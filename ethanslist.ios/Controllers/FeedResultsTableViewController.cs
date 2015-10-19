@@ -23,7 +23,7 @@ namespace ethanslist.ios
 
             tableView = new UITableView(this.View.Frame);
 
-            tableView.Source = new FeedResultTableSource("apartments");
+            tableView.Source = new FeedResultTableSource(this, "apartments");
 
             this.Add(tableView);
 

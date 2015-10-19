@@ -5,11 +5,13 @@ namespace ethanslist.ios
 {
     public class FeedResultTableSource : UITableViewSource
     {
+        UIViewController owner;
         CLFeedClient feedClient;
         String CellId = "postCell";
 
-        public FeedResultTableSource(String query)
+        public FeedResultTableSource(UIViewController owner, String query)
         {
+            this.owner = owner;
             feedClient = new CLFeedClient(query);
         }
 
@@ -33,6 +35,17 @@ namespace ethanslist.ios
             cell.DetailTextLabel.Text = post.Description;
 
             return cell;
+        }
+
+        public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            var storyboard = UIStoryboard.FromName("Main", null);
+            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
+
+            Posting post = feedClient.postings[indexPath.Row];
+            detailController.Post = post;
+
+            owner.ShowDetailViewController(detailController, owner);
         }
     }
 }

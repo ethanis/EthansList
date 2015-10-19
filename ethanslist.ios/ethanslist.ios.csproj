@@ -90,11 +90,17 @@
     <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Posting.cs" />
-    <Compile Include="FeedResultTableSource.cs" />
+    <Compile Include="Models\Posting.cs" />
+    <Compile Include="Helpers\FeedResultTableSource.cs" />
+    <Compile Include="Controllers\PostingDetailsViewController.cs" />
+    <Compile Include="Controllers\PostingDetailsViewController.designer.cs">
+      <DependentUpon>PostingDetailsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>
