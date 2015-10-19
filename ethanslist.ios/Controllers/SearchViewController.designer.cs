@@ -16,6 +16,38 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MaxLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISlider MaxRentSlider { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIStepper MinBathCountStep { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinBathLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIStepper MinBedCountStep { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinBedLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISlider MinRentSlider { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton SearchButton { get; set; }
 
 		[Outlet]
@@ -28,6 +60,38 @@ namespace ethanslist.ios
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (MaxLabel != null) {
+				MaxLabel.Dispose ();
+				MaxLabel = null;
+			}
+			if (MaxRentSlider != null) {
+				MaxRentSlider.Dispose ();
+				MaxRentSlider = null;
+			}
+			if (MinBathCountStep != null) {
+				MinBathCountStep.Dispose ();
+				MinBathCountStep = null;
+			}
+			if (MinBathLabel != null) {
+				MinBathLabel.Dispose ();
+				MinBathLabel = null;
+			}
+			if (MinBedCountStep != null) {
+				MinBedCountStep.Dispose ();
+				MinBedCountStep = null;
+			}
+			if (MinBedLabel != null) {
+				MinBedLabel.Dispose ();
+				MinBedLabel = null;
+			}
+			if (MinLabel != null) {
+				MinLabel.Dispose ();
+				MinLabel = null;
+			}
+			if (MinRentSlider != null) {
+				MinRentSlider.Dispose ();
+				MinRentSlider = null;
+			}
 			if (SearchButton != null) {
 				SearchButton.Dispose ();
 				SearchButton = null;

@@ -21,7 +21,7 @@ namespace ethanslist.ios
         {
             // Parse the Items in the RSS file
             XmlDocument rssXmlDoc = new XmlDocument();
-            rssXmlDoc.Load("http://sfbay.craigslist.org/search/sss?format=rss&query=" + query);
+            rssXmlDoc.Load("http://sfbay.craigslist.org/search/apa?format=rss&" + query);
 
             XmlNamespaceManager mgr = new XmlNamespaceManager(rssXmlDoc.NameTable);
             mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");

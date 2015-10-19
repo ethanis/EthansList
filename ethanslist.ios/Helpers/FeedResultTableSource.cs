@@ -26,7 +26,7 @@ namespace ethanslist.ios
 
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, "postCell");   
+                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellId);   
             }
 
             Posting post = feedClient.postings[indexPath.Row];

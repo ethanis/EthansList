@@ -154,6 +154,84 @@
                                     <action selector="SearchCL:" destination="288" id="406" eventType="touchUpInside"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="20" y="358" width="144" height="31"/>
+                                <constraints>
+                                    <constraint id="427" firstAttribute="width" constant="144"/>
+                                    <constraint id="428" firstAttribute="height" constant="31"/>
+                                </constraints>
+                                <connections/>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="211" y="358" width="144" height="31"/>
+                                <constraints>
+                                    <constraint id="431" firstAttribute="width" constant="144"/>
+                                    <constraint id="432" firstAttribute="height" constant="31"/>
+                                </constraints>
+                                <connections/>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                                <rect key="frame" x="20" y="323" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                                <rect key="frame" x="211" y="323" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                                <rect key="frame" x="20" y="397" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="454" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                <rect key="frame" x="211" y="397" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="45" y="501" width="94" height="29"/>
+                            </stepper>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                <rect key="frame" x="71" y="472" width="42" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center">
+                                <rect key="frame" x="20" y="443" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center">
+                                <rect key="frame" x="211" y="443" width="144" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" value="5">
+                                <rect key="frame" x="236" y="501" width="94" height="29"/>
+                            </stepper>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="5+">
+                                <rect key="frame" x="262" y="472" width="42" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint id="293" firstItem="289" firstAttribute="trailing" secondItem="292" secondAttribute="trailing" constant="20"/>
@@ -162,12 +240,25 @@
                             <constraint id="299" constant="193" firstItem="297" firstAttribute="top" secondItem="289" secondAttribute="top"/>
                             <constraint id="302" firstItem="289" firstAttribute="trailing" secondItem="301" secondAttribute="trailing" constant="147"/>
                             <constraint id="303" constant="275" firstItem="301" firstAttribute="top" secondItem="289" secondAttribute="top"/>
+                            <constraint id="425" firstItem="423" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="426" firstItem="289" firstAttribute="bottom" secondItem="423" secondAttribute="bottom" constant="278"/>
+                            <constraint id="429" firstItem="289" firstAttribute="trailing" secondItem="424" secondAttribute="trailing" constant="20"/>
+                            <constraint id="430" constant="278" firstItem="289" firstAttribute="bottom" secondItem="424" secondAttribute="bottom"/>
+                            <constraint firstItem="424" firstAttribute="leading" secondItem="423" secondAttribute="trailing" constant="47" id="433"/>
                         </constraints>
                     </view>
                     <navigationItem title="Title" id="338" key="navigationItem"/>
                     <connections>
                         <outlet property="SearchField" destination="297" id="name-outlet-297"/>
                         <outlet property="SearchButton" destination="301" id="name-outlet-301"/>
+                        <outlet property="MinRentSlider" destination="423" id="name-outlet-423"/>
+                        <outlet property="MaxRentSlider" destination="424" id="name-outlet-424"/>
+                        <outlet property="MinLabel" destination="453" id="name-outlet-453"/>
+                        <outlet property="MaxLabel" destination="454" id="name-outlet-454"/>
+                        <outlet property="MinBedCountStep" destination="480" id="name-outlet-480"/>
+                        <outlet property="MinBedLabel" destination="481" id="name-outlet-481"/>
+                        <outlet property="MinBathLabel" destination="485" id="name-outlet-485"/>
+                        <outlet property="MinBathCountStep" destination="484" id="name-outlet-484"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="290" userLabel="First Responder" sceneMemberID="firstResponder"/>
