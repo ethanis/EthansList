@@ -8,18 +8,16 @@ namespace ethanslist.ios
 {
     public class CLFeedClient
     {
-        string query;
         public List<Posting> postings;
 
-        public CLFeedClient(string query)
+        public CLFeedClient(String query)
         {
-            this.query = query;
             postings = new List<Posting>();
 
-            GetFeed();
+            GetFeed(query);
         }
 
-        private void GetFeed()
+        private void GetFeed(String query)
         {
             // Parse the Items in the RSS file
             XmlDocument rssXmlDoc = new XmlDocument();
@@ -46,16 +44,16 @@ namespace ethanslist.ios
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
                 rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
-                
-//                Console.WriteLine("Title: " + title);
-//                Console.WriteLine("Link: " + link);
-//                Console.WriteLine("Description: " + description);
-                Posting posting = new Posting();
-                posting.Title = title;
-                posting.Description = description;
-                posting.Link = link;
 
-                postings.Add(posting);
+                if (title != null && description != null && description != null)
+                {
+                    Posting posting = new Posting();
+                    posting.Title = title;
+                    posting.Description = description;
+                    posting.Link = link;
+
+                    postings.Add(posting);
+                }
             }
         }
 

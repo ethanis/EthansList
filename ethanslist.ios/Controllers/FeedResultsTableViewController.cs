@@ -10,7 +10,6 @@ namespace ethanslist.ios
 	partial class FeedResultsTableViewController : UITableViewController
 	{
         UITableView tableView;
-        CLFeedClient feedClient;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
 		{
@@ -20,11 +19,11 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            feedClient = new CLFeedClient("apartments");
-
-            this.Title = "Hello";
+            this.Title = "Craigslist Results";
 
             tableView = new UITableView(this.View.Frame);
+
+            tableView.Source = new FeedResultTableSource("apartments");
 
             this.Add(tableView);
 
@@ -37,23 +36,6 @@ namespace ethanslist.ios
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
             this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Height,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
-        }
-
-        public override nint RowsInSection(UITableView tableView, nint section)
-        {
-            return feedClient.postings.Count();
-        }
-
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            UITableViewCell cell = new UITableViewCell(CGRect.Empty);
-            var item = feedClient.postings[indexPath.Row];
-
-            cell.TextLabel.Text = item.Title;
-
-            Console.WriteLine(item);
-
-            return cell;
         }
 	}
 }

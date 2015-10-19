@@ -91,6 +91,7 @@
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Posting.cs" />
+    <Compile Include="FeedResultTableSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
