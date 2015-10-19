@@ -3,31 +3,33 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Xamarin.UITest;
-using Xamarin.UITest.iOS;
 using Xamarin.UITest.Queries;
 
-namespace ethanslist.ios.UITests
+namespace ethanslist.UITests
 {
-    [TestFixture]
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
     public class Tests
     {
-        iOSApp app;
+        IApp app;
+        Platform platform;
+
+        public Tests(Platform platform)
+        {
+            this.platform = platform;
+        }
 
         [SetUp]
         public void BeforeEachTest()
         {
-            app = ConfigureApp.iOS.StartApp();
+            app = AppInitializer.StartApp(platform);
         }
 
         [Test]
-        public void ViewIsDisplayed()
+        public void AppLaunches()
         {
-            AppResult[] results = app.WaitForElement(c => c.Child("UIView"));
             app.Screenshot("First screen.");
-
-            Assert.IsTrue(results.Any());
         }
     }
 }
-
 
