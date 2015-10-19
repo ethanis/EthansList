@@ -2,21 +2,24 @@
 using System.Xml;
 using System.Text;
 using Foundation;
+using System.Collections.Generic;
 
 namespace ethanslist.ios
 {
     public class CLFeedClient
     {
-        nint count = 0;
         string query;
-        string[] titles = new string[100];
+        public List<Posting> postings;
 
         public CLFeedClient(string query)
         {
             this.query = query;
+            postings = new List<Posting>();
+
+            GetFeed();
         }
 
-        public String GetFeed()
+        private void GetFeed()
         {
             // Parse the Items in the RSS file
             XmlDocument rssXmlDoc = new XmlDocument();
@@ -47,22 +50,18 @@ namespace ethanslist.ios
 //                Console.WriteLine("Title: " + title);
 //                Console.WriteLine("Link: " + link);
 //                Console.WriteLine("Description: " + description);
+                Posting posting = new Posting();
+                posting.Title = title;
+                posting.Description = description;
+                posting.Link = link;
 
-                titles[count] = title;
-                count++;
+                postings.Add(posting);
             }
-            // Return the string that contain the RSS items
-            return rssContent.ToString();
-        }
-
-        public nint FeedLength()
-        {
-            return count;
         }
 
         public string GetTitle(int index)
         {
-            return titles[index];
+            return postings[index].Title;
         }
     }
 }

@@ -86,10 +86,14 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="CLFeedClient.cs" />
-    <Compile Include="FeedResultsTableViewController.cs" />
-    <Compile Include="FeedResultsTableViewController.designer.cs">
+    <Compile Include="Controllers\FeedResultsTableViewController.cs" />
+    <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Posting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
 </Project>

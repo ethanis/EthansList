@@ -3,6 +3,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 using CoreGraphics;
+using System.Linq;
 
 namespace ethanslist.ios
 {
@@ -19,16 +20,13 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            tableView = new UITableView(this.View.Frame);
-            UITextView view = new UITextView();
-
             feedClient = new CLFeedClient("apartments");
-            view.Text = feedClient.GetFeed();
-            view.Frame = new CoreGraphics.CGRect(0, 0, 1000, 3000);
-            view.Center = this.View.Center;
+
+            this.Title = "Hello";
+
+            tableView = new UITableView(this.View.Frame);
 
             this.Add(tableView);
-            //            this.Add(view);
 
             tableView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Top,
@@ -43,15 +41,18 @@ namespace ethanslist.ios
 
         public override nint RowsInSection(UITableView tableView, nint section)
         {
-            return feedClient.FeedLength();
+            return feedClient.postings.Count();
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             UITableViewCell cell = new UITableViewCell(CGRect.Empty);
-            var item = feedClient.GetTitle(indexPath.Row);
+            var item = feedClient.postings[indexPath.Row];
 
-            cell.TextLabel.Text = item;
+            cell.TextLabel.Text = item.Title;
+
+            Console.WriteLine(item);
+
             return cell;
         }
 	}
