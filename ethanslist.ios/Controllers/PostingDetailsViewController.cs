@@ -18,7 +18,6 @@ namespace ethanslist.ios
             }
             set {
                 post = value;
-//                UpdateItem();
             }
         }
 
@@ -29,15 +28,8 @@ namespace ethanslist.ios
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
 
-//            UpdateItem();
         }
 
-//        public void UpdateItem()
-//        {
-//            if (post.Title != null) {
-//                Title = (post != null) ? post.ToString() : "";
-//            }
-//        }
 
         partial void OnDismiss(UIButton sender)
         {

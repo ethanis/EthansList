@@ -96,6 +96,10 @@
     <Compile Include="Controllers\PostingDetailsViewController.designer.cs">
       <DependentUpon>PostingDetailsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\SearchViewController.cs" />
+    <Compile Include="Controllers\SearchViewController.designer.cs">
+      <DependentUpon>SearchViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

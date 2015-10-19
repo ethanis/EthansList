@@ -10,10 +10,20 @@ namespace ethanslist.ios
 	partial class FeedResultsTableViewController : UITableViewController
 	{
         UITableView tableView;
+        string query;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
 		{
 		}
+
+        public String Query {
+            get {
+                return query;
+            }
+            set {
+                query = value;
+            }
+        }
 
         public override void ViewDidLoad()
         {
@@ -23,7 +33,7 @@ namespace ethanslist.ios
 
             tableView = new UITableView(this.View.Frame);
 
-            tableView.Source = new FeedResultTableSource(this, "apartments");
+            tableView.Source = new FeedResultTableSource(this, query);
 
             this.Add(tableView);
 
