@@ -100,11 +100,16 @@
     <Compile Include="Controllers\SearchViewController.designer.cs">
       <DependentUpon>SearchViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\AvailableLocations.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="USCraigslistLocations.csv" />
   </ItemGroup>
 </Project>

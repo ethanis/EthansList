@@ -2,6 +2,8 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
+using System.Reflection;
+using System.IO;
 
 namespace ethanslist.ios
 {
@@ -18,6 +20,13 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
             this.Title = "Ethan's List";
+
+            var locations = new AvailableLocations();
+
+            for (int i = 0; i < locations.PotentialLocations.Count; i++)
+            {
+                Console.WriteLine(locations.PotentialLocations[i].Url);
+            }
 
             SearchButton.Enabled = true;
             MinLabel.Text = String.Format("{0:C0}", MinRentSlider.Value);
