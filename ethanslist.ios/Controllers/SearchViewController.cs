@@ -11,10 +11,21 @@ namespace ethanslist.ios
 	{
         int minBed = 0;
         int minBath = 1;
+        string url;
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
 		}
+
+        public String Url {
+            get {
+                return url;
+            }
+            set {
+                url = value;
+            }
+        }
+
 
         public override void ViewDidLoad()
         {
@@ -70,9 +81,11 @@ namespace ethanslist.ios
         public string GenerateQuery()
         {
             string query;
-            query = String.Format("min_price={0}&max_price={1}&bedrooms={3}&bathrooms{4}&query=(5)", 
-                MinLabel.Text, MaxLabel.Text, MinBedLabel.Text, MinBathLabel.Text, SearchField.Text);
-            
+//            http://sfbay.craigslist.org/search/sfc/apa?format=rss&
+            query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
+                url, MinLabel.Text, MaxLabel.Text, MinBedLabel.Text, MinBathLabel.Text, SearchField.Text);
+
+            Console.WriteLine(query);
             return query;
         }
 	}
