@@ -4,12 +4,12 @@ namespace ethanslist.ios
 {
     public class Location
     {
-        public string Code;
-        public string AreaId;
-        public string Url;
-        public string SiteName;
-        public string State;
-        public string Category;
+        public string Code { get; set;}
+        public string AreaId { get; set;}
+        public string Url { get; set;}
+        public string SiteName { get; set;}
+        public string State { get; set;}
+        public string Category { get; set;}
 
         public Location(string Code, String AreaId, String Url, String SiteName, String State, String Category)
         {
@@ -19,7 +19,7 @@ namespace ethanslist.ios
             this.SiteName = SiteName;
             this.State = State;
             this.Category = Category;
-        }
+        }            
     }
 }
 
