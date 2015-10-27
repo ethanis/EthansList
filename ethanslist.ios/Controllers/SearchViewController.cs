@@ -30,14 +30,10 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
             this.Title = "Ethan's List";
 
             var locations = new AvailableLocations();
-
-            for (int i = 0; i < locations.PotentialLocations.Count; i++)
-            {
-                Console.WriteLine(locations.PotentialLocations[i].Url);
-            }
 
             SearchButton.Enabled = true;
             MinLabel.Text = String.Format("{0:C0}", MinRentSlider.Value);
@@ -60,7 +56,6 @@ namespace ethanslist.ios
             MinBathCountStep.ValueChanged += (object sender, EventArgs e) => {
                 MinBathLabel.Text = FormatBeds((int)MinBathCountStep.Value);
             };
-
         }
 
         partial void SearchCL(UIButton sender)
@@ -81,11 +76,9 @@ namespace ethanslist.ios
         public string GenerateQuery()
         {
             string query;
-//            http://sfbay.craigslist.org/search/sfc/apa?format=rss&
             query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
                 url, MinLabel.Text, MaxLabel.Text, MinBedLabel.Text, MinBathLabel.Text, SearchField.Text);
 
-            Console.WriteLine(query);
             return query;
         }
 	}

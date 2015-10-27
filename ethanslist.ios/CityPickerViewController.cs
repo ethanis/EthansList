@@ -21,13 +21,6 @@ namespace ethanslist.ios
 
             CityPickerView.Model = new LocationPickerModel(locations);
 
-
-
-            for (int i = 0; i < locations.PotentialLocations.Count; i++)
-            {
-                Console.WriteLine(locations.PotentialLocations[i].Url);
-            }
-
             ProceedButton.TouchUpInside += (object sender, EventArgs e) => {
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var searchViewController = (SearchViewController)storyboard.InstantiateViewController("SearchViewController");
@@ -36,7 +29,6 @@ namespace ethanslist.ios
 
                 this.ShowViewController(searchViewController, this);
             };
-
         }
 
 
