@@ -106,7 +106,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="130" width="280" height="21"/>
+                                    <rect key="frame" x="20" y="96" width="280" height="21"/>
                                 </variation>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="297" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="type here..." fixedFrame="YES">
@@ -114,13 +114,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="193" width="280" height="30"/>
+                                    <rect key="frame" x="20" y="144" width="280" height="30"/>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" opaque="NO">
                                 <rect key="frame" x="20" y="231" width="280" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <state key="normal" title="Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" colorSpace="calibratedRGB" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1"/>
                                 </state>
                                 <state key="highlighted"/>
                                 <state key="selected"/>
@@ -129,18 +130,21 @@
                                     <action selector="SearchCL:" destination="288" id="406" eventType="touchUpInside"/>
                                 </connections>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="122" y="254" width="81" height="30"/>
+                                    <rect key="frame" x="39" y="193" width="239" height="30"/>
                                 </variation>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="20" y="325" width="119" height="31"/>
                                 <connections/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="294" width="119" height="31"/>
+                                </variation>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="184" y="325" width="116" height="31"/>
                                 <connections/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="172" y="358" width="144" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="176" y="293" width="124" height="31"/>
                                 </variation>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
@@ -149,6 +153,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="264" width="119" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
                                 <rect key="frame" x="184" y="295" width="116" height="21"/>
@@ -157,7 +164,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="172" y="323" width="144" height="21"/>
+                                    <rect key="frame" x="176" y="264" width="125" height="21"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
@@ -166,6 +173,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="338" width="119" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="454" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="184" y="369" width="116" height="21"/>
@@ -174,11 +184,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="397" width="144" height="21"/>
+                                    <rect key="frame" x="176" y="338" width="124" height="21"/>
                                 </variation>
                             </label>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="32" y="473" width="94" height="29"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="32" y="442" width="94" height="29"/>
+                                </variation>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="58" y="444" width="42" height="21"/>
@@ -186,6 +199,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="413" width="42" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center">
                                 <rect key="frame" x="20" y="415" width="119" height="21"/>
@@ -193,6 +209,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="384" width="119" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center">
                                 <rect key="frame" x="184" y="415" width="116" height="21"/>
@@ -201,13 +220,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="443" width="144" height="21"/>
+                                    <rect key="frame" x="176" y="384" width="124" height="21"/>
                                 </variation>
                             </label>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" value="1">
                                 <rect key="frame" x="193" y="473" width="94" height="29"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="201" y="501" width="94" height="29"/>
+                                    <rect key="frame" x="191" y="442" width="94" height="29"/>
                                 </variation>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+">
@@ -217,7 +236,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="227" y="472" width="42" height="21"/>
+                                    <rect key="frame" x="217" y="413" width="42" height="21"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -254,13 +273,23 @@
                         <subviews>
                             <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="79" width="280" height="368"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="77" width="280" height="410"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="158" y="82" width="142" height="354"/>
+                                    <mask key="constraints">
+                                        <include reference="696"/>
+                                        <include reference="697"/>
+                                    </mask>
                                 </variation>
                                 <constraints>
-                                    <constraint id="604" firstAttribute="width" constant="280"/>
-                                    <constraint id="605" firstAttribute="height" constant="368"/>
+                                    <constraint id="696" firstAttribute="width" constant="142"/>
+                                    <constraint id="697" firstAttribute="height" constant="354"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="696"/>
+                                        <exclude reference="697"/>
+                                    </mask>
+                                </variation>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect">
                                 <rect key="frame" x="58" y="488" width="203" height="30"/>
@@ -268,22 +297,81 @@
                                 <state key="normal" title="Proceed to Search">
                                     <color key="titleColor" colorSpace="calibratedRGB" red="0" green="0.47843137254901963" blue="1" alpha="1"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="58" y="495" width="203" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="58" y="488" width="203" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="700"/>
+                                    </mask>
+                                </variation>
+                                <constraints>
+                                    <constraint id="700" firstAttribute="width" constant="203"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="700"/>
+                                    </mask>
                                 </variation>
                             </button>
+                            <pickerView contentMode="scaleToFill" id="685" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="-17" y="170" width="320" height="162"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="23" y="84" width="134" height="351"/>
+                                    <mask key="constraints">
+                                        <include reference="692"/>
+                                        <include reference="693"/>
+                                    </mask>
+                                </variation>
+                                <constraints>
+                                    <constraint id="692" firstAttribute="width" constant="134"/>
+                                    <constraint id="693" firstAttribute="height" constant="351"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="692"/>
+                                        <exclude reference="693"/>
+                                    </mask>
+                                </variation>
+                            </pickerView>
                         </subviews>
                         <constraints>
-                            <constraint id="602" constant="20" firstItem="496" firstAttribute="trailing" secondItem="507" secondAttribute="trailing"/>
-                            <constraint id="603" constant="79" firstItem="507" firstAttribute="top" secondItem="496" secondAttribute="top"/>
-                            <constraint firstItem="518" firstAttribute="leading" secondItem="496" secondAttribute="leading" constant="58" id="606"/>
-                            <constraint firstItem="496" firstAttribute="trailing" secondItem="518" secondAttribute="trailing" constant="59" id="607"/>
-                            <constraint firstItem="518" firstAttribute="top" secondItem="507" secondAttribute="bottom" constant="41" id="608"/>
+                            <constraint id="690" constant="23" firstItem="685" firstAttribute="leading" secondItem="496" secondAttribute="leading"/>
+                            <constraint id="691" constant="84" firstItem="685" firstAttribute="top" secondItem="496" secondAttribute="top"/>
+                            <constraint id="694" firstItem="507" firstAttribute="top" secondItem="496" secondAttribute="top" constant="82"/>
+                            <constraint id="695" constant="20" firstItem="496" firstAttribute="trailing" secondItem="507" secondAttribute="trailing"/>
+                            <constraint id="698" firstItem="496" firstAttribute="bottom" secondItem="518" secondAttribute="bottom" constant="50"/>
+                            <constraint id="699" constant="58" firstItem="518" firstAttribute="leading" secondItem="496" secondAttribute="leading"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="685"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="690"/>
+                                <exclude reference="691"/>
+                                <exclude reference="694"/>
+                                <exclude reference="695"/>
+                                <exclude reference="698"/>
+                                <exclude reference="699"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="685"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="690"/>
+                                <include reference="691"/>
+                                <include reference="694"/>
+                                <include reference="695"/>
+                                <include reference="698"/>
+                                <include reference="699"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="CityPickerView" destination="507" id="name-outlet-507"/>
                         <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
+                        <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
                     </connections>
                     <navigationItem title="Select City" id="593" key="navigationItem"/>
                 </viewController>
@@ -308,5 +396,6 @@
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedOrientationMetrics key="orientation"/>
     </simulatedMetricsContainer>
 </document>

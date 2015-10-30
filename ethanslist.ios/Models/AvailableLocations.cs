@@ -8,6 +8,7 @@ namespace ethanslist.ios
     public class AvailableLocations
     {
         List<Location> locations = new List<Location>();
+        SortedSet<String> states = new SortedSet<String>();
 
         public AvailableLocations()
         {
@@ -21,6 +22,13 @@ namespace ethanslist.ios
             }
         }
 
+        public SortedSet<String> States
+        {
+            get { 
+                return states;
+            }
+        }
+
 
         void ReadInputFile()
         {
@@ -31,6 +39,7 @@ namespace ethanslist.ios
                 {
                     var container = line.Split(',');
                     locations.Add(new Location(container[0],container[1],container[2],container[3],container[4], container[5]));
+                    states.Add(container[4]);
                 }
             }
         }

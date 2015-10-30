@@ -33,8 +33,6 @@ namespace ethanslist.ios
 
             this.Title = "Ethan's List";
 
-            var locations = new AvailableLocations();
-
             SearchButton.Enabled = true;
             MinLabel.Text = String.Format("{0:C0}", MinRentSlider.Value);
             MaxLabel.Text = String.Format("{0:C0}", MaxRentSlider.Value);
@@ -78,6 +76,8 @@ namespace ethanslist.ios
             string query;
             query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
                 url, MinLabel.Text, MaxLabel.Text, MinBedLabel.Text, MinBathLabel.Text, SearchField.Text);
+
+            Console.WriteLine(query);
 
             return query;
         }
