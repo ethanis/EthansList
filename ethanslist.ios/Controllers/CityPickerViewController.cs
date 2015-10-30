@@ -22,6 +22,8 @@ namespace ethanslist.ios
 
             locations = new AvailableLocations();
 
+            state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
+
             CityPickerView.Model = new LocationPickerModel(locations, state);
             StatePickerView.Model = new StatePickerModel(locations);
 
@@ -65,13 +67,11 @@ namespace ethanslist.ios
         {
             AvailableLocations locations;
             String state;
-            List<Location> sites;
 
             public LocationPickerModel(AvailableLocations locations, string state)
             {
                 this.locations = locations;
                 this.state = state;
-//                this.sites = locations.PotentialLocations.Where(loc => loc.State == state).ToList();
             }
 
             public override nint GetComponentCount(UIPickerView pickerView)
@@ -83,7 +83,6 @@ namespace ethanslist.ios
             {
 
                 return locations.PotentialLocations.Where(loc => loc.State == state).Count();
-//                return sites.Count;
 //                return locations.PotentialLocations.Count;
             }
 
