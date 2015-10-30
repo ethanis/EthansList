@@ -273,22 +273,8 @@
                         <subviews>
                             <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="79" width="280" height="368"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="158" y="82" width="142" height="354"/>
-                                    <mask key="constraints">
-                                        <include reference="696"/>
-                                        <include reference="697"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="696" firstAttribute="width" constant="142"/>
-                                    <constraint id="697" firstAttribute="height" constant="354"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="696"/>
-                                        <exclude reference="697"/>
-                                    </mask>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="158" y="82" width="166" height="300"/>
                                 </variation>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect">
@@ -297,74 +283,36 @@
                                 <state key="normal" title="Proceed to Search">
                                     <color key="titleColor" colorSpace="calibratedRGB" red="0" green="0.47843137254901963" blue="1" alpha="1"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="58" y="488" width="203" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="700"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="700" firstAttribute="width" constant="203"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="700"/>
-                                    </mask>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="148" y="488" width="164" height="30"/>
                                 </variation>
                             </button>
                             <pickerView contentMode="scaleToFill" id="685" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="-17" y="170" width="320" height="162"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="23" y="84" width="134" height="351"/>
-                                    <mask key="constraints">
-                                        <include reference="692"/>
-                                        <include reference="693"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="692" firstAttribute="width" constant="134"/>
-                                    <constraint id="693" firstAttribute="height" constant="351"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="692"/>
-                                        <exclude reference="693"/>
-                                    </mask>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="-4" y="82" width="159" height="298"/>
                                 </variation>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="742" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="24" y="488" width="46" height="30"/>
+                                <state key="normal" title="Select State">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="24" y="488" width="98" height="30"/>
+                                </variation>
+                            </button>
                         </subviews>
-                        <constraints>
-                            <constraint id="690" constant="23" firstItem="685" firstAttribute="leading" secondItem="496" secondAttribute="leading"/>
-                            <constraint id="691" constant="84" firstItem="685" firstAttribute="top" secondItem="496" secondAttribute="top"/>
-                            <constraint id="694" firstItem="507" firstAttribute="top" secondItem="496" secondAttribute="top" constant="82"/>
-                            <constraint id="695" constant="20" firstItem="496" firstAttribute="trailing" secondItem="507" secondAttribute="trailing"/>
-                            <constraint id="698" firstItem="496" firstAttribute="bottom" secondItem="518" secondAttribute="bottom" constant="50"/>
-                            <constraint id="699" constant="58" firstItem="518" firstAttribute="leading" secondItem="496" secondAttribute="leading"/>
-                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="685"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="690"/>
-                                <exclude reference="691"/>
-                                <exclude reference="694"/>
-                                <exclude reference="695"/>
-                                <exclude reference="698"/>
-                                <exclude reference="699"/>
+                                <exclude reference="742"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="685"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="690"/>
-                                <include reference="691"/>
-                                <include reference="694"/>
-                                <include reference="695"/>
-                                <include reference="698"/>
-                                <include reference="699"/>
+                                <include reference="742"/>
                             </mask>
                         </variation>
                     </view>
@@ -372,6 +320,7 @@
                         <outlet property="CityPickerView" destination="507" id="name-outlet-507"/>
                         <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
                         <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
+                        <outlet property="StatePickerButton" destination="742" id="name-outlet-742"/>
                     </connections>
                     <navigationItem title="Select City" id="593" key="navigationItem"/>
                 </viewController>

@@ -24,6 +24,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton StatePickerButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIPickerView StatePickerView { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -35,6 +39,10 @@ namespace ethanslist.ios
 			if (ProceedButton != null) {
 				ProceedButton.Dispose ();
 				ProceedButton = null;
+			}
+			if (StatePickerButton != null) {
+				StatePickerButton.Dispose ();
+				StatePickerButton = null;
 			}
 			if (StatePickerView != null) {
 				StatePickerView.Dispose ();

@@ -10,7 +10,8 @@ namespace ethanslist.ios
 	partial class CityPickerViewController : UIViewController
 	{
         AvailableLocations locations;
-        String state = "Michigan";
+        String state;
+        UIPickerViewModel stateModel;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -23,9 +24,11 @@ namespace ethanslist.ios
             locations = new AvailableLocations();
 
             state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
+            stateModel = new StatePickerModel(locations);
+
 
             CityPickerView.Model = new LocationPickerModel(locations, state);
-            StatePickerView.Model = new StatePickerModel(locations);
+            StatePickerView.Model = stateModel;
 
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
             {
@@ -36,11 +39,16 @@ namespace ethanslist.ios
 
                 this.ShowViewController(searchViewController, this);
             };
+
+            StatePickerButton.TouchUpInside += (object sender, EventArgs e) => {
+                CityPickerView.Model = new LocationPickerModel(locations, 
+                    locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0)));
+            };
         }
 
         public class StatePickerModel : UIPickerViewModel
         {
-            AvailableLocations locations;
+            public AvailableLocations locations;
 
             public StatePickerModel(AvailableLocations locations)
             {
@@ -60,6 +68,11 @@ namespace ethanslist.ios
             public override string GetTitle(UIPickerView pickerView, nint row, nint component)
             {
                 return locations.States.ElementAt((int)row);
+            }
+
+            public override void Selected(UIPickerView pickerView, nint row, nint component)
+            {
+                Console.WriteLine(locations.States.ElementAt((int)row));
             }
         }
 
@@ -81,9 +94,7 @@ namespace ethanslist.ios
 
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
             {
-
                 return locations.PotentialLocations.Where(loc => loc.State == state).Count();
-//                return locations.PotentialLocations.Count;
             }
 
             public override string GetTitle(UIPickerView pickerView, nint row, nint component)
