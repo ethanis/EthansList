@@ -11,7 +11,7 @@ namespace ethanslist.ios
 	{
         AvailableLocations locations;
         String state;
-        UIPickerViewModel stateModel;
+        StatePickerModel stateModel;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -22,12 +22,11 @@ namespace ethanslist.ios
             base.ViewDidLoad();
 
             locations = new AvailableLocations();
-
             state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
-            stateModel = new StatePickerModel(locations);
-
 
             CityPickerView.Model = new LocationPickerModel(locations, state);
+
+            stateModel = new StatePickerModel(locations);
             StatePickerView.Model = stateModel;
 
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
@@ -40,19 +39,26 @@ namespace ethanslist.ios
                 this.ShowViewController(searchViewController, this);
             };
 
-            StatePickerButton.TouchUpInside += (object sender, EventArgs e) => {
+            stateModel.ValueChanged += (object sender, EventArgs e) =>
+            {
                 CityPickerView.Model = new LocationPickerModel(locations, 
-                    locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0)));
+                    stateModel.SelectedItem);
             };
         }
 
         public class StatePickerModel : UIPickerViewModel
         {
             public AvailableLocations locations;
+            public event EventHandler<EventArgs> ValueChanged;
+            protected int SelectedIndex = 0;
 
             public StatePickerModel(AvailableLocations locations)
             {
                 this.locations = locations;
+            }
+
+            public String SelectedItem {
+                get { return locations.States.ElementAt(SelectedIndex);}
             }
 
             public override nint GetComponentCount(UIPickerView pickerView)
@@ -73,6 +79,12 @@ namespace ethanslist.ios
             public override void Selected(UIPickerView pickerView, nint row, nint component)
             {
                 Console.WriteLine(locations.States.ElementAt((int)row));
+
+                SelectedIndex = (int)row;
+                if (this.ValueChanged != null)
+                {
+                    this.ValueChanged(this, new EventArgs());
+                }
             }
         }
 
