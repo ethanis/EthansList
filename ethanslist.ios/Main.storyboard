@@ -52,7 +52,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="107" width="280" height="21"/>
+                                    <rect key="frame" x="20" y="70" width="280" height="71"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="259" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="10" textAlignment="center" fixedFrame="YES">
@@ -62,25 +62,36 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="168" width="280" height="398"/>
+                                    <rect key="frame" x="20" y="168" width="280" height="380"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="278" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="20" y="29" width="65" height="30"/>
-                                <connections>
-                                    <action selector="OnDismiss:" destination="254" id="279" eventType="touchUpInside"/>
-                                </connections>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <state key="normal" title="&lt;- Back">
-                                    <color key="titleColor" colorSpace="calibratedRGB" red="0" green="0.47843137254901963" blue="1" alpha="1"/>
-                                </state>
-                            </button>
+                            <navigationBar contentMode="scaleToFill" id="863" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="17" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Posting Details" id="864">
+                                        <barButtonItem id="867" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done"/>
+                                    </navigationItem>
+                                </items>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="15" width="320" height="44"/>
+                                </variation>
+                            </navigationBar>
                         </subviews>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="863"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="863"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
                         <outlet property="PostingDescription" destination="259" id="name-outlet-259"/>
-                        <outlet property="BackButton" destination="278" id="name-outlet-278"/>
+                        <outlet property="BackButton" destination="867" id="name-outlet-867"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>

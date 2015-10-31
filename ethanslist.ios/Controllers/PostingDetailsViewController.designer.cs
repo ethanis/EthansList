@@ -16,7 +16,7 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton BackButton { get; set; }
+		UIBarButtonItem BackButton { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -25,10 +25,6 @@ namespace ethanslist.ios
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel PostingTitle { get; set; }
-
-		[Action ("OnDismiss:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void OnDismiss (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{

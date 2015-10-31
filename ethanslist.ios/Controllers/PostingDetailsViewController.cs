@@ -28,10 +28,11 @@ namespace ethanslist.ios
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
 
+            BackButton.Clicked += OnDismiss;
         }
 
 
-        partial void OnDismiss(UIButton sender)
+        void OnDismiss(object sender, EventArgs e)
         {
             DismissViewController(true, null);
         }  
