@@ -33,6 +33,8 @@ namespace ethanslist.ios
             stateModel = new StatePickerModel(locations);
             StatePickerView.Model = stateModel;
 
+            cityModel.ValueChange += cityPickerChanged;
+
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
             {
                 var storyboard = UIStoryboard.FromName("Main", null);
@@ -44,26 +46,21 @@ namespace ethanslist.ios
                 this.ShowViewController(searchViewController, this);
             };
 
-            cityModel.ValueChange += (object sender, EventArgs e) =>
-            {
-                currentSelected = cityModel.SelectedCity;
-                Console.WriteLine(currentSelected.SiteName);
-                Console.WriteLine("Here");
-            };
-
             stateModel.ValueChanged += (object sender, EventArgs e) =>
             {
-//                cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
-//                CityPickerView.Model = cityModel;
+                cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
+                CityPickerView.Model = cityModel;
 
-                CityPickerView.Model = new LocationPickerModel(locations, 
-                    stateModel.SelectedItem);
-
-                CityPickerView.ReloadAllComponents();
+                cityModel.ValueChange += cityPickerChanged;
 
                 Console.WriteLine(stateModel.SelectedItem + ": " + cityModel.SelectedCity.SiteName);
                 Console.WriteLine("Now here");
             };
+        }
+
+        void cityPickerChanged (object sender, EventArgs e)
+        {
+            currentSelected = cityModel.SelectedCity;
         }
 
         public class StatePickerModel : UIPickerViewModel
@@ -145,6 +142,7 @@ namespace ethanslist.ios
                 {
                     this.ValueChange(this, new EventArgs());
                 } 
+                Console.WriteLine(1);
             }
         }
 	}
