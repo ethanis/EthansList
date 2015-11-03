@@ -35,6 +35,7 @@ namespace ethanslist.ios
 
             cityModel.ValueChange += cityPickerChanged;
 
+            //TODO: Have this initialized to the correct first selection
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
             {
                 var storyboard = UIStoryboard.FromName("Main", null);
@@ -52,9 +53,6 @@ namespace ethanslist.ios
                 CityPickerView.Model = cityModel;
 
                 cityModel.ValueChange += cityPickerChanged;
-
-                Console.WriteLine(stateModel.SelectedItem + ": " + cityModel.SelectedCity.SiteName);
-                Console.WriteLine("Now here");
             };
         }
 
@@ -142,7 +140,6 @@ namespace ethanslist.ios
                 {
                     this.ValueChange(this, new EventArgs());
                 } 
-                Console.WriteLine(1);
             }
         }
 	}

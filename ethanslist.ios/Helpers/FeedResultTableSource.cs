@@ -9,10 +9,10 @@ namespace ethanslist.ios
         CLFeedClient feedClient;
         String CellId = "postCell";
 
-        public FeedResultTableSource(UIViewController owner, String query)
+        public FeedResultTableSource(UIViewController owner, CLFeedClient client)
         {
             this.owner = owner;
-            feedClient = new CLFeedClient(query);
+            this.feedClient = client;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)

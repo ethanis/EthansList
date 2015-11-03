@@ -14,6 +14,8 @@ namespace ethanslist.ios
         readonly string query2;
         private static BackgroundWorker AsyncXmlLoader;
         private static XmlDocument AsyncXmlDocument;
+        public EventHandler<EventArgs> loadingComplete;
+        public EventHandler<EventArgs> loadingProgressChanged;
 
         public CLFeedClient(String query)
         {
@@ -23,11 +25,11 @@ namespace ethanslist.ios
             GetFeedAsync(query);
         }
 
-        private async void GetFeedAsync(string query)
+        private void GetFeedAsync(string query)
         {
             AsyncXmlLoader = new BackgroundWorker();
             AsyncXmlLoader.WorkerReportsProgress = true;
-
+            
             AsyncXmlLoader.ProgressChanged += AsyncXmlLoader_ProgressChanged;;
             AsyncXmlLoader.DoWork += AsyncXmlLoader_DoWork;
             AsyncXmlLoader.RunWorkerCompleted += AsyncXmlLoader_RunWorkerCompleted;
@@ -37,12 +39,19 @@ namespace ethanslist.ios
 
         void AsyncXmlLoader_ProgressChanged (object sender, ProgressChangedEventArgs e)
         {
-            
+            if (this.loadingProgressChanged != null)
+            {
+                this.loadingProgressChanged(this, new EventArgs());
+            }
         }
 
         void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine(postings);
+            Console.WriteLine(postings.Count);
+            if (this.loadingComplete != null)
+            {
+                this.loadingComplete(this, new EventArgs());
+            }
         }
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
@@ -50,7 +59,8 @@ namespace ethanslist.ios
             AsyncXmlDocument = new XmlDocument();
             AsyncXmlDocument.Load(query2);
             WireUpPostings();
-            AsyncXmlLoader.ReportProgress(100);
+//            AsyncXmlLoader.ReportProgress(100);
+            AsyncXmlLoader.ReportProgress(10);
         }
 
         private void WireUpPostings()
