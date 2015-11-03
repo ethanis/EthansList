@@ -16,6 +16,7 @@ namespace ethanslist.ios
         string query;
         CLFeedClient feedClient;
         Stopwatch loadTimer;
+        int percentComplete = 0;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
 		{
@@ -67,7 +68,8 @@ namespace ethanslist.ios
 
             feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
             {
-                    Console.WriteLine("Hi");
+                    percentComplete += 10;
+                    Console.WriteLine(percentComplete + "% Complete");
             };
         }
 

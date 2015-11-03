@@ -59,8 +59,10 @@ namespace ethanslist.ios
             AsyncXmlDocument = new XmlDocument();
             AsyncXmlDocument.Load(query2);
             WireUpPostings();
-//            AsyncXmlLoader.ReportProgress(100);
-            AsyncXmlLoader.ReportProgress(10);
+            for (int i = 10; i <= 100; i+=10)
+            {
+                AsyncXmlLoader.ReportProgress(i);
+            }
         }
 
         private void WireUpPostings()
