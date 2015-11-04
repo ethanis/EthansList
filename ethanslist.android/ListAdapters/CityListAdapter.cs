@@ -9,9 +9,9 @@ namespace ethanslist.android
     public class CityListAdapter : BaseAdapter<Location>
     {
         Activity context;
-        List<Location> cities;
+        IEnumerable<Location> cities;
 
-        public CityListAdapter(Activity context, List<Location> cities)
+        public CityListAdapter(Activity context, IEnumerable<Location> cities)
         {
             this.context = context;
             this.cities = cities;
@@ -21,7 +21,7 @@ namespace ethanslist.android
         {
             get
             {
-                return cities[index];
+                return cities.ElementAt(index);
             }
         }
 
@@ -29,7 +29,7 @@ namespace ethanslist.android
         {
             get
             {
-                return cities.Count;
+                return cities.Count();
             }
         }
 
@@ -43,7 +43,7 @@ namespace ethanslist.android
             var view = context.LayoutInflater.Inflate(Resource.Layout.CityRow, parent, false);
             var city = view.FindViewById<TextView>(Resource.Id.cityListViewItem);
 
-            city.Text = cities[position].SiteName;
+            city.Text = cities.ElementAt(position).SiteName;
             return view;
         }
     }
