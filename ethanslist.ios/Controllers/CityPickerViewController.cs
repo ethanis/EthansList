@@ -25,7 +25,7 @@ namespace ethanslist.ios
 
             locations = new AvailableLocations();
             state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
-            currentSelected = locations.PotentialLocations[0];
+            currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
 
             cityModel = new LocationPickerModel(locations, state);
             CityPickerView.Model = cityModel;
@@ -49,9 +49,13 @@ namespace ethanslist.ios
 
             stateModel.ValueChanged += (object sender, EventArgs e) =>
             {
+                state = stateModel.SelectedItem;
+                CityPickerView.Select(0,0,false);
+
+                currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
                 cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
                 CityPickerView.Model = cityModel;
-
+                
                 cityModel.ValueChange += cityPickerChanged;
             };
         }
