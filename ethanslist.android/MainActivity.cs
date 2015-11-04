@@ -16,7 +16,8 @@ namespace ethanslist.android
         AvailableLocations locations;
         ListView cityPickerListView;
         ListView statePickerListView;
-        ArrayAdapter<Location> locationAdapter;
+        CityListAdapter cityAdapter;
+        StateListAdapter stateAdapter;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -25,12 +26,14 @@ namespace ethanslist.android
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            ListView cityPickerListView = FindViewById<ListView>(Resource.Id.cityPickerListView);
-            ListView statePickerListView = FindViewById<ListView>(Resource.Id.statePickerListView);
-            locationAdapter = new ArrayAdapter<Location>(this, Android.Resource.Layout.SimpleListItem1, locations.PotentialLocations);
+            cityPickerListView = FindViewById<ListView>(Resource.Id.cityPickerListView);
+            statePickerListView = FindViewById<ListView>(Resource.Id.statePickerListView);
 
-            cityPickerListView.Adapter = locationAdapter;
-            statePickerListView.Adapter = locationAdapter;
+            cityAdapter = new CityListAdapter(this, locations.PotentialLocations);
+            stateAdapter = new StateListAdapter(this, locations.States);
+
+            cityPickerListView.Adapter = cityAdapter;
+            statePickerListView.Adapter = stateAdapter;
         }
     }
 }
