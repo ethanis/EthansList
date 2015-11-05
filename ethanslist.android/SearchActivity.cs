@@ -3,6 +3,7 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using System.Linq;
+using Android.Content;
 
 namespace ethanslist.android
 {
@@ -55,7 +56,10 @@ namespace ethanslist.android
             };
 
             searchButton.Click += (sender, e) => {
-                GenerateQuery();
+//                GenerateQuery();
+                var intent = new Intent(this, typeof(FeedResultsActivity));
+                intent.PutExtra("query", GenerateQuery());
+                StartActivity(intent);
             };
         }
 

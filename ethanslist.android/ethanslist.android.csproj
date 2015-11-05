@@ -52,6 +52,10 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\AvailableLocations.cs" />
     <Compile Include="SearchActivity.cs" />
+    <Compile Include="FeedResultsActivity.cs" />
+    <Compile Include="CLFeedClient.cs" />
+    <Compile Include="Models\Posting.cs" />
+    <Compile Include="ListAdapters\PostingListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -69,6 +73,8 @@
     <AndroidResource Include="Resources\layout\StateRow.axml" />
     <AndroidResource Include="Resources\layout\CityRow.axml" />
     <AndroidResource Include="Resources\layout\Search.axml" />
+    <AndroidResource Include="Resources\layout\FeedResultsRow.axml" />
+    <AndroidResource Include="Resources\layout\FeedResults.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ethanslist.shared\ethanslist.shared.csproj">
