@@ -56,6 +56,7 @@
     <Compile Include="CLFeedClient.cs" />
     <Compile Include="Models\Posting.cs" />
     <Compile Include="ListAdapters\PostingListAdapter.cs" />
+    <Compile Include="PostingDetailsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -75,6 +76,7 @@
     <AndroidResource Include="Resources\layout\Search.axml" />
     <AndroidResource Include="Resources\layout\FeedResultsRow.axml" />
     <AndroidResource Include="Resources\layout\FeedResults.axml" />
+    <AndroidResource Include="Resources\layout\PostingDetails.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ethanslist.shared\ethanslist.shared.csproj">

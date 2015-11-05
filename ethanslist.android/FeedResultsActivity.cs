@@ -24,19 +24,25 @@ namespace ethanslist.android
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FeedResults);
+
             query = Intent.GetStringExtra("query");
-                
             feedClient = new CLFeedClient(query);
 
             feedResultsListView = FindViewById<ListView>(Resource.Id.feedResultsListView);
 
             feedClient.loadingComplete += (object sender, EventArgs e) =>
             {
-                    Console.WriteLine(feedClient.postings.Count);
+                Console.WriteLine(feedClient.postings.Count);
                 postingListAdapter = new PostingListAdapter(this, feedClient.postings);
                 feedResultsListView.Adapter = postingListAdapter;
             };
 
+            feedResultsListView.ItemClick += (sender, e) => {
+                var intent = new Intent(this, typeof(PostingDetailsActivity));
+                intent.PutExtra("title", feedClient.postings[e.Position].Title);
+                intent.PutExtra("description", feedClient.postings[e.Position].Description);
+                StartActivity(intent);
+            };
         }
     }
 }

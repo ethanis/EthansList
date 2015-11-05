@@ -47,6 +47,12 @@ namespace ethanslist.android
             minBedroomPicker = FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
             minBathroomPicker = FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
 
+            minRentTextView.Text = FormatCurrency(1000);
+            maxRentTextView.Text = FormatCurrency(5000);
+            minRentSeekBar.Progress = 10;
+            maxRentSeekBar.Progress = 50;
+
+
             minRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
                 minRentTextView.Text = FormatCurrency(minRentSeekBar.Progress * 100);
             };
@@ -56,7 +62,6 @@ namespace ethanslist.android
             };
 
             searchButton.Click += (sender, e) => {
-//                GenerateQuery();
                 var intent = new Intent(this, typeof(FeedResultsActivity));
                 intent.PutExtra("query", GenerateQuery());
                 StartActivity(intent);
