@@ -59,4 +59,69 @@
             android:layout_alignParentRight="true"
             android:id="@+id/maxRentSeekBar" />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/strut3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/strut3"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/minRentTextView"
+            android:text="$ min rent" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/strut3"
+            android:layout_alignParentRight="true"
+            android:id="@+id/maxRentTextView"
+            android:text="$ max rent" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/strut4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/strut4"
+            android:layout_alignParentLeft="true"
+            android:text="Minimum Bedrooms" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/strut4"
+            android:layout_alignParentRight="true"
+            android:text="Minimum Bathrooms" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/strut5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true" />
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/strut5"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/minBedroomPicker" />
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/strut5"
+            android:layout_alignParentRight="true"
+            android:id="@+id/minBathroomPicker" />
+    </RelativeLayout>
 </LinearLayout>
