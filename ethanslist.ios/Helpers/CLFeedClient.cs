@@ -56,13 +56,14 @@ namespace ethanslist.ios
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
         {
+            //TODO: have this report actual progress done
+            for (int i = 10; i <= 100; i+=10)
+            {
+                AsyncXmlLoader.ReportProgress(i); 
+            }
             AsyncXmlDocument = new XmlDocument();
             AsyncXmlDocument.Load(query);
             WireUpPostings();
-            for (int i = 10; i <= 100; i+=10)
-            {
-                AsyncXmlLoader.ReportProgress(i);
-            }
         }
 
         private void WireUpPostings()
