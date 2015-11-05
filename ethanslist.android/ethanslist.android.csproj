@@ -51,6 +51,7 @@
     <Compile Include="ListAdapters\CityListAdapter.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\AvailableLocations.cs" />
+    <Compile Include="SearchActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -67,6 +68,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\StateRow.axml" />
     <AndroidResource Include="Resources\layout\CityRow.axml" />
+    <AndroidResource Include="Resources\layout\Search.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ethanslist.shared\ethanslist.shared.csproj">

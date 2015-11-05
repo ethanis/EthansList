@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace ethanslist.android
 {
-    [Activity(Label = "ethanslist.android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "ethanlist.android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         AvailableLocations locations;
@@ -26,7 +26,7 @@ namespace ethanslist.android
             base.OnCreate(bundle);
             locations = new AvailableLocations();
             state = locations.States.ElementAt(0);
-            // Set our view from the "main" layout resource
+
             SetContentView(Resource.Layout.Main);
 
             cityPickerListView = FindViewById<ListView>(Resource.Id.cityPickerListView);
@@ -42,6 +42,12 @@ namespace ethanslist.android
                 state = locations.States.ElementAt(e.Position);
                 cityAdapter = new CityListAdapter(this, locations.PotentialLocations.Where(loc => loc.State == state));
                 cityPickerListView.Adapter = cityAdapter;
+            };
+
+            cityPickerListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+                var intent = new Intent(this, typeof(SearchActivity));
+                intent.PutExtra("city", locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position).SiteName);
+                StartActivity(intent);
             };
         }
     }

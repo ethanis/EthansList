@@ -29,7 +29,6 @@ namespace ethanslist.android
             }
         }
 
-
         void ReadInputFile()
         {
             using (var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Resources.USCraigslistLocations.csv")))
@@ -41,7 +40,6 @@ namespace ethanslist.android
                     locations.Add(new Location(container[0],container[1],container[2],container[3],container[4], container[5]));
                     states.Add(container[4]);
                 }
-
             }
         }
     }

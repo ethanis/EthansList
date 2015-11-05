@@ -67,7 +67,10 @@ namespace ethanslist.android
 			public const int cityPickerListView = 2131034114;
 			
 			// aapt resource value: 0x7f050003
-			public const int stateListViewItem = 2131034115;
+			public const int citySelectedText = 2131034115;
+			
+			// aapt resource value: 0x7f050004
+			public const int stateListViewItem = 2131034116;
 			
 			// aapt resource value: 0x7f050001
 			public const int statePickerListView = 2131034113;
@@ -92,7 +95,10 @@ namespace ethanslist.android
 			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int StateRow = 2130903042;
+			public const int Search = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int StateRow = 2130903043;
 			
 			static Layout()
 			{
