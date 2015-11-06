@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using System.Linq;
 using Android.Content;
+using Android.Views;
 
 namespace ethanslist.android
 {
@@ -44,7 +45,7 @@ namespace ethanslist.android
             maxRentSeekBar = FindViewById<SeekBar>(Resource.Id.maxRentSeekBar);
             minRentTextView = FindViewById<TextView>(Resource.Id.minRentTextView);
             maxRentTextView = FindViewById<TextView>(Resource.Id.maxRentTextView);
-            minBedroomPicker = FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
+            minBedroomPicker = FindViewById<NumberPicker>(Resource.Id.minBedroomPicker);
             minBathroomPicker = FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
 
             minRentTextView.Text = FormatCurrency(1000);
@@ -52,6 +53,11 @@ namespace ethanslist.android
             minRentSeekBar.Progress = 10;
             maxRentSeekBar.Progress = 50;
 
+            minBedroomPicker.MinValue = 0;
+            minBedroomPicker.MaxValue = 10;
+
+            minBathroomPicker.MinValue = 0;
+            minBathroomPicker.MaxValue = 10;
 
             minRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
                 minRentTextView.Text = FormatCurrency(minRentSeekBar.Progress * 100);
