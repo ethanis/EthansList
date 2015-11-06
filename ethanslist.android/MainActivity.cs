@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using System.Collections.Generic;
 using System.Linq;
+using EthanList.SharedProject;
 
 namespace ethanslist.android
 {

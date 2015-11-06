@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ethanslist.ios
+namespace EthanList.SharedProject
 {
     public class Posting
     {

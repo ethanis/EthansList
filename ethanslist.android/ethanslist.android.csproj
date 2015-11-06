@@ -85,7 +85,4 @@
   <ItemGroup>
     <Folder Include="ListAdapters\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\USCraigslistLocations.csv" />
-  </ItemGroup>
 </Project>

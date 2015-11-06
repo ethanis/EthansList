@@ -5,6 +5,7 @@ using Android.Widget;
 using System.Linq;
 using Android.Content;
 using Android.Views;
+using EthanList.SharedProject;
 
 namespace ethanslist.android
 {

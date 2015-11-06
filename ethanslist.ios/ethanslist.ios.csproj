@@ -134,7 +134,4 @@
       <Name>ethanslist.shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\USCraigslistLocations.csv" />
-  </ItemGroup>
 </Project>

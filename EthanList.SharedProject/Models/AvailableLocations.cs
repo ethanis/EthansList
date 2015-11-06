@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace ethanslist.ios
+namespace EthanList.SharedProject
 {
     public class AvailableLocations
     {
@@ -33,9 +33,9 @@ namespace ethanslist.ios
         void ReadInputFile()
         {
             #if __IOS__
-            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.Resources.USCraigslistLocations.csv"));
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.USCraigslistLocations.csv"));
             #elif __ANDROID__
-            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Assets.USCraigslistLocations.csv"));
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.USCraigslistLocations.csv"));
             #endif
 
             using (accountsStream)
