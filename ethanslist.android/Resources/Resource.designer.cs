@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("ethanslist.android.Resource", IsApplication=true)]
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
 	
 	

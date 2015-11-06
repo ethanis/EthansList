@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EthansList.Shared;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     [Activity(Label = "ethanlist.android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
@@ -27,7 +27,6 @@ namespace EthansList.Droid
             base.OnCreate(bundle);
             locations = new AvailableLocations();
             state = locations.States.ElementAt(0);
-
             SetContentView(Resource.Layout.Main);
 
             cityPickerListView = FindViewById<ListView>(Resource.Id.cityPickerListView);

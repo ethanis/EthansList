@@ -17,9 +17,7 @@ namespace ethanslist.UITests
             {
                 return ConfigureApp
 					.Android
-                // TODO: Update this path to point to your Android app and uncomment the
-                // code if the app is not included in the solution.
-                //.ApkFile ("../../../Droid/bin/Debug/xamarinforms.apk")
+                    .ApkFile("../../../ethanslist.android/bin/Release/com.xamarin.ethanslist-Signed.apk")
 					.StartApp();
             }
 

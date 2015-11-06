@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     [Activity(Label = "Craigslist Feed Results")]			
     public class FeedResultsActivity : Activity

@@ -19,8 +19,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)USCraigslistLocations.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)USCraigslistLocations.csv" />
   </ItemGroup>
 </Project>

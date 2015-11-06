@@ -29,7 +29,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -53,6 +52,9 @@
     <Compile Include="FeedResultsActivity.cs" />
     <Compile Include="ListAdapters\PostingListAdapter.cs" />
     <Compile Include="PostingDetailsActivity.cs" />
+    <Compile Include="ViewHolders\StateListViewHolder.cs" />
+    <Compile Include="ViewHolders\CityListViewHolder.cs" />
+    <Compile Include="ViewHolders\PostingListViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -78,5 +80,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
     <Folder Include="ListAdapters\" />
+    <Folder Include="ViewHolders\" />
   </ItemGroup>
 </Project>

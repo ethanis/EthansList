@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Android.Widget;
 using System.Linq;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     public class StateListAdapter : BaseAdapter<String>
     {
@@ -44,10 +44,17 @@ namespace EthansList.Droid
             if (view == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.StateRow, parent, false);
-            }
-            var state = view.FindViewById<TextView>(Resource.Id.stateListViewItem);
-            state.Text = states.ElementAt(position);
+                var _state = view.FindViewById<TextView>(Resource.Id.stateListViewItem);
 
+                view.Tag = new StateListViewHolder { State = _state };
+            }
+
+            var holder = (StateListViewHolder)view.Tag;
+            holder.State.Text = states.ElementAt(position);
+//
+//            var state = view.FindViewById<TextView>(Resource.Id.stateListViewItem);
+//            state.Text = states.ElementAt(position);
+//
             return view;
         }
     }

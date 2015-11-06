@@ -7,7 +7,7 @@ using Android.Content;
 using Android.Views;
 using EthansList.Shared;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     [Activity(Label = "Search", Icon = "@drawable/icon")]
     public class SearchActivity : Activity

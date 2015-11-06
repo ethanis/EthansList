@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EthansList.Shared;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     public class PostingListAdapter : BaseAdapter<Posting>
     {
@@ -45,9 +45,13 @@ namespace EthansList.Droid
             if (convertView == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.FeedResultsRow, parent, false);
+                var _posting = view.FindViewById<TextView>(Resource.Id.feedListViewItem);
+
+                view.Tag = new PostingListViewHolder { Posting = _posting };
             }
-            var posting = view.FindViewById<TextView>(Resource.Id.feedListViewItem);
-            posting.Text = postings[position].Title;
+
+            var holder = (PostingListViewHolder)view.Tag;
+            holder.Posting.Text = postings[position].Title;
 
             return view;
         }

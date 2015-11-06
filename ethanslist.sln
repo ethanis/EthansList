@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.ios", "ethanslist.ios\ethanslist.ios.csproj", "{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.iOS", "ethanslist.ios\EthansList.iOS.csproj", "{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.Droid", "ethanslist.android\EthansList.Droid.csproj", "{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}"
 EndProject

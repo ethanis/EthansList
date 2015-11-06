@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EthansList.Shared;
 
-namespace EthansList.Droid
+namespace ethanslist.android
 {
     public class CityListAdapter : BaseAdapter<Location>
     {
@@ -45,10 +45,14 @@ namespace EthansList.Droid
             if (view == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.CityRow, parent, false);
-            }
-            var city = view.FindViewById<TextView>(Resource.Id.cityListViewItem);
+                var _city = view.FindViewById<TextView>(Resource.Id.cityListViewItem);
 
-            city.Text = cities.ElementAt(position).SiteName;
+                view.Tag = new CityListViewHolder { City = _city };
+            }
+
+            var holder = (CityListViewHolder)view.Tag;
+
+            holder.City.Text = cities.ElementAt(position).SiteName;
             return view;
         }
     }
