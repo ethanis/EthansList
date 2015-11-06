@@ -9,9 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
-namespace ethanslist.android
+namespace EthansList.Droid
 {
     [Activity(Label = "Craigslist Feed Results")]			
     public class FeedResultsActivity : Activity

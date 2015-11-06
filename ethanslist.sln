@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.ios", "ethanslist.ios\ethanslist.ios.csproj", "{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.android", "ethanslist.android\ethanslist.android.csproj", "{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.Droid", "ethanslist.android\EthansList.Droid.csproj", "{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.UITests", "ethanslist.UITests\ethanslist.UITests.csproj", "{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.shared", "ethanslist.shared\ethanslist.shared.csproj", "{7F2922D2-612F-4BB9-81D9-2493932BD749}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthanList.SharedProject", "EthanList.SharedProject\EthanList.SharedProject.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthansList.Shared", "EthanList.SharedProject\EthansList.Shared.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,18 +43,6 @@ Global
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhone.Build.0 = Release|Any CPU
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|iPhone.Build.0 = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{7F2922D2-612F-4BB9-81D9-2493932BD749}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|iPhone.ActiveCfg = Debug|Any CPU

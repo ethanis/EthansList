@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace EthanList.SharedProject
+namespace EthansList.Shared
 {
     public class CLFeedClient
     {

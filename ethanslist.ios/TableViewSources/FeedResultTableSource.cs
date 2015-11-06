@@ -1,6 +1,6 @@
 ﻿using System;
 using UIKit;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {

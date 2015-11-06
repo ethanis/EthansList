@@ -2,7 +2,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {

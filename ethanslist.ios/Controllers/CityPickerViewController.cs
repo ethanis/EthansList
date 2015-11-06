@@ -4,7 +4,7 @@ using System.CodeDom.Compiler;
 using UIKit;
 using System.Linq;
 using System.Collections.Generic;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {

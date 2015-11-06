@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EthanList.SharedProject
+namespace EthansList.Shared
 {
     public class Location
     {

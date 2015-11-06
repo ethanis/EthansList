@@ -8,9 +8,9 @@ using Android.Widget;
 using Android.OS;
 using System.Collections.Generic;
 using System.Linq;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
-namespace ethanslist.android
+namespace EthansList.Droid
 {
     [Activity(Label = "ethanlist.android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity

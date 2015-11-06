@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Android.Widget;
 using System.Linq;
 
-namespace ethanslist.android
+namespace EthansList.Droid
 {
     public class StateListAdapter : BaseAdapter<String>
     {

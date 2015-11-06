@@ -3,9 +3,9 @@ using Android.Widget;
 using Android.App;
 using System.Collections.Generic;
 using System.Linq;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
-namespace ethanslist.android
+namespace EthansList.Droid
 {
     public class PostingListAdapter : BaseAdapter<Posting>
     {

@@ -6,7 +6,7 @@ using CoreGraphics;
 using System.Linq;
 using System.Threading;
 using System.Diagnostics;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {

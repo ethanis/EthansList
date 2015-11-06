@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace EthanList.SharedProject
+namespace EthansList.Shared
 {
     public class AvailableLocations
     {

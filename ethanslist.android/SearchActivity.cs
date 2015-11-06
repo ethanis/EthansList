@@ -5,9 +5,9 @@ using Android.Widget;
 using System.Linq;
 using Android.Content;
 using Android.Views;
-using EthanList.SharedProject;
+using EthansList.Shared;
 
-namespace ethanslist.android
+namespace EthansList.Droid
 {
     [Activity(Label = "Search", Icon = "@drawable/icon")]
     public class SearchActivity : Activity
