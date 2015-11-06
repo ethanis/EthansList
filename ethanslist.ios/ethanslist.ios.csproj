@@ -107,8 +107,6 @@
     <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Posting.cs" />
-    <Compile Include="Helpers\FeedResultTableSource.cs" />
     <Compile Include="Controllers\PostingDetailsViewController.cs" />
     <Compile Include="Controllers\PostingDetailsViewController.designer.cs">
       <DependentUpon>PostingDetailsViewController.cs</DependentUpon>
@@ -117,28 +115,26 @@
     <Compile Include="Controllers\SearchViewController.designer.cs">
       <DependentUpon>SearchViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\AvailableLocations.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controllers\CityPickerViewController.cs" />
     <Compile Include="Controllers\CityPickerViewController.designer.cs">
       <DependentUpon>CityPickerViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CLFeedClient.cs" />
+    <Compile Include="TableViewSources\FeedResultTableSource.cs" />
   </ItemGroup>
+  <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="USCraigslistLocations.csv" />
+    <Folder Include="TableViewSources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ethanslist.shared\ethanslist.shared.csproj">
       <Project>{7F2922D2-612F-4BB9-81D9-2493932BD749}</Project>
       <Name>ethanslist.shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\USCraigslistLocations.csv" />
   </ItemGroup>
 </Project>

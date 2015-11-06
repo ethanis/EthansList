@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.UITests", "ethan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.shared", "ethanslist.shared\ethanslist.shared.csproj", "{7F2922D2-612F-4BB9-81D9-2493932BD749}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthanList.SharedProject", "EthanList.SharedProject\EthanList.SharedProject.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

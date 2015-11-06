@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace ethanslist.android
+namespace ethanslist.ios
 {
     public class AvailableLocations
     {
@@ -29,9 +29,16 @@ namespace ethanslist.android
             }
         }
 
+
         void ReadInputFile()
         {
-            using (var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Resources.USCraigslistLocations.csv")))
+            #if __IOS__
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.Resources.USCraigslistLocations.csv"));
+            #elif __ANDROID__
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Assets.USCraigslistLocations.csv"));
+            #endif
+
+            using (accountsStream)
             {
                 string line;
                 while ((line = accountsStream.ReadLine()) != null)
