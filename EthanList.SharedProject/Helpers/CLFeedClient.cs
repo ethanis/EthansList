@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+//using System.Xml.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,14 +73,18 @@ namespace EthansList.Shared
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
             mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
 
-            foreach (string names in mgr)
-            {
-                Console.WriteLine(names.ToString());
-            }
+//            Console.WriteLine(AsyncXmlDocument.DocumentElement.OuterXml);
 
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
-
 //            StringBuilder rssContent = new StringBuilder();
+            XmlNodeList rssNodes2 = AsyncXmlDocument.SelectNodes("//rdf:RDF/enc:enc", mgr);
+
+            foreach (XmlNode rssNode2 in rssNodes2)
+            {
+                XmlNode rssSubNode = rssNode2.SelectSingleNode("enc:enclosure", mgr);
+                string link = rssSubNode != null ? rssSubNode.InnerText : "";
+                Console.WriteLine(link != null ? link : "null");
+            }
 
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
@@ -93,10 +98,10 @@ namespace EthansList.Shared
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
-                rssSubNode = rssNode.SelectSingleNode("enc:enclosure", mgr);
-                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
-
-                Console.WriteLine(imageLink);
+//                rssSubNode = rssNode.SelectSingleNode("enc:resource", mgr);
+//                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
+////
+//                Console.WriteLine(imageLink == null ? "null" : imageLink);
 
 //                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 

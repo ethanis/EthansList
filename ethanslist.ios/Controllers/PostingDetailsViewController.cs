@@ -31,7 +31,6 @@ namespace ethanslist.ios
             Console.WriteLine(post.ImageLink);
 
 //            postingImageView = new UIImageView(FromUrl(post.ImageLink));
-//            postingImageView = new CoreGraphics.CGRect(10,10,
 
             BackButton.Clicked += OnDismiss;
         }
