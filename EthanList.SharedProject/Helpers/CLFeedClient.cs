@@ -72,6 +72,11 @@ namespace EthansList.Shared
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
             mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
 
+            foreach (string names in mgr)
+            {
+                Console.WriteLine(names.ToString());
+            }
+
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
 
 //            StringBuilder rssContent = new StringBuilder();
