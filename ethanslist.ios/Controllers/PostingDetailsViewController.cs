@@ -28,6 +28,10 @@ namespace ethanslist.ios
 
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
+            Console.WriteLine(post.ImageLink);
+
+//            postingImageView = new UIImageView(FromUrl(post.ImageLink));
+//            postingImageView = new CoreGraphics.CGRect(10,10,
 
             BackButton.Clicked += OnDismiss;
         }
@@ -36,6 +40,14 @@ namespace ethanslist.ios
         void OnDismiss(object sender, EventArgs e)
         {
             DismissViewController(true, null);
-        }  
+        }
+
+
+        static UIImage FromUrl (string uri)
+        {
+            using (var url = new NSUrl (uri))
+            using (var data = NSData.FromUrl (url))
+                return UIImage.LoadFromData (data);
+        }
 	}
 }

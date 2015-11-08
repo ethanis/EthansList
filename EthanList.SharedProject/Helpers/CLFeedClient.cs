@@ -70,10 +70,11 @@ namespace EthansList.Shared
             XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
             mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
+            mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
 
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
 
-            StringBuilder rssContent = new StringBuilder();
+//            StringBuilder rssContent = new StringBuilder();
 
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
@@ -87,7 +88,12 @@ namespace EthansList.Shared
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
-                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
+                rssSubNode = rssNode.SelectSingleNode("enc:enclosure", mgr);
+                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
+
+                Console.WriteLine(imageLink);
+
+//                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 
                 if (title != null && description != null && description != null)
                 {
@@ -95,6 +101,7 @@ namespace EthansList.Shared
                     posting.Title = title;
                     posting.Description = description;
                     posting.Link = link;
+//                    posting.ImageLink = imageLink;
 
                     postings.Add(posting);
                 }

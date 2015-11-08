@@ -24,6 +24,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView postingImageView { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel PostingTitle { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -35,6 +39,10 @@ namespace ethanslist.ios
 			if (PostingDescription != null) {
 				PostingDescription.Dispose ();
 				PostingDescription = null;
+			}
+			if (postingImageView != null) {
+				postingImageView.Dispose ();
+				postingImageView = null;
 			}
 			if (PostingTitle != null) {
 				PostingTitle.Dispose ();

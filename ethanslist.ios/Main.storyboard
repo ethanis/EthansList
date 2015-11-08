@@ -56,7 +56,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="259" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="10" textAlignment="center" fixedFrame="YES">
-                                <rect key="frame" x="20" y="166" width="280" height="382"/>
+                                <rect key="frame" x="20" y="244" width="280" height="304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -76,6 +76,9 @@
                                     <rect key="frame" x="0.0" y="15" width="320" height="44"/>
                                 </variation>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="875" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="136" width="280" height="100"/>
+                            </imageView>
                         </subviews>
                         <variation key="default">
                             <mask key="subviews">
@@ -92,6 +95,7 @@
                         <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
                         <outlet property="PostingDescription" destination="259" id="name-outlet-259"/>
                         <outlet property="BackButton" destination="867" id="name-outlet-867"/>
+                        <outlet property="postingImageView" destination="875" id="name-outlet-875"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,13 +286,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO">
+                            <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="20" y="79" width="280" height="368"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="158" y="82" width="166" height="326"/>
                                 </variation>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
                                 <rect key="frame" x="58" y="488" width="203" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Proceed to Search">
