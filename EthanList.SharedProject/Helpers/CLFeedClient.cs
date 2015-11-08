@@ -88,11 +88,6 @@ namespace EthansList.Shared
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
-                rssSubNode = rssNode.SelectSingleNode("enc:enclosure", mgr);
-                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
-
-                Console.WriteLine(imageLink);
-
 //                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 
                 if (title != null && description != null && description != null)
