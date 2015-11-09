@@ -94,18 +94,21 @@ namespace EthansList.Shared
             XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
             mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
-//            mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
 
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
 
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
             {
-                foreach (XmlNode subnode in rssNode.ChildNodes)
+                string imageLink = "-1";
+                foreach (XmlNode child in rssNode.ChildNodes)
                 {
-                    Console.WriteLine(subnode.Name);
+                    if (child.Name == "enc:enclosure")
+                    {
+                        string pot = child.Attributes["resource"].Value;
+                        imageLink = pot != null ? pot : "-1";
+                    }
                 }
-
 
                 XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
                 string title = rssSubNode != null ? rssSubNode.InnerText : "";
@@ -116,10 +119,7 @@ namespace EthansList.Shared
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
-//                rssSubNode = rssNode.SelectSingleNode("x:enc", mgr);
-//                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
-//
-//                Console.WriteLine(imageLink == null ? "null" : imageLink);
+//                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 
                 if (title != null && description != null && description != null)
                 {
@@ -127,11 +127,11 @@ namespace EthansList.Shared
                     posting.Title = title;
                     posting.Description = description;
                     posting.Link = link;
-//                    posting.ImageLink = imageLink;
+                    posting.ImageLink = imageLink;
 
                     postings.Add(posting);
                 }
-            }    
+            }
         }
 
         public string GetTitle(int index)
