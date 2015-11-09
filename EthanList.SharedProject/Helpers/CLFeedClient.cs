@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +29,6 @@ namespace EthansList.Shared
 //            XDocument doc = XDocument.Parse(xml.InnerXml);
 //
 //            List<Posting> postings2 = new List<Posting>();
-//            //TODO:try rdf instead of rss
 //            postings2 = (from item in doc.Element("rdf").Element("channel").Elements("item")
 //                select new Posting
 //                {
@@ -46,8 +44,8 @@ namespace EthansList.Shared
 //
 //            }
 
-            GetFeed();
-//            GetFeedAsync();
+//            GetFeed();
+            GetFeedAsync();
         }
 
         private void GetFeedAsync()
@@ -96,22 +94,19 @@ namespace EthansList.Shared
             XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
             mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
-            mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
-//
+//            mgr.AddNamespace("enc", "http://purl.oclc.org/net/rss_2.0/enc#");
+
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
-//            StringBuilder rssContent = new StringBuilder();
-//            XmlNodeList rssNodes2 = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item/enc:enc", mgr);
-//
-//            foreach (XmlNode rssNode2 in rssNodes2)
-//            {
-//                XmlNode rssSubNode = rssNode2.SelectSingleNode("enc:enclosure", mgr);
-//                string link = rssSubNode != null ? rssSubNode.InnerText : "";
-//                Console.WriteLine(link != null ? link : "null");
-//            }
 
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
             {
+                foreach (XmlNode subnode in rssNode.ChildNodes)
+                {
+                    Console.WriteLine(subnode.Name);
+                }
+
+
                 XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
                 string title = rssSubNode != null ? rssSubNode.InnerText : "";
 
@@ -121,12 +116,10 @@ namespace EthansList.Shared
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
 
-//                rssSubNode = rssNode.SelectSingleNode("enc:resource", mgr);
+//                rssSubNode = rssNode.SelectSingleNode("x:enc", mgr);
 //                string imageLink = rssNode != null ? rssSubNode.InnerText : "";
-////
+//
 //                Console.WriteLine(imageLink == null ? "null" : imageLink);
-
-//                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 
                 if (title != null && description != null && description != null)
                 {
@@ -193,7 +186,6 @@ namespace EthansList.Shared
             {
                 rss = sr.ReadToEnd();
             }
-            Console.WriteLine(rss);
         }
     }
 }
