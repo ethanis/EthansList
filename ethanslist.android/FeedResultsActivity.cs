@@ -42,6 +42,7 @@ namespace ethanslist.android
                 var intent = new Intent(this, typeof(PostingDetailsActivity));
                 intent.PutExtra("title", feedClient.postings[e.Position].Title);
                 intent.PutExtra("description", feedClient.postings[e.Position].Description);
+                intent.PutExtra("imageLink", feedClient.postings[e.Position].ImageLink);
                 StartActivity(intent);
             };
         }

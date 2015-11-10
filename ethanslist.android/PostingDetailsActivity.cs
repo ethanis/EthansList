@@ -10,6 +10,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
+using System.Net;
 
 namespace ethanslist.android
 {
@@ -18,6 +20,7 @@ namespace ethanslist.android
     {
         TextView postingTitle;
         TextView postingDetails;
+        ImageView postingImageView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -26,9 +29,34 @@ namespace ethanslist.android
 
             postingTitle = FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = FindViewById<TextView>(Resource.Id.postingDetailsText);
+            postingImageView = FindViewById<ImageView>(Resource.Id.postingImageView);
 
             postingTitle.Text = Intent.GetStringExtra("title");
             postingDetails.Text = Intent.GetStringExtra("description");
+
+            string imageLink = Intent.GetStringExtra("imageLink");  
+
+            if (imageLink != "-1")
+            {
+                var imageBitmap = GetImageBitmapFromUrl(imageLink);
+                postingImageView.SetImageBitmap(imageBitmap);
+            }
+        }
+
+        private Bitmap GetImageBitmapFromUrl(string url)
+        {
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
+            {
+                var imageBytes = webClient.DownloadData(url);
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                }
+            }
+
+            return imageBitmap;
         }
     }
 }
