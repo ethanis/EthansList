@@ -38,8 +38,8 @@ namespace ethanslist.android
 
             if (imageLink != "-1")
             {
-                var imageBitmap = GetImageBitmapFromUrl(imageLink);
-                postingImageView.SetImageBitmap(imageBitmap);
+//                var imageBitmap = GetImageBitmapFromUrl(imageLink);
+                postingImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
             }
         }
 

@@ -4,6 +4,8 @@ using Android.App;
 using System.Collections.Generic;
 using System.Linq;
 using EthansList.Shared;
+using Android.Graphics;
+using System.Net;
 
 namespace ethanslist.android
 {
@@ -45,15 +47,39 @@ namespace ethanslist.android
             if (convertView == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.FeedResultsRow, parent, false);
-                var _posting = view.FindViewById<TextView>(Resource.Id.feedListViewItem);
+                var _title = view.FindViewById<TextView>(Resource.Id.postingTitleText);
+                var _description = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
+                var _image = view.FindViewById<ImageView>(Resource.Id.postingImageView);
 
-                view.Tag = new PostingListViewHolder { Posting = _posting };
+                view.Tag = new PostingListViewHolder { Title = _title, Description = _description, ImageView = _image };
             }
 
             var holder = (PostingListViewHolder)view.Tag;
-            holder.Posting.Text = postings[position].Title;
+            holder.Title.Text = postings[position].Title;
+            holder.Description.Text = postings[position].Description;
+            string imageLink = postings[position].ImageLink;
+            if (imageLink != "-1")
+            {
+                holder.ImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
+            }
 
             return view;
+        }
+
+        private Bitmap GetImageBitmapFromUrl(string url)
+        {
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
+            {
+                var imageBytes = webClient.DownloadData(url);
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                }
+            }
+
+            return imageBitmap;
         }
     }
 }

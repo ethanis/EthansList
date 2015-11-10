@@ -4,6 +4,8 @@ namespace ethanslist.android
 {
     public class PostingListViewHolder : Java.Lang.Object
     {
-        public TextView Posting { get; set;}
+        public TextView Title { get; set;}
+        public TextView Description { get; set;}
+        public ImageView ImageView { get; set;}
     }
 }

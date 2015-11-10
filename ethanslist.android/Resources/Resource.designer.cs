@@ -63,14 +63,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f050000
 			public const int cityListViewItem = 2131034112;
 			
-			// aapt resource value: 0x7f050004
-			public const int cityPickerListView = 2131034116;
+			// aapt resource value: 0x7f050006
+			public const int cityPickerListView = 2131034118;
 			
 			// aapt resource value: 0x7f050008
 			public const int citySelectedText = 2131034120;
-			
-			// aapt resource value: 0x7f050002
-			public const int feedListViewItem = 2131034114;
 			
 			// aapt resource value: 0x7f050001
 			public const int feedResultsListView = 2131034113;
@@ -93,14 +90,17 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f050010
 			public const int minRentTextView = 2131034128;
 			
-			// aapt resource value: 0x7f050006
-			public const int postingDetailsText = 2131034118;
+			// aapt resource value: 0x7f050002
+			public const int photoImageView = 2131034114;
+			
+			// aapt resource value: 0x7f050004
+			public const int postingDetailsText = 2131034116;
 			
 			// aapt resource value: 0x7f050007
 			public const int postingImageView = 2131034119;
 			
-			// aapt resource value: 0x7f050005
-			public const int postingTitleText = 2131034117;
+			// aapt resource value: 0x7f050003
+			public const int postingTitleText = 2131034115;
 			
 			// aapt resource value: 0x7f05000a
 			public const int searchButton = 2131034122;
@@ -111,8 +111,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f050016
 			public const int stateListViewItem = 2131034134;
 			
-			// aapt resource value: 0x7f050003
-			public const int statePickerListView = 2131034115;
+			// aapt resource value: 0x7f050005
+			public const int statePickerListView = 2131034117;
 			
 			// aapt resource value: 0x7f05000b
 			public const int strut = 2131034123;
