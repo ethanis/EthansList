@@ -30,9 +30,10 @@ namespace ethanslist.ios
             PostingDescription.Text = post.Description;
             Console.WriteLine(post.ImageLink);
 
-//            postingImageView = new UIImageView(FromUrl(post.ImageLink));
-//            postingImageView = new CoreGraphics.CGRect(10,10,
-
+            if (post.ImageLink != "-1")
+            {
+                postingImageView.Image = FromUrl(post.ImageLink);
+            }
             BackButton.Clicked += OnDismiss;
         }
 
