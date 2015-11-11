@@ -1,6 +1,7 @@
 ﻿using System;
 using UIKit;
 using EthansList.Shared;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -36,7 +37,10 @@ namespace ethanslist.ios
 
             cell.TextLabel.Text = post.Title;
             cell.DetailTextLabel.Text = post.Description;
-
+            if (post.ImageLink != "-1")
+            {
+                cell.ImageView.Image = FromUrl(post.ImageLink);
+            }
             return cell;
         }
 
@@ -49,6 +53,13 @@ namespace ethanslist.ios
             detailController.Post = post;
 
             owner.ShowDetailViewController(detailController, owner);
+        }
+
+        static UIImage FromUrl (string uri)
+        {
+            using (var url = new NSUrl (uri))
+            using (var data = NSData.FromUrl (url))
+                return UIImage.LoadFromData (data);
         }
     }
 }
