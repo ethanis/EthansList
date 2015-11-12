@@ -6,7 +6,6 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
-using UrlImageViewHelper;
 
 namespace ethanslist.android
 {
@@ -61,13 +60,16 @@ namespace ethanslist.android
             string imageLink = postings[position].ImageLink;
             if (imageLink != "-1")
             {
-                holder.ImageView.SetUrlDrawable(imageLink, Resource.Drawable.placeholder);
+//                holder.ImageView.SetUrlDrawable(imageLink, Resource.Drawable.placeholder);
+                Koush.UrlImageViewHelper.SetUrlDrawable(holder.ImageView, imageLink, Resource.Drawable.placeholder);
             }
             else
             {
                 holder.ImageView.SetImageResource(Resource.Drawable.placeholder);
             }
 
+//            holder.ImageView.SetMaxWidth(100);
+//            holder.ImageView.SetMinimumWidth(100);
             return view;
         }
 
