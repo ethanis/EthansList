@@ -6,7 +6,8 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
-using System.Reflection;
+
+using com.refractored.monodroidtoolkit.imageloader;
 
 namespace ethanslist.android
 {
@@ -50,7 +51,7 @@ namespace ethanslist.android
                 view = context.LayoutInflater.Inflate(Resource.Layout.FeedResultsRow, parent, false);
                 var _title = view.FindViewById<TextView>(Resource.Id.postingTitleText);
                 var _description = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
-                var _image = view.FindViewById<ImageView>(Resource.Id.postingImageView);
+                var _image = view.FindViewById<ImageView>(Resource.Id.photoImageView);
 
                 view.Tag = new PostingListViewHolder { Title = _title, Description = _description, ImageView = _image };
             }

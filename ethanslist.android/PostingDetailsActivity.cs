@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +37,6 @@ namespace ethanslist.android
 
             if (imageLink != "-1")
             {
-//                var imageBitmap = GetImageBitmapFromUrl(imageLink);
                 postingImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
             }
         }
