@@ -6,6 +6,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
+using System.Reflection;
 
 namespace ethanslist.android
 {
@@ -61,6 +62,10 @@ namespace ethanslist.android
             if (imageLink != "-1")
             {
                 holder.ImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
+            }
+            else
+            {
+                holder.ImageView.SetImageResource(Resource.Drawable.placeholder);
             }
 
             return view;

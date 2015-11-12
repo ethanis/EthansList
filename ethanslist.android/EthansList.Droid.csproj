@@ -16,6 +16,7 @@
     <AssemblyName>ethanslist.android</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,14 +28,15 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,6 +77,11 @@
     <AndroidResource Include="Resources\layout\FeedResultsRow.axml" />
     <AndroidResource Include="Resources\layout\FeedResults.axml" />
     <AndroidResource Include="Resources\layout\PostingDetails.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\placeholder.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\placeholder.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\placeholder.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\placeholder.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\placeholder.png" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
