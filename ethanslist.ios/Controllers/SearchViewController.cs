@@ -31,6 +31,12 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
+            foreach (string assemlby in Assembly.GetExecutingAssembly().GetManifestResourceNames())
+            {
+                Console.WriteLine(assemlby);
+            }
+
+
             this.Title = "Ethan's List";
 
             SearchButton.Enabled = true;

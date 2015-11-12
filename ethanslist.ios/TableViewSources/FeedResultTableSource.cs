@@ -2,6 +2,7 @@
 using UIKit;
 using EthansList.Shared;
 using Foundation;
+using SDWebImage;
 
 namespace ethanslist.ios
 {
@@ -39,7 +40,15 @@ namespace ethanslist.ios
             cell.DetailTextLabel.Text = post.Description;
             if (post.ImageLink != "-1")
             {
-                cell.ImageView.Image = FromUrl(post.ImageLink);
+//                cell.ImageView.Image = FromUrl(post.ImageLink);
+                cell.ImageView.SetImage(
+                    url: new NSUrl(post.ImageLink),
+                    placeholder: UIImage.FromBundle("placeholder.png")
+                );
+            }
+            else
+            {
+                cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
             }
             return cell;
         }
