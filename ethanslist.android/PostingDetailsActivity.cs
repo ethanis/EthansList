@@ -12,6 +12,8 @@ using Android.Widget;
 using Android.Graphics;
 using System.Net;
 
+using UrlImageViewHelper;
+
 namespace ethanslist.android
 {
     [Activity(Label = "Posting Details")]			
@@ -37,7 +39,8 @@ namespace ethanslist.android
 
             if (imageLink != "-1")
             {
-                postingImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
+//                postingImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
+                postingImageView.SetUrlDrawable(imageLink, Resource.Drawable.placeholder);
             }
         }
 

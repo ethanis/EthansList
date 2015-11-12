@@ -6,8 +6,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
-
-using com.refractored.monodroidtoolkit.imageloader;
+using UrlImageViewHelper;
 
 namespace ethanslist.android
 {
@@ -62,7 +61,7 @@ namespace ethanslist.android
             string imageLink = postings[position].ImageLink;
             if (imageLink != "-1")
             {
-                holder.ImageView.SetImageBitmap(GetImageBitmapFromUrl(imageLink));
+                holder.ImageView.SetUrlDrawable(imageLink, Resource.Drawable.placeholder);
             }
             else
             {
