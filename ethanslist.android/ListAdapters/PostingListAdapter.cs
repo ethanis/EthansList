@@ -60,7 +60,6 @@ namespace ethanslist.android
             string imageLink = postings[position].ImageLink;
             if (imageLink != "-1")
             {
-//                holder.ImageView.SetUrlDrawable(imageLink, Resource.Drawable.placeholder);
                 Koush.UrlImageViewHelper.SetUrlDrawable(holder.ImageView, imageLink, Resource.Drawable.placeholder);
             }
             else
@@ -68,25 +67,7 @@ namespace ethanslist.android
                 holder.ImageView.SetImageResource(Resource.Drawable.placeholder);
             }
 
-//            holder.ImageView.SetMaxWidth(100);
-//            holder.ImageView.SetMinimumWidth(100);
             return view;
-        }
-
-        private Bitmap GetImageBitmapFromUrl(string url)
-        {
-            Bitmap imageBitmap = null;
-
-            using (var webClient = new WebClient())
-            {
-                var imageBytes = webClient.DownloadData(url);
-                if (imageBytes != null && imageBytes.Length > 0)
-                {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-                }
-            }
-
-            return imageBitmap;
         }
     }
 }
