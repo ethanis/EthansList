@@ -16,11 +16,11 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIBarButtonItem BackButton { get; set; }
+		UILabel dateLabel { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel dateLabel { get; set; }
+		UIBarButtonItem DoneButton { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -34,15 +34,19 @@ namespace ethanslist.ios
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel PostingTitle { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIBarButtonItem SaveButton { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (BackButton != null) {
-				BackButton.Dispose ();
-				BackButton = null;
-			}
 			if (dateLabel != null) {
 				dateLabel.Dispose ();
 				dateLabel = null;
+			}
+			if (DoneButton != null) {
+				DoneButton.Dispose ();
+				DoneButton = null;
 			}
 			if (PostingDescription != null) {
 				PostingDescription.Dispose ();
@@ -55,6 +59,10 @@ namespace ethanslist.ios
 			if (PostingTitle != null) {
 				PostingTitle.Dispose ();
 				PostingTitle = null;
+			}
+			if (SaveButton != null) {
+				SaveButton.Dispose ();
+				SaveButton = null;
 			}
 		}
 	}

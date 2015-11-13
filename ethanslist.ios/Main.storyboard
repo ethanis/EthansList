@@ -81,17 +81,6 @@
                                     <rect key="frame" x="20" y="168" width="280" height="380"/>
                                 </variation>
                             </label>
-                            <navigationBar contentMode="scaleToFill" id="863" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="20" y="17" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Posting Details" id="864">
-                                        <barButtonItem id="867" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done"/>
-                                    </navigationItem>
-                                </items>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="15" width="320" height="44"/>
-                                </variation>
-                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="875" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="136" width="280" height="100"/>
                             </imageView>
@@ -102,12 +91,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" id="1420" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Posting Details" id="1421">
+                                        <barButtonItem id="1423" translatesAutoresizingMaskIntoConstraints="NO" key="leftBarButtonItem" systemItem="save" style="plain"/>
+                                        <barButtonItem id="1424" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="863"/>
-                            </mask>
-                        </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="863"/>
@@ -117,10 +110,13 @@
                     <connections>
                         <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
                         <outlet property="PostingDescription" destination="259" id="name-outlet-259"/>
-                        <outlet property="BackButton" destination="867" id="name-outlet-867"/>
                         <outlet property="postingImageView" destination="875" id="name-outlet-875"/>
                         <outlet property="dateLabel" destination="974" id="name-outlet-974"/>
+                        <outlet property="DoneButton" destination="1424" id="name-outlet-1424"/>
+                        <outlet property="SaveButton" destination="1423" id="name-outlet-1423"/>
                     </connections>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -382,7 +378,6 @@
                     </tabBar>
                     <connections>
                         <segue id="1271" destination="561" kind="relationship" relationship="viewControllers"/>
-                        <segue id="1334" destination="1180" kind="relationship" relationship="viewControllers"/>
                         <segue id="1366" destination="1339" kind="relationship" relationship="viewControllers"/>
                         <segue id="1396" destination="1369" kind="relationship" relationship="viewControllers"/>
                     </connections>

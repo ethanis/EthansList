@@ -39,13 +39,20 @@ namespace ethanslist.ios
                 //TODO: used cached image instead
                 postingImageView.Image = FromUrl(post.ImageLink);
             }
-            BackButton.Clicked += OnDismiss;
+            DoneButton.Clicked += OnDismiss;
+
+            SaveButton.Clicked += SaveListing;
         }
 
 
         void OnDismiss(object sender, EventArgs e)
         {
             DismissViewController(true, null);
+        }
+
+        void SaveListing(object sender, EventArgs e)
+        {
+            
         }
 
 
