@@ -20,6 +20,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel dateLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel PostingDescription { get; set; }
 
 		[Outlet]
@@ -35,6 +39,10 @@ namespace ethanslist.ios
 			if (BackButton != null) {
 				BackButton.Dispose ();
 				BackButton = null;
+			}
+			if (dateLabel != null) {
+				dateLabel.Dispose ();
+				dateLabel = null;
 			}
 			if (PostingDescription != null) {
 				PostingDescription.Dispose ();

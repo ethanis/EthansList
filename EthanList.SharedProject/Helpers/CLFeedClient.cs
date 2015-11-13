@@ -79,6 +79,7 @@ namespace EthansList.Shared
             foreach (XmlNode rssNode in rssNodes)
             {
                 string imageLink = "-1";
+                DateTime date = new DateTime();
                 foreach (XmlNode child in rssNode.ChildNodes)
                 {
                     if (child.Name == "enc:enclosure")
@@ -86,6 +87,21 @@ namespace EthansList.Shared
                         string pot = child.Attributes["resource"].Value;
                         imageLink = pot != null ? pot : "-1";
                     }
+
+                    if (child.Name == "dc:date")
+                    {
+                        date = DateTime.Parse(child.InnerText);
+                    }
+//                    Console.WriteLine(child.Name);
+//                    if (child.Name == "title")
+//                    {
+//                        Console.WriteLine("title: " + child.InnerText);
+//                    }
+//                    if (child.Name == "dc:title")
+//                    {
+//                        Console.WriteLine("dc:title: " + child.InnerText);
+//                    }
+                    Console.WriteLine(child.Name + " = " + child.InnerText);
                 }
 
                 XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
@@ -106,6 +122,7 @@ namespace EthansList.Shared
                     posting.Description = description;
                     posting.Link = link;
                     posting.ImageLink = imageLink;
+                    posting.Date = date;
 
                     postings.Add(posting);
                 }

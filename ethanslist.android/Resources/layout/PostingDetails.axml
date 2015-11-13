@@ -22,4 +22,10 @@
         android:layout_height="wrap_content"
         android:maxHeight="100px"
         android:id="@+id/postingImageView" />
+    <TextView
+        android:text="Date posted"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/postingDateText" />
 </LinearLayout>

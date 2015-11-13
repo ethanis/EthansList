@@ -20,6 +20,7 @@ namespace ethanslist.android
         TextView postingTitle;
         TextView postingDetails;
         ImageView postingImageView;
+        TextView postingDate;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,10 +30,11 @@ namespace ethanslist.android
             postingTitle = FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = FindViewById<TextView>(Resource.Id.postingDetailsText);
             postingImageView = FindViewById<ImageView>(Resource.Id.postingImageView);
+            postingDate = FindViewById<TextView>(Resource.Id.postingDateText);
 
             postingTitle.Text = Intent.GetStringExtra("title");
             postingDetails.Text = Intent.GetStringExtra("description");
-
+            postingDate.Text = "Listed: " + Intent.GetStringExtra("date") + " at " + Intent.GetStringExtra("time");
             string imageLink = Intent.GetStringExtra("imageLink");  
 
             if (imageLink != "-1")

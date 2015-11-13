@@ -43,6 +43,9 @@ namespace ethanslist.android
                 intent.PutExtra("title", feedClient.postings[e.Position].Title);
                 intent.PutExtra("description", feedClient.postings[e.Position].Description);
                 intent.PutExtra("imageLink", feedClient.postings[e.Position].ImageLink);
+                intent.PutExtra("date", feedClient.postings[e.Position].Date.ToShortDateString());
+                intent.PutExtra("time", feedClient.postings[e.Position].Date.ToShortTimeString());
+
                 StartActivity(intent);
             };
         }

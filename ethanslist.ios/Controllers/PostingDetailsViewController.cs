@@ -29,9 +29,14 @@ namespace ethanslist.ios
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
             Console.WriteLine(post.ImageLink);
+            Console.WriteLine(post.Date);
+
+//            dateLabel.Text = post.Date.ToLongTimeString();
+            dateLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
 
             if (post.ImageLink != "-1")
             {
+                //TODO: used cached image instead
                 postingImageView.Image = FromUrl(post.ImageLink);
             }
             BackButton.Clicked += OnDismiss;
