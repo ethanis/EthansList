@@ -46,7 +46,6 @@ namespace ethanslist.ios
 
             TableView.Source = tableSource;
 
-            tableView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Left,
