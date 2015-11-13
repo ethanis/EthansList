@@ -31,12 +31,6 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            foreach (string assemlby in Assembly.GetExecutingAssembly().GetManifestResourceNames())
-            {
-                Console.WriteLine(assemlby);
-            }
-
-
             this.Title = "Ethan's List";
 
             SearchButton.Enabled = true;
@@ -59,6 +53,11 @@ namespace ethanslist.ios
 
             MinBathCountStep.ValueChanged += (object sender, EventArgs e) => {
                 MinBathLabel.Text = FormatBeds((int)MinBathCountStep.Value);
+            };
+
+            SearchField.EditingDidBegin += delegate
+            {
+                    SearchField.ResignFirstResponder();
             };
         }
 
@@ -86,6 +85,11 @@ namespace ethanslist.ios
             Console.WriteLine(query);
 
             return query;
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            SearchField.ResignFirstResponder();
         }
 	}
 }

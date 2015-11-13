@@ -18,14 +18,14 @@ namespace EthansList.Shared
         public List<Location> PotentialLocations
         {
             get { 
-                return locations;
+                return this.locations;
             }
         }
 
         public SortedSet<String> States
         {
             get { 
-                return states;
+                return this.states;
             }
         }
 
