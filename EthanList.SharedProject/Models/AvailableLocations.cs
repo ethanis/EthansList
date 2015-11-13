@@ -29,7 +29,6 @@ namespace EthansList.Shared
             }
         }
 
-
         void ReadInputFile()
         {
             #if __IOS__

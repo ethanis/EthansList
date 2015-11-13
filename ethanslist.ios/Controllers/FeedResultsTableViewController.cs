@@ -42,27 +42,24 @@ namespace ethanslist.ios
             this.Title = "Craigslist Results";
             feedClient = new CLFeedClient(query);
 
-            tableView = new UITableView(this.View.Frame);
-
             tableSource = new FeedResultTableSource(this, feedClient);
-            tableView.Source = tableSource;
 
-            this.Add(tableView);
+            TableView.Source = tableSource;
 
             tableView.TranslatesAutoresizingMaskIntoConstraints = false;
-            this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Top,
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Left,
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Left,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Width,
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Width,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Height,
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Height,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
 
             feedClient.loadingComplete += (object sender, EventArgs e) =>
             {
                     loadTimer.Stop();
-                    tableView.ReloadData();
+                    TableView.ReloadData();
                     Console.WriteLine(loadTimer.Elapsed);
 //                    feedClient.loadingComplete += Reload_Data;
             };
@@ -77,7 +74,7 @@ namespace ethanslist.ios
         void Reload_Data(object sender, EventArgs e)
         {
             loadTimer.Stop();
-            tableView.ReloadData();
+            TableView.ReloadData();
             Console.WriteLine(loadTimer.Elapsed);
         }
 	}
