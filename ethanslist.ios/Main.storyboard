@@ -76,7 +76,7 @@
                                     <rect key="frame" x="0.0" y="15" width="320" height="44"/>
                                 </variation>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="875" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="875" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="136" width="280" height="100"/>
                             </imageView>
                         </subviews>
@@ -350,4 +350,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
         <simulatedOrientationMetrics key="orientation"/>
     </simulatedMetricsContainer>
+    <resources>
+        <image name="placeholder.png" width="500" height="350"/>
+    </resources>
 </document>
