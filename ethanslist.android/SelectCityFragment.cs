@@ -55,8 +55,9 @@ namespace ethanslist.android
 
             cityPickerListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
-                SearchFragment searchFrag = new SearchFragment(locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position));
-                transaction.Replace(Resource.Id.frameLayout, searchFrag);
+                SearchFragment searchFragment = new SearchFragment();
+                searchFragment.location = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position);
+                transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
             };

@@ -39,14 +39,21 @@ namespace ethanslist.android
             };
 
             feedResultsListView.ItemClick += (sender, e) => {
-                var intent = new Intent(this, typeof(PostingDetailsActivity));
-                intent.PutExtra("title", feedClient.postings[e.Position].Title);
-                intent.PutExtra("description", feedClient.postings[e.Position].Description);
-                intent.PutExtra("imageLink", feedClient.postings[e.Position].ImageLink);
-                intent.PutExtra("date", feedClient.postings[e.Position].Date.ToShortDateString());
-                intent.PutExtra("time", feedClient.postings[e.Position].Date.ToShortTimeString());
-
-                StartActivity(intent);
+//                var intent = new Intent(this, typeof(PostingDetailsActivity));
+//                intent.PutExtra("title", feedClient.postings[e.Position].Title);
+//                intent.PutExtra("description", feedClient.postings[e.Position].Description);
+//                intent.PutExtra("imageLink", feedClient.postings[e.Position].ImageLink);
+//                intent.PutExtra("date", feedClient.postings[e.Position].Date.ToShortDateString());
+//                intent.PutExtra("time", feedClient.postings[e.Position].Date.ToShortTimeString());
+//
+//                StartActivity(intent);
+//
+                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
+                postingDetailsFragment.posting = feedClient.postings[e.Position];
+                transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
         }
     }

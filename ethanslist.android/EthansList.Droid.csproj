@@ -69,6 +69,8 @@
     <Compile Include="ViewHolders\PostingListViewHolder.cs" />
     <Compile Include="SelectCityFragment.cs" />
     <Compile Include="SearchFragment.cs" />
+    <Compile Include="FeedResultsFragment.cs" />
+    <Compile Include="PostingDetailsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

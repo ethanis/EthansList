@@ -19,7 +19,7 @@ namespace ethanslist.android
     {
         String city;
         AvailableLocations locations;
-        Location location;
+        public Location location { get; set; }
         TextView cityTextView;
         EditText searchTextField;
         Button searchButton;
@@ -29,11 +29,6 @@ namespace ethanslist.android
         TextView maxRentTextView;
         NumberPicker minBedroomPicker;
         NumberPicker minBathroomPicker;
-
-        public SearchFragment(Location location)
-        {
-            this.location = location;
-        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -82,9 +77,12 @@ namespace ethanslist.android
             };
 
             searchButton.Click += (sender, e) => {
-                var intent = new Intent(this.Activity, typeof(FeedResultsActivity));
-                intent.PutExtra("query", GenerateQuery());
-                StartActivity(intent);
+                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                FeedResultsFragment feedResultsFragment = new FeedResultsFragment();
+                feedResultsFragment.query = GenerateQuery();
+                transaction.Replace(Resource.Id.frameLayout, feedResultsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
 
             return view;
