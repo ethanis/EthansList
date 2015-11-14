@@ -1,0 +1,10 @@
+﻿<TextView
+	xmlns:android         ="http://schemas.android.com/apk/res/android"
+	android:id            ="@+id/menuRowTextView"
+	android:layout_width  ="match_parent"
+	android:layout_height ="?android:attr/listPreferredItemHeightSmall"
+	android:gravity       ="center_vertical"
+	android:paddingLeft   ="16dp"
+	android:textAppearance="?android:attr/textAppearanceListItemSmall"
+	android:background    ="?android:attr/activatedBackgroundIndicator"
+/>

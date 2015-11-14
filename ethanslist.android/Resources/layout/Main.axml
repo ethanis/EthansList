@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
+<!-- Content -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+<!-- Navigation drawer menu -->
     <ListView
-        android:id="@+id/statePickerListView"
-        android:layout_width="0dp"
+        android:id="@+id/drawerListView"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        android:layout_weight=".50" />
-    <ListView
-        android:id="@+id/cityPickerListView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        android:layout_weight=".50" />
-</LinearLayout>
+        android:background="?android:attr/windowBackground" />
+</android.support.v4.widget.DrawerLayout>

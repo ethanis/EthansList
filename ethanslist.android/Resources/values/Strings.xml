@@ -2,4 +2,6 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">ethanslist.android</string>
+    <string name="DrawerOpenDescription">Open navigation drawer</string>
+    <string name="DrawerCloseDescription">Close navigation drawer</string>
 </resources>
