@@ -54,9 +54,11 @@ namespace ethanslist.android
             };
 
             cityPickerListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-                var intent = new Intent(this.Activity, typeof(SearchActivity));
-                intent.PutExtra("city", locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position).SiteName);
-                StartActivity(intent);
+                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                SearchFragment searchFrag = new SearchFragment(locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position));
+                transaction.Replace(Resource.Id.frameLayout, searchFrag);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
 
             return view;

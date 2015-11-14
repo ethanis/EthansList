@@ -1,0 +1,110 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using EthansList.Shared;
+
+namespace ethanslist.android
+{
+    public class SearchFragment : Fragment
+    {
+        String city;
+        AvailableLocations locations;
+        Location location;
+        TextView cityTextView;
+        EditText searchTextField;
+        Button searchButton;
+        SeekBar minRentSeekBar;
+        SeekBar maxRentSeekBar;
+        TextView minRentTextView;
+        TextView maxRentTextView;
+        NumberPicker minBedroomPicker;
+        NumberPicker minBathroomPicker;
+
+        public SearchFragment(Location location)
+        {
+            this.location = location;
+        }
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            // Create your fragment here
+        }
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            var view = inflater.Inflate(Resource.Layout.Search, container, false);
+
+//            city = this.Activity.Intent.GetStringExtra("city");
+            locations = new AvailableLocations();
+//            location = locations.PotentialLocations.Where(loc => loc.SiteName == city).First();
+
+            cityTextView = view.FindViewById<TextView>(Resource.Id.citySelectedText);
+            cityTextView.Text = location.SiteName;
+
+            searchTextField = view.FindViewById<EditText>(Resource.Id.searchTextField);
+            searchButton = view.FindViewById<Button>(Resource.Id.searchButton);
+            minRentSeekBar = view.FindViewById<SeekBar>(Resource.Id.minRentSeekBar);
+            maxRentSeekBar = view.FindViewById<SeekBar>(Resource.Id.maxRentSeekBar);
+            minRentTextView = view.FindViewById<TextView>(Resource.Id.minRentTextView);
+            maxRentTextView = view.FindViewById<TextView>(Resource.Id.maxRentTextView);
+            minBedroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBedroomPicker);
+            minBathroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
+
+            minRentTextView.Text = FormatCurrency(1000);
+            maxRentTextView.Text = FormatCurrency(5000);
+            minRentSeekBar.Progress = 10;
+            maxRentSeekBar.Progress = 50;
+
+            minBedroomPicker.MinValue = 0;
+            minBedroomPicker.MaxValue = 10;
+
+            minBathroomPicker.MinValue = 0;
+            minBathroomPicker.MaxValue = 10;
+
+            minRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
+                minRentTextView.Text = FormatCurrency(minRentSeekBar.Progress * 100);
+            };
+
+            maxRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
+                maxRentTextView.Text = FormatCurrency(maxRentSeekBar.Progress * 100);
+            };
+
+            searchButton.Click += (sender, e) => {
+                var intent = new Intent(this.Activity, typeof(FeedResultsActivity));
+                intent.PutExtra("query", GenerateQuery());
+                StartActivity(intent);
+            };
+
+            return view;
+        }
+
+        protected string FormatCurrency(int i)
+        {
+            return String.Format("{0:C0}", i);
+        }
+
+        protected string GenerateQuery()
+        {
+            string query;
+            query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
+                location.Url, minRentTextView.Text, maxRentTextView.Text, minBedroomPicker.Value, minBathroomPicker.Value, searchTextField.Text);
+
+            Console.WriteLine(query);
+
+            return query;
+        }
+    }
+}
+
