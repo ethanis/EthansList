@@ -25,7 +25,8 @@ namespace ethanslist.ios
             // If not required for your application you can safely delete this method
             string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
             listingRepository = new ListingRepository(dbpath);
-            listingRepository.GetAllListingsAsync();
+//            listingRepository.GetAllListingsAsync();
+
             // Code to start the Xamarin Test Cloud Agent
             #if ENABLE_TEST_CLOUD
 //			Xamarin.Calabash.Start();
