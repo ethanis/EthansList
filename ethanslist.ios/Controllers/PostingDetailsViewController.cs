@@ -3,6 +3,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 using EthansList.Shared;
+using SDWebImage;
 
 namespace ethanslist.ios
 {
@@ -36,8 +37,10 @@ namespace ethanslist.ios
 
             if (post.ImageLink != "-1")
             {
-                //TODO: used cached image instead
-                postingImageView.Image = FromUrl(post.ImageLink);
+                postingImageView.SetImage(
+                    url: new NSUrl(post.ImageLink),
+                    placeholder: UIImage.FromBundle("placeholder.png")
+                );
             }
             DoneButton.Clicked += OnDismiss;
 
