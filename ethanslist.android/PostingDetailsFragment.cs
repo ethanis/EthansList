@@ -34,6 +34,7 @@ namespace ethanslist.android
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.PostingDetails, container, false);
+
             Console.WriteLine(posting.Title);
             postingTitle = view.FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
@@ -50,7 +51,7 @@ namespace ethanslist.android
                 Koush.UrlImageViewHelper.SetUrlDrawable(postingImageView, imageLink, Resource.Drawable.placeholder);
             }
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+            return view;
         }
     }
 }

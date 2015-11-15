@@ -31,7 +31,7 @@ namespace ethanslist.android
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FeedResults, container, false);
-//            query = Intent.GetStringExtra("query");
+
             feedClient = new CLFeedClient(query);
 
             feedResultsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
@@ -44,15 +44,6 @@ namespace ethanslist.android
                 };
 
             feedResultsListView.ItemClick += (sender, e) => {
-//                var intent = new Intent(this.Activity, typeof(PostingDetailsActivity));
-//                intent.PutExtra("title", feedClient.postings[e.Position].Title);
-//                intent.PutExtra("description", feedClient.postings[e.Position].Description);
-//                intent.PutExtra("imageLink", feedClient.postings[e.Position].ImageLink);
-//                intent.PutExtra("date", feedClient.postings[e.Position].Date.ToShortDateString());
-//                intent.PutExtra("time", feedClient.postings[e.Position].Date.ToShortTimeString());
-//
-//                StartActivity(intent);
-
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
                 postingDetailsFragment.posting = feedClient.postings[e.Position];
