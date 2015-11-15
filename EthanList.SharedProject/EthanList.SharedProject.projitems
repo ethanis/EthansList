@@ -13,6 +13,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CLFeedClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Listings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ListingRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FileAccessHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

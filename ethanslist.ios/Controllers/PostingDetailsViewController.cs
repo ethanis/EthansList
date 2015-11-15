@@ -32,7 +32,6 @@ namespace ethanslist.ios
             Console.WriteLine(post.ImageLink);
             Console.WriteLine(post.Date);
 
-//            dateLabel.Text = post.Date.ToLongTimeString();
             dateLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
 
             if (post.ImageLink != "-1")
@@ -55,7 +54,7 @@ namespace ethanslist.ios
 
         void SaveListing(object sender, EventArgs e)
         {
-            
+//            listingRepository.
         }
 
 

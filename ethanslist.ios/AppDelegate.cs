@@ -1,5 +1,7 @@
 ﻿using Foundation;
 using UIKit;
+using Listings;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
@@ -9,6 +11,7 @@ namespace ethanslist.ios
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
+        public static ListingRepository listingRepository {get;private set;}
 
         public override UIWindow Window
         {
@@ -20,7 +23,9 @@ namespace ethanslist.ios
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-
+            string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
+            listingRepository = new ListingRepository(dbpath);
+            listingRepository.GetAllListingsAsync();
             // Code to start the Xamarin Test Cloud Agent
             #if ENABLE_TEST_CLOUD
 //			Xamarin.Calabash.Start();

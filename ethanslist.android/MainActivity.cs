@@ -11,6 +11,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Listings;
 
 namespace ethanslist.android
 {
@@ -20,6 +21,7 @@ namespace ethanslist.android
         DrawerLayout          drawerLayout;
         ActionBarDrawerToggle drawerToggle;
         ListView              drawerListView;
+        public static ListingRepository listingRepository { get; private set;}
 
         Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment()};
         string  [] titles    = new string  [] {    "Select City" };
@@ -27,6 +29,10 @@ namespace ethanslist.android
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
+            listingRepository = new ListingRepository(dbpath);
+
             SetContentView(Resource.Layout.Main);
 
             // Retrieve the DrawerLayout from the XML
