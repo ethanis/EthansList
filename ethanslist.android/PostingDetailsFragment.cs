@@ -34,7 +34,7 @@ namespace ethanslist.android
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.PostingDetails, container, false);
-
+            Console.WriteLine(posting.Title);
             postingTitle = view.FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
             postingImageView = view.FindViewById<ImageView>(Resource.Id.postingImageView);
