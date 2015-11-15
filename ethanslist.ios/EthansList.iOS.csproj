@@ -123,8 +123,8 @@
       <DependentUpon>CityPickerViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\FeedResultTableSource.cs" />
-    <Compile Include="MenuTableViewController.cs" />
-    <Compile Include="MenuTableViewController.designer.cs">
+    <Compile Include="Controllers\MenuTableViewController.cs" />
+    <Compile Include="Controllers\MenuTableViewController.designer.cs">
       <DependentUpon>MenuTableViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
