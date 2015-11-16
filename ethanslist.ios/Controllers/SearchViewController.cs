@@ -59,6 +59,15 @@ namespace ethanslist.ios
             {
                     SearchField.ResignFirstResponder();
             };
+
+            saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
+        }
+
+        void SaveSearchButton_TouchUpInside (object sender, EventArgs e)
+        {
+            AppDelegate.databaseConnection.AddNewSearchAsync(url, MinLabel.Text, MaxLabel.Text, 
+                MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
         }
 
         partial void SearchCL(UIButton sender)

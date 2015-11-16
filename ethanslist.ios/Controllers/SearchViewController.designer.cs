@@ -48,6 +48,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton saveSearchButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton SearchButton { get; set; }
 
 		[Outlet]
@@ -91,6 +95,10 @@ namespace ethanslist.ios
 			if (MinRentSlider != null) {
 				MinRentSlider.Dispose ();
 				MinRentSlider = null;
+			}
+			if (saveSearchButton != null) {
+				saveSearchButton.Dispose ();
+				saveSearchButton = null;
 			}
 			if (SearchButton != null) {
 				SearchButton.Dispose ();

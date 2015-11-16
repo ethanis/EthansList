@@ -56,16 +56,8 @@ namespace ethanslist.ios
         {
             AppDelegate.databaseConnection.DeleteListingAsync(listing);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-
+            //TODO: raise event to relead data in previous table view
             DismissViewController(true, null);
-        }
-
-
-        static UIImage FromUrl (string uri)
-        {
-            using (var url = new NSUrl (uri))
-            using (var data = NSData.FromUrl (url))
-                return UIImage.LoadFromData (data);
         }
 	}
 }
