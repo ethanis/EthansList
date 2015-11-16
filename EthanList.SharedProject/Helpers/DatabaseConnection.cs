@@ -101,5 +101,10 @@ namespace EthansList.Models
             return conn.Table<Search>().ToListAsync();
         }
 
+        public string FormatSearchQuery(Search search)
+        {
+            return String.Format("Min Price: {1}{0}Max Price: {2}{0}Min Bedrooms: {3}{0}Min Bathrooms: {4}{0}Search Items: {5}",
+                Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
+        }
     }
 }

@@ -1624,14 +1624,14 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b006b
 			public const int searchButton = 2131427435;
 			
+			// aapt resource value: 0x7f0b0067
+			public const int searchCityText = 2131427431;
+			
 			// aapt resource value: 0x7f0b0068
-			public const int searchMinPriceText = 2131427432;
+			public const int searchInformationText = 2131427432;
 			
 			// aapt resource value: 0x7f0b006a
 			public const int searchTextField = 2131427434;
-			
-			// aapt resource value: 0x7f0b0067
-			public const int searchURLText = 2131427431;
 			
 			// aapt resource value: 0x7f0b0042
 			public const int search_badge = 2131427394;

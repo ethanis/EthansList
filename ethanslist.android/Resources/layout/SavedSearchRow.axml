@@ -7,15 +7,15 @@
     android:minHeight="25px"
     android:paddingBottom="4dp">
     <TextView
-        android:id="@+id/searchURLText"
+        android:id="@+id/searchCityText"
         android:text="--url--"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp" />
     <TextView
-        android:id="@+id/searchMinPriceText"
-        android:layout_below="@id/searchURLText"
+        android:id="@+id/searchInformationText"
+        android:layout_below="@id/searchCityText"
         android:text="--minimum price--"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="wrap_content"

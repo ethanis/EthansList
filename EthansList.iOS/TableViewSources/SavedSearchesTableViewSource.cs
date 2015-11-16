@@ -27,9 +27,11 @@ namespace ethanslist.ios
             UITableViewCell cell = tableView.DequeueReusableCell(cellID);
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Subtitle, cellID);
-
+            
+            //TODO need to write spaceing for these cells to display search query
+            cell.DetailTextLabel.Lines = 5;
             cell.TextLabel.Text = savedSearches[indexPath.Row].CityName;
-            cell.DetailTextLabel.Text = savedSearches[indexPath.Row].MinPrice;
+            cell.DetailTextLabel.Text = AppDelegate.databaseConnection.FormatSearchQuery(savedSearches[indexPath.Row]);
 
             return cell;
         }
