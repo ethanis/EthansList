@@ -28,7 +28,7 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Subtitle, cellID);
 
-            cell.TextLabel.Text = savedSearches[indexPath.Row].LinkUrl;
+            cell.TextLabel.Text = savedSearches[indexPath.Row].CityName;
             cell.DetailTextLabel.Text = savedSearches[indexPath.Row].MinPrice;
 
             return cell;

@@ -44,14 +44,14 @@ namespace ethanslist.android
             if (view == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.SavedSearchRow, parent, false);
-                var _url = view.FindViewById<TextView>(Resource.Id.searchURLText);
+                var _searchCity = view.FindViewById<TextView>(Resource.Id.searchURLText);
                 var _minPrice = view.FindViewById<TextView>(Resource.Id.searchMinPriceText);
 
-                view.Tag = new SavedSearchesViewHolder { SearchURL = _url, MinPriceText = _minPrice };
+                view.Tag = new SavedSearchesViewHolder { SearchCity = _searchCity, MinPriceText = _minPrice };
             }
 
             var holder = (SavedSearchesViewHolder)view.Tag;
-            holder.SearchURL.Text = savedSearches[position].LinkUrl;
+            holder.SearchCity.Text = savedSearches[position].CityName;
             holder.MinPriceText.Text = savedSearches[position].MinPrice;
 
             return view;

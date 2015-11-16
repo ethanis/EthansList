@@ -8,6 +8,7 @@ namespace EthansList.Models
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set;}
+        public string CityName {get;set;}
         public string LinkUrl { get; set;}
         public string MinPrice { get; set;}
         public string MaxPrice { get; set;}
