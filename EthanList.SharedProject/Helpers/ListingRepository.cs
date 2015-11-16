@@ -41,6 +41,19 @@ namespace Listings
             }
         }
 
+        public async Task DeleteListingAsync(Listing listing)
+        {
+            try
+            {
+                var result = conn.DeleteAsync(listing).ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} dropped from database", listing.Title);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", listing.Title, ex.Message); 
+            }
+        }
+
         public Task<List<Listing>> GetAllListingsAsync()
         {
             //return a list of people saved to the Person table in the database

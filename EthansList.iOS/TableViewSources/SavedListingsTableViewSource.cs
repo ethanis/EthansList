@@ -14,10 +14,10 @@ namespace ethanslist.ios
         List<Listing> savedListings;
         private const string cellId = "listingCell";
 
-        public SavedListingsTableViewSource(UIViewController owner)
+        public SavedListingsTableViewSource(UIViewController owner, List<Listing> savedListings)
         {
             this.owner = owner;
-            this.savedListings = AppDelegate.listingRepository.GetAllListingsAsync().Result;
+            this.savedListings = savedListings;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
