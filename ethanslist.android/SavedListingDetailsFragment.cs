@@ -59,8 +59,8 @@ namespace ethanslist.android
 
         void DeleteButton_Click (object sender, EventArgs e)
         {
-            MainActivity.listingRepository.DeleteListingAsync(this.listing);
-            Console.WriteLine(MainActivity.listingRepository.StatusMessage);
+            MainActivity.databaseConnection.DeleteListingAsync(this.listing);
+            Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             this.FragmentManager.PopBackStack();
         }
     }

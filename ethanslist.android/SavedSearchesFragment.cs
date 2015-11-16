@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -18,6 +19,8 @@ namespace ethanslist.android
     {
         List<String> savedSearches = new List<String>();
         ListView savedSearchesListView;
+        List<Search> savedSearchQueries;
+        SavedSearchesListAdapter searchListAdapter;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,10 +36,13 @@ namespace ethanslist.android
             savedSearches.Add("search one");
             savedSearches.Add("search two");
 
-            ArrayAdapter adapter = new ArrayAdapter(this.Activity, Android.Resource.Layout.SimpleListItem1, savedSearches);
+            savedSearchQueries = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
+
+//            ArrayAdapter adapter = new ArrayAdapter(this.Activity, Android.Resource.Layout.SimpleListItem1, savedSearches);
+            searchListAdapter = new SavedSearchesListAdapter(this.Activity, savedSearchQueries);
 
             savedSearchesListView = view.FindViewById<ListView>(Resource.Id.savedSearchListView);
-            savedSearchesListView.Adapter = adapter;
+            savedSearchesListView.Adapter = searchListAdapter;
     
             return view;
         }
