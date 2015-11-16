@@ -28,7 +28,7 @@ namespace ethanslist.ios
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
 
-            TableDelegate tableDelegate = new TableDelegate(savedListings);
+            TableDelegate tableDelegate = new TableDelegate(this, savedListings);
             TableView.Delegate = tableDelegate;
 
             tableDelegate.ItemDeleted += OnItemDeleted;
@@ -39,7 +39,7 @@ namespace ethanslist.ios
             savedListings = AppDelegate.listingRepository.GetAllListingsAsync().Result;
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
-            TableDelegate tableDelegate = new TableDelegate(savedListings);
+            TableDelegate tableDelegate = new TableDelegate(this, savedListings);
             TableView.Delegate = tableDelegate;
             tableDelegate.ItemDeleted += OnItemDeleted;
         }
@@ -47,11 +47,13 @@ namespace ethanslist.ios
         public class TableDelegate : UITableViewDelegate
         {
             List<Listing> savedListings;
+            UIViewController owner;
             public event EventHandler<EventArgs> ItemDeleted;
 
             #region Constructors
-            public TableDelegate (List<Listing> savedListings)
+            public TableDelegate (UIViewController owner, List<Listing> savedListings)
             {
+                this.owner = owner;
                 this.savedListings = savedListings;
             }
 
@@ -78,6 +80,15 @@ namespace ethanslist.ios
                         this.ItemDeleted(this, new EventArgs());
                 });
                 return new UITableViewRowAction[] { deleteButton };
+            }
+
+            public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+            {
+                var storyboard = UIStoryboard.FromName("Main", null);
+                var detailController = (SavedListingDetailsViewController)storyboard.InstantiateViewController("SavedListingDetailsViewController");
+                detailController.Listing = savedListings[indexPath.Row];
+                Console.WriteLine("Hello");
+                owner.PresentModalViewController(detailController, true);
             }
             #endregion
         }
