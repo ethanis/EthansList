@@ -37,6 +37,15 @@ namespace ethanslist.android
             savedListingsAdapter = new SavedListingListAdapter(this.Activity, savedListings);
             savedListingsListView.Adapter = savedListingsAdapter;
 
+            savedListingsListView.ItemClick += (sender, e) => {
+                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                SavedListingDetailsFragment savedListingDetailsFragment = new SavedListingDetailsFragment();
+                savedListingDetailsFragment.listing = savedListings[e.Position];
+                transaction.Replace(Resource.Id.frameLayout, savedListingDetailsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            };
+
             return view;
         }
     }

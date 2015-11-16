@@ -76,6 +76,7 @@
     <Compile Include="PostingDetailsFragment.cs" />
     <Compile Include="SavedListingsFragment.cs" />
     <Compile Include="ListAdapters\SavedListingListAdapter.cs" />
+    <Compile Include="SavedListingDetailsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
