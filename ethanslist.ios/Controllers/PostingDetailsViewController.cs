@@ -54,7 +54,8 @@ namespace ethanslist.ios
 
         void SaveListing(object sender, EventArgs e)
         {
-//            listingRepository.
+            AppDelegate.listingRepository.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
+            Console.WriteLine(AppDelegate.listingRepository.StatusMessage);
         }
 
 

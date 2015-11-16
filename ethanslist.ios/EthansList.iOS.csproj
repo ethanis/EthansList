@@ -133,6 +133,11 @@
     <Compile Include="Controllers\MenuTableViewController.designer.cs">
       <DependentUpon>MenuTableViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\SavedListingsTableViewController.cs" />
+    <Compile Include="Controllers\SavedListingsTableViewController.designer.cs">
+      <DependentUpon>SavedListingsTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SavedListingsTableViewSource.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

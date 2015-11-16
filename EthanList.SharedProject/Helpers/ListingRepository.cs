@@ -25,7 +25,7 @@ namespace Listings
             try
             {
                 //basic validation to ensure a name was entered
-                if (title != null)
+                if (title == null)
                     throw new Exception("Valid listing required");
 
                 //insert a new person into the Person table

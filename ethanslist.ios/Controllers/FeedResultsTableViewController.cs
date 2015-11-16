@@ -12,7 +12,6 @@ namespace ethanslist.ios
 {
 	partial class FeedResultsTableViewController : UITableViewController
 	{
-        UITableView tableView;
         FeedResultTableSource tableSource;
         string query;
         CLFeedClient feedClient;

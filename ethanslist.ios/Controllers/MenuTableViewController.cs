@@ -65,13 +65,13 @@ namespace ethanslist.ios
                         controller.ShowDetailViewController (cityPickVC, controller);
 
                         break;
-                    case 1://stopwatch
+                    case 1://Saved Searches
 //                        var stopwatchVC = controller.Storyboard.InstantiateViewController ("StopwatchViewController");
 //                        controller.ShowDetailViewController (stopwatchVC, controller);
                         break;
-                    case 2://about
-//                        var aboutVC = controller.Storyboard.InstantiateViewController ("AboutViewController");
-//                        controller.ShowDetailViewController (aboutVC, controller);
+                    case 2://Saved Listings
+                        var listingsVC = controller.Storyboard.InstantiateViewController ("SavedListingsTableViewController");
+                        controller.ShowDetailViewController (listingsVC, controller);
                         break;
                 }
             }
