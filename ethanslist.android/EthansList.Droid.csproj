@@ -77,6 +77,7 @@
     <Compile Include="SavedListingsFragment.cs" />
     <Compile Include="ListAdapters\SavedListingListAdapter.cs" />
     <Compile Include="SavedListingDetailsFragment.cs" />
+    <Compile Include="SavedSearchesFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,6 +106,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\placeholder.png" />
     <AndroidResource Include="Resources\layout\SelectCity.axml" />
     <AndroidResource Include="Resources\layout\ListViewMenuRow.axml" />
+    <AndroidResource Include="Resources\layout\SavedSearches.axml" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

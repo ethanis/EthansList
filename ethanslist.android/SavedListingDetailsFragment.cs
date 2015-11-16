@@ -11,7 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Listings.Models;
+using EthansList.Models;
 
 namespace ethanslist.android
 {

@@ -6,7 +6,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
-using Listings.Models;
+using EthansList.Models;
 
 namespace ethanslist.android
 {

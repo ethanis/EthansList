@@ -2,7 +2,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-using Listings.Models;
+using EthansList.Models;
 using SDWebImage;
 
 namespace ethanslist.ios
@@ -54,8 +54,8 @@ namespace ethanslist.ios
 
         void DeleteListing(object sender, EventArgs e)
         {
-            AppDelegate.listingRepository.DeleteListingAsync(listing);
-            Console.WriteLine(AppDelegate.listingRepository.StatusMessage);
+            AppDelegate.databaseConnection.DeleteListingAsync(listing);
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
             DismissViewController(true, null);
         }

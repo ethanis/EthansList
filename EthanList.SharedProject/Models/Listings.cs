@@ -1,8 +1,7 @@
 ﻿using System;
 using SQLite;
-using EthansList.Shared;
 
-namespace Listings.Models
+namespace EthansList.Models
 {
     [Table("listings")]
     public class Listing
