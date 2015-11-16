@@ -27,7 +27,7 @@ namespace ethanslist.ios
         {
             base.ViewWillAppear(animated);
 
-            PostingTitle.Text = listing.Title;
+            PostingTitle.Text = listing.PostTitle;
             PostingDescription.Text = listing.Description;
             Console.WriteLine(listing.ImageLink);
             Console.WriteLine(listing.Date);

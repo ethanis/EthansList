@@ -56,7 +56,7 @@ namespace ethanslist.android
             }
 
             var holder = (PostingListViewHolder)view.Tag;
-            holder.Title.Text = savedListings[position].Title;
+            holder.Title.Text = savedListings[position].PostTitle;
             holder.Description.Text = savedListings[position].Description;
             string imageLink = savedListings[position].ImageLink;
 

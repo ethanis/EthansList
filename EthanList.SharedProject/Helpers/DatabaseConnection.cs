@@ -30,7 +30,7 @@ namespace EthansList.Models
                     throw new Exception("Valid listing required");
 
                 //insert a new person into the Person table
-                var result = await conn.InsertAsync(new Listing { Title = title, 
+                var result = await conn.InsertAsync(new Listing { PostTitle = title, 
                     Description = description, Link = link, 
                     ImageLink = imageLink, Date = date })
                         .ConfigureAwait(continueOnCapturedContext: false);
@@ -47,11 +47,11 @@ namespace EthansList.Models
             try
             {
                 var result = await conn.DeleteAsync(listing).ConfigureAwait(continueOnCapturedContext: false);
-                StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, listing.Title);
+                StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, listing.PostTitle);
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", listing.Title, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", listing.PostTitle, ex.Message); 
             }
         }
 

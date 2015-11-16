@@ -37,7 +37,7 @@ namespace ethanslist.ios
 
             var listing = savedListings[indexPath.Row];
 
-            cell.TextLabel.Text = listing.Title;
+            cell.TextLabel.Text = listing.PostTitle;
             cell.DetailTextLabel.Text = listing.Description;
 
             if (listing.ImageLink != "-1")
@@ -51,6 +51,7 @@ namespace ethanslist.ios
             {
                 cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
             }
+
             return cell;
         }
 
@@ -70,7 +71,7 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            Console.WriteLine("Title: " + savedListings[indexPath.Row].Title);
+            Console.WriteLine("Title: " + savedListings[indexPath.Row].PostTitle);
             Console.WriteLine("Description: " + savedListings[indexPath.Row].Description);
             Console.WriteLine("ImageLink: " + savedListings[indexPath.Row].ImageLink);
             Console.WriteLine("Date: " + savedListings[indexPath.Row].Date);
