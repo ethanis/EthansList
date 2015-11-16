@@ -1456,11 +1456,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b004d
 			public const int cityListViewItem = 2131427405;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int cityPickerListView = 2131427444;
+			// aapt resource value: 0x7f0b0075
+			public const int cityPickerListView = 2131427445;
 			
-			// aapt resource value: 0x7f0b0065
-			public const int citySelectedText = 2131427429;
+			// aapt resource value: 0x7f0b0066
+			public const int citySelectedText = 2131427430;
 			
 			// aapt resource value: 0x7f0b001c
 			public const int collapseActionView = 2131427356;
@@ -1540,11 +1540,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0028
 			public const int list_item = 2131427368;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int maxRentSeekBar = 2131427435;
+			// aapt resource value: 0x7f0b006c
+			public const int maxRentSeekBar = 2131427436;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int maxRentTextView = 2131427438;
+			// aapt resource value: 0x7f0b006f
+			public const int maxRentTextView = 2131427439;
 			
 			// aapt resource value: 0x7f0b0059
 			public const int media_actions = 2131427417;
@@ -1555,17 +1555,17 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b001a
 			public const int middle = 2131427354;
 			
+			// aapt resource value: 0x7f0b0073
+			public const int minBathroomPicker = 2131427443;
+			
 			// aapt resource value: 0x7f0b0072
-			public const int minBathroomPicker = 2131427442;
+			public const int minBedroomPicker = 2131427442;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int minBedroomPicker = 2131427441;
+			// aapt resource value: 0x7f0b006b
+			public const int minRentSeekBar = 2131427435;
 			
-			// aapt resource value: 0x7f0b006a
-			public const int minRentSeekBar = 2131427434;
-			
-			// aapt resource value: 0x7f0b006d
-			public const int minRentTextView = 2131427437;
+			// aapt resource value: 0x7f0b006e
+			public const int minRentTextView = 2131427438;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int multiply = 2131427347;
@@ -1606,17 +1606,20 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0038
 			public const int radio = 2131427384;
 			
+			// aapt resource value: 0x7f0b0065
+			public const int saveListingButton = 2131427429;
+			
 			// aapt resource value: 0x7f0b0014
 			public const int screen = 2131427348;
 			
 			// aapt resource value: 0x7f0b0030
 			public const int scrollView = 2131427376;
 			
-			// aapt resource value: 0x7f0b0067
-			public const int searchButton = 2131427431;
+			// aapt resource value: 0x7f0b0068
+			public const int searchButton = 2131427432;
 			
-			// aapt resource value: 0x7f0b0066
-			public const int searchTextField = 2131427430;
+			// aapt resource value: 0x7f0b0067
+			public const int searchTextField = 2131427431;
 			
 			// aapt resource value: 0x7f0b0042
 			public const int search_badge = 2131427394;
@@ -1675,29 +1678,29 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0017
 			public const int src_over = 2131427351;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int stateListViewItem = 2131427445;
+			// aapt resource value: 0x7f0b0076
+			public const int stateListViewItem = 2131427446;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int statePickerListView = 2131427443;
+			// aapt resource value: 0x7f0b0074
+			public const int statePickerListView = 2131427444;
 			
 			// aapt resource value: 0x7f0b0058
 			public const int status_bar_latest_event_content = 2131427416;
 			
-			// aapt resource value: 0x7f0b0068
-			public const int strut = 2131427432;
-			
 			// aapt resource value: 0x7f0b0069
-			public const int strut2 = 2131427433;
+			public const int strut = 2131427433;
 			
-			// aapt resource value: 0x7f0b006c
-			public const int strut3 = 2131427436;
+			// aapt resource value: 0x7f0b006a
+			public const int strut2 = 2131427434;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int strut4 = 2131427439;
+			// aapt resource value: 0x7f0b006d
+			public const int strut3 = 2131427437;
 			
 			// aapt resource value: 0x7f0b0070
-			public const int strut5 = 2131427440;
+			public const int strut4 = 2131427440;
+			
+			// aapt resource value: 0x7f0b0071
+			public const int strut5 = 2131427441;
 			
 			// aapt resource value: 0x7f0b0049
 			public const int submit_area = 2131427401;
