@@ -61,6 +61,7 @@ namespace ethanslist.android
         {
             MainActivity.listingRepository.DeleteListingAsync(this.listing);
             Console.WriteLine(MainActivity.listingRepository.StatusMessage);
+            this.FragmentManager.PopBackStack();
         }
     }
 }
