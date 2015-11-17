@@ -36,7 +36,7 @@ namespace ethanslist.ios
 
         public override void LayoutSubviews()
         {
-            ContentView.Frame = new CGRect(ContentView.Frame.X, ContentView.Frame.Y, ContentView.Bounds.Width, ContentView.Bounds.Height);
+//            ContentView.Frame = new CGRect(ContentView.Frame.X, ContentView.Frame.Y, ContentView.Bounds.Width, ContentView.Bounds.Height);
             base.LayoutSubviews();
 
             this.cityLabel.Text = Model.CityName;

@@ -22,7 +22,7 @@ namespace ethanslist.ios
             savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
             searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
             TableView.Source = searchTableViewSource;
-            TableView.RowHeight = 140;
+            TableView.RowHeight = 135;
 
             searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
         }
