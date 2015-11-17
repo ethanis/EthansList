@@ -20,8 +20,6 @@ namespace ethanslist.ios
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            //TODO: Figure out weird cell lines and display
-
             return feedClient.postings.Count;
         }
 

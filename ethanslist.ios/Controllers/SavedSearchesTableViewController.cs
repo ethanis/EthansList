@@ -23,6 +23,8 @@ namespace ethanslist.ios
             searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
             TableView.Source = searchTableViewSource;
             TableView.RowHeight = 135;
+//            TableView.RowHeight = UITableView.AutomaticDimension;
+//            TableView.EstimatedRowHeight = 130;
 
             searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
         }
