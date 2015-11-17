@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Models;
+using System.Collections.ObjectModel;
 
 namespace ethanslist.android
 {
@@ -34,6 +35,7 @@ namespace ethanslist.android
 
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
 
+//            savedSearches = new ObservableCollection<Search>(MainActivity.databaseConnection.GetAllSearchesAsync().Result);
             searchListAdapter = new SavedSearchesListAdapter(this.Activity, savedSearches);
 
             savedSearchesListView = view.FindViewById<ListView>(Resource.Id.savedSearchListView);
@@ -41,7 +43,17 @@ namespace ethanslist.android
 
             savedSearchesListView.ItemClick += SavedSearchesListView_ItemClick;
 
+            searchListAdapter.dataDeleted += SearchList_DataDeleted;
+
             return view;
+        }
+
+        void SearchList_DataDeleted (object sender, EventArgs e)
+        {
+            savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
+            searchListAdapter = new SavedSearchesListAdapter(this.Activity, savedSearches);
+
+            searchListAdapter.dataDeleted += SearchList_DataDeleted;
         }
 
         void SavedSearchesListView_ItemClick (object sender, AdapterView.ItemClickEventArgs e)

@@ -3,13 +3,16 @@ using Android.Widget;
 using EthansList.Models;
 using Android.App;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ethanslist.android
 {
     public class SavedSearchesListAdapter : BaseAdapter<Search>
     {
         List<Search> savedSearches;
+//        ObservableCollection<Search> observedSearches;
         Activity context;
+        public EventHandler<EventArgs> dataDeleted;
 
         public SavedSearchesListAdapter(Activity context, List<Search> savedSearches)
         {
@@ -49,10 +52,19 @@ namespace ethanslist.android
 
                 view.Tag = new SavedSearchesViewHolder { SearchCity = _searchCity, SearchInformation = _searchInformation };
             }
+            Button delete = view.FindViewById<Button>(Resource.Id.deleteSearchButton);
 
             var holder = (SavedSearchesViewHolder)view.Tag;
             holder.SearchCity.Text = savedSearches[position].CityName;
             holder.SearchInformation.Text = MainActivity.databaseConnection.FormatSearchQuery(savedSearches[position]);
+
+            delete.Click += (object sender, EventArgs e) => {
+                MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
+//                this.savedSearches.RemoveAt(position);
+                if (dataDeleted != null)
+                    this.dataDeleted(this, new EventArgs());
+                NotifyDataSetChanged();
+            };
 
             return view;
         }
