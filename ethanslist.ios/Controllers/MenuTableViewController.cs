@@ -66,7 +66,7 @@ namespace ethanslist.ios
 
                         break;
                     case 1://Saved Searches
-                        var searchesVC = controller.Storyboard.InstantiateViewController ("SavedSearchesTableViewController");
+                        var searchesVC = controller.Storyboard.InstantiateViewController ("SavedSearchNavVC");
                         controller.ShowDetailViewController (searchesVC, controller);
                         break;
                     case 2://Saved Listings

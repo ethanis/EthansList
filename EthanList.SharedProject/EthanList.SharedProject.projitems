@@ -6,7 +6,7 @@
     <SharedGUID>{651A0769-36D6-4543-8235-9AEF8ABB1384}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>EthanList.SharedProject</Import_RootNamespace>
+    <Import_RootNamespace>EthansList.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\AvailableLocations.cs" />

@@ -57,7 +57,8 @@ namespace ethanslist.ios
             var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
             feedResultsVC.Query = GenerateQuery(savedSearches[indexPath.Row]);
             Console.WriteLine("Hello");
-            owner.PresentModalViewController(feedResultsVC, true);
+//            owner.PresentModalViewController(feedResultsVC, true);
+            owner.ShowViewController(feedResultsVC, owner);
         }
 
         public string GenerateQuery(Search search)
