@@ -23,6 +23,17 @@ namespace ethanslist.ios
             savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
             searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
             TableView.Source = searchTableViewSource;
+
+            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
+        }
+
+        void SearchTableViewSource_ItemDeleted (object sender, EventArgs e)
+        {
+            savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
+            searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
+            TableView.Source = searchTableViewSource;
+
+            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
         }
 	}
 }
