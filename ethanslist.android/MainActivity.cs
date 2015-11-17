@@ -11,7 +11,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
-using Listings;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -21,17 +21,17 @@ namespace ethanslist.android
         DrawerLayout          drawerLayout;
         ActionBarDrawerToggle drawerToggle;
         ListView              drawerListView;
-        public static ListingRepository listingRepository { get; private set;}
+        public static DatabaseConnection databaseConnection { get; private set;}
 
-        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new SavedListingsFragment()};
-        string  [] titles    = new string  [] { "Select City", "Saved Listings"};
+        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new SavedListingsFragment(), new SavedSearchesFragment()};
+        string  [] titles    = new string  [] { "Select City", "Saved Listings", "Saved Searches"};
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
-            listingRepository = new ListingRepository(dbpath);
+            databaseConnection = new DatabaseConnection(dbpath);
 
             SetContentView(Resource.Layout.Main);
 

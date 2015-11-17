@@ -142,6 +142,11 @@
     <Compile Include="Controllers\SavedListingDetailsViewController.designer.cs">
       <DependentUpon>SavedListingDetailsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\SavedSearchesTableViewController.cs" />
+    <Compile Include="Controllers\SavedSearchesTableViewController.designer.cs">
+      <DependentUpon>SavedSearchesTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SavedSearchesTableViewSource.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

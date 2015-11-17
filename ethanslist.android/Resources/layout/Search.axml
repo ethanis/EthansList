@@ -124,4 +124,9 @@
             android:layout_alignParentRight="true"
             android:id="@+id/minBathroomPicker" />
     </RelativeLayout>
+    <Button
+        android:text="Save Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveSearchButton" />
 </LinearLayout>

@@ -17,8 +17,6 @@ namespace ethanslist.android
 {
     public class SearchFragment : Fragment
     {
-        String city;
-        AvailableLocations locations;
         public Location location { get; set; }
         TextView cityTextView;
         EditText searchTextField;
@@ -29,6 +27,7 @@ namespace ethanslist.android
         TextView maxRentTextView;
         NumberPicker minBedroomPicker;
         NumberPicker minBathroomPicker;
+        Button saveSearchButton;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -41,10 +40,6 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.Search, container, false);
 
-//            city = this.Activity.Intent.GetStringExtra("city");
-            locations = new AvailableLocations();
-//            location = locations.PotentialLocations.Where(loc => loc.SiteName == city).First();
-
             cityTextView = view.FindViewById<TextView>(Resource.Id.citySelectedText);
             cityTextView.Text = location.SiteName;
 
@@ -56,6 +51,7 @@ namespace ethanslist.android
             maxRentTextView = view.FindViewById<TextView>(Resource.Id.maxRentTextView);
             minBedroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBedroomPicker);
             minBathroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
+            saveSearchButton = view.FindViewById<Button>(Resource.Id.saveSearchButton);
 
             minRentTextView.Text = FormatCurrency(1000);
             maxRentTextView.Text = FormatCurrency(5000);
@@ -85,7 +81,16 @@ namespace ethanslist.android
                 transaction.Commit();
             };
 
+            saveSearchButton.Click += SaveSearchButton_Click;
+
             return view;
+        }
+
+        void SaveSearchButton_Click (object sender, EventArgs e)
+        {
+            MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
+                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text);
+            Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
         }
 
         protected string FormatCurrency(int i)

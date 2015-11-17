@@ -44,6 +44,7 @@ namespace ethanslist.ios
 
                 Console.WriteLine(currentSelected.SiteName);
                 searchViewController.Url = currentSelected.Url;
+                searchViewController.City = currentSelected.SiteName;
 
                 this.ShowViewController(searchViewController, this);
             };

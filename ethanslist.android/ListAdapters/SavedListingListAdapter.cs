@@ -6,7 +6,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
-using Listings.Models;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -56,7 +56,7 @@ namespace ethanslist.android
             }
 
             var holder = (PostingListViewHolder)view.Tag;
-            holder.Title.Text = savedListings[position].Title;
+            holder.Title.Text = savedListings[position].PostTitle;
             holder.Description.Text = savedListings[position].Description;
             string imageLink = savedListings[position].ImageLink;
 

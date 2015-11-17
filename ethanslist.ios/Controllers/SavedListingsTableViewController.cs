@@ -2,7 +2,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-using Listings.Models;
+using EthansList.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -22,9 +22,9 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            Console.WriteLine(AppDelegate.listingRepository.GetAllListingsAsync().Result.Count);
+            Console.WriteLine(AppDelegate.databaseConnection.GetAllListingsAsync().Result.Count);
 
-            savedListings = AppDelegate.listingRepository.GetAllListingsAsync().Result;
+            savedListings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
 
@@ -33,7 +33,7 @@ namespace ethanslist.ios
 
         void OnItemDeleted(object sender, EventArgs e)
         {
-            savedListings = AppDelegate.listingRepository.GetAllListingsAsync().Result;
+            savedListings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
 

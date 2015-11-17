@@ -12,6 +12,7 @@ namespace ethanslist.ios
         int minBed = 0;
         int minBath = 1;
         string url;
+        string city;
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
@@ -23,6 +24,15 @@ namespace ethanslist.ios
             }
             set {
                 url = value;
+            }
+        }
+
+        public String City {
+            get { 
+                return city;
+            }
+            set { 
+                city = value;
             }
         }
 
@@ -59,6 +69,15 @@ namespace ethanslist.ios
             {
                     SearchField.ResignFirstResponder();
             };
+
+            saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
+        }
+
+        void SaveSearchButton_TouchUpInside (object sender, EventArgs e)
+        {
+            AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
+                MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
         }
 
         partial void SearchCL(UIButton sender)

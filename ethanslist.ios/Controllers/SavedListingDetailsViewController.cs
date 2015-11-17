@@ -2,7 +2,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-using Listings.Models;
+using EthansList.Models;
 using SDWebImage;
 
 namespace ethanslist.ios
@@ -27,7 +27,7 @@ namespace ethanslist.ios
         {
             base.ViewWillAppear(animated);
 
-            PostingTitle.Text = listing.Title;
+            PostingTitle.Text = listing.PostTitle;
             PostingDescription.Text = listing.Description;
             Console.WriteLine(listing.ImageLink);
             Console.WriteLine(listing.Date);
@@ -54,18 +54,10 @@ namespace ethanslist.ios
 
         void DeleteListing(object sender, EventArgs e)
         {
-            AppDelegate.listingRepository.DeleteListingAsync(listing);
-            Console.WriteLine(AppDelegate.listingRepository.StatusMessage);
-
+            AppDelegate.databaseConnection.DeleteListingAsync(listing);
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            //TODO: raise event to relead data in previous table view
             DismissViewController(true, null);
-        }
-
-
-        static UIImage FromUrl (string uri)
-        {
-            using (var url = new NSUrl (uri))
-            using (var data = NSData.FromUrl (url))
-                return UIImage.LoadFromData (data);
         }
 	}
 }

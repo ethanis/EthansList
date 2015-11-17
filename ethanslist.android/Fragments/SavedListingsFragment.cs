@@ -11,7 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Listings.Models;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -31,7 +31,7 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.FeedResults, container, false);
 
-            savedListings = MainActivity.listingRepository.GetAllListingsAsync().Result;
+            savedListings = MainActivity.databaseConnection.GetAllListingsAsync().Result;
 
             savedListingsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
             savedListingsAdapter = new SavedListingListAdapter(this.Activity, savedListings);

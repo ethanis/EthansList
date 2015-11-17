@@ -1,8 +1,7 @@
 ﻿using System;
 using SQLite;
-using EthansList.Shared;
 
-namespace Listings.Models
+namespace EthansList.Models
 {
     [Table("listings")]
     public class Listing
@@ -10,7 +9,7 @@ namespace Listings.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        public string Title { get; set;}
+        public string PostTitle { get; set;}
         public string Description { get; set; }
 
         [Unique]

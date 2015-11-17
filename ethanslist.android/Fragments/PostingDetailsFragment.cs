@@ -57,8 +57,8 @@ namespace ethanslist.android
 
         void SaveButton_Click (object sender, EventArgs e)
         {
-            MainActivity.listingRepository.AddNewListingAsync(posting.Title, posting.Description, posting.Link, posting.ImageLink, posting.Date);
-            Console.WriteLine(MainActivity.listingRepository.StatusMessage);
+            MainActivity.databaseConnection.AddNewListingAsync(posting.Title, posting.Description, posting.Link, posting.ImageLink, posting.Date);
+            Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
         }
 
     }

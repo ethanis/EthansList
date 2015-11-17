@@ -1,7 +1,7 @@
 ﻿using System;
 using EthansList.Shared;
 using UIKit;
-using Listings.Models;
+using EthansList.Models;
 using System.Collections.Generic;
 using SDWebImage;
 using Foundation;
@@ -37,7 +37,7 @@ namespace ethanslist.ios
 
             var listing = savedListings[indexPath.Row];
 
-            cell.TextLabel.Text = listing.Title;
+            cell.TextLabel.Text = listing.PostTitle;
             cell.DetailTextLabel.Text = listing.Description;
 
             if (listing.ImageLink != "-1")
@@ -51,6 +51,7 @@ namespace ethanslist.ios
             {
                 cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
             }
+
             return cell;
         }
 
@@ -60,8 +61,8 @@ namespace ethanslist.ios
                 UITableViewRowActionStyle.Destructive,
                 "Delete",
                 delegate {
-                AppDelegate.listingRepository.DeleteListingAsync(savedListings[indexPath.Row]);
-                Console.WriteLine(AppDelegate.listingRepository.StatusMessage);
+                AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
                 if (this.ItemDeleted != null)
                     this.ItemDeleted(this, new EventArgs());
             });
@@ -70,11 +71,6 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            Console.WriteLine("Title: " + savedListings[indexPath.Row].Title);
-            Console.WriteLine("Description: " + savedListings[indexPath.Row].Description);
-            Console.WriteLine("ImageLink: " + savedListings[indexPath.Row].ImageLink);
-            Console.WriteLine("Date: " + savedListings[indexPath.Row].Date);
-
             var storyboard = UIStoryboard.FromName("Main", null);
             var detailController = (SavedListingDetailsViewController)storyboard.InstantiateViewController("SavedListingDetailsViewController");
             detailController.Listing = savedListings[indexPath.Row];

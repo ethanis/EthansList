@@ -11,7 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Listings.Models;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -34,7 +34,7 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.PostingDetails, container, false);
 
-            Console.WriteLine(listing.Title);
+            Console.WriteLine(listing.PostTitle);
             postingTitle = view.FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
             postingImageView = view.FindViewById<ImageView>(Resource.Id.postingImageView);
@@ -42,7 +42,7 @@ namespace ethanslist.android
             deleteButton = view.FindViewById<Button>(Resource.Id.saveListingButton);
             deleteButton.Text = "Delete Saved Listing";
 
-            postingTitle.Text = listing.Title;
+            postingTitle.Text = listing.PostTitle;
             postingDetails.Text = listing.Description;
             postingDate.Text = "Listed: " + listing.Date.ToShortDateString() + " at " + listing.Date.ToShortTimeString();
             string imageLink = listing.ImageLink;  
@@ -59,8 +59,8 @@ namespace ethanslist.android
 
         void DeleteButton_Click (object sender, EventArgs e)
         {
-            MainActivity.listingRepository.DeleteListingAsync(this.listing);
-            Console.WriteLine(MainActivity.listingRepository.StatusMessage);
+            MainActivity.databaseConnection.DeleteListingAsync(this.listing);
+            Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             this.FragmentManager.PopBackStack();
         }
     }

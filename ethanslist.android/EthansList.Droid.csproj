@@ -70,13 +70,16 @@
     <Compile Include="ViewHolders\StateListViewHolder.cs" />
     <Compile Include="ViewHolders\CityListViewHolder.cs" />
     <Compile Include="ViewHolders\PostingListViewHolder.cs" />
-    <Compile Include="SelectCityFragment.cs" />
-    <Compile Include="SearchFragment.cs" />
-    <Compile Include="FeedResultsFragment.cs" />
-    <Compile Include="PostingDetailsFragment.cs" />
-    <Compile Include="SavedListingsFragment.cs" />
     <Compile Include="ListAdapters\SavedListingListAdapter.cs" />
-    <Compile Include="SavedListingDetailsFragment.cs" />
+    <Compile Include="ListAdapters\SavedSearchesListAdapter.cs" />
+    <Compile Include="ViewHolders\SavedSearchesViewHolder.cs" />
+    <Compile Include="Fragments\FeedResultsFragment.cs" />
+    <Compile Include="Fragments\PostingDetailsFragment.cs" />
+    <Compile Include="Fragments\SavedListingDetailsFragment.cs" />
+    <Compile Include="Fragments\SavedListingsFragment.cs" />
+    <Compile Include="Fragments\SavedSearchesFragment.cs" />
+    <Compile Include="Fragments\SearchFragment.cs" />
+    <Compile Include="Fragments\SelectCityFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,12 +108,15 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\placeholder.png" />
     <AndroidResource Include="Resources\layout\SelectCity.axml" />
     <AndroidResource Include="Resources\layout\ListViewMenuRow.axml" />
+    <AndroidResource Include="Resources\layout\SavedSearches.axml" />
+    <AndroidResource Include="Resources\layout\SavedSearchRow.axml" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
     <Folder Include="ListAdapters\" />
     <Folder Include="ViewHolders\" />
+    <Folder Include="Fragments\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="urlimageviewhelper">
