@@ -9,7 +9,7 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         List<Search> savedSearches;
-        private const string cellID = "searchCell";
+        private const string cellID = "searchCellID";
         public event EventHandler<EventArgs> ItemDeleted;
 
         public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)
@@ -25,14 +25,11 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            UITableViewCell cell = tableView.DequeueReusableCell(cellID);
+            SearchViewCell cell = (SearchViewCell)tableView.DequeueReusableCell (SearchViewCell.Key);
             if (cell == null)
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, cellID);
-            
-            //TODO need to write spaceing for these cells to display search query
-            cell.DetailTextLabel.Lines = 5;
-            cell.TextLabel.Text = savedSearches[indexPath.Row].CityName;
-            cell.DetailTextLabel.Text = AppDelegate.databaseConnection.FormatSearchQuery(savedSearches[indexPath.Row]);
+                cell = SearchViewCell.Create();
+
+            cell.Model = savedSearches[indexPath.Row];
 
             return cell;
         }
@@ -56,8 +53,7 @@ namespace ethanslist.ios
             var storyboard = UIStoryboard.FromName("Main", null);
             var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
             feedResultsVC.Query = GenerateQuery(savedSearches[indexPath.Row]);
-            Console.WriteLine("Hello");
-//            owner.PresentModalViewController(feedResultsVC, true);
+
             owner.ShowViewController(feedResultsVC, owner);
         }
 
