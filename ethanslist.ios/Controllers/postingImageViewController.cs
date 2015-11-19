@@ -29,8 +29,9 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
+            this.View.BackgroundColor = UIColor.DarkGray;
             myScrollView.Frame = new CGRect(0, 0, View.Frame.Width, View.Frame.Height);
+
             if (post.ImageLink != "-1")
             {
                 myImageView.SetImage(

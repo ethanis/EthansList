@@ -84,18 +84,18 @@ namespace ethanslist.ios
                 postingImageView.Image = UIImage.FromBundle("placeholder.png");
             }
 
-            UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) {
-                NumberOfTapsRequired = 2 // double tap
+            UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap) {
+                NumberOfTapsRequired = 1
             };
 
-            scrollView.AddGestureRecognizer(doubletap); // detect when the scrollView is double-tapped
+            scrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
 
             DoneButton.Clicked += OnDismiss;
 
 //            SaveButton.Clicked += SaveListing;
         }
 
-        private void OnDoubleTap (UIGestureRecognizer gesture) 
+        private void OnSingleTap (UIGestureRecognizer gesture) 
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
