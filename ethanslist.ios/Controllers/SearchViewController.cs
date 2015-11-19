@@ -70,7 +70,7 @@ namespace ethanslist.ios
 
             SearchField.EditingDidBegin += delegate
             {
-                    SearchField.ResignFirstResponder();
+                    SearchField.BecomeFirstResponder();
             };
 
             saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
