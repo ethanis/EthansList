@@ -4,6 +4,7 @@ using System.CodeDom.Compiler;
 using UIKit;
 using System.Reflection;
 using System.IO;
+using EthansList.Models;
 
 namespace ethanslist.ios
 {
@@ -80,13 +81,25 @@ namespace ethanslist.ios
             await AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
                 MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-            //TODO: change message if save was not successful
-            UIAlertView alert=new UIAlertView();
-            alert.Message="Search Saved!";
-            alert.AddButton("OK");
-            alert.Show();
 
-            saveSearchButton.Enabled = false;
+            if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = "Search Saved!";
+                alert.AddButton("OK");
+                alert.Show();
+
+                saveSearchButton.Enabled = false;
+            }
+            else
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Show();
+
+                saveSearchButton.Enabled = true;
+            }
         }
 
         partial void SearchCL(UIButton sender)

@@ -13,6 +13,7 @@ namespace EthansList.Models
         private readonly SQLiteAsyncConnection conn;
 
         public string StatusMessage { get; set; }
+        public codes StatusCode { get; set; }
 
         public DatabaseConnection(string dbPath)
         {
@@ -35,10 +36,12 @@ namespace EthansList.Models
                     ImageLink = imageLink, Date = date })
                         .ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} record(s) added [Title: {1})", result, title);
+                StatusCode = codes.ok;
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to add {0}. Error: {1}", title, ex.Message);
+                StatusCode = codes.bad;
             }
         }
 
@@ -48,10 +51,12 @@ namespace EthansList.Models
             {
                 var result = await conn.DeleteAsync(listing).ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, listing.PostTitle);
+                StatusCode = codes.ok;
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", listing.PostTitle, ex.Message); 
+                StatusCode = codes.bad;
             }
         }
 
@@ -75,10 +80,12 @@ namespace EthansList.Models
                     MinBedrooms = minBedrooms, MinBathrooms = minBathrooms, SearchQuery = searchQuery })
                     .ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} search(es) added [Link: {1})", result, linkUrl);
+                StatusCode = codes.ok;
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to add {0}. Error: {1}", linkUrl, ex.Message);
+                StatusCode = codes.bad;
             }
         }
 
@@ -88,10 +95,12 @@ namespace EthansList.Models
             {
                 var result = await conn.DeleteAsync(search).ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} dropped from database [Link: {1}]", result, search.LinkUrl);
+                StatusCode = codes.ok;
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", search.LinkUrl, ex.Message); 
+                StatusCode = codes.bad;
             }
         }
 
@@ -106,5 +115,11 @@ namespace EthansList.Models
             return String.Format("Min Price: {1}{0}Max Price: {2}{0}Min Bedrooms: {3}{0}Min Bathrooms: {4}{0}Search Items: {5}",
                 Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
         }
+    }
+
+    public enum codes
+    {
+        ok,
+        bad
     }
 }

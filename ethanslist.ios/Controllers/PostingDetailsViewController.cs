@@ -116,12 +116,24 @@ namespace ethanslist.ios
             await AppDelegate.databaseConnection.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
-            UIAlertView alert=new UIAlertView();
-            alert.Message="Listing Saved!";
-            alert.AddButton("OK");
-            alert.Show();
+            if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = "Listing Saved!";
+                alert.AddButton("OK");
+                alert.Show();
 
-            saveButton.Enabled = false;
+                saveButton.Enabled = false;
+            }
+            else
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Show();
+
+                saveButton.Enabled = true;
+            }
         }
 
         async void DeleteListing(object sender, EventArgs e)
