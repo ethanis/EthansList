@@ -110,15 +110,15 @@ namespace ethanslist.ios
             DismissViewController(true, null);
         }
 
-        void SaveListing(object sender, EventArgs e)
+        async void SaveListing(object sender, EventArgs e)
         {
-            AppDelegate.databaseConnection.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
+            await AppDelegate.databaseConnection.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
         }
 
-        void DeleteListing(object sender, EventArgs e)
+        async void DeleteListing(object sender, EventArgs e)
         {
-            AppDelegate.databaseConnection.DeleteListingAsync(listing);
+            await AppDelegate.databaseConnection.DeleteListingAsync(listing);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
             //TODO: raise event to relead data in previous table view
             DismissViewController(true, null);

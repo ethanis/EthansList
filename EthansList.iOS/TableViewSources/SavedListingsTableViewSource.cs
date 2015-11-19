@@ -60,8 +60,8 @@ namespace ethanslist.ios
             UITableViewRowAction deleteButton = UITableViewRowAction.Create (
                 UITableViewRowActionStyle.Destructive,
                 "Delete",
-                delegate {
-                AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                async delegate {
+                await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
                 Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
                 if (this.ItemDeleted != null)
                     this.ItemDeleted(this, new EventArgs());

@@ -49,10 +49,16 @@ namespace ethanslist.android
             {
                 Koush.UrlImageViewHelper.SetUrlDrawable(postingImageView, imageLink, Resource.Drawable.placeholder);
             }
+            postingImageView.Click += PostingImageView_Click;
 
             saveButton.Click += SaveButton_Click;;
 
             return view;
+        }
+
+        void PostingImageView_Click (object sender, EventArgs e)
+        {
+            
         }
 
         void SaveButton_Click (object sender, EventArgs e)
