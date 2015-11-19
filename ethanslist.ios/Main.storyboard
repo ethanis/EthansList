@@ -328,11 +328,12 @@
                                     <rect key="frame" x="158" y="82" width="166" height="326"/>
                                 </variation>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
                                 <rect key="frame" x="58" y="488" width="203" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                                 <state key="normal" title="Proceed to Search">
-                                    <color key="titleColor" colorSpace="calibratedRGB" red="0" green="0.47843137254901963" blue="1" alpha="1"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="22" y="488" width="280" height="30"/>
@@ -612,15 +613,23 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1779" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1779" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="0.0" y="34" width="320" height="534"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint id="1799" firstAttribute="width" constant="320"/>
+                                    <constraint id="1800" firstAttribute="height" constant="534"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
+                        <constraints>
+                            <constraint id="1797" firstItem="1758" firstAttribute="trailing" secondItem="1779" secondAttribute="trailing"/>
+                            <constraint id="1798" firstItem="1758" firstAttribute="bottom" secondItem="1779" secondAttribute="bottom"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>

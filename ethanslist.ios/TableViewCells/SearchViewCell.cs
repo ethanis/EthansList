@@ -14,6 +14,7 @@ namespace ethanslist.ios
         public static readonly UINib Nib;
 
         public Search Model { get; set;}
+        public int Row { get; set; }
 
         static SearchViewCell()
         {

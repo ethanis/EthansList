@@ -75,11 +75,17 @@ namespace ethanslist.ios
             saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
         }
 
-        void SaveSearchButton_TouchUpInside (object sender, EventArgs e)
+        async void SaveSearchButton_TouchUpInside (object sender, EventArgs e)
         {
-            AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
+            await AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
                 MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            //TODO: change message if save was not successful
+            UIAlertView alert=new UIAlertView();
+            alert.Message="Search Saved!";
+            alert.AddButton("OK");
+            alert.Show();
+
             saveSearchButton.Enabled = false;
         }
 

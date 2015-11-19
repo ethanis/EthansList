@@ -62,6 +62,7 @@ namespace ethanslist.ios
             if (!saved)
             {
                 saveButton = new UIBarButtonItem(UIBarButtonSystemItem.Save, SaveListing);
+                saveButton.Enabled = true;
                 myNavBarItem.SetLeftBarButtonItem(saveButton, true);
             }
             else
@@ -114,6 +115,13 @@ namespace ethanslist.ios
         {
             await AppDelegate.databaseConnection.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+
+            UIAlertView alert=new UIAlertView();
+            alert.Message="Listing Saved!";
+            alert.AddButton("OK");
+            alert.Show();
+
+            saveButton.Enabled = false;
         }
 
         async void DeleteListing(object sender, EventArgs e)
