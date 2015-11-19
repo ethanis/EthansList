@@ -120,6 +120,8 @@
                         <outlet property="SaveButton" destination="1423" id="name-outlet-1423"/>
                         <outlet property="scrollView" destination="1751" id="name-outlet-1751"/>
                         <outlet property="postingImageView" destination="875" id="name-outlet-875"/>
+                        <outlet property="myNavBar" destination="1420" id="name-outlet-1420"/>
+                        <outlet property="myNavBarItem" destination="1421" id="name-outlet-1421"/>
                     </connections>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

@@ -139,10 +139,6 @@
       <DependentUpon>SavedListingsTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\SavedListingsTableViewSource.cs" />
-    <Compile Include="Controllers\SavedListingDetailsViewController.cs" />
-    <Compile Include="Controllers\SavedListingDetailsViewController.designer.cs">
-      <DependentUpon>SavedListingDetailsViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\SavedSearchesTableViewController.cs" />
     <Compile Include="Controllers\SavedSearchesTableViewController.designer.cs">
       <DependentUpon>SavedSearchesTableViewController.cs</DependentUpon>

@@ -5,12 +5,14 @@ using UIKit;
 using EthansList.Shared;
 using SDWebImage;
 using CoreGraphics;
+using EthansList.Models;
 
 namespace ethanslist.ios
 {
 	partial class PostingDetailsViewController : UIViewController
 	{
-//        UIScrollView scrollView;
+        UIBarButtonItem saveButton;
+        UIBarButtonItem deleteButton;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -26,6 +28,26 @@ namespace ethanslist.ios
             }
         }
 
+        Boolean saved = false;
+        public Boolean Saved {
+            get { 
+                return saved;
+            }
+            set { 
+                saved = value;
+            }
+        }
+
+        Listing listing;
+        public Listing Listing {
+            get { 
+                return listing;
+            }
+            set { 
+                listing = value;
+            }
+        }
+
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -34,6 +56,19 @@ namespace ethanslist.ios
             PostingDescription.Text = post.Description;
             Console.WriteLine(post.ImageLink);
             Console.WriteLine(post.Date);
+
+            myNavBarItem.SetLeftBarButtonItem(null, true);
+
+            if (!saved)
+            {
+                saveButton = new UIBarButtonItem(UIBarButtonSystemItem.Save, SaveListing);
+                myNavBarItem.SetLeftBarButtonItem(saveButton, true);
+            }
+            else
+            {
+                deleteButton = new UIBarButtonItem(UIBarButtonSystemItem.Trash, DeleteListing);
+                myNavBarItem.SetLeftBarButtonItem(deleteButton, true);
+            }
 
             dateLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
 
@@ -57,7 +92,7 @@ namespace ethanslist.ios
 
             DoneButton.Clicked += OnDismiss;
 
-            SaveButton.Clicked += SaveListing;
+//            SaveButton.Clicked += SaveListing;
         }
 
         private void OnDoubleTap (UIGestureRecognizer gesture) 
@@ -81,6 +116,13 @@ namespace ethanslist.ios
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
         }
 
+        void DeleteListing(object sender, EventArgs e)
+        {
+            AppDelegate.databaseConnection.DeleteListingAsync(listing);
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            //TODO: raise event to relead data in previous table view
+            DismissViewController(true, null);
+        }
 
         static UIImage FromUrl (string uri)
         {

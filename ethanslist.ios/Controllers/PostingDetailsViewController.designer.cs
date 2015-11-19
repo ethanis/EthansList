@@ -24,6 +24,14 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UINavigationBar myNavBar { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UINavigationItem myNavBarItem { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel PostingDescription { get; set; }
 
 		[Outlet]
@@ -51,6 +59,14 @@ namespace ethanslist.ios
 			if (DoneButton != null) {
 				DoneButton.Dispose ();
 				DoneButton = null;
+			}
+			if (myNavBar != null) {
+				myNavBar.Dispose ();
+				myNavBar = null;
+			}
+			if (myNavBarItem != null) {
+				myNavBarItem.Dispose ();
+				myNavBarItem = null;
 			}
 			if (PostingDescription != null) {
 				PostingDescription.Dispose ();

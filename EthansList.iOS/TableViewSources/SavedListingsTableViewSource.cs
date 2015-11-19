@@ -72,8 +72,14 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
-            var detailController = (SavedListingDetailsViewController)storyboard.InstantiateViewController("SavedListingDetailsViewController");
+            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
             detailController.Listing = savedListings[indexPath.Row];
+            var listing = savedListings[indexPath.Row];
+            detailController.Post = new Posting()
+            { Title = listing.PostTitle, Description = listing.Description, 
+                Link = listing.Link, ImageLink = listing.ImageLink, Date = listing.Date
+            };
+            detailController.Saved = true;
             Console.WriteLine("Hello");
             owner.PresentModalViewController(detailController, true);
         }
