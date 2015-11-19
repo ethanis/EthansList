@@ -56,6 +56,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel searchCLLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITextField SearchField { get; set; }
 
 		[Action ("SearchCL:")]
@@ -103,6 +107,10 @@ namespace ethanslist.ios
 			if (SearchButton != null) {
 				SearchButton.Dispose ();
 				SearchButton = null;
+			}
+			if (searchCLLabel != null) {
+				searchCLLabel.Dispose ();
+				searchCLLabel = null;
 			}
 			if (SearchField != null) {
 				SearchField.Dispose ();

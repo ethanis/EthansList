@@ -4,11 +4,14 @@ using System.CodeDom.Compiler;
 using UIKit;
 using EthansList.Shared;
 using SDWebImage;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
 	partial class PostingDetailsViewController : UIViewController
 	{
+//        UIScrollView scrollView;
+
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
 		}
@@ -41,9 +44,29 @@ namespace ethanslist.ios
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
             }
+            else
+            {
+                postingImageView.Image = UIImage.FromBundle("placeholder.png");
+            }
+
+            UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) {
+                NumberOfTapsRequired = 2 // double tap
+            };
+
+            scrollView.AddGestureRecognizer(doubletap); // detect when the scrollView is double-tapped
+
             DoneButton.Clicked += OnDismiss;
 
             SaveButton.Clicked += SaveListing;
+        }
+
+        private void OnDoubleTap (UIGestureRecognizer gesture) 
+        {
+            var storyboard = UIStoryboard.FromName("Main", null);
+            postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
+            postingImageVC.Post = this.post;
+
+            this.ShowViewController(postingImageVC, this);
         }
 
 

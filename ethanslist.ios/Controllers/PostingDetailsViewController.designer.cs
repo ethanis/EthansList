@@ -38,6 +38,10 @@ namespace ethanslist.ios
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIBarButtonItem SaveButton { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIScrollView scrollView { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (dateLabel != null) {
@@ -63,6 +67,10 @@ namespace ethanslist.ios
 			if (SaveButton != null) {
 				SaveButton.Dispose ();
 				SaveButton = null;
+			}
+			if (scrollView != null) {
+				scrollView.Dispose ();
+				scrollView = null;
 			}
 		}
 	}

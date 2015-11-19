@@ -42,8 +42,10 @@ namespace ethanslist.ios
             base.ViewDidLoad();
 
             this.Title = "Ethan's List";
+            searchCLLabel.Text = String.Format("Search {0} for:", city);
 
             SearchButton.Enabled = true;
+            saveSearchButton.Enabled = true;
             MinLabel.Text = String.Format("{0:C0}", MinRentSlider.Value);
             MaxLabel.Text = String.Format("{0:C0}", MaxRentSlider.Value);
             MinBedLabel.Text = FormatBeds(minBed);
@@ -78,6 +80,7 @@ namespace ethanslist.ios
             AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
                 MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            saveSearchButton.Enabled = false;
         }
 
         partial void SearchCL(UIButton sender)
