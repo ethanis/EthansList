@@ -58,7 +58,12 @@ namespace ethanslist.android
 
         void PostingImageView_Click (object sender, EventArgs e)
         {
-            
+            FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+            PostingImageViewFragment imageFragment = new PostingImageViewFragment();
+            imageFragment.post = posting;
+            transaction.Replace(Resource.Id.frameLayout, imageFragment);
+            transaction.AddToBackStack(null);
+            transaction.Commit();
         }
 
         void SaveButton_Click (object sender, EventArgs e)
