@@ -11,7 +11,7 @@ namespace ethanslist.ios
     public class SavedListingsTableViewSource : UITableViewSource
     {
         UIViewController owner;
-        List<Listing> savedListings;
+        public List<Listing> savedListings;
         private const string cellId = "listingCell";
 
         public SavedListingsTableViewSource(UIViewController owner, List<Listing> savedListings)
@@ -86,9 +86,16 @@ namespace ethanslist.ios
             { Title = listing.PostTitle, Description = listing.Description, 
                 Link = listing.Link, ImageLink = listing.ImageLink, Date = listing.Date
             };
+
             detailController.Saved = true;
-            Console.WriteLine("Hello");
-            owner.PresentModalViewController(detailController, true);
+            detailController.ItemDeleted += async (sender, e) => {
+                await owner.DismissViewControllerAsync(true);
+                await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                savedListings.RemoveAt(indexPath.Row);
+                tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            };
+            owner.PresentViewController(detailController, true, null);
         }
     }
 }

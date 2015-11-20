@@ -18,6 +18,10 @@ namespace ethanslist.ios
 		{
 		}
 
+        public PostingDetailsViewController()
+        {
+        }
+
         Posting post;
         public Posting Post {
             get {
@@ -47,6 +51,8 @@ namespace ethanslist.ios
                 listing = value;
             }
         }
+
+        public event EventHandler<EventArgs> ItemDeleted;
 
         public override void ViewWillAppear(bool animated)
         {
@@ -92,8 +98,6 @@ namespace ethanslist.ios
             scrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
 
             DoneButton.Clicked += OnDismiss;
-
-//            SaveButton.Clicked += SaveListing;
         }
 
         private void OnSingleTap (UIGestureRecognizer gesture) 
@@ -136,12 +140,10 @@ namespace ethanslist.ios
             }
         }
 
-        async void DeleteListing(object sender, EventArgs e)
+        void DeleteListing(object sender, EventArgs e)
         {
-            await AppDelegate.databaseConnection.DeleteListingAsync(listing);
-            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-            //TODO: raise event to relead data in previous table view
-            DismissViewController(true, null);
+            if (this.ItemDeleted != null)
+                this.ItemDeleted(this, new EventArgs());
         }
 
         static UIImage FromUrl (string uri)
