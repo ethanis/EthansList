@@ -6,6 +6,7 @@ using EthansList.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ethanslist.ios
 {
@@ -27,17 +28,6 @@ namespace ethanslist.ios
             savedListings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
-
-            tableSource.ItemDeleted += OnItemDeleted;
-        }
-
-        void OnItemDeleted(object sender, EventArgs e)
-        {
-            savedListings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
-            tableSource = new SavedListingsTableViewSource(this, savedListings);
-            TableView.Source = tableSource;
-
-            tableSource.ItemDeleted += OnItemDeleted;
         }
 	}
 }

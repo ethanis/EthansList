@@ -34,18 +34,40 @@ namespace ethanslist.ios
             return cell;
         }
 
-        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
+//        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
+//        {
+//            UITableViewRowAction deleteButton = UITableViewRowAction.Create (
+//                UITableViewRowActionStyle.Destructive,
+//                "Delete",
+//                async delegate {
+//                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
+//                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+//                if (this.ItemDeleted != null)
+//                    this.ItemDeleted(this, new EventArgs());
+//            });
+//            return new UITableViewRowAction[] { deleteButton };
+//        }
+
+        public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
-            UITableViewRowAction deleteButton = UITableViewRowAction.Create (
-                UITableViewRowActionStyle.Destructive,
-                "Delete",
-                async delegate {
-                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
-                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-                if (this.ItemDeleted != null)
-                    this.ItemDeleted(this, new EventArgs());
-            });
-            return new UITableViewRowAction[] { deleteButton };
+            switch (editingStyle) {
+                case UITableViewCellEditingStyle.Delete:
+                    AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
+                    savedSearches.RemoveAt(indexPath.Row);
+                    tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                    break;
+                case UITableViewCellEditingStyle.None:
+                    Console.WriteLine ("CommitEditingStyle:None called");
+                    break;
+            }
+        }
+        public override bool CanEditRow (UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            return true;
+        }
+        public override string TitleForDeleteConfirmation (UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            return "Delete";
         }
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)

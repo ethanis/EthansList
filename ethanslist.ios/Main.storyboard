@@ -328,16 +328,23 @@
                                     <rect key="frame" x="158" y="82" width="166" height="326"/>
                                 </variation>
                             </pickerView>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES" hasAttributedTitle="YES">
                                 <rect key="frame" x="58" y="488" width="203" height="30"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
-                                <state key="normal" title="Proceed to Search">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="22" y="488" width="280" height="30"/>
                                 </variation>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Proceed to Search">
+                                            <attributes>
+                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <font key="NSFont" name="Helvetica" family="Helvetica" size="15"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                             </button>
                             <pickerView contentMode="scaleToFill" id="685" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="-17" y="170" width="320" height="162"/>

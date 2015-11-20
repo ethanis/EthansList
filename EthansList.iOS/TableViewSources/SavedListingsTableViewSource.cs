@@ -13,7 +13,6 @@ namespace ethanslist.ios
         UIViewController owner;
         List<Listing> savedListings;
         private const string cellId = "listingCell";
-        public event EventHandler<EventArgs> ItemDeleted;
 
         public SavedListingsTableViewSource(UIViewController owner, List<Listing> savedListings)
         {
@@ -55,18 +54,26 @@ namespace ethanslist.ios
             return cell;
         }
 
-        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
+        public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
-            UITableViewRowAction deleteButton = UITableViewRowAction.Create (
-                UITableViewRowActionStyle.Destructive,
-                "Delete",
-                async delegate {
-                await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
-                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-                if (this.ItemDeleted != null)
-                    this.ItemDeleted(this, new EventArgs());
-            });
-            return new UITableViewRowAction[] { deleteButton };
+            switch (editingStyle) {
+                case UITableViewCellEditingStyle.Delete:
+                    AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                    savedListings.RemoveAt(indexPath.Row);
+                    tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                    break;
+                case UITableViewCellEditingStyle.None:
+                    Console.WriteLine ("CommitEditingStyle:None called");
+                    break;
+            }
+        }
+        public override bool CanEditRow (UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            return true;
+        }
+        public override string TitleForDeleteConfirmation (UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            return "Delete";
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
