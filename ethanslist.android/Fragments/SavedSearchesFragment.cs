@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Models;
 using System.Collections.ObjectModel;
+using EthansList.Shared;
 
 namespace ethanslist.android
 {
@@ -21,12 +22,18 @@ namespace ethanslist.android
         ListView savedSearchesListView;
         List<Search> savedSearches;
         SavedSearchesListAdapter searchListAdapter;
+        Dictionary<string, string> searchTerms;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
+            searchTerms = new Dictionary<string, string>();
+            searchTerms.Add("min_price", null);
+            searchTerms.Add("max_price", null);
+            searchTerms.Add("bedrooms", null);
+            searchTerms.Add("bathrooms", null);
+            searchTerms.Add("query", null);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -60,9 +67,16 @@ namespace ethanslist.android
         {
             var transaction = this.FragmentManager.BeginTransaction();
             var feedResultsFragment = new FeedResultsFragment();
-            feedResultsFragment.query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
-                savedSearches[e.Position].LinkUrl, savedSearches[e.Position].MinPrice, savedSearches[e.Position].MaxPrice, 
-                savedSearches[e.Position].MinBedrooms, savedSearches[e.Position].MinBathrooms, savedSearches[e.Position].SearchQuery);
+
+            var search = savedSearches[e.Position];
+            QueryGeneration helper = new QueryGeneration();
+            searchTerms["min_price"] = search.MinPrice;
+            searchTerms["max_price"] = search.MaxPrice;
+            searchTerms["bedrooms"] = search.MinBedrooms;
+            searchTerms["bathrooms"] = search.MinBathrooms;
+            searchTerms["query"] = search.SearchQuery;
+
+            feedResultsFragment.query = helper.Generate(search.LinkUrl, searchTerms);
 
             transaction.Replace(Resource.Id.frameLayout, feedResultsFragment);
             transaction.AddToBackStack(null);

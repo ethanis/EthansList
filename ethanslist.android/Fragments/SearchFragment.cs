@@ -29,11 +29,18 @@ namespace ethanslist.android
         NumberPicker minBathroomPicker;
         Button saveSearchButton;
 
+        Dictionary<string, string> searchTerms;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
+            searchTerms = new Dictionary<string, string>();
+            searchTerms.Add("min_price", null);
+            searchTerms.Add("max_price", null);
+            searchTerms.Add("bedrooms", null);
+            searchTerms.Add("bathrooms", null);
+            searchTerms.Add("query", null);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -86,9 +93,9 @@ namespace ethanslist.android
             return view;
         }
 
-        void SaveSearchButton_Click (object sender, EventArgs e)
+        async void SaveSearchButton_Click (object sender, EventArgs e)
         {
-            MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
+            await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
                 maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
         }
@@ -100,9 +107,14 @@ namespace ethanslist.android
 
         protected string GenerateQuery()
         {
-            string query;
-            query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
-                location.Url, minRentTextView.Text, maxRentTextView.Text, minBedroomPicker.Value, minBathroomPicker.Value, searchTextField.Text);
+            QueryGeneration helper = new QueryGeneration();
+            searchTerms["min_price"] = minRentTextView.Text;
+            searchTerms["max_price"] = maxRentTextView.Text;
+            searchTerms["bedrooms"] = minBedroomPicker.Value.ToString();
+            searchTerms["bathrooms"] = minBathroomPicker.Value.ToString();
+            searchTerms["query"] = searchTextField.Text;
+
+            string query = helper.Generate(location.Url, searchTerms);
 
             Console.WriteLine(query);
 

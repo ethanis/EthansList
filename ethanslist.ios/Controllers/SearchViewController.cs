@@ -5,6 +5,8 @@ using UIKit;
 using System.Reflection;
 using System.IO;
 using EthansList.Models;
+using EthansList.Shared;
+using System.Collections.Generic;
 
 namespace ethanslist.ios
 {
@@ -14,9 +16,16 @@ namespace ethanslist.ios
         int minBath = 1;
         string url;
         string city;
+        Dictionary<string, string> searchTerms = new Dictionary<string, string>();
+
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
+            searchTerms.Add("min_price", null);
+            searchTerms.Add("max_price", null);
+            searchTerms.Add("bedrooms", null);
+            searchTerms.Add("bathrooms", null);
+            searchTerms.Add("query", null);
 		}
 
         public String Url {
@@ -107,7 +116,14 @@ namespace ethanslist.ios
             var storyboard = UIStoryboard.FromName("Main", null);
             var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
-            feedViewController.Query = GenerateQuery();
+            QueryGeneration helper = new QueryGeneration();
+            searchTerms["min_price"] = MinRentSlider.Value.ToString();
+            searchTerms["max_price"] = MaxRentSlider.Value.ToString();
+            searchTerms["bedrooms"] = MinBedCountStep.Value.ToString();
+            searchTerms["bathrooms"] = MinBathCountStep.Value.ToString();
+            searchTerms["query"] = SearchField.Text;
+
+            feedViewController.Query = helper.Generate(url, searchTerms);
 
             this.ShowViewController(feedViewController, this);
         }
@@ -115,17 +131,6 @@ namespace ethanslist.ios
         public string FormatBeds(int beds)
         {
             return String.Format("{0}+", beds);
-        }
-
-        public string GenerateQuery()
-        {
-            string query;
-            query = String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
-                url, MinLabel.Text, MaxLabel.Text, MinBedLabel.Text, MinBathLabel.Text, SearchField.Text);
-
-            Console.WriteLine(query);
-
-            return query;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

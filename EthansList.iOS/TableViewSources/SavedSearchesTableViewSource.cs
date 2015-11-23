@@ -2,6 +2,7 @@
 using UIKit;
 using EthansList.Models;
 using System.Collections.Generic;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
@@ -11,11 +12,17 @@ namespace ethanslist.ios
         List<Search> savedSearches;
         private const string cellID = "searchCellID";
         public event EventHandler<EventArgs> ItemDeleted;
+        Dictionary<string, string> searchTerms = new Dictionary<string, string>();
 
         public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)
         {
             this.owner = owner;
             this.savedSearches = savedSearches;
+            searchTerms.Add("min_price", null);
+            searchTerms.Add("max_price", null);
+            searchTerms.Add("bedrooms", null);
+            searchTerms.Add("bathrooms", null);
+            searchTerms.Add("query", null);
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -48,11 +55,11 @@ namespace ethanslist.ios
 //            return new UITableViewRowAction[] { deleteButton };
 //        }
 
-        public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+        public override async void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
             switch (editingStyle) {
                 case UITableViewCellEditingStyle.Delete:
-                    AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
+                    await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
                     savedSearches.RemoveAt(indexPath.Row);
                     tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                     break;
@@ -74,15 +81,18 @@ namespace ethanslist.ios
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
-            feedResultsVC.Query = GenerateQuery(savedSearches[indexPath.Row]);
+
+            var search = savedSearches[indexPath.Row];
+            searchTerms["min_price"] = search.MinPrice;
+            searchTerms["max_price"] = search.MaxPrice;
+            searchTerms["bedrooms"] = search.MinBedrooms;
+            searchTerms["bathrooms"] = search.MinBathrooms;
+            searchTerms["query"] = search.SearchQuery;
+            QueryGeneration helper = new QueryGeneration();
+
+            feedResultsVC.Query = helper.Generate(search.LinkUrl, searchTerms);
 
             owner.ShowViewController(feedResultsVC, owner);
-        }
-
-        public string GenerateQuery(Search search)
-        {
-            return String.Format("{0}/search/apa?format=rss&min_price={1}&max_price={2}&bedrooms={3}&bathrooms{4}&query={5}", 
-                search.LinkUrl, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
         }
     }
 }

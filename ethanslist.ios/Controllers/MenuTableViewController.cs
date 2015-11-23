@@ -60,10 +60,9 @@ namespace ethanslist.ios
             {
                 switch (indexPath.Row)
                 {
-                    case 0: //clock
+                    case 0: //Search Cities
                         var cityPickVC = controller.Storyboard.InstantiateViewController ("CityPickerViewController");
                         controller.ShowDetailViewController (cityPickVC, controller);
-
                         break;
                     case 1://Saved Searches
                         var searchesVC = controller.Storyboard.InstantiateViewController ("SavedSearchesTableViewController");

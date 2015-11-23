@@ -101,7 +101,7 @@ namespace EthansList.Shared
 //                    {
 //                        Console.WriteLine("dc:title: " + child.InnerText);
 //                    }
-                    Console.WriteLine(child.Name + " = " + child.InnerText);
+//                    Console.WriteLine(child.Name + " = " + child.InnerText);
                 }
 
                 XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
