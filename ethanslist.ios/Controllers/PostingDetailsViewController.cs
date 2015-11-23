@@ -145,12 +145,5 @@ namespace ethanslist.ios
             if (this.ItemDeleted != null)
                 this.ItemDeleted(this, new EventArgs());
         }
-
-        static UIImage FromUrl (string uri)
-        {
-            using (var url = new NSUrl (uri))
-            using (var data = NSData.FromUrl (url))
-                return UIImage.LoadFromData (data);
-        }
 	}
 }
