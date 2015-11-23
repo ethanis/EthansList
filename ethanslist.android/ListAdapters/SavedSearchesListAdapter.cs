@@ -12,7 +12,6 @@ namespace ethanslist.android
         List<Search> savedSearches;
 //        ObservableCollection<Search> observedSearches;
         Activity context;
-        public EventHandler<EventArgs> dataDeleted;
 
         public SavedSearchesListAdapter(Activity context, List<Search> savedSearches)
         {
@@ -58,12 +57,11 @@ namespace ethanslist.android
             holder.SearchCity.Text = savedSearches[position].CityName;
             holder.SearchInformation.Text = MainActivity.databaseConnection.FormatSearchQuery(savedSearches[position]);
 
-            delete.Click += (object sender, EventArgs e) => {
-                MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
-//                this.savedSearches.RemoveAt(position);
-                if (dataDeleted != null)
-                    this.dataDeleted(this, new EventArgs());
-                NotifyDataSetChanged();
+            delete.Click += async (object sender, EventArgs e) => {
+                await MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
+                savedSearches.RemoveAt(position);
+
+                this.NotifyDataSetChanged();
             };
 
             return view;

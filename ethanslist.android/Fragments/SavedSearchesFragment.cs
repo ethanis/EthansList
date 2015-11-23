@@ -50,17 +50,7 @@ namespace ethanslist.android
 
             savedSearchesListView.ItemClick += SavedSearchesListView_ItemClick;
 
-            searchListAdapter.dataDeleted += SearchList_DataDeleted;
-
             return view;
-        }
-
-        void SearchList_DataDeleted (object sender, EventArgs e)
-        {
-            savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
-            searchListAdapter = new SavedSearchesListAdapter(this.Activity, savedSearches);
-
-            searchListAdapter.dataDeleted += SearchList_DataDeleted;
         }
 
         void SavedSearchesListView_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
