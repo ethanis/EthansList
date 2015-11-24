@@ -48,22 +48,21 @@ namespace ethanslist.android
                 view = context.LayoutInflater.Inflate(Resource.Layout.SavedSearchRow, parent, false);
                 var _searchCity = view.FindViewById<TextView>(Resource.Id.searchCityText);
                 var _searchInformation = view.FindViewById<TextView>(Resource.Id.searchInformationText);
+                var _deleteBtn = view.FindViewById<Button>(Resource.Id.deleteSearchButton);
 
-                view.Tag = new SavedSearchesViewHolder { SearchCity = _searchCity, SearchInformation = _searchInformation };
+                _deleteBtn.Click += async (sender, e) => {
+                    await MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
+                    savedSearches.RemoveAt(position);
+                    this.NotifyDataSetChanged();
+                };
+
+                view.Tag = new SavedSearchesViewHolder { SearchCity = _searchCity, SearchInformation = _searchInformation, DeleteBtn = _deleteBtn };
             }
-            Button delete = view.FindViewById<Button>(Resource.Id.deleteSearchButton);
 
             var holder = (SavedSearchesViewHolder)view.Tag;
             holder.SearchCity.Text = savedSearches[position].CityName;
             holder.SearchInformation.Text = MainActivity.databaseConnection.FormatSearchQuery(savedSearches[position]);
-
-            delete.Click += async (object sender, EventArgs e) => {
-                await MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
-                savedSearches.RemoveAt(position);
-
-                this.NotifyDataSetChanged();
-            };
-
+           
             return view;
         }
     }

@@ -7,6 +7,7 @@ namespace ethanslist.android
     {
         public TextView SearchCity { get; set;}
         public TextView SearchInformation {get;set;}
+        public Button DeleteBtn { get; set; }
     }
 }
 
