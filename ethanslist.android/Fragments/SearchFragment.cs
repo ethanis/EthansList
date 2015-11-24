@@ -59,6 +59,7 @@ namespace ethanslist.android
             minBedroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBedroomPicker);
             minBathroomPicker = view.FindViewById<NumberPicker>(Resource.Id.minBathroomPicker);
             saveSearchButton = view.FindViewById<Button>(Resource.Id.saveSearchButton);
+            saveSearchButton.Enabled = true;
 
             minRentTextView.Text = FormatCurrency(1000);
             maxRentTextView.Text = FormatCurrency(5000);
@@ -98,6 +99,16 @@ namespace ethanslist.android
             await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
                 maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+            if (MainActivity.databaseConnection.StatusCode == EthansList.Models.codes.ok)
+            {
+                Toast.MakeText(this.Activity, "Search saved successfully", ToastLength.Short).Show();
+                saveSearchButton.Enabled = false;
+            }
+            else
+            {
+                Toast.MakeText(this.Activity, "Unable to save search. Please try again.", ToastLength.Short).Show();
+                saveSearchButton.Enabled = true;
+            }
         }
 
         protected string FormatCurrency(int i)

@@ -57,11 +57,19 @@ namespace ethanslist.android
             return view;
         }
 
-        void DeleteButton_Click (object sender, EventArgs e)
+        async void DeleteButton_Click (object sender, EventArgs e)
         {
-            MainActivity.databaseConnection.DeleteListingAsync(this.listing);
+            await MainActivity.databaseConnection.DeleteListingAsync(this.listing);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
-            this.FragmentManager.PopBackStack();
+            if (MainActivity.databaseConnection.StatusCode == codes.ok)
+            {
+                Toast.MakeText(this.Activity, "Listing removed successfully", ToastLength.Short).Show();
+                this.FragmentManager.PopBackStack();
+            }
+            else
+            {
+                Toast.MakeText(this.Activity, "Unable to remove listing, please try again", ToastLength.Short).Show();
+            }
         }
     }
 }

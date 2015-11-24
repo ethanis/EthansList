@@ -39,6 +39,7 @@ namespace ethanslist.android
             postingImageView = view.FindViewById<ImageView>(Resource.Id.postingImageView);
             postingDate = view.FindViewById<TextView>(Resource.Id.postingDateText);
             saveButton = view.FindViewById<Button>(Resource.Id.saveListingButton);
+            saveButton.Enabled = true;
 
             postingTitle.Text = posting.Title;
             postingDetails.Text = posting.Description;
@@ -66,10 +67,20 @@ namespace ethanslist.android
             transaction.Commit();
         }
 
-        void SaveButton_Click (object sender, EventArgs e)
+        async void SaveButton_Click (object sender, EventArgs e)
         {
-            MainActivity.databaseConnection.AddNewListingAsync(posting.Title, posting.Description, posting.Link, posting.ImageLink, posting.Date);
+            await MainActivity.databaseConnection.AddNewListingAsync(posting.Title, posting.Description, posting.Link, posting.ImageLink, posting.Date);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+            if (MainActivity.databaseConnection.StatusCode == EthansList.Models.codes.ok)
+            {
+                Toast.MakeText(this.Activity, "Listing saved successfully!", ToastLength.Short).Show();
+                saveButton.Enabled = false;
+            }
+            else
+            {
+                Toast.MakeText(this.Activity, "Unable to save listing. Please try again.", ToastLength.Short).Show();
+                saveButton.Enabled = true;
+            }
         }
 
     }

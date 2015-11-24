@@ -53,6 +53,10 @@ namespace ethanslist.android
                 _deleteBtn.Click += async (sender, e) => {
                     await MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
                     savedSearches.RemoveAt(position);
+                    if (MainActivity.databaseConnection.StatusCode == codes.ok)
+                        Toast.MakeText(this.context, "Search removed successfully",ToastLength.Short).Show();
+                    else
+                        Toast.MakeText(this.context, "Unable to remove search, please try again", ToastLength.Short).Show();
                     this.NotifyDataSetChanged();
                 };
 
