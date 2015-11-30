@@ -6,6 +6,10 @@ using EthansList.Shared;
 using SDWebImage;
 using CoreGraphics;
 using EthansList.Models;
+using System.Xml;
+using System.Net;
+using System.IO;
+using System.Text;
 
 namespace ethanslist.ios
 {
@@ -62,6 +66,10 @@ namespace ethanslist.ios
             PostingDescription.Text = post.Description;
             Console.WriteLine(post.ImageLink);
             Console.WriteLine(post.Date);
+            Console.WriteLine(post.Link);
+
+            ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
+            Console.WriteLine(imageHelper.GetAllImages());
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 
