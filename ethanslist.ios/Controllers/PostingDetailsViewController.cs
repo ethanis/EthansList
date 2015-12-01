@@ -59,6 +59,15 @@ namespace ethanslist.ios
             }
         }
 
+        public string Image {
+            set {
+                postingImageView.SetImage(
+                    url: new NSUrl(value),
+                    placeholder: UIImage.FromBundle("placeholder.png")
+                );
+            }
+        }
+
         public event EventHandler<EventArgs> ItemDeleted;
 
         public override void ViewWillAppear(bool animated)
@@ -78,7 +87,7 @@ namespace ethanslist.ios
             }
 
             imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-            collectionSource = new ImageCollectionViewSource(imageHelper.GetAllImages());
+            collectionSource = new ImageCollectionViewSource(this, imageHelper.GetAllImages());
             imageCollectionView.Source = collectionSource;
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
@@ -99,10 +108,11 @@ namespace ethanslist.ios
 
             if (post.ImageLink != "-1")
             {
-                postingImageView.SetImage(
-                    url: new NSUrl(post.ImageLink),
-                    placeholder: UIImage.FromBundle("placeholder.png")
-                );
+//                postingImageView.SetImage(
+//                    url: new NSUrl(post.ImageLink),
+//                    placeholder: UIImage.FromBundle("placeholder.png")
+//                );
+                Image = post.ImageLink;
             }
             else
             {

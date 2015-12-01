@@ -2,6 +2,8 @@
 using UIKit;
 using Foundation;
 using CoreGraphics;
+using SDWebImage;
+using System.Drawing;
 
 namespace ethanslist.ios
 {
@@ -12,25 +14,27 @@ namespace ethanslist.ios
         [Export ("initWithFrame:")]
         public ListingImageCell (CGRect frame) : base (frame)
         {
-            BackgroundView = new UIView{BackgroundColor = UIColor.Orange};
-
-            SelectedBackgroundView = new UIView{BackgroundColor = UIColor.Green};
-
-            ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
-            ContentView.Layer.BorderWidth = 2.0f;
+//            BackgroundView = new UIView{BackgroundColor = UIColor.Orange};
+//            SelectedBackgroundView = new UIView{BackgroundColor = UIColor.Green};
+//            ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
+//            ContentView.Layer.BorderWidth = 0.1f;
+//            ContentView.Transform = CGAffineTransform.MakeScale (0.9f, 0.9f);
             ContentView.BackgroundColor = UIColor.White;
-            ContentView.Transform = CGAffineTransform.MakeScale (0.8f, 0.8f);
 
             imageView = new UIImageView (UIImage.FromBundle ("placeholder.png"));
+//            imageView.Transform = CGAffineTransform.MakeScale (0.2f, 0.2f);
+            imageView.Bounds = ContentView.Bounds;
             imageView.Center = ContentView.Center;
-            imageView.Transform = CGAffineTransform.MakeScale (0.7f, 0.7f);
 
             ContentView.AddSubview (imageView);
         }
 
-        public UIImage Image {
+        public string Image {
             set {
-                imageView.Image = value;
+                imageView.SetImage(
+                    url: new NSUrl(value),
+                    placeholder: UIImage.FromBundle("placeholder.png")
+                );
             }
         }
     }

@@ -9,9 +9,11 @@ namespace ethanslist.ios
     public class ImageCollectionViewSource : UICollectionViewSource
     {
         List<string> urls;
+        PostingDetailsViewController owner;
 
-        public ImageCollectionViewSource(List<string> urls)
+        public ImageCollectionViewSource(UIViewController owner, List<string> urls)
         {
+            this.owner = (PostingDetailsViewController)owner;
             this.urls = urls;
         }
 
@@ -23,14 +25,14 @@ namespace ethanslist.ios
         public override UICollectionViewCell GetCell(UICollectionView collectionView, Foundation.NSIndexPath indexPath)
         {
             var cell = (ListingImageCell)collectionView.DequeueReusableCell("listingCell", indexPath);
-            var image = urls[indexPath.Row];
-
-            cell.imageView.SetImage(
-                url: new NSUrl(image),
-                placeholder: UIImage.FromBundle("placeholder.png")
-            );
+            cell.Image = urls[indexPath.Row];
 
             return cell;
+        }
+
+        public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
+        {
+            owner.Image = urls[indexPath.Row];
         }
     }
 }
