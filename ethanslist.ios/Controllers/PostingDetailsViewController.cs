@@ -10,6 +10,8 @@ using System.Xml;
 using System.Net;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ethanslist.ios
 {
@@ -64,12 +66,20 @@ namespace ethanslist.ios
 
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
-            Console.WriteLine(post.ImageLink);
-            Console.WriteLine(post.Date);
-            Console.WriteLine(post.Link);
+//            Console.WriteLine(post.ImageLink);
+//            Console.WriteLine(post.Date);
+//            Console.WriteLine(post.Link);
 
             ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
-            Console.WriteLine(imageHelper.GetAllImages());
+//            Console.WriteLine(imageHelper.GetAllImages());
+            foreach (string image in imageHelper.GetAllImages())
+            {
+//                postingImageView.SetImage(
+//                    url: new NSUrl(image.ToString()),
+//                    placeholder: UIImage.FromBundle("placeholder.png")
+//                );
+                Console.WriteLine(image);
+            }
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 
