@@ -59,12 +59,18 @@ namespace ethanslist.ios
             }
         }
 
-        public string Image {
+        string image;
+        public string Image
+        {
+            get{ 
+                return image;
+            }
             set {
                 postingImageView.SetImage(
                     url: new NSUrl(value),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
+                image = value;
             }
         }
 
@@ -133,7 +139,7 @@ namespace ethanslist.ios
             var storyboard = UIStoryboard.FromName("Main", null);
             postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
             postingImageVC.Post = this.post;
-
+            postingImageVC.ImageLink = Image;
             this.ShowViewController(postingImageVC, this);
         }
 

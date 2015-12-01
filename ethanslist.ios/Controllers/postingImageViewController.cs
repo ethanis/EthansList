@@ -26,6 +26,8 @@ namespace ethanslist.ios
             }
         }
 
+        public string ImageLink { get; set; }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -35,7 +37,7 @@ namespace ethanslist.ios
             if (post.ImageLink != "-1")
             {
                 myImageView.SetImage(
-                    url: new NSUrl(post.ImageLink),
+                    url: new NSUrl(ImageLink),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
             }
