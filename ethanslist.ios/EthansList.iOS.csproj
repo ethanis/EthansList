@@ -155,6 +155,8 @@
     <Compile Include="TableViewCells\SearchViewCell.designer.cs">
       <DependentUpon>SearchViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableViewSources\ImageCollectionViewSource.cs" />
+    <Compile Include="TableViewCells\ListingImageCell.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

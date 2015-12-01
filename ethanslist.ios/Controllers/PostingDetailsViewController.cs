@@ -19,6 +19,7 @@ namespace ethanslist.ios
 	{
         UIBarButtonItem saveButton;
         UIBarButtonItem deleteButton;
+        ImageCollectionViewSource collectionSource;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -71,15 +72,14 @@ namespace ethanslist.ios
 //            Console.WriteLine(post.Link);
 
             ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
-//            Console.WriteLine(imageHelper.GetAllImages());
             foreach (string image in imageHelper.GetAllImages())
             {
-//                postingImageView.SetImage(
-//                    url: new NSUrl(image.ToString()),
-//                    placeholder: UIImage.FromBundle("placeholder.png")
-//                );
                 Console.WriteLine(image);
             }
+
+            imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+            collectionSource = new ImageCollectionViewSource(imageHelper.GetAllImages());
+            imageCollectionView.Source = collectionSource;
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 
