@@ -84,10 +84,6 @@ namespace ethanslist.ios
             PostingDescription.Text = post.Description;
 
             ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
-            foreach (string image in imageHelper.GetAllImages())
-            {
-                Console.WriteLine(image);
-            }
 
             imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
             collectionSource = new ImageCollectionViewSource(this, imageHelper.GetAllImages());
