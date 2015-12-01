@@ -82,9 +82,6 @@ namespace ethanslist.ios
 
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
-//            Console.WriteLine(post.ImageLink);
-//            Console.WriteLine(post.Date);
-//            Console.WriteLine(post.Link);
 
             ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
             foreach (string image in imageHelper.GetAllImages())
@@ -114,10 +111,6 @@ namespace ethanslist.ios
 
             if (post.ImageLink != "-1")
             {
-//                postingImageView.SetImage(
-//                    url: new NSUrl(post.ImageLink),
-//                    placeholder: UIImage.FromBundle("placeholder.png")
-//                );
                 Image = post.ImageLink;
             }
             else
