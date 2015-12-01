@@ -24,15 +24,12 @@ namespace EthansList.Shared
         {
             List<string> links = new List<string>();
 
-            // For speed of dev, I use a WebClient
             WebClient client = new WebClient();
             string html = client.DownloadString(url);
 
-            // Load the Html into the agility pack
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            // Now, using LINQ to get all Images
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
                 where node.Name == "a"

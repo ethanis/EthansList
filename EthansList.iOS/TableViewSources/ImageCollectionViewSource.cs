@@ -10,6 +10,7 @@ namespace ethanslist.ios
     {
         List<string> urls;
         PostingDetailsViewController owner;
+        static string CellID = "listingCell";
 
         public ImageCollectionViewSource(UIViewController owner, List<string> urls)
         {
@@ -24,7 +25,7 @@ namespace ethanslist.ios
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, Foundation.NSIndexPath indexPath)
         {
-            var cell = (ListingImageCell)collectionView.DequeueReusableCell("listingCell", indexPath);
+            var cell = (ListingImageCell)collectionView.DequeueReusableCell(CellID, indexPath);
             cell.Image = urls[indexPath.Row];
 
             return cell;

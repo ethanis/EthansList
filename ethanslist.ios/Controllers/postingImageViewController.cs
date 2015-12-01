@@ -15,7 +15,6 @@ namespace ethanslist.ios
 		}
 
         Posting post;
-
         public Posting Post
         {
             get { 

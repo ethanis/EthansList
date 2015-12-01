@@ -27,7 +27,7 @@ namespace ethanslist.ios
             tableSource = new SavedListingsTableViewSource(this, savedListings);
             TableView.Source = tableSource;
 
-            PostingDetailsViewController postingDetailsVC = new PostingDetailsViewController();
+//            PostingDetailsViewController postingDetailsVC = new PostingDetailsViewController();
 //            postingDetailsVC.ItemDeleted += (object sender, EventArgs e) => {
 //                this.DismissViewController(true, null);
 //            };

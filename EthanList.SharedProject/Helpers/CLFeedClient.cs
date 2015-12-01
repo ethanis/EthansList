@@ -73,8 +73,6 @@ namespace EthansList.Shared
 
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
 
-//            StringBuilder rssContent = new StringBuilder();
-
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
             {
@@ -92,15 +90,6 @@ namespace EthansList.Shared
                     {
                         date = DateTime.Parse(child.InnerText);
                     }
-//                    Console.WriteLine(child.Name);
-//                    if (child.Name == "title")
-//                    {
-//                        Console.WriteLine("title: " + child.InnerText);
-//                    }
-//                    if (child.Name == "dc:title")
-//                    {
-//                        Console.WriteLine("dc:title: " + child.InnerText);
-//                    }
 //                    Console.WriteLine(child.Name + " = " + child.InnerText);
                 }
 
@@ -112,8 +101,6 @@ namespace EthansList.Shared
 
                 rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
                 string description = rssSubNode != null ? rssSubNode.InnerText : "";
-
-//                rssContent.Append("<a href='" + link + "'>" + title + "</a><br>" + description);
 
                 if (title != null && description != null && description != null)
                 {
