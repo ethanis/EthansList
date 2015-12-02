@@ -46,4 +46,3 @@ namespace EthansList.Shared
         }
     }
 }
-
