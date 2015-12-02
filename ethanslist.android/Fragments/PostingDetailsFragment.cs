@@ -21,8 +21,19 @@ namespace ethanslist.android
         ImageView postingImageView;
         TextView postingDate;
         Button saveButton;
+        GridView imageGV;
+        ListingImageDownloader imageHelper;
 
         public Posting posting { get; set; }
+        string currentImage;
+        public string CurrentImage
+        {
+            get { return currentImage; }
+            set { 
+                Koush.UrlImageViewHelper.SetUrlDrawable(postingImageView, value, Resource.Drawable.placeholder);
+                currentImage = value;
+            }
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,26 +44,35 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.PostingDetails, container, false);
 
-            Console.WriteLine(posting.Title);
             postingTitle = view.FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
             postingImageView = view.FindViewById<ImageView>(Resource.Id.postingImageView);
             postingDate = view.FindViewById<TextView>(Resource.Id.postingDateText);
             saveButton = view.FindViewById<Button>(Resource.Id.saveListingButton);
-            saveButton.Enabled = true;
+            imageGV = view.FindViewById<GridView>(Resource.Id.imageGridView);
 
+            imageHelper = new ListingImageDownloader(posting.Link);
+            var imageUrls = imageHelper.GetAllImages();
+            imageGV.Adapter = new ImageAdapter(this.Activity, imageUrls);
+
+            saveButton.Enabled = true;
             postingTitle.Text = posting.Title;
             postingDetails.Text = posting.Description;
             postingDate.Text = "Listed: " + posting.Date.ToShortDateString() + " at " + posting.Date.ToShortTimeString();
+
             string imageLink = posting.ImageLink;  
 
             if (imageLink != "-1")
             {
-                Koush.UrlImageViewHelper.SetUrlDrawable(postingImageView, imageLink, Resource.Drawable.placeholder);
+                CurrentImage = imageLink;
             }
             postingImageView.Click += PostingImageView_Click;
 
             saveButton.Click += SaveButton_Click;;
+
+            imageGV.ItemClick += (Object sender, AdapterView.ItemClickEventArgs args) => {
+                CurrentImage = imageUrls.ElementAt(args.Position);
+            };
 
             return view;
         }
@@ -61,7 +81,7 @@ namespace ethanslist.android
         {
             FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
             PostingImageViewFragment imageFragment = new PostingImageViewFragment();
-            imageFragment.post = posting;
+            imageFragment.imageUrl = CurrentImage;
             transaction.Replace(Resource.Id.frameLayout, imageFragment);
             transaction.AddToBackStack(null);
             transaction.Commit();

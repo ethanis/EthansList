@@ -18,7 +18,7 @@ namespace ethanslist.android
 {
     public class PostingImageViewFragment : Fragment
     {
-        public Posting post { get; set; }
+        public string imageUrl { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,9 +36,9 @@ namespace ethanslist.android
             webView.Settings.BuiltInZoomControls = true;
             webView.Settings.DisplayZoomControls = true;
 
-            if (post.ImageLink != "-1")
+            if (imageUrl != "-1")
             {
-                webView.LoadUrl(post.ImageLink);
+                webView.LoadUrl(imageUrl);
             }
 
 //            ImageView image = view.FindViewById<ImageView>(Resource.Id.imageViewMap);

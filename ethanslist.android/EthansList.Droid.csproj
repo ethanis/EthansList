@@ -84,6 +84,7 @@
     <Compile Include="Fragments\SelectCityFragment.cs" />
     <Compile Include="Fragments\PostingImageViewFragment.cs" />
     <Compile Include="Helpers\ScaleImageView.cs" />
+    <Compile Include="ListAdapters\ImageAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

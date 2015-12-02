@@ -16,16 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/postingDetailsText" />
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageGridView" />
     <ImageView
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="100px"
+        android:maxHeight="200px"
         android:id="@+id/postingImageView" />
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="100px"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:stretchMode="columnWidth"
+        android:id="@+id/imageGridView" />
     <TextView
         android:text="Date posted"
         android:textAppearance="?android:attr/textAppearanceSmall"

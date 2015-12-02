@@ -1528,8 +1528,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0026
 			public const int image = 2131427366;
 			
-			// aapt resource value: 0x7f0b0063
-			public const int imageGridView = 2131427427;
+			// aapt resource value: 0x7f0b0064
+			public const int imageGridView = 2131427428;
 			
 			// aapt resource value: 0x7f0b0061
 			public const int info = 2131427425;
@@ -1600,8 +1600,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0051
 			public const int postingDetailsText = 2131427409;
 			
-			// aapt resource value: 0x7f0b0064
-			public const int postingImageView = 2131427428;
+			// aapt resource value: 0x7f0b0063
+			public const int postingImageView = 2131427427;
 			
 			// aapt resource value: 0x7f0b0050
 			public const int postingTitleText = 2131427408;
