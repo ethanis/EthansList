@@ -25,10 +25,10 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="100px"
+        android:columnWidth="150px"
         android:numColumns="auto_fit"
-        android:verticalSpacing="1dp"
-        android:horizontalSpacing="1dp"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
         android:stretchMode="columnWidth"
         android:id="@+id/imageGridView" />
     <TextView
