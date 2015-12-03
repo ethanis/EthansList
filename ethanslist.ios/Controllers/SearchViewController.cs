@@ -46,7 +46,6 @@ namespace ethanslist.ios
             }
         }
 
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();

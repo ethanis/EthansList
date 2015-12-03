@@ -66,6 +66,7 @@ namespace ethanslist.android
 
         void OnMenuItemClick(int position)
         {
+            base.FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive);
             // Show the selected Fragment to the user
             base.FragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[position]).Commit();
 
