@@ -81,6 +81,12 @@ namespace ethanslist.ios
                     SearchField.BecomeFirstResponder();
             };
 
+            SearchField.ShouldReturn += delegate
+            {
+                SearchField.ResignFirstResponder();
+                return true;
+            };
+
             saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
         }
 

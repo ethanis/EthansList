@@ -169,25 +169,26 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="292" translatesAutoresizingMaskIntoConstraints="NO" text="Search Craigslist for:" textAlignment="center" fixedFrame="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="292" translatesAutoresizingMaskIntoConstraints="NO" text="Search Craigslist for:" textAlignment="center">
                                 <rect key="frame" x="20" y="102" width="280" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="96" width="280" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="102" width="280" height="24"/>
                                 </variation>
+                                <constraints/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="297" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="type here..." fixedFrame="YES">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="297" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="type here..." misplaced="YES">
                                 <rect key="frame" x="20" y="164" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="144" width="280" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="165" width="280" height="30"/>
                                 </variation>
                             </textField>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" opaque="NO">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" misplaced="YES">
                                 <rect key="frame" x="20" y="231" width="280" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <state key="normal" title="Search">
@@ -199,123 +200,260 @@
                                 <connections>
                                     <action selector="SearchCL:" destination="288" id="406" eventType="touchUpInside"/>
                                 </connections>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="39" y="193" width="239" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="232" width="280" height="30"/>
                                 </variation>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
                                 <rect key="frame" x="20" y="325" width="119" height="31"/>
                                 <connections/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="294" width="119" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="16" y="325.5" width="128" height="31"/>
                                 </variation>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
                                 <rect key="frame" x="184" y="325" width="116" height="31"/>
                                 <connections/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="293" width="124" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="180" y="325.5" width="124" height="31"/>
                                 </variation>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="20" y="295" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="264" width="119" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="296" width="120" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="184" y="295" width="116" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="264" width="125" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="184" y="296" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="20" y="369" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="338" width="119" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="368.5" width="120" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="454" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="454" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="184" y="369" width="116" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="338" width="124" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="184" y="368.5" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
                                 <rect key="frame" x="32" y="473" width="94" height="29"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="32" y="442" width="94" height="29"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="32" y="471" width="94" height="29"/>
                                 </variation>
                             </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="58" y="444" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="58" y="413" width="42" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="58" y="442.5" width="42" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="20" y="415" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="384" width="119" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="414" width="120" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center" misplaced="YES">
                                 <rect key="frame" x="184" y="415" width="116" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="384" width="124" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="184" y="414" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" value="1">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" translatesAutoresizingMaskIntoConstraints="NO" value="1" misplaced="YES">
                                 <rect key="frame" x="193" y="473" width="94" height="29"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="191" y="442" width="94" height="29"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="193" y="471" width="94" height="29"/>
                                 </variation>
                             </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+" misplaced="YES">
                                 <rect key="frame" x="219" y="444" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="217" y="413" width="42" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="219" y="442.5" width="42" height="20.5"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1578" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1578" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
                                 <rect key="frame" x="184" y="518" width="103" height="30"/>
                                 <state key="normal" title="Save Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint id="1885" firstItem="292" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1886" firstItem="289" firstAttribute="trailing" secondItem="292" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1888" firstItem="292" firstAttribute="centerX" secondItem="289" secondAttribute="centerX"/>
+                            <constraint id="1889" firstItem="292" firstAttribute="top" secondItem="285" secondAttribute="bottom" constant="82"/>
+                            <constraint id="1890" firstItem="297" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1891" firstItem="289" firstAttribute="trailing" secondItem="297" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1895" firstItem="297" firstAttribute="top" secondItem="292" secondAttribute="centerY" constant="51"/>
+                            <constraint id="1896" firstItem="301" firstAttribute="top" secondItem="297" secondAttribute="bottom" constant="37"/>
+                            <constraint id="1897" firstItem="301" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1898" firstItem="289" firstAttribute="trailing" secondItem="301" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1971" firstItem="423" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="18"/>
+                            <constraint id="1972" firstItem="301" firstAttribute="centerX" secondItem="423" secondAttribute="trailing" constant="18"/>
+                            <constraint id="1974" firstItem="424" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="22"/>
+                            <constraint id="1975" firstItem="289" firstAttribute="trailing" secondItem="424" secondAttribute="trailing" constant="18"/>
+                            <constraint id="1981" firstItem="301" firstAttribute="centerX" secondItem="434" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1982" firstItem="434" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1983" firstItem="434" firstAttribute="top" secondItem="301" secondAttribute="bottom" constant="34"/>
+                            <constraint id="1984" firstItem="438" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
+                            <constraint id="1985" firstItem="289" firstAttribute="trailing" secondItem="438" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1986" firstItem="438" firstAttribute="top" secondItem="301" secondAttribute="bottom" constant="34"/>
+                            <constraint id="1987" firstItem="453" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1988" firstItem="301" firstAttribute="centerX" secondItem="453" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1991" firstItem="423" firstAttribute="top" secondItem="434" secondAttribute="bottom" constant="9"/>
+                            <constraint id="1992" firstItem="424" firstAttribute="top" secondItem="438" secondAttribute="bottom" constant="9"/>
+                            <constraint id="1993" firstItem="453" firstAttribute="top" secondItem="423" secondAttribute="bottom" constant="12"/>
+                            <constraint id="1994" firstItem="289" firstAttribute="trailing" secondItem="454" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1995" firstItem="454" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
+                            <constraint id="1996" firstItem="454" firstAttribute="top" secondItem="424" secondAttribute="bottom" constant="12"/>
+                            <constraint id="1997" firstItem="482" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
+                            <constraint id="1998" firstItem="301" firstAttribute="centerX" secondItem="482" secondAttribute="trailing" constant="20"/>
+                            <constraint id="1999" firstItem="482" firstAttribute="top" secondItem="453" secondAttribute="bottom" constant="25"/>
+                            <constraint id="2000" firstItem="483" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
+                            <constraint id="2001" firstItem="483" firstAttribute="top" secondItem="454" secondAttribute="bottom" constant="25"/>
+                            <constraint id="2002" firstItem="289" firstAttribute="trailing" secondItem="483" secondAttribute="trailing" constant="20"/>
+                            <constraint id="2003" firstItem="481" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="58"/>
+                            <constraint id="2004" firstItem="301" firstAttribute="centerX" secondItem="481" secondAttribute="trailing" constant="60"/>
+                            <constraint id="2005" firstItem="481" firstAttribute="top" secondItem="482" secondAttribute="bottom" constant="8"/>
+                            <constraint id="2006" firstItem="485" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="59"/>
+                            <constraint id="2007" firstItem="485" firstAttribute="top" secondItem="483" secondAttribute="bottom" constant="8"/>
+                            <constraint id="2008" firstItem="289" firstAttribute="trailing" secondItem="485" secondAttribute="trailing" constant="59"/>
+                            <constraint id="2009" firstItem="480" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="32"/>
+                            <constraint id="2010" firstItem="480" firstAttribute="top" secondItem="481" secondAttribute="bottom" constant="8"/>
+                            <constraint id="2011" firstItem="301" firstAttribute="centerX" secondItem="480" secondAttribute="trailing" constant="34"/>
+                            <constraint id="2012" firstItem="484" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="33"/>
+                            <constraint id="2013" firstItem="484" firstAttribute="top" secondItem="485" secondAttribute="bottom" constant="8"/>
+                            <constraint id="2014" firstItem="289" firstAttribute="trailing" secondItem="484" secondAttribute="trailing" constant="33"/>
+                            <constraint id="2015" firstItem="1578" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
+                            <constraint id="2016" firstItem="289" firstAttribute="trailing" secondItem="1578" secondAttribute="trailing" constant="51"/>
+                            <constraint id="2017" firstItem="1578" firstAttribute="top" secondItem="484" secondAttribute="bottom" constant="18"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1971"/>
+                                <exclude reference="1972"/>
+                                <exclude reference="1974"/>
+                                <exclude reference="1975"/>
+                                <exclude reference="1981"/>
+                                <exclude reference="1982"/>
+                                <exclude reference="1983"/>
+                                <exclude reference="1984"/>
+                                <exclude reference="1985"/>
+                                <exclude reference="1986"/>
+                                <exclude reference="1987"/>
+                                <exclude reference="1988"/>
+                                <exclude reference="1991"/>
+                                <exclude reference="1992"/>
+                                <exclude reference="1993"/>
+                                <exclude reference="1994"/>
+                                <exclude reference="1995"/>
+                                <exclude reference="1996"/>
+                                <exclude reference="1997"/>
+                                <exclude reference="1998"/>
+                                <exclude reference="1999"/>
+                                <exclude reference="2000"/>
+                                <exclude reference="2001"/>
+                                <exclude reference="2002"/>
+                                <exclude reference="2003"/>
+                                <exclude reference="2004"/>
+                                <exclude reference="2005"/>
+                                <exclude reference="2006"/>
+                                <exclude reference="2007"/>
+                                <exclude reference="2008"/>
+                                <exclude reference="2009"/>
+                                <exclude reference="2010"/>
+                                <exclude reference="2011"/>
+                                <exclude reference="2012"/>
+                                <exclude reference="2013"/>
+                                <exclude reference="2014"/>
+                                <exclude reference="2015"/>
+                                <exclude reference="2016"/>
+                                <exclude reference="2017"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="1971"/>
+                                <include reference="1972"/>
+                                <include reference="1974"/>
+                                <include reference="1975"/>
+                                <include reference="1981"/>
+                                <include reference="1982"/>
+                                <include reference="1983"/>
+                                <include reference="1984"/>
+                                <include reference="1985"/>
+                                <include reference="1986"/>
+                                <include reference="1987"/>
+                                <include reference="1988"/>
+                                <include reference="1991"/>
+                                <include reference="1992"/>
+                                <include reference="1993"/>
+                                <include reference="1994"/>
+                                <include reference="1995"/>
+                                <include reference="1996"/>
+                                <include reference="1997"/>
+                                <include reference="1998"/>
+                                <include reference="1999"/>
+                                <include reference="2000"/>
+                                <include reference="2001"/>
+                                <include reference="2002"/>
+                                <include reference="2003"/>
+                                <include reference="2004"/>
+                                <include reference="2005"/>
+                                <include reference="2006"/>
+                                <include reference="2007"/>
+                                <include reference="2008"/>
+                                <include reference="2009"/>
+                                <include reference="2010"/>
+                                <include reference="2011"/>
+                                <include reference="2012"/>
+                                <include reference="2013"/>
+                                <include reference="2014"/>
+                                <include reference="2015"/>
+                                <include reference="2016"/>
+                                <include reference="2017"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem title="Title" id="338" key="navigationItem"/>
                     <connections>
