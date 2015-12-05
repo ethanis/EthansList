@@ -24,10 +24,6 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UICollectionView imageCollectionView { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UINavigationBar myNavBar { get; set; }
 
 		[Outlet]
@@ -63,10 +59,6 @@ namespace ethanslist.ios
 			if (DoneButton != null) {
 				DoneButton.Dispose ();
 				DoneButton = null;
-			}
-			if (imageCollectionView != null) {
-				imageCollectionView.Dispose ();
-				imageCollectionView = null;
 			}
 			if (myNavBar != null) {
 				myNavBar.Dispose ();

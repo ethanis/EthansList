@@ -67,8 +67,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="70" width="280" height="71"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="70" width="280" height="44"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="259" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="10" textAlignment="center" fixedFrame="YES">
@@ -78,7 +78,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="168" width="280" height="380"/>
+                                    <rect key="frame" x="20" y="402" width="280" height="146"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="974" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
@@ -102,8 +102,14 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="875" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="187"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="-2" width="320" height="187"/>
+                                        </variation>
                                     </imageView>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="124" width="320" height="184"/>
+                                </variation>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1871" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="0.0" y="300" width="320" height="67"/>
@@ -128,13 +134,48 @@
                                             </collectionViewCell>
                                         </cells>
                                         <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
+                                        </variation>
                                     </collectionView>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="316" width="320" height="67"/>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="863"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2066"/>
+                                <include reference="2067"/>
+                                <include reference="2068"/>
+                                <include reference="2069"/>
+                                <include reference="2070"/>
+                                <include reference="2071"/>
+                                <include reference="2072"/>
+                            </mask>
+                        </variation>
+                        <constraints>
+                            <constraint id="2066" firstItem="258" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
+                            <constraint id="2067" firstItem="255" firstAttribute="trailing" secondItem="258" secondAttribute="trailing" constant="20"/>
+                            <constraint id="2068" firstItem="258" firstAttribute="top" secondItem="1420" secondAttribute="bottom" constant="7"/>
+                            <constraint id="2069" firstItem="1751" firstAttribute="top" secondItem="258" secondAttribute="bottom" constant="2"/>
+                            <constraint id="2070" firstItem="1420" firstAttribute="top" secondItem="255" secondAttribute="top" constant="19"/>
+                            <constraint id="2071" firstItem="1420" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
+                            <constraint id="2072" firstItem="1420" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2066"/>
+                                <exclude reference="2067"/>
+                                <exclude reference="2068"/>
+                                <exclude reference="2069"/>
+                                <exclude reference="2070"/>
+                                <exclude reference="2071"/>
+                                <exclude reference="2072"/>
                             </mask>
                         </variation>
                     </view>
@@ -204,21 +245,21 @@
                                     <rect key="frame" x="20" y="232" width="280" height="30"/>
                                 </variation>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="325" width="119" height="31"/>
                                 <connections/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="16" y="325.5" width="128" height="31"/>
                                 </variation>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="184" y="325" width="116" height="31"/>
                                 <connections/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="180" y="325.5" width="124" height="31"/>
                                 </variation>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="20" y="295" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -228,7 +269,7 @@
                                     <rect key="frame" x="20" y="296" width="120" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="184" y="295" width="116" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -238,7 +279,7 @@
                                     <rect key="frame" x="184" y="296" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="20" y="369" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -258,13 +299,13 @@
                                     <rect key="frame" x="184" y="368.5" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="32" y="473" width="94" height="29"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="32" y="471" width="94" height="29"/>
                                 </variation>
                             </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="58" y="444" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -274,7 +315,7 @@
                                     <rect key="frame" x="58" y="442.5" width="42" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center">
                                 <rect key="frame" x="20" y="415" width="119" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -284,7 +325,7 @@
                                     <rect key="frame" x="20" y="414" width="120" height="20.5"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center">
                                 <rect key="frame" x="184" y="415" width="116" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -294,13 +335,13 @@
                                     <rect key="frame" x="184" y="414" width="116" height="20.5"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" translatesAutoresizingMaskIntoConstraints="NO" value="1" misplaced="YES">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" translatesAutoresizingMaskIntoConstraints="NO" value="1">
                                 <rect key="frame" x="193" y="473" width="94" height="29"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="193" y="471" width="94" height="29"/>
                                 </variation>
                             </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+">
                                 <rect key="frame" x="219" y="444" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -310,7 +351,7 @@
                                     <rect key="frame" x="219" y="442.5" width="42" height="20.5"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1578" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1578" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="184" y="518" width="103" height="30"/>
                                 <state key="normal" title="Save Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -490,14 +531,14 @@
                             <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="20" y="79" width="280" height="368"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="158" y="82" width="166" height="326"/>
+                                    <rect key="frame" x="164" y="82" width="156" height="326"/>
                                 </variation>
                             </pickerView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES" hasAttributedTitle="YES">
                                 <rect key="frame" x="58" y="488" width="203" height="30"/>
                                 <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="22" y="488" width="280" height="30"/>
+                                    <rect key="frame" x="20" y="479" width="280" height="29.5"/>
                                 </variation>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -514,7 +555,7 @@
                             <pickerView contentMode="scaleToFill" id="685" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="-17" y="170" width="320" height="162"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="-4" y="82" width="159" height="326"/>
+                                    <rect key="frame" x="0.0" y="82" width="156" height="327"/>
                                 </variation>
                             </pickerView>
                         </subviews>
