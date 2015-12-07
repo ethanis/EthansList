@@ -48,6 +48,8 @@ namespace ethanslist.android
                     Toast.MakeText(this.Activity, 
                         String.Format("No listings found.{0}Try a different search", System.Environment.NewLine),
                         ToastLength.Short).Show();
+
+                    this.FragmentManager.PopBackStack();
                 };
 
             feedResultsListView.ItemClick += (sender, e) => {

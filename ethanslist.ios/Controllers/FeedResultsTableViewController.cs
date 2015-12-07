@@ -67,7 +67,10 @@ namespace ethanslist.ios
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
+                    alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
                     alert.Show();
+
+//                    this.NavigationController.PopViewController(true);
             };
 
             feedClient.loadingProgressChanged += (object sender, EventArgs e) =>

@@ -76,13 +76,9 @@ namespace ethanslist.ios
                 MinBathLabel.Text = FormatBeds((int)MinBathCountStep.Value);
             };
 
-            SearchField.EditingDidBegin += delegate
-            {
-                    SearchField.BecomeFirstResponder();
-            };
+            SearchField.EditingDidBegin += delegate { SearchField.BecomeFirstResponder(); };
 
-            SearchField.ShouldReturn += delegate
-            {
+            SearchField.ShouldReturn += delegate {
                 SearchField.ResignFirstResponder();
                 return true;
             };
