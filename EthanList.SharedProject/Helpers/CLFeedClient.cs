@@ -15,6 +15,7 @@ namespace EthansList.Shared
         private static XmlDocument AsyncXmlDocument;
         public EventHandler<EventArgs> loadingComplete;
         public EventHandler<EventArgs> loadingProgressChanged;
+        public EventHandler<EventArgs> emptyPostingComplete;
 
         public CLFeedClient(String query)
         {
@@ -47,7 +48,11 @@ namespace EthansList.Shared
         void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
         {
             Console.WriteLine(postings.Count);
-            if (this.loadingComplete != null)
+            if (postings.Count == 0 && this.emptyPostingComplete != null)
+            {
+                this.emptyPostingComplete(this, new EventArgs());
+            }
+            else if (this.loadingComplete != null)
             {
                 this.loadingComplete(this, new EventArgs());
             }

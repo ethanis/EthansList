@@ -62,6 +62,14 @@ namespace ethanslist.ios
 //                    feedClient.loadingComplete += Reload_Data;
             };
 
+            feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
+            {
+                    UIAlertView alert = new UIAlertView();
+                    alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
+                    alert.AddButton("OK");
+                    alert.Show();
+            };
+
             feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
             {
                     percentComplete += 10;

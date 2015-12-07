@@ -43,6 +43,13 @@ namespace ethanslist.android
                     feedResultsListView.Adapter = postingListAdapter;
                 };
 
+            feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
+                {
+                    Toast.MakeText(this.Activity, 
+                        String.Format("No listings found.{0}Try a different search", System.Environment.NewLine),
+                        ToastLength.Short).Show();
+                };
+
             feedResultsListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
