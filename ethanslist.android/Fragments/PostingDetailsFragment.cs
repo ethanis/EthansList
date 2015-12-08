@@ -52,9 +52,12 @@ namespace ethanslist.android
             imageGV = view.FindViewById<GridView>(Resource.Id.imageGridView);
 
             imageHelper = new ListingImageDownloader(posting.Link);
-            var imageUrls = imageHelper.GetAllImages();
-            imageGV.Adapter = new ImageAdapter(this.Activity, imageUrls);
 
+            imageHelper.loadingComplete += (sender, e) =>
+            {
+                imageGV.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
+            };
+            
             saveButton.Enabled = true;
             postingTitle.Text = posting.Title;
             postingDetails.Text = posting.Description;
@@ -71,7 +74,7 @@ namespace ethanslist.android
             saveButton.Click += SaveButton_Click;;
 
             imageGV.ItemClick += (Object sender, AdapterView.ItemClickEventArgs args) => {
-                CurrentImage = imageUrls.ElementAt(args.Position);
+                CurrentImage = imageHelper.images.ElementAt(args.Position);
             };
 
             return view;

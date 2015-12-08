@@ -85,9 +85,13 @@ namespace ethanslist.ios
 
             ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
 
-            imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-            collectionSource = new ImageCollectionViewSource(this, imageHelper.GetAllImages());
-            imageCollectionView.Source = collectionSource;
+            imageHelper.loadingComplete += (object sender, EventArgs e) =>
+            {
+                imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                imageCollectionView.Source = collectionSource;
+            };
+
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 

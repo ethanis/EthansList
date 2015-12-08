@@ -8,25 +8,72 @@ using System.Xml;
 using HtmlAgilityPack;
 using System.Threading.Tasks;
 using System.Linq;
+using System.ComponentModel;
 
 namespace EthansList.Shared
 {
     public class ListingImageDownloader
     {
-        string url;
+        readonly string url;
+        public List<string> images = new List<string>();
+
+        private static BackgroundWorker AsyncHtmlLoader;
+        public EventHandler<EventArgs> loadingComplete;
+        public EventHandler<EventArgs> loadingProgressChanged;
 
         public ListingImageDownloader(string url)
         {
             this.url = url;
+
+            GetImagesAsync();
         }
 
-        public List<string> GetAllImages()
+        private void GetImagesAsync()
         {
-            List<string> links = new List<string>();
+            AsyncHtmlLoader = new BackgroundWorker();
+            AsyncHtmlLoader.WorkerReportsProgress = true;
 
+            AsyncHtmlLoader.ProgressChanged += AsyncXmlLoader_ProgressChanged;;
+            AsyncHtmlLoader.DoWork += AsyncXmlLoader_DoWork;
+            AsyncHtmlLoader.RunWorkerCompleted += AsyncXmlLoader_RunWorkerCompleted;
+
+            AsyncHtmlLoader.RunWorkerAsync();
+        }
+
+        void AsyncXmlLoader_ProgressChanged (object sender, ProgressChangedEventArgs e)
+        {
+            if (this.loadingProgressChanged != null)
+            {
+                this.loadingProgressChanged(this, new EventArgs());
+            }
+        }
+
+        void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine(images.Count);
+            if (this.loadingComplete != null)
+            {
+                this.loadingComplete(this, new EventArgs());
+            }
+        }
+
+        void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
+        {
+            //TODO: have this report actual progress done
+            for (int i = 10; i <= 100; i+=10)
+            {
+                AsyncHtmlLoader.ReportProgress(i); 
+            }
+//            AsyncXmlDocument = new XmlDocument();
+//            AsyncXmlDocument.Load(url);
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(url));
 
+            ParseHtmlForImages(html);
+        }
+
+        public void ParseHtmlForImages(string html)
+        {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
@@ -37,12 +84,10 @@ namespace EthansList.Shared
                 && node.Attributes["data-imgid"] != null
                 select node).ToList();
 
-            foreach(HtmlNode node in imageNodes)
+            foreach (HtmlNode node in imageNodes)
             {
-                links.Add(node.Attributes["href"].Value);
+                images.Add(node.Attributes["href"].Value);
             }
-
-            return links;
         }
     }
 }

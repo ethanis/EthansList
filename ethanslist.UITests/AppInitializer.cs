@@ -10,9 +10,6 @@ namespace ethanslist.UITests
     {
         public static IApp StartApp(Platform platform)
         {
-            // TODO: If the iOS or Android app being tested is included in the solution 
-            // then open the Unit Tests window, right click Test Apps, select Add App Project
-            // and select the app projects that should be tested.
             if (platform == Platform.Android)
             {
                 return ConfigureApp
@@ -23,9 +20,7 @@ namespace ethanslist.UITests
 
             return ConfigureApp
 				.iOS
-            // TODO: Update this path to point to your iOS app and uncomment the
-            // code if the app is not included in the solution.
-            //.AppBundle ("../../../iOS/bin/iPhoneSimulator/Debug/XamarinForms.iOS.app")
+                .AppBundle ("../../../EthansList.iOS/bin/iPhoneSimulator/Debug/ethanslist.ios.app")
 				.StartApp();
         }
     }
