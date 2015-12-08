@@ -17,6 +17,7 @@ namespace ethanslist.ios
         CLFeedClient feedClient;
         Stopwatch loadTimer;
         int percentComplete = 0;
+        protected LoadingOverlay _loadingOverlay = null;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
 		{
@@ -41,6 +42,14 @@ namespace ethanslist.ios
             this.Title = "Craigslist Results";
             feedClient = new CLFeedClient(query);
 
+            var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+            if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
+                bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
+            }
+            // show the loading overlay on the UI thread using the correct orientation sizing
+            this._loadingOverlay = new LoadingOverlay (bounds);
+            this.View.Add ( this._loadingOverlay );
+
             tableSource = new FeedResultTableSource(this, feedClient);
 
             TableView.Source = tableSource;
@@ -56,6 +65,7 @@ namespace ethanslist.ios
 
             feedClient.loadingComplete += (object sender, EventArgs e) =>
             {
+                    this._loadingOverlay.Hide();
                     loadTimer.Stop();
                     TableView.ReloadData();
                     Console.WriteLine(loadTimer.Elapsed);
@@ -64,6 +74,7 @@ namespace ethanslist.ios
 
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
+                    this._loadingOverlay.Hide();
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
