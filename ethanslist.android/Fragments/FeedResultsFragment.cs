@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
+using System.Threading;
 
 namespace ethanslist.android
 {
@@ -33,15 +34,30 @@ namespace ethanslist.android
             var view = inflater.Inflate(Resource.Layout.FeedResults, container, false);
 
             feedClient = new CLFeedClient(query);
+            var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
+            new Thread(new ThreadStart(delegate
+                {
+                    //HIDE PROGRESS DIALOG
+                    feedClient.loadingComplete += (object sender, EventArgs e) => {
+                        this.Activity.RunOnUiThread(() => {
+                            progressDialog.Hide();
+//                            dialog.Hide();
+                        });
+                        Console.WriteLine(feedClient.postings.Count);
+                        postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
+                        feedResultsListView.Adapter = postingListAdapter;
+                    };
+
+                })).Start();
 
             feedResultsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
 
-            feedClient.loadingComplete += (object sender, EventArgs e) => {
-                Console.WriteLine(feedClient.postings.Count);
-                postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
-                feedResultsListView.Adapter = postingListAdapter;
-            };
-
+//            feedClient.loadingComplete += (object sender, EventArgs e) => {
+//                Console.WriteLine(feedClient.postings.Count);
+//                postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
+//                feedResultsListView.Adapter = postingListAdapter;
+//            };
+//
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
                 Dialog dialog;
