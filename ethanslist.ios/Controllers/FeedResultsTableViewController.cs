@@ -80,8 +80,6 @@ namespace ethanslist.ios
                     alert.AddButton("OK");
                     alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
                     alert.Show();
-
-//                    this.NavigationController.PopViewController(true);
             };
 
             feedClient.loadingProgressChanged += (object sender, EventArgs e) =>

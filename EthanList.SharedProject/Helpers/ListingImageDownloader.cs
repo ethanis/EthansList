@@ -25,7 +25,7 @@ namespace EthansList.Shared
             List<string> links = new List<string>();
 
             WebClient client = new WebClient();
-            string html = client.DownloadString(url);
+            string html = client.DownloadString(new Uri(url));
 
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);

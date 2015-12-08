@@ -12,8 +12,8 @@ namespace ethanslist.ios
         public LoadingOverlay (CGRect frame) : base (frame)
         {
             // configurable bits
-            BackgroundColor = UIColor.Black;
-            Alpha = 0.75f;
+            BackgroundColor = UIColor.LightGray;
+            Alpha = 0.60f;
             AutoresizingMask = UIViewAutoresizing.All;
 
             nfloat labelHeight = 22;
