@@ -69,7 +69,6 @@ namespace ethanslist.ios
                     loadTimer.Stop();
                     TableView.ReloadData();
                     Console.WriteLine(loadTimer.Elapsed);
-//                    feedClient.loadingComplete += Reload_Data;
             };
 
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
@@ -79,7 +78,7 @@ namespace ethanslist.ios
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
                     alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
-                    alert.Show();
+                    this.InvokeOnMainThread(() => alert.Show());
             };
 
             feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
