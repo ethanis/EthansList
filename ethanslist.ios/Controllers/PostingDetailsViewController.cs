@@ -122,7 +122,7 @@ namespace ethanslist.ios
                 NumberOfTapsRequired = 1
             };
 
-            scrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
+            imageScrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
 
             DoneButton.Clicked += OnDismiss;
         }

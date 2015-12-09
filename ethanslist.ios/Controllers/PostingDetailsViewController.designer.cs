@@ -28,6 +28,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIScrollView imageScrollView { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UINavigationBar myNavBar { get; set; }
 
 		[Outlet]
@@ -50,10 +54,6 @@ namespace ethanslist.ios
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIBarButtonItem SaveButton { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIScrollView scrollView { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
 			if (dateLabel != null) {
@@ -67,6 +67,10 @@ namespace ethanslist.ios
 			if (imageCollectionView != null) {
 				imageCollectionView.Dispose ();
 				imageCollectionView = null;
+			}
+			if (imageScrollView != null) {
+				imageScrollView.Dispose ();
+				imageScrollView = null;
 			}
 			if (myNavBar != null) {
 				myNavBar.Dispose ();
@@ -91,10 +95,6 @@ namespace ethanslist.ios
 			if (SaveButton != null) {
 				SaveButton.Dispose ();
 				SaveButton = null;
-			}
-			if (scrollView != null) {
-				scrollView.Dispose ();
-				scrollView = null;
 			}
 		}
 	}
