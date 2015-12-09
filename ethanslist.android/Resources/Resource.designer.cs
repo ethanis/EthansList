@@ -742,29 +742,29 @@ namespace ethanslist.android
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0a003a
-			public const int abc_background_cache_hint_selector_material_dark = 2131361850;
-			
 			// aapt resource value: 0x7f0a003b
-			public const int abc_background_cache_hint_selector_material_light = 2131361851;
+			public const int abc_background_cache_hint_selector_material_dark = 2131361851;
+			
+			// aapt resource value: 0x7f0a003c
+			public const int abc_background_cache_hint_selector_material_light = 2131361852;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int abc_input_method_navigation_guard = 2131361792;
 			
-			// aapt resource value: 0x7f0a003c
-			public const int abc_primary_text_disable_only_material_dark = 2131361852;
-			
 			// aapt resource value: 0x7f0a003d
-			public const int abc_primary_text_disable_only_material_light = 2131361853;
+			public const int abc_primary_text_disable_only_material_dark = 2131361853;
 			
 			// aapt resource value: 0x7f0a003e
-			public const int abc_primary_text_material_dark = 2131361854;
+			public const int abc_primary_text_disable_only_material_light = 2131361854;
 			
 			// aapt resource value: 0x7f0a003f
-			public const int abc_primary_text_material_light = 2131361855;
+			public const int abc_primary_text_material_dark = 2131361855;
 			
 			// aapt resource value: 0x7f0a0040
-			public const int abc_search_url_text = 2131361856;
+			public const int abc_primary_text_material_light = 2131361856;
+			
+			// aapt resource value: 0x7f0a0041
+			public const int abc_search_url_text = 2131361857;
 			
 			// aapt resource value: 0x7f0a0001
 			public const int abc_search_url_text_normal = 2131361793;
@@ -775,11 +775,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a0003
 			public const int abc_search_url_text_selected = 2131361795;
 			
-			// aapt resource value: 0x7f0a0041
-			public const int abc_secondary_text_material_dark = 2131361857;
-			
 			// aapt resource value: 0x7f0a0042
-			public const int abc_secondary_text_material_light = 2131361858;
+			public const int abc_secondary_text_material_dark = 2131361858;
+			
+			// aapt resource value: 0x7f0a0043
+			public const int abc_secondary_text_material_light = 2131361859;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int accent_material_dark = 2131361796;
@@ -937,17 +937,20 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a0037
 			public const int switch_thumb_disabled_material_light = 2131361847;
 			
-			// aapt resource value: 0x7f0a0043
-			public const int switch_thumb_material_dark = 2131361859;
-			
 			// aapt resource value: 0x7f0a0044
-			public const int switch_thumb_material_light = 2131361860;
+			public const int switch_thumb_material_dark = 2131361860;
+			
+			// aapt resource value: 0x7f0a0045
+			public const int switch_thumb_material_light = 2131361861;
 			
 			// aapt resource value: 0x7f0a0038
 			public const int switch_thumb_normal_material_dark = 2131361848;
 			
 			// aapt resource value: 0x7f0a0039
 			public const int switch_thumb_normal_material_light = 2131361849;
+			
+			// aapt resource value: 0x7f0a003a
+			public const int theme_devicedefault_background = 2131361850;
 			
 			static Color()
 			{
@@ -2788,6 +2791,9 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0x7f0800e5
 			public const int Theme_AppCompat_NoActionBar = 2131230949;
+			
+			// aapt resource value: 0x7f08012f
+			public const int Theme_Custom = 2131231023;
 			
 			// aapt resource value: 0x7f0800e6
 			public const int ThemeOverlay_AppCompat = 2131230950;
