@@ -61,10 +61,10 @@ namespace ethanslist.android
             saveSearchButton = view.FindViewById<Button>(Resource.Id.saveSearchButton);
             saveSearchButton.Enabled = true;
 
-            minRentTextView.Text = FormatCurrency(1000);
-            maxRentTextView.Text = FormatCurrency(5000);
             minRentSeekBar.Progress = 10;
             maxRentSeekBar.Progress = 50;
+            minRentTextView.Text = FormatCurrency(minRentSeekBar.Progress * 100);
+            maxRentTextView.Text = FormatCurrency(maxRentSeekBar.Progress * 100);
 
             minBedroomPicker.MinValue = 0;
             minBedroomPicker.MaxValue = 10;
@@ -72,11 +72,10 @@ namespace ethanslist.android
             minBathroomPicker.MinValue = 0;
             minBathroomPicker.MaxValue = 10;
 
-            minRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
+            minRentSeekBar.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) => {
                 minRentTextView.Text = FormatCurrency(minRentSeekBar.Progress * 100);
             };
-
-            maxRentSeekBar.StopTrackingTouch += (object sender, SeekBar.StopTrackingTouchEventArgs e) => {
+            maxRentSeekBar.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) => {
                 maxRentTextView.Text = FormatCurrency(maxRentSeekBar.Progress * 100);
             };
 
