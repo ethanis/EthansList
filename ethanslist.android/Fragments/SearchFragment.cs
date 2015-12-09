@@ -119,8 +119,8 @@ namespace ethanslist.android
         protected string GenerateQuery()
         {
             QueryGeneration helper = new QueryGeneration();
-            searchTerms["min_price"] = minRentTextView.Text;
-            searchTerms["max_price"] = maxRentTextView.Text;
+            searchTerms["min_price"] = minRentTextView.Text.Substring(1);
+            searchTerms["max_price"] = maxRentTextView.Text.Substring(1);
             searchTerms["bedrooms"] = minBedroomPicker.Value.ToString();
             searchTerms["bathrooms"] = minBathroomPicker.Value.ToString();
             searchTerms["query"] = searchTextField.Text;

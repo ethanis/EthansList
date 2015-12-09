@@ -41,7 +41,6 @@ namespace ethanslist.ios
                 );
             }
 
-
             myScrollView.MaximumZoomScale = 3f;
             myScrollView.MinimumZoomScale = .1f;
             myScrollView.ViewForZoomingInScrollView += (UIScrollView sv) => { return myImageView; };

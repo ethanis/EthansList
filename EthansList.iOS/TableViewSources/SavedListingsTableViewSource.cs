@@ -54,11 +54,11 @@ namespace ethanslist.ios
             return cell;
         }
 
-        public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+        public override async void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
             switch (editingStyle) {
                 case UITableViewCellEditingStyle.Delete:
-                    AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                    await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
                     savedListings.RemoveAt(indexPath.Row);
                     tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                     break;
