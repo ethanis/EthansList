@@ -41,11 +41,27 @@ namespace ethanslist.android
                     feedClient.loadingComplete += (object sender, EventArgs e) => {
                         this.Activity.RunOnUiThread(() => {
                             progressDialog.Hide();
-//                            dialog.Hide();
                         });
                         Console.WriteLine(feedClient.postings.Count);
                         postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
                         feedResultsListView.Adapter = postingListAdapter;
+                    };
+
+                    feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
+                        this.Activity.RunOnUiThread(() => progressDialog.Hide());
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
+                        Dialog dialog;
+                        builder.SetTitle("Error loading listings");
+                        builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
+                        builder.SetPositiveButton("Ok", delegate {
+                            this.FragmentManager.PopBackStack();
+                        });
+                        dialog = builder.Create();
+
+                        this.Activity.RunOnUiThread(() => {
+                            dialog.Show();
+                        });
                     };
 
                 })).Start();
@@ -58,20 +74,20 @@ namespace ethanslist.android
 //                feedResultsListView.Adapter = postingListAdapter;
 //            };
 //
-            feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
-                Dialog dialog;
-                builder.SetTitle("Error loading listings");
-                builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
-                builder.SetPositiveButton("Ok", delegate {
-                    this.FragmentManager.PopBackStack();
-                });
-                dialog = builder.Create();
-
-                this.Activity.RunOnUiThread(() => {
-                    dialog.Show();
-                    });
-            };
+//            feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
+//                Dialog dialog;
+//                builder.SetTitle("Error loading listings");
+//                builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
+//                builder.SetPositiveButton("Ok", delegate {
+//                    this.FragmentManager.PopBackStack();
+//                });
+//                dialog = builder.Create();
+//
+//                this.Activity.RunOnUiThread(() => {
+//                    dialog.Show();
+//                    });
+//            };
 
             feedResultsListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
