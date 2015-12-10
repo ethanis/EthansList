@@ -66,5 +66,3 @@ namespace ethanslist.ios
         }
     }
 }
-
-

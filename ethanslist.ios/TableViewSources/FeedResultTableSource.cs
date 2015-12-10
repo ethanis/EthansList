@@ -10,7 +10,7 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         CLFeedClient feedClient;
-        String CellId = "postCell";
+        private readonly String CellId = "postCell";
 
         public FeedResultTableSource(UIViewController owner, CLFeedClient client)
         {

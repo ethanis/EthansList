@@ -14,10 +14,7 @@ namespace ethanslist.ios
 	{
         int minBed = 0;
         int minBath = 1;
-        string url;
-        string city;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
-
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
@@ -28,30 +25,17 @@ namespace ethanslist.ios
             searchTerms.Add("query", null);
 		}
 
-        public String Url {
-            get {
-                return url;
-            }
-            set {
-                url = value;
-            }
-        }
+        public String Url { get; set;}
 
-        public String City {
-            get { 
-                return city;
-            }
-            set { 
-                city = value;
-            }
-        }
+
+        public String City { get; set; }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
             this.Title = "Ethan's List";
-            searchCLLabel.Text = String.Format("Search {0} for:", city);
+            searchCLLabel.Text = String.Format("Search {0} for:", City);
 
             SearchButton.Enabled = true;
             saveSearchButton.Enabled = true;
@@ -88,7 +72,7 @@ namespace ethanslist.ios
 
         async void SaveSearchButton_TouchUpInside (object sender, EventArgs e)
         {
-            await AppDelegate.databaseConnection.AddNewSearchAsync(url, city, MinLabel.Text, MaxLabel.Text, 
+            await AppDelegate.databaseConnection.AddNewSearchAsync(Url, City, MinLabel.Text, MaxLabel.Text, 
                 MinBedLabel.Text.ToString(), MinBathLabel.Text.ToString(), SearchField.Text);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
@@ -124,7 +108,7 @@ namespace ethanslist.ios
             searchTerms["bathrooms"] = MinBathCountStep.Value.ToString();
             searchTerms["query"] = SearchField.Text;
 
-            feedViewController.Query = helper.Generate(url, searchTerms);
+            feedViewController.Query = helper.Generate(Url, searchTerms);
 
             this.ShowViewController(feedViewController, this);
         }
