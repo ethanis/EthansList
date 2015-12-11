@@ -45,7 +45,7 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeleteListingAsync(Posting posting)
+        public async Task DeletePostingAsync(Posting posting)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace EthansList.Models
             }
         }
 
-        public Task<List<Posting>> GetAllListingsAsync()
+        public Task<List<Posting>> GetAllPostingsAsync()
         {
             //return a list of people saved to the Person table in the database
             return conn.Table<Posting>().ToListAsync();

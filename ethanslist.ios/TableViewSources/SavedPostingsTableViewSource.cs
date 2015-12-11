@@ -8,13 +8,13 @@ using Foundation;
 
 namespace ethanslist.ios
 {
-    public class SavedListingsTableViewSource : UITableViewSource
+    public class SavedPostingsTableViewSource : UITableViewSource
     {
         UIViewController owner;
         public List<Posting> savedListings;
         private const string cellId = "listingCell";
 
-        public SavedListingsTableViewSource(UIViewController owner, List<Posting> savedListings)
+        public SavedPostingsTableViewSource(UIViewController owner, List<Posting> savedListings)
         {
             this.owner = owner;
             this.savedListings = savedListings;
@@ -58,7 +58,7 @@ namespace ethanslist.ios
         {
             switch (editingStyle) {
                 case UITableViewCellEditingStyle.Delete:
-                    await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                    await AppDelegate.databaseConnection.DeletePostingAsync(savedListings[indexPath.Row]);
                     savedListings.RemoveAt(indexPath.Row);
                     tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                     break;
@@ -90,7 +90,7 @@ namespace ethanslist.ios
             detailController.Saved = true;
             detailController.ItemDeleted += async (sender, e) => {
                 await owner.DismissViewControllerAsync(true);
-                await AppDelegate.databaseConnection.DeleteListingAsync(savedListings[indexPath.Row]);
+                await AppDelegate.databaseConnection.DeletePostingAsync(savedListings[indexPath.Row]);
                 savedListings.RemoveAt(indexPath.Row);
                 tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                 Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);

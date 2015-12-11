@@ -24,14 +24,13 @@ namespace ethanslist.android
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FeedResults, container, false);
 
-            savedListings = MainActivity.databaseConnection.GetAllListingsAsync().Result;
+            savedListings = MainActivity.databaseConnection.GetAllPostingsAsync().Result;
 
             savedListingsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
             savedListingsAdapter = new SavedListingListAdapter(this.Activity, savedListings);
