@@ -13,7 +13,6 @@ namespace ethanslist.ios
 	partial class FeedResultsTableViewController : UITableViewController
 	{
         FeedResultTableSource tableSource;
-        string query;
         CLFeedClient feedClient;
         Stopwatch loadTimer;
         int percentComplete = 0;
@@ -23,14 +22,7 @@ namespace ethanslist.ios
 		{
 		}
 
-        public String Query {
-            get {
-                return query;
-            }
-            set {
-                query = value;
-            }
-        }
+        public String Query { get; set;}
 
         public override void ViewDidLoad()
         {
@@ -40,7 +32,7 @@ namespace ethanslist.ios
             loadTimer.Start();
 
             this.Title = "Craigslist Results";
-            feedClient = new CLFeedClient(query);
+            feedClient = new CLFeedClient(Query);
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
