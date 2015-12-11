@@ -17,9 +17,9 @@ namespace ethanslist.android
             _view._scaleFactor *= detector.ScaleFactor;
 
             // put a limit on how small or big the image can get.
-            if (_view._scaleFactor > 5.0f)
+            if (_view._scaleFactor > 10.0f)
             {
-                _view._scaleFactor = 5.0f;
+                _view._scaleFactor = 10.0f;
             }
             if (_view._scaleFactor < 0.1f)
             {

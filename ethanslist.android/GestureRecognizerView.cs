@@ -28,7 +28,7 @@ namespace ethanslist.android
         private float _lastTouchY;
         private float _posX;
         private float _posY;
-        public float _scaleFactor = 1.0f;
+        public float _scaleFactor = 3.0f;
 
         public GestureRecognizerView(Context context, String imageUrl): base(context, null, 0)
         {
@@ -37,6 +37,22 @@ namespace ethanslist.android
             _image = imageView.Drawable;
             _image.SetBounds(0, 0, _image.IntrinsicWidth, _image.IntrinsicHeight);
             _scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
+
+            var metrics = Resources.DisplayMetrics;
+            _posX = GetCornerPosition(ConvertPixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
+            _posY = GetCornerPosition(ConvertPixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
+        }
+
+        private int ConvertPixelsToDp(float pixelValue)
+        {
+            var dp = (int) ((pixelValue)/Resources.DisplayMetrics.Density);
+            return dp;
+        }
+
+        private int GetCornerPosition(int screenWidth, int imageWidth)
+        {
+            var padding = screenWidth - imageWidth;
+            return padding / 2;
         }
 
         protected override void OnDraw(Canvas canvas)
