@@ -20,14 +20,14 @@ namespace ethanslist.android
     {
         private static readonly int InvalidPointerId = -1;
 
-        public readonly Drawable _image;
+        private readonly Drawable _image;
         private readonly ScaleGestureDetector _scaleDetector;
 
-        public int _activePointerId = InvalidPointerId;
-        public float _lastTouchX;
-        public float _lastTouchY;
-        public float _posX;
-        public float _posY;
+        private int _activePointerId = InvalidPointerId;
+        private float _lastTouchX;
+        private float _lastTouchY;
+        private float _posX;
+        private float _posY;
         public float _scaleFactor = 1.0f;
 
         public GestureRecognizerView(Context context, String imageUrl): base(context, null, 0)
