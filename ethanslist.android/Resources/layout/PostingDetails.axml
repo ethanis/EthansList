@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/postingDateText" />
     <Button
-        android:text="Save Listing"
+        android:text="Save Posting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/saveListingButton" />

@@ -13,7 +13,7 @@ namespace ethanslist.ios
 	partial class SavedListingsTableViewController : UITableViewController
 	{
         SavedListingsTableViewSource tableSource;
-        List<Posting> savedListings;
+        List<Posting> savedPostings;
 
 		public SavedListingsTableViewController (IntPtr handle) : base (handle)
 		{
@@ -23,8 +23,8 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            savedListings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
-            tableSource = new SavedListingsTableViewSource(this, savedListings);
+            savedPostings = AppDelegate.databaseConnection.GetAllListingsAsync().Result;
+            tableSource = new SavedListingsTableViewSource(this, savedPostings);
             TableView.Source = tableSource;
         }
 	}

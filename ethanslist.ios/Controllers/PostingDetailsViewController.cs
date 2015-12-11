@@ -47,16 +47,6 @@ namespace ethanslist.ios
             }
         }
 
-//        Listing listing;
-//        public Listing Listing {
-//            get { 
-//                return listing;
-//            }
-//            set { 
-//                listing = value;
-//            }
-//        }
-
         string image;
         public string Image
         {

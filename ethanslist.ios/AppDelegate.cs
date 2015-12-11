@@ -23,7 +23,7 @@ namespace ethanslist.ios
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-            string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
+            string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
 
             // Code to start the Xamarin Test Cloud Agent

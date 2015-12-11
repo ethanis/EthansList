@@ -137,10 +137,6 @@
     <Compile Include="Controllers\MenuTableViewController.designer.cs">
       <DependentUpon>MenuTableViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\SavedListingsTableViewController.cs" />
-    <Compile Include="Controllers\SavedListingsTableViewController.designer.cs">
-      <DependentUpon>SavedListingsTableViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="TableViewSources\SavedListingsTableViewSource.cs" />
     <Compile Include="Controllers\SavedSearchesTableViewController.cs" />
     <Compile Include="Controllers\SavedSearchesTableViewController.designer.cs">
@@ -158,6 +154,10 @@
     <Compile Include="TableViewSources\ImageCollectionViewSource.cs" />
     <Compile Include="TableViewCells\ListingImageCell.cs" />
     <Compile Include="Helpers\LoadingOverlay.cs" />
+    <Compile Include="Controllers\SavedPostingsTableViewController.cs" />
+    <Compile Include="Controllers\SavedPostingsTableViewController.designer.cs">
+      <DependentUpon>SavedPostingsTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

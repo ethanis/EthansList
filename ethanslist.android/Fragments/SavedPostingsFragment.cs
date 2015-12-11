@@ -15,7 +15,7 @@ using EthansList.Models;
 
 namespace ethanslist.android
 {
-    public class SavedListingsFragment : Fragment
+    public class SavedPostingsFragment : Fragment
     {
         SavedListingListAdapter savedListingsAdapter;
         ListView savedListingsListView;
@@ -39,9 +39,9 @@ namespace ethanslist.android
 
             savedListingsListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
-                SavedListingDetailsFragment savedListingDetailsFragment = new SavedListingDetailsFragment();
-                savedListingDetailsFragment.posting = savedListings[e.Position];
-                transaction.Replace(Resource.Id.frameLayout, savedListingDetailsFragment);
+                PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
+                postingDetailsFragment.posting = savedListings[e.Position];
+                transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
             };

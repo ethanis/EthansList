@@ -77,8 +77,6 @@
     <Compile Include="ViewHolders\SavedSearchesViewHolder.cs" />
     <Compile Include="Fragments\FeedResultsFragment.cs" />
     <Compile Include="Fragments\PostingDetailsFragment.cs" />
-    <Compile Include="Fragments\SavedListingDetailsFragment.cs" />
-    <Compile Include="Fragments\SavedListingsFragment.cs" />
     <Compile Include="Fragments\SavedSearchesFragment.cs" />
     <Compile Include="Fragments\SearchFragment.cs" />
     <Compile Include="Fragments\SelectCityFragment.cs" />
@@ -87,6 +85,7 @@
     <Compile Include="ImageZoomActivity.cs" />
     <Compile Include="Helpers\GestureRecognizerView.cs" />
     <Compile Include="Helpers\MyScaleListener.cs" />
+    <Compile Include="Fragments\SavedPostingsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -24,7 +24,7 @@ namespace ethanslist.ios
         {
             base.ViewWillAppear (animated);
 
-            var sections = new string[]{ "Search Craigslist", "Saved Searches", "Saved Listings" };
+            var sections = new string[]{ "Search Craigslist", "Saved Searches", "Saved Postings" };
 
             this.TableView.Source = new MenuTableViewSource (this, sections);
         }
@@ -69,7 +69,7 @@ namespace ethanslist.ios
                         controller.ShowDetailViewController (searchesVC, controller);
                         break;
                     case 2://Saved Listings
-                        var listingsVC = controller.Storyboard.InstantiateViewController ("SavedListingsTableViewController");
+                        var listingsVC = controller.Storyboard.InstantiateViewController ("SavedPostingsTableViewController");
                         controller.ShowDetailViewController (listingsVC, controller);
                         break;
                 }

@@ -23,14 +23,14 @@ namespace ethanslist.android
         ListView              drawerListView;
         public static DatabaseConnection databaseConnection { get; private set;}
 
-        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new SavedListingsFragment(), new SavedSearchesFragment()};
-        string  [] titles    = new string  [] { "Select City", "Saved Listings", "Saved Searches"};
+        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        string  [] titles    = new string  [] { "Select City", "Saved Postings", "Saved Searches"};
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            string dbpath = FileAccessHelper.GetLocalFilePath("listings.db3");
+            string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
 
             SetContentView(Resource.Layout.Main);
