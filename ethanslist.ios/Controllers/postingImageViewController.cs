@@ -18,19 +18,8 @@ namespace ethanslist.ios
         public List<string> ImageLinks { get; set; }
         public int ImageIndex { get; set; }
 
-        Posting post;
-        public Posting Post
-        {
-            get { 
-                return post;
-            }
-            set { 
-                post = value;
-            }
-        }
-
         string image;
-        public string Image
+        private string Image
         {
             get{ 
                 return image;
@@ -44,22 +33,15 @@ namespace ethanslist.ios
             }
         }
 
-        public string ImageLink { get; set; }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             this.View.BackgroundColor = UIColor.DarkGray;
             myScrollView.Frame = new CGRect(0, 0, View.Frame.Width, View.Frame.Height);
 
-            if (post.ImageLink != "-1")
+            if (ImageLinks[ImageIndex] != "-1")
             {
-//                myImageView.SetImage(
-//                    url: new NSUrl(ImageLink),
-//                    placeholder: UIImage.FromBundle("placeholder.png")
-//                );
-
-                Image = ImageLink;
+                Image = ImageLinks[ImageIndex];
             }
 
             myScrollView.MaximumZoomScale = 3f;
@@ -102,25 +84,16 @@ namespace ethanslist.ios
         private void OnSwipeNext (UIGestureRecognizer gesture) {
             if (ImageIndex >= ImageLinks.Count - 1)
                 return;
+            
             ImageIndex += 1;
-
-//            myImageView.SetImage(
-//                url: new NSUrl(ImageLinks[ImageIndex]),
-//                placeholder: UIImage.FromBundle("placeholder.png")
-//            );
-
             Image = ImageLinks[ImageIndex];
         }
 
         private void OnSwipePrevious (UIGestureRecognizer gesture) {
             if (ImageIndex == 0)
                 return;
+            
             ImageIndex -= 1;
-//
-//            myImageView.SetImage(
-//                url: new NSUrl(ImageLinks[ImageIndex]),
-//                placeholder: UIImage.FromBundle("placeholder.png")
-//            );
             Image = ImageLinks[ImageIndex];
         }
 	}

@@ -72,6 +72,8 @@ namespace ethanslist.ios
             }
         }
 
+        public int CurrentImageIndex { get; set; }
+
         public event EventHandler<EventArgs> ItemDeleted;
 
         public override void ViewWillAppear(bool animated)
@@ -80,6 +82,7 @@ namespace ethanslist.ios
 
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
+            CurrentImageIndex = 0;
 
             imageHelper = new ListingImageDownloader(post.Link);
 
@@ -129,10 +132,8 @@ namespace ethanslist.ios
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
-            postingImageVC.Post = this.post;
-            postingImageVC.ImageLink = Image;
             postingImageVC.ImageLinks = imageHelper.images;
-            postingImageVC.ImageIndex = 0;
+            postingImageVC.ImageIndex = CurrentImageIndex;
             this.ShowViewController(postingImageVC, this);
         }
 

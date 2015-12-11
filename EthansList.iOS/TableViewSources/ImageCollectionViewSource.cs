@@ -34,6 +34,7 @@ namespace ethanslist.ios
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             owner.Image = urls[indexPath.Row];
+            owner.CurrentImageIndex = indexPath.Row;
         }
     }
 }
