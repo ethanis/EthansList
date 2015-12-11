@@ -102,7 +102,6 @@ namespace ethanslist.android
                 saveButton.Enabled = true;
             }
         }
-
     }
 }
 

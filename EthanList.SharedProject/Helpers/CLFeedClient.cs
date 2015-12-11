@@ -89,6 +89,7 @@ namespace EthansList.Shared
                     {
                         string pot = child.Attributes["resource"].Value;
                         imageLink = pot != null ? pot : "-1";
+//                        Console.WriteLine(imageLink);
                     }
 
                     if (child.Name == "dc:date")
