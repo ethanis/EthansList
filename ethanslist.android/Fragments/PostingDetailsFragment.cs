@@ -82,12 +82,16 @@ namespace ethanslist.android
 
         void PostingImageView_Click (object sender, EventArgs e)
         {
-            FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
-            PostingImageViewFragment imageFragment = new PostingImageViewFragment();
-            imageFragment.imageUrl = CurrentImage;
-            transaction.Replace(Resource.Id.frameLayout, imageFragment);
-            transaction.AddToBackStack(null);
-            transaction.Commit();
+//            FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+//            PostingImageViewFragment imageFragment = new PostingImageViewFragment();
+//            imageFragment.imageUrl = CurrentImage;
+//            transaction.Replace(Resource.Id.frameLayout, imageFragment);
+//            transaction.AddToBackStack(null);
+//            transaction.Commit();
+
+            var intent = new Intent(this.Activity, typeof(ImageZoomActivity));
+            intent.PutExtra("imageUrl", currentImage);
+            StartActivity(intent);
         }
 
         async void SaveButton_Click (object sender, EventArgs e)

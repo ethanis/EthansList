@@ -1622,7 +1622,7 @@ namespace ethanslist.android
 			public const int multiply = 2131427347;
 			
 			// aapt resource value: 0x7f0b006a
-			public const int myWebView = 2131427434;
+			public const int myImageView = 2131427434;
 			
 			// aapt resource value: 0x7f0b001e
 			public const int never = 2131427358;

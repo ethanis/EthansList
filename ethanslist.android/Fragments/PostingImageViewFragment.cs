@@ -31,22 +31,25 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.postingImageView, container, false);
 
-            WebView webView = view.FindViewById<WebView>(Resource.Id.myWebView);
+//            WebView webView = view.FindViewById<WebView>(Resource.Id.myWebView);
 //            webView.Settings.SupportZoom(true;
-            webView.Settings.BuiltInZoomControls = true;
-            webView.Settings.DisplayZoomControls = true;
-
-            if (imageUrl != "-1")
-            {
-                webView.LoadUrl(imageUrl);
-            }
-
+//            webView.Settings.BuiltInZoomControls = true;
+//            webView.Settings.DisplayZoomControls = true;
+//
+//            if (imageUrl != "-1")
+//            {
+//                webView.LoadUrl(imageUrl);
+//            }
+//
 //            ImageView image = view.FindViewById<ImageView>(Resource.Id.imageViewMap);
 //
 //            if (post.ImageLink != "-1")
 //            {
 //                Koush.UrlImageViewHelper.SetUrlDrawable(image, post.ImageLink, Resource.Drawable.placeholder);
 //            }
+
+            ImageView image = view.FindViewById<ImageView>(Resource.Id.myImageView);
+            Koush.UrlImageViewHelper.SetUrlDrawable(image, imageUrl, Resource.Drawable.placeholder);
 
             return view;
         }

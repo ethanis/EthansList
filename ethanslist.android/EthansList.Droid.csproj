@@ -85,6 +85,9 @@
     <Compile Include="Fragments\PostingImageViewFragment.cs" />
     <Compile Include="Helpers\ScaleImageView.cs" />
     <Compile Include="ListAdapters\ImageAdapter.cs" />
+    <Compile Include="ImageZoomActivity.cs" />
+    <Compile Include="GestureRecognizerView.cs" />
+    <Compile Include="MyScaleListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

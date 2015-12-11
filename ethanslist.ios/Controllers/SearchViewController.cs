@@ -26,8 +26,6 @@ namespace ethanslist.ios
 		}
 
         public String Url { get; set;}
-
-
         public String City { get; set; }
 
         public override void ViewDidLoad()
