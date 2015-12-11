@@ -85,8 +85,8 @@
     <Compile Include="Helpers\ScaleImageView.cs" />
     <Compile Include="ListAdapters\ImageAdapter.cs" />
     <Compile Include="ImageZoomActivity.cs" />
-    <Compile Include="GestureRecognizerView.cs" />
-    <Compile Include="MyScaleListener.cs" />
+    <Compile Include="Helpers\GestureRecognizerView.cs" />
+    <Compile Include="Helpers\MyScaleListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

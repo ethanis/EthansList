@@ -17,6 +17,7 @@ namespace ethanslist.ios
         UIBarButtonItem saveButton;
         UIBarButtonItem deleteButton;
         ImageCollectionViewSource collectionSource;
+        ListingImageDownloader imageHelper;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -80,7 +81,7 @@ namespace ethanslist.ios
             PostingTitle.Text = post.Title;
             PostingDescription.Text = post.Description;
 
-            ListingImageDownloader imageHelper = new ListingImageDownloader(post.Link);
+            imageHelper = new ListingImageDownloader(post.Link);
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
             {
@@ -130,6 +131,8 @@ namespace ethanslist.ios
             postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
             postingImageVC.Post = this.post;
             postingImageVC.ImageLink = Image;
+            postingImageVC.ImageLinks = imageHelper.images;
+            postingImageVC.ImageIndex = 0;
             this.ShowViewController(postingImageVC, this);
         }
 

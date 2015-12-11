@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace ethanslist.android
 {
-    [Activity(Label = "ImageZoomActivity")]			
+    [Activity]			
     public class ImageZoomActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
