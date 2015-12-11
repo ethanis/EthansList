@@ -82,7 +82,6 @@
     <Compile Include="Fragments\SavedSearchesFragment.cs" />
     <Compile Include="Fragments\SearchFragment.cs" />
     <Compile Include="Fragments\SelectCityFragment.cs" />
-    <Compile Include="Fragments\PostingImageViewFragment.cs" />
     <Compile Include="Helpers\ScaleImageView.cs" />
     <Compile Include="ListAdapters\ImageAdapter.cs" />
     <Compile Include="ImageZoomActivity.cs" />
@@ -118,7 +117,6 @@
     <AndroidResource Include="Resources\layout\ListViewMenuRow.axml" />
     <AndroidResource Include="Resources\layout\SavedSearches.axml" />
     <AndroidResource Include="Resources\layout\SavedSearchRow.axml" />
-    <AndroidResource Include="Resources\layout\postingImageView.axml" />
     <AndroidResource Include="Resources\values\theme.xml" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />

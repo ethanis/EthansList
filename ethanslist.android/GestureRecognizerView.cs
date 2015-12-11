@@ -34,7 +34,6 @@ namespace ethanslist.android
         {
             ImageView imageView = new ImageView(context);
             Koush.UrlImageViewHelper.SetUrlDrawable(imageView, imageUrl, Resource.Drawable.placeholder);
-
             _image = imageView.Drawable;
             _image.SetBounds(0, 0, _image.IntrinsicWidth, _image.IntrinsicHeight);
             _scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));

@@ -1501,11 +1501,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0050
 			public const int cityListViewItem = 2131427408;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int cityPickerListView = 2131427455;
+			// aapt resource value: 0x7f0b007e
+			public const int cityPickerListView = 2131427454;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int citySelectedText = 2131427439;
+			// aapt resource value: 0x7f0b006e
+			public const int citySelectedText = 2131427438;
 			
 			// aapt resource value: 0x7f0b001c
 			public const int collapseActionView = 2131427356;
@@ -1525,8 +1525,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0027
 			public const int default_activity_button = 2131427367;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int deleteSearchButton = 2131427438;
+			// aapt resource value: 0x7f0b006d
+			public const int deleteSearchButton = 2131427437;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int disableHome = 2131427340;
@@ -1591,11 +1591,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0028
 			public const int list_item = 2131427368;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int maxRentSeekBar = 2131427445;
+			// aapt resource value: 0x7f0b0074
+			public const int maxRentSeekBar = 2131427444;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int maxRentTextView = 2131427448;
+			// aapt resource value: 0x7f0b0077
+			public const int maxRentTextView = 2131427447;
 			
 			// aapt resource value: 0x7f0b005c
 			public const int media_actions = 2131427420;
@@ -1606,23 +1606,20 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b001a
 			public const int middle = 2131427354;
 			
-			// aapt resource value: 0x7f0b007c
-			public const int minBathroomPicker = 2131427452;
-			
 			// aapt resource value: 0x7f0b007b
-			public const int minBedroomPicker = 2131427451;
+			public const int minBathroomPicker = 2131427451;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int minRentSeekBar = 2131427444;
+			// aapt resource value: 0x7f0b007a
+			public const int minBedroomPicker = 2131427450;
 			
-			// aapt resource value: 0x7f0b0077
-			public const int minRentTextView = 2131427447;
+			// aapt resource value: 0x7f0b0073
+			public const int minRentSeekBar = 2131427443;
+			
+			// aapt resource value: 0x7f0b0076
+			public const int minRentTextView = 2131427446;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int multiply = 2131427347;
-			
-			// aapt resource value: 0x7f0b006a
-			public const int myImageView = 2131427434;
 			
 			// aapt resource value: 0x7f0b001e
 			public const int never = 2131427358;
@@ -1663,11 +1660,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0069
 			public const int saveListingButton = 2131427433;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int saveSearchButton = 2131427453;
+			// aapt resource value: 0x7f0b007c
+			public const int saveSearchButton = 2131427452;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int savedSearchListView = 2131427435;
+			// aapt resource value: 0x7f0b006a
+			public const int savedSearchListView = 2131427434;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int screen = 2131427348;
@@ -1681,17 +1678,17 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0033
 			public const int scrollView = 2131427379;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int searchButton = 2131427441;
+			// aapt resource value: 0x7f0b0070
+			public const int searchButton = 2131427440;
+			
+			// aapt resource value: 0x7f0b006b
+			public const int searchCityText = 2131427435;
 			
 			// aapt resource value: 0x7f0b006c
-			public const int searchCityText = 2131427436;
+			public const int searchInformationText = 2131427436;
 			
-			// aapt resource value: 0x7f0b006d
-			public const int searchInformationText = 2131427437;
-			
-			// aapt resource value: 0x7f0b0070
-			public const int searchTextField = 2131427440;
+			// aapt resource value: 0x7f0b006f
+			public const int searchTextField = 2131427439;
 			
 			// aapt resource value: 0x7f0b0045
 			public const int search_badge = 2131427397;
@@ -1753,29 +1750,29 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0017
 			public const int src_over = 2131427351;
 			
-			// aapt resource value: 0x7f0b0080
-			public const int stateListViewItem = 2131427456;
+			// aapt resource value: 0x7f0b007f
+			public const int stateListViewItem = 2131427455;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int statePickerListView = 2131427454;
+			// aapt resource value: 0x7f0b007d
+			public const int statePickerListView = 2131427453;
 			
 			// aapt resource value: 0x7f0b005b
 			public const int status_bar_latest_event_content = 2131427419;
 			
+			// aapt resource value: 0x7f0b0071
+			public const int strut = 2131427441;
+			
 			// aapt resource value: 0x7f0b0072
-			public const int strut = 2131427442;
+			public const int strut2 = 2131427442;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int strut2 = 2131427443;
+			// aapt resource value: 0x7f0b0075
+			public const int strut3 = 2131427445;
 			
-			// aapt resource value: 0x7f0b0076
-			public const int strut3 = 2131427446;
+			// aapt resource value: 0x7f0b0078
+			public const int strut4 = 2131427448;
 			
 			// aapt resource value: 0x7f0b0079
-			public const int strut4 = 2131427449;
-			
-			// aapt resource value: 0x7f0b007a
-			public const int strut5 = 2131427450;
+			public const int strut5 = 2131427449;
 			
 			// aapt resource value: 0x7f0b004c
 			public const int submit_area = 2131427404;
@@ -1975,34 +1972,31 @@ namespace ethanslist.android
 			public const int PostingDetails = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int postingImageView = 2130903079;
+			public const int SavedSearches = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int SavedSearches = 2130903080;
+			public const int SavedSearchRow = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int SavedSearchRow = 2130903081;
+			public const int Search = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int Search = 2130903082;
+			public const int select_dialog_item_material = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int select_dialog_item_material = 2130903083;
+			public const int select_dialog_multichoice_material = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int select_dialog_multichoice_material = 2130903084;
+			public const int select_dialog_singlechoice_material = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int select_dialog_singlechoice_material = 2130903085;
+			public const int SelectCity = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int SelectCity = 2130903086;
+			public const int StateRow = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int StateRow = 2130903087;
-			
-			// aapt resource value: 0x7f030030
-			public const int support_simple_spinner_dropdown_item = 2130903088;
+			public const int support_simple_spinner_dropdown_item = 2130903087;
 			
 			static Layout()
 			{
