@@ -47,15 +47,15 @@ namespace ethanslist.ios
             }
         }
 
-        Listing listing;
-        public Listing Listing {
-            get { 
-                return listing;
-            }
-            set { 
-                listing = value;
-            }
-        }
+//        Listing listing;
+//        public Listing Listing {
+//            get { 
+//                return listing;
+//            }
+//            set { 
+//                listing = value;
+//            }
+//        }
 
         string image;
         public string Image
@@ -80,7 +80,7 @@ namespace ethanslist.ios
         {
             base.ViewWillAppear(animated);
 
-            PostingTitle.Text = post.Title;
+            PostingTitle.Text = post.PostTitle;
             PostingDescription.Text = post.Description;
             CurrentImageIndex = 0;
 
@@ -145,7 +145,7 @@ namespace ethanslist.ios
 
         async void SaveListing(object sender, EventArgs e)
         {
-            await AppDelegate.databaseConnection.AddNewListingAsync(post.Title, post.Description, post.Link, post.ImageLink, post.Date);
+            await AppDelegate.databaseConnection.AddNewListingAsync(post.PostTitle, post.Description, post.Link, post.ImageLink, post.Date);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
             if (AppDelegate.databaseConnection.StatusCode == codes.ok)

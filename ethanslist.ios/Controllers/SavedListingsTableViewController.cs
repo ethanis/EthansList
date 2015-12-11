@@ -13,7 +13,7 @@ namespace ethanslist.ios
 	partial class SavedListingsTableViewController : UITableViewController
 	{
         SavedListingsTableViewSource tableSource;
-        List<Listing> savedListings;
+        List<Posting> savedListings;
 
 		public SavedListingsTableViewController (IntPtr handle) : base (handle)
 		{

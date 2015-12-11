@@ -19,7 +19,7 @@ namespace ethanslist.android
     {
         SavedListingListAdapter savedListingsAdapter;
         ListView savedListingsListView;
-        List<Listing> savedListings;
+        List<Posting> savedListings;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +40,7 @@ namespace ethanslist.android
             savedListingsListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
                 SavedListingDetailsFragment savedListingDetailsFragment = new SavedListingDetailsFragment();
-                savedListingDetailsFragment.listing = savedListings[e.Position];
+                savedListingDetailsFragment.posting = savedListings[e.Position];
                 transaction.Replace(Resource.Id.frameLayout, savedListingDetailsFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();

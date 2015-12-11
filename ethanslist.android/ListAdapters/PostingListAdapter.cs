@@ -6,6 +6,7 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Graphics;
 using System.Net;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -55,7 +56,7 @@ namespace ethanslist.android
             }
 
             var holder = (PostingListViewHolder)view.Tag;
-            holder.Title.Text = postings[position].Title;
+            holder.Title.Text = postings[position].PostTitle;
             holder.Description.Text = postings[position].Description;
             string imageLink = postings[position].ImageLink;
             if (imageLink != "-1")

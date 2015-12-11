@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using EthansList.Models;
 
 namespace EthansList.Shared
 {
@@ -111,7 +112,7 @@ namespace EthansList.Shared
                 if (title != null && description != null && description != null)
                 {
                     Posting posting = new Posting();
-                    posting.Title = title;
+                    posting.PostTitle = title;
                     posting.Description = description;
                     posting.Link = link;
                     posting.ImageLink = imageLink;
@@ -124,7 +125,7 @@ namespace EthansList.Shared
 
         public string GetTitle(int index)
         {
-            return postings[index].Title;
+            return postings[index].PostTitle;
         }
     }
 }

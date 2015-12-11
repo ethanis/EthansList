@@ -3,6 +3,7 @@ using UIKit;
 using EthansList.Shared;
 using Foundation;
 using SDWebImage;
+using EthansList.Models;
 
 namespace ethanslist.ios
 {
@@ -34,7 +35,7 @@ namespace ethanslist.ios
 
             Posting post = feedClient.postings[indexPath.Row];
 
-            cell.TextLabel.Text = post.Title;
+            cell.TextLabel.Text = post.PostTitle;
             cell.DetailTextLabel.Text = post.Description;
             if (post.ImageLink != "-1")
             {

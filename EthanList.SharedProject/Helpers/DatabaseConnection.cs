@@ -18,7 +18,7 @@ namespace EthansList.Models
         public DatabaseConnection(string dbPath)
         {
             conn = new SQLiteAsyncConnection(dbPath);
-            conn.CreateTableAsync<Listing>().Wait();
+            conn.CreateTableAsync<Posting>().Wait();
             conn.CreateTableAsync<Search>().Wait();
         }
 
@@ -26,12 +26,12 @@ namespace EthansList.Models
         {
             try
             {
-                //basic validation to ensure a name was entered
+                //basic validation to ensure a title was entered
                 if (title == null)
                     throw new Exception("Valid listing required");
 
-                //insert a new person into the Person table
-                var result = await conn.InsertAsync(new Listing { PostTitle = title, 
+                //insert a new posting into the Posting table
+                var result = await conn.InsertAsync(new Posting { PostTitle = title, 
                     Description = description, Link = link, 
                     ImageLink = imageLink, Date = date })
                         .ConfigureAwait(continueOnCapturedContext: false);
@@ -45,25 +45,25 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeleteListingAsync(Listing listing)
+        public async Task DeleteListingAsync(Posting posting)
         {
             try
             {
-                var result = await conn.DeleteAsync(listing).ConfigureAwait(continueOnCapturedContext: false);
-                StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, listing.PostTitle);
+                var result = await conn.DeleteAsync(posting).ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, posting.PostTitle);
                 StatusCode = codes.ok;
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", listing.PostTitle, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", posting.PostTitle, ex.Message); 
                 StatusCode = codes.bad;
             }
         }
 
-        public Task<List<Listing>> GetAllListingsAsync()
+        public Task<List<Posting>> GetAllListingsAsync()
         {
             //return a list of people saved to the Person table in the database
-            return conn.Table<Listing>().ToListAsync();
+            return conn.Table<Posting>().ToListAsync();
         }
 
         public async Task AddNewSearchAsync(String linkUrl, String cityName, string minPrice, string maxPrice, string minBedrooms, string minBathrooms, string searchQuery)

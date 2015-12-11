@@ -10,18 +10,18 @@ using EthansList.Models;
 
 namespace ethanslist.android
 {
-    public class SavedListingListAdapter : BaseAdapter<Listing>
+    public class SavedListingListAdapter : BaseAdapter<Posting>
     {
         Activity context;
-        List<Listing> savedListings;
+        List<Posting> savedListings;
 
-        public SavedListingListAdapter(Activity context, List<Listing> savedListings)
+        public SavedListingListAdapter(Activity context, List<Posting> savedListings)
         {
             this.context = context;
             this.savedListings = savedListings;
         }
 
-        public override Listing this[int index]
+        public override Posting this[int index]
         {
             get
             {

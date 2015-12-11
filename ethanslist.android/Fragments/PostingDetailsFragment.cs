@@ -11,6 +11,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
+using EthansList.Models;
 
 namespace ethanslist.android
 {
@@ -59,7 +60,7 @@ namespace ethanslist.android
             };
             
             saveButton.Enabled = true;
-            postingTitle.Text = posting.Title;
+            postingTitle.Text = posting.PostTitle;
             postingDetails.Text = posting.Description;
             postingDate.Text = "Listed: " + posting.Date.ToShortDateString() + " at " + posting.Date.ToShortTimeString();
 
@@ -89,7 +90,7 @@ namespace ethanslist.android
 
         async void SaveButton_Click (object sender, EventArgs e)
         {
-            await MainActivity.databaseConnection.AddNewListingAsync(posting.Title, posting.Description, posting.Link, posting.ImageLink, posting.Date);
+            await MainActivity.databaseConnection.AddNewListingAsync(posting.PostTitle, posting.Description, posting.Link, posting.ImageLink, posting.Date);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             if (MainActivity.databaseConnection.StatusCode == EthansList.Models.codes.ok)
             {

@@ -11,10 +11,10 @@ namespace ethanslist.ios
     public class SavedListingsTableViewSource : UITableViewSource
     {
         UIViewController owner;
-        public List<Listing> savedListings;
+        public List<Posting> savedListings;
         private const string cellId = "listingCell";
 
-        public SavedListingsTableViewSource(UIViewController owner, List<Listing> savedListings)
+        public SavedListingsTableViewSource(UIViewController owner, List<Posting> savedListings)
         {
             this.owner = owner;
             this.savedListings = savedListings;
@@ -80,10 +80,10 @@ namespace ethanslist.ios
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
-            detailController.Listing = savedListings[indexPath.Row];
+            detailController.Post = savedListings[indexPath.Row];
             var listing = savedListings[indexPath.Row];
             detailController.Post = new Posting()
-            { Title = listing.PostTitle, Description = listing.Description, 
+            { PostTitle = listing.PostTitle, Description = listing.Description, 
                 Link = listing.Link, ImageLink = listing.ImageLink, Date = listing.Date
             };
 

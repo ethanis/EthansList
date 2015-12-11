@@ -23,7 +23,7 @@ namespace ethanslist.android
         TextView postingDate;
         Button deleteButton;
 
-        public Listing listing { get; set; }
+        public Posting posting { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,7 +34,7 @@ namespace ethanslist.android
         {
             var view = inflater.Inflate(Resource.Layout.PostingDetails, container, false);
 
-            Console.WriteLine(listing.PostTitle);
+            Console.WriteLine(posting.PostTitle);
             postingTitle = view.FindViewById<TextView>(Resource.Id.postingTitleText);
             postingDetails = view.FindViewById<TextView>(Resource.Id.postingDetailsText);
             postingImageView = view.FindViewById<ImageView>(Resource.Id.postingImageView);
@@ -42,10 +42,10 @@ namespace ethanslist.android
             deleteButton = view.FindViewById<Button>(Resource.Id.saveListingButton);
             deleteButton.Text = "Delete Saved Listing";
 
-            postingTitle.Text = listing.PostTitle;
-            postingDetails.Text = listing.Description;
-            postingDate.Text = "Listed: " + listing.Date.ToShortDateString() + " at " + listing.Date.ToShortTimeString();
-            string imageLink = listing.ImageLink;  
+            postingTitle.Text = posting.PostTitle;
+            postingDetails.Text = posting.Description;
+            postingDate.Text = "Listed: " + posting.Date.ToShortDateString() + " at " + posting.Date.ToShortTimeString();
+            string imageLink = posting.ImageLink;  
 
             if (imageLink != "-1")
             {
@@ -59,7 +59,7 @@ namespace ethanslist.android
 
         async void DeleteButton_Click (object sender, EventArgs e)
         {
-            await MainActivity.databaseConnection.DeleteListingAsync(this.listing);
+            await MainActivity.databaseConnection.DeleteListingAsync(this.posting);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             if (MainActivity.databaseConnection.StatusCode == codes.ok)
             {
