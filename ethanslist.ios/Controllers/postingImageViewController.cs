@@ -26,11 +26,14 @@ namespace ethanslist.ios
             }
             set {
                 myImageView.SetImage(
-                    url: new NSUrl(value),
-                    placeholder: UIImage.FromBundle("placeholder.png")
+                    new NSUrl(value),
+                    UIImage.FromBundle("placeholder.png"),
+                    SDWebImageOptions.HighPriority,
+                    null,
+                    (image,error,cachetype,NSNull) => {
+                        myImageView.ContentMode = UIViewContentMode.Center;
+                    }
                 );
-                myImageView.Center = myScrollView.Center;
-                myImageView.ContentMode = UIViewContentMode.Center;
                 image = value;
             }
         }
@@ -38,16 +41,10 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
-            if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
-                bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
-            }
                
             myScrollView.BackgroundColor = UIColor.LightGray;
-            myScrollView.Frame = bounds;
-            myImageView.Center = myScrollView.Center;
-            myImageView.ContentMode = UIViewContentMode.Center;
+            myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
+            myScrollView.Frame = UIScreen.MainScreen.Bounds;
 
             if (ImageLinks[ImageIndex] != "-1")
             {
