@@ -45,7 +45,6 @@ namespace ethanslist.ios
             myScrollView.BackgroundColor = UIColor.LightGray;
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
             myScrollView.Frame = UIScreen.MainScreen.Bounds;
-
             if (ImageLinks[ImageIndex] != "-1")
             {
                 Image = ImageLinks[ImageIndex];
@@ -54,29 +53,31 @@ namespace ethanslist.ios
             myScrollView.MaximumZoomScale = 4f;
             myScrollView.MinimumZoomScale = .1f;
             myScrollView.ViewForZoomingInScrollView += (UIScrollView sv) => { return myImageView; };
+            myImageView.ContentMode = UIViewContentMode.Center;
 
             UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) 
             {
                 NumberOfTapsRequired = 2 // double tap
             };
-            myScrollView.AddGestureRecognizer(doubletap); // detect when the scrollView is double-tapped
 
             UISwipeGestureRecognizer dismissSwipe = new UISwipeGestureRecognizer(OnDismissSwipe)
             {
-                    Direction = UISwipeGestureRecognizerDirection.Down
+                Direction = UISwipeGestureRecognizerDirection.Down
             };
-            View.AddGestureRecognizer(dismissSwipe); // detect when the scrollView is swiped down
 
             UISwipeGestureRecognizer onSwipeNext = new UISwipeGestureRecognizer(OnSwipeNext)
-                { 
-                    Direction = UISwipeGestureRecognizerDirection.Left
-                };
-            View.AddGestureRecognizer(onSwipeNext);
+            { 
+                Direction = UISwipeGestureRecognizerDirection.Left
+            };
 
             UISwipeGestureRecognizer onSwipePrevious = new UISwipeGestureRecognizer(OnSwipePrevious)
             {
                 Direction = UISwipeGestureRecognizerDirection.Right
             };
+            
+            View.AddGestureRecognizer(doubletap);
+            View.AddGestureRecognizer(dismissSwipe);
+            View.AddGestureRecognizer(onSwipeNext);
             View.AddGestureRecognizer(onSwipePrevious);
         }
 
