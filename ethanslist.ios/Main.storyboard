@@ -781,7 +781,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1779" translatesAutoresizingMaskIntoConstraints="NO">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1779" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="0.0" y="34" width="320" height="534"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
@@ -794,15 +794,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
-                                <constraints>
-                                    <constraint id="1799" firstAttribute="width" constant="320"/>
-                                    <constraint id="1800" firstAttribute="height" constant="534"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint id="1797" firstItem="1758" firstAttribute="trailing" secondItem="1779" secondAttribute="trailing"/>
-                            <constraint id="1798" firstItem="1758" firstAttribute="bottom" secondItem="1779" secondAttribute="bottom"/>
+                            <constraint id="2124" firstItem="1779" firstAttribute="top" secondItem="1754" secondAttribute="bottom" constant="14"/>
+                            <constraint id="2125" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
+                            <constraint id="2126" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
+                            <constraint id="2127" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
                         </constraints>
                     </view>
                     <connections>

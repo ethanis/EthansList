@@ -29,6 +29,8 @@ namespace ethanslist.ios
                     url: new NSUrl(value),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
+                myImageView.Center = myScrollView.Center;
+                myImageView.ContentMode = UIViewContentMode.Center;
                 image = value;
             }
         }
@@ -36,15 +38,23 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.View.BackgroundColor = UIColor.DarkGray;
-            myScrollView.Frame = new CGRect(0, 0, View.Frame.Width, View.Frame.Height);
+
+            var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+            if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
+                bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
+            }
+               
+            myScrollView.BackgroundColor = UIColor.LightGray;
+            myScrollView.Frame = bounds;
+            myImageView.Center = myScrollView.Center;
+            myImageView.ContentMode = UIViewContentMode.Center;
 
             if (ImageLinks[ImageIndex] != "-1")
             {
                 Image = ImageLinks[ImageIndex];
             }
 
-            myScrollView.MaximumZoomScale = 3f;
+            myScrollView.MaximumZoomScale = 4f;
             myScrollView.MinimumZoomScale = .1f;
             myScrollView.ViewForZoomingInScrollView += (UIScrollView sv) => { return myImageView; };
 
@@ -75,6 +85,7 @@ namespace ethanslist.ios
 
         private void OnDoubleTap (UIGestureRecognizer gesture) {
             myScrollView.SetZoomScale(1, true);
+            myImageView.ContentMode = UIViewContentMode.Center;
         }
 
         private void OnDismissSwipe (UIGestureRecognizer gesture) {
