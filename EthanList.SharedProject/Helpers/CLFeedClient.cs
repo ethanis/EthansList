@@ -26,6 +26,11 @@ namespace EthansList.Shared
             GetFeedAsync();
         }
 
+        public void RefreshPostings()
+        {
+            GetFeedAsync();
+        }
+
         private void GetFeedAsync()
         {
             AsyncXmlLoader = new BackgroundWorker();
@@ -118,7 +123,8 @@ namespace EthansList.Shared
                     posting.ImageLink = imageLink;
                     posting.Date = date;
 
-                    postings.Add(posting);
+                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+                        postings.Add(posting);
                 }
             }
         }

@@ -58,9 +58,7 @@ namespace ethanslist.ios
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
-                Console.WriteLine("here");
-                feedClient = new CLFeedClient(Query);
-                feedClient.loadingComplete += feedClient_LoadingComplete;
+                feedClient.RefreshPostings();
             };
 
             feedClient.loadingComplete += feedClient_LoadingComplete;
@@ -83,19 +81,13 @@ namespace ethanslist.ios
             };
         }
 
-        void Reload_Data(object sender, EventArgs e)
-        {
-            loadTimer.Stop();
-            TableView.ReloadData();
-            Console.WriteLine(loadTimer.Elapsed);
-        }
-
         void feedClient_LoadingComplete(object sender, EventArgs e)
         {
             this.InvokeOnMainThread(() => this._loadingOverlay.Hide());
             loadTimer.Stop();
             TableView.ReloadData();
             Console.WriteLine(loadTimer.Elapsed);
+            percentComplete = 0;
             RefreshControl.EndRefreshing();
         }
 	}

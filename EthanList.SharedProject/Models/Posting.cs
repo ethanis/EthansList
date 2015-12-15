@@ -15,6 +15,13 @@ namespace EthansList.Models
         public string Link { get; set;}
         public string ImageLink { get; set;}
         public DateTime Date { get; set; }
+
+        [Ignore]
+        public string Serialized {
+            get { 
+                return String.Format("{0}{1}{2}{3}{4}", PostTitle, Description, Link, ImageLink, Date);
+            }
+        }
     }
 }
 
