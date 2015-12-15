@@ -56,7 +56,6 @@ namespace ethanslist.ios
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
 
             RefreshControl = new UIRefreshControl();
-            RefreshControl.AttributedTitle = new NSAttributedString("Loading");
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
                 Console.WriteLine("here");
