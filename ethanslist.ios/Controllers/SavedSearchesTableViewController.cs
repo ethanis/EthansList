@@ -26,16 +26,16 @@ namespace ethanslist.ios
 //            TableView.RowHeight = UITableView.AutomaticDimension;
 //            TableView.EstimatedRowHeight = 130;
 
-            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
+//            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
         }
 
-        void SearchTableViewSource_ItemDeleted (object sender, EventArgs e)
-        {
-            savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
-            searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
-            TableView.Source = searchTableViewSource;
-
-            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
-        }
+//        void SearchTableViewSource_ItemDeleted (object sender, EventArgs e)
+//        {
+//            savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
+//            searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
+//            TableView.Source = searchTableViewSource;
+//
+//            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
+//        }
 	}
 }
