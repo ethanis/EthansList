@@ -26,6 +26,55 @@ namespace ethanslist.android
 		
 		public static void UpdateIdValues()
 		{
+			global::PullToRefresharp.Resource.Attribute.contentViewId = global::ethanslist.android.Resource.Attribute.contentViewId;
+			global::PullToRefresharp.Resource.Attribute.fastScrollThumbWidth = global::ethanslist.android.Resource.Attribute.fastScrollThumbWidth;
+			global::PullToRefresharp.Resource.Attribute.headerIconDrawable = global::ethanslist.android.Resource.Attribute.headerIconDrawable;
+			global::PullToRefresharp.Resource.Attribute.headerId = global::ethanslist.android.Resource.Attribute.headerId;
+			global::PullToRefresharp.Resource.Attribute.headerTextColor = global::ethanslist.android.Resource.Attribute.headerTextColor;
+			global::PullToRefresharp.Resource.Attribute.ptrHeaderBackground = global::ethanslist.android.Resource.Attribute.ptrHeaderBackground;
+			global::PullToRefresharp.Resource.Attribute.pullDownProgressIndicatorId = global::ethanslist.android.Resource.Attribute.pullDownProgressIndicatorId;
+			global::PullToRefresharp.Resource.Attribute.pullDownTension = global::ethanslist.android.Resource.Attribute.pullDownTension;
+			global::PullToRefresharp.Resource.Attribute.pullEnabled = global::ethanslist.android.Resource.Attribute.pullEnabled;
+			global::PullToRefresharp.Resource.Attribute.pullToRefreshText = global::ethanslist.android.Resource.Attribute.pullToRefreshText;
+			global::PullToRefresharp.Resource.Attribute.refreshingText = global::ethanslist.android.Resource.Attribute.refreshingText;
+			global::PullToRefresharp.Resource.Attribute.releaseToRefreshText = global::ethanslist.android.Resource.Attribute.releaseToRefreshText;
+			global::PullToRefresharp.Resource.Attribute.snapbackDuration = global::ethanslist.android.Resource.Attribute.snapbackDuration;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_gradient_end = global::ethanslist.android.Resource.Color.ptrsharp_sb_gradient_end;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_gradient_start = global::ethanslist.android.Resource.Color.ptrsharp_sb_gradient_start;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_header_text = global::ethanslist.android.Resource.Color.ptrsharp_sb_header_text;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_header_text_shadow = global::ethanslist.android.Resource.Color.ptrsharp_sb_header_text_shadow;
+			global::PullToRefresharp.Resource.Dimension.fastscroll_thumb_width = global::ethanslist.android.Resource.Dimension.fastscroll_thumb_width;
+			global::PullToRefresharp.Resource.Drawable.progress_medium_holo = global::ethanslist.android.Resource.Drawable.progress_medium_holo;
+			global::PullToRefresharp.Resource.Drawable.ptrsharp_serious_business_gradient = global::ethanslist.android.Resource.Drawable.ptrsharp_serious_business_gradient;
+			global::PullToRefresharp.Resource.Drawable.serious_business_arrow = global::ethanslist.android.Resource.Drawable.serious_business_arrow;
+			global::PullToRefresharp.Resource.Drawable.serious_business_arrow2 = global::ethanslist.android.Resource.Drawable.serious_business_arrow2;
+			global::PullToRefresharp.Resource.Drawable.spinner_20_inner_holo = global::ethanslist.android.Resource.Drawable.spinner_20_inner_holo;
+			global::PullToRefresharp.Resource.Drawable.spinner_20_outer_holo = global::ethanslist.android.Resource.Drawable.spinner_20_outer_holo;
+			global::PullToRefresharp.Resource.Id.header = global::ethanslist.android.Resource.Id.header;
+			global::PullToRefresharp.Resource.Id.header_container = global::ethanslist.android.Resource.Id.header_container;
+			global::PullToRefresharp.Resource.Id.icon = global::ethanslist.android.Resource.Id.icon;
+			global::PullToRefresharp.Resource.Id.pullDownProgressIndicator = global::ethanslist.android.Resource.Id.pullDownProgressIndicator;
+			global::PullToRefresharp.Resource.Id.text = global::ethanslist.android.Resource.Id.text;
+			global::PullToRefresharp.Resource.Layout.ptrsharp_header = global::ethanslist.android.Resource.Layout.ptrsharp_header;
+			global::PullToRefresharp.Resource.String.library_name = global::ethanslist.android.Resource.String.library_name;
+			global::PullToRefresharp.Resource.String.ptrsharp_pull_to_refresh = global::ethanslist.android.Resource.String.ptrsharp_pull_to_refresh;
+			global::PullToRefresharp.Resource.String.ptrsharp_refreshing = global::ethanslist.android.Resource.String.ptrsharp_refreshing;
+			global::PullToRefresharp.Resource.String.ptrsharp_release_to_refresh = global::ethanslist.android.Resource.String.ptrsharp_release_to_refresh;
+			global::PullToRefresharp.Resource.Style.HoloProgressMedium = global::ethanslist.android.Resource.Style.HoloProgressMedium;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_contentViewId = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_contentViewId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_fastScrollThumbWidth = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_fastScrollThumbWidth;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerIconDrawable = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_headerIconDrawable;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerId = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_headerId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerTextColor = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_headerTextColor;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_ptrHeaderBackground = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_ptrHeaderBackground;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullDownProgressIndicatorId = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_pullDownProgressIndicatorId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullDownTension = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_pullDownTension;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullEnabled = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_pullEnabled;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullToRefreshText = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_pullToRefreshText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_refreshingText = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_refreshingText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_releaseToRefreshText = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_releaseToRefreshText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_snapbackDuration = global::ethanslist.android.Resource.Styleable.PullToRefresharpWrapper_snapbackDuration;
 		}
 		
 		public partial class Animation
@@ -311,6 +360,9 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f010016
 			public const int contentInsetStart = 2130771990;
 			
+			// aapt resource value: 0x7f0100cf
+			public const int contentViewId = 2130772175;
+			
 			// aapt resource value: 0x7f0100a6
 			public const int controlBackground = 2130772134;
 			
@@ -368,11 +420,23 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f01001e
 			public const int expandActivityOverflowButtonDrawable = 2130771998;
 			
+			// aapt resource value: 0x7f0100da
+			public const int fastScrollThumbWidth = 2130772186;
+			
 			// aapt resource value: 0x7f01002b
 			public const int gapBetweenBars = 2130772011;
 			
 			// aapt resource value: 0x7f01003f
 			public const int goIcon = 2130772031;
+			
+			// aapt resource value: 0x7f0100d8
+			public const int headerIconDrawable = 2130772184;
+			
+			// aapt resource value: 0x7f0100ce
+			public const int headerId = 2130772174;
+			
+			// aapt resource value: 0x7f0100d7
+			public const int headerTextColor = 2130772183;
 			
 			// aapt resource value: 0x7f010001
 			public const int height = 2130771969;
@@ -500,6 +564,21 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f010011
 			public const int progressBarStyle = 2130771985;
 			
+			// aapt resource value: 0x7f0100d6
+			public const int ptrHeaderBackground = 2130772182;
+			
+			// aapt resource value: 0x7f0100d0
+			public const int pullDownProgressIndicatorId = 2130772176;
+			
+			// aapt resource value: 0x7f0100d2
+			public const int pullDownTension = 2130772178;
+			
+			// aapt resource value: 0x7f0100d9
+			public const int pullEnabled = 2130772185;
+			
+			// aapt resource value: 0x7f0100d3
+			public const int pullToRefreshText = 2130772179;
+			
 			// aapt resource value: 0x7f010045
 			public const int queryBackground = 2130772037;
 			
@@ -511,6 +590,12 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0x7f0100b6
 			public const int ratingBarStyle = 2130772150;
+			
+			// aapt resource value: 0x7f0100d5
+			public const int refreshingText = 2130772181;
+			
+			// aapt resource value: 0x7f0100d4
+			public const int releaseToRefreshText = 2130772180;
 			
 			// aapt resource value: 0x7f010041
 			public const int searchHintIcon = 2130772033;
@@ -541,6 +626,9 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0x7f010022
 			public const int singleChoiceItemLayout = 2130772002;
+			
+			// aapt resource value: 0x7f0100d1
+			public const int snapbackDuration = 2130772177;
 			
 			// aapt resource value: 0x7f010029
 			public const int spinBars = 2130772009;
@@ -742,29 +830,29 @@ namespace ethanslist.android
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0a003b
-			public const int abc_background_cache_hint_selector_material_dark = 2131361851;
+			// aapt resource value: 0x7f0a003f
+			public const int abc_background_cache_hint_selector_material_dark = 2131361855;
 			
-			// aapt resource value: 0x7f0a003c
-			public const int abc_background_cache_hint_selector_material_light = 2131361852;
+			// aapt resource value: 0x7f0a0040
+			public const int abc_background_cache_hint_selector_material_light = 2131361856;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int abc_input_method_navigation_guard = 2131361792;
 			
-			// aapt resource value: 0x7f0a003d
-			public const int abc_primary_text_disable_only_material_dark = 2131361853;
-			
-			// aapt resource value: 0x7f0a003e
-			public const int abc_primary_text_disable_only_material_light = 2131361854;
-			
-			// aapt resource value: 0x7f0a003f
-			public const int abc_primary_text_material_dark = 2131361855;
-			
-			// aapt resource value: 0x7f0a0040
-			public const int abc_primary_text_material_light = 2131361856;
-			
 			// aapt resource value: 0x7f0a0041
-			public const int abc_search_url_text = 2131361857;
+			public const int abc_primary_text_disable_only_material_dark = 2131361857;
+			
+			// aapt resource value: 0x7f0a0042
+			public const int abc_primary_text_disable_only_material_light = 2131361858;
+			
+			// aapt resource value: 0x7f0a0043
+			public const int abc_primary_text_material_dark = 2131361859;
+			
+			// aapt resource value: 0x7f0a0044
+			public const int abc_primary_text_material_light = 2131361860;
+			
+			// aapt resource value: 0x7f0a0045
+			public const int abc_search_url_text = 2131361861;
 			
 			// aapt resource value: 0x7f0a0001
 			public const int abc_search_url_text_normal = 2131361793;
@@ -775,11 +863,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a0003
 			public const int abc_search_url_text_selected = 2131361795;
 			
-			// aapt resource value: 0x7f0a0042
-			public const int abc_secondary_text_material_dark = 2131361858;
+			// aapt resource value: 0x7f0a0046
+			public const int abc_secondary_text_material_dark = 2131361862;
 			
-			// aapt resource value: 0x7f0a0043
-			public const int abc_secondary_text_material_light = 2131361859;
+			// aapt resource value: 0x7f0a0047
+			public const int abc_secondary_text_material_light = 2131361863;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int accent_material_dark = 2131361796;
@@ -913,6 +1001,18 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a002f
 			public const int primary_text_disabled_material_light = 2131361839;
 			
+			// aapt resource value: 0x7f0a003b
+			public const int ptrsharp_sb_gradient_end = 2131361851;
+			
+			// aapt resource value: 0x7f0a003a
+			public const int ptrsharp_sb_gradient_start = 2131361850;
+			
+			// aapt resource value: 0x7f0a003c
+			public const int ptrsharp_sb_header_text = 2131361852;
+			
+			// aapt resource value: 0x7f0a003d
+			public const int ptrsharp_sb_header_text_shadow = 2131361853;
+			
 			// aapt resource value: 0x7f0a0030
 			public const int ripple_material_dark = 2131361840;
 			
@@ -937,11 +1037,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a0037
 			public const int switch_thumb_disabled_material_light = 2131361847;
 			
-			// aapt resource value: 0x7f0a0044
-			public const int switch_thumb_material_dark = 2131361860;
+			// aapt resource value: 0x7f0a0048
+			public const int switch_thumb_material_dark = 2131361864;
 			
-			// aapt resource value: 0x7f0a0045
-			public const int switch_thumb_material_light = 2131361861;
+			// aapt resource value: 0x7f0a0049
+			public const int switch_thumb_material_light = 2131361865;
 			
 			// aapt resource value: 0x7f0a0038
 			public const int switch_thumb_normal_material_dark = 2131361848;
@@ -949,8 +1049,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0a0039
 			public const int switch_thumb_normal_material_light = 2131361849;
 			
-			// aapt resource value: 0x7f0a003a
-			public const int theme_devicedefault_background = 2131361850;
+			// aapt resource value: 0x7f0a003e
+			public const int theme_devicedefault_background = 2131361854;
 			
 			static Color()
 			{
@@ -1171,6 +1271,9 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0x7f070044
 			public const int disabled_alpha_material_light = 2131165252;
+			
+			// aapt resource value: 0x7f07004b
+			public const int fastscroll_thumb_width = 2131165259;
 			
 			// aapt resource value: 0x7f070045
 			public const int highlight_alpha_material_colored = 2131165253;
@@ -1410,11 +1513,29 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f020044
 			public const int Icon = 2130837572;
 			
-			// aapt resource value: 0x7f020046
-			public const int notification_template_icon_bg = 2130837574;
+			// aapt resource value: 0x7f02004c
+			public const int notification_template_icon_bg = 2130837580;
 			
 			// aapt resource value: 0x7f020045
 			public const int placeholder = 2130837573;
+			
+			// aapt resource value: 0x7f020046
+			public const int progress_medium_holo = 2130837574;
+			
+			// aapt resource value: 0x7f020047
+			public const int ptrsharp_serious_business_gradient = 2130837575;
+			
+			// aapt resource value: 0x7f020048
+			public const int serious_business_arrow = 2130837576;
+			
+			// aapt resource value: 0x7f020049
+			public const int serious_business_arrow2 = 2130837577;
+			
+			// aapt resource value: 0x7f02004a
+			public const int spinner_20_inner_holo = 2130837578;
+			
+			// aapt resource value: 0x7f02004b
+			public const int spinner_20_outer_holo = 2130837579;
 			
 			static Drawable()
 			{
@@ -1501,11 +1622,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0050
 			public const int cityListViewItem = 2131427408;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int cityPickerListView = 2131427454;
+			// aapt resource value: 0x7f0b0081
+			public const int cityPickerListView = 2131427457;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int citySelectedText = 2131427438;
+			// aapt resource value: 0x7f0b0071
+			public const int citySelectedText = 2131427441;
 			
 			// aapt resource value: 0x7f0b001c
 			public const int collapseActionView = 2131427356;
@@ -1525,8 +1646,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0027
 			public const int default_activity_button = 2131427367;
 			
-			// aapt resource value: 0x7f0b006d
-			public const int deleteSearchButton = 2131427437;
+			// aapt resource value: 0x7f0b0070
+			public const int deleteSearchButton = 2131427440;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int disableHome = 2131427340;
@@ -1557,6 +1678,12 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0x7f0b0057
 			public const int frameLayout = 2131427415;
+			
+			// aapt resource value: 0x7f0b006b
+			public const int header = 2131427435;
+			
+			// aapt resource value: 0x7f0b006a
+			public const int header_container = 2131427434;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -1591,11 +1718,11 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0028
 			public const int list_item = 2131427368;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int maxRentSeekBar = 2131427444;
-			
 			// aapt resource value: 0x7f0b0077
-			public const int maxRentTextView = 2131427447;
+			public const int maxRentSeekBar = 2131427447;
+			
+			// aapt resource value: 0x7f0b007a
+			public const int maxRentTextView = 2131427450;
 			
 			// aapt resource value: 0x7f0b005c
 			public const int media_actions = 2131427420;
@@ -1606,17 +1733,17 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b001a
 			public const int middle = 2131427354;
 			
-			// aapt resource value: 0x7f0b007b
-			public const int minBathroomPicker = 2131427451;
+			// aapt resource value: 0x7f0b007e
+			public const int minBathroomPicker = 2131427454;
 			
-			// aapt resource value: 0x7f0b007a
-			public const int minBedroomPicker = 2131427450;
-			
-			// aapt resource value: 0x7f0b0073
-			public const int minRentSeekBar = 2131427443;
+			// aapt resource value: 0x7f0b007d
+			public const int minBedroomPicker = 2131427453;
 			
 			// aapt resource value: 0x7f0b0076
-			public const int minRentTextView = 2131427446;
+			public const int minRentSeekBar = 2131427446;
+			
+			// aapt resource value: 0x7f0b0079
+			public const int minRentTextView = 2131427449;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int multiply = 2131427347;
@@ -1654,17 +1781,20 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0006
 			public const int progress_horizontal = 2131427334;
 			
+			// aapt resource value: 0x7f0b006c
+			public const int pullDownProgressIndicator = 2131427436;
+			
 			// aapt resource value: 0x7f0b003b
 			public const int radio = 2131427387;
 			
 			// aapt resource value: 0x7f0b0069
 			public const int saveListingButton = 2131427433;
 			
-			// aapt resource value: 0x7f0b007c
-			public const int saveSearchButton = 2131427452;
+			// aapt resource value: 0x7f0b007f
+			public const int saveSearchButton = 2131427455;
 			
-			// aapt resource value: 0x7f0b006a
-			public const int savedSearchListView = 2131427434;
+			// aapt resource value: 0x7f0b006d
+			public const int savedSearchListView = 2131427437;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int screen = 2131427348;
@@ -1678,17 +1808,17 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0033
 			public const int scrollView = 2131427379;
 			
-			// aapt resource value: 0x7f0b0070
-			public const int searchButton = 2131427440;
+			// aapt resource value: 0x7f0b0073
+			public const int searchButton = 2131427443;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int searchCityText = 2131427435;
-			
-			// aapt resource value: 0x7f0b006c
-			public const int searchInformationText = 2131427436;
+			// aapt resource value: 0x7f0b006e
+			public const int searchCityText = 2131427438;
 			
 			// aapt resource value: 0x7f0b006f
-			public const int searchTextField = 2131427439;
+			public const int searchInformationText = 2131427439;
+			
+			// aapt resource value: 0x7f0b0072
+			public const int searchTextField = 2131427442;
 			
 			// aapt resource value: 0x7f0b0045
 			public const int search_badge = 2131427397;
@@ -1750,29 +1880,29 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0b0017
 			public const int src_over = 2131427351;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int stateListViewItem = 2131427455;
+			// aapt resource value: 0x7f0b0082
+			public const int stateListViewItem = 2131427458;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int statePickerListView = 2131427453;
+			// aapt resource value: 0x7f0b0080
+			public const int statePickerListView = 2131427456;
 			
 			// aapt resource value: 0x7f0b005b
 			public const int status_bar_latest_event_content = 2131427419;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int strut = 2131427441;
-			
-			// aapt resource value: 0x7f0b0072
-			public const int strut2 = 2131427442;
+			// aapt resource value: 0x7f0b0074
+			public const int strut = 2131427444;
 			
 			// aapt resource value: 0x7f0b0075
-			public const int strut3 = 2131427445;
+			public const int strut2 = 2131427445;
 			
 			// aapt resource value: 0x7f0b0078
-			public const int strut4 = 2131427448;
+			public const int strut3 = 2131427448;
 			
-			// aapt resource value: 0x7f0b0079
-			public const int strut5 = 2131427449;
+			// aapt resource value: 0x7f0b007b
+			public const int strut4 = 2131427451;
+			
+			// aapt resource value: 0x7f0b007c
+			public const int strut5 = 2131427452;
 			
 			// aapt resource value: 0x7f0b004c
 			public const int submit_area = 2131427404;
@@ -1972,31 +2102,34 @@ namespace ethanslist.android
 			public const int PostingDetails = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int SavedSearches = 2130903079;
+			public const int ptrsharp_header = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int SavedSearchRow = 2130903080;
+			public const int SavedSearches = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int Search = 2130903081;
+			public const int SavedSearchRow = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int select_dialog_item_material = 2130903082;
+			public const int Search = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int select_dialog_multichoice_material = 2130903083;
+			public const int select_dialog_item_material = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int select_dialog_singlechoice_material = 2130903084;
+			public const int select_dialog_multichoice_material = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int SelectCity = 2130903085;
+			public const int select_dialog_singlechoice_material = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int StateRow = 2130903086;
+			public const int SelectCity = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int support_simple_spinner_dropdown_item = 2130903087;
+			public const int StateRow = 2130903087;
+			
+			// aapt resource value: 0x7f030030
+			public const int support_simple_spinner_dropdown_item = 2130903088;
 			
 			static Layout()
 			{
@@ -2011,11 +2144,11 @@ namespace ethanslist.android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050017
-			public const int DrawerCloseDescription = 2131034135;
+			// aapt resource value: 0x7f05001b
+			public const int DrawerCloseDescription = 2131034139;
 			
-			// aapt resource value: 0x7f050016
-			public const int DrawerOpenDescription = 2131034134;
+			// aapt resource value: 0x7f05001a
+			public const int DrawerOpenDescription = 2131034138;
 			
 			// aapt resource value: 0x7f050000
 			public const int abc_action_bar_home_description = 2131034112;
@@ -2074,11 +2207,23 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f050012
 			public const int abc_toolbar_collapse_description = 2131034130;
 			
-			// aapt resource value: 0x7f050015
-			public const int app_name = 2131034133;
+			// aapt resource value: 0x7f050019
+			public const int app_name = 2131034137;
+			
+			// aapt resource value: 0x7f050018
+			public const int hello = 2131034136;
 			
 			// aapt resource value: 0x7f050014
-			public const int hello = 2131034132;
+			public const int library_name = 2131034132;
+			
+			// aapt resource value: 0x7f050015
+			public const int ptrsharp_pull_to_refresh = 2131034133;
+			
+			// aapt resource value: 0x7f050017
+			public const int ptrsharp_refreshing = 2131034135;
+			
+			// aapt resource value: 0x7f050016
+			public const int ptrsharp_release_to_refresh = 2131034134;
 			
 			// aapt resource value: 0x7f050013
 			public const int status_bar_notification_info_overflow = 2131034131;
@@ -2516,6 +2661,9 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f080073
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131230835;
 			
+			// aapt resource value: 0x7f08012f
+			public const int HoloProgressMedium = 2131231023;
+			
 			// aapt resource value: 0x7f080010
 			public const int Platform_AppCompat = 2131230736;
 			
@@ -2786,8 +2934,8 @@ namespace ethanslist.android
 			// aapt resource value: 0x7f0800e5
 			public const int Theme_AppCompat_NoActionBar = 2131230949;
 			
-			// aapt resource value: 0x7f08012f
-			public const int Theme_Custom = 2131231023;
+			// aapt resource value: 0x7f080130
+			public const int Theme_Custom = 2131231024;
 			
 			// aapt resource value: 0x7f0800e6
 			public const int ThemeOverlay_AppCompat = 2131230950;
@@ -3500,6 +3648,61 @@ namespace ethanslist.android
 			
 			// aapt resource value: 0
 			public const int PopupWindowBackgroundState_state_above_anchor = 0;
+			
+			public static int[] PullToRefresharpWrapper = new int[]
+			{
+					2130772174,
+					2130772175,
+					2130772176,
+					2130772177,
+					2130772178,
+					2130772179,
+					2130772180,
+					2130772181,
+					2130772182,
+					2130772183,
+					2130772184,
+					2130772185,
+					2130772186};
+			
+			// aapt resource value: 1
+			public const int PullToRefresharpWrapper_contentViewId = 1;
+			
+			// aapt resource value: 12
+			public const int PullToRefresharpWrapper_fastScrollThumbWidth = 12;
+			
+			// aapt resource value: 10
+			public const int PullToRefresharpWrapper_headerIconDrawable = 10;
+			
+			// aapt resource value: 0
+			public const int PullToRefresharpWrapper_headerId = 0;
+			
+			// aapt resource value: 9
+			public const int PullToRefresharpWrapper_headerTextColor = 9;
+			
+			// aapt resource value: 8
+			public const int PullToRefresharpWrapper_ptrHeaderBackground = 8;
+			
+			// aapt resource value: 2
+			public const int PullToRefresharpWrapper_pullDownProgressIndicatorId = 2;
+			
+			// aapt resource value: 4
+			public const int PullToRefresharpWrapper_pullDownTension = 4;
+			
+			// aapt resource value: 11
+			public const int PullToRefresharpWrapper_pullEnabled = 11;
+			
+			// aapt resource value: 5
+			public const int PullToRefresharpWrapper_pullToRefreshText = 5;
+			
+			// aapt resource value: 7
+			public const int PullToRefresharpWrapper_refreshingText = 7;
+			
+			// aapt resource value: 6
+			public const int PullToRefresharpWrapper_releaseToRefreshText = 6;
+			
+			// aapt resource value: 3
+			public const int PullToRefresharpWrapper_snapbackDuration = 3;
 			
 			public static int[] SearchView = new int[]
 			{

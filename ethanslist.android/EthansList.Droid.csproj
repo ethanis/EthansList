@@ -61,6 +61,9 @@
     <Reference Include="Xamarin.Android.Support.v7.AppCompat">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
+    <Reference Include="PullToRefresharp">
+      <HintPath>..\Components\pulltorefresharp-1.0.2\lib\android\PullToRefresharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -129,6 +132,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="urlimageviewhelper">
       <Version>1.0.4.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="pulltorefresharp">
+      <Version>1.0.2</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
