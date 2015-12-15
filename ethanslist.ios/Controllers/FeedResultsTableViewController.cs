@@ -55,17 +55,21 @@ namespace ethanslist.ios
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Height,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
 
-            feedClient.loadingComplete += (object sender, EventArgs e) =>
-            {
-                    this._loadingOverlay.Hide();
-                    loadTimer.Stop();
-                    TableView.ReloadData();
-                    Console.WriteLine(loadTimer.Elapsed);
+            RefreshControl = new UIRefreshControl();
+            RefreshControl.AttributedTitle = new NSAttributedString("Loading");
+
+            RefreshControl.ValueChanged += (object sender, EventArgs e) => {
+                Console.WriteLine("here");
+                feedClient = new CLFeedClient(Query);
+                feedClient.loadingComplete += feedClient_LoadingComplete;
             };
+
+            feedClient.loadingComplete += feedClient_LoadingComplete;
 
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
                     this._loadingOverlay.Hide();
+                    RefreshControl.EndRefreshing();
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
@@ -85,6 +89,15 @@ namespace ethanslist.ios
             loadTimer.Stop();
             TableView.ReloadData();
             Console.WriteLine(loadTimer.Elapsed);
+        }
+
+        void feedClient_LoadingComplete(object sender, EventArgs e)
+        {
+            this.InvokeOnMainThread(() => this._loadingOverlay.Hide());
+            loadTimer.Stop();
+            TableView.ReloadData();
+            Console.WriteLine(loadTimer.Elapsed);
+            RefreshControl.EndRefreshing();
         }
 	}
 }
