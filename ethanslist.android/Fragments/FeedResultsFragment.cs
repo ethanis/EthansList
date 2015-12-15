@@ -13,11 +13,13 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
 using System.Threading;
+using PullToRefresharp.Android.Views;
 
 namespace ethanslist.android
 {
     public class FeedResultsFragment : Fragment
     {
+        private IPullToRefresharpView ptr_list_view;
         ListView feedResultsListView;
         PostingListAdapter postingListAdapter;
         CLFeedClient feedClient;
@@ -32,6 +34,10 @@ namespace ethanslist.android
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FeedResults, container, false);
+            feedResultsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
+
+            if (feedResultsListView is IPullToRefresharpView)
+                ptr_list_view = (IPullToRefresharpView)feedResultsListView;
 
             feedClient = new CLFeedClient(query);
             var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
@@ -66,28 +72,10 @@ namespace ethanslist.android
 
                 })).Start();
 
-            feedResultsListView = view.FindViewById<ListView>(Resource.Id.feedResultsListView);
-
-//            feedClient.loadingComplete += (object sender, EventArgs e) => {
-//                Console.WriteLine(feedClient.postings.Count);
-//                postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
-//                feedResultsListView.Adapter = postingListAdapter;
-//            };
-//
-//            feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
-//                Dialog dialog;
-//                builder.SetTitle("Error loading listings");
-//                builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
-//                builder.SetPositiveButton("Ok", delegate {
-//                    this.FragmentManager.PopBackStack();
-//                });
-//                dialog = builder.Create();
-//
-//                this.Activity.RunOnUiThread(() => {
-//                    dialog.Show();
-//                    });
-//            };
+            ptr_list_view.RefreshActivated += (object sender, EventArgs e) => {
+                feedClient = new CLFeedClient(query);
+                feedClient.loadingComplete += FeedCompletedRefreshing;
+            };
 
             feedResultsListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
@@ -99,6 +87,13 @@ namespace ethanslist.android
             };
 
             return view;
+        }
+
+        void FeedCompletedRefreshing(object s, EventArgs e)
+        {
+            postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
+            feedResultsListView.Adapter = postingListAdapter;
+            ptr_list_view.OnRefreshCompleted();
         }
     }
 }
