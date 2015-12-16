@@ -11,7 +11,7 @@ namespace ethanslist.ios
         UIViewController owner;
         List<Search> savedSearches;
         private const string cellID = "searchCellID";
-        public event EventHandler<EventArgs> ItemDeleted;
+//        public event EventHandler<EventArgs> ItemDeleted;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
 
         public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)

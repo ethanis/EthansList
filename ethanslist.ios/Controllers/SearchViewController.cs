@@ -12,10 +12,10 @@ namespace ethanslist.ios
 {
 	partial class SearchViewController : UIViewController
 	{
-        int minBed = 0;
-        int minBath = 1;
-        Dictionary<string, string> searchTerms = new Dictionary<string, string>();
-        UIScrollView scrollView;
+        private int minBed = 0;
+        private int minBath = 1;
+        private Dictionary<string, string> searchTerms = new Dictionary<string, string>();
+        private UIScrollView scrollView;
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
