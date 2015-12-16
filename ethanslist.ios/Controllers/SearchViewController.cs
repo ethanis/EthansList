@@ -15,6 +15,7 @@ namespace ethanslist.ios
         int minBed = 0;
         int minBath = 1;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
+        UIScrollView scrollView;
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
@@ -31,6 +32,12 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            scrollView = new UIScrollView();
+            scrollView.Frame = this.View.Bounds;
+            scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
+            scrollView.AddSubviews(this.View.Subviews);
+            this.View.InsertSubview(scrollView, 0);
 
             this.Title = "Ethan's List";
             searchCLLabel.Text = String.Format("Search {0} for:", City);

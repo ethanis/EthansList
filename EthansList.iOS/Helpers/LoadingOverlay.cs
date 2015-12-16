@@ -55,7 +55,7 @@ namespace ethanslist.ios
         /// </summary>
         public void Hide ()
         {
-            UIView.Animate ( 
+            UIView.Animate (
                 0.5, // duration
                 () => { Alpha = 0; }, 
                 () => { RemoveFromSuperview(); }
