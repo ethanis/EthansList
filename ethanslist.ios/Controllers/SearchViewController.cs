@@ -29,6 +29,16 @@ namespace ethanslist.ios
         public String Url { get; set;}
         public String City { get; set; }
 
+        public override void LoadView()
+        {
+            base.LoadView();
+
+            SearchButton.Layer.BackgroundColor = UIColor.FromRGB(44, 62, 80).CGColor;
+            SearchButton.SetTitleColor(UIColor.FromRGB(236, 240, 241), UIControlState.Normal);
+            SearchButton.Layer.CornerRadius = 10;
+            SearchButton.ClipsToBounds = true;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
