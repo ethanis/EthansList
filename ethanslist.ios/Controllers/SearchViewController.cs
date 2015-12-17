@@ -37,6 +37,19 @@ namespace ethanslist.ios
             SearchButton.SetTitleColor(UIColor.FromRGB(236, 240, 241), UIControlState.Normal);
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
+
+            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
+            MinRentSlider.MinimumTrackTintColor = UIColor.FromRGB(44, 62, 80);
+            MaxRentSlider.MinimumTrackTintColor = UIColor.FromRGB(44, 62, 80);
+
+            MinBedCountStep.TintColor = UIColor.FromRGB(44, 62, 80);
+            MinBathCountStep.TintColor = UIColor.FromRGB(44, 62, 80);
+            MinBedCountStep.Layer.BackgroundColor = UIColor.FromRGB(189, 195, 199).CGColor;
+            MinBathCountStep.Layer.BackgroundColor = UIColor.FromRGB(189, 195, 199).CGColor;
+            MinBedCountStep.Layer.CornerRadius = 5;
+            MinBathCountStep.Layer.CornerRadius = 5;
+            MinBedCountStep.ClipsToBounds = true;
+            MinBathCountStep.ClipsToBounds = true;
         }
 
         public override void ViewDidLoad()

@@ -587,26 +587,16 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </pickerView>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES" hasAttributedTitle="YES">
-                                <rect key="frame" x="58" y="488" width="203" height="30"/>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
+                                <rect key="frame" x="20" y="488" width="280" height="30"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="20" y="479" width="280" height="29.5"/>
                                 </variation>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Proceed to Search">
-                                            <attributes>
-                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <font key="NSFont" name="Helvetica" family="Helvetica" size="15"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="proceedButton"/>
                                 </userDefinedRuntimeAttributes>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Proceed to Search"/>
                             </button>
                             <pickerView contentMode="scaleToFill" id="685" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="-17" y="170" width="320" height="162"/>
@@ -649,7 +639,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1444">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1447" rowHeight="44" reuseIdentifier="cellid">
                                 <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
@@ -700,7 +689,7 @@
         </scene>
         <scene sceneID="1470">
             <objects>
-                <tableViewController id="1471" sceneMemberID="viewController" customClass="SavedListingsTableViewController" storyboardIdentifier="SavedPostingsTableViewController">
+                <tableViewController id="1471" sceneMemberID="viewController" customClass="SavedListingsTableViewController" storyboardIdentifier="SavedPostingsTableViewController" title="Saved Postings">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1472">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

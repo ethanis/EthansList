@@ -38,6 +38,7 @@ namespace ethanslist.ios
 
             cell.TextLabel.Text = listing.PostTitle;
             cell.DetailTextLabel.Text = listing.Description;
+            cell.BackgroundColor = UIColor.FromRGB(236, 240, 241);
 
             if (listing.ImageLink != "-1")
             {

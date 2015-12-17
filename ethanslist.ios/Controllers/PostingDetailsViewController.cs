@@ -26,7 +26,7 @@ namespace ethanslist.ios
         public PostingDetailsViewController()
         {
         }
-
+            
         Posting post;
         public Posting Post {
             get {
@@ -65,6 +65,13 @@ namespace ethanslist.ios
         public int CurrentImageIndex { get; set; }
 
         public event EventHandler<EventArgs> ItemDeleted;
+
+        public override void LoadView()
+        {
+            base.LoadView();
+
+            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
+        }
 
         public override void ViewWillAppear(bool animated)
         {

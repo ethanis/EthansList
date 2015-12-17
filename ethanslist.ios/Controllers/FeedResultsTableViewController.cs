@@ -22,6 +22,13 @@ namespace ethanslist.ios
 		{
 		}
 
+        public override void LoadView()
+        {
+            base.LoadView();
+
+            this.TableView.BackgroundColor = UIColor.FromRGB(236, 240, 241);
+        }
+
         public String Query { get; set;}
 
         public override void ViewDidLoad()
