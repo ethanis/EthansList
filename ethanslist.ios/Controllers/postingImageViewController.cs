@@ -38,12 +38,19 @@ namespace ethanslist.ios
             }
         }
 
+        public override void LoadView()
+        {
+            base.LoadView();
+
+            myScrollView.BackgroundColor = ColorScheme.Clouds;
+            myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
+            myImageView.ContentMode = UIViewContentMode.Center;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-               
-            myScrollView.BackgroundColor = UIColor.LightGray;
-            myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
+
             myScrollView.Frame = UIScreen.MainScreen.Bounds;
             if (ImageLinks[ImageIndex] != "-1")
             {
@@ -53,7 +60,6 @@ namespace ethanslist.ios
             myScrollView.MaximumZoomScale = 4f;
             myScrollView.MinimumZoomScale = .1f;
             myScrollView.ViewForZoomingInScrollView += (UIScrollView sv) => { return myImageView; };
-            myImageView.ContentMode = UIViewContentMode.Center;
 
             UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) 
             {

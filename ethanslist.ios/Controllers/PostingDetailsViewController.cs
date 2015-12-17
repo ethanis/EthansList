@@ -70,7 +70,7 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
+            this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
 
         public override void ViewWillAppear(bool animated)

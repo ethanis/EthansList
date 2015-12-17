@@ -37,7 +37,7 @@ namespace ethanslist.ios
                 cell = SearchViewCell.Create();
 
             cell.Model = savedSearches[indexPath.Row];
-            cell.BackgroundColor = UIColor.FromRGB(236, 240, 241);
+            cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
         }

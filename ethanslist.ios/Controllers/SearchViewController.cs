@@ -33,19 +33,19 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            SearchButton.Layer.BackgroundColor = UIColor.FromRGB(44, 62, 80).CGColor;
-            SearchButton.SetTitleColor(UIColor.FromRGB(236, 240, 241), UIControlState.Normal);
+            SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
+            SearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
 
-            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
-            MinRentSlider.MinimumTrackTintColor = UIColor.FromRGB(44, 62, 80);
-            MaxRentSlider.MinimumTrackTintColor = UIColor.FromRGB(44, 62, 80);
+            this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+            MinRentSlider.MinimumTrackTintColor = ColorScheme.MidnightBlue;
+            MaxRentSlider.MinimumTrackTintColor = ColorScheme.MidnightBlue;
 
-            MinBedCountStep.TintColor = UIColor.FromRGB(44, 62, 80);
-            MinBathCountStep.TintColor = UIColor.FromRGB(44, 62, 80);
-            MinBedCountStep.Layer.BackgroundColor = UIColor.FromRGB(189, 195, 199).CGColor;
-            MinBathCountStep.Layer.BackgroundColor = UIColor.FromRGB(189, 195, 199).CGColor;
+            MinBedCountStep.TintColor = ColorScheme.MidnightBlue;
+            MinBathCountStep.TintColor = ColorScheme.MidnightBlue;
+            MinBedCountStep.Layer.BackgroundColor = ColorScheme.Silver.CGColor;
+            MinBathCountStep.Layer.BackgroundColor = ColorScheme.Silver.CGColor;
             MinBedCountStep.Layer.CornerRadius = 5;
             MinBathCountStep.Layer.CornerRadius = 5;
             MinBedCountStep.ClipsToBounds = true;

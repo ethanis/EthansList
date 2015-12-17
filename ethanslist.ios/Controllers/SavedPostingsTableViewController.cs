@@ -23,7 +23,8 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
+            this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+            this.TableView.BackgroundColor = ColorScheme.Clouds;
         }
 
         public override void ViewDidLoad()

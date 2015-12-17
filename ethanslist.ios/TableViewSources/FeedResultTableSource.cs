@@ -33,7 +33,7 @@ namespace ethanslist.ios
                 cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellId);   
             }
 
-            cell.BackgroundColor = UIColor.FromRGB(236, 240, 241);
+            cell.BackgroundColor = ColorScheme.Clouds;
 
             Posting post = feedClient.postings[indexPath.Row];
 

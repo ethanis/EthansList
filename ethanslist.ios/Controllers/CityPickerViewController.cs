@@ -24,12 +24,12 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            ProceedButton.Layer.BackgroundColor = UIColor.FromRGB(44, 62, 80).CGColor;
-            ProceedButton.SetTitleColor(UIColor.FromRGB(236, 240, 241), UIControlState.Normal);
+            ProceedButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
+            ProceedButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
             ProceedButton.Layer.CornerRadius = 10;
             ProceedButton.ClipsToBounds = true;
 
-            this.View.Layer.BackgroundColor = UIColor.FromRGB(236, 240, 241).CGColor;
+            this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
 
         public override void ViewDidLoad()
