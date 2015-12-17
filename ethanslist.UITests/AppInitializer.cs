@@ -26,14 +26,12 @@ namespace ethanslist.UITests
             {
                 app = ConfigureApp
 					.Android
-                    .ApkFile("../../../ethanslist.android/bin/Release/com.xamarin.ethanslist-Signed.apk")
 					.StartApp();
             }
             else
             {
                 app = ConfigureApp
     				.iOS
-                    .AppBundle("../../../EthansList.iOS/bin/iPhoneSimulator/Debug/ethanslist.ios.app")
     				.StartApp();
             }
 
