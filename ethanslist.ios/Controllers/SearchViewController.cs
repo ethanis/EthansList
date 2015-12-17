@@ -38,6 +38,11 @@ namespace ethanslist.ios
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
 
+            saveSearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
+            saveSearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
+            saveSearchButton.Layer.CornerRadius = 10;
+            saveSearchButton.ClipsToBounds = true;
+
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             MinRentSlider.MinimumTrackTintColor = ColorScheme.MidnightBlue;
             MaxRentSlider.MinimumTrackTintColor = ColorScheme.MidnightBlue;
