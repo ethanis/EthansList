@@ -219,7 +219,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="292" translatesAutoresizingMaskIntoConstraints="NO" text="Search Craigslist for:" textAlignment="center">
-                                <rect key="frame" x="20" y="102" width="280" height="21"/>
+                                <rect key="frame" x="20" y="70" width="280" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -230,7 +230,7 @@
                                 <constraints/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="297" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="type here...">
-                                <rect key="frame" x="20" y="165" width="280" height="30"/>
+                                <rect key="frame" x="20" y="133" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -241,7 +241,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO">
-                                <rect key="frame" x="20" y="232" width="280" height="30"/>
+                                <rect key="frame" x="20" y="200" width="280" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" colorSpace="calibratedRGB" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1"/>
@@ -409,7 +409,7 @@
                             <constraint id="1885" firstItem="292" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
                             <constraint id="1886" firstItem="289" firstAttribute="trailing" secondItem="292" secondAttribute="trailing" constant="20"/>
                             <constraint id="1888" firstItem="292" firstAttribute="centerX" secondItem="289" secondAttribute="centerX"/>
-                            <constraint id="1889" firstItem="292" firstAttribute="top" secondItem="285" secondAttribute="bottom" constant="82"/>
+                            <constraint id="1889" firstItem="292" firstAttribute="top" secondItem="285" secondAttribute="bottom" constant="50"/>
                             <constraint id="1890" firstItem="297" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
                             <constraint id="1891" firstItem="289" firstAttribute="trailing" secondItem="297" secondAttribute="trailing" constant="20"/>
                             <constraint id="1895" firstItem="297" firstAttribute="top" secondItem="292" secondAttribute="centerY" constant="51"/>
