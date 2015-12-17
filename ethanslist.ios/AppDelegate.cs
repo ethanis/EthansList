@@ -31,6 +31,16 @@ namespace ethanslist.ios
 			Xamarin.Calabash.Start();
             #endif
 
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
+
+            UINavigationBar.Appearance.BarTintColor = ColorScheme.WetAsphalt;
+            UINavigationBar.Appearance.TintColor = ColorScheme.Clouds;
+            UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes()
+                {
+                    ForegroundColor = ColorScheme.Clouds,
+                };
+
+
             return true;
         }
 

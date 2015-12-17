@@ -94,6 +94,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="2141" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint id="2144" firstAttribute="width" constant="320"/>
+                                    <constraint id="2145" firstAttribute="height" constant="59"/>
+                                </constraints>
+                            </view>
                             <navigationBar contentMode="scaleToFill" id="1420" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="0.0" y="19" width="320" height="44"/>
                                 <items>
@@ -175,6 +183,8 @@
                             <constraint id="2070" firstItem="1420" firstAttribute="top" secondItem="255" secondAttribute="top" constant="19"/>
                             <constraint id="2071" firstItem="1420" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
                             <constraint id="2072" firstItem="1420" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
+                            <constraint id="2142" firstItem="255" firstAttribute="trailing" secondItem="2141" secondAttribute="trailing"/>
+                            <constraint id="2143" firstItem="2141" firstAttribute="top" secondItem="255" secondAttribute="top"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -198,6 +208,7 @@
                         <outlet property="imageScrollView" destination="2094" id="name-outlet-2094"/>
                         <outlet property="postingImageView" destination="2095" id="name-outlet-2095"/>
                         <outlet property="imageCollectionView" destination="2107" id="name-outlet-2107"/>
+                        <outlet property="statusBarColorPlaceholder" destination="2141" id="name-outlet-2141"/>
                     </connections>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

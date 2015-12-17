@@ -69,8 +69,12 @@ namespace ethanslist.ios
         public override void LoadView()
         {
             base.LoadView();
-
+            
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+            this.myNavBar.BarTintColor = ColorScheme.WetAsphalt;
+//            statusBarColorPlaceholder.BackgroundColor = ColorScheme.WetAsphalt;
+//            statusBarColorPlaceholder.Alpha = 0.90f;
+            statusBarColorPlaceholder.BackgroundColor = UIColor.FromRGB(0.2745f, 0.3451f, 0.4157f);
         }
 
         public override void ViewWillAppear(bool animated)

@@ -54,6 +54,10 @@ namespace ethanslist.ios
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIBarButtonItem SaveButton { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIView statusBarColorPlaceholder { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (dateLabel != null) {
@@ -95,6 +99,10 @@ namespace ethanslist.ios
 			if (SaveButton != null) {
 				SaveButton.Dispose ();
 				SaveButton = null;
+			}
+			if (statusBarColorPlaceholder != null) {
+				statusBarColorPlaceholder.Dispose ();
+				statusBarColorPlaceholder = null;
 			}
 		}
 	}
