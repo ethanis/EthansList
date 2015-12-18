@@ -93,7 +93,7 @@ namespace EthansList.Shared
                 images.Add(node.Attributes["href"].Value);
             }
 
-            if (images.Count == 0 || rssImageUrl != "-1" || rssImageUrl != null)
+            if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
         }
     }

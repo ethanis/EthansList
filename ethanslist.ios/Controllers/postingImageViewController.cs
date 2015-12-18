@@ -32,6 +32,7 @@ namespace ethanslist.ios
                     null,
                     (image,error,cachetype,NSNull) => {
                         myImageView.ContentMode = UIViewContentMode.Center;
+                        myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
                     }
                 );
                 image = value;
@@ -44,7 +45,7 @@ namespace ethanslist.ios
             this.View.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
-            myImageView.ContentMode = UIViewContentMode.Center;
+            myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
         }
 
         public override void ViewDidLoad()
