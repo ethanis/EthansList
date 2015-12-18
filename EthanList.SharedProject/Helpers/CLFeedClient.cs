@@ -117,8 +117,8 @@ namespace EthansList.Shared
                 if (title != null && description != null && description != null)
                 {
                     Posting posting = new Posting();
-                    posting.PostTitle = title;
-                    posting.Description = description;
+                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
+                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
                     posting.Link = link;
                     posting.ImageLink = imageLink;
                     posting.Date = date;

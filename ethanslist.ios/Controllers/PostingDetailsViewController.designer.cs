@@ -40,7 +40,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel PostingDescription { get; set; }
+		UITextView PostingDescription { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]

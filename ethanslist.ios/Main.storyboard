@@ -74,19 +74,6 @@
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingTitle"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="259" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="10" textAlignment="center" fixedFrame="YES">
-                                <rect key="frame" x="20" y="364" width="280" height="150"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="402" width="280" height="146"/>
-                                </variation>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="posting description"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="974" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="522" width="232" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -162,6 +149,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2164" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" opaque="NO">
+                                <rect key="frame" x="20" y="364" width="280" height="150"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
@@ -199,7 +193,6 @@
                     </view>
                     <connections>
                         <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
-                        <outlet property="PostingDescription" destination="259" id="name-outlet-259"/>
                         <outlet property="dateLabel" destination="974" id="name-outlet-974"/>
                         <outlet property="DoneButton" destination="1424" id="name-outlet-1424"/>
                         <outlet property="SaveButton" destination="1423" id="name-outlet-1423"/>
@@ -209,9 +202,9 @@
                         <outlet property="postingImageView" destination="2095" id="name-outlet-2095"/>
                         <outlet property="imageCollectionView" destination="2107" id="name-outlet-2107"/>
                         <outlet property="statusBarColorPlaceholder" destination="2141" id="name-outlet-2141"/>
+                        <outlet property="PostingDescription" destination="2164" id="name-outlet-2164"/>
                     </connections>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

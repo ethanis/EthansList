@@ -18,6 +18,7 @@ namespace ethanslist.ios
         UIBarButtonItem deleteButton;
         ImageCollectionViewSource collectionSource;
         ListingImageDownloader imageHelper;
+        UIScrollView scrollView;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -73,11 +74,18 @@ namespace ethanslist.ios
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             this.myNavBar.BarTintColor = ColorScheme.WetAsphalt;
             statusBarColorPlaceholder.BackgroundColor = UIColor.FromRGB(0.2745f, 0.3451f, 0.4157f);
+            PostingDescription.BackgroundColor = ColorScheme.Clouds;
         }
 
-        public override void ViewWillAppear(bool animated)
+        public override void ViewDidLoad()
         {
-            base.ViewWillAppear(animated);
+            base.ViewDidLoad();
+
+            scrollView = new UIScrollView();
+            scrollView.Frame = this.View.Bounds;
+            scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
+            scrollView.AddSubviews(this.View.Subviews);
+            this.View.InsertSubview(scrollView, 0);
 
             PostingTitle.Text = post.PostTitle;
             PostingDescription.Text = post.Description;
@@ -86,11 +94,11 @@ namespace ethanslist.ios
             imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
-            {
-                imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                imageCollectionView.Source = collectionSource;
-            };
+                {
+                    imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                    imageCollectionView.Source = collectionSource;
+                };
 
 
             myNavBarItem.SetLeftBarButtonItem(null, true);

@@ -27,23 +27,14 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            this.Title = "Saved Searches";
+
             savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
             searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
             TableView.Source = searchTableViewSource;
             TableView.RowHeight = 135;
 //            TableView.RowHeight = UITableView.AutomaticDimension;
 //            TableView.EstimatedRowHeight = 130;
-
-//            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
         }
-
-//        void SearchTableViewSource_ItemDeleted (object sender, EventArgs e)
-//        {
-//            savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
-//            searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
-//            TableView.Source = searchTableViewSource;
-//
-//            searchTableViewSource.ItemDeleted += SearchTableViewSource_ItemDeleted;
-//        }
 	}
 }
