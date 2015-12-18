@@ -52,7 +52,7 @@ namespace ethanslist.android
             saveButton = view.FindViewById<Button>(Resource.Id.saveListingButton);
             imageGV = view.FindViewById<GridView>(Resource.Id.imageGridView);
 
-            imageHelper = new ListingImageDownloader(posting.Link);
+            imageHelper = new ListingImageDownloader(posting.Link, posting.ImageLink);
 
             imageHelper.loadingComplete += (sender, e) =>
             {

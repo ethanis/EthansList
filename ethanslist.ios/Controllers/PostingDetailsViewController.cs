@@ -72,8 +72,6 @@ namespace ethanslist.ios
             
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             this.myNavBar.BarTintColor = ColorScheme.WetAsphalt;
-//            statusBarColorPlaceholder.BackgroundColor = ColorScheme.WetAsphalt;
-//            statusBarColorPlaceholder.Alpha = 0.90f;
             statusBarColorPlaceholder.BackgroundColor = UIColor.FromRGB(0.2745f, 0.3451f, 0.4157f);
         }
 
@@ -85,7 +83,7 @@ namespace ethanslist.ios
             PostingDescription.Text = post.Description;
             CurrentImageIndex = 0;
 
-            imageHelper = new ListingImageDownloader(post.Link);
+            imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
             {
@@ -131,11 +129,15 @@ namespace ethanslist.ios
 
         private void OnSingleTap (UIGestureRecognizer gesture) 
         {
-            var storyboard = UIStoryboard.FromName("Main", null);
-            postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
-            postingImageVC.ImageLinks = imageHelper.images;
-            postingImageVC.ImageIndex = CurrentImageIndex;
-            this.ShowViewController(postingImageVC, this);
+            if (imageHelper.images.Count > 0)
+            {
+                var storyboard = UIStoryboard.FromName("Main", null);
+                postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
+                postingImageVC.ImageLinks = imageHelper.images;
+                postingImageVC.ImageIndex = CurrentImageIndex;
+
+                this.ShowViewController(postingImageVC, this);
+            }
         }
 
 

@@ -102,25 +102,6 @@
                                     <constraint id="2145" firstAttribute="height" constant="59"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" id="1420" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Posting Details" id="1421">
-                                        <barButtonItem id="1423" translatesAutoresizingMaskIntoConstraints="NO" key="leftBarButtonItem" systemItem="save">
-                                            <accessibilityConfiguration key="accessibilityConfiguration">
-                                                <isElement key="isElement" value="YES"/>
-                                            </accessibilityConfiguration>
-                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="saveButton"/>
-                                        </barButtonItem>
-                                        <barButtonItem id="1424" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done">
-                                            <accessibilityConfiguration key="accessibilityConfiguration">
-                                                <isElement key="isElement" value="YES"/>
-                                            </accessibilityConfiguration>
-                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="doneButton"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2094" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="0.0" y="120" width="320" height="180"/>
                                 <subviews>
@@ -162,6 +143,25 @@
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="imageCollection"/>
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" id="1420" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Posting Details" id="1421">
+                                        <barButtonItem id="1423" translatesAutoresizingMaskIntoConstraints="NO" key="leftBarButtonItem" systemItem="save">
+                                            <accessibilityConfiguration key="accessibilityConfiguration">
+                                                <isElement key="isElement" value="YES"/>
+                                            </accessibilityConfiguration>
+                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="saveButton"/>
+                                        </barButtonItem>
+                                        <barButtonItem id="1424" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done">
+                                            <accessibilityConfiguration key="accessibilityConfiguration">
+                                                <isElement key="isElement" value="YES"/>
+                                            </accessibilityConfiguration>
+                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="doneButton"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">

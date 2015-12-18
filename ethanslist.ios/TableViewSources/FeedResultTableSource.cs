@@ -50,6 +50,7 @@ namespace ethanslist.ios
             {
                 cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
             }
+
             return cell;
         }
 

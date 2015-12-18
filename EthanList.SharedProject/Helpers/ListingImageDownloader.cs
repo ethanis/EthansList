@@ -15,16 +15,20 @@ namespace EthansList.Shared
     public class ListingImageDownloader
     {
         readonly string url;
+        readonly string rssImageUrl;
         public List<string> images = new List<string>();
 
         private static BackgroundWorker AsyncHtmlLoader;
         public EventHandler<EventArgs> loadingComplete;
         public EventHandler<EventArgs> loadingProgressChanged;
 
-        public ListingImageDownloader(string url)
+        public ListingImageDownloader(string url, string rssImageUrl)
         {
             this.url = url;
-
+            this.rssImageUrl = rssImageUrl;
+//            if (rssImageUrl != null || rssImageUrl != "-1")
+//                images.Add(rssImageUrl);
+            
             GetImagesAsync();
         }
 
@@ -88,6 +92,9 @@ namespace EthansList.Shared
             {
                 images.Add(node.Attributes["href"].Value);
             }
+
+            if (images.Count == 0 || rssImageUrl != "-1" || rssImageUrl != null)
+                images.Insert(0, rssImageUrl);
         }
     }
 }
