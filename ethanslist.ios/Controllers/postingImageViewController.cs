@@ -42,6 +42,7 @@ namespace ethanslist.ios
         public override void LoadView()
         {
             base.LoadView();
+
             this.View.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
@@ -51,6 +52,7 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            UIApplication.SharedApplication.SetStatusBarHidden(true, false);
 
             myScrollView.Frame = UIScreen.MainScreen.Bounds;
             if (ImageLinks[ImageIndex] != "-1")
@@ -94,6 +96,7 @@ namespace ethanslist.ios
         }
 
         private void OnDismissSwipe (UIGestureRecognizer gesture) {
+            UIApplication.SharedApplication.SetStatusBarHidden(false, false);
             this.DismissViewController(true, null);
         }
 
