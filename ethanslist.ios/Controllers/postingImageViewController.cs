@@ -41,7 +41,7 @@ namespace ethanslist.ios
         public override void LoadView()
         {
             base.LoadView();
-
+            this.View.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
             myImageView.ContentMode = UIViewContentMode.Center;
