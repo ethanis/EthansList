@@ -16,6 +16,8 @@ namespace ethanslist.ios
         private int minBath = 1;
         private Dictionary<string, string> searchTerms = new Dictionary<string, string>();
         private UIScrollView scrollView;
+        ConstraintHelper constraintHelper = new ConstraintHelper();
+//        NSLayoutConstraint constCityLeft, constCityRight, constCityTop, constCityBottom, const
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
@@ -55,6 +57,8 @@ namespace ethanslist.ios
             MinBathCountStep.Layer.CornerRadius = 5;
             MinBedCountStep.ClipsToBounds = true;
             MinBathCountStep.ClipsToBounds = true;
+
+//            constraintHelper.GetConstraint();
         }
 
         public override void ViewDidLoad()

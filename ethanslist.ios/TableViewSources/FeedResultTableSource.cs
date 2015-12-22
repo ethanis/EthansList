@@ -50,6 +50,9 @@ namespace ethanslist.ios
             {
                 cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
             }
+            //TODO: make sure this content mode sticks with the image view
+            cell.ImageView.ContentMode = UIViewContentMode.ScaleAspectFill;
+            cell.ImageView.ClipsToBounds = true;
 
             return cell;
         }

@@ -28,25 +28,8 @@ namespace ethanslist.ios
         {
         }
             
-        Posting post;
-        public Posting Post {
-            get {
-                return post;
-            }
-            set {
-                post = value;
-            }
-        }
-
-        Boolean saved = false;
-        public Boolean Saved {
-            get { 
-                return saved;
-            }
-            set { 
-                saved = value;
-            }
-        }
+        public Posting Post { get; set; }
+        public Boolean Saved { get; set; }
 
         string image;
         public string Image
@@ -87,11 +70,11 @@ namespace ethanslist.ios
             scrollView.AddSubviews(this.View.Subviews);
             this.View.InsertSubview(scrollView, 0);
 
-            PostingTitle.Text = post.PostTitle;
-            PostingDescription.Text = post.Description;
+            PostingTitle.Text = Post.PostTitle;
+            PostingDescription.Text = Post.Description;
             CurrentImageIndex = 0;
 
-            imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
+            imageHelper = new ListingImageDownloader(Post.Link, Post.ImageLink);
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
                 {
@@ -103,7 +86,7 @@ namespace ethanslist.ios
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 
-            if (!saved)
+            if (!Saved)
             {
                 saveButton = new UIBarButtonItem(UIBarButtonSystemItem.Save, SaveListing);
                 saveButton.Enabled = true;
@@ -115,11 +98,11 @@ namespace ethanslist.ios
                 myNavBarItem.SetLeftBarButtonItem(deleteButton, true);
             }
 
-            dateLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
+            dateLabel.Text = "Listed: " + Post.Date.ToShortDateString() + " at " + Post.Date.ToShortTimeString();
 
-            if (post.ImageLink != "-1")
+            if (Post.ImageLink != "-1")
             {
-                Image = post.ImageLink;
+                Image = Post.ImageLink;
             }
             else
             {
@@ -156,7 +139,7 @@ namespace ethanslist.ios
 
         async void SaveListing(object sender, EventArgs e)
         {
-            await AppDelegate.databaseConnection.AddNewListingAsync(post.PostTitle, post.Description, post.Link, post.ImageLink, post.Date);
+            await AppDelegate.databaseConnection.AddNewListingAsync(Post.PostTitle, Post.Description, Post.Link, Post.ImageLink, Post.Date);
             Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
             if (AppDelegate.databaseConnection.StatusCode == codes.ok)

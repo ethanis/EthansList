@@ -31,6 +31,7 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
+            this.Title = "Saved Postings";
             savedPostings = AppDelegate.databaseConnection.GetAllPostingsAsync().Result;
             tableSource = new SavedPostingsTableViewSource(this, savedPostings);
             TableView.Source = tableSource;
