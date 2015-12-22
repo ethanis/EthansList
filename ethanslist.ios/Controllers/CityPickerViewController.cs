@@ -18,6 +18,7 @@ namespace ethanslist.ios
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
+            this.View.AddSubviews(new UIView[] { CityPickerView, StatePickerView });
 		}
 
         public override void LoadView()
@@ -31,7 +32,12 @@ namespace ethanslist.ios
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
+        public override void ViewDidLayoutSubviews()
+        {
+            AddConstraints();
 
+            base.ViewDidLayoutSubviews();
+        }
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -158,6 +164,44 @@ namespace ethanslist.ios
                     this.ValueChange(this, new EventArgs());
                 } 
             }
+        }
+
+        void AddConstraints()
+        {
+            CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
+            StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
+
+            List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
+//            City picker view constraints
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Left, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 10));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Right, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 10));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Top, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Bottom, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 50));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Width, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
+
+            this.CityPickerView.AddConstraints(cityConstraints.ToArray());
+            this.CityPickerView.LayoutIfNeeded();
+
+            List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
+            //State picker view constraints
+            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Left, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
+            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Right, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 10));
+            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Top, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
+            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Bottom, 
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 50));
+            stateConstraints.Add(NSLayoutConstraint.Create(this.StatePickerView, NSLayoutAttribute.Width, 
+                    NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
+
+            this.StatePickerView.AddConstraints(stateConstraints.ToArray());
+            this.StatePickerView.LayoutIfNeeded();
         }
 	}
 }
