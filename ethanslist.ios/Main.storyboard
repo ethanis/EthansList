@@ -68,7 +68,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="70" width="374" height="24"/>
+                                    <rect key="frame" x="20" y="70" width="280" height="24"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingTitle"/>
@@ -229,7 +229,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="70" width="374" height="24"/>
+                                    <rect key="frame" x="20" y="70" width="280" height="24"/>
                                 </variation>
                                 <constraints/>
                             </label>
@@ -238,7 +238,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="133" width="374" height="30"/>
+                                    <rect key="frame" x="20" y="133" width="280" height="30"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="searchField"/>
@@ -257,7 +257,7 @@
                                     <action selector="SearchCL:" destination="288" id="406" eventType="touchUpInside"/>
                                 </connections>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="200" width="374" height="30"/>
+                                    <rect key="frame" x="20" y="200" width="280" height="30"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="searchButton"/>
@@ -267,7 +267,7 @@
                                 <rect key="frame" x="20" y="325" width="119" height="31"/>
                                 <connections/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="16" y="293.5" width="175" height="31"/>
+                                    <rect key="frame" x="16" y="293.5" width="128" height="31"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minRentSlider"/>
@@ -277,7 +277,7 @@
                                 <rect key="frame" x="184" y="325" width="116" height="31"/>
                                 <connections/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="227" y="293.5" width="171" height="31"/>
+                                    <rect key="frame" x="180" y="293.5" width="124" height="31"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="maxRentSlider"/>
@@ -290,7 +290,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="264" width="167" height="20.5"/>
+                                    <rect key="frame" x="20" y="264" width="120" height="20.5"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
@@ -300,7 +300,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="231" y="264" width="163" height="20.5"/>
+                                    <rect key="frame" x="184" y="264" width="116" height="20.5"/>
                                 </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
@@ -310,7 +310,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="335.5" width="167" height="20.5"/>
+                                    <rect key="frame" x="20" y="335.5" width="120" height="20.5"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minRentLabel"/>
@@ -323,7 +323,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="231" y="335.5" width="163" height="20.5"/>
+                                    <rect key="frame" x="184" y="335.5" width="116" height="20.5"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="maxRentLabel"/>
@@ -582,7 +582,7 @@
                             <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="20" y="79" width="280" height="368"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="219" y="53" width="195" height="436"/>
+                                    <rect key="frame" x="172" y="53" width="148" height="283"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="cityPicker"/>
@@ -593,8 +593,8 @@
                             </pickerView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
                                 <rect key="frame" x="20" y="488" width="280" height="30"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="525" width="374" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="20" y="353" width="280" height="30"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="proceedButton"/>
@@ -605,7 +605,7 @@
                             <pickerView contentMode="scaleToFill" id="685" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="-17" y="170" width="320" height="162"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="53" width="195" height="436"/>
+                                    <rect key="frame" x="0.0" y="53" width="148" height="283"/>
                                 </variation>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="statePicker"/>
@@ -655,7 +655,9 @@
                             <constraint id="2192" firstItem="507" firstAttribute="trailing" secondItem="496" secondAttribute="trailing"/>
                             <constraint id="2201" firstItem="496" firstAttribute="trailing" secondItem="518" secondAttribute="trailing" constant="20"/>
                             <constraint id="2202" firstItem="518" firstAttribute="leading" secondItem="496" secondAttribute="leading" constant="20"/>
-                            <constraint id="2203" firstItem="518" firstAttribute="top" secondItem="507" secondAttribute="bottom" constant="36"/>
+                            <constraint id="2203" firstItem="518" firstAttribute="top" secondItem="507" secondAttribute="bottom" constant="36">
+                                <variation key="heightClass=regular-widthClass=compact" constant="84"/>
+                            </constraint>
                             <constraint id="2204" firstItem="518" firstAttribute="centerX" secondItem="685" secondAttribute="trailing" constant="12"/>
                         </constraints>
                     </view>
@@ -840,7 +842,7 @@
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina55"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
         <simulatedOrientationMetrics key="orientation"/>
     </simulatedMetricsContainer>
     <resources>
