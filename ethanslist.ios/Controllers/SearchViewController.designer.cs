@@ -20,6 +20,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MaxRentLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UISlider MaxRentSlider { get; set; }
 
 		[Outlet]
@@ -32,6 +36,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinBathTitleLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIStepper MinBedCountStep { get; set; }
 
 		[Outlet]
@@ -40,7 +48,15 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinBedTitleLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel MinLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel MinRentLabel { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -72,6 +88,10 @@ namespace ethanslist.ios
 				MaxLabel.Dispose ();
 				MaxLabel = null;
 			}
+			if (MaxRentLabel != null) {
+				MaxRentLabel.Dispose ();
+				MaxRentLabel = null;
+			}
 			if (MaxRentSlider != null) {
 				MaxRentSlider.Dispose ();
 				MaxRentSlider = null;
@@ -84,6 +104,10 @@ namespace ethanslist.ios
 				MinBathLabel.Dispose ();
 				MinBathLabel = null;
 			}
+			if (MinBathTitleLabel != null) {
+				MinBathTitleLabel.Dispose ();
+				MinBathTitleLabel = null;
+			}
 			if (MinBedCountStep != null) {
 				MinBedCountStep.Dispose ();
 				MinBedCountStep = null;
@@ -92,9 +116,17 @@ namespace ethanslist.ios
 				MinBedLabel.Dispose ();
 				MinBedLabel = null;
 			}
+			if (MinBedTitleLabel != null) {
+				MinBedTitleLabel.Dispose ();
+				MinBedTitleLabel = null;
+			}
 			if (MinLabel != null) {
 				MinLabel.Dispose ();
 				MinLabel = null;
+			}
+			if (MinRentLabel != null) {
+				MinRentLabel.Dispose ();
+				MinRentLabel = null;
 			}
 			if (MinRentSlider != null) {
 				MinRentSlider.Dispose ();
