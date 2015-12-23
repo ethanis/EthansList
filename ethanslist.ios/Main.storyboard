@@ -398,6 +398,10 @@
                         <outlet property="MinBathCountStep" destination="484" id="name-outlet-484"/>
                         <outlet property="saveSearchButton" destination="1578" id="name-outlet-1578"/>
                         <outlet property="searchCLLabel" destination="292" id="name-outlet-292"/>
+                        <outlet property="MinRentLabel" destination="434" id="name-outlet-434"/>
+                        <outlet property="MaxRentLabel" destination="438" id="name-outlet-438"/>
+                        <outlet property="MinBedTitleLabel" destination="482" id="name-outlet-482"/>
+                        <outlet property="MinBathTitleLabel" destination="483" id="name-outlet-483"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="290" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -453,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="497" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="232"/>
+            <point key="canvasLocation" x="-58" y="232"/>
         </scene>
         <scene sceneID="1441">
             <objects>
@@ -627,7 +631,4 @@
     <resources>
         <image name="placeholder.png" width="500" height="350"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
