@@ -163,7 +163,7 @@ namespace ethanslist.ios
 
         void AddLayoutConstraints()
         {
-            View.RemoveConstraints(constraints: View.Constraints);
+            this.View.RemoveConstraints(constraints: this.View.Constraints);
             StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;

@@ -16,8 +16,6 @@ namespace ethanslist.ios
         private int minBath = 1;
         private Dictionary<string, string> searchTerms = new Dictionary<string, string>();
         private UIScrollView scrollView;
-        ConstraintHelper constraintHelper = new ConstraintHelper();
-//        NSLayoutConstraint constCityLeft, constCityRight, constCityTop, constCityBottom, const
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
@@ -57,8 +55,6 @@ namespace ethanslist.ios
             MinBathCountStep.Layer.CornerRadius = 5;
             MinBedCountStep.ClipsToBounds = true;
             MinBathCountStep.ClipsToBounds = true;
-
-//            constraintHelper.GetConstraint();
         }
 
         public override void ViewDidLoad()
@@ -70,6 +66,7 @@ namespace ethanslist.ios
             scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
             scrollView.AddSubviews(this.View.Subviews);
             this.View.InsertSubview(scrollView, 0);
+            AddLayoutConstraints();
 
             this.Title = "Ethan's List";
             searchCLLabel.Text = String.Format("Search {0} for:", City);
@@ -158,6 +155,99 @@ namespace ethanslist.ios
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             SearchField.ResignFirstResponder();
+        }
+
+        void AddLayoutConstraints()
+        {
+            this.View.RemoveConstraints(constraints: this.View.Constraints);
+
+            SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;//
+            SearchField.TranslatesAutoresizingMaskIntoConstraints = false;//
+            searchCLLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MinLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MaxLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MinRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MaxRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MinBedLabel.TranslatesAutoresizingMaskIntoConstraints = false;// 
+            MinBathLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MinBathCountStep.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinBathCountStep.TranslatesAutoresizingMaskIntoConstraints = false;
+            saveSearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
+
+            //Seach CL Label Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 100),
+            });
+            //Seach Field Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.Top, NSLayoutRelation.Equal, searchCLLabel, NSLayoutAttribute.Bottom, 1, 25),
+            });
+            //Seach Button Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchField, NSLayoutAttribute.Bottom, 1, 25),
+            });
+            //Min Label Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.25f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Max Label Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.75f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Min Rent Slider Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.25f, 0),
+                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinLabel, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Max Rent Slider Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.75f, 0),
+                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MaxLabel, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Min Bed Label Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.25f, 0),
+                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinRentSlider, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Min Bath Label Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.75f, 0),
+                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MaxRentSlider, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Min Bed Stepper Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.25f, 0),
+                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedLabel, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Min Bath Stepper Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.75f, 0),
+                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBathLabel, NSLayoutAttribute.Bottom, 1, 50),
+            });
+            //Save Search Button Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.75f, 0),
+                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedCountStep, NSLayoutAttribute.Bottom, 1, 50),
+            });
+
+            this.View.LayoutIfNeeded();
         }
 	}
 }
