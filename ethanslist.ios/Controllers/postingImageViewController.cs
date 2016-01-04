@@ -46,6 +46,7 @@ namespace ethanslist.ios
             this.View.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor = ColorScheme.Clouds;
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
+            myImageView.ContentMode = UIViewContentMode.Center;
             myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
         }
 

@@ -716,7 +716,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1779" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
                                 <rect key="frame" x="0.0" y="34" width="600" height="566"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
@@ -733,7 +733,24 @@
                             <constraint id="2125" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
                             <constraint id="2126" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
                             <constraint id="2127" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
+                            <constraint id="2313" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
+                            <constraint id="2314" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
+                            <constraint id="2315" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2313"/>
+                                <exclude reference="2314"/>
+                                <exclude reference="2315"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="2313"/>
+                                <include reference="2314"/>
+                                <include reference="2315"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
