@@ -258,13 +258,11 @@ namespace ethanslist.ios
             });
             //Min Bed Stepper Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
                 NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.5f, 0),
                 NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Bath Stepper Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
                 NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.50f, 0),
                 NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBathLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
