@@ -47,7 +47,6 @@ namespace ethanslist.ios
         }
 
         public int CurrentImageIndex { get; set; }
-
         public event EventHandler<EventArgs> ItemDeleted;
 
         public override void LoadView()
@@ -167,5 +166,77 @@ namespace ethanslist.ios
             if (this.ItemDeleted != null)
                 this.ItemDeleted(this, new EventArgs());
         }
+//
+//        void AddLayoutConstraints()
+//        {
+//            this.View.RemoveConstraints(constraints: this.View.Constraints);
+//
+//            myNavBar.TranslatesAutoresizingMaskIntoConstraints = false;
+//            statusBarColorPlaceholder.TranslatesAutoresizingMaskIntoConstraints = false;
+//            PostingTitle.TranslatesAutoresizingMaskIntoConstraints = false;
+//            imageScrollView.TranslatesAutoresizingMaskIntoConstraints = false;
+//            postingImageView.TranslatesAutoresizingMaskIntoConstraints = false;
+//            imageCollectionView.TranslatesAutoresizingMaskIntoConstraints = false;
+//            PostingDescription.TranslatesAutoresizingMaskIntoConstraints = false;
+//            dateLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+//
+//            //NavBar Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+////                NSLayoutConstraint.Create(myNavBar, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+//                NSLayoutConstraint.Create(myNavBar, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
+//                NSLayoutConstraint.Create(myNavBar, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0),
+//                NSLayoutConstraint.Create(myNavBar, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0),
+//            });
+//            //Status Bar Color Placeholder Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(statusBarColorPlaceholder, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+//                NSLayoutConstraint.Create(statusBarColorPlaceholder, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 0),
+//                NSLayoutConstraint.Create(statusBarColorPlaceholder, NSLayoutAttribute.Height, NSLayoutRelation.Equal, myNavBar, NSLayoutAttribute.Height, 1, 0),
+//                NSLayoutConstraint.Create(statusBarColorPlaceholder, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+//            });
+//            //Title Label Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(PostingTitle, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+//                NSLayoutConstraint.Create(PostingTitle, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+//                NSLayoutConstraint.Create(PostingTitle, NSLayoutAttribute.Top, NSLayoutRelation.Equal, myNavBar, NSLayoutAttribute.Bottom, 1, 75),
+//            });
+//            //ImageScrollView Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(imageScrollView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+//                NSLayoutConstraint.Create(imageScrollView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+//                NSLayoutConstraint.Create(imageScrollView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, PostingTitle, NSLayoutAttribute.Bottom, 1, 5),
+//                NSLayoutConstraint.Create(imageScrollView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 100),
+//            });
+//            imageScrollView.AddSubview(postingImageView);
+//            //Posting Image View Constraints
+////            this.View.AddConstraints(new NSLayoutConstraint[] {
+////                NSLayoutConstraint.Create(postingImageView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, imageScrollView, NSLayoutAttribute.Width, 1, 0),
+////                NSLayoutConstraint.Create(postingImageView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, imageScrollView, NSLayoutAttribute.CenterX, 1, 0),
+////                NSLayoutConstraint.Create(postingImageView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, imageScrollView, NSLayoutAttribute.Top, 1, 0),
+////                NSLayoutConstraint.Create(postingImageView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, imageScrollView, NSLayoutAttribute.Height, 1, 0),
+////            });
+//            //Image CollectionView Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(imageCollectionView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+//                NSLayoutConstraint.Create(imageCollectionView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+//                NSLayoutConstraint.Create(imageCollectionView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, imageScrollView, NSLayoutAttribute.Bottom, 1, 0),
+//                NSLayoutConstraint.Create(imageCollectionView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 25),
+//            });
+//            //Posting Description Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(PostingDescription, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+//                NSLayoutConstraint.Create(PostingDescription, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.5f, 0),
+//                NSLayoutConstraint.Create(PostingDescription, NSLayoutAttribute.Top, NSLayoutRelation.Equal, imageCollectionView, NSLayoutAttribute.Bottom, 1, 10),
+//                NSLayoutConstraint.Create(PostingDescription, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
+//            });
+//            //Date Label Constraints
+//            this.View.AddConstraints(new NSLayoutConstraint[] {
+//                NSLayoutConstraint.Create(dateLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+//                NSLayoutConstraint.Create(dateLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+//                NSLayoutConstraint.Create(dateLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, PostingDescription, NSLayoutAttribute.Bottom, 1, 10),
+//            });
+//
+//            this.View.LayoutIfNeeded();
+//        }
 	}
 }

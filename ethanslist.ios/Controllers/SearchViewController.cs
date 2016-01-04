@@ -161,19 +161,19 @@ namespace ethanslist.ios
         {
             this.View.RemoveConstraints(constraints: this.View.Constraints);
 
-            SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;//
-            SearchField.TranslatesAutoresizingMaskIntoConstraints = false;//
-            searchCLLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
+            SearchField.TranslatesAutoresizingMaskIntoConstraints = false;
+            searchCLLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             MinRentLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             MaxRentLabel.TranslatesAutoresizingMaskIntoConstraints = false;
-            MinLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MaxLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MinRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MaxRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MinBathTitleLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MinBedTitleLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
-            MinBedLabel.TranslatesAutoresizingMaskIntoConstraints = false;// 
-            MinBathLabel.TranslatesAutoresizingMaskIntoConstraints = false;//
+            MinLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            MaxLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;
+            MaxRentSlider.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinBathTitleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinBedTitleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinBedLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            MinBathLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             MinBathCountStep.TranslatesAutoresizingMaskIntoConstraints = false;
             MinBathCountStep.TranslatesAutoresizingMaskIntoConstraints = false;
             saveSearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
