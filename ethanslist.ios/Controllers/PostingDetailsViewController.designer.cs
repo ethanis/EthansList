@@ -32,6 +32,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIView imageViewPlaceholder { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UINavigationBar myNavBar { get; set; }
 
 		[Outlet]
@@ -75,6 +79,10 @@ namespace ethanslist.ios
 			if (imageScrollView != null) {
 				imageScrollView.Dispose ();
 				imageScrollView = null;
+			}
+			if (imageViewPlaceholder != null) {
+				imageViewPlaceholder.Dispose ();
+				imageViewPlaceholder = null;
 			}
 			if (myNavBar != null) {
 				myNavBar.Dispose ();

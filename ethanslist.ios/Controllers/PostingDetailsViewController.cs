@@ -63,15 +63,15 @@ namespace ethanslist.ios
 
             // center horizontally
             if (frameToCenter.Size.Width < boundsSize.Width)
-                frameToCenter.X = (this.View.Bounds.Size.Width - frameToCenter.Size.Width) / 2;
+                frameToCenter.X = (this.View.Bounds.Size.Width - (frameToCenter.Size.Width)) / 2;
             else
                 frameToCenter.X = 0;
 
             // center vertically
             if (frameToCenter.Size.Height < boundsSize.Height)
-                frameToCenter.Y = (boundsSize.Height - frameToCenter.Size.Height) / 2;
+                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2);
             else
-                frameToCenter.Y = 0;
+                frameToCenter.Y = imageViewPlaceholder.Frame.Y;
 
             postingImageView.Frame = frameToCenter;
         }
@@ -89,6 +89,13 @@ namespace ethanslist.ios
             PostingDescription.BackgroundColor = ColorScheme.Clouds;
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            CenterImage();
+
+            base.ViewDidAppear(animated);
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -99,7 +106,7 @@ namespace ethanslist.ios
             scrollView.AddSubviews(this.View.Subviews);
             this.View.InsertSubview(scrollView, 0);
 
-            scrollViewSize = imageScrollView.Bounds.Size;
+            scrollViewSize = imageViewPlaceholder.Bounds.Size;
 
             PostingTitle.Text = Post.PostTitle;
             PostingDescription.Text = Post.Description;
@@ -143,7 +150,6 @@ namespace ethanslist.ios
             UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap) {
                 NumberOfTapsRequired = 1
             };
-            imageScrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
 
             UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight) { 
                 Direction = UISwipeGestureRecognizerDirection.Right
@@ -151,6 +157,8 @@ namespace ethanslist.ios
             UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft) { 
                 Direction = UISwipeGestureRecognizerDirection.Left
             };
+
+            imageScrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
             imageScrollView.AddGestureRecognizer(swipeLeft);
             imageScrollView.AddGestureRecognizer(swipeRight);
 
@@ -187,7 +195,6 @@ namespace ethanslist.ios
                 Image = imageHelper.images[CurrentImageIndex];
             }
         }
-
 
         void OnDismiss(object sender, EventArgs e)
         {

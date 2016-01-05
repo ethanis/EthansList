@@ -62,6 +62,13 @@ namespace ethanslist.ios
             myImageView.Frame = frameToCenter;
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            CenterImage();
+
+            base.ViewDidAppear(animated);
+        }
+
         public override void LoadView()
         {
             base.LoadView();
