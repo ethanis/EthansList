@@ -39,6 +39,7 @@ namespace ethanslist.ios
                 return image;
             }
             set {
+                postingImageView.ContentMode = UIViewContentMode.Center;
                 postingImageView.SetImage(
                     new NSUrl(value),
                     UIImage.FromBundle("placeholder.png"),
@@ -62,7 +63,7 @@ namespace ethanslist.ios
 
             // center horizontally
             if (frameToCenter.Size.Width < boundsSize.Width)
-                frameToCenter.X = (boundsSize.Width - frameToCenter.Size.Width) / 2;
+                frameToCenter.X = (this.View.Bounds.Size.Width - frameToCenter.Size.Width) / 2;
             else
                 frameToCenter.X = 0;
 
@@ -142,8 +143,16 @@ namespace ethanslist.ios
             UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap) {
                 NumberOfTapsRequired = 1
             };
-
             imageScrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
+
+            UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight) { 
+                Direction = UISwipeGestureRecognizerDirection.Right
+            };
+            UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft) { 
+                Direction = UISwipeGestureRecognizerDirection.Left
+            };
+            imageScrollView.AddGestureRecognizer(swipeLeft);
+            imageScrollView.AddGestureRecognizer(swipeRight);
 
             DoneButton.Clicked += OnDismiss;
         }
@@ -158,6 +167,24 @@ namespace ethanslist.ios
                 postingImageVC.ImageIndex = CurrentImageIndex;
 
                 this.ShowViewController(postingImageVC, this);
+            }
+        }
+
+        private void OnSwipeRight (UIGestureRecognizer gesture)
+        {
+            if (CurrentImageIndex > 0)
+            {
+                CurrentImageIndex -= 1;
+                Image = imageHelper.images[CurrentImageIndex];
+            }
+        }
+
+        private void OnSwipeLeft (UIGestureRecognizer gesture)
+        {
+            if (CurrentImageIndex < imageHelper.images.Count - 1)
+            {
+                CurrentImageIndex += 1;
+                Image = imageHelper.images[CurrentImageIndex];
             }
         }
 

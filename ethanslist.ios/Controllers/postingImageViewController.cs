@@ -25,6 +25,7 @@ namespace ethanslist.ios
                 return image;
             }
             set {
+                myImageView.ContentMode = UIViewContentMode.Center;
                 myImageView.SetImage(
                     new NSUrl(value),
                     UIImage.FromBundle("placeholder.png"),
