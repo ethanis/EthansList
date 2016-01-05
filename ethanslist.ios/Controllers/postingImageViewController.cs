@@ -33,10 +33,32 @@ namespace ethanslist.ios
                     (image,error,cachetype,NSNull) => {
                         myImageView.ContentMode = UIViewContentMode.Center;
                         myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+                        CenterImage();
                     }
                 );
                 image = value;
             }
+        }
+
+        void CenterImage()
+        {
+            // center the image as it becomes smaller than the size of the screen
+            CGSize boundsSize = this.View.Bounds.Size;
+            CGRect frameToCenter = myImageView.Frame;
+
+            // center horizontally
+            if (frameToCenter.Size.Width < boundsSize.Width)
+                frameToCenter.X = (boundsSize.Width - frameToCenter.Size.Width) / 2;
+            else
+                frameToCenter.X = 0;
+
+            // center vertically
+            if (frameToCenter.Size.Height < boundsSize.Height)
+                frameToCenter.Y = (boundsSize.Height - frameToCenter.Size.Height) / 2;
+            else
+                frameToCenter.Y = 0;
+
+            myImageView.Frame = frameToCenter;
         }
 
         public override void LoadView()
@@ -48,6 +70,16 @@ namespace ethanslist.ios
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
             myImageView.ContentMode = UIViewContentMode.Center;
             myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            CenterImage();
+            if (ImageLinks[ImageIndex] != "-1")
+            {
+                Image = ImageLinks[ImageIndex];
+            }
+        }
+
+        public override void ViewWillLayoutSubviews()
+        {
+            base.ViewWillLayoutSubviews();
         }
 
         public override void ViewDidLoad()

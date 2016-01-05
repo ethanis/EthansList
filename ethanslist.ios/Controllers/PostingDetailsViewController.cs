@@ -19,6 +19,7 @@ namespace ethanslist.ios
         ImageCollectionViewSource collectionSource;
         ListingImageDownloader imageHelper;
         UIScrollView scrollView;
+        protected CGSize scrollViewSize;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -39,11 +40,39 @@ namespace ethanslist.ios
             }
             set {
                 postingImageView.SetImage(
-                    url: new NSUrl(value),
-                    placeholder: UIImage.FromBundle("placeholder.png")
+                    new NSUrl(value),
+                    UIImage.FromBundle("placeholder.png"),
+                    SDWebImageOptions.HighPriority,
+                    null,
+                    (image,error,cachetype,NSNull) => {
+                        postingImageView.ContentMode = UIViewContentMode.Center;
+                        postingImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+                        CenterImage();
+                    }
                 );
                 image = value;
             }
+        }
+
+        void CenterImage()
+        {
+            // center the image as it becomes smaller than the size of the screen
+            CGSize boundsSize = scrollViewSize;
+            CGRect frameToCenter = postingImageView.Frame;
+
+            // center horizontally
+            if (frameToCenter.Size.Width < boundsSize.Width)
+                frameToCenter.X = (boundsSize.Width - frameToCenter.Size.Width) / 2;
+            else
+                frameToCenter.X = 0;
+
+            // center vertically
+            if (frameToCenter.Size.Height < boundsSize.Height)
+                frameToCenter.Y = (boundsSize.Height - frameToCenter.Size.Height) / 2;
+            else
+                frameToCenter.Y = 0;
+
+            postingImageView.Frame = frameToCenter;
         }
 
         public int CurrentImageIndex { get; set; }
@@ -68,6 +97,8 @@ namespace ethanslist.ios
             scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
             scrollView.AddSubviews(this.View.Subviews);
             this.View.InsertSubview(scrollView, 0);
+
+            scrollViewSize = imageScrollView.Bounds.Size;
 
             PostingTitle.Text = Post.PostTitle;
             PostingDescription.Text = Post.Description;
