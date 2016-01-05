@@ -61,11 +61,7 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            scrollView = new UIScrollView();
-            scrollView.Frame = this.View.Bounds;
-            scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
-            scrollView.AddSubviews(this.View.Subviews);
-            this.View.InsertSubview(scrollView, 0);
+
             AddLayoutConstraints();
 
             this.Title = "Ethan's List";
@@ -161,6 +157,12 @@ namespace ethanslist.ios
         {
             this.View.RemoveConstraints(constraints: this.View.Constraints);
 
+            scrollView = new UIScrollView();
+            scrollView.Frame = this.View.Bounds;
+            scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
+            scrollView.AddSubviews(this.View.Subviews);
+            this.View.InsertSubview(scrollView, 0);
+
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchField.TranslatesAutoresizingMaskIntoConstraints = false;
             searchCLLabel.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -180,96 +182,96 @@ namespace ethanslist.ios
 
             //Seach CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 100),
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(searchCLLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Top, 1, 50),
             });
             //Seach Field Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchField, NSLayoutAttribute.Top, NSLayoutRelation.Equal, searchCLLabel, NSLayoutAttribute.Bottom, 1, 25),
             });
             //Seach Button Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchField, NSLayoutAttribute.Bottom, 1, 25),
             });
             //Min Rent Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinRentLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinRentLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+                NSLayoutConstraint.Create(MinRentLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinRentLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.50f, 0),
                 NSLayoutConstraint.Create(MinRentLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 50),
             });
             //Max Rent Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MaxRentLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MaxRentLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.5f, 0),
+                NSLayoutConstraint.Create(MaxRentLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MaxRentLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.5f, 0),
                 NSLayoutConstraint.Create(MaxRentLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 50),
             });
             //Min Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.50f, 0),
                 NSLayoutConstraint.Create(MinLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinRentLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Max Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MaxLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MaxLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.5f, 0),
+                NSLayoutConstraint.Create(MaxLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MaxLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.5f, 0),
                 NSLayoutConstraint.Create(MaxLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MaxRentLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Rent Slider Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
-                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.50f, 0),
                 NSLayoutConstraint.Create(MinRentSlider, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Max Rent Slider Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
-                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.5f, 0),
+                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.5f, 0),
                 NSLayoutConstraint.Create(MaxRentSlider, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MaxLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Bed Title Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBedTitleLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinBedTitleLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.50f, 0),
+                NSLayoutConstraint.Create(MinBedTitleLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBedTitleLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.50f, 0),
                 NSLayoutConstraint.Create(MinBedTitleLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinRentSlider, NSLayoutAttribute.Bottom, 1, 25),
             });
             //Min Bath Title Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBathTitleLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinBathTitleLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.5f, 0),
+                NSLayoutConstraint.Create(MinBathTitleLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBathTitleLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.5f, 0),
                 NSLayoutConstraint.Create(MinBathTitleLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MaxRentSlider, NSLayoutAttribute.Bottom, 1, 25),
             });
             //Min Bed Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.5f, 0),
+                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.5f, 0),
                 NSLayoutConstraint.Create(MinBedLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedTitleLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Bath Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
-                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.50f, 0),
+                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.50f, 0),
                 NSLayoutConstraint.Create(MinBathLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBathTitleLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Bed Stepper Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 0.5f, 0),
+                NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 0.5f, 0),
                 NSLayoutConstraint.Create(MinBedCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Min Bath Stepper Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.50f, 0),
+                NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.50f, 0),
                 NSLayoutConstraint.Create(MinBathCountStep, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBathLabel, NSLayoutAttribute.Bottom, 1, 10),
             });
             //Save Search Button Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .45f, 0),
-                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1.50f, 0),
+                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.Width, .45f, 0),
+                NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, scrollView, NSLayoutAttribute.CenterX, 1.50f, 0),
                 NSLayoutConstraint.Create(saveSearchButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, MinBedCountStep, NSLayoutAttribute.Bottom, 1, 25),
             });
 
