@@ -57,6 +57,13 @@ namespace ethanslist.ios
                 Console.WriteLine(currentSelected.SiteName);
                 searchViewController.Url = currentSelected.Url;
                 searchViewController.City = currentSelected.SiteName;
+                
+                    if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 4)
+                    {
+                        AppDelegate.databaseConnection.DeleteOldestCityAsync();
+                    }
+
+                    AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url).Wait();
 
                 this.ShowViewController(searchViewController, this);
             };

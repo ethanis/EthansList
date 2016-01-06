@@ -117,7 +117,7 @@ namespace EthansList.Models
                 Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
         }
         //
-        public async Task AddNewRecentCityAsync(String city)
+        public async Task AddNewRecentCityAsync(String city, string url)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace EthansList.Models
                     throw new Exception("Valid city required");
 
                 //insert a new person into the Person table
-                var result = await conn.InsertAsync(new RecentCity { City = city })
+                var result = await conn.InsertAsync(new RecentCity { City = city, Url = url })
                     .ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} recent city added [City: {1})", result, city);
                 StatusCode = codes.ok;
@@ -138,10 +138,10 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeleteLastCityAsync()
+        public async Task DeleteOldestCityAsync()
         {
             var list = await GetAllRecentCitiesAsync();
-            var oldest = list.ElementAt(list.Count - 1);
+            var oldest = list.ElementAt(0);
 
             try
             {
@@ -173,7 +173,6 @@ namespace EthansList.Models
 
         public Task<List<RecentCity>> GetAllRecentCitiesAsync()
         {
-            //return a list of people saved to the Person table in the database
             return conn.Table<RecentCity>().ToListAsync();
         }
     }

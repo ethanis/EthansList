@@ -10,6 +10,7 @@ namespace EthansList.Models
         public int ID { get; set;}
         [Unique]
         public string City { get; set;}
+        public string Url { get; set; }
     }
 }
 
