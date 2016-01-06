@@ -20,6 +20,7 @@ namespace EthansList.Models
             conn = new SQLiteAsyncConnection(dbPath);
             conn.CreateTableAsync<Posting>().Wait();
             conn.CreateTableAsync<Search>().Wait();
+            conn.CreateTableAsync<RecentCity>().Wait();
         }
 
         public async Task AddNewListingAsync(String title, string description, string link, string imageLink, DateTime date)
@@ -114,6 +115,66 @@ namespace EthansList.Models
         {
             return String.Format("Min Price: {1}{0}Max Price: {2}{0}Min Bedrooms: {3}{0}Min Bathrooms: {4}{0}Search Items: {5}",
                 Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
+        }
+        //
+        public async Task AddNewRecentCityAsync(String city)
+        {
+            try
+            {
+                //basic validation to ensure a name was entered
+                if (city == null)
+                    throw new Exception("Valid city required");
+
+                //insert a new person into the Person table
+                var result = await conn.InsertAsync(new RecentCity { City = city })
+                    .ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} recent city added [City: {1})", result, city);
+                StatusCode = codes.ok;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to add {0}. Error: {1}", city, ex.Message);
+                StatusCode = codes.bad;
+            }
+        }
+
+        public async Task DeleteLastCityAsync()
+        {
+            var list = await GetAllRecentCitiesAsync();
+            var oldest = list.ElementAt(list.Count - 1);
+
+            try
+            {
+                await DeleteCityAsync(oldest);
+                StatusMessage = string.Format("Oldest Search dropped from database [City: {1}]", oldest);
+                StatusCode = codes.ok;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to delete last city: {0}, Error: {1}", oldest, ex.Message);
+                StatusCode = codes.bad;
+            }
+        }
+
+        public async Task DeleteCityAsync(RecentCity city)
+        {
+            try
+            {
+                var result = await conn.DeleteAsync(city).ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} dropped from database [City: {1}]", result, city);
+                StatusCode = codes.ok;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", city, ex.Message); 
+                StatusCode = codes.bad;
+            }
+        }
+
+        public Task<List<RecentCity>> GetAllRecentCitiesAsync()
+        {
+            //return a list of people saved to the Person table in the database
+            return conn.Table<RecentCity>().ToListAsync();
         }
     }
 

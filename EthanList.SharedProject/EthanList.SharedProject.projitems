@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DatabaseConnection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\QueryGeneration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ListingImageDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RecentCity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

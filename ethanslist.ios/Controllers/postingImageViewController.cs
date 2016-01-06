@@ -55,9 +55,9 @@ namespace ethanslist.ios
 
             // center vertically
             if (frameToCenter.Size.Height < boundsSize.Height)
-                frameToCenter.Y = (boundsSize.Height - frameToCenter.Size.Height) / 2;
+                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2) - UIApplication.SharedApplication.StatusBarFrame.Height;
             else
-                frameToCenter.Y = 0;
+                frameToCenter.Y = UIApplication.SharedApplication.StatusBarFrame.Height;
 
             myImageView.Frame = frameToCenter;
         }
