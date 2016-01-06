@@ -23,8 +23,8 @@ namespace ethanslist.android
         ListView              drawerListView;
         public static DatabaseConnection databaseConnection { get; private set;}
 
-        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
-        string  [] titles    = new string  [] { "Select City", "Saved Postings", "Saved Searches"};
+        Android.App.Fragment[] fragments = new Android.App.Fragment[] { new SelectCityFragment(), new RecentCitiesFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        string  [] titles    = new string  [] { "Select City", "Recent Cities", "Saved Postings", "Saved Searches"};
 
         protected override void OnCreate(Bundle bundle)
         {

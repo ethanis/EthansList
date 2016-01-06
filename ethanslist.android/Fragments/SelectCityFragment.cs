@@ -60,6 +60,11 @@ namespace ethanslist.android
                 transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
+
+                if (MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 4)
+                    MainActivity.databaseConnection.DeleteOldestCityAsync().Wait();
+                
+                MainActivity.databaseConnection.AddNewRecentCityAsync(searchFragment.location.SiteName, searchFragment.location.Url).Wait();
             };
 
             return view;
