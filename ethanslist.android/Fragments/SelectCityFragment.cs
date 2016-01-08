@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
+using System.Threading.Tasks;
 
 namespace ethanslist.android
 {
@@ -62,10 +63,12 @@ namespace ethanslist.android
                 transaction.AddToBackStack(null);
                 transaction.Commit();
 
-                MainActivity.databaseConnection.AddNewRecentCityAsync(searchFragment.location.SiteName, searchFragment.location.Url);
+                Task.Run(async () => {
+                    await MainActivity.databaseConnection.AddNewRecentCityAsync(searchFragment.location.SiteName, searchFragment.location.Url).ConfigureAwait(true);
 
-                if (MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
-                    MainActivity.databaseConnection.DeleteOldestCityAsync();
+                    if (MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
+                        await MainActivity.databaseConnection.DeleteOldestCityAsync().ConfigureAwait(true);
+                });
             };
 
             return view;

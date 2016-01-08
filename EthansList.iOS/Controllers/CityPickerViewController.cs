@@ -57,13 +57,15 @@ namespace ethanslist.ios
                 Console.WriteLine(currentSelected.SiteName);
                 searchViewController.Url = currentSelected.Url;
                 searchViewController.City = currentSelected.SiteName;
-                
-                    AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
 
-                    if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
-                    {
-                        AppDelegate.databaseConnection.DeleteOldestCityAsync();
-                    }
+                    System.Threading.Tasks.Task.Run(async () => {
+                        await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
+
+                        if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
+                        {
+                            await AppDelegate.databaseConnection.DeleteOldestCityAsync();
+                        }
+                    });
 
                 this.ShowViewController(searchViewController, this);
             };
