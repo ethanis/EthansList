@@ -25,12 +25,21 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            ProceedButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
-            ProceedButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
-            ProceedButton.Layer.CornerRadius = 10;
-            ProceedButton.ClipsToBounds = true;
+            FormatButtons(new UIButton[]{ProceedButton, RecentCitiesButton});
+
             AddLayoutConstraints();
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+        }
+
+        void FormatButtons(UIButton[] buttons)
+        {
+            foreach (UIButton button in buttons)
+            {
+                button.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
+                button.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
+                button.Layer.CornerRadius = 10;
+                button.ClipsToBounds = true;
+            }
         }
 
         public override void ViewDidLoad()
@@ -68,6 +77,12 @@ namespace ethanslist.ios
                     });
 
                 this.ShowViewController(searchViewController, this);
+            };
+
+            RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) => {
+                var storyboard = UIStoryboard.FromName("Main", null);
+                var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
+                this.ShowViewController(recentCitiesViewController, this);
             };
 
             stateModel.ValueChanged += (object sender, EventArgs e) =>
@@ -190,7 +205,7 @@ namespace ethanslist.ios
             this.View.AddConstraints(stateConstraints.ToArray());
 
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
-            //            City picker view constraints
+            //City picker view constraints
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Left, 
                 NSLayoutRelation.Equal, StatePickerView, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Right, 
@@ -202,11 +217,17 @@ namespace ethanslist.ios
 
             this.View.AddConstraints(cityConstraints.ToArray());
 
+            //Proceed Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, CityPickerView, NSLayoutAttribute.Bottom, 1, 20),
-
+            });
+            //Recent Cities Button View Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Bottom, 1, 5),
             });
             this.View.LayoutIfNeeded();
         }

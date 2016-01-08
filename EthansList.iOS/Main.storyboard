@@ -572,12 +572,19 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2367" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="20" y="495" width="280" height="30"/>
+                                <state key="normal" title="Recent Cities">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="CityPickerView" destination="507" id="name-outlet-507"/>
                         <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
                         <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
+                        <outlet property="RecentCitiesButton" destination="2367" id="name-outlet-2367"/>
                     </connections>
                     <navigationItem title="Select City" id="593" key="navigationItem"/>
                 </viewController>
