@@ -25,21 +25,19 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            FormatButtons(new UIButton[]{ProceedButton, RecentCitiesButton});
+            FormatButton(ProceedButton, ColorScheme.MidnightBlue);
+            FormatButton(RecentCitiesButton, ColorScheme.Concrete);
 
             AddLayoutConstraints();
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
 
-        void FormatButtons(UIButton[] buttons)
+        void FormatButton(UIButton button, UIColor background)
         {
-            foreach (UIButton button in buttons)
-            {
-                button.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
-                button.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
-                button.Layer.CornerRadius = 10;
-                button.ClipsToBounds = true;
-            }
+            button.Layer.BackgroundColor = background.CGColor;
+            button.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
+            button.Layer.CornerRadius = 10;
+            button.ClipsToBounds = true;
         }
 
         public override void ViewDidLoad()
