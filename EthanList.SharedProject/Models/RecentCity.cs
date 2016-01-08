@@ -11,6 +11,7 @@ namespace EthansList.Models
         [Unique]
         public string City { get; set;}
         public string Url { get; set; }
+        public DateTime Updated { get; set; }
     }
 }
 

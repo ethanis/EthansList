@@ -116,20 +116,33 @@ namespace EthansList.Models
             return String.Format("Min Price: {1}{0}Max Price: {2}{0}Min Bedrooms: {3}{0}Min Bathrooms: {4}{0}Search Items: {5}",
                 Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
         }
-        //
+
         public async Task AddNewRecentCityAsync(String city, string url)
         {
+            var current = conn.Table<RecentCity>().Where(x => x.City.Equals(city)).ToListAsync().Result;
             try
             {
-                //basic validation to ensure a name was entered
-                if (city == null)
-                    throw new Exception("Valid city required");
+                if (current.Count > 0)
+                {
+                    foreach (var past in current)
+                    {
+                        past.Updated = System.DateTime.UtcNow;
+                        var result = conn.UpdateAsync(past).Result;
+                        StatusMessage = string.Format("{0} recent city updated [City: {1})", result, past);
+                        StatusCode = codes.ok;
+                    }
+                }
+                else 
+                {
+                        //basic validation to ensure a name was entered
+                        if (city == null)
+                            throw new Exception("Valid city required");
 
-                //insert a new person into the Person table
-                var result = await conn.InsertAsync(new RecentCity { City = city, Url = url })
-                    .ConfigureAwait(continueOnCapturedContext: false);
-                StatusMessage = string.Format("{0} recent city added [City: {1})", result, city);
-                StatusCode = codes.ok;
+                        var result = await conn.InsertAsync(new RecentCity { City = city, Url = url, Updated = System.DateTime.UtcNow })
+                            .ConfigureAwait(continueOnCapturedContext: false);
+                        StatusMessage = string.Format("{0} recent city added [City: {1})", result, city);
+                        StatusCode = codes.ok;
+                }
             }
             catch (Exception ex)
             {
@@ -140,8 +153,8 @@ namespace EthansList.Models
 
         public async Task DeleteOldestCityAsync()
         {
-            var list = await GetAllRecentCitiesAsync();
-            var oldest = list.ElementAt(0);
+            var list = GetAllRecentCitiesAsync().Result;
+            RecentCity oldest = list.OrderBy(x => x.Updated).FirstOrDefault();
 
             try
             {
@@ -154,6 +167,14 @@ namespace EthansList.Models
                 StatusMessage = string.Format("Failed to delete last city: {0}, Error: {1}", oldest, ex.Message);
                 StatusCode = codes.bad;
             }
+        }
+
+        public RecentCity GetOldestCity()
+        {
+            var list = GetAllRecentCitiesAsync().Result;
+            RecentCity oldest = list.OrderByDescending(x => x.Updated).FirstOrDefault();
+
+            return oldest;
         }
 
         public async Task DeleteCityAsync(RecentCity city)

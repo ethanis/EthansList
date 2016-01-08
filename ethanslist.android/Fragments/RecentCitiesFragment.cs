@@ -19,31 +19,30 @@ namespace ethanslist.android
     public class RecentCitiesFragment : Fragment
     {
         ListView recentCitiesListView;
+        List<RecentCity> recentCityList;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            
             var view = inflater.Inflate(Resource.Layout.RecentCities, container, false);
 
-            var recentCities = MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Select(x => x.City).ToList();
-            recentCities.Reverse();
+            recentCityList = MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result;
+//            recentCities.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
+            recentCityList.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
             recentCitiesListView = view.FindViewById<ListView>(Resource.Id.recentCitiesList);
 
-            recentCitiesListView.Adapter = new ArrayAdapter<String>(this.Activity, Android.Resource.Layout.SimpleListItem1, recentCities);
+            recentCitiesListView.Adapter = new ArrayAdapter<String>(this.Activity, Android.Resource.Layout.SimpleListItem1, recentCityList.Select(x => x.City).ToList());
 
             recentCitiesListView.ItemClick += (sender, e) => {
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
                 SearchFragment searchFragment = new SearchFragment();
                 AvailableLocations locations = new AvailableLocations();
-                searchFragment.location = locations.PotentialLocations.Where(loc => loc.SiteName == recentCities[e.Position]).First();
+                searchFragment.location = locations.PotentialLocations.Where(loc => loc.SiteName.Equals(recentCityList[e.Position].City)).First();
                 transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();

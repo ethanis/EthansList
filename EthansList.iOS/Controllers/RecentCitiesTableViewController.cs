@@ -21,7 +21,7 @@ namespace ethanslist.ios
             base.ViewDidLoad();
 
             recentCities = AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result;
-            recentCities.Reverse();
+            recentCities.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
 
             recentCitySource = new RecentCityTableViewSource(this, recentCities);
             TableView.Source = recentCitySource;
