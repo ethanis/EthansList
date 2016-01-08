@@ -169,14 +169,6 @@ namespace EthansList.Models
             }
         }
 
-        public RecentCity GetOldestCity()
-        {
-            var list = GetAllRecentCitiesAsync().Result;
-            RecentCity oldest = list.OrderByDescending(x => x.Updated).FirstOrDefault();
-
-            return oldest;
-        }
-
         public async Task DeleteCityAsync(RecentCity city)
         {
             try

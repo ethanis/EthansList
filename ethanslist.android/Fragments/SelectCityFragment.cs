@@ -65,9 +65,7 @@ namespace ethanslist.android
                 MainActivity.databaseConnection.AddNewRecentCityAsync(searchFragment.location.SiteName, searchFragment.location.Url);
 
                 if (MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
-                {
                     MainActivity.databaseConnection.DeleteOldestCityAsync();
-                }
             };
 
             return view;

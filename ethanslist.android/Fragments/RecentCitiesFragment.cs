@@ -32,7 +32,6 @@ namespace ethanslist.android
             var view = inflater.Inflate(Resource.Layout.RecentCities, container, false);
 
             recentCityList = MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result;
-//            recentCities.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
             recentCityList.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
             recentCitiesListView = view.FindViewById<ListView>(Resource.Id.recentCitiesList);
 
