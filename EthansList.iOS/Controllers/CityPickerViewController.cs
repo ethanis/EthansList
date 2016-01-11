@@ -5,7 +5,6 @@ using UIKit;
 using System.Linq;
 using System.Collections.Generic;
 using EthansList.Shared;
-//using Cirrious.FluentLayouts.Touch;
 
 namespace ethanslist.ios
 {

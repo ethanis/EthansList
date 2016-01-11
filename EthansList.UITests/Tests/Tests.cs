@@ -24,6 +24,7 @@ namespace ethanslist.UITests
         public void AppLaunches()
         {
             app.Screenshot("First Screen");
+            Console.WriteLine("HELLO!!!");
         }
     }
 }
