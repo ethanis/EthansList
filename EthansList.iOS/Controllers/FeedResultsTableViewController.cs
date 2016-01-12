@@ -13,7 +13,7 @@ namespace ethanslist.ios
 	partial class FeedResultsTableViewController : UITableViewController
 	{
         FeedResultTableSource tableSource;
-        CLFeedClient feedClient;
+        private CLFeedClient feedClient;
         Stopwatch loadTimer;
         int percentComplete = 0;
         protected LoadingOverlay _loadingOverlay = null;
@@ -35,12 +35,15 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            Console.WriteLine(Query);
 
             loadTimer = new Stopwatch();
             loadTimer.Start();
 
             this.Title = "Craigslist Results";
+            feedClient = null;
             feedClient = new CLFeedClient(Query);
+            feedClient.GetPostings();
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
@@ -66,13 +69,14 @@ namespace ethanslist.ios
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
-                feedClient.RefreshPostings();
+                feedClient.GetPostings();
             };
 
             feedClient.loadingComplete += feedClient_LoadingComplete;
 
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
+                    feedClient = null;
                     this._loadingOverlay.Hide();
                     RefreshControl.EndRefreshing();
                     UIAlertView alert = new UIAlertView();

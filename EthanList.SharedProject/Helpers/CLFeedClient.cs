@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Xml;
 using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using EthansList.Models;
+using System.Net;
+using HtmlAgilityPack;
 
 namespace EthansList.Shared
 {
@@ -22,11 +25,9 @@ namespace EthansList.Shared
         {
             postings = new List<Posting>();
             this.query = query;
-
-            GetFeedAsync();
         }
 
-        public void RefreshPostings()
+        public void GetPostings()
         {
             GetFeedAsync();
         }
@@ -71,50 +72,65 @@ namespace EthansList.Shared
             {
                 AsyncXmlLoader.ReportProgress(i); 
             }
-            AsyncXmlDocument = new XmlDocument();
-            AsyncXmlDocument.Load(query);
-            WireUpPostings();
+//            AsyncXmlDocument = new XmlDocument();
+//            AsyncXmlDocument.Load(query);
+//            WireUpPostings();
+
+            WebClient client = new WebClient();
+            string html = client.DownloadString(new Uri(query));
+
+            ParseHtmlForPostings(html);
         }
 
-        private void WireUpPostings()
+        public void ParseHtmlForPostings(string html)
         {
-            XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
-            mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-            mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
-            XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
+            List<HtmlNode> itemNodes = null;
+            itemNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
+                where node.Name == "item"
+                select node).ToList();
 
-            // Iterate through the items in the RSS file
-            foreach (XmlNode rssNode in rssNodes)
+            foreach (HtmlNode node in itemNodes)
             {
                 string imageLink = "-1";
+                string title = String.Empty;
+                string description = String.Empty;
+                string link = string.Empty;
                 DateTime date = new DateTime();
-                foreach (XmlNode child in rssNode.ChildNodes)
-                {
-                    if (child.Name == "enc:enclosure")
-                    {
-                        string pot = child.Attributes["resource"].Value;
-                        imageLink = pot != null ? pot : "-1";
-//                        Console.WriteLine(imageLink);
-                    }
 
-                    if (child.Name == "dc:date")
-                    {
-                        date = DateTime.Parse(child.InnerText);
-                    }
-//                    Console.WriteLine(child.Name + " = " + child.InnerText);
+                foreach (HtmlNode child in node.ChildNodes)
+                {
+
+                        if (child.Name == "title")
+                        {
+                            string pot = child.InnerText;
+                            title = pot != null ? pot : "";
+                        }
+                        if (child.Name == "description")
+                        {
+                            string pot = child.InnerText;
+                            description = pot != null ? pot : "";
+                        }
+                        if (child.Name == "link")
+                        {
+                            string pot = child.InnerText;
+                            link = pot != null ? pot : "";
+                        }
+
+                        if (child.Name == "enc:enclosure")
+                        {
+                            string pot = child.Attributes["resource"].Value;
+                            imageLink = pot != null ? pot : "-1";
+                        }
+
+                        if (child.Name == "dc:date")
+                        {
+                            date = DateTime.Parse(child.InnerText);
+                        }
                 }
 
-                XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
-                string title = rssSubNode != null ? rssSubNode.InnerText : "";
-
-                rssSubNode = rssNode.SelectSingleNode("x:link", mgr);
-                string link = rssSubNode != null ? rssSubNode.InnerText : "";
-
-                rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
-                string description = rssSubNode != null ? rssSubNode.InnerText : "";
-
-                if (title != null && description != null && description != null)
                 {
                     Posting posting = new Posting();
                     posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
@@ -128,6 +144,78 @@ namespace EthansList.Shared
                 }
             }
         }
+//
+//        private void WireUpPostings()
+//        {
+//            XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
+//            mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+//            mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
+//
+//            XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
+//
+//            // Iterate through the items in the RSS file
+//            foreach (XmlNode rssNode in rssNodes)
+//            {
+//                string imageLink = "-1";
+//                string title = String.Empty;
+//                string description = String.Empty;
+//                string link = string.Empty;
+//                DateTime date = new DateTime();
+//                foreach (XmlNode child in rssNode.ChildNodes)
+//                {
+//                    if (child.Name == "title")
+//                    {
+//                        string pot = child.InnerText;
+//                        title = pot != null ? pot : "";
+//                    }
+//                    if (child.Name == "description")
+//                    {
+//                        string pot = child.InnerText;
+//                        description = pot != null ? pot : "";
+//                    }
+//                    if (child.Name == "link")
+//                    {
+//                        string pot = child.InnerText;
+//                        link = pot != null ? pot : "";
+//                    }
+//
+//                    if (child.Name == "enc:enclosure")
+//                    {
+//                        string pot = child.Attributes["resource"].Value;
+//                        imageLink = pot != null ? pot : "-1";
+////                        Console.WriteLine(imageLink);
+//                    }
+//
+//                    if (child.Name == "dc:date")
+//                    {
+//                        date = DateTime.Parse(child.InnerText);
+//                    }
+////                    Console.WriteLine(child.Name + " = " + child.InnerText);
+//                }
+//
+////                XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
+////                string title = rssSubNode != null ? rssSubNode.InnerText : "";
+////
+////                rssSubNode = rssNode.SelectSingleNode("x:link", mgr);
+////                string link = rssSubNode != null ? rssSubNode.InnerText : "";
+////
+////                rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
+////                string description = rssSubNode != null ? rssSubNode.InnerText : "";
+//
+//                if (title != null)
+//                {
+//                    Posting posting = new Posting();
+//                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
+//                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
+//                    posting.Link = link;
+//                    posting.ImageLink = imageLink;
+//                    posting.Date = date;
+//
+//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+//                        postings.Add(posting);
+//                }
+//            }
+//        }
 
         public string GetTitle(int index)
         {

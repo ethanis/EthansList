@@ -14,16 +14,16 @@ namespace ethanslist.ios
 	{
         private int minBed = 0;
         private int minBath = 1;
-        private Dictionary<string, string> searchTerms = new Dictionary<string, string>();
+        private Dictionary<string, string> searchTerms;
         private UIScrollView scrollView;
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
-            searchTerms.Add("min_price", null);
-            searchTerms.Add("max_price", null);
-            searchTerms.Add("bedrooms", null);
-            searchTerms.Add("bathrooms", null);
-            searchTerms.Add("query", null);
+//            searchTerms.Add("min_price", null);
+//            searchTerms.Add("max_price", null);
+//            searchTerms.Add("bedrooms", null);
+//            searchTerms.Add("bathrooms", null);
+//            searchTerms.Add("query", null);
 		}
 
         public String Url { get; set;}
@@ -32,6 +32,7 @@ namespace ethanslist.ios
         public override void LoadView()
         {
             base.LoadView();
+            searchTerms = new Dictionary<string, string>();
 
             SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
             SearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
@@ -61,7 +62,6 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-
             AddLayoutConstraints();
 
             this.Title = "Ethan's List";
@@ -76,18 +76,22 @@ namespace ethanslist.ios
 
             MinRentSlider.ValueChanged += (object sender, EventArgs e) => {
                 MinLabel.Text = String.Format("{0:C0}", MinRentSlider.Value);
+                searchTerms["min_price"] = MinRentSlider.Value.ToString();
             };
 
             MaxRentSlider.ValueChanged += (object sender, EventArgs e) => {
                 MaxLabel.Text = String.Format("{0:C0}", MaxRentSlider.Value);
+                searchTerms["max_price"] = MaxRentSlider.Value.ToString();
             };
 
             MinBedCountStep.ValueChanged += (object sender, EventArgs e) => {
                 MinBedLabel.Text = FormatBeds((int)MinBedCountStep.Value);
+                searchTerms["bedrooms"] = MinBedCountStep.Value.ToString();
             };
 
             MinBathCountStep.ValueChanged += (object sender, EventArgs e) => {
                 MinBathLabel.Text = FormatBeds((int)MinBathCountStep.Value);
+                searchTerms["bathrooms"] = MinBathCountStep.Value.ToString();
             };
 
             SearchField.EditingDidBegin += delegate { SearchField.BecomeFirstResponder(); };
@@ -95,6 +99,11 @@ namespace ethanslist.ios
             SearchField.ShouldReturn += delegate {
                 SearchField.ResignFirstResponder();
                 return true;
+            };
+
+            SearchField.EditingChanged += delegate
+            {
+                searchTerms["query"] = SearchField.Text;
             };
 
             saveSearchButton.TouchUpInside += SaveSearchButton_TouchUpInside;
@@ -132,11 +141,6 @@ namespace ethanslist.ios
             var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
             QueryGeneration helper = new QueryGeneration();
-            searchTerms["min_price"] = MinRentSlider.Value.ToString();
-            searchTerms["max_price"] = MaxRentSlider.Value.ToString();
-            searchTerms["bedrooms"] = MinBedCountStep.Value.ToString();
-            searchTerms["bathrooms"] = MinBathCountStep.Value.ToString();
-            searchTerms["query"] = SearchField.Text;
 
             feedViewController.Query = helper.Generate(Url, searchTerms);
 
