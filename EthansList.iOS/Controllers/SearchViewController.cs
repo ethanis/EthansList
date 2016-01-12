@@ -19,11 +19,7 @@ namespace ethanslist.ios
 
 		public SearchViewController (IntPtr handle) : base (handle)
 		{
-//            searchTerms.Add("min_price", null);
-//            searchTerms.Add("max_price", null);
-//            searchTerms.Add("bedrooms", null);
-//            searchTerms.Add("bathrooms", null);
-//            searchTerms.Add("query", null);
+            searchTerms = new Dictionary<string, string>();
 		}
 
         public String Url { get; set;}
@@ -32,7 +28,6 @@ namespace ethanslist.ios
         public override void LoadView()
         {
             base.LoadView();
-            searchTerms = new Dictionary<string, string>();
 
             SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
             SearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
