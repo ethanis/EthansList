@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EthansList.Models;
 using System.Net;
 using HtmlAgilityPack;
+using System.Text.RegularExpressions;
 
 namespace EthansList.Shared
 {
@@ -72,97 +73,102 @@ namespace EthansList.Shared
             {
                 AsyncXmlLoader.ReportProgress(i); 
             }
-//            AsyncXmlDocument = new XmlDocument();
-//            AsyncXmlDocument.Load(query);
-//            WireUpPostings();
-
+            AsyncXmlDocument = new XmlDocument();
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(query));
 
-            ParseHtmlForPostings(html);
+            AsyncXmlDocument.LoadXml(html);
+            WireUpPostings();
+//            ParseHtmlForPostings(html);
         }
 
-        public void ParseHtmlForPostings(string html)
-        {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            List<HtmlNode> itemNodes = null;
-            itemNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
-                where node.Name == "item"
-                select node).ToList();
-
-            foreach (HtmlNode node in itemNodes)
-            {
-                string imageLink = "-1";
-                string title = String.Empty;
-                string description = String.Empty;
-                string link = string.Empty;
-                DateTime date = new DateTime();
-
-                foreach (HtmlNode child in node.ChildNodes)
-                {
-
-                        if (child.Name == "title")
-                        {
-                            string pot = child.InnerText;
-                            title = pot != null ? pot : "";
-                        }
-                        if (child.Name == "description")
-                        {
-                            string pot = child.InnerText;
-                            description = pot != null ? pot : "";
-                        }
-                        if (child.Name == "link")
-                        {
-                            string pot = child.InnerText;
-                            link = pot != null ? pot : "";
-                        }
-
-                        if (child.Name == "enc:enclosure")
-                        {
-                            string pot = child.Attributes["resource"].Value;
-                            imageLink = pot != null ? pot : "-1";
-                        }
-
-                        if (child.Name == "dc:date")
-                        {
-                            date = DateTime.Parse(child.InnerText);
-                        }
-                }
-
-                {
-                    Posting posting = new Posting();
-                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
-                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
-                    posting.Link = link;
-                    posting.ImageLink = imageLink;
-                    posting.Date = date;
-
-                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
-                        postings.Add(posting);
-                }
-            }
-        }
-//
-//        private void WireUpPostings()
+//        public void ParseHtmlForPostings(string html)
 //        {
-//            XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
-//            mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-//            mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
+//            HtmlDocument doc = new HtmlDocument();
+//            doc.LoadHtml(html);
 //
-//            XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
+//            List<HtmlNode> itemNodes = null;
+//            itemNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
+//                where node.Name == "item"
+//                select node).ToList();
 //
-//            // Iterate through the items in the RSS file
-//            foreach (XmlNode rssNode in rssNodes)
+//            foreach (HtmlNode node in itemNodes)
 //            {
 //                string imageLink = "-1";
 //                string title = String.Empty;
 //                string description = String.Empty;
 //                string link = string.Empty;
 //                DateTime date = new DateTime();
-//                foreach (XmlNode child in rssNode.ChildNodes)
+//
+//                foreach (HtmlNode child in node.ChildNodes)
 //                {
+//                    Console.WriteLine(child.Name);
+//                    if (child.Name == "title")
+//                    {
+//                        string pot = child.InnerText;
+//                        Console.WriteLine(pot);
+//                        Console.WriteLine(pot.Substring(9, pot.Length - 12));
+//                        Console.WriteLine(Environment.NewLine);
+//                        title = pot != null ? pot.Substring(9, pot.Length - 12) : "";
+//                    }
+//                    if (child.Name == "description")
+//                    {
+//                        string pot = child.InnerText;
+//                        description = pot != null ? pot.Substring(9, pot.Length - 12) : "";
+//                    }
+//                    if (child.Name == "link")
+//                    {
+//                        string pot = child.InnerText;
+//                        link = pot != null ? pot : "";
+//                        Console.WriteLine(link);
+//                    }
+//
+//                    if (child.Name == "enc:enclosure")
+//                    {
+//                        string pot = child.Attributes["resource"].Value;
+//                        imageLink = pot != null ? pot : "-1";
+//                        Console.WriteLine(imageLink);
+//                    }
+//
+//                    if (child.Name == "dc:date")
+//                    {
+//                        date = DateTime.Parse(child.InnerText);
+//                        Console.WriteLine(date);
+//                    }
+//                }
+//
+//                {
+//                    Posting posting = new Posting();
+//                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
+//                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
+//                    posting.Link = link;
+//                    posting.ImageLink = imageLink;
+//                    posting.Date = date;
+//
+//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+//                        postings.Add(posting);
+//                }
+//            }
+//        }
+
+        private void WireUpPostings()
+        {
+            XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
+            mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+            mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
+
+            XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
+
+            // Iterate through the items in the RSS file
+            foreach (XmlNode rssNode in rssNodes)
+            {
+                string imageLink = "-1";
+//                string title = String.Empty;
+//                string description = String.Empty;
+//                string link = string.Empty;
+                DateTime date = new DateTime();
+                foreach (XmlNode child in rssNode.ChildNodes)
+                {
 //                    if (child.Name == "title")
 //                    {
 //                        string pot = child.InnerText;
@@ -179,43 +185,41 @@ namespace EthansList.Shared
 //                        link = pot != null ? pot : "";
 //                    }
 //
-//                    if (child.Name == "enc:enclosure")
-//                    {
-//                        string pot = child.Attributes["resource"].Value;
-//                        imageLink = pot != null ? pot : "-1";
-////                        Console.WriteLine(imageLink);
-//                    }
+                    if (child.Name == "enc:enclosure")
+                    {
+                        string pot = child.Attributes["resource"].Value;
+                        imageLink = pot != null ? pot : "-1";
+                    }
 //
-//                    if (child.Name == "dc:date")
-//                    {
-//                        date = DateTime.Parse(child.InnerText);
-//                    }
-////                    Console.WriteLine(child.Name + " = " + child.InnerText);
-//                }
-//
-////                XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
-////                string title = rssSubNode != null ? rssSubNode.InnerText : "";
-////
-////                rssSubNode = rssNode.SelectSingleNode("x:link", mgr);
-////                string link = rssSubNode != null ? rssSubNode.InnerText : "";
-////
-////                rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
-////                string description = rssSubNode != null ? rssSubNode.InnerText : "";
-//
-//                if (title != null)
-//                {
-//                    Posting posting = new Posting();
-//                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
-//                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
-//                    posting.Link = link;
-//                    posting.ImageLink = imageLink;
-//                    posting.Date = date;
-//
-//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
-//                        postings.Add(posting);
-//                }
-//            }
-//        }
+                    if (child.Name == "dc:date")
+                    {
+                        date = DateTime.Parse(child.InnerText);
+                    }
+                }
+
+                XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
+                string title = rssSubNode != null ? rssSubNode.InnerText : "";
+
+                rssSubNode = rssNode.SelectSingleNode("x:link", mgr);
+                string link = rssSubNode != null ? rssSubNode.InnerText : "";
+
+                rssSubNode = rssNode.SelectSingleNode("x:description", mgr);
+                string description = rssSubNode != null ? rssSubNode.InnerText : "";
+
+                if (title != null)
+                {
+                    Posting posting = new Posting();
+                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
+                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
+                    posting.Link = link;
+                    posting.ImageLink = imageLink;
+                    posting.Date = date;
+
+                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+                        postings.Add(posting);
+                }
+            }
+        }
 
         public string GetTitle(int index)
         {
