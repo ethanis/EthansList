@@ -167,6 +167,10 @@
       <DependentUpon>RecentCitiesTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\RecentCityTableViewSource.cs" />
+    <Compile Include="PickSearchCityViewController.cs" />
+    <Compile Include="PickSearchCityViewController.designer.cs">
+      <DependentUpon>PickSearchCityViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
