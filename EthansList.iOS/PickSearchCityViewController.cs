@@ -58,11 +58,11 @@ namespace ethanslist.ios
             cityModel.ValueChange += cityPickerChanged;
 
             CurrentStateLabel.AllTouchEvents += (sender, e) => {
-                BeginPickerAnimations(StatePickerView, CityPickerView);
+                ShowStatePickerOnly();
             };
 
             CurrentCityLabel.AllTouchEvents += (sender, e) => {
-                BeginPickerAnimations(CityPickerView, StatePickerView);
+                ShowCityPickerOnly();
             };
 
             CurrentStateLabel.ShouldReturn += delegate {
@@ -106,12 +106,16 @@ namespace ethanslist.ios
                     CityPickerView.Model = cityModel;
 
                     cityModel.ValueChange += cityPickerChanged;
+                    CurrentStateLabel.Text = state;
+//                    ShowCityPickerOnly();
                 };
         }
 
         void cityPickerChanged (object sender, EventArgs e)
         {
             currentSelected = cityModel.SelectedCity;
+            CurrentCityLabel.Text = currentSelected.SiteName;
+//            ShowStateAndCityPicker();
         }
 
         public class StatePickerModel : UIPickerViewModel
@@ -216,7 +220,7 @@ namespace ethanslist.ios
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
             //State picker view constraints
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Left, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
+                NSLayoutRelation.Equal, topView, NSLayoutAttribute.Left, 1, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Top, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Height,
@@ -226,7 +230,7 @@ namespace ethanslist.ios
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
             //City picker view constraints
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Right, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
+                NSLayoutRelation.Equal, topView, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Top, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Height,
@@ -258,41 +262,27 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Bottom, 1, 5),
             });
 
+            ShowStateAndCityPicker();
+
+            this.View.LayoutIfNeeded();
+        }
+
+        void ShowStateAndCityPicker()
+        {
+            if (statepickerWidthConstraint != null)
+                this.View.RemoveConstraint(statepickerWidthConstraint);
+            if (citypickerWidthConstraint != null)
+                this.View.RemoveConstraint(citypickerWidthConstraint);
             //StatePicker Width Constraint
             statepickerWidthConstraint = NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Width, 
-                                                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0);
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0);
             //CityPicker Width Constraint
             citypickerWidthConstraint = NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Width, 
-                                                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0);
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0);
 
             this.View.AddConstraint(statepickerWidthConstraint);
             this.View.AddConstraint(citypickerWidthConstraint);
             this.View.LayoutIfNeeded();
-        }
-
-        void BeginPickerAnimations(UIPickerView showPicker, UIPickerView hidePicker)
-        {
-            UIView.Animate (
-                0,
-                () => {
-                hidePicker.Alpha = 0;
-            },
-                () => {
-                hidePicker.RemoveFromSuperview ();
-            });
-
-            switch (showPicker.AccessibilityIdentifier)
-            {
-                case "statePicker":
-                    ShowStatePickerOnly();
-                    break;
-                case "cityPicker":
-                    ShowCityPickerOnly();
-                    break;
-                default:
-                    break;
-            }
-
         }
 
         void ShowStatePickerOnly()
@@ -300,11 +290,13 @@ namespace ethanslist.ios
             UIView.Animate (
                 0,
                 () => {
+                CityPickerView.Hidden = true;
+                StatePickerView.Hidden = false;
                 this.View.RemoveConstraint(statepickerWidthConstraint);
+                this.View.RemoveConstraint(citypickerWidthConstraint);
                 //Show Picker View Constraints
                 statepickerWidthConstraint = NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Width, 
                     NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0);
-
                 this.View.AddConstraint(statepickerWidthConstraint);
             },
                 () => {
@@ -317,11 +309,13 @@ namespace ethanslist.ios
             UIView.Animate (
                 0,
                 () => {
+                StatePickerView.Hidden = true;
+                CityPickerView.Hidden = false;
                 this.View.RemoveConstraint(citypickerWidthConstraint);
+                this.View.RemoveConstraint(statepickerWidthConstraint);
                 //Show Picker View Constraints
                 citypickerWidthConstraint = NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Width, 
                     NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0);
-
                 this.View.AddConstraint(citypickerWidthConstraint);
             },
                 () => {
