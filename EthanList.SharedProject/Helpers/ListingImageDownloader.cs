@@ -17,6 +17,7 @@ namespace EthansList.Shared
         readonly string url;
         readonly string rssImageUrl;
         public List<string> images = new List<string>();
+        public string postingDescription;
 
         private static BackgroundWorker AsyncHtmlLoader;
         public EventHandler<EventArgs> loadingComplete;
@@ -80,18 +81,19 @@ namespace EthansList.Shared
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
-
+//            Console.WriteLine(html);
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
                 where node.Name == "a"
                 && node.Attributes["id"] != null
                 && node.Attributes["data-imgid"] != null
                 select node).ToList();
-
             foreach (HtmlNode node in imageNodes)
             {
                 images.Add(node.Attributes["href"].Value);
             }
+
+            postingDescription = doc.GetElementbyId("postingbody").InnerText;
 
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);

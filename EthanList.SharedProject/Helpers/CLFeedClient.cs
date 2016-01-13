@@ -190,7 +190,7 @@ namespace EthansList.Shared
                         string pot = child.Attributes["resource"].Value;
                         imageLink = pot != null ? pot : "-1";
                     }
-//
+
                     if (child.Name == "dc:date")
                     {
                         date = DateTime.Parse(child.InnerText);
@@ -199,6 +199,10 @@ namespace EthansList.Shared
 
                 XmlNode rssSubNode = rssNode.SelectSingleNode("x:title", mgr);
                 string title = rssSubNode != null ? rssSubNode.InnerText : "";
+                if (title.Length > 12 && title.Substring(title.Length - 12) == "<sup>2</sup>")
+                {
+                    title = title.Remove(title.Length - 12);
+                }
 
                 rssSubNode = rssNode.SelectSingleNode("x:link", mgr);
                 string link = rssSubNode != null ? rssSubNode.InnerText : "";

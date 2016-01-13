@@ -65,19 +65,6 @@
                                 <rect key="frame" x="0.0" y="120" width="320" height="180"/>
                                 <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" minimumFontSize="10" id="258" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="2">
-                                <rect key="frame" x="20" y="70" width="280" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingTitle"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="70" width="280" height="24"/>
-                                </variation>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="974" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="20" y="522" width="232" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -190,15 +177,22 @@
                                 </variation>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2164" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" editable="NO" selectable="NO">
-                                <rect key="frame" x="20" y="364" width="280" height="150"/>
+                                <rect key="frame" x="6" y="364" width="308" height="150"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="20" y="364" width="280" height="150"/>
                                 </variation>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" minimumFontSize="10" id="2398" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="2">
+                                <rect key="frame" x="6" y="71" width="308" height="41"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint id="2258" firstItem="2141" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
@@ -207,9 +201,6 @@
                             <constraint id="2264" firstItem="1420" firstAttribute="trailing" secondItem="2141" secondAttribute="trailing"/>
                             <constraint id="2265" firstItem="1420" firstAttribute="leading" secondItem="2141" secondAttribute="leading"/>
                             <constraint id="2266" firstItem="1420" firstAttribute="top" secondItem="2141" secondAttribute="top" constant="19"/>
-                            <constraint id="2269" firstItem="258" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
-                            <constraint id="2270" firstItem="255" firstAttribute="trailing" secondItem="258" secondAttribute="trailing" constant="20"/>
-                            <constraint id="2271" firstItem="258" firstAttribute="top" secondItem="1420" secondAttribute="bottom" constant="7"/>
                             <constraint id="2280" firstItem="255" firstAttribute="trailing" secondItem="2094" secondAttribute="trailing"/>
                             <constraint id="2281" firstItem="2094" firstAttribute="top" secondItem="255" secondAttribute="top" constant="120"/>
                             <constraint id="2286" firstItem="255" firstAttribute="bottom" secondItem="2094" secondAttribute="bottom" constant="268"/>
@@ -217,8 +208,8 @@
                             <constraint id="2297" firstItem="2107" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
                             <constraint id="2298" firstItem="2107" firstAttribute="top" secondItem="2094" secondAttribute="bottom" constant="3"/>
                             <constraint id="2299" firstItem="255" firstAttribute="bottom" secondItem="2107" secondAttribute="bottom" constant="212"/>
-                            <constraint id="2300" firstItem="2164" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
-                            <constraint id="2301" firstItem="255" firstAttribute="trailing" secondItem="2164" secondAttribute="trailing" constant="20"/>
+                            <constraint id="2300" firstItem="2164" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="10"/>
+                            <constraint id="2301" firstItem="255" firstAttribute="trailing" secondItem="2164" secondAttribute="trailing" constant="10"/>
                             <constraint id="2302" firstItem="2164" firstAttribute="top" secondItem="2107" secondAttribute="bottom" constant="8"/>
                             <constraint id="2303" firstItem="255" firstAttribute="bottom" secondItem="2164" secondAttribute="bottom" constant="54"/>
                             <constraint id="2304" firstItem="974" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
@@ -228,6 +219,9 @@
                             <constraint id="2331" firstItem="2329" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
                             <constraint id="2332" firstItem="2329" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
                             <constraint id="2333" firstItem="255" firstAttribute="bottom" secondItem="2329" secondAttribute="bottom" constant="268"/>
+                            <constraint id="2399" firstItem="2398" firstAttribute="top" secondItem="255" secondAttribute="top" constant="71"/>
+                            <constraint id="2400" firstItem="2398" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="6"/>
+                            <constraint id="2401" firstItem="255" firstAttribute="trailing" secondItem="2398" secondAttribute="trailing" constant="6"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -237,9 +231,6 @@
                                 <exclude reference="2264"/>
                                 <exclude reference="2265"/>
                                 <exclude reference="2266"/>
-                                <exclude reference="2269"/>
-                                <exclude reference="2270"/>
-                                <exclude reference="2271"/>
                                 <exclude reference="2280"/>
                                 <exclude reference="2281"/>
                                 <exclude reference="2286"/>
@@ -264,9 +255,6 @@
                                 <include reference="2264"/>
                                 <include reference="2265"/>
                                 <include reference="2266"/>
-                                <include reference="2269"/>
-                                <include reference="2270"/>
-                                <include reference="2271"/>
                                 <include reference="2280"/>
                                 <include reference="2281"/>
                                 <include reference="2286"/>
@@ -285,7 +273,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
                         <outlet property="dateLabel" destination="974" id="name-outlet-974"/>
                         <outlet property="DoneButton" destination="1424" id="name-outlet-1424"/>
                         <outlet property="SaveButton" destination="1423" id="name-outlet-1423"/>
@@ -297,6 +284,7 @@
                         <outlet property="statusBarColorPlaceholder" destination="2141" id="name-outlet-2141"/>
                         <outlet property="PostingDescription" destination="2164" id="name-outlet-2164"/>
                         <outlet property="imageViewPlaceholder" destination="2329" id="name-outlet-2329"/>
+                        <outlet property="PostingTitle" destination="2398" id="name-outlet-2398"/>
                     </connections>
                     <toolbarItems/>
                 </viewController>
@@ -806,6 +794,10 @@
     </scenes>
     <resources>
         <image name="placeholder.png" width="500" height="350"/>
+        <image name="Icon-60.png" width="60" height="60"/>
+        <image name="Icon-Small.png" width="29" height="29"/>
+        <image name="Icon-Small-40.png" width="40" height="40"/>
+        <image name="Icon.png" width="57" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>

@@ -112,10 +112,13 @@ namespace ethanslist.ios
             PostingDescription.Text = Post.Description;
             CurrentImageIndex = 0;
 
+            PostingTitle.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
+
             imageHelper = new ListingImageDownloader(Post.Link, Post.ImageLink);
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
                 {
+                    PostingDescription.Text = imageHelper.postingDescription;
                     imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
                     collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
                     imageCollectionView.Source = collectionSource;
