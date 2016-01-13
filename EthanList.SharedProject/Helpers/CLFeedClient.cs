@@ -9,6 +9,7 @@ using EthansList.Models;
 using System.Net;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Net.Http;
 
 namespace EthansList.Shared
 {

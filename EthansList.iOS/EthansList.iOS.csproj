@@ -84,6 +84,7 @@
     <Reference Include="Calabash">
       <HintPath>..\packages\Xamarin.TestCloud.Agent.0.17.0\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -187,5 +188,6 @@
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\LaunchScreenIcon.png" />
   </ItemGroup>
 </Project>
