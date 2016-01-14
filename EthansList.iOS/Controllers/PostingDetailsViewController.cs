@@ -20,6 +20,7 @@ namespace ethanslist.ios
         ListingImageDownloader imageHelper;
         UIScrollView scrollView;
         protected CGSize scrollViewSize;
+        protected SmallLoadingOverlay _loadingOverlay = null;
 
 		public PostingDetailsViewController (IntPtr handle) : base (handle)
 		{
@@ -106,6 +107,12 @@ namespace ethanslist.ios
             scrollView.AddSubviews(this.View.Subviews);
             this.View.InsertSubview(scrollView, 0);
 
+            if (Post.ImageLink != "-1")
+            {
+                var bounds = imageCollectionView.Bounds;
+                _loadingOverlay = new SmallLoadingOverlay(bounds);
+                imageCollectionView.Add(_loadingOverlay);
+            }
             scrollViewSize = imageViewPlaceholder.Bounds.Size;
 
             PostingTitle.Text = Post.PostTitle;
@@ -118,6 +125,8 @@ namespace ethanslist.ios
 
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
                 {
+                    if (_loadingOverlay != null)
+                        _loadingOverlay.Hide();
                     PostingDescription.Text = imageHelper.postingDescription;
                     imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
                     collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
