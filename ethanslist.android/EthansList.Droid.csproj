@@ -100,11 +100,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\StateRow.axml" />
     <AndroidResource Include="Resources\layout\CityRow.axml" />
     <AndroidResource Include="Resources\layout\Search.axml" />
@@ -122,11 +117,11 @@
     <AndroidResource Include="Resources\layout\SavedSearchRow.axml" />
     <AndroidResource Include="Resources\values\theme.xml" />
     <AndroidResource Include="Resources\layout\RecentCities.axml" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher_APP.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher_APP.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher_APP.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher_APP.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher_APP.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ethanslist_icon.png" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

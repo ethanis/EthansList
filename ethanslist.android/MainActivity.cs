@@ -15,7 +15,7 @@ using EthansList.Models;
 
 namespace ethanslist.android
 {
-    [Activity(Label = "ethanlist.android", MainLauncher = true, Icon = "@drawable/ic_launcher_APP")]
+    [Activity(Label = "ethanlist.android", MainLauncher = true, Icon = "@drawable/ethanslist_icon")]
     public class MainActivity : Activity
     {
         DrawerLayout          drawerLayout;
