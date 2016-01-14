@@ -27,8 +27,6 @@ namespace EthansList.Shared
         {
             this.url = url;
             this.rssImageUrl = rssImageUrl;
-//            if (rssImageUrl != null || rssImageUrl != "-1")
-//                images.Add(rssImageUrl);
             
             GetImagesAsync();
         }

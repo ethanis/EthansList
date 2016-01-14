@@ -162,7 +162,6 @@
     </Compile>
     <Compile Include="TableViewSources\SavedPostingsTableViewSource.cs" />
     <Compile Include="Helpers\ColorScheme.cs" />
-    <Compile Include="Helpers\ConstraintHelper.cs" />
     <Compile Include="Controllers\RecentCitiesTableViewController.cs" />
     <Compile Include="Controllers\RecentCitiesTableViewController.designer.cs">
       <DependentUpon>RecentCitiesTableViewController.cs</DependentUpon>
