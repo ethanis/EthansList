@@ -70,8 +70,8 @@ namespace ethanslist.ios
         public SmallLoadingOverlay (CGRect frame) : base (frame)
         {
             // configurable bits
-            BackgroundColor = UIColor.Clear;
-            Alpha = 0.0f;
+            BackgroundColor = UIColor.LightGray;
+            Alpha = 0.60f;
             AutoresizingMask = UIViewAutoresizing.All;
 
             // derive the center x and y
