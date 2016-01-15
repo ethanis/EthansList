@@ -23,7 +23,7 @@ namespace ethanslist.ios
             nfloat centerX = Frame.Width / 2;
             nfloat centerY = Frame.Height / 2;
 
-            // create the activity spinner, center it horizontall and put it 5 points above center x
+            // create the activity spinner, center it horizontaly and put it 5 points above center x
             activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
             activitySpinner.Frame = new CGRect ( 
                 centerX - (activitySpinner.Frame.Width / 2) ,
@@ -78,7 +78,7 @@ namespace ethanslist.ios
             nfloat centerX = Frame.Width / 2;
             nfloat centerY = Frame.Height / 2;
 
-            // create the activity spinner, center it horizontall and put it 5 points above center x
+            // create the activity spinner, center it vertically and put it at center x
             activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
             activitySpinner.Frame = new CGRect ( 
                 centerX - (activitySpinner.Frame.Width / 2) ,

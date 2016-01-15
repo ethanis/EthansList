@@ -58,7 +58,7 @@
     <MtouchProfiling>true</MtouchProfiling>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>6134aba8-c9aa-4d70-9d0e-3c275b735cf1</CodesignProvision>
+    <CodesignProvision>432eb3fc-530d-4644-b008-b14711a81b3e</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>
     </IpaPackageName>

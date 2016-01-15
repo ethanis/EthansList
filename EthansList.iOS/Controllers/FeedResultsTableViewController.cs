@@ -37,8 +37,8 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             Console.WriteLine(Query);
 
-            loadTimer = new Stopwatch();
-            loadTimer.Start();
+//            loadTimer = new Stopwatch();
+//            loadTimer.Start();
 
             this.Title = "Craigslist Results";
             feedClient = null;
@@ -86,21 +86,23 @@ namespace ethanslist.ios
                     this.InvokeOnMainThread(() => alert.Show());
             };
 
-            feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
-            {
-                    percentComplete += 10;
-                    Console.WriteLine(percentComplete + "% Complete");
-            };
+//            feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
+//            {
+//                    percentComplete += 10;
+//                    Console.WriteLine(percentComplete + "% Complete");
+//            };
         }
 
         void feedClient_LoadingComplete(object sender, EventArgs e)
         {
-            this.InvokeOnMainThread(() => this._loadingOverlay.Hide());
-            loadTimer.Stop();
-            TableView.ReloadData();
-            Console.WriteLine(loadTimer.Elapsed);
-            percentComplete = 0;
-            RefreshControl.EndRefreshing();
+            this.InvokeOnMainThread(() => {
+                this._loadingOverlay.Hide();
+//                loadTimer.Stop();
+                TableView.ReloadData();
+//                Console.WriteLine(loadTimer.Elapsed);
+//                percentComplete = 0;
+                RefreshControl.EndRefreshing();
+            });
         }
 	}
 }

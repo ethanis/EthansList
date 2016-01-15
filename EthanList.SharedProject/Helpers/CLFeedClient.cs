@@ -15,12 +15,13 @@ namespace EthansList.Shared
     public class CLFeedClient
     {
         public List<Posting> postings;
-        readonly string query;
+        private string query;
         private static BackgroundWorker AsyncXmlLoader;
         private static XmlDocument AsyncXmlDocument;
         public EventHandler<EventArgs> loadingComplete;
         public EventHandler<EventArgs> loadingProgressChanged;
         public EventHandler<EventArgs> emptyPostingComplete;
+        private int pageCounter = 25;
 
         public CLFeedClient(String query)
         {
@@ -55,7 +56,7 @@ namespace EthansList.Shared
 
         void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine(postings.Count);
+//            Console.WriteLine(postings.Count);
             if (postings.Count == 0 && this.emptyPostingComplete != null)
             {
                 this.emptyPostingComplete(this, new EventArgs());
@@ -158,7 +159,7 @@ namespace EthansList.Shared
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
 
             XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
-
+            bool incremented = false;
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
             {
@@ -219,10 +220,21 @@ namespace EthansList.Shared
                     posting.ImageLink = imageLink;
                     posting.Date = date;
 
-                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
+//                    {
                         postings.Add(posting);
+                        incremented = true;
+//                    }
                 }
             }
+
+            if (postings.Count >= 25 && postings.Count < 100 && incremented)
+            {
+                this.query += String.Format("&s={0}", pageCounter);
+                GetPostings();
+                pageCounter += 25;
+            }
+            Console.WriteLine(postings.Count);
         }
 
         public string GetTitle(int index)
