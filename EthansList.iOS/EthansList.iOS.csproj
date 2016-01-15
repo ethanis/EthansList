@@ -110,6 +110,8 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
+    <InterfaceDefinition Include="SearchTermsCell.xib" />
+    <InterfaceDefinition Include="PriceSelectorCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -167,6 +169,18 @@
       <DependentUpon>RecentCitiesTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\RecentCityTableViewSource.cs" />
+    <Compile Include="SearchOptionsViewController.cs" />
+    <Compile Include="SearchOptionsViewController.designer.cs">
+      <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchTermsCell.cs" />
+    <Compile Include="SearchTermsCell.designer.cs">
+      <DependentUpon>SearchTermsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceSelectorCell.cs" />
+    <Compile Include="PriceSelectorCell.designer.cs">
+      <DependentUpon>PriceSelectorCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
