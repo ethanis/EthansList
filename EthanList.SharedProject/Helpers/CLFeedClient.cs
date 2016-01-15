@@ -19,7 +19,6 @@ namespace EthansList.Shared
         private static BackgroundWorker AsyncXmlLoader;
         private static XmlDocument AsyncXmlDocument;
         public EventHandler<EventArgs> loadingComplete;
-        public EventHandler<EventArgs> loadingProgressChanged;
         public EventHandler<EventArgs> emptyPostingComplete;
         private int pageCounter = 25;
 
@@ -38,25 +37,14 @@ namespace EthansList.Shared
         {
             AsyncXmlLoader = new BackgroundWorker();
             AsyncXmlLoader.WorkerReportsProgress = true;
-            
-            AsyncXmlLoader.ProgressChanged += AsyncXmlLoader_ProgressChanged;;
             AsyncXmlLoader.DoWork += AsyncXmlLoader_DoWork;
             AsyncXmlLoader.RunWorkerCompleted += AsyncXmlLoader_RunWorkerCompleted;
 
             AsyncXmlLoader.RunWorkerAsync();
         }
 
-        void AsyncXmlLoader_ProgressChanged (object sender, ProgressChangedEventArgs e)
-        {
-            if (this.loadingProgressChanged != null)
-            {
-                this.loadingProgressChanged(this, new EventArgs());
-            }
-        }
-
         void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
         {
-//            Console.WriteLine(postings.Count);
             if (postings.Count == 0 && this.emptyPostingComplete != null)
             {
                 this.emptyPostingComplete(this, new EventArgs());
@@ -69,88 +57,13 @@ namespace EthansList.Shared
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
         {
-            //TODO: have this report actual progress done
-            for (int i = 10; i <= 100; i+=10)
-            {
-                AsyncXmlLoader.ReportProgress(i); 
-            }
             AsyncXmlDocument = new XmlDocument();
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(query));
 
             AsyncXmlDocument.LoadXml(html);
             WireUpPostings();
-//            ParseHtmlForPostings(html);
         }
-
-//        public void ParseHtmlForPostings(string html)
-//        {
-//            HtmlDocument doc = new HtmlDocument();
-//            doc.LoadHtml(html);
-//
-//            List<HtmlNode> itemNodes = null;
-//            itemNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
-//                where node.Name == "item"
-//                select node).ToList();
-//
-//            foreach (HtmlNode node in itemNodes)
-//            {
-//                string imageLink = "-1";
-//                string title = String.Empty;
-//                string description = String.Empty;
-//                string link = string.Empty;
-//                DateTime date = new DateTime();
-//
-//                foreach (HtmlNode child in node.ChildNodes)
-//                {
-//                    Console.WriteLine(child.Name);
-//                    if (child.Name == "title")
-//                    {
-//                        string pot = child.InnerText;
-//                        Console.WriteLine(pot);
-//                        Console.WriteLine(pot.Substring(9, pot.Length - 12));
-//                        Console.WriteLine(Environment.NewLine);
-//                        title = pot != null ? pot.Substring(9, pot.Length - 12) : "";
-//                    }
-//                    if (child.Name == "description")
-//                    {
-//                        string pot = child.InnerText;
-//                        description = pot != null ? pot.Substring(9, pot.Length - 12) : "";
-//                    }
-//                    if (child.Name == "link")
-//                    {
-//                        string pot = child.InnerText;
-//                        link = pot != null ? pot : "";
-//                        Console.WriteLine(link);
-//                    }
-//
-//                    if (child.Name == "enc:enclosure")
-//                    {
-//                        string pot = child.Attributes["resource"].Value;
-//                        imageLink = pot != null ? pot : "-1";
-//                        Console.WriteLine(imageLink);
-//                    }
-//
-//                    if (child.Name == "dc:date")
-//                    {
-//                        date = DateTime.Parse(child.InnerText);
-//                        Console.WriteLine(date);
-//                    }
-//                }
-//
-//                {
-//                    Posting posting = new Posting();
-//                    posting.PostTitle = System.Net.WebUtility.HtmlDecode(title);
-//                    posting.Description = System.Net.WebUtility.HtmlDecode(description);
-//                    posting.Link = link;
-//                    posting.ImageLink = imageLink;
-//                    posting.Date = date;
-//
-//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
-//                        postings.Add(posting);
-//                }
-//            }
-//        }
 
         private void WireUpPostings()
         {
@@ -164,28 +77,9 @@ namespace EthansList.Shared
             foreach (XmlNode rssNode in rssNodes)
             {
                 string imageLink = "-1";
-//                string title = String.Empty;
-//                string description = String.Empty;
-//                string link = string.Empty;
                 DateTime date = new DateTime();
                 foreach (XmlNode child in rssNode.ChildNodes)
                 {
-//                    if (child.Name == "title")
-//                    {
-//                        string pot = child.InnerText;
-//                        title = pot != null ? pot : "";
-//                    }
-//                    if (child.Name == "description")
-//                    {
-//                        string pot = child.InnerText;
-//                        description = pot != null ? pot : "";
-//                    }
-//                    if (child.Name == "link")
-//                    {
-//                        string pot = child.InnerText;
-//                        link = pot != null ? pot : "";
-//                    }
-//
                     if (child.Name == "enc:enclosure")
                     {
                         string pot = child.Attributes["resource"].Value;
@@ -235,11 +129,6 @@ namespace EthansList.Shared
                 pageCounter += 25;
             }
             Console.WriteLine(postings.Count);
-        }
-
-        public string GetTitle(int index)
-        {
-            return postings[index].PostTitle;
         }
     }
 }

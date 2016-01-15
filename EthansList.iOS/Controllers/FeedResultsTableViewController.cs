@@ -85,12 +85,6 @@ namespace ethanslist.ios
                     alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
                     this.InvokeOnMainThread(() => alert.Show());
             };
-
-//            feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
-//            {
-//                    percentComplete += 10;
-//                    Console.WriteLine(percentComplete + "% Complete");
-//            };
         }
 
         void feedClient_LoadingComplete(object sender, EventArgs e)

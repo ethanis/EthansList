@@ -40,6 +40,7 @@ namespace ethanslist.android
                 ptr_list_view = (IPullToRefresharpView)feedResultsListView;
 
             feedClient = new CLFeedClient(query);
+            feedClient.GetPostings();
             var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
             new Thread(new ThreadStart(delegate
                 {
@@ -48,9 +49,11 @@ namespace ethanslist.android
                         this.Activity.RunOnUiThread(() => {
                             progressDialog.Hide();
                         });
-                        Console.WriteLine(feedClient.postings.Count);
+                        Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
                         postingListAdapter = new PostingListAdapter(this.Activity, feedClient.postings);
-                        feedResultsListView.Adapter = postingListAdapter;
+                        this.Activity.RunOnUiThread(() => {
+                            feedResultsListView.Adapter = postingListAdapter;
+                        });
                     };
 
                     feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
