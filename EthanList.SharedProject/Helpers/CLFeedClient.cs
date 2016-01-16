@@ -21,11 +21,13 @@ namespace EthansList.Shared
         public EventHandler<EventArgs> loadingComplete;
         public EventHandler<EventArgs> emptyPostingComplete;
         private int pageCounter = 25;
+        readonly int MaxListings;
 
-        public CLFeedClient(String query)
+        public CLFeedClient(String query, int MaxListings = 25)
         {
             postings = new List<Posting>();
             this.query = query;
+            this.MaxListings = MaxListings;
         }
 
         public void GetPostings()
@@ -122,7 +124,7 @@ namespace EthansList.Shared
                 }
             }
 
-            if (postings.Count >= 25 && postings.Count < 100 && incremented)
+            if (postings.Count >= 25 && postings.Count < MaxListings && incremented)
             {
                 this.query += String.Format("&s={0}", pageCounter);
                 GetPostings();

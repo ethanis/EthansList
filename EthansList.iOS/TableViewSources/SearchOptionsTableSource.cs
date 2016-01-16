@@ -89,37 +89,44 @@ namespace ethanslist.ios
             {
                 cell = SearchTermsCell.Create();
                 ((SearchTermsCell)cell).TermsField.EditingChanged += delegate
-                    {
-                        ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
-                    };
+                {
+                    ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
+                };
             }
             else if (item.CellType == "PriceSelectorCell")
             {
                 cell = PriceSelectorCell.Create();
                 ((PriceSelectorCell)cell).LabelText = item.Heading;
                 ((PriceSelectorCell)cell).MinPrice.EditingChanged += delegate
-                    {
-                        ((SearchOptionsViewController)(this.owner)).MinPrice = ((PriceSelectorCell)cell).MinPrice.Text;
-                    };
+                {
+                    ((SearchOptionsViewController)(this.owner)).MinPrice = ((PriceSelectorCell)cell).MinPrice.Text;
+                };
                 ((PriceSelectorCell)cell).MaxPrice.EditingChanged += delegate
-                    {
-                        ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
-                    };
+                {
+                    ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
+                };
             }
             else if (item.CellType == "BedBathCell")
             {
                 cell = BedBathCell.Create();
+
                 ((BedBathCell)cell).Title = item.Heading;
 
-                UITapGestureRecognizer tap = new UITapGestureRecognizer(async () => {
-                    var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
-                    Console.WriteLine (result);
-                    ((BedBathCell)cell).MinimumLabel.Text = result;
-                    if (item.Heading == "Min Bedrooms")
-                        ((SearchOptionsViewController)(this.owner)).MinBedrooms = item.ActionOptions[result];
-                    else
-                        ((SearchOptionsViewController)(this.owner)).MinBathrooms = item.ActionOptions[result];
-                });
+                if (item.SubHeading != null)
+                    ((BedBathCell)cell).MinimumLabel.Text = item.SubHeading;
+                
+                UITapGestureRecognizer tap = new UITapGestureRecognizer(async () =>
+                    {
+                        var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
+                        Console.WriteLine(result);
+                        ((BedBathCell)cell).MinimumLabel.Text = result;
+                        if (item.Heading == "Min Bedrooms")
+                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = item.ActionOptions[result];
+                        else if (item.Heading == "Min Bathrooms")
+                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = item.ActionOptions[result];
+                        else if (item.Heading == "Max Listings")
+                            ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt32(item.ActionOptions[result]);
+                    });
 
                 ((BedBathCell)cell).MinimumLabel.AddGestureRecognizer(tap);
             }
@@ -130,7 +137,7 @@ namespace ethanslist.ios
         public static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, string> options)
         {
             var taskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<string>();
-            // Create a new Alert Controller
+
             UIAlertController actionSheetAlert = UIAlertController.Create(strTitle, strMsg, UIAlertControllerStyle.ActionSheet);
 
             foreach (KeyValuePair<string, string> option in options)

@@ -31,6 +31,12 @@ namespace ethanslist.ios
         }
 
         public String Query { get; set;}
+        public int MaxListings 
+        { 
+            get { return maxListings; } 
+            set { maxListings = value; }
+        }
+        protected int maxListings = 25;
 
         public override void ViewDidLoad()
         {
@@ -42,7 +48,7 @@ namespace ethanslist.ios
 
             this.Title = "Craigslist Results";
             feedClient = null;
-            feedClient = new CLFeedClient(Query);
+            feedClient = new CLFeedClient(Query, MaxListings);
             feedClient.GetPostings();
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds

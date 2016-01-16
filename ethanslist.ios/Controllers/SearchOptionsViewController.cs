@@ -16,6 +16,7 @@ namespace ethanslist.ios
         public string MinPrice { get; set; }
         public string MaxPrice { get; set; }
         public string SearchTerms { get; set; }
+        public int MaxListings { get; set; }
 
         public Location Location { get; set; }
 
@@ -95,6 +96,7 @@ namespace ethanslist.ios
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
                 feedViewController.Query = query;
+                feedViewController.MaxListings = MaxListings;
 
                 this.ShowViewController(feedViewController, this);
             };
@@ -143,6 +145,18 @@ namespace ethanslist.ios
                     {"3+", "3"},
                 }
             });
+            options.Items.Add(new TableItem() {
+                Heading = "Max Listings",
+                CellType = "BedBathCell",
+                SubHeading = "25",
+                ActionOptions = new Dictionary<string, string>() 
+                {
+                    {"25", "25"},
+                    {"50", "50"},
+                    {"75", "75"},
+                    {"100", "100"},
+                }
+            });
 
             tableItems.Add(searchterms);
             tableItems.Add(options);
@@ -152,9 +166,18 @@ namespace ethanslist.ios
 
         void AddLayoutConstraints()
         {
+            scrollView.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
+
+            //Scroll View Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
+                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
+            });
 
             //Seach CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
