@@ -1,110 +1,21 @@
-using Foundation;
-using System;
-using System.CodeDom.Compiler;
+﻿using System;
 using UIKit;
 using System.Collections.Generic;
+using Foundation;
 using System.Threading.Tasks;
-using EthansList.Shared;
 
 namespace ethanslist.ios
 {
-	partial class SearchOptionsViewController : UIViewController
-	{
-        protected List<TableItemGroup> tableItems;
-
-        public string MinBedrooms { get; set; }
-        public string MinBathrooms { get; set; }
-        public string MinPrice { get; set; }
-        public string MaxPrice { get; set; }
-        public string SearchTerms { get; set; }
-
-        public Location Location { get; set; }
-
-		public SearchOptionsViewController (IntPtr handle) : base (handle)
-		{
-		}
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-            tableItems = new List<TableItemGroup>();
-
-            TableItemGroup searchterms = new TableItemGroup()
-                { Name = "Search Terms"};
-            searchterms.Items.Add(new TableItem() { 
-                Heading = "Search Terms",
-                CellType = "SearchTermsCell",
-            });
-            searchterms.Items.Add(new TableItem() {
-                Heading = "Price",
-                CellType = "PriceSelectorCell"
-            });
-
-            TableItemGroup options = new TableItemGroup()
-                { 
-                    Name = "Options",
-                };
-            options.Items.Add(new TableItem() {
-                Heading = "Min Bedrooms",
-                CellType = "BedBathCell",
-                ActionOptions = new Dictionary<string, string>() 
-                {
-                    {"Any", "Any"},
-                    {"Studio", "0"},
-                    {"1+", "1"},
-                    {"2+", "2"},
-                    {"3+", "3"},
-                    {"4+", "4"},
-                }
-            });
-            options.Items.Add(new TableItem() {
-                Heading = "Min Bathrooms",
-                CellType = "BedBathCell",
-                ActionOptions = new Dictionary<string, string>() 
-                {
-                    {"Any", "Any"},
-                    {"1+", "1"},
-                    {"2+", "2"},
-                    {"3+", "3"},
-                }
-            });
-
-            tableItems.Add(searchterms);
-            tableItems.Add(options);
-
-            SearchTableView.Source = new TableSource(tableItems, this);
-
-            SearchButton.TouchUpInside += (sender, e) => {
-                AvailableLocations locations = new AvailableLocations();
-                QueryGeneration queryHelper = new QueryGeneration();
-                var query = queryHelper.Generate(locations.PotentialLocations[0].Url, new Dictionary<string, string>()
-                    {
-                        {"MinPrice", MinPrice},
-                        {"MaxPrice", MaxPrice},
-                        {"Bedrooms", MinBedrooms},
-                        {"Bathrooms", MinBathrooms},
-                        {"Terms", SearchTerms}
-                    }
-                );
-                Console.WriteLine (query);
-            };
-        }
-	}
-        
-    /// <summary>
-    /// Combined DataSource and Delegate for our UITableView
-    /// </summary>
-    public class TableSource : UITableViewSource
+    public class SearchOptionsTableSource : UITableViewSource
     {
-        // declare vars
         protected List<TableItemGroup> tableItems;
         protected string cellIdentifier = "TableCell";
         UIViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
 
-        protected TableSource() {}
+        protected SearchOptionsTableSource() {}
 
-        public TableSource (List<TableItemGroup> items, UIViewController owner)
+        public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
         {
             tableItems = items;
             this.owner = owner;
@@ -150,8 +61,8 @@ namespace ethanslist.ios
 
         public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
         {
-//            new UIAlertView("Row Selected"
-//                , tableItems[indexPath.Section].Items[indexPath.Row].Heading, null, "OK", null).Show();
+            //            new UIAlertView("Row Selected"
+            //                , tableItems[indexPath.Section].Items[indexPath.Row].Heading, null, "OK", null).Show();
         }
 
         public override void RowDeselected (UITableView tableView, NSIndexPath indexPath)
@@ -178,9 +89,9 @@ namespace ethanslist.ios
             {
                 cell = SearchTermsCell.Create();
                 ((SearchTermsCell)cell).TermsField.EditingChanged += delegate
-                {
+                    {
                         ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
-                };
+                    };
             }
             else if (item.CellType == "PriceSelectorCell")
             {
@@ -296,3 +207,4 @@ namespace ethanslist.ios
         { this.Heading = heading; }
     }
 }
+

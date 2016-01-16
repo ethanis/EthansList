@@ -58,11 +58,11 @@ namespace ethanslist.ios
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
             {
                 var storyboard = UIStoryboard.FromName("Main", null);
-                var searchViewController = (SearchViewController)storyboard.InstantiateViewController("SearchViewController");
+                var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
 
                 Console.WriteLine(currentSelected.SiteName);
-                searchViewController.Url = currentSelected.Url;
-                searchViewController.City = currentSelected.SiteName;
+                searchViewController.Location = currentSelected;
+//                searchViewController.City = currentSelected.SiteName;
 
                     System.Threading.Tasks.Task.Run(async () => {
                         await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);

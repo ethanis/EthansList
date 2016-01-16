@@ -110,9 +110,9 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
-    <InterfaceDefinition Include="SearchTermsCell.xib" />
-    <InterfaceDefinition Include="PriceSelectorCell.xib" />
-    <InterfaceDefinition Include="BedBathCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\BedBathCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -170,22 +170,23 @@
       <DependentUpon>RecentCitiesTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\RecentCityTableViewSource.cs" />
-    <Compile Include="SearchOptionsViewController.cs" />
-    <Compile Include="SearchOptionsViewController.designer.cs">
-      <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SearchTermsCell.cs" />
-    <Compile Include="SearchTermsCell.designer.cs">
-      <DependentUpon>SearchTermsCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PriceSelectorCell.cs" />
-    <Compile Include="PriceSelectorCell.designer.cs">
-      <DependentUpon>PriceSelectorCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BedBathCell.cs" />
-    <Compile Include="BedBathCell.designer.cs">
+    <Compile Include="TableViewCells\BedBathCell.cs" />
+    <Compile Include="TableViewCells\BedBathCell.designer.cs">
       <DependentUpon>BedBathCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableViewCells\PriceSelectorCell.cs" />
+    <Compile Include="TableViewCells\PriceSelectorCell.designer.cs">
+      <DependentUpon>PriceSelectorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\SearchTermsCell.cs" />
+    <Compile Include="TableViewCells\SearchTermsCell.designer.cs">
+      <DependentUpon>SearchTermsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SearchOptionsViewController.cs" />
+    <Compile Include="Controllers\SearchOptionsViewController.designer.cs">
+      <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SearchOptionsTableSource.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
