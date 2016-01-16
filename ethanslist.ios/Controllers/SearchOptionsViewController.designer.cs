@@ -16,7 +16,15 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIScrollView scrollView { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton SearchButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel SearchCityLabel { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -24,9 +32,17 @@ namespace ethanslist.ios
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (scrollView != null) {
+				scrollView.Dispose ();
+				scrollView = null;
+			}
 			if (SearchButton != null) {
 				SearchButton.Dispose ();
 				SearchButton = null;
+			}
+			if (SearchCityLabel != null) {
+				SearchCityLabel.Dispose ();
+				SearchCityLabel = null;
 			}
 			if (SearchTableView != null) {
 				SearchTableView.Dispose ();
