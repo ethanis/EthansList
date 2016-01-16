@@ -20,7 +20,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MaxLabel { get; set; }
+		UITextField MaxPriceField { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -28,7 +28,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MinLabel { get; set; }
+		UITextField MinPriceField { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -40,17 +40,17 @@ namespace ethanslist.ios
 				Heading.Dispose ();
 				Heading = null;
 			}
-			if (MaxLabel != null) {
-				MaxLabel.Dispose ();
-				MaxLabel = null;
+			if (MaxPriceField != null) {
+				MaxPriceField.Dispose ();
+				MaxPriceField = null;
 			}
 			if (MaxTextLabel != null) {
 				MaxTextLabel.Dispose ();
 				MaxTextLabel = null;
 			}
-			if (MinLabel != null) {
-				MinLabel.Dispose ();
-				MinLabel = null;
+			if (MinPriceField != null) {
+				MinPriceField.Dispose ();
+				MinPriceField = null;
 			}
 			if (MinTextLabel != null) {
 				MinTextLabel.Dispose ();
