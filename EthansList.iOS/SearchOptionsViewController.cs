@@ -3,12 +3,14 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ethanslist.ios
 {
 	partial class SearchOptionsViewController : UIViewController
 	{
         List<TableItemGroup> tableItems;
+        public string MinBedrooms { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -18,7 +20,6 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
             tableItems = new List<TableItemGroup>();
-
 
             TableItemGroup searchterms = new TableItemGroup()
                 { Name = "Search Terms"};
@@ -42,11 +43,27 @@ namespace ethanslist.ios
                 };
             options.Items.Add(new TableItem() {
                 Heading = "Min Bedrooms",
-                CellType = "BedBathCell"
+                CellType = "BedBathCell",
+                ActionOptions = new Dictionary<string, string>() 
+                {
+                    {"Any", "Any"},
+                    {"Studio", "0"},
+                    {"1+", "1"},
+                    {"2+", "2"},
+                    {"3+", "3"},
+                    {"4+", "4"},
+                }
             });
             options.Items.Add(new TableItem() {
                 Heading = "Min Bathrooms",
-                CellType = "BedBathCell"
+                CellType = "BedBathCell",
+                ActionOptions = new Dictionary<string, string>() 
+                {
+                    {"Any", "Any"},
+                    {"1+", "1"},
+                    {"2+", "2"},
+                    {"3+", "3"},
+                }
             });
 
             tableItems.Add(searchterms);
@@ -66,6 +83,7 @@ namespace ethanslist.ios
         protected List<TableItemGroup> tableItems;
         protected string cellIdentifier = "TableCell";
         UIViewController owner;
+        public EventHandler<EventArgs> actionSheetSelected;
 
         protected TableSource() {}
 
@@ -152,27 +170,10 @@ namespace ethanslist.ios
             {
                 cell = BedBathCell.Create();
                 ((BedBathCell)cell).Title = item.Heading;
-//                ((BedBathCell)cell).MinimumLabel
-                UITapGestureRecognizer tap = new UITapGestureRecognizer(() => {
-                    // Create a new Alert Controller
-                    UIAlertController actionSheetAlert = UIAlertController.Create("Action Sheet", "Select an item from below", UIAlertControllerStyle.ActionSheet);
 
-                    // Add Actions
-                    actionSheetAlert.AddAction(UIAlertAction.Create("Item One",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item One pressed.")));
-                    actionSheetAlert.AddAction(UIAlertAction.Create("Item Two",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item Two pressed.")));
-                    actionSheetAlert.AddAction(UIAlertAction.Create("Item Three",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item Three pressed.")));
-                    actionSheetAlert.AddAction(UIAlertAction.Create("Cancel",UIAlertActionStyle.Cancel, (action) => Console.WriteLine ("Cancel button pressed.")));
-
-                    // Required for iPad - You must specify a source for the Action Sheet since it is
-                    // displayed as a popover
-                    UIPopoverPresentationController presentationPopover = actionSheetAlert.PopoverPresentationController;
-                    if (presentationPopover!=null) {
-                        presentationPopover.SourceView = this.owner.View;
-                        presentationPopover.PermittedArrowDirections = UIPopoverArrowDirection.Up;
-                    }
-
-                    // Display the alert
-                    this.owner.PresentViewController(actionSheetAlert,true,null);
+                UITapGestureRecognizer tap = new UITapGestureRecognizer(async () => {
+                    var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
+                    Console.WriteLine (result);
                 });
 
                 ((BedBathCell)cell).MinimumLabel.AddGestureRecognizer(tap);
@@ -202,7 +203,35 @@ namespace ethanslist.ios
             return cell;
         }
 
+        public static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, string> options)
+        {
+            var taskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<string>();
+            // Create a new Alert Controller
+            UIAlertController actionSheetAlert = UIAlertController.Create(strTitle, strMsg, UIAlertControllerStyle.ActionSheet);
+
+            foreach (KeyValuePair<string, string> option in options)
+            {
+                actionSheetAlert.AddAction(UIAlertAction.Create(option.Key,UIAlertActionStyle.Default, (a) => taskCompletionSource.SetResult(option.Value)));
+            }
+
+            actionSheetAlert.AddAction(UIAlertAction.Create("Cancel",UIAlertActionStyle.Cancel, (action) => Console.WriteLine ("Cancel button pressed.")));
+
+            // Required for iPad - You must specify a source for the Action Sheet since it is
+            // displayed as a popover
+            UIPopoverPresentationController presentationPopover = actionSheetAlert.PopoverPresentationController;
+            if (presentationPopover!=null) {
+                presentationPopover.SourceView = parent.View;
+                presentationPopover.PermittedArrowDirections = UIPopoverArrowDirection.Up;
+            }
+            // Display the alert
+            parent.PresentViewController(actionSheetAlert,true,null);
+            return taskCompletionSource.Task;
+        }
+
     }
+
+
+
 
     /// <summary>
     /// A group that contains table items
@@ -227,12 +256,16 @@ namespace ethanslist.ios
     public class TableItem
     {
         public string Heading { get; set; }
-
         public string SubHeading { get; set; }
-
         public string ImageName { get; set; }
-
         public string CellType { get; set; }
+
+        public Dictionary<string, string> ActionOptions 
+        { 
+            get { return actionOptions;} 
+            set { actionOptions = value; } 
+        }
+        protected Dictionary<string, string> actionOptions = new Dictionary<string, string>();
 
         public UITableViewCellStyle CellStyle
         {
