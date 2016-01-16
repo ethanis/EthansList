@@ -24,15 +24,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MaxTextLabel { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UITextField MinPriceField { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MinTextLabel { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -44,17 +36,9 @@ namespace ethanslist.ios
 				MaxPriceField.Dispose ();
 				MaxPriceField = null;
 			}
-			if (MaxTextLabel != null) {
-				MaxTextLabel.Dispose ();
-				MaxTextLabel = null;
-			}
 			if (MinPriceField != null) {
 				MinPriceField.Dispose ();
 				MinPriceField = null;
-			}
-			if (MinTextLabel != null) {
-				MinTextLabel.Dispose ();
-				MinTextLabel = null;
 			}
 		}
 	}

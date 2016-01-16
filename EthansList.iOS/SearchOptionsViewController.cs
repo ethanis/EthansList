@@ -53,7 +53,7 @@ namespace ethanslist.ios
             tableItems.Add(prices);
             tableItems.Add(options);
 
-            SearchTableView.Source = new TableSource(tableItems);
+            SearchTableView.Source = new TableSource(tableItems, this);
         }
 	}
         
@@ -65,12 +65,14 @@ namespace ethanslist.ios
         // declare vars
         protected List<TableItemGroup> tableItems;
         protected string cellIdentifier = "TableCell";
+        UIViewController owner;
 
         protected TableSource() {}
 
-        public TableSource (List<TableItemGroup> items)
+        public TableSource (List<TableItemGroup> items, UIViewController owner)
         {
             tableItems = items;
+            this.owner = owner;
         }
 
         #region -= data binding/display methods =-
@@ -113,8 +115,8 @@ namespace ethanslist.ios
 
         public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
         {
-            new UIAlertView("Row Selected"
-                , tableItems[indexPath.Section].Items[indexPath.Row].Heading, null, "OK", null).Show();
+//            new UIAlertView("Row Selected"
+//                , tableItems[indexPath.Section].Items[indexPath.Row].Heading, null, "OK", null).Show();
         }
 
         public override void RowDeselected (UITableView tableView, NSIndexPath indexPath)
@@ -150,29 +152,53 @@ namespace ethanslist.ios
             {
                 cell = BedBathCell.Create();
                 ((BedBathCell)cell).Title = item.Heading;
+//                ((BedBathCell)cell).MinimumLabel
+                UITapGestureRecognizer tap = new UITapGestureRecognizer(() => {
+                    // Create a new Alert Controller
+                    UIAlertController actionSheetAlert = UIAlertController.Create("Action Sheet", "Select an item from below", UIAlertControllerStyle.ActionSheet);
+
+                    // Add Actions
+                    actionSheetAlert.AddAction(UIAlertAction.Create("Item One",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item One pressed.")));
+                    actionSheetAlert.AddAction(UIAlertAction.Create("Item Two",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item Two pressed.")));
+                    actionSheetAlert.AddAction(UIAlertAction.Create("Item Three",UIAlertActionStyle.Default, (action) => Console.WriteLine ("Item Three pressed.")));
+                    actionSheetAlert.AddAction(UIAlertAction.Create("Cancel",UIAlertActionStyle.Cancel, (action) => Console.WriteLine ("Cancel button pressed.")));
+
+                    // Required for iPad - You must specify a source for the Action Sheet since it is
+                    // displayed as a popover
+                    UIPopoverPresentationController presentationPopover = actionSheetAlert.PopoverPresentationController;
+                    if (presentationPopover!=null) {
+                        presentationPopover.SourceView = this.owner.View;
+                        presentationPopover.PermittedArrowDirections = UIPopoverArrowDirection.Up;
+                    }
+
+                    // Display the alert
+                    this.owner.PresentViewController(actionSheetAlert,true,null);
+                });
+
+                ((BedBathCell)cell).MinimumLabel.AddGestureRecognizer(tap);
             }
-            else
-            {
-                cell = tableView.DequeueReusableCell(cellIdentifier);
-
-                // if there are no cells to reuse, create a new one
-                if (cell == null)
-                    cell = new UITableViewCell(item.CellStyle, cellIdentifier);
-
-                // set the item text
-                cell.TextLabel.Text = tableItems[indexPath.Section].Items[indexPath.Row].Heading;
-
-                // if it's a cell style that supports a subheading, set it
-                if (item.CellStyle == UITableViewCellStyle.Subtitle
-                || item.CellStyle == UITableViewCellStyle.Value1
-                || item.CellStyle == UITableViewCellStyle.Value2)
-                {
-                    cell.DetailTextLabel.Text = item.SubHeading;
-                }
-                
-                // set the accessory
-                cell.Accessory = item.CellAccessory;
-            }
+//            else
+//            {
+//                cell = tableView.DequeueReusableCell(cellIdentifier);
+//
+//                // if there are no cells to reuse, create a new one
+//                if (cell == null)
+//                    cell = new UITableViewCell(item.CellStyle, cellIdentifier);
+//
+//                // set the item text
+//                cell.TextLabel.Text = tableItems[indexPath.Section].Items[indexPath.Row].Heading;
+//
+//                // if it's a cell style that supports a subheading, set it
+//                if (item.CellStyle == UITableViewCellStyle.Subtitle
+//                || item.CellStyle == UITableViewCellStyle.Value1
+//                || item.CellStyle == UITableViewCellStyle.Value2)
+//                {
+//                    cell.DetailTextLabel.Text = item.SubHeading;
+//                }
+//                
+//                // set the accessory
+//                cell.Accessory = item.CellAccessory;
+//            }
             return cell;
         }
 

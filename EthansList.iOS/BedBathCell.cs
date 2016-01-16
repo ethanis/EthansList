@@ -10,6 +10,10 @@ namespace ethanslist.ios
         public static readonly NSString Key = new NSString("BedBathCell");
         public static readonly UINib Nib;
         public string Title { get; set; }
+        public UILabel MinimumLabel 
+        {
+            get { return MinLabel; }
+        }
 
         static BedBathCell()
         {
