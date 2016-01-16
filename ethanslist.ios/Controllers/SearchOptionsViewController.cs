@@ -11,6 +11,8 @@ namespace ethanslist.ios
 {
 	partial class SearchOptionsViewController : UIViewController
 	{
+        UIBarButtonItem customButton;
+
         public string MinBedrooms { get; set; }
         public string MinBathrooms { get; set; }
         public string MinPrice { get; set; }
@@ -52,30 +54,62 @@ namespace ethanslist.ios
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
 
+//            customButton = new UIBarButtonItem (
+//                UIImage.FromFile ("Save-50.png"),
+//                UIBarButtonItemStyle.Plain,
+//                async (sender, e) => {
+//                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
+//                        MinBedrooms, MinBathrooms, SearchTerms);
+//                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+//
+//                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+//                    {
+//                        UIAlertView alert = new UIAlertView();
+//                        alert.Message = "Search Saved!";
+//                        alert.AddButton("OK");
+//                        alert.Show();
+//
+//                        this.NavigationItem.RightBarButtonItem.Enabled = false;
+//                    }
+//                    else
+//                    {
+//                        UIAlertView alert = new UIAlertView();
+//                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+//                        alert.AddButton("OK");
+//                        alert.Show();
+//
+//                        this.NavigationItem.RightBarButtonItem.Enabled = true;
+//                    }
+//                }
+//            );
+//
+//            NavigationItem.RightBarButtonItem = customButton;
+
             this.NavigationItem.SetRightBarButtonItem(
-                new UIBarButtonItem(UIBarButtonSystemItem.Save, async (sender, e) => {
-                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-                        MinBedrooms, MinBathrooms, SearchTerms);
-                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+                new UIBarButtonItem(UIBarButtonSystemItem.Save, 
+                    async (sender, e) => {
+                        await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
+                            MinBedrooms, MinBathrooms, SearchTerms);
+                        Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
-                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = "Search Saved!";
-                        alert.AddButton("OK");
-                        alert.Show();
+                        if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+                        {
+                            UIAlertView alert = new UIAlertView();
+                            alert.Message = "Search Saved!";
+                            alert.AddButton("OK");
+                            alert.Show();
 
-                        this.NavigationItem.RightBarButtonItem.Enabled = false;
-                    }
-                    else
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-                        alert.AddButton("OK");
-                        alert.Show();
+                            this.NavigationItem.RightBarButtonItem.Enabled = false;
+                        }
+                        else
+                        {
+                            UIAlertView alert = new UIAlertView();
+                            alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                            alert.AddButton("OK");
+                            alert.Show();
 
-                        this.NavigationItem.RightBarButtonItem.Enabled = true;
-                    }
+                            this.NavigationItem.RightBarButtonItem.Enabled = true;
+                        }
                 }),
                 true);
 
@@ -170,6 +204,7 @@ namespace ethanslist.ios
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
+            scrollView.ContentSize = this.View.Bounds.Size;
 
             //Scroll View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
