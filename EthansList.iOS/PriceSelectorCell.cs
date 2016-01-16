@@ -33,6 +33,7 @@ namespace ethanslist.ios
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
+
             this.Heading.Text = LabelText;
         }
     }

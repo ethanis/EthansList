@@ -11,8 +11,8 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("PriceSelectorCell")]
-	partial class PriceSelectorCell
+	[Register ("BedBathCell")]
+	partial class BedBathCell
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -20,19 +20,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MaxLabel { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MaxTextLabel { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel MinLabel { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel MinTextLabel { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -40,21 +28,9 @@ namespace ethanslist.ios
 				Heading.Dispose ();
 				Heading = null;
 			}
-			if (MaxLabel != null) {
-				MaxLabel.Dispose ();
-				MaxLabel = null;
-			}
-			if (MaxTextLabel != null) {
-				MaxTextLabel.Dispose ();
-				MaxTextLabel = null;
-			}
 			if (MinLabel != null) {
 				MinLabel.Dispose ();
 				MinLabel = null;
-			}
-			if (MinTextLabel != null) {
-				MinTextLabel.Dispose ();
-				MinTextLabel = null;
 			}
 		}
 	}

@@ -41,12 +41,12 @@ namespace ethanslist.ios
                     Name = "Options",
                 };
             options.Items.Add(new TableItem() {
-                Heading = "Minimum Bedrooms",
-                CellStyle = UITableViewCellStyle.Default
+                Heading = "Min Bedrooms",
+                CellType = "BedBathCell"
             });
             options.Items.Add(new TableItem() {
-                Heading = "Minimum Bathrooms",
-                CellStyle = UITableViewCellStyle.Default
+                Heading = "Min Bathrooms",
+                CellType = "BedBathCell"
             });
 
             tableItems.Add(searchterms);
@@ -145,6 +145,11 @@ namespace ethanslist.ios
             {
                 cell = PriceSelectorCell.Create();
                 ((PriceSelectorCell)cell).LabelText = item.Heading;
+            }
+            else if (item.CellType == "BedBathCell")
+            {
+                cell = BedBathCell.Create();
+                ((BedBathCell)cell).Title = item.Heading;
             }
             else
             {

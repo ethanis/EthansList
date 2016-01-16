@@ -112,6 +112,7 @@
     <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
     <InterfaceDefinition Include="SearchTermsCell.xib" />
     <InterfaceDefinition Include="PriceSelectorCell.xib" />
+    <InterfaceDefinition Include="BedBathCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -180,6 +181,10 @@
     <Compile Include="PriceSelectorCell.cs" />
     <Compile Include="PriceSelectorCell.designer.cs">
       <DependentUpon>PriceSelectorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BedBathCell.cs" />
+    <Compile Include="BedBathCell.designer.cs">
+      <DependentUpon>BedBathCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
