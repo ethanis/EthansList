@@ -20,7 +20,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Min" minimumFontSize="17" id="52" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="52" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="Min">
                         <rect key="frame" x="143" y="0.0" width="80" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -28,7 +28,7 @@
                             <constraint id="97" firstItem="52" firstAttribute="width" constant="80"/>
                         </constraints>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="53" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="Max">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="53" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="Max">
                         <rect key="frame" x="230" y="0.0" width="80" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>

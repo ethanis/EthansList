@@ -43,7 +43,13 @@ namespace ethanslist.ios
 
             AddLayoutConstraints();
 
+            this.Title = "Options";
+            SearchCityLabel.Text = String.Format("Search {0} for:", Location.SiteName);
+
             SearchTableView.Source = new SearchOptionsTableSource(GetTableSetup(), this);
+
+            var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            View.AddGestureRecognizer(g);
 
             this.NavigationItem.SetRightBarButtonItem(
                 new UIBarButtonItem(UIBarButtonSystemItem.Save, async (sender, e) => {
