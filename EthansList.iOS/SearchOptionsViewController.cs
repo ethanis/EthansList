@@ -4,13 +4,21 @@ using System.CodeDom.Compiler;
 using UIKit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
 	partial class SearchOptionsViewController : UIViewController
 	{
-        List<TableItemGroup> tableItems;
+        protected List<TableItemGroup> tableItems;
+
         public string MinBedrooms { get; set; }
+        public string MinBathrooms { get; set; }
+        public string MinPrice { get; set; }
+        public string MaxPrice { get; set; }
+        public string SearchTerms { get; set; }
+
+        public Location Location { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -27,13 +35,8 @@ namespace ethanslist.ios
                 Heading = "Search Terms",
                 CellType = "SearchTermsCell",
             });
-
-            TableItemGroup prices = new TableItemGroup()
-            { 
-                Name = "Prices",
-            };
-            prices.Items.Add(new TableItem() {
-                Heading = "Max. Price",
+            searchterms.Items.Add(new TableItem() {
+                Heading = "Price",
                 CellType = "PriceSelectorCell"
             });
 
@@ -67,10 +70,24 @@ namespace ethanslist.ios
             });
 
             tableItems.Add(searchterms);
-            tableItems.Add(prices);
             tableItems.Add(options);
 
             SearchTableView.Source = new TableSource(tableItems, this);
+
+            SearchButton.TouchUpInside += (sender, e) => {
+                AvailableLocations locations = new AvailableLocations();
+                QueryGeneration queryHelper = new QueryGeneration();
+                var query = queryHelper.Generate(locations.PotentialLocations[0].Url, new Dictionary<string, string>()
+                    {
+                        {"MinPrice", MinPrice},
+                        {"MaxPrice", MaxPrice},
+                        {"Bedrooms", MinBedrooms},
+                        {"Bathrooms", MinBathrooms},
+                        {"Terms", SearchTerms}
+                    }
+                );
+                Console.WriteLine (query);
+            };
         }
 	}
         
@@ -160,11 +177,23 @@ namespace ethanslist.ios
             if (item.CellType == "SearchTermsCell")
             {
                 cell = SearchTermsCell.Create();
+                ((SearchTermsCell)cell).TermsField.EditingChanged += delegate
+                {
+                        ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
+                };
             }
             else if (item.CellType == "PriceSelectorCell")
             {
                 cell = PriceSelectorCell.Create();
                 ((PriceSelectorCell)cell).LabelText = item.Heading;
+                ((PriceSelectorCell)cell).MinPrice.EditingChanged += delegate
+                    {
+                        ((SearchOptionsViewController)(this.owner)).MinPrice = ((PriceSelectorCell)cell).MinPrice.Text;
+                    };
+                ((PriceSelectorCell)cell).MaxPrice.EditingChanged += delegate
+                    {
+                        ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
+                    };
             }
             else if (item.CellType == "BedBathCell")
             {
@@ -174,32 +203,16 @@ namespace ethanslist.ios
                 UITapGestureRecognizer tap = new UITapGestureRecognizer(async () => {
                     var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
                     Console.WriteLine (result);
+                    ((BedBathCell)cell).MinimumLabel.Text = result;
+                    if (item.Heading == "Min Bedrooms")
+                        ((SearchOptionsViewController)(this.owner)).MinBedrooms = item.ActionOptions[result];
+                    else
+                        ((SearchOptionsViewController)(this.owner)).MinBathrooms = item.ActionOptions[result];
                 });
 
                 ((BedBathCell)cell).MinimumLabel.AddGestureRecognizer(tap);
             }
-//            else
-//            {
-//                cell = tableView.DequeueReusableCell(cellIdentifier);
-//
-//                // if there are no cells to reuse, create a new one
-//                if (cell == null)
-//                    cell = new UITableViewCell(item.CellStyle, cellIdentifier);
-//
-//                // set the item text
-//                cell.TextLabel.Text = tableItems[indexPath.Section].Items[indexPath.Row].Heading;
-//
-//                // if it's a cell style that supports a subheading, set it
-//                if (item.CellStyle == UITableViewCellStyle.Subtitle
-//                || item.CellStyle == UITableViewCellStyle.Value1
-//                || item.CellStyle == UITableViewCellStyle.Value2)
-//                {
-//                    cell.DetailTextLabel.Text = item.SubHeading;
-//                }
-//                
-//                // set the accessory
-//                cell.Accessory = item.CellAccessory;
-//            }
+
             return cell;
         }
 
@@ -211,7 +224,7 @@ namespace ethanslist.ios
 
             foreach (KeyValuePair<string, string> option in options)
             {
-                actionSheetAlert.AddAction(UIAlertAction.Create(option.Key,UIAlertActionStyle.Default, (a) => taskCompletionSource.SetResult(option.Value)));
+                actionSheetAlert.AddAction(UIAlertAction.Create(option.Key,UIAlertActionStyle.Default, (a) => taskCompletionSource.SetResult(option.Key)));
             }
 
             actionSheetAlert.AddAction(UIAlertAction.Create("Cancel",UIAlertActionStyle.Cancel, (action) => Console.WriteLine ("Cancel button pressed.")));
@@ -227,11 +240,7 @@ namespace ethanslist.ios
             parent.PresentViewController(actionSheetAlert,true,null);
             return taskCompletionSource.Task;
         }
-
     }
-
-
-
 
     /// <summary>
     /// A group that contains table items

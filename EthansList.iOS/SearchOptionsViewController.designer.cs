@@ -16,10 +16,18 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton SearchButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView SearchTableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (SearchButton != null) {
+				SearchButton.Dispose ();
+				SearchButton = null;
+			}
 			if (SearchTableView != null) {
 				SearchTableView.Dispose ();
 				SearchTableView = null;

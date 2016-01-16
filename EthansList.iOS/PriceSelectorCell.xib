@@ -20,29 +20,33 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Min" borderStyle="roundedRect" minimumFontSize="17" id="52" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
-                        <rect key="frame" x="142" y="10" width="80" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Min" minimumFontSize="17" id="52" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                        <rect key="frame" x="143" y="0.0" width="80" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        <constraints>
+                            <constraint id="97" firstItem="52" firstAttribute="width" constant="80"/>
+                        </constraints>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="53" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="Max">
-                        <rect key="frame" x="230" y="10" width="80" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="53" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="Max">
+                        <rect key="frame" x="230" y="0.0" width="80" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        <constraints>
+                            <constraint id="98" firstItem="53" firstAttribute="width" constant="80"/>
+                        </constraints>
                     </textField>
                 </subviews>
                 <constraints>
                     <constraint id="8" firstItem="2" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="20"/>
                     <constraint id="9" firstItem="2" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="15"/>
                     <constraint id="10" firstItem="YTl-1W-gDM" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" constant="14"/>
-                    <constraint id="74" firstItem="52" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="142"/>
-                    <constraint id="75" firstItem="52" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="10"/>
-                    <constraint id="76" firstItem="YTl-1W-gDM" firstAttribute="trailing" secondItem="52" secondAttribute="trailing" constant="98"/>
-                    <constraint id="77" firstItem="YTl-1W-gDM" firstAttribute="trailing" secondItem="53" secondAttribute="trailing" constant="10"/>
-                    <constraint id="78" firstItem="53" firstAttribute="leading" secondItem="52" secondAttribute="trailing" constant="8"/>
-                    <constraint id="79" firstItem="53" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="10"/>
-                    <constraint id="82" firstItem="YTl-1W-gDM" firstAttribute="bottom" secondItem="53" secondAttribute="bottom" constant="10"/>
-                    <constraint id="83" firstItem="YTl-1W-gDM" firstAttribute="bottom" secondItem="52" secondAttribute="bottom" constant="10"/>
+                    <constraint id="88" firstItem="52" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top"/>
+                    <constraint id="89" firstItem="52" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom"/>
+                    <constraint id="90" firstItem="52" firstAttribute="leading" secondItem="2" secondAttribute="trailing" constant="81"/>
+                    <constraint id="92" firstItem="YTl-1W-gDM" firstAttribute="trailing" secondItem="53" secondAttribute="trailing" constant="10"/>
+                    <constraint id="93" firstItem="53" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top"/>
+                    <constraint id="94" firstItem="53" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

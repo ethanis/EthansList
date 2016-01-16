@@ -10,6 +10,14 @@ namespace ethanslist.ios
         public static readonly NSString Key = new NSString("PriceSelectorCell");
         public static readonly UINib Nib;
         public string LabelText { get; set;}
+        public UITextField MinPrice
+        {
+            get { return MinPriceField; }
+        }
+        public UITextField MaxPrice
+        {
+            get { return MaxPriceField; }
+        }
 
         static PriceSelectorCell()
         {
@@ -35,6 +43,20 @@ namespace ethanslist.ios
             base.LayoutSubviews();
 
             this.Heading.Text = LabelText;
+
+            this.MinPriceField.EditingDidBegin += delegate { this.MinPriceField.BecomeFirstResponder(); };
+
+            this.MinPriceField.ShouldReturn += delegate {
+                MinPriceField.ResignFirstResponder();
+                return true;
+            };
+
+            this.MaxPriceField.EditingDidBegin += delegate { this.MinPriceField.BecomeFirstResponder(); };
+
+            this.MaxPriceField.ShouldReturn += delegate {
+                MaxPriceField.ResignFirstResponder();
+                return true;
+            };
         }
     }
 }
