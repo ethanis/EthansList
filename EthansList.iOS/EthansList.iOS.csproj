@@ -205,5 +205,6 @@
     <BundleResource Include="Resources\Icon-60%402x.png" />
     <BundleResource Include="Resources\LaunchScreenIcon.png" />
     <BundleResource Include="Resources\Save-50.png" />
+    <BundleResource Include="Resources\save.png" />
   </ItemGroup>
 </Project>

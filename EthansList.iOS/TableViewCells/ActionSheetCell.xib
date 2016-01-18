@@ -50,5 +50,7 @@
         <image name="Icon-60.png" width="60" height="60"/>
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
         <image name="Save-50.png" width="50" height="50"/>
+        <image name="Save-44.png" width="44" height="44"/>
+        <image name="save.png" width="50" height="50"/>
     </resources>
 </document>

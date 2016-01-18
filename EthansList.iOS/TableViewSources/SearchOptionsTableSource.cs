@@ -12,6 +12,8 @@ namespace ethanslist.ios
         protected string cellIdentifier = "TableCell";
         UIViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
+        PickerModel picker_model;
+        UIPickerView picker;
 
         protected SearchOptionsTableSource() {}
 
@@ -82,6 +84,8 @@ namespace ethanslist.ios
         /// </summary>
         public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
+
+
             // declare vars
             TableItem item = tableItems[indexPath.Section].Items[indexPath.Row];
             UITableViewCell cell = null;
@@ -97,6 +101,35 @@ namespace ethanslist.ios
             {
                 cell = PriceSelectorCell.Create();
                 ((PriceSelectorCell)cell).LabelText = item.Heading;
+
+
+                picker_model = new PickerModel (item.PickerOptions);
+                picker =  new UIPickerView ();
+                picker.Model = picker_model;
+                picker.ShowSelectionIndicator = true;
+
+                UIToolbar toolbar = new UIToolbar ();
+                toolbar.BarStyle = UIBarStyle.Default;
+                toolbar.Translucent = true;
+                toolbar.SizeToFit ();
+
+                UIBarButtonItem doneButton = new UIBarButtonItem("Done",UIBarButtonItemStyle.Done,(s,e) =>
+                    {
+//                        foreach (UIView view in this.picker.Subviews) 
+//                        {
+//                            if (view.IsFirstResponder)
+//                            {
+//                                UITextField textview = (UITextField)view;
+//                                textview.Text = picker_model.values[(int)picker.SelectedRowInComponent((nint)0)].ToString();
+//                                textview.ResignFirstResponder ();
+//                            }
+//                        }
+
+                    });
+                toolbar.SetItems (new UIBarButtonItem[]{doneButton},true);
+
+
+
                 ((PriceSelectorCell)cell).MinPrice.EditingChanged += delegate
                 {
                     ((SearchOptionsViewController)(this.owner)).MinPrice = ((PriceSelectorCell)cell).MinPrice.Text;
@@ -105,6 +138,9 @@ namespace ethanslist.ios
                 {
                     ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
                 };
+
+                ((PriceSelectorCell)cell).MinPrice.InputView = picker;
+                ((PriceSelectorCell)cell).MinPrice.InputAccessoryView = toolbar;
             }
             else if (item.CellType == "ActionSheetCell")
             {
@@ -214,6 +250,72 @@ namespace ethanslist.ios
 
         public TableItem (string heading)
         { this.Heading = heading; }
+
+        public List<PickerOptions> PickerOptions { get; set; }
+//        {
+//            get { return pickerOptions; }
+//            set { pickerOptions = value; }
+//        }
+//        protected PickerViewGroup pickerOptions = new PickerViewGroup();
+    }
+
+    public class PickerModel : UIPickerViewModel
+    {
+        public List<PickerOptions> values;
+
+        public event EventHandler<PickerChangedEventArgs> PickerChanged;
+
+        public PickerModel(List<PickerOptions> values)
+        {
+            this.values = values;
+        }
+
+        public override nint GetComponentCount (UIPickerView picker)
+        {
+            return values.Count;
+        }
+
+        public override nint GetRowsInComponent (UIPickerView picker, nint component)
+        {
+            return values[(int)component].Options.Count;
+        }
+
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        {
+            return values[(int)component].Options[(int)row].ToString ();
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            if (this.PickerChanged != null)
+            {
+                this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[(int)row]});
+            }
+        }
+    }
+
+    public class PickerChangedEventArgs : EventArgs{
+        public object SelectedValue {get;set;}
+    }
+
+    public class PickerViewGroup
+    {
+        public List<PickerOptions> Options
+        {
+            get { return items; }
+            set { items = value; }
+        }
+        protected List<PickerOptions> items = new List<PickerOptions> ();
+    }
+
+    public class PickerOptions
+    {
+        public Dictionary<object, object> Options
+        {
+            get { return options; }
+            set { options = value; }
+        }
+        protected Dictionary<object, object> options = new Dictionary<object, object>();
     }
 }
 

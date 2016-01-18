@@ -11,7 +11,7 @@ namespace ethanslist.ios
 {
 	partial class SearchOptionsViewController : UIViewController
 	{
-        UIBarButtonItem customButton;
+        UIBarButtonItem saveButton;
 
         public string MinBedrooms { get; set; }
         public string MinBathrooms { get; set; }
@@ -55,64 +55,36 @@ namespace ethanslist.ios
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
 
-//            customButton = new UIBarButtonItem (
-//                UIImage.FromFile ("Save-50.png"),
-//                UIBarButtonItemStyle.Plain,
-//                async (sender, e) => {
-//                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-//                        MinBedrooms, MinBathrooms, SearchTerms);
-//                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-//
-//                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-//                    {
-//                        UIAlertView alert = new UIAlertView();
-//                        alert.Message = "Search Saved!";
-//                        alert.AddButton("OK");
-//                        alert.Show();
-//
-//                        this.NavigationItem.RightBarButtonItem.Enabled = false;
-//                    }
-//                    else
-//                    {
-//                        UIAlertView alert = new UIAlertView();
-//                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-//                        alert.AddButton("OK");
-//                        alert.Show();
-//
-//                        this.NavigationItem.RightBarButtonItem.Enabled = true;
-//                    }
-//                }
-//            );
-//
-//            NavigationItem.RightBarButtonItem = customButton;
+            saveButton = new UIBarButtonItem (
+                UIImage.FromFile ("save.png"),
+                UIBarButtonItemStyle.Plain,
+                async (sender, e) => {
+                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
+                        MinBedrooms, MinBathrooms, SearchTerms);
+                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
-            this.NavigationItem.SetRightBarButtonItem(
-                new UIBarButtonItem(UIBarButtonSystemItem.Save, 
-                    async (sender, e) => {
-                        await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-                            MinBedrooms, MinBathrooms, SearchTerms);
-                        Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+                    {
+                        UIAlertView alert = new UIAlertView();
+                        alert.Message = "Search Saved!";
+                        alert.AddButton("OK");
+                        alert.Show();
 
-                        if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-                        {
-                            UIAlertView alert = new UIAlertView();
-                            alert.Message = "Search Saved!";
-                            alert.AddButton("OK");
-                            alert.Show();
+                        this.NavigationItem.RightBarButtonItem.Enabled = false;
+                    }
+                    else
+                    {
+                        UIAlertView alert = new UIAlertView();
+                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                        alert.AddButton("OK");
+                        alert.Show();
 
-                            this.NavigationItem.RightBarButtonItem.Enabled = false;
-                        }
-                        else
-                        {
-                            UIAlertView alert = new UIAlertView();
-                            alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-                            alert.AddButton("OK");
-                            alert.Show();
+                        this.NavigationItem.RightBarButtonItem.Enabled = true;
+                    }
+                }
+            );
 
-                            this.NavigationItem.RightBarButtonItem.Enabled = true;
-                        }
-                }),
-                true);
+            NavigationItem.RightBarButtonItem = saveButton;
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
@@ -142,6 +114,38 @@ namespace ethanslist.ios
         {
             List<TableItemGroup> tableItems = new List<TableItemGroup>();
 
+            List<PickerOptions> pickerOptions = new List<PickerOptions>();
+//            PickerViewGroup pickerOptions = new PickerViewGroup();
+            PickerOptions min_price = new PickerOptions();
+            min_price.Options = new Dictionary<object, object>()
+            {
+                {0, "Any"},
+                {1, "1000"},
+                {2, "1200"},
+                {3, "1400"},
+                {4, "1600"},
+                {5, "1800"},
+                {6, "2000"},
+                {7, "2200"},
+                {8, "2400"},
+            };
+            pickerOptions.Add(min_price);
+
+            PickerOptions max_price = new PickerOptions();
+            max_price.Options = new Dictionary<object, object>()
+            {
+                {0,"Any"},
+                {1, "1000"},
+                {2, "1200"},
+                {3, "1400"},
+                {4, "1600"},
+                {5, "1800"},
+                {6, "2000"},
+                {7, "2200"},
+                {8, "2400"},
+            };
+            pickerOptions.Add(max_price);
+
             TableItemGroup searchterms = new TableItemGroup()
                 { Name = "Search Terms"};
             searchterms.Items.Add(new TableItem() { 
@@ -150,7 +154,8 @@ namespace ethanslist.ios
             });
             searchterms.Items.Add(new TableItem() {
                 Heading = "Price",
-                CellType = "PriceSelectorCell"
+                CellType = "PriceSelectorCell",
+                PickerOptions = pickerOptions,
             });
 
             TableItemGroup options = new TableItemGroup()
@@ -226,7 +231,7 @@ namespace ethanslist.ios
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
                 NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
+                NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 20),
                 NSLayoutConstraint.Create(scrollView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
             });
 
