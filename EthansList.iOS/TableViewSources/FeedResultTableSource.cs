@@ -64,7 +64,6 @@ namespace ethanslist.ios
 
             Posting post = feedClient.postings[indexPath.Row];
             detailController.Post = post;
-            detailController.Saved = false;
 
             owner.PresentModalViewController(detailController, true);
         }

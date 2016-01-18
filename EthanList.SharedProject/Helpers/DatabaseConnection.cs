@@ -67,6 +67,15 @@ namespace EthansList.Models
             return conn.Table<Posting>().ToListAsync();
         }
 
+        public bool PostingAlreadySaved(Posting posting)
+        {
+            var query = conn.Table<Posting>().Where(v => v.Link.Equals(posting.Link)).ToListAsync().Result;
+            if (query.Count > 0)
+                return true;
+
+            return false;
+        }
+
         public async Task AddNewSearchAsync(String linkUrl, String cityName, string minPrice, string maxPrice, string minBedrooms, string minBathrooms, string searchQuery)
         {
             try

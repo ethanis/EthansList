@@ -88,7 +88,6 @@ namespace ethanslist.ios
                 Link = listing.Link, ImageLink = listing.ImageLink, Date = listing.Date
             };
 
-            detailController.Saved = true;
             detailController.ItemDeleted += async (sender, e) => {
                 await owner.DismissViewControllerAsync(true);
                 await AppDelegate.databaseConnection.DeletePostingAsync(savedListings[indexPath.Row]);

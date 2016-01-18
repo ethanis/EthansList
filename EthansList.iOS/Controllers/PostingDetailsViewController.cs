@@ -31,7 +31,6 @@ namespace ethanslist.ios
         }
             
         public Posting Post { get; set; }
-        public Boolean Saved { get; set; }
 
         string image;
         public string Image
@@ -135,8 +134,7 @@ namespace ethanslist.ios
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
 
-            //TODO: Handle case where posting is saved, but access again through feed results table
-            if (!Saved)
+            if (!AppDelegate.databaseConnection.PostingAlreadySaved(Post))
             {
                 saveButton = new UIBarButtonItem (
                     UIImage.FromFile ("save.png"),
