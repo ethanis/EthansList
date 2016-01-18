@@ -115,30 +115,25 @@ namespace ethanslist.ios
 
                 UIBarButtonItem doneButton = new UIBarButtonItem("Done",UIBarButtonItemStyle.Done,(s,e) =>
                     {
-//                        foreach (UIView view in this.picker.Subviews) 
-//                        {
-//                            if (view.IsFirstResponder)
-//                            {
-//                                UITextField textview = (UITextField)view;
-//                                textview.Text = picker_model.values[(int)picker.SelectedRowInComponent((nint)0)].ToString();
-//                                textview.ResignFirstResponder ();
-//                            }
-//                        }
-
+                        this.owner.View.EndEditing(true);
                     });
                 toolbar.SetItems (new UIBarButtonItem[]{doneButton},true);
 
-
-
-                ((PriceSelectorCell)cell).MinPrice.EditingChanged += delegate
-                {
-                    ((SearchOptionsViewController)(this.owner)).MinPrice = ((PriceSelectorCell)cell).MinPrice.Text;
-                };
-                ((PriceSelectorCell)cell).MaxPrice.EditingChanged += delegate
-                {
-                    ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
-                };
-
+                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) => 
+                    {
+                        Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
+                        if (e.FromComponent == 0)
+                        {
+                            ((PriceSelectorCell)cell).MinPrice.Text = e.SelectedValue.ToString();
+                            ((SearchOptionsViewController)(this.owner)).MinPrice = e.SelectedValue.ToString();
+                        }
+                        else
+                        {
+                            ((PriceSelectorCell)cell).MaxPrice.Text = e.SelectedValue.ToString();
+                            ((SearchOptionsViewController)(this.owner)).MaxPrice = e.SelectedValue.ToString();
+                        }
+                    };
+                        
                 ((PriceSelectorCell)cell).MinPrice.InputView = picker;
                 ((PriceSelectorCell)cell).MinPrice.InputAccessoryView = toolbar;
             }
@@ -252,50 +247,6 @@ namespace ethanslist.ios
         { this.Heading = heading; }
 
         public List<PickerOptions> PickerOptions { get; set; }
-//        {
-//            get { return pickerOptions; }
-//            set { pickerOptions = value; }
-//        }
-//        protected PickerViewGroup pickerOptions = new PickerViewGroup();
-    }
-
-    public class PickerModel : UIPickerViewModel
-    {
-        public List<PickerOptions> values;
-
-        public event EventHandler<PickerChangedEventArgs> PickerChanged;
-
-        public PickerModel(List<PickerOptions> values)
-        {
-            this.values = values;
-        }
-
-        public override nint GetComponentCount (UIPickerView picker)
-        {
-            return values.Count;
-        }
-
-        public override nint GetRowsInComponent (UIPickerView picker, nint component)
-        {
-            return values[(int)component].Options.Count;
-        }
-
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return values[(int)component].Options[(int)row].ToString ();
-        }
-
-        public override void Selected (UIPickerView picker, nint row, nint component)
-        {
-            if (this.PickerChanged != null)
-            {
-                this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[(int)row]});
-            }
-        }
-    }
-
-    public class PickerChangedEventArgs : EventArgs{
-        public object SelectedValue {get;set;}
     }
 
     public class PickerViewGroup

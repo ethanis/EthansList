@@ -114,38 +114,6 @@ namespace ethanslist.ios
         {
             List<TableItemGroup> tableItems = new List<TableItemGroup>();
 
-            List<PickerOptions> pickerOptions = new List<PickerOptions>();
-//            PickerViewGroup pickerOptions = new PickerViewGroup();
-            PickerOptions min_price = new PickerOptions();
-            min_price.Options = new Dictionary<object, object>()
-            {
-                {0, "Any"},
-                {1, "1000"},
-                {2, "1200"},
-                {3, "1400"},
-                {4, "1600"},
-                {5, "1800"},
-                {6, "2000"},
-                {7, "2200"},
-                {8, "2400"},
-            };
-            pickerOptions.Add(min_price);
-
-            PickerOptions max_price = new PickerOptions();
-            max_price.Options = new Dictionary<object, object>()
-            {
-                {0,"Any"},
-                {1, "1000"},
-                {2, "1200"},
-                {3, "1400"},
-                {4, "1600"},
-                {5, "1800"},
-                {6, "2000"},
-                {7, "2200"},
-                {8, "2400"},
-            };
-            pickerOptions.Add(max_price);
-
             TableItemGroup searchterms = new TableItemGroup()
                 { Name = "Search Terms"};
             searchterms.Items.Add(new TableItem() { 
@@ -155,7 +123,33 @@ namespace ethanslist.ios
             searchterms.Items.Add(new TableItem() {
                 Heading = "Price",
                 CellType = "PriceSelectorCell",
-                PickerOptions = pickerOptions,
+                PickerOptions = new List<PickerOptions> ()
+                    {
+                        new PickerOptions(){Options = new Dictionary<object, object>()
+                            {
+                                {0, "Any"},
+                                {1, "1000"},
+                                {2, "1200"},
+                                {3, "1400"},
+                                {4, "1600"},
+                                {5, "1800"},
+                                {6, "2000"},
+                                {7, "2200"},
+                                {8, "2400"},
+                            }},
+                        new PickerOptions(){Options = new Dictionary<object, object>()
+                            {
+                                {0, "Any"},
+                                {1, "1000"},
+                                {2, "1200"},
+                                {3, "1400"},
+                                {4, "1600"},
+                                {5, "1800"},
+                                {6, "2000"},
+                                {7, "2200"},
+                                {8, "2400"},
+                            }},
+                    },
             });
 
             TableItemGroup options = new TableItemGroup()
