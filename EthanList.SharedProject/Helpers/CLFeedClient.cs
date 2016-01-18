@@ -30,6 +30,11 @@ namespace EthansList.Shared
             this.query = query;
             this.MaxListings = MaxListings;
             this.WeeksOld = WeeksOld;
+            if (WeeksOld == -1)
+            {
+                this.query += "&postedToday=1";
+                this.WeeksOld = null;
+            }
         }
 
         public void GetPostings()
@@ -61,6 +66,7 @@ namespace EthansList.Shared
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
         {
+            Console.WriteLine(query);
             AsyncXmlDocument = new XmlDocument();
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(query));

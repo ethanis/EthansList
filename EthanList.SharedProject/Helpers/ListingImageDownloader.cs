@@ -62,13 +62,11 @@ namespace EthansList.Shared
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
         {
-            //TODO: have this report actual progress done
             for (int i = 10; i <= 100; i+=10)
             {
                 AsyncHtmlLoader.ReportProgress(i); 
             }
-//            AsyncXmlDocument = new XmlDocument();
-//            AsyncXmlDocument.Load(url);
+
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(url));
 

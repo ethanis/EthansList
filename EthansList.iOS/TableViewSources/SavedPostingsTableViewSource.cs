@@ -82,11 +82,6 @@ namespace ethanslist.ios
             var storyboard = UIStoryboard.FromName("Main", null);
             var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
             detailController.Post = savedListings[indexPath.Row];
-            var listing = savedListings[indexPath.Row];
-            detailController.Post = new Posting()
-            { PostTitle = listing.PostTitle, Description = listing.Description, 
-                Link = listing.Link, ImageLink = listing.ImageLink, Date = listing.Date
-            };
 
             detailController.ItemDeleted += async (sender, e) => {
                 await owner.DismissViewControllerAsync(true);

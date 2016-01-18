@@ -186,12 +186,11 @@ namespace ethanslist.ios
                 ActionOptions = new Dictionary<string, object>()
                 {
                     {"Any", null},
+                    {"Today", -1},
                     {"1 Week Old", 1},
                     {"2 Weeks Old", 2},
                     {"3 Weeks Old", 3},
                     {"4 Weeks Old", 4},
-                    {"5 Weeks Old", 5},
-                    {"6 Weeks Old", 6}
                 }
             });
             options.Items.Add(new TableItem() {
