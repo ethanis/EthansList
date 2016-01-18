@@ -132,8 +132,9 @@ namespace ethanslist.ios
                         }
                     };
                         
-                ((PriceSelectorCell)cell).MinPrice.InputView = picker;
-                ((PriceSelectorCell)cell).MinPrice.InputAccessoryView = toolbar;
+                ((PriceSelectorCell)cell).PickerField.InputView = picker;
+                ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
+                ((PriceSelectorCell)cell).PickerField.GetCaretRectForPosition(null);
             }
             else if (item.CellType == "ActionSheetCell")
             {

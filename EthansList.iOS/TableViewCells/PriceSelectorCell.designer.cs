@@ -20,11 +20,15 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField MaxPriceField { get; set; }
+		UILabel MaxPriceField { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField MinPriceField { get; set; }
+		UILabel MinPriceField { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField PickerTextField { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -39,6 +43,10 @@ namespace ethanslist.ios
 			if (MinPriceField != null) {
 				MinPriceField.Dispose ();
 				MinPriceField = null;
+			}
+			if (PickerTextField != null) {
+				PickerTextField.Dispose ();
+				PickerTextField = null;
 			}
 		}
 	}
