@@ -19,6 +19,7 @@ namespace ethanslist.ios
         public string MaxPrice { get; set; }
         public string SearchTerms { get; set; }
         public int MaxListings { get; set; }
+        public int? WeeksOld { get; set; }
 
         public Location Location { get; set; }
 
@@ -124,13 +125,14 @@ namespace ethanslist.ios
                         {"query", SearchTerms}
                     }
                 );
-                Console.WriteLine (query);
+//                Console.WriteLine (query);
 
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
                 feedViewController.Query = query;
                 feedViewController.MaxListings = MaxListings;
+                feedViewController.WeeksOld = WeeksOld;
 
                 this.ShowViewController(feedViewController, this);
             };
@@ -158,7 +160,7 @@ namespace ethanslist.ios
             options.Items.Add(new TableItem() {
                 Heading = "Min Bedrooms",
                 CellType = "BedBathCell",
-                ActionOptions = new Dictionary<string, string>() 
+                ActionOptions = new Dictionary<string, object>() 
                 {
                     {"Any", "Any"},
                     {"Studio", "0"},
@@ -171,7 +173,7 @@ namespace ethanslist.ios
             options.Items.Add(new TableItem() {
                 Heading = "Min Bathrooms",
                 CellType = "BedBathCell",
-                ActionOptions = new Dictionary<string, string>() 
+                ActionOptions = new Dictionary<string, object>() 
                 {
                     {"Any", "Any"},
                     {"1+", "1"},
@@ -180,10 +182,24 @@ namespace ethanslist.ios
                 }
             });
             options.Items.Add(new TableItem() {
+                Heading = "Posted Date",
+                CellType = "BedBathCell",
+                ActionOptions = new Dictionary<string, object>()
+                {
+                    {"Any", null},
+                    {"1 Week Old", 1},
+                    {"2 Weeks Old", 2},
+                    {"3 Weeks Old", 3},
+                    {"4 Weeks Old", 4},
+                    {"5 Weeks Old", 5},
+                    {"6 Weeks Old", 6}
+                }
+            });
+            options.Items.Add(new TableItem() {
                 Heading = "Max Listings",
                 CellType = "BedBathCell",
                 SubHeading = "25",
-                ActionOptions = new Dictionary<string, string>() 
+                ActionOptions = new Dictionary<string, object>() 
                 {
                     {"25", "25"},
                     {"50", "50"},

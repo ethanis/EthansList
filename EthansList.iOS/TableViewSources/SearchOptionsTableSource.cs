@@ -121,9 +121,11 @@ namespace ethanslist.ios
                         Console.WriteLine(result);
                         ((BedBathCell)cell).MinimumLabel.Text = result;
                         if (item.Heading == "Min Bedrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = item.ActionOptions[result];
+                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = (string)item.ActionOptions[result];
                         else if (item.Heading == "Min Bathrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = item.ActionOptions[result];
+                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = (string)item.ActionOptions[result];
+                        else if (item.Heading == "Posted Date")
+                            ((SearchOptionsViewController)(this.owner)).WeeksOld = Convert.ToInt16(item.ActionOptions[result]);
                         else if (item.Heading == "Max Listings")
                             ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt32(item.ActionOptions[result]);
                     });
@@ -134,13 +136,13 @@ namespace ethanslist.ios
             return cell;
         }
 
-        public static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, string> options)
+        public static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, object> options)
         {
             var taskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<string>();
 
             UIAlertController actionSheetAlert = UIAlertController.Create(strTitle, strMsg, UIAlertControllerStyle.ActionSheet);
 
-            foreach (KeyValuePair<string, string> option in options)
+            foreach (KeyValuePair<string, object> option in options)
             {
                 actionSheetAlert.AddAction(UIAlertAction.Create(option.Key,UIAlertActionStyle.Default, (a) => taskCompletionSource.SetResult(option.Key)));
             }
@@ -187,12 +189,12 @@ namespace ethanslist.ios
         public string ImageName { get; set; }
         public string CellType { get; set; }
 
-        public Dictionary<string, string> ActionOptions 
+        public Dictionary<string, object> ActionOptions 
         { 
             get { return actionOptions;} 
             set { actionOptions = value; } 
         }
-        protected Dictionary<string, string> actionOptions = new Dictionary<string, string>();
+        protected Dictionary<string, object> actionOptions = new Dictionary<string, object>();
 
         public UITableViewCellStyle CellStyle
         {
