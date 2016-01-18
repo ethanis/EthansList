@@ -5,9 +5,9 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-    public partial class BedBathCell : UITableViewCell
+    public partial class ActionSheetCell : UITableViewCell
     {
-        public static readonly NSString Key = new NSString("BedBathCell");
+        public static readonly NSString Key = new NSString("ActionSheetCell");
         public static readonly UINib Nib;
         public string Title { get; set; }
         public UILabel MinimumLabel 
@@ -15,23 +15,24 @@ namespace ethanslist.ios
             get { return MinLabel; }
         }
 
-        static BedBathCell()
+        static ActionSheetCell()
         {
-            Nib = UINib.FromName("BedBathCell", NSBundle.MainBundle);
+            Nib = UINib.FromName("ActionSheetCell", NSBundle.MainBundle);
         }
 
-        public BedBathCell(IntPtr handle)
+        public ActionSheetCell(IntPtr handle)
             : base(handle)
         {
         }
+            
 
-        public BedBathCell() : base()
+        public ActionSheetCell() : base()
         {
         }
 
-        public static BedBathCell Create()
+        public static ActionSheetCell Create()
         {
-            return (BedBathCell)Nib.Instantiate(null, null)[0];
+            return (ActionSheetCell)Nib.Instantiate(null, null)[0];
         }
 
         public override void LayoutSubviews()

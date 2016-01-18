@@ -125,7 +125,7 @@ namespace ethanslist.ios
                         {"query", SearchTerms}
                     }
                 );
-//                Console.WriteLine (query);
+                Console.WriteLine (query);
 
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
@@ -159,7 +159,7 @@ namespace ethanslist.ios
                 };
             options.Items.Add(new TableItem() {
                 Heading = "Min Bedrooms",
-                CellType = "BedBathCell",
+                CellType = "ActionSheetCell",
                 ActionOptions = new Dictionary<string, object>() 
                 {
                     {"Any", "Any"},
@@ -172,7 +172,7 @@ namespace ethanslist.ios
             });
             options.Items.Add(new TableItem() {
                 Heading = "Min Bathrooms",
-                CellType = "BedBathCell",
+                CellType = "ActionSheetCell",
                 ActionOptions = new Dictionary<string, object>() 
                 {
                     {"Any", "Any"},
@@ -183,7 +183,7 @@ namespace ethanslist.ios
             });
             options.Items.Add(new TableItem() {
                 Heading = "Posted Date",
-                CellType = "BedBathCell",
+                CellType = "ActionSheetCell",
                 ActionOptions = new Dictionary<string, object>()
                 {
                     {"Any", null},
@@ -197,7 +197,7 @@ namespace ethanslist.ios
             });
             options.Items.Add(new TableItem() {
                 Heading = "Max Listings",
-                CellType = "BedBathCell",
+                CellType = "ActionSheetCell",
                 SubHeading = "25",
                 ActionOptions = new Dictionary<string, object>() 
                 {

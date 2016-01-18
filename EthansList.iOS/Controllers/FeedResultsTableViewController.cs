@@ -14,8 +14,7 @@ namespace ethanslist.ios
 	{
         FeedResultTableSource tableSource;
         private CLFeedClient feedClient;
-        Stopwatch loadTimer;
-        int percentComplete = 0;
+//        Stopwatch loadTimer;
         protected LoadingOverlay _loadingOverlay = null;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
@@ -54,9 +53,7 @@ namespace ethanslist.ios
 //            loadTimer.Start();
 
             this.Title = "Craigslist Results";
-            feedClient = null;
 
-            //TODO: Change weeks old to property to be set
             feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
             feedClient.GetPostings();
 
@@ -109,7 +106,6 @@ namespace ethanslist.ios
 //                loadTimer.Stop();
                 TableView.ReloadData();
 //                Console.WriteLine(loadTimer.Elapsed);
-//                percentComplete = 0;
                 RefreshControl.EndRefreshing();
             });
         }

@@ -11,8 +11,8 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("BedBathCell")]
-	partial class BedBathCell
+	[Register ("ActionSheetCell")]
+	partial class ActionSheetCell
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]

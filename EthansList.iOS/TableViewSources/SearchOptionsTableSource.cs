@@ -106,20 +106,20 @@ namespace ethanslist.ios
                     ((SearchOptionsViewController)(this.owner)).MaxPrice = ((PriceSelectorCell)cell).MaxPrice.Text;
                 };
             }
-            else if (item.CellType == "BedBathCell")
+            else if (item.CellType == "ActionSheetCell")
             {
-                cell = BedBathCell.Create();
+                cell = ActionSheetCell.Create();
 
-                ((BedBathCell)cell).Title = item.Heading;
+                ((ActionSheetCell)cell).Title = item.Heading;
 
                 if (item.SubHeading != null)
-                    ((BedBathCell)cell).MinimumLabel.Text = item.SubHeading;
+                    ((ActionSheetCell)cell).MinimumLabel.Text = item.SubHeading;
                 
                 UITapGestureRecognizer tap = new UITapGestureRecognizer(async () =>
                     {
                         var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
                         Console.WriteLine(result);
-                        ((BedBathCell)cell).MinimumLabel.Text = result;
+                        ((ActionSheetCell)cell).MinimumLabel.Text = result;
                         if (item.Heading == "Min Bedrooms")
                             ((SearchOptionsViewController)(this.owner)).MinBedrooms = (string)item.ActionOptions[result];
                         else if (item.Heading == "Min Bathrooms")
@@ -130,7 +130,7 @@ namespace ethanslist.ios
                             ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt32(item.ActionOptions[result]);
                     });
 
-                ((BedBathCell)cell).MinimumLabel.AddGestureRecognizer(tap);
+                ((ActionSheetCell)cell).MinimumLabel.AddGestureRecognizer(tap);
             }
 
             return cell;
