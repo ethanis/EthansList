@@ -22,10 +22,11 @@ namespace EthansList.Shared
         public EventHandler<EventArgs> emptyPostingComplete;
         private int pageCounter = 25;
         readonly int MaxListings;
-        readonly int? WeeksOld;
+        private int? WeeksOld;
 
         public CLFeedClient(String query, int MaxListings = 25, int? WeeksOld = null)
         {
+            //HACK: This needs to be disposed better before release
             postings = new List<Posting>();
             this.query = query;
             this.MaxListings = MaxListings;
@@ -66,7 +67,6 @@ namespace EthansList.Shared
 
         void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
         {
-            Console.WriteLine(query);
             AsyncXmlDocument = new XmlDocument();
             WebClient client = new WebClient();
             string html = client.DownloadString(new Uri(query));
@@ -124,18 +124,19 @@ namespace EthansList.Shared
                     posting.ImageLink = imageLink;
                     posting.Date = date;
 
-                    if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
+
+                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                     {
-                        postings.Add(posting);
-                        incremented = true;
-                    }
-                    else if (WeeksOld == null)
-                    {
-//                    if (!postings.Exists(c => c.Serialized == posting.Serialized))
-//                    {
-                        postings.Add(posting);
-                        incremented = true;
-//                    }
+                        if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
+                        {
+                            postings.Add(posting);
+                            incremented = true;
+                        }
+                        else if (WeeksOld == null)
+                        {
+                            postings.Add(posting);
+                            incremented = true;
+                        }
                     }
                 }
             }
