@@ -38,7 +38,6 @@ namespace ethanslist.ios
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
-//            var recent = recentCities[indexPath.Row].City;
             AvailableLocations allLocations = new AvailableLocations();
 
             searchViewController.Location = allLocations.PotentialLocations.Find(x => x.SiteName == recentCities[indexPath.Row].City);

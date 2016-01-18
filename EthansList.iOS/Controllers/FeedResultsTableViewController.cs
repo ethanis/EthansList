@@ -38,6 +38,13 @@ namespace ethanslist.ios
         }
         protected int maxListings = 25;
 
+        public int? WeeksOld
+        { 
+            get { return weeksOld; } 
+            set { weeksOld = value; }
+        }
+        protected int? weeksOld = null;
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -48,7 +55,9 @@ namespace ethanslist.ios
 
             this.Title = "Craigslist Results";
             feedClient = null;
-            feedClient = new CLFeedClient(Query, MaxListings);
+
+            //TODO: Change weeks old to property to be set
+            feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
             feedClient.GetPostings();
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
