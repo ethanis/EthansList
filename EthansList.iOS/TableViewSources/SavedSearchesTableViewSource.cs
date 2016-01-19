@@ -42,20 +42,6 @@ namespace ethanslist.ios
             return cell;
         }
 
-//        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
-//        {
-//            UITableViewRowAction deleteButton = UITableViewRowAction.Create (
-//                UITableViewRowActionStyle.Destructive,
-//                "Delete",
-//                async delegate {
-//                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
-//                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-//                if (this.ItemDeleted != null)
-//                    this.ItemDeleted(this, new EventArgs());
-//            });
-//            return new UITableViewRowAction[] { deleteButton };
-//        }
-
         public override async void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
             switch (editingStyle) {
