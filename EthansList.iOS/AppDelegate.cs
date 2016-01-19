@@ -11,7 +11,7 @@ namespace ethanslist.ios
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
-        public static DatabaseConnection databaseConnection {get;private set;}
+        public static DatabaseConnection databaseConnection {get; private set;}
 
         public override UIWindow Window
         {
