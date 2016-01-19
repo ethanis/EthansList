@@ -30,7 +30,7 @@ namespace ethanslist.ios
         {
             base.ViewWillAppear (animated);
 
-            var sections = new string[]{ "Search Craigslist", "Recent Searches", "Saved Searches", "Saved Postings" };
+            var sections = new string[]{ "Search Craigslist", "Recent Cities", "Saved Searches", "Saved Postings" };
 
             this.TableView.Source = new MenuTableViewSource (this, sections);
         }

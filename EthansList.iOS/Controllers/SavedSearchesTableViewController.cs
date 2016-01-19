@@ -29,6 +29,10 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             this.Title = "Saved Searches";
 
+            NavigationItem.SetLeftBarButtonItem(
+                new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
+                true);
+
             savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
             searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
             TableView.Source = searchTableViewSource;

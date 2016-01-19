@@ -43,6 +43,10 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
+            NavigationItem.SetLeftBarButtonItem(
+                new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
+                true);
+
             locations = new AvailableLocations();
             state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
             currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
@@ -79,6 +83,7 @@ namespace ethanslist.ios
             RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) => {
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
+                recentCitiesViewController.FromMenu = false;
                 this.ShowViewController(recentCitiesViewController, this);
             };
 
