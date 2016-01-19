@@ -119,16 +119,17 @@ namespace ethanslist.ios
 
                 picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) => 
                     {
+                        var result = e.SelectedValue.ToString();
                         Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
                         if (e.FromComponent == 0)
                         {
-                            ((PriceSelectorCell)cell).MinPrice.Text = "$" + e.SelectedValue.ToString();
-                            ((SearchOptionsViewController)(this.owner)).MinPrice = e.SelectedValue.ToString();
+                            ((PriceSelectorCell)cell).MinPrice.Text = result != "Any" ? "$" + result : result;
+                            ((SearchOptionsViewController)(this.owner)).MinPrice = result;
                         }
                         else
                         {
-                            ((PriceSelectorCell)cell).MaxPrice.Text = "$" + e.SelectedValue.ToString();
-                            ((SearchOptionsViewController)(this.owner)).MaxPrice = e.SelectedValue.ToString();
+                            ((PriceSelectorCell)cell).MaxPrice.Text = result != "Any" ? "$" + result : result;
+                            ((SearchOptionsViewController)(this.owner)).MaxPrice = result;
                         }
                     };
                         
