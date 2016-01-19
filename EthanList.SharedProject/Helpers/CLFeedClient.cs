@@ -125,7 +125,7 @@ namespace EthansList.Shared
                     posting.Date = date;
 
 
-                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
+//                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                     {
                         if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
                         {

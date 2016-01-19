@@ -108,6 +108,7 @@ namespace ethanslist.ios
 //                Console.WriteLine(loadTimer.Elapsed);
                 RefreshControl.EndRefreshing();
             });
+            feedClient.loadingComplete += feedClient_LoadingComplete;
         }
 	}
 }

@@ -78,6 +78,8 @@ namespace ethanslist.ios
             QueryGeneration helper = new QueryGeneration();
 
             feedResultsVC.Query = helper.Generate(search.LinkUrl, searchTerms);
+            feedResultsVC.MaxListings = search.MaxListings;
+            feedResultsVC.WeeksOld = search.PostedDate;
 
             owner.ShowViewController(feedResultsVC, owner);
         }

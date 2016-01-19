@@ -15,6 +15,8 @@ namespace EthansList.Models
         public string MinBedrooms { get; set;}
         public string MinBathrooms { get; set;}
         public string SearchQuery { get; set;}
+        public int? PostedDate { get; set;}
+        public int MaxListings { get; set;}
     }
 }
 

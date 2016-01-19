@@ -18,7 +18,12 @@ namespace ethanslist.ios
         public string MinPrice { get; set; }
         public string MaxPrice { get; set; }
         public string SearchTerms { get; set; }
-        public int MaxListings { get; set; }
+        public int MaxListings 
+        { 
+            get { return maxListings; } 
+            set { maxListings = value; }
+        }
+        private int maxListings = 25;
         public int? WeeksOld { get; set; }
 
         public Location Location { get; set; }
@@ -60,7 +65,7 @@ namespace ethanslist.ios
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => {
                     await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-                        MinBedrooms, MinBathrooms, SearchTerms);
+                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
                     if (AppDelegate.databaseConnection.StatusCode == codes.ok)
