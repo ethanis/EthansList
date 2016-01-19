@@ -40,12 +40,13 @@ namespace ethanslist.android
                 ptr_list_view = (IPullToRefresharpView)feedResultsListView;
 
             feedClient = new CLFeedClient(query);
-            feedClient.GetPostings();
+            var result = feedClient.GetAllPostingsAsync();
+            Console.WriteLine(result);
             var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
             new Thread(new ThreadStart(delegate
                 {
                     //HIDE PROGRESS DIALOG
-                    feedClient.loadingComplete += (object sender, EventArgs e) => {
+                    feedClient.asyncLoadingComplete += (object sender, EventArgs e) => {
                         this.Activity.RunOnUiThread(() => {
                             progressDialog.Hide();
                         });
@@ -55,6 +56,8 @@ namespace ethanslist.android
                             feedResultsListView.Adapter = postingListAdapter;
                         });
                     };
+
+                    //TODO: Reload data on asyncLoadingPartlyComplete
 
                     feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
                         this.Activity.RunOnUiThread(() => progressDialog.Hide());
@@ -77,7 +80,7 @@ namespace ethanslist.android
 
             ptr_list_view.RefreshActivated += (object sender, EventArgs e) => {
                 feedClient = new CLFeedClient(query);
-                feedClient.loadingComplete += FeedCompletedRefreshing;
+                feedClient.asyncLoadingComplete += FeedCompletedRefreshing;
             };
 
             feedResultsListView.ItemClick += (sender, e) => {
