@@ -96,7 +96,7 @@ namespace ethanslist.android
         async void SaveSearchButton_Click (object sender, EventArgs e)
         {
             await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
-                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text);
+                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text, null, 25);
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             if (MainActivity.databaseConnection.StatusCode == EthansList.Models.codes.ok)
             {

@@ -94,7 +94,9 @@ namespace ethanslist.ios
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
-                    alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
+                    alert.Clicked += (s, ev) => {
+                        this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
+                    };
                     this.InvokeOnMainThread(() => alert.Show());
             };
         }
@@ -104,8 +106,8 @@ namespace ethanslist.ios
             this.InvokeOnMainThread(() => {
                 this._loadingOverlay.Hide();
 //                loadTimer.Stop();
-                TableView.ReloadData();
 //                Console.WriteLine(loadTimer.Elapsed);
+                TableView.ReloadData();
                 RefreshControl.EndRefreshing();
             });
             feedClient.loadingComplete += feedClient_LoadingComplete;

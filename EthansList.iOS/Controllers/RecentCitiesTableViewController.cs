@@ -28,7 +28,9 @@ namespace ethanslist.ios
             if (FromMenu)
             {
                 NavigationItem.SetLeftBarButtonItem(
-                    new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
+                    new UIBarButtonItem(UIImage.FromBundle("menu.png"), 
+                        UIBarButtonItemStyle.Plain, 
+                        (s, e) => NavigationController.PopViewController(true)), 
                     true);
             }
 
