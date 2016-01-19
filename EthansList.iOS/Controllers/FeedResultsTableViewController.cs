@@ -14,7 +14,6 @@ namespace ethanslist.ios
 	{
         FeedResultTableSource tableSource;
         private CLFeedClient feedClient;
-//        Stopwatch loadTimer;
         protected LoadingOverlay _loadingOverlay = null;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
@@ -49,15 +48,10 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             Console.WriteLine(Query);
 
-//            loadTimer = new Stopwatch();
-//            loadTimer.Start();
-
             this.Title = "Craigslist Results";
 
             feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
-//            feedClient.GetPostings();
-            var result = feedClient.GetAllPostingsAsync();
-            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
+            feedClient.GetAllPostingsAsync();
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
@@ -83,13 +77,11 @@ namespace ethanslist.ios
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
-//                feedClient.GetPostings();
+                feedClient.GetAllPostingsAsync();
             };
 
-//            feedClient.loadingComplete += feedClient_LoadingComplete;
-
+            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
-
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
                     feedClient = null;
@@ -109,13 +101,12 @@ namespace ethanslist.ios
         {
             this.InvokeOnMainThread(() => {
                 this._loadingOverlay.Hide();
-//                loadTimer.Stop();
-//                Console.WriteLine(loadTimer.Elapsed);
                 TableView.ReloadData();
                 RefreshControl.EndRefreshing();
                 Console.WriteLine (feedClient.postings.Count);
             });
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
+            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
         }
 	}
 }

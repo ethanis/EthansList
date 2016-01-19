@@ -9,6 +9,7 @@ using HtmlAgilityPack;
 using System.Threading.Tasks;
 using System.Linq;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace EthansList.Shared
 {
@@ -18,10 +19,7 @@ namespace EthansList.Shared
         readonly string rssImageUrl;
         public List<string> images = new List<string>();
         public string postingDescription;
-
-        private static BackgroundWorker AsyncHtmlLoader;
         public EventHandler<EventArgs> loadingComplete;
-        public EventHandler<EventArgs> loadingProgressChanged;
 
         public ListingImageDownloader(string url, string rssImageUrl)
         {
@@ -33,51 +31,48 @@ namespace EthansList.Shared
 
         private void GetImagesAsync()
         {
-            AsyncHtmlLoader = new BackgroundWorker();
-            AsyncHtmlLoader.WorkerReportsProgress = true;
-
-            AsyncHtmlLoader.ProgressChanged += AsyncXmlLoader_ProgressChanged;;
-            AsyncHtmlLoader.DoWork += AsyncXmlLoader_DoWork;
-            AsyncHtmlLoader.RunWorkerCompleted += AsyncXmlLoader_RunWorkerCompleted;
-
-            AsyncHtmlLoader.RunWorkerAsync();
+            Stopwatch timer = Stopwatch.StartNew();
+            Task.Factory.StartNew<string>(() => DownloadString(url))
+                .ContinueWith(t => {
+                    //                    string html = t.Result;
+                    //                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    //                    doc.LoadHtml(html);
+                    //                    HtmlNode root = doc.DocumentNode; 
+                    ParseHtmlForImages(t.Result);
+                    timer.Stop();
+                    TimeSpan timespan = timer.Elapsed;
+                    Console.WriteLine (timespan.ToString());
+                }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        void AsyncXmlLoader_ProgressChanged (object sender, ProgressChangedEventArgs e)
+        public string DownloadString(string add)
         {
-            if (this.loadingProgressChanged != null)
+            string html = "";            
+            using (WebClient client = new WebClient())
             {
-                this.loadingProgressChanged(this, new EventArgs());
+                client.Proxy = null;
+                while (html == "")
+                {
+                    try
+                    {
+                        html = client.DownloadString(add);
+                    }
+                    catch (WebException e)
+                    {
+                        html = "";
+                        Console.WriteLine(e.InnerException);
+                    }
+                }
+                client.Dispose();
             }
-        }
-
-        void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
-        {
-            Console.WriteLine(images.Count);
-            if (this.loadingComplete != null)
-            {
-                this.loadingComplete(this, new EventArgs());
-            }
-        }
-
-        void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
-        {
-            for (int i = 10; i <= 100; i+=10)
-            {
-                AsyncHtmlLoader.ReportProgress(i); 
-            }
-
-            WebClient client = new WebClient();
-            string html = client.DownloadString(new Uri(url));
-
-            ParseHtmlForImages(html);
+            return html;
         }
 
         public void ParseHtmlForImages(string html)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
-//            Console.WriteLine(html);
+
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
                 where node.Name == "a"
@@ -93,6 +88,9 @@ namespace EthansList.Shared
 
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
+
+            if (this.loadingComplete != null)
+                this.loadingComplete(this, new EventArgs());
         }
     }
 }
