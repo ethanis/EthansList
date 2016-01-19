@@ -55,7 +55,9 @@ namespace ethanslist.ios
             this.Title = "Craigslist Results";
 
             feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
-            feedClient.GetPostings();
+//            feedClient.GetPostings();
+            var result = feedClient.GetAllPostingsAsync();
+            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
@@ -81,10 +83,12 @@ namespace ethanslist.ios
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
-                feedClient.GetPostings();
+//                feedClient.GetPostings();
             };
 
-            feedClient.loadingComplete += feedClient_LoadingComplete;
+//            feedClient.loadingComplete += feedClient_LoadingComplete;
+
+            feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
 
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
@@ -109,8 +113,9 @@ namespace ethanslist.ios
 //                Console.WriteLine(loadTimer.Elapsed);
                 TableView.ReloadData();
                 RefreshControl.EndRefreshing();
+                Console.WriteLine (feedClient.postings.Count);
             });
-            feedClient.loadingComplete += feedClient_LoadingComplete;
+            feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
         }
 	}
 }

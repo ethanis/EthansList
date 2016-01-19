@@ -9,6 +9,7 @@ using EthansList.Models;
 using System.Net;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace EthansList.Shared
 {
@@ -16,17 +17,17 @@ namespace EthansList.Shared
     {
         public List<Posting> postings;
         private string query;
-        private static BackgroundWorker AsyncXmlLoader;
-        private static XmlDocument AsyncXmlDocument;
-        public EventHandler<EventArgs> loadingComplete;
-        public EventHandler<EventArgs> emptyPostingComplete;
         private int pageCounter = 25;
         readonly int MaxListings;
         private int? WeeksOld;
 
+        public EventHandler<EventArgs> asyncLoadingComplete;
+        public EventHandler<EventArgs> emptyPostingComplete;
+        public EventHandler<EventArgs> asyncLoadingPartlyComplete;
+
+
         public CLFeedClient(String query, int MaxListings = 25, int? WeeksOld = null)
         {
-            //HACK: This needs to be disposed better before release
             postings = new List<Posting>();
             this.query = query;
             this.MaxListings = MaxListings;
@@ -38,50 +39,62 @@ namespace EthansList.Shared
             }
         }
 
-        public void GetPostings()
+        public bool GetAllPostingsAsync()
         {
-            GetFeedAsync();
+            get_craigslist_postings(query);
+            return true;
         }
 
-        private void GetFeedAsync()
+        public string DownloadString(string add)
         {
-            AsyncXmlLoader = new BackgroundWorker();
-            AsyncXmlLoader.WorkerReportsProgress = true;
-            AsyncXmlLoader.DoWork += AsyncXmlLoader_DoWork;
-            AsyncXmlLoader.RunWorkerCompleted += AsyncXmlLoader_RunWorkerCompleted;
-
-            AsyncXmlLoader.RunWorkerAsync();
-        }
-
-        void AsyncXmlLoader_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (postings.Count == 0 && this.emptyPostingComplete != null)
+            string html = "";            
+            using (WebClient client = new WebClient())
             {
-                this.emptyPostingComplete(this, new EventArgs());
+                client.Proxy = null;
+                while (html == "")
+                {
+                    try
+                    {
+                        html = client.DownloadString(add);
+                    }
+                    catch (WebException e)
+                    {
+                        html = "";
+                        Console.WriteLine(e.InnerException);
+                    }
+                }
+                client.Dispose();
             }
-            else if (this.loadingComplete != null)
-            {
-                this.loadingComplete(this, new EventArgs());
-            }
+            return html;
         }
 
-        void AsyncXmlLoader_DoWork (object sender, DoWorkEventArgs e)
+        public void get_craigslist_postings(string query)
         {
-            AsyncXmlDocument = new XmlDocument();
-            WebClient client = new WebClient();
-            string html = client.DownloadString(new Uri(query));
+            Stopwatch timer = Stopwatch.StartNew();
+            Task.Factory.StartNew<string>(() => DownloadString(query))
+                .ContinueWith(t => {
+//                    string html = t.Result;
+//                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+//                    doc.LoadHtml(html);
+//                    HtmlNode root = doc.DocumentNode; 
+                    XmlDocument xmldocument = new XmlDocument();
+                    xmldocument.LoadXml(t.Result);
 
-            AsyncXmlDocument.LoadXml(html);
-            WireUpPostings();
+                    var done = ParsePostings(xmldocument);
+                    Console.WriteLine (done);
+                    timer.Stop();
+                    TimeSpan timespan = timer.Elapsed;
+                    Console.WriteLine (timespan.ToString());
+                }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private void WireUpPostings()
+        private bool ParsePostings(XmlDocument xmldocument)
         {
-            XmlNamespaceManager mgr = new XmlNamespaceManager(AsyncXmlDocument.NameTable);
+            XmlNamespaceManager mgr = new XmlNamespaceManager(xmldocument.NameTable);
             mgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
             mgr.AddNamespace("x", "http://purl.org/rss/1.0/");
 
-            XmlNodeList rssNodes = AsyncXmlDocument.SelectNodes("//rdf:RDF/x:item", mgr);
+            XmlNodeList rssNodes = xmldocument.SelectNodes("//rdf:RDF/x:item", mgr);
             bool incremented = false;
             // Iterate through the items in the RSS file
             foreach (XmlNode rssNode in rssNodes)
@@ -125,7 +138,7 @@ namespace EthansList.Shared
                     posting.Date = date;
 
 
-//                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
+                    //                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                     {
                         if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
                         {
@@ -143,11 +156,22 @@ namespace EthansList.Shared
 
             if (postings.Count >= 25 && postings.Count < MaxListings && incremented)
             {
+                if (this.asyncLoadingPartlyComplete != null)
+                    this.asyncLoadingPartlyComplete(this, new EventArgs());
                 this.query += String.Format("&s={0}", pageCounter);
-                GetPostings();
+                get_craigslist_postings(this.query);
                 pageCounter += 25;
             }
-            Console.WriteLine(postings.Count);
+            else
+            {
+                if (this.asyncLoadingComplete != null)
+                    this.asyncLoadingComplete(this, new EventArgs());
+
+                if (postings.Count == 0 && this.emptyPostingComplete != null)
+                    this.emptyPostingComplete(this, new EventArgs());
+            }
+            
+            return true;
         }
     }
 }
