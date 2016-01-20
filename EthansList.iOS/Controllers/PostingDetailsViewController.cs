@@ -39,16 +39,15 @@ namespace ethanslist.ios
                 return image;
             }
             set {
-                postingImageView.ContentMode = UIViewContentMode.Center;
                 postingImageView.SetImage(
                     new NSUrl(value),
                     UIImage.FromBundle("placeholder.png"),
                     SDWebImageOptions.HighPriority,
                     null,
                     (image,error,cachetype,NSNull) => {
-                        postingImageView.ContentMode = UIViewContentMode.Center;
+//                        postingImageView.ContentMode = UIViewContentMode.Center;
                         postingImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-                        CenterImage();
+//                        CenterImage();
                     }
                 );
                 image = value;
@@ -89,13 +88,6 @@ namespace ethanslist.ios
             PostingDescription.BackgroundColor = ColorScheme.Clouds;
         }
 
-        public override void ViewDidAppear(bool animated)
-        {
-            CenterImage();
-
-            base.ViewDidAppear(animated);
-        }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -104,7 +96,7 @@ namespace ethanslist.ios
             scrollView.Frame = this.View.Bounds;
             scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
             scrollView.AddSubviews(this.View.Subviews);
-//            this.View.InsertSubview(scrollView, 0);
+            this.View.InsertSubview(scrollView, 0);
 
             if (Post.ImageLink != "-1")
             {
@@ -112,7 +104,7 @@ namespace ethanslist.ios
                 _loadingOverlay = new SmallLoadingOverlay(bounds);
                 imageCollectionView.Add(_loadingOverlay);
             }
-            scrollViewSize = imageViewPlaceholder.Bounds.Size;
+            scrollViewSize = imageScrollView.Bounds.Size;
 
             PostingTitle.Text = Post.PostTitle;
             PostingDescription.Text = Post.Description;

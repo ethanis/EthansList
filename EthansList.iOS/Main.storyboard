@@ -72,14 +72,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="522" width="280" height="21"/>
+                                    <rect key="frame" x="20" y="690" width="374" height="20.5"/>
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" id="2141" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="280" y="0.0" width="320" height="59"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
                                     <mask key="constraints">
                                         <include reference="2261"/>
                                     </mask>
@@ -105,23 +105,12 @@
                                             <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingImage"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="348"/>
                                         </variation>
                                     </imageView>
                                 </subviews>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="120" width="320" height="180"/>
-                                    <mask key="constraints">
-                                        <include reference="2282"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="2282" firstAttribute="width" constant="320"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2282"/>
-                                    </mask>
+                                    <rect key="frame" x="0.0" y="120" width="414" height="348"/>
                                 </variation>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2107" translatesAutoresizingMaskIntoConstraints="NO">
@@ -151,7 +140,7 @@
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="imageCollection"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="303" width="320" height="53"/>
+                                    <rect key="frame" x="0.0" y="471" width="414" height="53"/>
                                 </variation>
                             </collectionView>
                             <navigationBar contentMode="scaleToFill" id="1420" translatesAutoresizingMaskIntoConstraints="NO">
@@ -173,7 +162,7 @@
                                     </navigationItem>
                                 </items>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="19" width="414" height="44"/>
                                 </variation>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2164" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" editable="NO" selectable="NO">
@@ -183,7 +172,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="364" width="280" height="150"/>
+                                    <rect key="frame" x="10" y="532" width="394" height="150"/>
                                 </variation>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" minimumFontSize="10" id="2398" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="2">
@@ -201,7 +190,6 @@
                             <constraint id="2264" firstItem="1420" firstAttribute="trailing" secondItem="2141" secondAttribute="trailing"/>
                             <constraint id="2265" firstItem="1420" firstAttribute="leading" secondItem="2141" secondAttribute="leading"/>
                             <constraint id="2266" firstItem="1420" firstAttribute="top" secondItem="2141" secondAttribute="top" constant="19"/>
-                            <constraint id="2280" firstItem="255" firstAttribute="trailing" secondItem="2094" secondAttribute="trailing"/>
                             <constraint id="2281" firstItem="2094" firstAttribute="top" secondItem="255" secondAttribute="top" constant="120"/>
                             <constraint id="2286" firstItem="255" firstAttribute="bottom" secondItem="2094" secondAttribute="bottom" constant="268"/>
                             <constraint id="2296" firstItem="2107" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
@@ -222,6 +210,8 @@
                             <constraint id="2399" firstItem="2398" firstAttribute="top" secondItem="255" secondAttribute="top" constant="71"/>
                             <constraint id="2400" firstItem="2398" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="6"/>
                             <constraint id="2401" firstItem="255" firstAttribute="trailing" secondItem="2398" secondAttribute="trailing" constant="6"/>
+                            <constraint id="2603" firstItem="2094" firstAttribute="leading" secondItem="2329" secondAttribute="leading"/>
+                            <constraint id="2604" firstItem="2094" firstAttribute="trailing" secondItem="2329" secondAttribute="trailing"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -231,7 +221,6 @@
                                 <exclude reference="2264"/>
                                 <exclude reference="2265"/>
                                 <exclude reference="2266"/>
-                                <exclude reference="2280"/>
                                 <exclude reference="2281"/>
                                 <exclude reference="2286"/>
                                 <exclude reference="2296"/>
@@ -245,6 +234,8 @@
                                 <exclude reference="2304"/>
                                 <exclude reference="2305"/>
                                 <exclude reference="2306"/>
+                                <exclude reference="2603"/>
+                                <exclude reference="2604"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -255,7 +246,6 @@
                                 <include reference="2264"/>
                                 <include reference="2265"/>
                                 <include reference="2266"/>
-                                <include reference="2280"/>
                                 <include reference="2281"/>
                                 <include reference="2286"/>
                                 <include reference="2296"/>
@@ -269,6 +259,8 @@
                                 <include reference="2304"/>
                                 <include reference="2305"/>
                                 <include reference="2306"/>
+                                <include reference="2603"/>
+                                <include reference="2604"/>
                             </mask>
                         </variation>
                     </view>
@@ -290,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="229"/>
+            <point key="canvasLocation" x="1472" y="163"/>
         </scene>
         <scene sceneID="494">
             <objects>
@@ -497,33 +489,16 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingImage"/>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
+                                        </variation>
                                     </imageView>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="34" width="414" height="702"/>
+                                </variation>
                             </scrollView>
                         </subviews>
-                        <constraints>
-                            <constraint id="2124" firstItem="1779" firstAttribute="top" secondItem="1754" secondAttribute="bottom" constant="14"/>
-                            <constraint id="2125" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
-                            <constraint id="2126" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
-                            <constraint id="2127" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
-                            <constraint id="2313" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
-                            <constraint id="2314" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
-                            <constraint id="2315" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2313"/>
-                                <exclude reference="2314"/>
-                                <exclude reference="2315"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="2313"/>
-                                <include reference="2314"/>
-                                <include reference="2315"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
@@ -532,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1759" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="231"/>
+            <point key="canvasLocation" x="1970" y="169"/>
         </scene>
         <scene sceneID="2346">
             <objects>
@@ -638,6 +613,6 @@
         <image name="menu.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina55"/>
     </simulatedMetricsContainer>
 </document>

@@ -34,41 +34,34 @@ namespace ethanslist.ios
                     (image,error,cachetype,NSNull) => {
                         myImageView.ContentMode = UIViewContentMode.Center;
                         myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-                        CenterImage();
+//                        CenterImage();
                     }
                 );
                 image = value;
             }
         }
-
-        void CenterImage()
-        {
-            // center the image as it becomes smaller than the size of the screen
-            CGSize boundsSize = this.View.Bounds.Size;
-            CGRect frameToCenter = myImageView.Frame;
-
-            // center horizontally
-            if (frameToCenter.Size.Width < boundsSize.Width)
-                frameToCenter.X = (boundsSize.Width - frameToCenter.Size.Width) / 2;
-            else
-                frameToCenter.X = 0;
-
-            // center vertically
-            if (frameToCenter.Size.Height < boundsSize.Height)
-                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2) - UIApplication.SharedApplication.StatusBarFrame.Height;
-            else
-                frameToCenter.Y = UIApplication.SharedApplication.StatusBarFrame.Height;
-
-            myImageView.Frame = frameToCenter;
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            CenterImage();
-
-            base.ViewDidAppear(animated);
-        }
-
+//
+//        void CenterImage()
+//        {
+//            // center the image as it becomes smaller than the size of the screen
+//            CGSize boundsSize = this.View.Bounds.Size;
+//            CGRect frameToCenter = myImageView.Frame;
+//
+//            // center horizontally
+//            if (frameToCenter.Size.Width < boundsSize.Width)
+//                frameToCenter.X = (boundsSize.Width - frameToCenter.Size.Width) / 2;
+//            else
+//                frameToCenter.X = 0;
+//
+//            // center vertically
+//            if (frameToCenter.Size.Height < boundsSize.Height)
+//                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2) - UIApplication.SharedApplication.StatusBarFrame.Height;
+//            else
+//                frameToCenter.Y = UIApplication.SharedApplication.StatusBarFrame.Height;
+//
+//            myImageView.Frame = frameToCenter;
+//        }
+//
         public override void LoadView()
         {
             base.LoadView();
@@ -78,21 +71,19 @@ namespace ethanslist.ios
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
             myImageView.ContentMode = UIViewContentMode.Center;
             myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-            CenterImage();
+//            CenterImage();
             if (ImageLinks[ImageIndex] != "-1")
             {
                 Image = ImageLinks[ImageIndex];
             }
         }
 
-        public override void ViewWillLayoutSubviews()
-        {
-            base.ViewWillLayoutSubviews();
-        }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            AddLayoutConstraints();
+
             UIApplication.SharedApplication.SetStatusBarHidden(true, false);
 
             myScrollView.Frame = UIScreen.MainScreen.Bounds;
@@ -155,6 +146,23 @@ namespace ethanslist.ios
             
             ImageIndex -= 1;
             Image = ImageLinks[ImageIndex];
+        }
+
+        void AddLayoutConstraints()
+        {
+            this.View.RemoveConstraints(this.View.Constraints);
+            myScrollView.ContentSize = this.View.Bounds.Size;
+            myScrollView.Frame = this.View.Frame;
+
+            myImageView.TranslatesAutoresizingMaskIntoConstraints = false;
+            //My Image View Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
+                NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
+                NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
+            });
+            this.View.LayoutIfNeeded();
         }
 	}
 }
