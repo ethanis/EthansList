@@ -26,7 +26,7 @@ namespace ethanslist.UITests
         {
             app.Tap(SaveButton);
             app.WaitForElement("Listing Saved!");
-            app.Tap("Tapped Save Button");
+            app.Screenshot("Tapped Save Button");
             app.Tap("OK");
             app.Screenshot("Dismissed Dialog");
 
