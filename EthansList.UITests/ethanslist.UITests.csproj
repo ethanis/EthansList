@@ -41,6 +41,8 @@
     <Compile Include="BasePage.cs" />
     <Compile Include="Tests\Tests.cs" />
     <Compile Include="AbstractSetup.cs" />
+    <Compile Include="Pages\CityPickerPage.cs" />
+    <Compile Include="Pages\SearchOptionsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

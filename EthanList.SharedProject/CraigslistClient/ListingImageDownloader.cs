@@ -45,7 +45,7 @@ namespace EthansList.Shared
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public string DownloadString(string add)
+        private string DownloadString(string add)
         {
             string html = "";            
             using (WebClient client = new WebClient())
@@ -68,7 +68,7 @@ namespace EthansList.Shared
             return html;
         }
 
-        public void ParseHtmlForImages(string html)
+        private void ParseHtmlForImages(string html)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);

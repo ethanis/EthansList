@@ -19,12 +19,20 @@ namespace ethanslist.UITests
         {
             app.Repl();
         }
-
+            
         [Test]
-        public void AppLaunches()
+        public void SearchBayArea()
         {
-            app.Screenshot("First Screen");
-            Console.WriteLine("HELLO!!!");
+            string state = "California";
+            string area = "San Francisco Bay Area";
+
+            new CityPickerPage()
+                .SelectStateAtRow(3, state)
+                .SelectCityAtRow(19, area)
+                .ProceedToSearchOptions();
+
+            new SearchOptionsPage()
+                .VerifyOnLocation(area);
         }
     }
 }
