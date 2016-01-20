@@ -104,7 +104,7 @@ namespace ethanslist.ios
             scrollView.Frame = this.View.Bounds;
             scrollView.ContentSize = UIScreen.MainScreen.Bounds.Size;
             scrollView.AddSubviews(this.View.Subviews);
-            this.View.InsertSubview(scrollView, 0);
+//            this.View.InsertSubview(scrollView, 0);
 
             if (Post.ImageLink != "-1")
             {

@@ -32,9 +32,9 @@ namespace EthansList.Shared
         void ReadInputFile()
         {
             #if __IOS__
-            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.USCraigslistLocations.csv"));
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.Constants.USCraigslistLocations.csv"));
             #elif __ANDROID__
-            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.USCraigslistLocations.csv"));
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Constants.USCraigslistLocations.csv"));
             #endif
 
             using (accountsStream)
