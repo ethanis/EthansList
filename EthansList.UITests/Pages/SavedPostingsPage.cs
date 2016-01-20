@@ -16,6 +16,7 @@ namespace ethanslist.UITests
         {
             var result = app.Query(title)[0];
             Assert.IsNotNull(result, "Unable to verify posting was saved");
+            app.Screenshot("Confirmed posting was saved");
 
             return this;
         }

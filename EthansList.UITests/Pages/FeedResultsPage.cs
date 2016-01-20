@@ -19,11 +19,13 @@ namespace ethanslist.UITests
             }
 
             app.WaitForNoElement(LoadingOverlay, timeout:TimeSpan.FromSeconds(10), timeoutMessage:"Timed out waiting for loading to complete");
+            app.Screenshot("Loading icon has been removed");
         }
 
         public void SelectFirstListing()
         {
             app.Tap(FirstListingCell);
+            app.Screenshot("Selected first listing");
         }
     }
 }

@@ -21,13 +21,14 @@ namespace ethanslist.UITests
         public SearchOptionsPage VerifyOnLocation(string state)
         {
             app.WaitForElement(string.Format("Search {0} for:", state));
-
+            app.Screenshot("Verified searching: " + state);
             return this;
         }
 
         public void ProceedToSearch()
         {
             app.Tap(SearchButton);
+            app.Screenshot("Tapped Search Button");
         }
     }
 }
