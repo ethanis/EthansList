@@ -6,9 +6,16 @@ namespace ethanslist.UITests
 {
     public class SearchOptionsPage : BasePage
     {
+        readonly string SearchButton = "Search";
+        readonly string SaveButton;
+
         public SearchOptionsPage()
             : base ("androidTrait", "save.png")
         {
+            if (OniOS)
+            {
+                SaveButton = "save.png";
+            }
         }
 
         public SearchOptionsPage VerifyOnLocation(string state)
@@ -16,6 +23,11 @@ namespace ethanslist.UITests
             app.WaitForElement(string.Format("Search {0} for:", state));
 
             return this;
+        }
+
+        public void ProceedToSearch()
+        {
+            app.Tap(SearchButton);
         }
     }
 }

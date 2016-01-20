@@ -13,18 +13,13 @@ namespace ethanslist.UITests
             :base(platform)
         {
         }
-
-        [Test]
-        public void Repl()
-        {
-            app.Repl();
-        }
             
         [Test]
-        public void SearchBayArea()
+        public void SavePosting()
         {
             string state = "California";
             string area = "San Francisco Bay Area";
+            string title = String.Empty;
 
             new CityPickerPage()
                 .SelectStateAtRow(3, state)
@@ -32,7 +27,27 @@ namespace ethanslist.UITests
                 .ProceedToSearchOptions();
 
             new SearchOptionsPage()
-                .VerifyOnLocation(area);
+                .VerifyOnLocation(area)
+                .ProceedToSearch();
+
+            new FeedResultsPage()
+                .SelectFirstListing();
+
+            title = new PostingDetailsPage().GetListingTitle();
+
+            new PostingDetailsPage()
+                .SaveListing()
+                .ExitListing();
+
+            new FeedResultsPage().GoBack();
+            new SearchOptionsPage().GoBack();
+            new CityPickerPage().GoBack();
+
+            new MenuPage()
+                .SavedPostings();
+            
+            new SavedPostingsPage()
+                .ConfirmPostingVisible(title);
         }
     }
 }

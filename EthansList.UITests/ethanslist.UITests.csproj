@@ -43,6 +43,10 @@
     <Compile Include="AbstractSetup.cs" />
     <Compile Include="Pages\CityPickerPage.cs" />
     <Compile Include="Pages\SearchOptionsPage.cs" />
+    <Compile Include="Pages\FeedResultsPage.cs" />
+    <Compile Include="Pages\PostingDetailsPage.cs" />
+    <Compile Include="Pages\MenuPage.cs" />
+    <Compile Include="Pages\SavedPostingsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -9,6 +9,7 @@ namespace ethanslist.UITests
     {
         readonly string ProceedButton;
         readonly string RecentCityButton;
+        readonly string MenuButton;
 
         public CityPickerPage()
             : base ("androidTrait", "cityPicker")
@@ -17,6 +18,7 @@ namespace ethanslist.UITests
             {
                 ProceedButton = "proceedButton";
                 RecentCityButton = "Recent Cities";
+                MenuButton = "menu.png";
             }
         }
 
@@ -46,6 +48,11 @@ namespace ethanslist.UITests
         public void ProceedToRecentCities()
         {
             app.Tap(RecentCityButton);
+        }
+
+        public override void GoBack()
+        {
+            app.Tap(MenuButton);
         }
     }
 }
