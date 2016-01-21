@@ -17,8 +17,9 @@ namespace EthansList.Shared
     {
         readonly string url;
         readonly string rssImageUrl;
-        public List<string> images = new List<string>();
         public string postingDescription;
+        public List<string> images = new List<string>();
+
         public EventHandler<EventArgs> loadingComplete;
 
         public ListingImageDownloader(string url, string rssImageUrl)

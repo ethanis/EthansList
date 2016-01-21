@@ -50,9 +50,6 @@ namespace ethanslist.ios
 
             this.Title = "Craigslist Results";
 
-            feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
-            feedClient.GetAllPostingsAsync();
-
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
                 bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
@@ -60,6 +57,21 @@ namespace ethanslist.ios
             // show the loading overlay on the UI thread using the correct orientation sizing
             this._loadingOverlay = new LoadingOverlay (bounds);
             this.View.Add ( this._loadingOverlay );
+
+            feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
+            var result = feedClient.GetAllPostingsAsync();
+
+            if (!result)
+            {
+                this._loadingOverlay.Hide();
+                UIAlertView alert = new UIAlertView();
+                alert.Message = String.Format("No network connection.{0}Please check your settings", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Clicked += (s, ev) => {
+                    this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
+                };
+                this.InvokeOnMainThread(() => alert.Show());   
+            }
 
             tableSource = new FeedResultTableSource(this, feedClient);
 

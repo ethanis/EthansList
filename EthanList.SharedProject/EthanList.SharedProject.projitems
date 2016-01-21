@@ -22,12 +22,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\ListingDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\SearchDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\RecentCityDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Reachability.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
     <Folder Include="$(MSBuildThisFileDirectory)Database\" />
     <Folder Include="$(MSBuildThisFileDirectory)CraigslistClient\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Constants\USCraigslistLocations.csv" />

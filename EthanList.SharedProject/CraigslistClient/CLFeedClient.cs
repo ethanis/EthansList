@@ -25,7 +25,6 @@ namespace EthansList.Shared
         public EventHandler<EventArgs> emptyPostingComplete;
         public EventHandler<EventArgs> asyncLoadingPartlyComplete;
 
-
         public CLFeedClient(String query, int MaxListings = 25, int? WeeksOld = null)
         {
             postings = new List<Posting>();
@@ -41,8 +40,15 @@ namespace EthansList.Shared
 
         public bool GetAllPostingsAsync()
         {
-            get_craigslist_postings(query);
-            return true;
+            if (Reachability.Reachability.IsHostReachable("http://www.craigslist.org"))
+            {
+                get_craigslist_postings(query);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private string DownloadString(string add)
