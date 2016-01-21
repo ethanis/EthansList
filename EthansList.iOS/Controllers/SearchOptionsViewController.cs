@@ -153,7 +153,7 @@ namespace ethanslist.ios
                                 {2, "1400"},
                                 {3, "1600"},
                                 {4, "1800"},
-                                {5, "1000"},
+                                {5, "2000"},
                                 {6, "2200"},
                                 {7, "2400"},
                                 {8, "2600"},
@@ -171,52 +171,63 @@ namespace ethanslist.ios
                 };
             options.Items.Add(new TableItem() {
                 Heading = "Min Bedrooms",
-                CellType = "ActionSheetCell",
-                ActionOptions = new Dictionary<string, object>() 
-                {
-                    {"Any", "Any"},
-                    {"Studio", "0"},
-                    {"1+", "1"},
-                    {"2+", "2"},
-                    {"3+", "3"},
-                    {"4+", "4"},
-                }
+                CellType = "PickerSelectorCell",
+                PickerOptions = new List<PickerOptions> ()
+                    {
+                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {
+                                {0, new KeyValuePair<object, object>("Any", null)},
+                                {1, new KeyValuePair<object, object>("1+","1")},
+                                {2, new KeyValuePair<object, object>("2+","2")},
+                                {3, new KeyValuePair<object, object>("3+","3")},
+                                {4, new KeyValuePair<object, object>("4+","4")},
+                            }}
+                    },
             });
             options.Items.Add(new TableItem() {
                 Heading = "Min Bathrooms",
-                CellType = "ActionSheetCell",
-                ActionOptions = new Dictionary<string, object>() 
-                {
-                    {"Any", "Any"},
-                    {"1+", "1"},
-                    {"2+", "2"},
-                    {"3+", "3"},
-                }
+                CellType = "PickerSelectorCell",
+                PickerOptions = new List<PickerOptions> ()
+                    {
+                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {
+                                {0, new KeyValuePair<object, object>("Any", null)},
+                                {1, new KeyValuePair<object, object>("1+","1")},
+                                {2, new KeyValuePair<object, object>("2+","2")},
+                                {3, new KeyValuePair<object, object>("3+","3")},
+                                {4, new KeyValuePair<object, object>("4+","4")},
+                            }}
+                    },
             });
             options.Items.Add(new TableItem() {
                 Heading = "Posted Date",
-                CellType = "ActionSheetCell",
-                ActionOptions = new Dictionary<string, object>()
-                {
-                    {"Any", null},
-                    {"Today", -1},
-                    {"1 Week Old", 1},
-                    {"2 Weeks Old", 2},
-                    {"3 Weeks Old", 3},
-                    {"4 Weeks Old", 4},
-                }
+                CellType = "PickerSelectorCell",
+                PickerOptions = new List<PickerOptions> ()
+                    {
+                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {
+                                {0, new KeyValuePair<object, object>("Any", null)},
+                                {1, new KeyValuePair<object, object>("Today","-1")},
+                                {2, new KeyValuePair<object, object>("1 Week Old","1")},
+                                {3, new KeyValuePair<object, object>("2 Weeks Old","2")},
+                                {4, new KeyValuePair<object, object>("3 Weeks Old","3")},
+                                {5, new KeyValuePair<object, object>("4 Weeks Old","4")},
+                            }}
+                    },
             });
             options.Items.Add(new TableItem() {
                 Heading = "Max Listings",
-                CellType = "ActionSheetCell",
-                SubHeading = "25",
-                ActionOptions = new Dictionary<string, object>() 
-                {
-                    {"25", "25"},
-                    {"50", "50"},
-                    {"75", "75"},
-                    {"100", "100"},
-                }
+                CellType = "PickerSelectorCell",
+                PickerOptions = new List<PickerOptions> ()
+                    {
+                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {
+                                {0, new KeyValuePair<object, object>(25, 25)},
+                                {1, new KeyValuePair<object, object>(50, 50)},
+                                {2, new KeyValuePair<object, object>(75, 75)},
+                                {3, new KeyValuePair<object, object>(100, 100)},
+                            }}
+                    },
             });
 
             tableItems.Add(searchterms);

@@ -84,6 +84,14 @@ namespace ethanslist.ios
             set { options = value; }
         }
         protected Dictionary<object, object> options = new Dictionary<object, object>();
+
+        public Dictionary<object, KeyValuePair<object, object>> PickerWheelOptions
+        {
+            get {return pickerWheelOptions;}
+            set {pickerWheelOptions = value;}
+        }
+        protected Dictionary<object, KeyValuePair<object, object>> pickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>();
+
     }
 }
 

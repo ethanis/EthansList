@@ -112,7 +112,7 @@
     <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
     <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
-    <InterfaceDefinition Include="TableViewCells\ActionSheetCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -179,13 +179,13 @@
       <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\SearchOptionsTableSource.cs" />
-    <Compile Include="TableViewCells\ActionSheetCell.cs" />
-    <Compile Include="TableViewCells\ActionSheetCell.designer.cs">
-      <DependentUpon>ActionSheetCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TableViewSources\PricePickerSource.cs" />
     <Compile Include="Helpers\TableFormHelpers.cs" />
     <Compile Include="Helpers\Reachability.cs" />
+    <Compile Include="TableViewCells\PickerSelectorCell.cs" />
+    <Compile Include="TableViewCells\PickerSelectorCell.designer.cs">
+      <DependentUpon>PickerSelectorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SearchPickerModel.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

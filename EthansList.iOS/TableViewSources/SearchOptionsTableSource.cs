@@ -12,7 +12,7 @@ namespace ethanslist.ios
         protected string cellIdentifier = "TableCell";
         UIViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
-        PickerModel picker_model;
+        SearchPickerModel picker_model;
         UIPickerView picker;
 
         protected SearchOptionsTableSource() {}
@@ -101,66 +101,85 @@ namespace ethanslist.ios
                 ((PriceSelectorCell)cell).LabelText = item.Heading;
 
 
-                picker_model = new PickerModel (item.PickerOptions);
-                picker =  new UIPickerView ();
+                picker_model = new SearchPickerModel(item.PickerOptions, true);
+                picker = new UIPickerView();
                 picker.Model = picker_model;
                 picker.ShowSelectionIndicator = true;
 
-                UIToolbar toolbar = new UIToolbar ();
+                UIToolbar toolbar = new UIToolbar();
                 toolbar.BarStyle = UIBarStyle.Default;
                 toolbar.Translucent = true;
-                toolbar.SizeToFit ();
+                toolbar.SizeToFit();
 
-                UIBarButtonItem doneButton = new UIBarButtonItem("Done",UIBarButtonItemStyle.Done,(s,e) =>
+                UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
                     {
                         this.owner.View.EndEditing(true);
                     });
-                toolbar.SetItems (new UIBarButtonItem[]{doneButton},true);
+                toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
 
-                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) => 
+                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                {
+                    var result = e.SelectedValue.ToString();
+                    Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
+                    if (e.FromComponent == 0)
                     {
-                        var result = e.SelectedValue.ToString();
-                        Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
-                        if (e.FromComponent == 0)
-                        {
-                            ((PriceSelectorCell)cell).MinPrice.Text = result != "Any" ? "$" + result : result;
-                            ((SearchOptionsViewController)(this.owner)).MinPrice = result;
-                        }
-                        else
-                        {
-                            ((PriceSelectorCell)cell).MaxPrice.Text = result != "Any" ? "$" + result : result;
-                            ((SearchOptionsViewController)(this.owner)).MaxPrice = result;
-                        }
-                    };
+                        ((PriceSelectorCell)cell).MinPrice.Text = result != "Any" ? "$" + result : result;
+                        ((SearchOptionsViewController)(this.owner)).MinPrice = result;
+                    }
+                    else
+                    {
+                        ((PriceSelectorCell)cell).MaxPrice.Text = result != "Any" ? "$" + result : result;
+                        ((SearchOptionsViewController)(this.owner)).MaxPrice = result;
+                    }
+                };
                         
                 ((PriceSelectorCell)cell).PickerField.InputView = picker;
                 ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
             }
-            else if (item.CellType == "ActionSheetCell")
+            else if (item.CellType == "PickerSelectorCell")
             {
-                cell = ActionSheetCell.Create();
+                cell = PickerSelectorCell.Create();
+                ((PickerSelectorCell)cell).Title.Text = item.Heading;
 
-                ((ActionSheetCell)cell).Title = item.Heading;
 
-                if (item.SubHeading != null)
-                    ((ActionSheetCell)cell).MinimumLabel.Text = item.SubHeading;
-                
-                UITapGestureRecognizer tap = new UITapGestureRecognizer(async () =>
+                picker_model = new SearchPickerModel(item.PickerOptions, false);
+                picker = new UIPickerView();
+                picker.Model = picker_model;
+                picker.ShowSelectionIndicator = true;
+
+                UIToolbar toolbar = new UIToolbar();
+                toolbar.BarStyle = UIBarStyle.Default;
+                toolbar.Translucent = true;
+                toolbar.SizeToFit();
+
+                UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
                     {
-                        var result = await ShowNumberOptions(this.owner, item.Heading, "Select an option below", item.ActionOptions);
-                        Console.WriteLine(result);
-                        ((ActionSheetCell)cell).MinimumLabel.Text = result;
-                        if (item.Heading == "Min Bedrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = (string)item.ActionOptions[result];
-                        else if (item.Heading == "Min Bathrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = (string)item.ActionOptions[result];
-                        else if (item.Heading == "Posted Date")
-                            ((SearchOptionsViewController)(this.owner)).WeeksOld = Convert.ToInt16(item.ActionOptions[result]);
-                        else if (item.Heading == "Max Listings")
-                            ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt32(item.ActionOptions[result]);
+                        this.owner.View.EndEditing(true);
                     });
+                toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
 
-                ((ActionSheetCell)cell).MinimumLabel.AddGestureRecognizer(tap);
+                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                    {
+                        string resultKey = e.SelectedKey.ToString();
+                        string resultValue = null;
+
+                        if (e.SelectedValue != null)
+                            resultValue = e.SelectedValue.ToString();
+
+                        Console.WriteLine(resultKey + " From " + e.FromComponent);
+                        ((PickerSelectorCell)cell).Display.Text = resultKey;
+                        if (item.Heading == "Min Bedrooms")
+                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = resultValue;
+                        else if (item.Heading == "Min Bathrooms")
+                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = resultValue;
+                        else if (item.Heading == "Posted Date")
+                            ((SearchOptionsViewController)(this.owner)).WeeksOld = (int?)Convert.ToInt16(resultValue);
+                        else if (item.Heading == "Max Listings")
+                            ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt16(resultValue);
+                    };
+
+                ((PickerSelectorCell)cell).InputTextField.InputView = picker;
+                ((PickerSelectorCell)cell).InputTextField.InputAccessoryView = toolbar;
             }
 
             return cell;
