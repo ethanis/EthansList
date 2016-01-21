@@ -26,11 +26,22 @@ namespace EthansList.Shared
         {
             this.url = url;
             this.rssImageUrl = rssImageUrl;
-            
-            GetImagesAsync();
         }
 
-        private void GetImagesAsync()
+        public bool GetAllImagesAsync()
+        {
+            if (Reachability.Reachability.IsHostReachable("http://www.craigslist.org"))
+            {
+                GetImages();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void GetImages()
         {
             Stopwatch timer = Stopwatch.StartNew();
             Task.Factory.StartNew<string>(() => DownloadString(url))

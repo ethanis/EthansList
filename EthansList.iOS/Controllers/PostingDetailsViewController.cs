@@ -113,7 +113,13 @@ namespace ethanslist.ios
             PostingTitle.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
 
             imageHelper = new ListingImageDownloader(Post.Link, Post.ImageLink);
+            var result = imageHelper.GetAllImagesAsync();
 
+            //Result contains whether or not there is internet connection available
+            if (!result)
+            {
+                Console.WriteLine("Not connected to internet");
+            }
             imageHelper.loadingComplete += (object sender, EventArgs e) =>
                 {
                     if (_loadingOverlay != null)

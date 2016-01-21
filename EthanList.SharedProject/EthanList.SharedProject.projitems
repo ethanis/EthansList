@@ -22,7 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\ListingDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\SearchDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\RecentCityDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Reachability.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
