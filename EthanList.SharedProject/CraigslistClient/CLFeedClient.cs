@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using EthansList.Models;
 using System.Net;
 using HtmlAgilityPack;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 
 namespace EthansList.Shared

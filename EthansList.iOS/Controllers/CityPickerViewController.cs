@@ -124,6 +124,11 @@ namespace ethanslist.ios
                 return 1;
             }
 
+            public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
+            {
+                return Constants.CityPickerRowHeight;
+            }
+
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
             {
                 return locations.States.Count;
@@ -164,6 +169,11 @@ namespace ethanslist.ios
             public override nint GetComponentCount(UIPickerView pickerView)
             {
                 return 1;
+            }
+
+            public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
+            {
+                return Constants.CityPickerRowHeight;
             }
 
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)

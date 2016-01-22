@@ -90,6 +90,7 @@
     <Compile Include="Helpers\MyScaleListener.cs" />
     <Compile Include="Fragments\SavedPostingsFragment.cs" />
     <Compile Include="Fragments\RecentCitiesFragment.cs" />
+    <Compile Include="Helpers\Reachability.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

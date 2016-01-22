@@ -33,7 +33,7 @@ namespace ethanslist.UITests
                 app = ConfigureApp
     				.iOS
 //                    .AppBundle("../../../EthansList.iOS/bin/iPhoneSimulator/Debug/ethanslist.ios.app")
-                    .InstalledApp("com.xamarin.ethanslist")
+//                    .InstalledApp("com.xamarin.ethanslist")
     				.StartApp();
             }
 
