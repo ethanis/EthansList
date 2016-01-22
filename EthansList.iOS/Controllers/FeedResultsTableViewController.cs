@@ -76,6 +76,9 @@ namespace ethanslist.ios
             tableSource = new FeedResultTableSource(this, feedClient);
 
             TableView.Source = tableSource;
+//            TableView.RowHeight = UITableView.AutomaticDimension;
+//            TableView.EstimatedRowHeight = 80;
+            TableView.RowHeight = 80;
 
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));

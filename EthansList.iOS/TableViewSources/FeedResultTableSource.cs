@@ -26,33 +26,33 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            UITableViewCell cell = tableView.DequeueReusableCell(CellId);
+            var cell = (FeedResultsCell)tableView.DequeueReusableCell(FeedResultsCell.Key);
 
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellId);   
+                cell = FeedResultsCell.Create();
             }
 
             cell.BackgroundColor = ColorScheme.Clouds;
 
             Posting post = feedClient.postings[indexPath.Row];
 
-            cell.TextLabel.Text = post.PostTitle;
-            cell.DetailTextLabel.Text = post.Description;
+            cell.PostingTitle.Text = post.PostTitle;
+            cell.PostingDescription.Text = post.Description;
             if (post.ImageLink != "-1")
             {
-                cell.ImageView.SetImage(
+                cell.PostingImage.SetImage(
                     url: new NSUrl(post.ImageLink),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
             }
             else
             {
-                cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
+                cell.PostingImage.Image = UIImage.FromBundle("placeholder.png");
             }
             //TODO: make sure this content mode sticks with the image view
-            cell.ImageView.ContentMode = UIViewContentMode.ScaleAspectFill;
-            cell.ImageView.ClipsToBounds = true;
+//            cell.PostingImage.ContentMode = UIViewContentMode.ScaleAspectFill;
+//            cell.PostingImage.ClipsToBounds = true;
 
             return cell;
         }
