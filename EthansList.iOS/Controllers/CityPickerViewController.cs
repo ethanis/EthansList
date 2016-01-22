@@ -66,7 +66,6 @@ namespace ethanslist.ios
 
                 Console.WriteLine(currentSelected.SiteName);
                 searchViewController.Location = currentSelected;
-//                searchViewController.City = currentSelected.SiteName;
 
                     System.Threading.Tasks.Task.Run(async () => {
                         await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
