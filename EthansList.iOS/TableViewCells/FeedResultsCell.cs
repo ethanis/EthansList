@@ -27,5 +27,13 @@ namespace ethanslist.ios
         {
             return (FeedResultsCell)Nib.Instantiate(null, null)[0];
         }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+//            TitleLabel.TextColor = ColorScheme.MidnightBlue;
+            DescriptionLabel.TextColor = ColorScheme.Asbestos;
+        }
     }
 }
