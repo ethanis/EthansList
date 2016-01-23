@@ -18,6 +18,7 @@ namespace ethanslist.ios
         ListingImageDownloader imageHelper;
         ImageCollectionViewSource collectionSource;
 
+        public nfloat TitleHeight { get; set; }
         public nfloat DescriptionHeight { get; set; }
 
         public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
@@ -37,6 +38,12 @@ namespace ethanslist.ios
             {
                 cell = PostingTitleCell.Create();
                 ((PostingTitleCell)cell).PostingTitle.Text = post.PostTitle;
+
+                CoreGraphics.CGRect bounds = ((PostingTitleCell)cell).PostingTitle.AttributedText.GetBoundingRect(
+                    new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
+                    NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+
+                TitleHeight = bounds.Height;
             }
             else if (item.CellType == "PostingImage")
             {
@@ -69,7 +76,8 @@ namespace ethanslist.ios
                     }
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
                     {
-//                            PostingDescription.Text = imageHelper.postingDescription;
+                        //TODO: Update row height based on full description
+                        //PostingDescription.Text = imageHelper.postingDescription;
                         ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
                         collectionSource = new ImageCollectionViewSource(this.owner, imageHelper.images);
                         ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
@@ -103,7 +111,7 @@ namespace ethanslist.ios
 
             if (item.CellType == "PostingTitleCell")
             {
-                height = 40f;
+                height = TitleHeight;
             }
             else if (item.CellType == "PostingImage")
             {
@@ -125,14 +133,10 @@ namespace ethanslist.ios
             return height;
         }
 
-        #region -= data binding/display methods =-
-            
         public override nint RowsInSection (UITableView tableview, nint section)
         {
             return tableItems.Count;
         }
-
-        #endregion
     }
 }
 

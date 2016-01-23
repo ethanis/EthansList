@@ -22,7 +22,10 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post);
             PostingInfoTableView.Source = tableSource;
-            PostingInfoTableView.RowHeight = 100;
+
+            myNavBarButton.Clicked += (object sender, EventArgs e) => {
+                this.DismissViewController(true, null);
+            };
         }
 
         private List<TableItem> GetTableSetup()
