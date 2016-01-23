@@ -65,21 +65,24 @@ namespace ethanslist.ios
                         Console.WriteLine("Not connected to internet");
                     }
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
-                        {
+                    {
 //                            PostingDescription.Text = imageHelper.postingDescription;
-                            ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                            collectionSource = new ImageCollectionViewSource(this.owner, imageHelper.images);
-                            ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
-                        };
+                        ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                        collectionSource = new ImageCollectionViewSource(this.owner, imageHelper.images);
+                        ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+                    };
                 }
             }
-            else
+            else if (item.CellType == "PostingDescription")
             {
-                cell = tableView.DequeueReusableCell(cellIdentifier);
-                if (cell == null)
-                    cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+                cell = PostingDescriptionCell.Create();
+                ((PostingDescriptionCell)cell).PostingDescription.Text = post.Description;
+            }
+            else if (item.CellType == "PostingDate")
+            {
+                cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
 
-                cell.TextLabel.Text = tableItems[(int)indexPath.Row].Heading;
+                cell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
             }
 
             return cell;
