@@ -13,19 +13,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="69" translatesAutoresizingMaskIntoConstraints="NO" editable="NO" selectable="NO" textAlignment="center">
-                        <rect key="frame" x="14" y="0.0" width="286" height="116"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="69" translatesAutoresizingMaskIntoConstraints="NO" editable="NO" selectable="NO" textAlignment="center" usesAttributedText="YES" userInteractionEnabled="NO">
+                        <rect key="frame" x="10" y="10" width="300" height="97"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.">
+                                <attributes>
+                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <font key="NSFont" name="Helvetica" family="Helvetica" size="20"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" header="YES" staticText="YES"/>
+                        </accessibility>
                     </textView>
                 </subviews>
                 <constraints>
-                    <constraint id="70" firstItem="69" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="14"/>
-                    <constraint id="71" firstItem="YTl-1W-gDM" firstAttribute="trailing" secondItem="69" secondAttribute="trailing" constant="20"/>
-                    <constraint id="72" firstItem="69" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top"/>
-                    <constraint id="73" firstItem="69" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom"/>
+                    <constraint id="82" firstItem="69" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="10"/>
+                    <constraint id="83" firstItem="YTl-1W-gDM" firstAttribute="bottom" secondItem="69" secondAttribute="bottom" constant="10"/>
+                    <constraint id="84" firstItem="69" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="10"/>
+                    <constraint id="85" firstItem="YTl-1W-gDM" firstAttribute="trailing" secondItem="69" secondAttribute="trailing" constant="10"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

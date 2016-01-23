@@ -6,6 +6,7 @@ using SDWebImage;
 using Foundation;
 using EthansList.Shared;
 using System.Drawing;
+using CoreText;
 
 namespace ethanslist.ios
 {
@@ -37,7 +38,12 @@ namespace ethanslist.ios
             if (item.CellType == "PostingTitleCell")
             {
                 cell = PostingTitleCell.Create();
-                ((PostingTitleCell)cell).PostingTitle.Text = post.PostTitle;
+
+                UIStringAttributes txtAttributes = new UIStringAttributes();
+                txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
+
+                ((PostingTitleCell)cell).PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, txtAttributes);
+                ((PostingTitleCell)cell).PostingTitle.TextAlignment = UITextAlignment.Justified;
 
                 CoreGraphics.CGRect bounds = ((PostingTitleCell)cell).PostingTitle.AttributedText.GetBoundingRect(
                     new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
@@ -87,7 +93,13 @@ namespace ethanslist.ios
             else if (item.CellType == "PostingDescription")
             {
                 cell = PostingDescriptionCell.Create();
-                ((PostingDescriptionCell)cell).PostingDescription.Text = post.Description;
+
+                UIStringAttributes txtAttributes = new UIStringAttributes();
+                txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
+
+                ((PostingDescriptionCell)cell).PostingDescription.AttributedText = new NSAttributedString(post.Description, txtAttributes);
+                ((PostingDescriptionCell)cell).PostingDescription.TextAlignment = UITextAlignment.Left;
+
                 CoreGraphics.CGRect bounds = ((PostingDescriptionCell)cell).PostingDescription.AttributedText.GetBoundingRect(
                     new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
                     NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
@@ -111,7 +123,7 @@ namespace ethanslist.ios
 
             if (item.CellType == "PostingTitleCell")
             {
-                height = TitleHeight;
+                height = TitleHeight + 20f;
             }
             else if (item.CellType == "PostingImage")
             {
@@ -123,7 +135,7 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "PostingDescription")
             {
-                height = DescriptionHeight;
+                height = DescriptionHeight + 20f;
             }
             else if (item.CellType == "PostingDate")
             {
