@@ -56,23 +56,23 @@ namespace ethanslist.ios
 
         void CenterImage()
         {
-            // center the image as it becomes smaller than the size of the screen
-            CGSize boundsSize = scrollViewSize;
-            CGRect frameToCenter = postingImageView.Frame;
-
-            // center horizontally
-            if (frameToCenter.Size.Width < boundsSize.Width)
-                frameToCenter.X = (this.View.Bounds.Size.Width - (frameToCenter.Size.Width)) / 2;
-            else
-                frameToCenter.X = 0;
-
-            // center vertically
-            if (frameToCenter.Size.Height < boundsSize.Height)
-                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2) - UIApplication.SharedApplication.StatusBarFrame.Height;
-            else
-                frameToCenter.Y = imageViewPlaceholder.Frame.Y - UIApplication.SharedApplication.StatusBarFrame.Height;
-
-            postingImageView.Frame = frameToCenter;
+//            // center the image as it becomes smaller than the size of the screen
+//            CGSize boundsSize = scrollViewSize;
+//            CGRect frameToCenter = postingImageView.Frame;
+//
+//            // center horizontally
+//            if (frameToCenter.Size.Width < boundsSize.Width)
+//                frameToCenter.X = (this.View.Bounds.Size.Width - (frameToCenter.Size.Width)) / 2;
+//            else
+//                frameToCenter.X = 0;
+//
+//            // center vertically
+//            if (frameToCenter.Size.Height < boundsSize.Height)
+//                frameToCenter.Y = ((boundsSize.Height - frameToCenter.Size.Height) / 2) - UIApplication.SharedApplication.StatusBarFrame.Height;
+//            else
+//                frameToCenter.Y = imageViewPlaceholder.Frame.Y - UIApplication.SharedApplication.StatusBarFrame.Height;
+//
+//            postingImageView.Frame = frameToCenter;
         }
 
         public int CurrentImageIndex { get; set; }
