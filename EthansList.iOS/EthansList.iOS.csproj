@@ -114,6 +114,7 @@
     <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
     <InterfaceDefinition Include="TableViewCells\FeedResultsCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingTitleCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -197,6 +198,10 @@
       <DependentUpon>PostingInfoViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="PostingInfoTableSource.cs" />
+    <Compile Include="TableViewCells\PostingTitleCell.cs" />
+    <Compile Include="TableViewCells\PostingTitleCell.designer.cs">
+      <DependentUpon>PostingTitleCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -93,6 +93,8 @@ namespace ethanslist.ios
 //            owner.PresentViewController(detailController, true, null);
 
             var detailController = (PostingInfoViewController)storyboard.InstantiateViewController("PostingInfoViewController");
+            detailController.Post = savedListings[indexPath.Row];
+
             owner.PresentViewController(detailController, true, null);
         }
     }

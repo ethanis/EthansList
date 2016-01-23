@@ -3,12 +3,14 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 using System.Collections.Generic;
+using EthansList.Models;
 
 namespace ethanslist.ios
 {
 	partial class PostingInfoViewController : UIViewController
 	{
         PostingInfoTableSource tableSource;
+        public Posting Post { get; set; }
 
 		public PostingInfoViewController (IntPtr handle) : base (handle)
 		{
@@ -28,7 +30,8 @@ namespace ethanslist.ios
             tableItems.Add(new TableItem()
                 { 
                     Heading = "Posting Title",
-                    CellType = "PostingTitle",
+                    CellType = "PostingTitleCell",
+                    SubHeading = Post.PostTitle,
                 });
             tableItems.Add(new TableItem()
                 {

@@ -18,11 +18,21 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(cellIdentifier);
-            if (cell == null)
-                cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+            var cell = new UITableViewCell();
+            Console.WriteLine(tableItems[(int)indexPath.Row].CellType);
+            if (tableItems[(int)indexPath.Row].CellType == "PostingTitleCell")
+            {
+                cell = PostingTitleCell.Create();
+                ((PostingTitleCell)cell).PostingTitle.Text = tableItems[(int)indexPath.Row].SubHeading;
+            }
+            else
+            {
+                cell = tableView.DequeueReusableCell(cellIdentifier);
+                if (cell == null)
+                    cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
 
-            cell.TextLabel.Text = tableItems[(int)indexPath.Row].Heading;
+                cell.TextLabel.Text = tableItems[(int)indexPath.Row].Heading;
+            }
 
             return cell;
         }
