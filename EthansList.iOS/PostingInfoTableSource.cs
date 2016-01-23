@@ -5,6 +5,7 @@ using EthansList.Models;
 using SDWebImage;
 using Foundation;
 using EthansList.Shared;
+using System.Drawing;
 
 namespace ethanslist.ios
 {
@@ -16,6 +17,8 @@ namespace ethanslist.ios
         Posting post;
         ListingImageDownloader imageHelper;
         ImageCollectionViewSource collectionSource;
+
+        public nfloat DescriptionHeight { get; set; }
 
         public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
         {
@@ -77,6 +80,11 @@ namespace ethanslist.ios
             {
                 cell = PostingDescriptionCell.Create();
                 ((PostingDescriptionCell)cell).PostingDescription.Text = post.Description;
+                CoreGraphics.CGRect bounds = ((PostingDescriptionCell)cell).PostingDescription.AttributedText.GetBoundingRect(
+                    new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
+                    NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+
+                DescriptionHeight = bounds.Height;
             }
             else if (item.CellType == "PostingDate")
             {
@@ -107,7 +115,7 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "PostingDescription")
             {
-                height = 200f;
+                height = DescriptionHeight;
             }
             else if (item.CellType == "PostingDate")
             {
