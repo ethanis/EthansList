@@ -14,7 +14,7 @@ namespace ethanslist.ios
         UIViewController owner;
         List<TableItem> tableItems;
         protected string cellIdentifier = "infoCell";
-        Posting post;
+        readonly Posting post;
         ListingImageDownloader imageHelper;
         ImageCollectionViewSource collectionSource;
 
@@ -115,7 +115,7 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "PostingImage")
             {
-                height = 200f;
+                height = this.owner.View.Bounds.Height * 0.4f;
             }
             else if (item.CellType == "ImageCollection")
             {
