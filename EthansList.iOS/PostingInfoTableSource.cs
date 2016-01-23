@@ -88,6 +88,34 @@ namespace ethanslist.ios
             return cell;
         }
 
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            var item = tableItems[(int)indexPath.Row];
+            nfloat height = new nfloat();
+
+            if (item.CellType == "PostingTitleCell")
+            {
+                height = 40f;
+            }
+            else if (item.CellType == "PostingImage")
+            {
+                height = 200f;
+            }
+            else if (item.CellType == "ImageCollection")
+            {
+                height = 80f;
+            }
+            else if (item.CellType == "PostingDescription")
+            {
+                height = 200f;
+            }
+            else if (item.CellType == "PostingDate")
+            {
+                height = 40f;
+            }
+
+            return height;
+        }
 
         #region -= data binding/display methods =-
             

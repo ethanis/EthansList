@@ -16,7 +16,7 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel DescriptionLabel { get; set; }
+		UITextView DescriptionLabel { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
