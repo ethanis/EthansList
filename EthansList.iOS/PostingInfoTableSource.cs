@@ -1,6 +1,9 @@
 ﻿using System;
 using UIKit;
 using System.Collections.Generic;
+using EthansList.Models;
+using SDWebImage;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -9,21 +12,41 @@ namespace ethanslist.ios
         UIViewController owner;
         List<TableItem> tableItems;
         protected string cellIdentifier = "infoCell";
+        Posting post;
 
-        public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems)
+        public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
         {
             this.owner = owner;
             this.tableItems = tableItems;
+            this.post = post;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = new UITableViewCell();
             Console.WriteLine(tableItems[(int)indexPath.Row].CellType);
-            if (tableItems[(int)indexPath.Row].CellType == "PostingTitleCell")
+            var item = tableItems[(int)indexPath.Row];
+
+            if (item.CellType == "PostingTitleCell")
             {
                 cell = PostingTitleCell.Create();
-                ((PostingTitleCell)cell).PostingTitle.Text = tableItems[(int)indexPath.Row].SubHeading;
+                ((PostingTitleCell)cell).PostingTitle.Text = post.PostTitle;
+            }
+            else if (item.CellType == "PostingImage")
+            {
+                cell = PostingImageCell.Create();
+                if (post.ImageLink != "-1")
+                {
+                    ((PostingImageCell)cell).MainImage.SetImage(
+                        new NSUrl(post.ImageLink),
+                        UIImage.FromBundle("placeholder.png"),
+                        SDWebImageOptions.HighPriority,
+                        null,
+                        (image,error,cachetype,NSNull) => {
+                        ((PostingImageCell)cell).MainImage.ContentMode = UIViewContentMode.ScaleAspectFit;
+                    }
+                    );
+                }
             }
             else
             {

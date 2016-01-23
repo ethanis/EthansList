@@ -4,6 +4,7 @@ using System.CodeDom.Compiler;
 using UIKit;
 using System.Collections.Generic;
 using EthansList.Models;
+using SDWebImage;
 
 namespace ethanslist.ios
 {
@@ -19,7 +20,7 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            tableSource = new PostingInfoTableSource(this, GetTableSetup());
+            tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post);
             PostingInfoTableView.Source = tableSource;
         }
 
@@ -31,7 +32,6 @@ namespace ethanslist.ios
                 { 
                     Heading = "Posting Title",
                     CellType = "PostingTitleCell",
-                    SubHeading = Post.PostTitle,
                 });
             tableItems.Add(new TableItem()
                 {
