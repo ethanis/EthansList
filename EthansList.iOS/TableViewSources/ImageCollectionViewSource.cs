@@ -9,12 +9,12 @@ namespace ethanslist.ios
     public class ImageCollectionViewSource : UICollectionViewSource
     {
         List<string> urls;
-        PostingDetailsViewController owner;
+        UIViewController owner;
         static string CellID = "listingCell";
 
         public ImageCollectionViewSource(UIViewController owner, List<string> urls)
         {
-            this.owner = (PostingDetailsViewController)owner;
+            this.owner = owner;
             this.urls = urls;
         }
 
@@ -33,8 +33,8 @@ namespace ethanslist.ios
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            owner.Image = urls[indexPath.Row];
-            owner.CurrentImageIndex = indexPath.Row;
+            ((PostingDetailsViewController)owner).Image = urls[indexPath.Row];
+            ((PostingDetailsViewController)owner).CurrentImageIndex = indexPath.Row;
         }
     }
 }

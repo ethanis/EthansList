@@ -116,6 +116,7 @@
     <InterfaceDefinition Include="TableViewCells\FeedResultsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingTitleCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingImageCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingImageCollectionCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -206,6 +207,10 @@
     <Compile Include="TableViewCells\PostingImageCell.cs" />
     <Compile Include="TableViewCells\PostingImageCell.designer.cs">
       <DependentUpon>PostingImageCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\PostingImageCollectionCell.cs" />
+    <Compile Include="TableViewCells\PostingImageCollectionCell.designer.cs">
+      <DependentUpon>PostingImageCollectionCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />

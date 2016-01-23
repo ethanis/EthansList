@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EthansList.Models;
 using SDWebImage;
 using Foundation;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
@@ -13,6 +14,8 @@ namespace ethanslist.ios
         List<TableItem> tableItems;
         protected string cellIdentifier = "infoCell";
         Posting post;
+        ListingImageDownloader imageHelper;
+        ImageCollectionViewSource collectionSource;
 
         public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
         {
@@ -42,10 +45,32 @@ namespace ethanslist.ios
                         UIImage.FromBundle("placeholder.png"),
                         SDWebImageOptions.HighPriority,
                         null,
-                        (image,error,cachetype,NSNull) => {
-                        ((PostingImageCell)cell).MainImage.ContentMode = UIViewContentMode.ScaleAspectFit;
-                    }
+                        (image, error, cachetype, NSNull) =>
+                        {
+                            ((PostingImageCell)cell).MainImage.ContentMode = UIViewContentMode.ScaleAspectFit;
+                        }
                     );
+                }
+            }
+            else if (item.CellType == "ImageCollection")
+            {
+                cell = PostingImageCollectionCell.Create();
+                if (post.ImageLink != "-1")
+                {
+                    imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
+                    var result = imageHelper.GetAllImagesAsync();
+                    //Result contains whether or not there is internet connection available
+                    if (!result)
+                    {
+                        Console.WriteLine("Not connected to internet");
+                    }
+                    imageHelper.loadingComplete += (object sender, EventArgs e) =>
+                        {
+//                            PostingDescription.Text = imageHelper.postingDescription;
+                            ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                            collectionSource = new ImageCollectionViewSource(this.owner, imageHelper.images);
+                            ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+                        };
                 }
             }
             else

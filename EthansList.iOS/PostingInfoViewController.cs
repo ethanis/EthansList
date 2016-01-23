@@ -22,6 +22,7 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post);
             PostingInfoTableView.Source = tableSource;
+            PostingInfoTableView.RowHeight = 100;
         }
 
         private List<TableItem> GetTableSetup()
