@@ -21,11 +21,22 @@ namespace ethanslist.ios
 		{
 		}
 
+        public override void LoadView()
+        {
+            base.LoadView();
+
+            this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+            this.myNavBar.BarTintColor = ColorScheme.WetAsphalt;
+            NavBarPlaceholder.BackgroundColor = UIColor.FromRGB(0.2745f, 0.3451f, 0.4157f);
+            PostingInfoTableView.BackgroundColor = ColorScheme.Clouds;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post);
             PostingInfoTableView.Source = tableSource;
+            PostingInfoTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
             myNavItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done, DismissClicked),true);
 

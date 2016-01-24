@@ -24,6 +24,10 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIView NavBarPlaceholder { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView PostingInfoTableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -35,6 +39,10 @@ namespace ethanslist.ios
 			if (myNavItem != null) {
 				myNavItem.Dispose ();
 				myNavItem = null;
+			}
+			if (NavBarPlaceholder != null) {
+				NavBarPlaceholder.Dispose ();
+				NavBarPlaceholder = null;
 			}
 			if (PostingInfoTableView != null) {
 				PostingInfoTableView.Dispose ();

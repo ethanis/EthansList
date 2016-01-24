@@ -60,7 +60,8 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
-            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
+//            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
+            var detailController = (PostingInfoViewController)storyboard.InstantiateViewController("PostingInfoViewController");
 
             Posting post = feedClient.postings[indexPath.Row];
             detailController.Post = post;

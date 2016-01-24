@@ -177,6 +177,9 @@ namespace ethanslist.ios
                 cell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
             }
 
+            cell.BackgroundColor = ColorScheme.Clouds;
+            cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+
             return cell;
         }
 
@@ -187,7 +190,7 @@ namespace ethanslist.ios
 
             if (item.CellType == "PostingTitleCell")
             {
-                height = TitleHeight + 20f;
+                height = TitleHeight + 10f;
             }
             else if (item.CellType == "PostingImage")
             {

@@ -597,6 +597,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="2663" translatesAutoresizingMaskIntoConstraints="NO" userInteractionEnabled="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <navigationBar contentMode="scaleToFill" id="2629" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                                 <items>
@@ -604,7 +608,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2631" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="72" width="414" height="664"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="248"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2632" rowHeight="44" reuseIdentifier="infoCell">
@@ -614,6 +618,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <subviews/>
                                         </view>
                                     </tableViewCell>
                                 </prototypes>
@@ -627,12 +632,17 @@
                             <constraint id="2642" firstItem="2629" firstAttribute="leading" secondItem="2626" secondAttribute="leading"/>
                             <constraint id="2643" firstItem="2629" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing"/>
                             <constraint id="2644" firstItem="2629" firstAttribute="top" secondItem="2626" secondAttribute="top" constant="20"/>
+                            <constraint id="2664" firstItem="2663" firstAttribute="leading" secondItem="2629" secondAttribute="leading"/>
+                            <constraint id="2665" firstItem="2663" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing"/>
+                            <constraint id="2666" firstItem="2663" firstAttribute="top" secondItem="2626" secondAttribute="top"/>
+                            <constraint id="2667" firstItem="2663" firstAttribute="bottom" secondItem="2629" secondAttribute="bottom"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="PostingInfoTableView" destination="2631" id="name-outlet-2631"/>
                         <outlet property="myNavBar" destination="2629" id="name-outlet-2629"/>
                         <outlet property="myNavItem" destination="2630" id="name-outlet-2630"/>
+                        <outlet property="NavBarPlaceholder" destination="2663" id="name-outlet-2663"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2627" userLabel="First Responder" sceneMemberID="firstResponder"/>

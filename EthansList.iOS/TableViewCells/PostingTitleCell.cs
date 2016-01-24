@@ -9,7 +9,7 @@ namespace ethanslist.ios
     {
         public static readonly NSString Key = new NSString("PostingTitleCell");
         public static readonly UINib Nib;
-        public UITextView PostingTitle {get{ return TitleLabel; }}
+        public UILabel PostingTitle {get{ return TitleLabel; }}
 
         static PostingTitleCell()
         {
