@@ -129,7 +129,12 @@ namespace ethanslist.ios
                     Heading = "Posting Date",
                     CellType = "PostingDate",
                 });
-
+            tableItems.Add(new TableItem()
+                {
+                    
+                    Heading = "Posting Link",
+                    CellType = "PostingLink",
+                });
             return tableItems;
         }
 	}

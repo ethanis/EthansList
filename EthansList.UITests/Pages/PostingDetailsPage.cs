@@ -12,7 +12,7 @@ namespace ethanslist.UITests
         readonly Query TitleLabel;
 
         public PostingDetailsPage()
-            : base ("androidTrait", "Posting Details")
+            : base ("androidTrait", "Posting Info")
         {
             if (OniOS)
             {

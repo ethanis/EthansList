@@ -83,8 +83,8 @@ namespace ethanslist.ios
                 ((PostingTitleCell)cell).PostingTitle.TextAlignment = UITextAlignment.Justified;
 
                 CoreGraphics.CGRect bounds = ((PostingTitleCell)cell).PostingTitle.AttributedText.GetBoundingRect(
-                    new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
-                    NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+                                                 new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
+                                                 NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
                 TitleHeight = bounds.Height;
             }
@@ -107,14 +107,17 @@ namespace ethanslist.ios
                     );
                 }
 
-                UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap) {
+                UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap)
+                {
                     NumberOfTapsRequired = 1
                 };
 
-                UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight) { 
+                UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight)
+                { 
                     Direction = UISwipeGestureRecognizerDirection.Right
                 };
-                UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft) { 
+                UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft)
+                { 
                     Direction = UISwipeGestureRecognizerDirection.Left
                 };
 
@@ -138,12 +141,12 @@ namespace ethanslist.ios
                     }
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
                     {
-                            if (_loadingOverlay != null)
-                                _loadingOverlay.Hide();
+                        if (_loadingOverlay != null)
+                            _loadingOverlay.Hide();
 
-                            ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                            ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+                        ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                        collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                        ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
                     };
                 }
             }
@@ -158,16 +161,16 @@ namespace ethanslist.ios
                 ((PostingDescriptionCell)cell).PostingDescription.TextAlignment = UITextAlignment.Left;
 
                 CoreGraphics.CGRect bounds = ((PostingDescriptionCell)cell).PostingDescription.AttributedText.GetBoundingRect(
-                    new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
-                    NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+                                                 new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
+                                                 NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
                 imageHelper.loadingComplete += (object sender, EventArgs e) =>
-                    {
-                        DescriptionText = imageHelper.postingDescription;
+                {
+                    DescriptionText = imageHelper.postingDescription;
 
-                        if (this.DescriptionLoaded != null)
-                            this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() {DescriptionRow = indexPath});
-                    };
+                    if (this.DescriptionLoaded != null)
+                        this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() { DescriptionRow = indexPath });
+                };
 
                 DescriptionHeight = bounds.Height;
             }
@@ -177,6 +180,23 @@ namespace ethanslist.ios
 
                 cell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
             }
+            else if (item.CellType == "PostingLink")
+            {
+                cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+
+                cell.TextLabel.Text = post.Link;
+
+                UITapGestureRecognizer openLink = new UITapGestureRecognizer(()=> {
+                    var storyboard = UIStoryboard.FromName("Main", null);
+                    PostingWebViewController postingWebView = (PostingWebViewController)storyboard.InstantiateViewController("PostingWebViewController");
+                    postingWebView.PostingLink = post.Link;
+
+                    this.owner.ShowViewController(postingWebView, this);
+                }) { NumberOfTapsRequired = 1 };
+
+                cell.AddGestureRecognizer(openLink);
+            }
+
 
             cell.BackgroundColor = ColorScheme.Clouds;
             cell.SelectionStyle = UITableViewCellSelectionStyle.None;
@@ -206,6 +226,10 @@ namespace ethanslist.ios
                 height = DescriptionHeight + 10f;
             }
             else if (item.CellType == "PostingDate")
+            {
+                height = 40f;
+            }
+            else if (item.CellType == "PostingLink")
             {
                 height = 40f;
             }
