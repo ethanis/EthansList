@@ -19,13 +19,14 @@ namespace EthansList.Shared
         readonly string rssImageUrl;
         public string postingDescription;
         public List<string> images = new List<string>();
-
+        public bool LoadingComplete { get; set;}
         public EventHandler<EventArgs> loadingComplete;
 
         public ListingImageDownloader(string url, string rssImageUrl)
         {
             this.url = url;
             this.rssImageUrl = rssImageUrl;
+            LoadingComplete = false;
         }
 
         public bool GetAllImagesAsync()
@@ -101,6 +102,7 @@ namespace EthansList.Shared
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
 
+            LoadingComplete = true;
             if (this.loadingComplete != null)
                 this.loadingComplete(this, new EventArgs());
         }

@@ -55,7 +55,7 @@ namespace ethanslist.ios
         private string descriptionText;
 
 
-        public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
+        public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post, ListingImageDownloader imageHelper)
         {
             this.owner = owner;
             this.tableItems = tableItems;
@@ -63,7 +63,7 @@ namespace ethanslist.ios
             this.descriptionText = post.Description;
             CurrentImageIndex = 0;
 
-            imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
+            this.imageHelper = imageHelper;
             result = imageHelper.GetAllImagesAsync();
         }
 
@@ -130,10 +130,12 @@ namespace ethanslist.ios
                 cell = PostingImageCollectionCell.Create();
                 if (post.ImageLink != "-1")
                 {
-                    var bounds = ((PostingImageCollectionCell)cell).Collection.Bounds;
-                    _loadingOverlay = new SmallLoadingOverlay(bounds);
-                    ((PostingImageCollectionCell)cell).Collection.Add(_loadingOverlay);
-
+                    if (!imageHelper.LoadingComplete)
+                    {
+                        var bounds = ((PostingImageCollectionCell)cell).Collection.Bounds;
+                        _loadingOverlay = new SmallLoadingOverlay(bounds);
+                        ((PostingImageCollectionCell)cell).Collection.Add(_loadingOverlay);
+                    }
                     //Result contains whether or not there is internet connection available
                     if (!result)
                     {
@@ -184,7 +186,11 @@ namespace ethanslist.ios
             {
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
 
-                cell.TextLabel.Text = post.Link;
+                cell.TextLabel.Text = "Original Posting";
+
+                cell.TextLabel.TextColor = UIColor.Blue;
+                cell.TextLabel.BackgroundColor = UIColor.Clear;
+                cell.TextLabel.UserInteractionEnabled = true;
 
                 UITapGestureRecognizer openLink = new UITapGestureRecognizer(()=> {
                     var storyboard = UIStoryboard.FromName("Main", null);
@@ -194,7 +200,7 @@ namespace ethanslist.ios
                     this.owner.ShowViewController(postingWebView, this);
                 }) { NumberOfTapsRequired = 1 };
 
-                cell.AddGestureRecognizer(openLink);
+                cell.TextLabel.AddGestureRecognizer(openLink);
             }
 
 

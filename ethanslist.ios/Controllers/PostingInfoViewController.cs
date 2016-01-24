@@ -5,6 +5,7 @@ using UIKit;
 using System.Collections.Generic;
 using EthansList.Models;
 using SDWebImage;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
@@ -13,6 +14,7 @@ namespace ethanslist.ios
         PostingInfoTableSource tableSource;
         UIBarButtonItem saveButton;
         UIBarButtonItem deleteButton;
+        ListingImageDownloader imageHelper;
         public Posting Post { get; set; }
         public event EventHandler<EventArgs> ItemDeleted;
 
@@ -34,7 +36,8 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post);
+            imageHelper = new ListingImageDownloader(Post.Link, Post.ImageLink);
+            tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post, imageHelper);
             PostingInfoTableView.Source = tableSource;
             PostingInfoTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
