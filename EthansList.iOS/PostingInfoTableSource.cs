@@ -61,6 +61,7 @@ namespace ethanslist.ios
             this.tableItems = tableItems;
             this.post = post;
             this.descriptionText = post.Description;
+            CurrentImageIndex = 0;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -198,7 +199,7 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "ImageCollection")
             {
-                height = 80f;
+                height = 54f;
             }
             else if (item.CellType == "PostingDescription")
             {

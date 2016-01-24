@@ -14,11 +14,6 @@ namespace ethanslist.ios
         [Export ("initWithFrame:")]
         public ListingImageCell (CGRect frame) : base (frame)
         {
-//            BackgroundView = new UIView{BackgroundColor = UIColor.Orange};
-//            SelectedBackgroundView = new UIView{BackgroundColor = UIColor.Green};
-//            ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
-//            ContentView.Layer.BorderWidth = 0.1f;
-//            ContentView.Transform = CGAffineTransform.MakeScale (0.9f, 0.9f);
             ContentView.BackgroundColor = UIColor.White;
 
             imageView = new UIImageView (UIImage.FromBundle ("placeholder.png"));

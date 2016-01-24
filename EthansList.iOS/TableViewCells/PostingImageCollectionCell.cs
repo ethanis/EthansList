@@ -29,5 +29,12 @@ namespace ethanslist.ios
         {
             return (PostingImageCollectionCell)Nib.Instantiate(null,null)[0];
         }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+            ImageCollection.BackgroundColor = ColorScheme.Silver;
+        }
     }
 }
