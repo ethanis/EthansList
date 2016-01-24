@@ -600,9 +600,7 @@
                             <navigationBar contentMode="scaleToFill" id="2629" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                                 <items>
-                                    <navigationItem id="2630" title="Posting Info">
-                                        <barButtonItem title="Item" id="2659" translatesAutoresizingMaskIntoConstraints="NO" key="leftBarButtonItem"/>
-                                    </navigationItem>
+                                    <navigationItem id="2630" title="Posting Info"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2631" translatesAutoresizingMaskIntoConstraints="NO">
@@ -634,7 +632,7 @@
                     <connections>
                         <outlet property="PostingInfoTableView" destination="2631" id="name-outlet-2631"/>
                         <outlet property="myNavBar" destination="2629" id="name-outlet-2629"/>
-                        <outlet property="myNavBarButton" destination="2659" id="name-outlet-2659"/>
+                        <outlet property="myNavItem" destination="2630" id="name-outlet-2630"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2627" userLabel="First Responder" sceneMemberID="firstResponder"/>

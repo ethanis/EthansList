@@ -20,7 +20,7 @@ namespace ethanslist.ios
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIBarButtonItem myNavBarButton { get; set; }
+		UINavigationItem myNavItem { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -32,9 +32,9 @@ namespace ethanslist.ios
 				myNavBar.Dispose ();
 				myNavBar = null;
 			}
-			if (myNavBarButton != null) {
-				myNavBarButton.Dispose ();
-				myNavBarButton = null;
+			if (myNavItem != null) {
+				myNavItem.Dispose ();
+				myNavItem = null;
 			}
 			if (PostingInfoTableView != null) {
 				PostingInfoTableView.Dispose ();
