@@ -170,7 +170,7 @@ namespace ethanslist.ios
                 Direction = UISwipeGestureRecognizerDirection.Left
             };
 
-            imageScrollView.AddGestureRecognizer(singletap); // detect when the scrollView is double-tapped
+            imageScrollView.AddGestureRecognizer(singletap);
             imageScrollView.AddGestureRecognizer(swipeLeft);
             imageScrollView.AddGestureRecognizer(swipeRight);
 

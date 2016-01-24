@@ -120,6 +120,7 @@ namespace ethanslist.ios
             View.AddGestureRecognizer(dismissSwipe);
             View.AddGestureRecognizer(onSwipeNext);
             View.AddGestureRecognizer(onSwipePrevious);
+            myImageView.AddGestureRecognizer(dismissSwipe);
         }
 
         private void OnDoubleTap (UIGestureRecognizer gesture) {

@@ -6,7 +6,6 @@ using SDWebImage;
 using Foundation;
 using EthansList.Shared;
 using System.Drawing;
-using CoreText;
 
 namespace ethanslist.ios
 {
@@ -23,6 +22,9 @@ namespace ethanslist.ios
         public nfloat TitleHeight { get; set; }
         public nfloat DescriptionHeight { get; set; }
         public int CurrentImageIndex { get; set; }
+        private NSIndexPath DescriptionRow { get; set; }
+
+        public event EventHandler<DescriptionLoadedEventArgs> DescriptionLoaded;
 
         string image;
         public string Image
@@ -43,14 +45,22 @@ namespace ethanslist.ios
                 image = value;
             }
         }
-
         private UIImageView PostingImageView { get; set; }
+
+        private string DescriptionText 
+        { 
+            get { return descriptionText; } 
+            set { descriptionText = value; } 
+        }
+        private string descriptionText;
+
 
         public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
         {
             this.owner = owner;
             this.tableItems = tableItems;
             this.post = post;
+            this.descriptionText = post.Description;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -92,6 +102,21 @@ namespace ethanslist.ios
                         }
                     );
                 }
+
+                UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap) {
+                    NumberOfTapsRequired = 1
+                };
+
+                UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight) { 
+                    Direction = UISwipeGestureRecognizerDirection.Right
+                };
+                UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft) { 
+                    Direction = UISwipeGestureRecognizerDirection.Left
+                };
+
+                PostingImageView.AddGestureRecognizer(singletap);
+                PostingImageView.AddGestureRecognizer(swipeLeft);
+                PostingImageView.AddGestureRecognizer(swipeRight);
             }
             else if (item.CellType == "ImageCollection")
             {
@@ -111,14 +136,20 @@ namespace ethanslist.ios
                     }
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
                     {
-                        //TODO: Update row height based on full description
-                        //PostingDescription.Text = imageHelper.postingDescription;
-                        if (_loadingOverlay != null)
-                            _loadingOverlay.Hide();
-                            
-                        ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                            collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                        ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+                            if (_loadingOverlay != null)
+                                _loadingOverlay.Hide();
+                                
+                            ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                            ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+
+                            UIStringAttributes txtAttributes = new UIStringAttributes();
+                            txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
+
+                            DescriptionText = imageHelper.postingDescription;
+
+                            if (this.DescriptionLoaded != null)
+                                this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() {DescriptionRow = this.DescriptionRow});
                     };
                 }
             }
@@ -129,7 +160,7 @@ namespace ethanslist.ios
                 UIStringAttributes txtAttributes = new UIStringAttributes();
                 txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
 
-                ((PostingDescriptionCell)cell).PostingDescription.AttributedText = new NSAttributedString(post.Description, txtAttributes);
+                ((PostingDescriptionCell)cell).PostingDescription.AttributedText = new NSAttributedString(DescriptionText, txtAttributes);
                 ((PostingDescriptionCell)cell).PostingDescription.TextAlignment = UITextAlignment.Left;
 
                 CoreGraphics.CGRect bounds = ((PostingDescriptionCell)cell).PostingDescription.AttributedText.GetBoundingRect(
@@ -137,6 +168,7 @@ namespace ethanslist.ios
                     NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
                 DescriptionHeight = bounds.Height;
+                DescriptionRow = indexPath;
             }
             else if (item.CellType == "PostingDate")
             {
@@ -181,6 +213,42 @@ namespace ethanslist.ios
         {
             return tableItems.Count;
         }
+
+        private void OnSingleTap (UIGestureRecognizer gesture) 
+        {
+            if (imageHelper.images.Count > 0)
+            {
+                var storyboard = UIStoryboard.FromName("Main", null);
+                postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
+                postingImageVC.ImageLinks = imageHelper.images;
+                postingImageVC.ImageIndex = CurrentImageIndex;
+
+                this.owner.ShowViewController(postingImageVC, this);
+            }
+        }
+
+        private void OnSwipeRight (UIGestureRecognizer gesture)
+        {
+            if (CurrentImageIndex > 0)
+            {
+                CurrentImageIndex -= 1;
+                Image = imageHelper.images[CurrentImageIndex];
+            }
+        }
+
+        private void OnSwipeLeft (UIGestureRecognizer gesture)
+        {
+            if (CurrentImageIndex < imageHelper.images.Count - 1)
+            {
+                CurrentImageIndex += 1;
+                Image = imageHelper.images[CurrentImageIndex];
+            }
+        }
+    }
+
+    public class DescriptionLoadedEventArgs : EventArgs
+    {
+        public NSIndexPath DescriptionRow { get; set;}
     }
 }
 

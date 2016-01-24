@@ -26,6 +26,10 @@ namespace ethanslist.ios
             myNavBarButton.Clicked += (object sender, EventArgs e) => {
                 this.DismissViewController(true, null);
             };
+
+            tableSource.DescriptionLoaded += (object sender, DescriptionLoadedEventArgs e) => {
+                PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
+            };
         }
 
         private List<TableItem> GetTableSetup()
