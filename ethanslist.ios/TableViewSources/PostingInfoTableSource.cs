@@ -15,6 +15,7 @@ namespace ethanslist.ios
         List<TableItem> tableItems;
         protected string cellIdentifier = "infoCell";
         readonly Posting post;
+        bool result;
         ListingImageDownloader imageHelper;
         ImageCollectionViewSource collectionSource;
         protected SmallLoadingOverlay _loadingOverlay = null;
@@ -22,7 +23,6 @@ namespace ethanslist.ios
         public nfloat TitleHeight { get; set; }
         public nfloat DescriptionHeight { get; set; }
         public int CurrentImageIndex { get; set; }
-        private NSIndexPath DescriptionRow { get; set; }
 
         public event EventHandler<DescriptionLoadedEventArgs> DescriptionLoaded;
 
@@ -62,6 +62,9 @@ namespace ethanslist.ios
             this.post = post;
             this.descriptionText = post.Description;
             CurrentImageIndex = 0;
+
+            imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
+            result = imageHelper.GetAllImagesAsync();
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -128,8 +131,6 @@ namespace ethanslist.ios
                     _loadingOverlay = new SmallLoadingOverlay(bounds);
                     ((PostingImageCollectionCell)cell).Collection.Add(_loadingOverlay);
 
-                    imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
-                    var result = imageHelper.GetAllImagesAsync();
                     //Result contains whether or not there is internet connection available
                     if (!result)
                     {
@@ -139,18 +140,10 @@ namespace ethanslist.ios
                     {
                             if (_loadingOverlay != null)
                                 _loadingOverlay.Hide();
-                                
+
                             ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
                                 collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
                             ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
-
-                            UIStringAttributes txtAttributes = new UIStringAttributes();
-                            txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
-
-                            DescriptionText = imageHelper.postingDescription;
-
-                            if (this.DescriptionLoaded != null)
-                                this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() {DescriptionRow = this.DescriptionRow});
                     };
                 }
             }
@@ -168,8 +161,15 @@ namespace ethanslist.ios
                     new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
                     NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
+                imageHelper.loadingComplete += (object sender, EventArgs e) =>
+                    {
+                        DescriptionText = imageHelper.postingDescription;
+
+                        if (this.DescriptionLoaded != null)
+                            this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() {DescriptionRow = indexPath});
+                    };
+
                 DescriptionHeight = bounds.Height;
-                DescriptionRow = indexPath;
             }
             else if (item.CellType == "PostingDate")
             {

@@ -106,16 +106,19 @@ namespace ethanslist.ios
                     Heading = "Posting Title",
                     CellType = "PostingTitleCell",
                 });
-            tableItems.Add(new TableItem()
-                {
-                    Heading = "Posting Image",
-                    CellType = "PostingImage",
-                });
-            tableItems.Add(new TableItem()
-                {
-                    Heading = "Image Collection",
-                    CellType = "ImageCollection",
-                });
+            if (Post.ImageLink != "-1")
+            {
+                tableItems.Add(new TableItem()
+                    {
+                        Heading = "Posting Image",
+                        CellType = "PostingImage",
+                    });
+                tableItems.Add(new TableItem()
+                    {
+                        Heading = "Image Collection",
+                        CellType = "ImageCollection",
+                    });
+            }
             tableItems.Add(new TableItem()
                 {
                     Heading = "Posting Description",
