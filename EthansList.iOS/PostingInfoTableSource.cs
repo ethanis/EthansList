@@ -18,9 +18,33 @@ namespace ethanslist.ios
         readonly Posting post;
         ListingImageDownloader imageHelper;
         ImageCollectionViewSource collectionSource;
+        protected SmallLoadingOverlay _loadingOverlay = null;
 
         public nfloat TitleHeight { get; set; }
         public nfloat DescriptionHeight { get; set; }
+        public int CurrentImageIndex { get; set; }
+
+        string image;
+        public string Image
+        {
+            get { return image; }
+            set 
+            {
+                PostingImageView.SetImage(
+                    new NSUrl(value),
+                    UIImage.FromBundle("placeholder.png"),
+                    SDWebImageOptions.HighPriority,
+                    null,
+                    (image,error,cachetype,NSNull) => 
+                    {
+                        PostingImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+                    }
+                );
+                image = value;
+            }
+        }
+
+        private UIImageView PostingImageView { get; set; }
 
         public PostingInfoTableSource(UIViewController owner, List<TableItem> tableItems, Posting post)
         {
@@ -32,7 +56,6 @@ namespace ethanslist.ios
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = new UITableViewCell();
-            Console.WriteLine(tableItems[(int)indexPath.Row].CellType);
             var item = tableItems[(int)indexPath.Row];
 
             if (item.CellType == "PostingTitleCell")
@@ -54,6 +77,8 @@ namespace ethanslist.ios
             else if (item.CellType == "PostingImage")
             {
                 cell = PostingImageCell.Create();
+                this.PostingImageView = ((PostingImageCell)cell).MainImage;
+
                 if (post.ImageLink != "-1")
                 {
                     ((PostingImageCell)cell).MainImage.SetImage(
@@ -73,6 +98,10 @@ namespace ethanslist.ios
                 cell = PostingImageCollectionCell.Create();
                 if (post.ImageLink != "-1")
                 {
+                    var bounds = ((PostingImageCollectionCell)cell).Collection.Bounds;
+                    _loadingOverlay = new SmallLoadingOverlay(bounds);
+                    ((PostingImageCollectionCell)cell).Collection.Add(_loadingOverlay);
+
                     imageHelper = new ListingImageDownloader(post.Link, post.ImageLink);
                     var result = imageHelper.GetAllImagesAsync();
                     //Result contains whether or not there is internet connection available
@@ -84,8 +113,11 @@ namespace ethanslist.ios
                     {
                         //TODO: Update row height based on full description
                         //PostingDescription.Text = imageHelper.postingDescription;
+                        if (_loadingOverlay != null)
+                            _loadingOverlay.Hide();
+                            
                         ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                        collectionSource = new ImageCollectionViewSource(this.owner, imageHelper.images);
+                            collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
                         ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
                     };
                 }
@@ -135,7 +167,7 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "PostingDescription")
             {
-                height = DescriptionHeight + 20f;
+                height = DescriptionHeight + 10f;
             }
             else if (item.CellType == "PostingDate")
             {

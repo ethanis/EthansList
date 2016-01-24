@@ -126,8 +126,8 @@ namespace ethanslist.ios
                         _loadingOverlay.Hide();
                     PostingDescription.Text = imageHelper.postingDescription;
                     imageCollectionView.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                    imageCollectionView.Source = collectionSource;
+//                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+//                    imageCollectionView.Source = collectionSource;
                 };
 
             myNavBarItem.SetLeftBarButtonItem(null, true);
