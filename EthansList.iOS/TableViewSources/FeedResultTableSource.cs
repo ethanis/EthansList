@@ -50,9 +50,6 @@ namespace ethanslist.ios
             {
                 cell.PostingImage.Image = UIImage.FromBundle("placeholder.png");
             }
-            //TODO: make sure this content mode sticks with the image view
-//            cell.PostingImage.ContentMode = UIViewContentMode.ScaleAspectFill;
-//            cell.PostingImage.ClipsToBounds = true;
 
             return cell;
         }
@@ -60,7 +57,6 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
-//            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
             var detailController = (PostingInfoViewController)storyboard.InstantiateViewController("PostingInfoViewController");
 
             Posting post = feedClient.postings[indexPath.Row];

@@ -130,10 +130,6 @@
     <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\PostingDetailsViewController.cs" />
-    <Compile Include="Controllers\PostingDetailsViewController.designer.cs">
-      <DependentUpon>PostingDetailsViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controllers\CityPickerViewController.cs" />
     <Compile Include="Controllers\CityPickerViewController.designer.cs">
@@ -196,11 +192,6 @@
       <DependentUpon>FeedResultsCell.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="PostingInfoViewController.cs" />
-    <Compile Include="PostingInfoViewController.designer.cs">
-      <DependentUpon>PostingInfoViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PostingInfoTableSource.cs" />
     <Compile Include="TableViewCells\PostingTitleCell.cs" />
     <Compile Include="TableViewCells\PostingTitleCell.designer.cs">
       <DependentUpon>PostingTitleCell.cs</DependentUpon>
@@ -217,6 +208,11 @@
     <Compile Include="TableViewCells\PostingDescriptionCell.designer.cs">
       <DependentUpon>PostingDescriptionCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PostingInfoViewController.cs" />
+    <Compile Include="Controllers\PostingInfoViewController.designer.cs">
+      <DependentUpon>PostingInfoViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\PostingInfoTableSource.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
