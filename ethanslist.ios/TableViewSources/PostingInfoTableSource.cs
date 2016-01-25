@@ -150,6 +150,17 @@ namespace ethanslist.ios
                     }
 //                    imageHelper.loadingComplete += ImageHelper_LoadingComplete;
 
+                    imageHelper.postingRemoved += (object s, EventArgs ev) =>
+                    {
+                            if (_loadingOverlay != null)
+                                _loadingOverlay.Hide();
+
+                            UIAlertView alert = new UIAlertView();
+                            alert.Message = String.Format("This Posting was removed.{0}No additional data available", Environment.NewLine);
+                            alert.AddButton("OK");
+                            this.owner.InvokeOnMainThread(() => alert.Show());
+                    };
+
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
                     {
                         if (_loadingOverlay != null)

@@ -21,6 +21,7 @@ namespace EthansList.Shared
         public List<string> images = new List<string>();
         public bool LoadingComplete { get; set;}
         public EventHandler<EventArgs> loadingComplete;
+        public EventHandler<EventArgs> postingRemoved;
 
         public ListingImageDownloader(string url, string rssImageUrl)
         {
@@ -47,10 +48,6 @@ namespace EthansList.Shared
             Stopwatch timer = Stopwatch.StartNew();
             Task.Factory.StartNew<string>(() => DownloadString(url))
                 .ContinueWith(t => {
-                    //                    string html = t.Result;
-                    //                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                    //                    doc.LoadHtml(html);
-                    //                    HtmlNode root = doc.DocumentNode; 
                     ParseHtmlForImages(t.Result);
                     timer.Stop();
                     TimeSpan timespan = timer.Elapsed;
@@ -86,6 +83,15 @@ namespace EthansList.Shared
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
+            if (doc.GetElementbyId("has_been_removed") != null)
+            {
+                Console.WriteLine("REMOVED");
+                if (this.postingRemoved != null)
+                    this.postingRemoved(this, new EventArgs());
+
+                return;
+
+            }
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
                 where node.Name == "a"
@@ -96,6 +102,7 @@ namespace EthansList.Shared
             {
                 images.Add(node.Attributes["href"].Value);
             }
+
 
             postingDescription = doc.GetElementbyId("postingbody").InnerText;
 
