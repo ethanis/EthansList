@@ -17,7 +17,7 @@ namespace ethanslist.ios
         readonly Posting post;
         bool result;
         ListingImageDownloader imageHelper;
-        ImageCollectionViewSource collectionSource;
+        private ImageCollectionViewSource collectionSource {get;set;}
         protected SmallLoadingOverlay _loadingOverlay = null;
 
         public nfloat TitleHeight { get; set; }
@@ -77,7 +77,7 @@ namespace ethanslist.ios
                 cell = PostingTitleCell.Create();
 
                 UIStringAttributes txtAttributes = new UIStringAttributes();
-                txtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
+                txtAttributes.Font = UIFont.FromName("San Francisco", 18f);
 
                 ((PostingTitleCell)cell).PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, txtAttributes);
                 ((PostingTitleCell)cell).PostingTitle.TextAlignment = UITextAlignment.Justified;
@@ -136,18 +136,28 @@ namespace ethanslist.ios
                         _loadingOverlay = new SmallLoadingOverlay(bounds);
                         ((PostingImageCollectionCell)cell).Collection.Add(_loadingOverlay);
                     }
+                    else
+                    {
+                        ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                        if (collectionSource == null)
+                            collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                        ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+                    }
                     //Result contains whether or not there is internet connection available
                     if (!result)
                     {
                         Console.WriteLine("Not connected to internet");
                     }
+//                    imageHelper.loadingComplete += ImageHelper_LoadingComplete;
+
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
                     {
                         if (_loadingOverlay != null)
                             _loadingOverlay.Hide();
 
                         ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                        collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                        if (collectionSource == null)
+                            collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
                         ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
                     };
                 }
@@ -178,13 +188,13 @@ namespace ethanslist.ios
             }
             else if (item.CellType == "PostingDate")
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+                cell = new UITableViewCell(UITableViewCellStyle.Default, null);
 
                 cell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
             }
             else if (item.CellType == "PostingLink")
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+                cell = new UITableViewCell(UITableViewCellStyle.Default, null);
 
                 cell.TextLabel.Text = "Original Posting";
 
@@ -278,6 +288,16 @@ namespace ethanslist.ios
                 Image = imageHelper.images[CurrentImageIndex];
             }
         }
+
+//        void ImageHelper_LoadingComplete (object sender, EventArgs e)
+//        {
+//                                    if (_loadingOverlay != null)
+//                                        _loadingOverlay.Hide();
+//            
+//                                    ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+//                                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+//                                    ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
+//        }
     }
 
     public class DescriptionLoadedEventArgs : EventArgs
