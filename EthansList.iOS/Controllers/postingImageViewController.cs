@@ -15,6 +15,8 @@ namespace ethanslist.ios
 		{
 		}
 
+        UIImageView closeIcon;
+
         public List<string> ImageLinks { get; set; }
         public int ImageIndex { get; set; }
 
@@ -34,7 +36,6 @@ namespace ethanslist.ios
                     (image,error,cachetype,NSNull) => {
                         myImageView.ContentMode = UIViewContentMode.Center;
                         myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-//                        CenterImage();
                     }
                 );
                 image = value;
@@ -71,7 +72,6 @@ namespace ethanslist.ios
             myScrollView.BackgroundColor.ColorWithAlpha(0.7f);
             myImageView.ContentMode = UIViewContentMode.Center;
             myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-//            CenterImage();
             if (ImageLinks[ImageIndex] != "-1")
             {
                 Image = ImageLinks[ImageIndex];
@@ -95,6 +95,8 @@ namespace ethanslist.ios
             myScrollView.MaximumZoomScale = 4f;
             myScrollView.MinimumZoomScale = .1f;
             myScrollView.ViewForZoomingInScrollView += (UIScrollView sv) => { return myImageView; };
+
+            closeIcon.AddGestureRecognizer(new UITapGestureRecognizer(CloseIconTap));
 
             UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) 
             {
@@ -120,7 +122,12 @@ namespace ethanslist.ios
             View.AddGestureRecognizer(dismissSwipe);
             View.AddGestureRecognizer(onSwipeNext);
             View.AddGestureRecognizer(onSwipePrevious);
-            myImageView.AddGestureRecognizer(dismissSwipe);
+//            myImageView.AddGestureRecognizer(dismissSwipe);
+        }
+
+        private void CloseIconTap (UITapGestureRecognizer gesture)
+        {
+            this.DismissViewController(true, null);
         }
 
         private void OnDoubleTap (UIGestureRecognizer gesture) {
@@ -156,13 +163,24 @@ namespace ethanslist.ios
             myScrollView.Frame = this.View.Frame;
 
             myImageView.TranslatesAutoresizingMaskIntoConstraints = false;
-            //My Image View Constraints
+
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0),
                 NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
                 NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
             });
+
+            closeIcon = new UIImageView(UIImage.FromBundle("Delete-50.png"));
+            closeIcon.UserInteractionEnabled = true;
+            closeIcon.TranslatesAutoresizingMaskIntoConstraints = false;
+            this.View.AddSubview(closeIcon);
+
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(closeIcon, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 25),
+                NSLayoutConstraint.Create(closeIcon, NSLayoutAttribute.Right, NSLayoutRelation.Equal, myScrollView, NSLayoutAttribute.Right, 1, -25),
+            });
+
             this.View.LayoutIfNeeded();
         }
 	}

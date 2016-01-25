@@ -240,5 +240,6 @@
     <BundleResource Include="Resources\LaunchScreenIcon.png" />
     <BundleResource Include="Resources\save.png" />
     <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\Delete-50.png" />
   </ItemGroup>
 </Project>
