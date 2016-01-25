@@ -127,6 +127,7 @@ namespace ethanslist.ios
 
         private void CloseIconTap (UITapGestureRecognizer gesture)
         {
+            UIApplication.SharedApplication.SetStatusBarHidden(false, false);
             this.DismissViewController(true, null);
         }
 
@@ -171,6 +172,8 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(myImageView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
             });
 
+            myImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+
             closeIcon = new UIImageView(UIImage.FromBundle("Delete-50.png"));
             closeIcon.UserInteractionEnabled = true;
             closeIcon.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -178,7 +181,7 @@ namespace ethanslist.ios
 
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(closeIcon, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 25),
-                NSLayoutConstraint.Create(closeIcon, NSLayoutAttribute.Right, NSLayoutRelation.Equal, myScrollView, NSLayoutAttribute.Right, 1, -25),
+                NSLayoutConstraint.Create(closeIcon, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, -25),
             });
 
             this.View.LayoutIfNeeded();
