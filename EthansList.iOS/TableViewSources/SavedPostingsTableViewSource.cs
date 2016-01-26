@@ -12,7 +12,6 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         public List<Posting> savedListings;
-        private const string cellId = "listingCell";
 
         public SavedPostingsTableViewSource(UIViewController owner, List<Posting> savedListings)
         {
@@ -27,29 +26,29 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            UITableViewCell cell = tableView.DequeueReusableCell(cellId);
+            var cell = (FeedResultsCell)tableView.DequeueReusableCell(FeedResultsCell.Key);
 
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, cellId);
+                cell = FeedResultsCell.Create();
             }
 
-            var listing = savedListings[indexPath.Row];
-
-            cell.TextLabel.Text = listing.PostTitle;
-            cell.DetailTextLabel.Text = listing.Description;
             cell.BackgroundColor = ColorScheme.Clouds;
 
-            if (listing.ImageLink != "-1")
+            Posting post = savedListings[indexPath.Row];
+
+            cell.PostingTitle.Text = post.PostTitle;
+            cell.PostingDescription.Text = post.Description;
+            if (post.ImageLink != "-1")
             {
-                cell.ImageView.SetImage(
-                    url: new NSUrl(listing.ImageLink),
+                cell.PostingImage.SetImage(
+                    url: new NSUrl(post.ImageLink),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
             }
             else
             {
-                cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
+                cell.PostingImage.Image = UIImage.FromBundle("placeholder.png");
             }
 
             return cell;
