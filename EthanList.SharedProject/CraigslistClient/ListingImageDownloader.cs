@@ -21,8 +21,11 @@ namespace EthansList.Shared
         public string postingDescription;
         public List<string> images = new List<string>();
         public bool LoadingComplete { get; set;}
-        public EventHandler<EventArgs> loadingComplete;
-        public EventHandler<EventArgs> postingRemoved;
+        public bool PostingImagesFound {get;set;}
+        public bool PostingBodyAdded { get; set;}
+        public bool PostingMapFound {get;set;}
+        public event EventHandler<EventArgs> loadingComplete;
+        public event EventHandler<EventArgs> postingRemoved;
         public CLLocationCoordinate2D postingCoordinates;
         public String postAddress;
 
@@ -31,6 +34,8 @@ namespace EthansList.Shared
             this.url = url;
             this.rssImageUrl = rssImageUrl;
             LoadingComplete = false;
+            PostingBodyAdded = false;
+            PostingMapFound = false;
         }
 
         public bool GetAllImagesAsync()
@@ -105,18 +110,26 @@ namespace EthansList.Shared
             foreach (HtmlNode node in imageNodes)
             {
                 images.Add(node.Attributes["href"].Value);
-            }
+            }           
+
+            if (images.Count > 0)
+                PostingImagesFound = true;
 
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
 
             if (doc.GetElementbyId("postingbody") != null)
+            {
                 postingDescription = doc.GetElementbyId("postingbody").InnerText;
+                PostingBodyAdded = true;
+            }
 
             if (doc.GetElementbyId("map") != null)
             {
                 var element = doc.GetElementbyId("map");
-                postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), 
+                    Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                PostingMapFound = true;
             }
 
             LoadingComplete = true;

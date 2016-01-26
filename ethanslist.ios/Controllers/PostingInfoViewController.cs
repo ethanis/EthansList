@@ -15,6 +15,7 @@ namespace ethanslist.ios
         UIBarButtonItem saveButton;
         UIBarButtonItem deleteButton;
         ListingImageDownloader imageHelper;
+        List<TableItem> tableItems;
         public Posting Post { get; set; }
         public event EventHandler<EventArgs> ItemDeleted;
 
@@ -37,7 +38,8 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
             imageHelper = new ListingImageDownloader(Post.Link, Post.ImageLink);
-            tableSource = new PostingInfoTableSource(this, GetTableSetup(), Post, imageHelper);
+            tableItems = GetTableSetup();
+            tableSource = new PostingInfoTableSource(this, tableItems, Post, imageHelper);
             PostingInfoTableView.Source = tableSource;
             PostingInfoTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
@@ -62,6 +64,22 @@ namespace ethanslist.ios
             tableSource.DescriptionLoaded += (object sender, DescriptionLoadedEventArgs e) => {
                 PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
             };
+
+            imageHelper.loadingComplete += ImageHelper_loadingComplete;
+        }
+
+        void ImageHelper_loadingComplete (object sender, EventArgs e)
+        {
+            if (imageHelper.PostingMapFound)
+            {
+                tableItems.Insert(4, new TableItem()
+                    {
+                        Heading = "Posting Map",
+                        CellType = "PostingMap",
+                    });
+            }
+
+            PostingInfoTableView.ReloadData();
         }
 
         async void SaveListing(object sender, EventArgs e)
@@ -127,15 +145,15 @@ namespace ethanslist.ios
                     Heading = "Posting Description",
                     CellType = "PostingDescription",
                 });
-            //TODO: Better way of not loading map cell
-            if (Post.ImageLink != "-1")
-            {
-                tableItems.Add(new TableItem()
-                    {
-                        Heading = "Posting Map",
-                        CellType = "PostingMap",
-                    });
-            }
+//            //TODO: Better way of not loading map cell
+//            if (Post.ImageLink != "-1")
+//            {
+//                tableItems.Add(new TableItem()
+//                    {
+//                        Heading = "Posting Map",
+//                        CellType = "PostingMap",
+//                    });
+//            }
             tableItems.Add(new TableItem()
                 {
                     Heading = "Posting Date",
