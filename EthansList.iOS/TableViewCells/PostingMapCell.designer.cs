@@ -16,10 +16,18 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIStepper MapStepper { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		MapKit.MKMapView PostingMapView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (MapStepper != null) {
+				MapStepper.Dispose ();
+				MapStepper = null;
+			}
 			if (PostingMapView != null) {
 				PostingMapView.Dispose ();
 				PostingMapView = null;

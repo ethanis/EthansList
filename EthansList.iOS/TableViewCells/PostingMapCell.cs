@@ -3,6 +3,7 @@
 using Foundation;
 using UIKit;
 using MapKit;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -11,6 +12,7 @@ namespace ethanslist.ios
         public static readonly NSString Key = new NSString("PostingMapCell");
         public static readonly UINib Nib;
         public MKMapView PostingMap {get{ return PostingMapView; }}
+        public UIStepper ZoomStepper { get { return MapStepper; }}
 
         static PostingMapCell()
         {

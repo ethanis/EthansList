@@ -7,6 +7,7 @@ using Foundation;
 using EthansList.Shared;
 using System.Drawing;
 using MapKit;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -203,14 +204,23 @@ namespace ethanslist.ios
                 cell = PostingMapCell.Create();
                 imageHelper.loadingComplete += (object sender, EventArgs e) =>
                 {
+                        var coords = imageHelper.postingCoordinates;
+
                         ((PostingMapCell)cell).PostingMap.AddAnnotation(new MKPointAnnotation() 
                             {
                                 Title = "Location", 
-                                Coordinate = imageHelper.postingCoordinates,
+                                Coordinate = coords,
                             });
 
-                        MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(20), MilesToLongitudeDegrees(20, imageHelper.postingCoordinates.Latitude));
-                        ((PostingMapCell)cell).PostingMap.Region = new MKCoordinateRegion(imageHelper.postingCoordinates, span);
+                        MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(10.5), MilesToLongitudeDegrees(10.5, coords.Latitude));
+                        ((PostingMapCell)cell).PostingMap.Region = new MKCoordinateRegion(coords, span);
+
+                        ((PostingMapCell)cell).ZoomStepper.ValueChanged += (s, ev) => {
+                            var value = ((PostingMapCell)cell).ZoomStepper.Value;
+                            value = (value*50)*(1/value)-value+0.5;
+                            MKCoordinateSpan newSpan = new MKCoordinateSpan(MilesToLatitudeDegrees(value), MilesToLongitudeDegrees(value, coords.Latitude));
+                            ((PostingMapCell)cell).PostingMap.Region = new MKCoordinateRegion(coords, newSpan);
+                        };
                 };
             }
             else if (item.CellType == "PostingDate")
@@ -336,16 +346,6 @@ namespace ethanslist.ios
             double radiusAtLatitude = earthRadius * Math.Cos(atLatitude * degreesToRadians);
             return (miles / radiusAtLatitude) * radiansToDegrees;
         }
-
-//        void ImageHelper_LoadingComplete (object sender, EventArgs e)
-//        {
-//                                    if (_loadingOverlay != null)
-//                                        _loadingOverlay.Hide();
-//            
-//                                    ((PostingImageCollectionCell)cell).Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-//                                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-//                                    ((PostingImageCollectionCell)cell).Collection.Source = collectionSource;
-//        }
     }
 
     public class DescriptionLoadedEventArgs : EventArgs

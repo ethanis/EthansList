@@ -16,16 +16,22 @@
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="2" translatesAutoresizingMaskIntoConstraints="NO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="246"/>
                     </mapView>
+                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="50" id="19" translatesAutoresizingMaskIntoConstraints="NO" minimumValue="10" value="40" stepValue="2">
+                        <rect key="frame" x="206" y="198" width="94" height="29"/>
+                    </stepper>
                 </subviews>
                 <constraints>
                     <constraint id="3" firstItem="2" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top"/>
                     <constraint id="4" firstItem="2" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading"/>
                     <constraint id="5" firstItem="2" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom"/>
                     <constraint id="6" firstItem="2" firstAttribute="trailing" secondItem="YTl-1W-gDM" secondAttribute="trailing"/>
+                    <constraint id="20" firstItem="2" firstAttribute="bottom" secondItem="19" secondAttribute="bottom" constant="19"/>
+                    <constraint id="21" firstItem="2" firstAttribute="trailing" secondItem="19" secondAttribute="trailing" constant="20"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="PostingMapView" destination="2" id="name-outlet-2"/>
+                <outlet property="MapStepper" destination="19" id="name-outlet-19"/>
             </connections>
         </tableViewCell>
     </objects>
