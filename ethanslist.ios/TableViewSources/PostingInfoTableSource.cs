@@ -69,6 +69,14 @@ namespace ethanslist.ios
             result = imageHelper.GetAllImagesAsync();
         }
 
+        private PostingTitleCell titleCell { get; set; }
+        private PostingImageCell imageCell { get; set; }
+        private PostingImageCollectionCell collectionCell { get; set; }
+        private PostingDescriptionCell descriptioncell { get; set; }
+        private PostingMapCell mapCell { get; set; }
+        private UITableViewCell dateCell { get; set; }
+        private UITableViewCell linkcell { get; set; }
+
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var item = tableItems[(int)indexPath.Row];
@@ -76,7 +84,9 @@ namespace ethanslist.ios
             switch (item.CellType)
             {
                 case "PostingTitleCell":
-                    var titleCell = PostingTitleCell.Create();
+                    if (titleCell == null)
+                        titleCell = PostingTitleCell.Create();
+                    
                     UIStringAttributes txtAttributes = new UIStringAttributes();
                     txtAttributes.Font = UIFont.FromName("San Francisco", 18f);
 
@@ -94,9 +104,10 @@ namespace ethanslist.ios
 
                     return titleCell;
                 case "PostingImage":
-                    var imageCell = PostingImageCell.Create();
+                    if (imageCell == null)
+                        imageCell = PostingImageCell.Create();
+                    
                     this.PostingImageView = imageCell.MainImage;
-
                     if (post.ImageLink != "-1")
                     {
                         imageCell.MainImage.SetImage(
@@ -134,7 +145,9 @@ namespace ethanslist.ios
 
                     return imageCell;
                 case "ImageCollection":
-                    var collectionCell = PostingImageCollectionCell.Create();
+                    if (collectionCell == null)
+                        collectionCell = PostingImageCollectionCell.Create();
+                    
                     if (post.ImageLink != "-1")
                     {
                         if (!imageHelper.LoadingComplete)
@@ -184,7 +197,8 @@ namespace ethanslist.ios
 
                     return collectionCell;
                 case "PostingDescription":
-                    var descriptioncell = PostingDescriptionCell.Create();
+                    if (descriptioncell == null)
+                        descriptioncell = PostingDescriptionCell.Create();
 
                     UIStringAttributes desctxtAttributes = new UIStringAttributes();
                     desctxtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
@@ -220,7 +234,8 @@ namespace ethanslist.ios
 
                     return descriptioncell;
                 case "PostingMap":
-                    var mapCell = PostingMapCell.Create();
+                    if (mapCell == null)
+                        mapCell = PostingMapCell.Create();
 
                     var coords = imageHelper.postingCoordinates;
                     mapCell.PostingMap.AddAnnotation(new MKPointAnnotation()
@@ -245,7 +260,9 @@ namespace ethanslist.ios
 
                     return mapCell;
                 case "PostingDate":
-                    var dateCell = new UITableViewCell(UITableViewCellStyle.Default, null);
+                    if (dateCell == null)
+                        dateCell = new UITableViewCell(UITableViewCellStyle.Default, null);
+                    
                     dateCell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
 
                     dateCell.BackgroundColor = ColorScheme.Clouds;
@@ -253,7 +270,8 @@ namespace ethanslist.ios
 
                     return dateCell;
                 case "PostingLink":
-                    var linkcell = new UITableViewCell(UITableViewCellStyle.Default, null);
+                    if (linkcell == null)
+                        linkcell = new UITableViewCell(UITableViewCellStyle.Default, null);
 
                     linkcell.TextLabel.Text = "Original Posting";
 
