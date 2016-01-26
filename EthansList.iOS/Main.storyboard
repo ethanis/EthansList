@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1456" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1456">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="5">
             <objects>
-                <tableViewController id="6" sceneMemberID="viewController" customClass="FeedResultsTableViewController" storyboardIdentifier="FeedResultsTableViewController">
+                <tableViewController storyboardIdentifier="FeedResultsTableViewController" id="6" customClass="FeedResultsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="10" reuseIdentifier="postCell" style="IBUITableViewCellStyleSubtitle" textLabel="934" detailTextLabel="935" rowHeight="44">
-                                <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" textLabel="934" detailTextLabel="935" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="10">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="10" id="11">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="934">
@@ -43,81 +43,84 @@
                             <outlet property="delegate" destination="6" id="9"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="245" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="245"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1028" y="225"/>
         </scene>
+        <!--Select City-->
         <scene sceneID="494">
             <objects>
-                <viewController id="495" sceneMemberID="viewController" customClass="CityPickerViewController" storyboardIdentifier="CityPickerViewController">
+                <viewController storyboardIdentifier="CityPickerViewController" id="495" customClass="CityPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="492"/>
                         <viewControllerLayoutGuide type="bottom" id="493"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="496">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="507">
                                 <rect key="frame" x="176" y="53" width="144" height="311"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="cityPicker"/>
-                                </userDefinedRuntimeAttributes>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
-                            </pickerView>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
-                                <rect key="frame" x="15" y="457" width="200" height="30"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="proceedButton"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="cityPicker"/>
                                 </userDefinedRuntimeAttributes>
+                            </pickerView>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="518">
+                                <rect key="frame" x="15" y="457" width="200" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Proceed to Search"/>
-                            </button>
-                            <pickerView contentMode="scaleToFill" id="685" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="53" width="162" height="311"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="statePicker"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="proceedButton"/>
                                 </userDefinedRuntimeAttributes>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="685">
+                                <rect key="frame" x="0.0" y="53" width="162" height="311"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="statePicker"/>
+                                </userDefinedRuntimeAttributes>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2367" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2367">
                                 <rect key="frame" x="20" y="495" width="280" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Recent Cities"/>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Select City" id="593"/>
                     <connections>
                         <outlet property="CityPickerView" destination="507" id="name-outlet-507"/>
                         <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
-                        <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
                         <outlet property="RecentCitiesButton" destination="2367" id="name-outlet-2367"/>
+                        <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
                     </connections>
-                    <navigationItem title="Select City" id="593" key="navigationItem"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="497" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-58" y="232"/>
         </scene>
+        <!--Ethan's List-->
         <scene sceneID="1441">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="1442" sceneMemberID="viewController" customClass="MenuTableViewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="1442" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1444">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1447" rowHeight="44" reuseIdentifier="cellid">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellid" rowHeight="44" id="1447">
+                                <rect key="frame" x="0.0" y="55.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1448" tableViewCell="1447">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1447" id="1448">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -133,12 +136,13 @@
             </objects>
             <point key="canvasLocation" x="244" y="1028"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="1450">
             <objects>
                 <navigationController id="1451" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1453">
+                        <rect key="frame" x="0.0" y="20" width="880" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <rect key="frame" x="0.0" y="20" width="508" height="44"/>
                     </navigationBar>
                     <connections>
                         <segue destination="1442" kind="relationship" relationship="rootViewController" id="1452"/>
@@ -148,6 +152,7 @@
             </objects>
             <point key="canvasLocation" x="-311" y="1025"/>
         </scene>
+        <!--Split View Controller-->
         <scene sceneID="1455">
             <objects>
                 <splitViewController id="1456" sceneMemberID="viewController">
@@ -160,18 +165,19 @@
             </objects>
             <point key="canvasLocation" x="-842" y="1024"/>
         </scene>
+        <!--Saved Postings-->
         <scene sceneID="1470">
             <objects>
-                <tableViewController id="1471" sceneMemberID="viewController" customClass="SavedListingsTableViewController" storyboardIdentifier="SavedPostingsTableViewController" title="Saved Postings">
+                <tableViewController storyboardIdentifier="SavedPostingsTableViewController" title="Saved Postings" id="1471" customClass="SavedListingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1472">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1475" rowHeight="44" reuseIdentifier="listingCell" style="IBUITableViewCellStyleSubtitle" textLabel="1479" detailTextLabel="1480">
-                                <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listingCell" textLabel="1479" detailTextLabel="1480" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="1475">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1475" id="1476">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1479">
@@ -197,27 +203,56 @@
                             <outlet property="delegate" destination="1471" id="1474"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="1563" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="1563"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1477" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="737" y="976"/>
         </scene>
+        <!--Title-->
         <scene sceneID="1591">
             <objects>
-                <tableViewController id="1592" sceneMemberID="viewController" customClass="SavedSearchesTableViewController" storyboardIdentifier="SavedSearchesTableViewController">
+                <tableViewController storyboardIdentifier="SavedSearchesTableViewController" id="1592" customClass="SavedSearchesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1593">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1596" rowHeight="44" reuseIdentifier="searchCell">
-                                <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" rowHeight="66" id="1596" customClass="SavedSearchCell">
+                                <rect key="frame" x="0.0" y="22" width="600" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1596" id="1597">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is the city of the search" lineBreakMode="tailTruncation" minimumFontSize="10" id="2723" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="10" y="10" width="580" height="21"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search terms go here" lineBreakMode="wordWrap" id="2727" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0" adjustsFontSizeToFit="NO">
+                                            <rect key="frame" x="20" y="37.5" width="570" height="18"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint id="2724" firstItem="2723" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="10"/>
+                                        <constraint id="2725" firstItem="2723" firstAttribute="top" secondItem="1597" secondAttribute="top" constant="10"/>
+                                        <constraint id="2726" firstItem="1597" firstAttribute="trailing" secondItem="2723" secondAttribute="trailing" constant="10"/>
+                                        <constraint id="2729" firstItem="2727" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="20"/>
+                                        <constraint id="2730" firstItem="1597" firstAttribute="trailing" secondItem="2727" secondAttribute="trailing" constant="10"/>
+                                        <constraint id="2731" firstItem="1597" firstAttribute="bottom" secondItem="2727" secondAttribute="bottom" constant="10"/>
+                                        <constraint id="2740" firstItem="2727" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="5"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="LabelCity" destination="2723" id="name-outlet-2723"/>
+                                    <outlet property="LabelSearchTerms" destination="2727" id="name-outlet-2727"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -225,34 +260,34 @@
                             <outlet property="delegate" destination="1592" id="1595"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="1684" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="1684"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1598" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1129" y="979"/>
         </scene>
+        <!--Posting Image View Controller-->
         <scene sceneID="1756">
             <objects>
-                <viewController id="1757" sceneMemberID="viewController" customClass="postingImageViewController" storyboardIdentifier="postingImageViewController">
+                <viewController storyboardIdentifier="postingImageViewController" id="1757" customClass="postingImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1754"/>
                         <viewControllerLayoutGuide type="bottom" id="1755"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1758">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1779" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1779">
                                 <rect key="frame" x="0.0" y="34" width="600" height="566"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1780">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingImage"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="postingImage"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
@@ -264,29 +299,31 @@
                                 </variation>
                             </scrollView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
                         <outlet property="myImageView" destination="1780" id="name-outlet-1780"/>
+                        <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1759" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1970" y="169"/>
         </scene>
+        <!--Recent Cities Table View Controller-->
         <scene sceneID="2346">
             <objects>
-                <tableViewController id="2347" sceneMemberID="viewController" customClass="RecentCitiesTableViewController" storyboardIdentifier="RecentCitiesTableViewController">
+                <tableViewController storyboardIdentifier="RecentCitiesTableViewController" id="2347" customClass="RecentCitiesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2348">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2351" rowHeight="44" reuseIdentifier="recentCityCell">
-                                <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recentCityCell" rowHeight="44" id="2351">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2351" id="2352">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -301,183 +338,183 @@
             </objects>
             <point key="canvasLocation" x="1533" y="979"/>
         </scene>
+        <!--Search Options View Controller-->
         <scene sceneID="2417">
             <objects>
-                <viewController id="2418" sceneMemberID="viewController" customClass="SearchOptionsViewController" storyboardIdentifier="SearchOptionsViewController">
+                <viewController storyboardIdentifier="SearchOptionsViewController" id="2418" customClass="SearchOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2415"/>
                         <viewControllerLayoutGuide type="bottom" id="2416"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2419">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2545" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2545">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search Craigslist For:" lineBreakMode="tailTruncation" minimumFontSize="10" id="2546" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" fixedFrame="YES">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Search Craigslist For:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2546">
                                         <rect key="frame" x="20" y="30" width="280" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2552" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2552">
                                         <rect key="frame" x="20" y="68" width="280" height="30"/>
                                         <state key="normal" title="Search">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2563" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" scrollEnabled="NO">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2563">
                                         <rect key="frame" x="0.0" y="131" width="320" height="417"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2564" rowHeight="44" reuseIdentifier="TableCell">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="44" id="2564">
                                                 <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2565" tableViewCell="2564">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2564" id="5le-Wi-u2k">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
+                                                </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                 </subviews>
                             </scrollView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint id="2584" firstItem="2545" firstAttribute="trailing" secondItem="2419" secondAttribute="trailing"/>
-                            <constraint id="2585" firstItem="2545" firstAttribute="leading" secondItem="2419" secondAttribute="leading"/>
-                            <constraint id="2586" firstItem="2545" firstAttribute="top" secondItem="2419" secondAttribute="top" constant="20"/>
-                            <constraint id="2587" firstItem="2545" firstAttribute="bottom" secondItem="2419" secondAttribute="bottom"/>
+                            <constraint firstItem="2545" firstAttribute="trailing" secondItem="2419" secondAttribute="trailing" id="2584"/>
+                            <constraint firstItem="2545" firstAttribute="leading" secondItem="2419" secondAttribute="leading" id="2585"/>
+                            <constraint firstItem="2545" firstAttribute="top" secondItem="2419" secondAttribute="top" constant="20" id="2586"/>
+                            <constraint firstItem="2545" firstAttribute="bottom" secondItem="2419" secondAttribute="bottom" id="2587"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="scrollView" destination="2545" id="name-outlet-2545"/>
-                        <outlet property="SearchCityLabel" destination="2546" id="name-outlet-2546"/>
                         <outlet property="SearchButton" destination="2552" id="name-outlet-2552"/>
+                        <outlet property="SearchCityLabel" destination="2546" id="name-outlet-2546"/>
                         <outlet property="SearchTableView" destination="2563" id="name-outlet-2563"/>
+                        <outlet property="scrollView" destination="2545" id="name-outlet-2545"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2420" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="477" y="230"/>
         </scene>
+        <!--Posting Info View Controller-->
         <scene sceneID="2624">
             <objects>
-                <viewController id="2625" sceneMemberID="viewController" customClass="PostingInfoViewController" storyboardIdentifier="PostingInfoViewController">
+                <viewController storyboardIdentifier="PostingInfoViewController" id="2625" customClass="PostingInfoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2622"/>
                         <viewControllerLayoutGuide type="bottom" id="2623"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2626">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="2663" translatesAutoresizingMaskIntoConstraints="NO" userInteractionEnabled="NO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2663">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <navigationBar contentMode="scaleToFill" id="2629" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2629">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem id="2630" title="Posting Info"/>
+                                    <navigationItem title="Posting Info" id="2630"/>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2631" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="72" width="414" height="248"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2631">
+                                <rect key="frame" x="0.0" y="72" width="600" height="248"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2632" rowHeight="44" reuseIdentifier="infoCell">
-                                        <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infoCell" rowHeight="44" id="2632">
+                                        <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2633" tableViewCell="2632">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2632" id="y4b-Q0-jGX">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <subviews/>
-                                        </view>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint id="2638" firstItem="2631" firstAttribute="leading" secondItem="2626" secondAttribute="leading"/>
-                            <constraint id="2639" firstItem="2631" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing"/>
-                            <constraint id="2640" firstItem="2631" firstAttribute="top" secondItem="2629" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2641" firstItem="2631" firstAttribute="bottom" secondItem="2626" secondAttribute="bottom"/>
-                            <constraint id="2642" firstItem="2629" firstAttribute="leading" secondItem="2626" secondAttribute="leading"/>
-                            <constraint id="2643" firstItem="2629" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing"/>
-                            <constraint id="2644" firstItem="2629" firstAttribute="top" secondItem="2626" secondAttribute="top" constant="20"/>
-                            <constraint id="2664" firstItem="2663" firstAttribute="leading" secondItem="2629" secondAttribute="leading"/>
-                            <constraint id="2665" firstItem="2663" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing"/>
-                            <constraint id="2666" firstItem="2663" firstAttribute="top" secondItem="2626" secondAttribute="top"/>
-                            <constraint id="2667" firstItem="2663" firstAttribute="bottom" secondItem="2629" secondAttribute="bottom"/>
+                            <constraint firstItem="2631" firstAttribute="leading" secondItem="2626" secondAttribute="leading" id="2638"/>
+                            <constraint firstItem="2631" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2639"/>
+                            <constraint firstItem="2631" firstAttribute="top" secondItem="2629" secondAttribute="bottom" constant="8" id="2640"/>
+                            <constraint firstItem="2631" firstAttribute="bottom" secondItem="2626" secondAttribute="bottom" id="2641"/>
+                            <constraint firstItem="2629" firstAttribute="leading" secondItem="2626" secondAttribute="leading" id="2642"/>
+                            <constraint firstItem="2629" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2643"/>
+                            <constraint firstItem="2629" firstAttribute="top" secondItem="2626" secondAttribute="top" constant="20" id="2644"/>
+                            <constraint firstItem="2663" firstAttribute="leading" secondItem="2629" secondAttribute="leading" id="2664"/>
+                            <constraint firstItem="2663" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2665"/>
+                            <constraint firstItem="2663" firstAttribute="top" secondItem="2626" secondAttribute="top" id="2666"/>
+                            <constraint firstItem="2663" firstAttribute="bottom" secondItem="2629" secondAttribute="bottom" id="2667"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="NavBarPlaceholder" destination="2663" id="name-outlet-2663"/>
                         <outlet property="PostingInfoTableView" destination="2631" id="name-outlet-2631"/>
                         <outlet property="myNavBar" destination="2629" id="name-outlet-2629"/>
                         <outlet property="myNavItem" destination="2630" id="name-outlet-2630"/>
-                        <outlet property="NavBarPlaceholder" destination="2663" id="name-outlet-2663"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2627" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1504" y="167"/>
         </scene>
+        <!--Posting Web View Controller-->
         <scene sceneID="2683">
             <objects>
-                <viewController id="2684" sceneMemberID="viewController" customClass="PostingWebViewController" storyboardIdentifier="PostingWebViewController">
+                <viewController storyboardIdentifier="PostingWebViewController" id="2684" customClass="PostingWebViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2681"/>
                         <viewControllerLayoutGuide type="bottom" id="2682"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2685">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="2703" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2703">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <navigationBar contentMode="scaleToFill" id="2688" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2688">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem id="2689" title="Original Posting">
-                                        <barButtonItem id="2698" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" style="done" systemItem="done"/>
+                                    <navigationItem title="Original Posting" id="2689">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="2698"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <webView contentMode="scaleToFill" id="2690" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2690">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint id="2691" firstItem="2690" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing"/>
-                            <constraint id="2692" firstItem="2690" firstAttribute="leading" secondItem="2685" secondAttribute="leading"/>
-                            <constraint id="2693" firstItem="2690" firstAttribute="bottom" secondItem="2685" secondAttribute="bottom"/>
-                            <constraint id="2694" firstItem="2690" firstAttribute="top" secondItem="2688" secondAttribute="bottom"/>
-                            <constraint id="2695" firstItem="2688" firstAttribute="leading" secondItem="2685" secondAttribute="leading"/>
-                            <constraint id="2696" firstItem="2685" firstAttribute="trailing" secondItem="2688" secondAttribute="trailing"/>
-                            <constraint id="2697" firstItem="2688" firstAttribute="top" secondItem="2685" secondAttribute="top" constant="20"/>
-                            <constraint id="2704" firstItem="2703" firstAttribute="top" secondItem="2685" secondAttribute="top"/>
-                            <constraint id="2706" firstItem="2703" firstAttribute="leading" secondItem="2685" secondAttribute="leading"/>
-                            <constraint id="2707" firstItem="2703" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing"/>
-                            <constraint id="2708" firstItem="2703" firstAttribute="bottom" secondItem="2690" secondAttribute="top"/>
+                            <constraint firstItem="2690" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing" id="2691"/>
+                            <constraint firstItem="2690" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2692"/>
+                            <constraint firstItem="2690" firstAttribute="bottom" secondItem="2685" secondAttribute="bottom" id="2693"/>
+                            <constraint firstItem="2690" firstAttribute="top" secondItem="2688" secondAttribute="bottom" id="2694"/>
+                            <constraint firstItem="2688" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2695"/>
+                            <constraint firstAttribute="trailing" secondItem="2688" secondAttribute="trailing" id="2696"/>
+                            <constraint firstItem="2688" firstAttribute="top" secondItem="2685" secondAttribute="top" constant="20" id="2697"/>
+                            <constraint firstItem="2703" firstAttribute="top" secondItem="2685" secondAttribute="top" id="2704"/>
+                            <constraint firstItem="2703" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2706"/>
+                            <constraint firstItem="2703" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing" id="2707"/>
+                            <constraint firstItem="2703" firstAttribute="bottom" secondItem="2690" secondAttribute="top" id="2708"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="navBarItem" destination="2689" id="name-outlet-2689"/>
-                        <outlet property="webView" destination="2690" id="name-outlet-2690"/>
                         <outlet property="DoneButton" destination="2698" id="name-outlet-2698"/>
-                        <outlet property="statusBarPlaceholder" destination="2703" id="name-outlet-2703"/>
                         <outlet property="navBar" destination="2688" id="name-outlet-2688"/>
+                        <outlet property="navBarItem" destination="2689" id="name-outlet-2689"/>
+                        <outlet property="statusBarPlaceholder" destination="2703" id="name-outlet-2703"/>
+                        <outlet property="webView" destination="2690" id="name-outlet-2690"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2686" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -487,16 +524,11 @@
     </scenes>
     <resources>
         <image name="placeholder.png" width="500" height="350"/>
-        <image name="Icon-60.png" width="60" height="60"/>
-        <image name="Icon-Small.png" width="29" height="29"/>
-        <image name="Icon-Small-40.png" width="40" height="40"/>
         <image name="Icon.png" width="57" height="57"/>
+        <image name="Icon-60.png" width="60" height="60"/>
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
-        <image name="Save-50.png" width="50" height="50"/>
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina55"/>
-    </simulatedMetricsContainer>
 </document>

@@ -33,12 +33,16 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            SearchViewCell cell = (SearchViewCell)tableView.DequeueReusableCell (SearchViewCell.Key);
-            if (cell == null)
-                cell = SearchViewCell.Create();
+//            SearchViewCell cell = (SearchViewCell)tableView.DequeueReusableCell (SearchViewCell.Key);
+//            if (cell == null)
+//                cell = SearchViewCell.Create();
+//
+//            cell.Model = savedSearches[indexPath.Row];
+//            cell.BackgroundColor = ColorScheme.Clouds;
 
-            cell.Model = savedSearches[indexPath.Row];
-            cell.BackgroundColor = ColorScheme.Clouds;
+            SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
+            cell.SetCity(savedSearches[indexPath.Row].CityName);
+            cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
 
             return cell;
         }
@@ -85,19 +89,19 @@ namespace ethanslist.ios
             owner.ShowViewController(feedResultsVC, owner);
         }
 
-        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-        {
-            SearchViewCell cell = SearchViewCell.Create();
-            cell.Model = savedSearches[indexPath.Row];
-
-            CoreGraphics.CGRect bounds = cell.SearchTermsLabel.AttributedText.GetBoundingRect(
-                new SizeF((float)this.owner.View.Bounds.Width - 30f, float.MaxValue),
-                NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
-
-            Console.WriteLine(bounds.Height);
-
-            return bounds.Height * 2.5f;
-        }
+//        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+//        {
+//            SearchViewCell cell = SearchViewCell.Create();
+//            cell.Model = savedSearches[indexPath.Row];
+//
+//            CoreGraphics.CGRect bounds = cell.SearchTermsLabel.AttributedText.GetBoundingRect(
+//                new SizeF((float)this.owner.View.Bounds.Width - 30f, float.MaxValue),
+//                NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+//
+//            Console.WriteLine(bounds.Height);
+//
+//            return bounds.Height * 2.5f;
+//        }
     }
 }
 

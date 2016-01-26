@@ -222,6 +222,10 @@
     <Compile Include="TableViewCells\PostingMapCell.designer.cs">
       <DependentUpon>PostingMapCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="SavedSearchCell.cs" />
+    <Compile Include="SavedSearchCell.designer.cs">
+      <DependentUpon>SavedSearchCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
