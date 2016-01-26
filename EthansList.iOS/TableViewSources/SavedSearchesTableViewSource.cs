@@ -3,6 +3,9 @@ using UIKit;
 using EthansList.Models;
 using System.Collections.Generic;
 using EthansList.Shared;
+using System.Drawing;
+using Foundation;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -10,8 +13,6 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         List<Search> savedSearches;
-        private const string cellID = "searchCellID";
-//        public event EventHandler<EventArgs> ItemDeleted;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
 
         public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)
@@ -82,6 +83,20 @@ namespace ethanslist.ios
             feedResultsVC.WeeksOld = search.PostedDate;
 
             owner.ShowViewController(feedResultsVC, owner);
+        }
+
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            SearchViewCell cell = SearchViewCell.Create();
+            cell.Model = savedSearches[indexPath.Row];
+
+            CoreGraphics.CGRect bounds = cell.SearchTermsLabel.AttributedText.GetBoundingRect(
+                new SizeF((float)this.owner.View.Bounds.Width - 30f, float.MaxValue),
+                NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+
+            Console.WriteLine(bounds.Height);
+
+            return bounds.Height * 2.5f;
         }
     }
 }

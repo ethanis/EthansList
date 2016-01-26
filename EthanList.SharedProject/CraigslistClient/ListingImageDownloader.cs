@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.ComponentModel;
 using System.Diagnostics;
+using CoreLocation;
 
 namespace EthansList.Shared
 {
@@ -22,6 +23,8 @@ namespace EthansList.Shared
         public bool LoadingComplete { get; set;}
         public EventHandler<EventArgs> loadingComplete;
         public EventHandler<EventArgs> postingRemoved;
+        public CLLocationCoordinate2D postingCoordinates;
+        public String postAddress;
 
         public ListingImageDownloader(string url, string rssImageUrl)
         {
@@ -83,15 +86,16 @@ namespace EthansList.Shared
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
+            Console.WriteLine(html);
+
             if (doc.GetElementbyId("has_been_removed") != null)
             {
-                Console.WriteLine("REMOVED");
                 if (this.postingRemoved != null)
                     this.postingRemoved(this, new EventArgs());
 
                 return;
-
             }
+
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
                 where node.Name == "a"
@@ -103,11 +107,17 @@ namespace EthansList.Shared
                 images.Add(node.Attributes["href"].Value);
             }
 
-
-            postingDescription = doc.GetElementbyId("postingbody").InnerText;
-
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
+
+            if (doc.GetElementbyId("postingbody") != null)
+                postingDescription = doc.GetElementbyId("postingbody").InnerText;
+
+            if (doc.GetElementbyId("map") != null)
+            {
+                var element = doc.GetElementbyId("map");
+                postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), Convert.ToDouble(element.Attributes["data-longitude"].Value));
+            }
 
             LoadingComplete = true;
             if (this.loadingComplete != null)

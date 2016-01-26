@@ -6,6 +6,7 @@ using SDWebImage;
 using Foundation;
 using EthansList.Shared;
 using System.Drawing;
+using MapKit;
 
 namespace ethanslist.ios
 {
@@ -152,13 +153,13 @@ namespace ethanslist.ios
 
                     imageHelper.postingRemoved += (object s, EventArgs ev) =>
                     {
-                            if (_loadingOverlay != null)
-                                _loadingOverlay.Hide();
+                        if (_loadingOverlay != null)
+                            _loadingOverlay.Hide();
 
-                            UIAlertView alert = new UIAlertView();
-                            alert.Message = String.Format("This Posting was removed.{0}No additional data available", Environment.NewLine);
-                            alert.AddButton("OK");
-                            this.owner.InvokeOnMainThread(() => alert.Show());
+                        UIAlertView alert = new UIAlertView();
+                        alert.Message = String.Format("This Posting was removed.{0}No additional data available", Environment.NewLine);
+                        alert.AddButton("OK");
+                        this.owner.InvokeOnMainThread(() => alert.Show());
                     };
 
                     imageHelper.loadingComplete += (object sender, EventArgs e) =>
@@ -196,6 +197,18 @@ namespace ethanslist.ios
                 };
 
                 DescriptionHeight = bounds.Height;
+            }
+            else if (item.CellType == "PostingMap")
+            {
+                cell = PostingMapCell.Create();
+                imageHelper.loadingComplete += (object sender, EventArgs e) =>
+                {
+                        ((PostingMapCell)cell).PostingMap.AddAnnotation(new MKPointAnnotation() 
+                            {
+                                Title = "Location", 
+                                Coordinate = imageHelper.postingCoordinates,
+                            });
+                };
             }
             else if (item.CellType == "PostingDate")
             {
@@ -251,6 +264,10 @@ namespace ethanslist.ios
             else if (item.CellType == "PostingDescription")
             {
                 height = DescriptionHeight + 10f;
+            }
+            else if (item.CellType == "PostingMap")
+            {
+                height = this.owner.View.Bounds.Width;
             }
             else if (item.CellType == "PostingDate")
             {

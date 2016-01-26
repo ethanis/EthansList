@@ -47,7 +47,6 @@ namespace EthansList.Models
 
         public Task<List<Search>> GetAllSearchesAsync()
         {
-            //return a list of people saved to the Person table in the database
             return conn.Table<Search>().ToListAsync();
         }
 
@@ -55,6 +54,34 @@ namespace EthansList.Models
         {
             return String.Format("Min Price: {1}{0}Max Price: {2}{0}Min Bedrooms: {3}{0}Min Bathrooms: {4}{0}Search Items: {5}",
                 Environment.NewLine, search.MinPrice, search.MaxPrice, search.MinBedrooms, search.MinBathrooms, search.SearchQuery);
+        }
+
+        public string SecondFormatSearch(Search search)
+        {
+            string result = string.Empty;
+
+            foreach (KeyValuePair<string, object> prop in new Dictionary<string, object>() 
+            {
+                {"Min Price: ", search.MinPrice}, 
+                {"Max Price: ", search.MaxPrice},
+                {"Min Bedrooms: ", search.MinBedrooms},
+                {"Min Bathrooms: ", search.MinBathrooms},
+                {"Search Items: ", search.SearchQuery},
+                {"Max Listings: ", search.MaxListings},
+                {"Posted Date: ", search.PostedDate}
+            })
+            {
+                if (prop.Value != null)
+                    result += String.Format("{0}{1}, ", prop.Key, prop.Value);
+//                else 
+//                    result += String.Format("{0}{1}, ", prop.Key, "Any");
+            }
+            result = result.Trim();
+
+            if (result[result.Length - 1].Equals(','))
+                result = result.TrimEnd(',');
+
+            return result;
         }
     }
 }
