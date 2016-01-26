@@ -109,7 +109,6 @@
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
     <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
@@ -149,10 +148,6 @@
     <Compile Include="Controllers\postingImageViewController.cs" />
     <Compile Include="Controllers\postingImageViewController.designer.cs">
       <DependentUpon>postingImageViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TableViewCells\SearchViewCell.cs" />
-    <Compile Include="TableViewCells\SearchViewCell.designer.cs">
-      <DependentUpon>SearchViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\ImageCollectionViewSource.cs" />
     <Compile Include="TableViewCells\ListingImageCell.cs" />
@@ -222,8 +217,8 @@
     <Compile Include="TableViewCells\PostingMapCell.designer.cs">
       <DependentUpon>PostingMapCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="SavedSearchCell.cs" />
-    <Compile Include="SavedSearchCell.designer.cs">
+    <Compile Include="TableViewCells\SavedSearchCell.cs" />
+    <Compile Include="TableViewCells\SavedSearchCell.designer.cs">
       <DependentUpon>SavedSearchCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>

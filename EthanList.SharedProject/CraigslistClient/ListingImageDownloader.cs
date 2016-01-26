@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.ComponentModel;
 using System.Diagnostics;
+#if __IOS__
 using CoreLocation;
+#endif
 
 namespace EthansList.Shared
 {
@@ -26,7 +28,9 @@ namespace EthansList.Shared
         public bool PostingMapFound {get;set;}
         public event EventHandler<EventArgs> loadingComplete;
         public event EventHandler<EventArgs> postingRemoved;
+        #if __IOS__
         public CLLocationCoordinate2D postingCoordinates;
+        #endif
         public String postAddress;
 
         public ListingImageDownloader(string url, string rssImageUrl)
@@ -127,8 +131,10 @@ namespace EthansList.Shared
             if (doc.GetElementbyId("map") != null)
             {
                 var element = doc.GetElementbyId("map");
+                #if __IOS__
                 postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), 
                     Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                #endif
                 PostingMapFound = true;
             }
 
