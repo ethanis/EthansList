@@ -284,38 +284,25 @@ namespace ethanslist.ios
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
             var item = tableItems[(int)indexPath.Row];
-            nfloat height = new nfloat();
-
-            if (item.CellType == "PostingTitleCell")
+            switch (item.CellType)
             {
-                height = TitleHeight + 10f;
+                case "PostingTitleCell":
+                    return TitleHeight + 10f;
+                case "PostingImage":
+                    return  this.owner.View.Bounds.Height * 0.4f;
+                case "ImageCollection":
+                    return 54f;
+                case "PostingDescription":
+                    return DescriptionHeight + 10f;
+                case "PostingMap":
+                    return this.owner.View.Bounds.Width;
+                case "PostingDate":
+                    return 40f;
+                case "PostingLink":
+                    return 40f;
+                default:
+                    return 40f;
             }
-            else if (item.CellType == "PostingImage")
-            {
-                height = this.owner.View.Bounds.Height * 0.4f;
-            }
-            else if (item.CellType == "ImageCollection")
-            {
-                height = 54f;
-            }
-            else if (item.CellType == "PostingDescription")
-            {
-                height = DescriptionHeight + 10f;
-            }
-            else if (item.CellType == "PostingMap")
-            {
-                height = this.owner.View.Bounds.Width;
-            }
-            else if (item.CellType == "PostingDate")
-            {
-                height = 40f;
-            }
-            else if (item.CellType == "PostingLink")
-            {
-                height = 40f;
-            }
-
-            return height;
         }
 
         public override nint RowsInSection (UITableView tableview, nint section)
