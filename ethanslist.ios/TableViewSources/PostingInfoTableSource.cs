@@ -22,6 +22,14 @@ namespace ethanslist.ios
         private ImageCollectionViewSource collectionSource {get;set;}
         protected SmallLoadingOverlay _loadingOverlay = null;
 
+        private PostingTitleCell titleCell { get; set; }
+        private PostingImageCell imageCell { get; set; }
+        private PostingImageCollectionCell collectionCell { get; set; }
+        private PostingDescriptionCell descriptioncell { get; set; }
+        private PostingMapCell mapCell { get; set; }
+        private UITableViewCell dateCell { get; set; }
+        private UITableViewCell linkcell { get; set; }
+
         public nfloat TitleHeight { get; set; }
         public nfloat DescriptionHeight { get; set; }
         public int CurrentImageIndex { get; set; }
@@ -69,14 +77,6 @@ namespace ethanslist.ios
             result = imageHelper.GetAllImagesAsync();
         }
 
-        private PostingTitleCell titleCell { get; set; }
-        private PostingImageCell imageCell { get; set; }
-        private PostingImageCollectionCell collectionCell { get; set; }
-        private PostingDescriptionCell descriptioncell { get; set; }
-        private PostingMapCell mapCell { get; set; }
-        private UITableViewCell dateCell { get; set; }
-        private UITableViewCell linkcell { get; set; }
-
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var item = tableItems[(int)indexPath.Row];
@@ -85,214 +85,221 @@ namespace ethanslist.ios
             {
                 case "PostingTitleCell":
                     if (titleCell == null)
+                    {
                         titleCell = PostingTitleCell.Create();
                     
-                    UIStringAttributes txtAttributes = new UIStringAttributes();
-                    txtAttributes.Font = UIFont.FromName("San Francisco", 18f);
+                        UIStringAttributes txtAttributes = new UIStringAttributes();
+                        txtAttributes.Font = UIFont.FromName("San Francisco", 18f);
 
-                    titleCell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, txtAttributes);
-                    titleCell.PostingTitle.TextAlignment = UITextAlignment.Justified;
+                        titleCell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, txtAttributes);
+                        titleCell.PostingTitle.TextAlignment = UITextAlignment.Justified;
 
-                    CoreGraphics.CGRect bounds = titleCell.PostingTitle.AttributedText.GetBoundingRect(
+                        CoreGraphics.CGRect bounds = titleCell.PostingTitle.AttributedText.GetBoundingRect(
                                                      new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
                                                      NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
-                    TitleHeight = bounds.Height;
+                        TitleHeight = bounds.Height;
 
-                    titleCell.BackgroundColor = ColorScheme.Clouds;
-                    titleCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
+                        titleCell.BackgroundColor = ColorScheme.Clouds;
+                        titleCell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                    }
                     return titleCell;
                 case "PostingImage":
                     if (imageCell == null)
+                    {
                         imageCell = PostingImageCell.Create();
                     
-                    this.PostingImageView = imageCell.MainImage;
-                    if (post.ImageLink != "-1")
-                    {
-                        imageCell.MainImage.SetImage(
-                            new NSUrl(post.ImageLink),
-                            UIImage.FromBundle("placeholder.png"),
-                            SDWebImageOptions.HighPriority,
-                            null,
-                            (image, error, cachetype, NSNull) =>
-                            {
-                                imageCell.MainImage.ContentMode = UIViewContentMode.ScaleAspectFit;
-                            }
-                        );
+                        this.PostingImageView = imageCell.MainImage;
+                        if (post.ImageLink != "-1")
+                        {
+                            imageCell.MainImage.SetImage(
+                                new NSUrl(post.ImageLink),
+                                UIImage.FromBundle("placeholder.png"),
+                                SDWebImageOptions.HighPriority,
+                                null,
+                                (image, error, cachetype, NSNull) =>
+                                {
+                                    imageCell.MainImage.ContentMode = UIViewContentMode.ScaleAspectFit;
+                                }
+                            );
+                        }
+
+                        UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap)
+                        {
+                            NumberOfTapsRequired = 1
+                        };
+
+                        UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight)
+                        { 
+                            Direction = UISwipeGestureRecognizerDirection.Right
+                        };
+                        UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft)
+                        { 
+                            Direction = UISwipeGestureRecognizerDirection.Left
+                        };
+
+                        PostingImageView.AddGestureRecognizer(singletap);
+                        PostingImageView.AddGestureRecognizer(swipeLeft);
+                        PostingImageView.AddGestureRecognizer(swipeRight);
+
+                        imageCell.BackgroundColor = ColorScheme.Clouds;
+                        imageCell.SelectionStyle = UITableViewCellSelectionStyle.None;
                     }
-
-                    UITapGestureRecognizer singletap = new UITapGestureRecognizer(OnSingleTap)
-                    {
-                        NumberOfTapsRequired = 1
-                    };
-
-                    UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight)
-                    { 
-                        Direction = UISwipeGestureRecognizerDirection.Right
-                    };
-                    UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft)
-                    { 
-                        Direction = UISwipeGestureRecognizerDirection.Left
-                    };
-
-                    PostingImageView.AddGestureRecognizer(singletap);
-                    PostingImageView.AddGestureRecognizer(swipeLeft);
-                    PostingImageView.AddGestureRecognizer(swipeRight);
-
-                    imageCell.BackgroundColor = ColorScheme.Clouds;
-                    imageCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
                     return imageCell;
                 case "ImageCollection":
                     if (collectionCell == null)
+                    {
                         collectionCell = PostingImageCollectionCell.Create();
                     
-                    if (post.ImageLink != "-1")
-                    {
-                        if (!imageHelper.LoadingComplete)
+                        if (post.ImageLink != "-1")
                         {
-                            var collectionBounds = collectionCell.Collection.Bounds;
-                            _loadingOverlay = new SmallLoadingOverlay(collectionBounds);
-                            collectionCell.Collection.Add(_loadingOverlay);
+                            if (!imageHelper.LoadingComplete)
+                            {
+                                var collectionBounds = collectionCell.Collection.Bounds;
+                                _loadingOverlay = new SmallLoadingOverlay(collectionBounds);
+                                collectionCell.Collection.Add(_loadingOverlay);
+                            }
+                            else
+                            {
+                                collectionCell.Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                                if (collectionSource == null)
+                                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                                collectionCell.Collection.Source = collectionSource;
+                            }
+                            //Result contains whether or not there is internet connection available
+                            if (!result)
+                            {
+                                Console.WriteLine("Not connected to internet");
+                            }
+
+                            imageHelper.postingRemoved += (object s, EventArgs ev) =>
+                            {
+                                if (_loadingOverlay != null)
+                                    _loadingOverlay.Hide();
+
+                                UIAlertView alert = new UIAlertView();
+                                alert.Message = String.Format("This Posting was removed.{0}No additional data available", Environment.NewLine);
+                                alert.AddButton("OK");
+                                this.owner.InvokeOnMainThread(() => alert.Show());
+                            };
+
+                            imageHelper.loadingComplete += (object sender, EventArgs e) =>
+                            {
+                                if (_loadingOverlay != null)
+                                    _loadingOverlay.Hide();
+
+                                collectionCell.Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
+                                if (collectionSource == null)
+                                    collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
+                                collectionCell.Collection.Source = collectionSource;
+                            };
                         }
-                        else
-                        {
-                            collectionCell.Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                            if (collectionSource == null)
-                                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                            collectionCell.Collection.Source = collectionSource;
-                        }
-                        //Result contains whether or not there is internet connection available
-                        if (!result)
-                        {
-                            Console.WriteLine("Not connected to internet");
-                        }
 
-                        imageHelper.postingRemoved += (object s, EventArgs ev) =>
-                        {
-                            if (_loadingOverlay != null)
-                                _loadingOverlay.Hide();
-
-                            UIAlertView alert = new UIAlertView();
-                            alert.Message = String.Format("This Posting was removed.{0}No additional data available", Environment.NewLine);
-                            alert.AddButton("OK");
-                            this.owner.InvokeOnMainThread(() => alert.Show());
-                        };
-
-                        imageHelper.loadingComplete += (object sender, EventArgs e) =>
-                        {
-                            if (_loadingOverlay != null)
-                                _loadingOverlay.Hide();
-
-                            collectionCell.Collection.RegisterClassForCell(typeof(ListingImageCell), "listingCell");
-                            if (collectionSource == null)
-                                collectionSource = new ImageCollectionViewSource(this, imageHelper.images);
-                            collectionCell.Collection.Source = collectionSource;
-                        };
+                        collectionCell.BackgroundColor = ColorScheme.Clouds;
+                        collectionCell.SelectionStyle = UITableViewCellSelectionStyle.None;
                     }
-
-                    collectionCell.BackgroundColor = ColorScheme.Clouds;
-                    collectionCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
                     return collectionCell;
                 case "PostingDescription":
                     if (descriptioncell == null)
+                    {
                         descriptioncell = PostingDescriptionCell.Create();
 
-                    UIStringAttributes desctxtAttributes = new UIStringAttributes();
-                    desctxtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
+                        UIStringAttributes desctxtAttributes = new UIStringAttributes();
+                        desctxtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
 
-                    descriptioncell.PostingDescription.AttributedText = new NSAttributedString(DescriptionText, desctxtAttributes);
-                    descriptioncell.PostingDescription.TextAlignment = UITextAlignment.Left;
+                        descriptioncell.PostingDescription.AttributedText = new NSAttributedString(DescriptionText, desctxtAttributes);
+                        descriptioncell.PostingDescription.TextAlignment = UITextAlignment.Left;
 
-                    CoreGraphics.CGRect descbounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
+                        CoreGraphics.CGRect descbounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
                                                          new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
                                                          NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
-                    imageHelper.loadingComplete += (object sender, EventArgs e) =>
-                    {
-                        if (imageHelper.PostingBodyAdded)
+                        imageHelper.loadingComplete += (object sender, EventArgs e) =>
                         {
-                            DescriptionText = imageHelper.postingDescription;
+                            if (imageHelper.PostingBodyAdded)
+                            {
+                                DescriptionText = imageHelper.postingDescription;
 
-                            CoreGraphics.CGRect newBounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
-                                                                    new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
-                                                                    NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+                                CoreGraphics.CGRect newBounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
+                                                                new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
+                                                                NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
-                            DescriptionHeight = newBounds.Height;
+                                DescriptionHeight = newBounds.Height;
 
-                            if (this.DescriptionLoaded != null)
-                                this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() { DescriptionRow = indexPath });
-                        }
-                    };
+                                if (this.DescriptionLoaded != null)
+                                    this.DescriptionLoaded(this, new DescriptionLoadedEventArgs() { DescriptionRow = indexPath });
+                            }
+                        };
 
-                    DescriptionHeight = descbounds.Height;
+                        DescriptionHeight = descbounds.Height;
 
-                    descriptioncell.BackgroundColor = ColorScheme.Clouds;
-                    descriptioncell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
+                        descriptioncell.BackgroundColor = ColorScheme.Clouds;
+                        descriptioncell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                    }
                     return descriptioncell;
                 case "PostingMap":
                     if (mapCell == null)
+                    {
                         mapCell = PostingMapCell.Create();
 
-                    var coords = imageHelper.postingCoordinates;
-                    mapCell.PostingMap.AddAnnotation(new MKPointAnnotation()
+                        var coords = imageHelper.postingCoordinates;
+                        mapCell.PostingMap.AddAnnotation(new MKPointAnnotation()
+                            {
+                                Title = "Location", 
+                                Coordinate = coords,
+                            });
+
+                        MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(10.5), MilesToLongitudeDegrees(10.5, coords.Latitude));
+                        mapCell.PostingMap.Region = new MKCoordinateRegion(coords, span);
+
+                        mapCell.ZoomStepper.ValueChanged += (s, ev) =>
                         {
-                            Title = "Location", 
-                            Coordinate = coords,
-                        });
+                            var value = mapCell.ZoomStepper.Value;
+                            value = (value * 50) * (1 / value) - value + 0.5;
+                            MKCoordinateSpan newSpan = new MKCoordinateSpan(MilesToLatitudeDegrees(value), MilesToLongitudeDegrees(value, coords.Latitude));
+                            mapCell.PostingMap.Region = new MKCoordinateRegion(coords, newSpan);
+                        };
 
-                    MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(10.5), MilesToLongitudeDegrees(10.5, coords.Latitude));
-                    mapCell.PostingMap.Region = new MKCoordinateRegion(coords, span);
-
-                    mapCell.ZoomStepper.ValueChanged += (s, ev) =>
-                    {
-                        var value = mapCell.ZoomStepper.Value;
-                        value = (value * 50) * (1 / value) - value + 0.5;
-                        MKCoordinateSpan newSpan = new MKCoordinateSpan(MilesToLatitudeDegrees(value), MilesToLongitudeDegrees(value, coords.Latitude));
-                        mapCell.PostingMap.Region = new MKCoordinateRegion(coords, newSpan);
-                    };
-
-                    mapCell.BackgroundColor = ColorScheme.Clouds;
-                    mapCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
+                        mapCell.BackgroundColor = ColorScheme.Clouds;
+                        mapCell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                    }
                     return mapCell;
                 case "PostingDate":
                     if (dateCell == null)
+                    {
                         dateCell = new UITableViewCell(UITableViewCellStyle.Default, null);
                     
-                    dateCell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
+                        dateCell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
 
-                    dateCell.BackgroundColor = ColorScheme.Clouds;
-                    dateCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
+                        dateCell.BackgroundColor = ColorScheme.Clouds;
+                        dateCell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                    }
                     return dateCell;
                 case "PostingLink":
                     if (linkcell == null)
+                    {
                         linkcell = new UITableViewCell(UITableViewCellStyle.Default, null);
 
-                    linkcell.TextLabel.Text = "Original Posting";
+                        linkcell.TextLabel.Text = "Original Posting";
 
-                    linkcell.TextLabel.TextColor = UIColor.Blue;
-                    linkcell.TextLabel.BackgroundColor = UIColor.Clear;
-                    linkcell.TextLabel.UserInteractionEnabled = true;
+                        linkcell.TextLabel.TextColor = UIColor.Blue;
+                        linkcell.TextLabel.BackgroundColor = UIColor.Clear;
+                        linkcell.TextLabel.UserInteractionEnabled = true;
 
-                    UITapGestureRecognizer openLink = new UITapGestureRecognizer(() =>
-                        {
-                            var storyboard = UIStoryboard.FromName("Main", null);
-                            PostingWebViewController postingWebView = (PostingWebViewController)storyboard.InstantiateViewController("PostingWebViewController");
-                            postingWebView.PostingLink = post.Link;
+                        UITapGestureRecognizer openLink = new UITapGestureRecognizer(() =>
+                            {
+                                var storyboard = UIStoryboard.FromName("Main", null);
+                                PostingWebViewController postingWebView = (PostingWebViewController)storyboard.InstantiateViewController("PostingWebViewController");
+                                postingWebView.PostingLink = post.Link;
 
-                            this.owner.ShowViewController(postingWebView, this);
-                        }) { NumberOfTapsRequired = 1 };
+                                this.owner.ShowViewController(postingWebView, this);
+                            }) { NumberOfTapsRequired = 1 };
 
-                    linkcell.TextLabel.AddGestureRecognizer(openLink);
+                        linkcell.TextLabel.AddGestureRecognizer(openLink);
 
-                    linkcell.BackgroundColor = ColorScheme.Clouds;
-                    linkcell.SelectionStyle = UITableViewCellSelectionStyle.None;
-
+                        linkcell.BackgroundColor = ColorScheme.Clouds;
+                        linkcell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                    }
                     return linkcell;
                 default:
                     return new UITableViewCell();
