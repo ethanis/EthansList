@@ -18,7 +18,7 @@ namespace ethanslist.ios
 
         private float scroll_amount = 0.0f;    // amount to scroll 
         private float bottom = 0.0f;           // bottom point
-        private float offset = 10.0f;          // extra offset
+        private float offset = 40.0f;          // extra offset
         private bool moveViewUp = false;           // which direction are we moving
 
         public string MinBedrooms { get; set; }
@@ -69,7 +69,6 @@ namespace ethanslist.ios
 
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
-
             // Keyboard popup
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.DidShowNotification,KeyBoardUpNotification);
@@ -260,7 +259,7 @@ namespace ethanslist.ios
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
-            scrollView.ContentSize = new CoreGraphics.CGSize(this.View.Bounds.Width, this.View.Bounds.Height + 280f);
+            scrollView.ContentSize = new CoreGraphics.CGSize(this.View.Bounds.Width, this.View.Bounds.Height);// + 280f);
             scrollView.Frame = this.View.Frame;
 
             //Seach CL Label Constraints
@@ -292,13 +291,14 @@ namespace ethanslist.ios
             Console.WriteLine("Bottom: " + bottom);
             Console.WriteLine("Picker Input Y: " + PickerPicked.Frame.Y);
             Console.WriteLine("Picker Frame Height: " + PickerPicked.Frame.Height);
+            Console.WriteLine("View Height: " + this.View.Frame.Height);
 
-            // Calculate how far we need to scroll
-            scroll_amount = (float)(PickerBounds.Height - (View.Frame.Size.Height - bottom)) ;
+            //Added 180 for toolbar, navbar, constraints and padding height
+            scroll_amount = (float)(PickerBounds.Height + (180) - (View.Frame.Size.Height - bottom)) ;
             Console.WriteLine("PickerBoungs Height: " + PickerBounds.Height);
             Console.WriteLine("View Frame Height: " + View.Frame.Size.Height);
             Console.WriteLine("Scroll Amount: " + scroll_amount);
-//            scroll_amount = 100;
+
             // Perform the scrolling
             if (scroll_amount > 0) {
                 moveViewUp = true;
@@ -316,7 +316,6 @@ namespace ethanslist.ios
 
         private void ScrollTheView(bool move)
         {
-
             // scroll the view up or down
             UIView.BeginAnimations (string.Empty, System.IntPtr.Zero);
             UIView.SetAnimationDuration (0.3);

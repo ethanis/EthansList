@@ -137,9 +137,8 @@ namespace ethanslist.ios
                 ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
 
                 ((PriceSelectorCell)cell).PickerField.EditingDidBegin += (object sender, EventArgs e) => {
-                    Console.WriteLine (((PriceSelectorCell)cell).PickerField.InputView);
+                    ((SearchOptionsViewController)this.owner).PickerBounds = picker.Bounds;
                     ((SearchOptionsViewController)this.owner).PickerPicked = ((PriceSelectorCell)cell).PickerField.InputView;
-                    //TODO: Need to send coordinates relative to parent view
                 };
 
             }
@@ -191,9 +190,6 @@ namespace ethanslist.ios
                 ((PickerSelectorCell)cell).InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
                     ((SearchOptionsViewController)this.owner).PickerBounds = picker.Bounds;
                     ((SearchOptionsViewController)this.owner).PickerPicked = ((PickerSelectorCell)cell);
-                    Console.WriteLine (((PickerSelectorCell)cell).Bounds);
-                    Console.WriteLine (((PickerSelectorCell)cell).Frame);
-//                    this.
                 };
             }
 
