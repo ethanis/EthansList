@@ -6,12 +6,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EthansList.Shared;
 using EthansList.Models;
+using System.Drawing;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
 	partial class SearchOptionsViewController : UIViewController
 	{
         UIBarButtonItem saveButton;
+        SearchOptionsTableSource tableSource;
+
+        private float scroll_amount = 0.0f;    // amount to scroll 
+        private float bottom = 0.0f;           // bottom point
+        private float offset = 10.0f;          // extra offset
+        private bool moveViewUp = false;           // which direction are we moving
 
         public string MinBedrooms { get; set; }
         public string MinBathrooms { get; set; }
@@ -25,8 +33,10 @@ namespace ethanslist.ios
         }
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
-
         public Location Location { get; set; }
+
+        public UIView PickerPicked { get; set; }
+        public CGRect PickerBounds { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -54,11 +64,19 @@ namespace ethanslist.ios
 
             this.Title = "Options";
             SearchCityLabel.Text = String.Format("Search {0} for:", Location.SiteName);
-
-            SearchTableView.Source = new SearchOptionsTableSource(GetTableSetup(), this);
+            tableSource = new SearchOptionsTableSource(GetTableSetup(), this);
+            SearchTableView.Source = tableSource;
 
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
+
+            // Keyboard popup
+            NSNotificationCenter.DefaultCenter.AddObserver
+            (UIKeyboard.DidShowNotification,KeyBoardUpNotification);
+
+            // Keyboard Down
+            NSNotificationCenter.DefaultCenter.AddObserver
+            (UIKeyboard.WillHideNotification,KeyBoardDownNotification);
 
             saveButton = new UIBarButtonItem (
                 UIImage.FromFile ("save.png"),
@@ -265,6 +283,55 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
             });
+        }
+
+        private void KeyBoardUpNotification(NSNotification notification)
+        {
+            // Bottom of the controller = initial position + height + offset      
+            bottom = (float)(PickerPicked.Frame.Y + PickerPicked.Frame.Height + offset);
+            Console.WriteLine("Bottom: " + bottom);
+            Console.WriteLine("Picker Input Y: " + PickerPicked.Frame.Y);
+            Console.WriteLine("Picker Frame Height: " + PickerPicked.Frame.Height);
+
+            // Calculate how far we need to scroll
+            scroll_amount = (float)(PickerBounds.Height - (View.Frame.Size.Height - bottom)) ;
+            Console.WriteLine("PickerBoungs Height: " + PickerBounds.Height);
+            Console.WriteLine("View Frame Height: " + View.Frame.Size.Height);
+            Console.WriteLine("Scroll Amount: " + scroll_amount);
+//            scroll_amount = 100;
+            // Perform the scrolling
+            if (scroll_amount > 0) {
+                moveViewUp = true;
+                ScrollTheView (moveViewUp);
+            } else {
+                moveViewUp = false;
+            }
+
+        }
+
+        private void KeyBoardDownNotification(NSNotification notification)
+        {
+            if(moveViewUp){ScrollTheView(false);}
+        }
+
+        private void ScrollTheView(bool move)
+        {
+
+            // scroll the view up or down
+            UIView.BeginAnimations (string.Empty, System.IntPtr.Zero);
+            UIView.SetAnimationDuration (0.3);
+
+            CGRect frame = View.Frame;
+
+            if (move) {
+                frame.Y -= scroll_amount;
+            } else {
+                frame.Y += scroll_amount;
+                scroll_amount = 0;
+            }
+
+            View.Frame = frame;
+            UIView.CommitAnimations();
         }
 	}
 }

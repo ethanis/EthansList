@@ -19,7 +19,7 @@ namespace ethanslist.ios
 
         public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
         {
-            tableItems = items;
+            this.tableItems = items;
             this.owner = owner;
         }
 
@@ -135,6 +135,13 @@ namespace ethanslist.ios
                         
                 ((PriceSelectorCell)cell).PickerField.InputView = picker;
                 ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
+
+                ((PriceSelectorCell)cell).PickerField.EditingDidBegin += (object sender, EventArgs e) => {
+                    Console.WriteLine (((PriceSelectorCell)cell).PickerField.InputView);
+                    ((SearchOptionsViewController)this.owner).PickerPicked = ((PriceSelectorCell)cell).PickerField.InputView;
+                    //TODO: Need to send coordinates relative to parent view
+                };
+
             }
             else if (item.CellType == "PickerSelectorCell")
             {
@@ -180,6 +187,14 @@ namespace ethanslist.ios
 
                 ((PickerSelectorCell)cell).InputTextField.InputView = picker;
                 ((PickerSelectorCell)cell).InputTextField.InputAccessoryView = toolbar;
+
+                ((PickerSelectorCell)cell).InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                    ((SearchOptionsViewController)this.owner).PickerBounds = picker.Bounds;
+                    ((SearchOptionsViewController)this.owner).PickerPicked = ((PickerSelectorCell)cell);
+                    Console.WriteLine (((PickerSelectorCell)cell).Bounds);
+                    Console.WriteLine (((PickerSelectorCell)cell).Frame);
+//                    this.
+                };
             }
 
             return cell;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using EthansList.Models;
 using SDWebImage;
 using EthansList.Shared;
+using System.Drawing;
 
 namespace ethanslist.ios
 {
@@ -18,7 +19,6 @@ namespace ethanslist.ios
         List<TableItem> tableItems;
         public Posting Post { get; set; }
         public event EventHandler<EventArgs> ItemDeleted;
-
 
 		public PostingInfoViewController (IntPtr handle) : base (handle)
 		{
