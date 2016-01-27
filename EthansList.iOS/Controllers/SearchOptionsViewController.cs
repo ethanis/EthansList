@@ -20,6 +20,7 @@ namespace ethanslist.ios
         private float bottom = 0.0f;           // bottom point
         private float offset = 40.0f;          // extra offset
         private bool moveViewUp = false;           // which direction are we moving
+        private bool keyboardSet = false;
 
         public string MinBedrooms { get; set; }
         public string MinBathrooms { get; set; }
@@ -35,8 +36,8 @@ namespace ethanslist.ios
         public int? WeeksOld { get; set; }
         public Location Location { get; set; }
 
-        public UIView PickerPicked { get; set; }
-        public CGRect PickerBounds { get; set; }
+        public UIView FieldSelected { get; set; }
+        public CGRect KeyboardBounds { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -286,18 +287,20 @@ namespace ethanslist.ios
 
         private void KeyBoardUpNotification(NSNotification notification)
         {
+            if (!keyboardSet)
+            {
+                var val = (NSValue)notification.UserInfo.ValueForKey(UIKeyboard.FrameEndUserInfoKey);
+                KeyboardBounds = val.CGRectValue;
+                keyboardSet = true;
+            }
+            if (FieldSelected == null)
+                return;
+            
             // Bottom of the controller = initial position + height + offset      
-            bottom = (float)(PickerPicked.Frame.Y + PickerPicked.Frame.Height + offset);
-            Console.WriteLine("Bottom: " + bottom);
-            Console.WriteLine("Picker Input Y: " + PickerPicked.Frame.Y);
-            Console.WriteLine("Picker Frame Height: " + PickerPicked.Frame.Height);
-            Console.WriteLine("View Height: " + this.View.Frame.Height);
+            bottom = (float)(FieldSelected.Frame.Y + FieldSelected.Frame.Height + offset);
 
             //Added 180 for toolbar, navbar, constraints and padding height
-            scroll_amount = (float)(PickerBounds.Height + (180) - (View.Frame.Size.Height - bottom)) ;
-            Console.WriteLine("PickerBoungs Height: " + PickerBounds.Height);
-            Console.WriteLine("View Frame Height: " + View.Frame.Size.Height);
-            Console.WriteLine("Scroll Amount: " + scroll_amount);
+            scroll_amount = (float)(KeyboardBounds.Height + (180) - (View.Frame.Size.Height - bottom)) ;
 
             // Perform the scrolling
             if (scroll_amount > 0) {

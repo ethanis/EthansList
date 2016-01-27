@@ -94,6 +94,9 @@ namespace ethanslist.ios
                 {
                     ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
                 };
+                ((SearchTermsCell)cell).TermsField.EditingDidBegin += (object sender, EventArgs e) => {
+                    ((SearchOptionsViewController)this.owner).FieldSelected = ((SearchTermsCell)cell).TermsField.InputView;
+                };
             }
             else if (item.CellType == "PriceSelectorCell")
             {
@@ -137,8 +140,8 @@ namespace ethanslist.ios
                 ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
 
                 ((PriceSelectorCell)cell).PickerField.EditingDidBegin += (object sender, EventArgs e) => {
-                    ((SearchOptionsViewController)this.owner).PickerBounds = picker.Bounds;
-                    ((SearchOptionsViewController)this.owner).PickerPicked = ((PriceSelectorCell)cell).PickerField.InputView;
+                    ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
+                    ((SearchOptionsViewController)this.owner).FieldSelected = ((PriceSelectorCell)cell).PickerField.InputView;
                 };
 
             }
@@ -188,8 +191,8 @@ namespace ethanslist.ios
                 ((PickerSelectorCell)cell).InputTextField.InputAccessoryView = toolbar;
 
                 ((PickerSelectorCell)cell).InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-                    ((SearchOptionsViewController)this.owner).PickerBounds = picker.Bounds;
-                    ((SearchOptionsViewController)this.owner).PickerPicked = ((PickerSelectorCell)cell);
+                    ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
+                    ((SearchOptionsViewController)this.owner).FieldSelected = ((PickerSelectorCell)cell);
                 };
             }
 
