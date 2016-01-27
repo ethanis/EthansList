@@ -30,6 +30,10 @@ namespace ethanslist.ios
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UITextField PickerTextField { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel toLabel { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (Heading != null) {
@@ -47,6 +51,10 @@ namespace ethanslist.ios
 			if (PickerTextField != null) {
 				PickerTextField.Dispose ();
 				PickerTextField = null;
+			}
+			if (toLabel != null) {
+				toLabel.Dispose ();
+				toLabel = null;
 			}
 		}
 	}

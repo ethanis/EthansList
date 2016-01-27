@@ -134,6 +134,11 @@ namespace ethanslist.ios
                         ((PriceSelectorCell)cell).MaxPrice.Text = result != "Any" ? "$" + result : result;
                         ((SearchOptionsViewController)(this.owner)).MaxPrice = result;
                     }
+
+                        if (((PriceSelectorCell)cell).MinPrice.Text != "Any" || ((PriceSelectorCell)cell).MaxPrice.Text != "Any")
+                            ((PriceSelectorCell)cell).ToLabel.Hidden = false;
+                        else
+                            ((PriceSelectorCell)cell).ToLabel.Hidden = true;
                 };
                         
                 ((PriceSelectorCell)cell).PickerField.InputView = picker;
@@ -142,8 +147,13 @@ namespace ethanslist.ios
                 ((PriceSelectorCell)cell).PickerField.EditingDidBegin += (object sender, EventArgs e) => {
                     ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
                     ((SearchOptionsViewController)this.owner).FieldSelected = ((PriceSelectorCell)cell).PickerField.InputView;
+                    ((PriceSelectorCell)cell).Accessory = UITableViewCellAccessory.Checkmark;
                 };
 
+                ((PriceSelectorCell)cell).PickerField.EditingDidEnd += delegate
+                {
+                        ((PriceSelectorCell)cell).Accessory = UITableViewCellAccessory.None;
+                };
             }
             else if (item.CellType == "PickerSelectorCell")
             {
@@ -186,13 +196,19 @@ namespace ethanslist.ios
                         else if (item.Heading == "Max Listings")
                             ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt16(resultValue);
                     };
-
+                
                 ((PickerSelectorCell)cell).InputTextField.InputView = picker;
                 ((PickerSelectorCell)cell).InputTextField.InputAccessoryView = toolbar;
 
                 ((PickerSelectorCell)cell).InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
                     ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
                     ((SearchOptionsViewController)this.owner).FieldSelected = ((PickerSelectorCell)cell);
+                    ((PickerSelectorCell)cell).Accessory = UITableViewCellAccessory.Checkmark;
+                };
+
+                ((PickerSelectorCell)cell).InputTextField.EditingDidEnd += delegate
+                {
+                        ((PickerSelectorCell)cell).Accessory = UITableViewCellAccessory.None;
                 };
             }
 

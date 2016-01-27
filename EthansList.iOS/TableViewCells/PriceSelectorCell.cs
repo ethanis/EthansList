@@ -19,6 +19,7 @@ namespace ethanslist.ios
             get { return MaxPriceField; }
         }
 
+        public UILabel ToLabel {get{ return toLabel; }}
         public UITextField PickerField { get { return PickerTextField; } }
 
         static PriceSelectorCell()

@@ -321,7 +321,7 @@ namespace ethanslist.ios
         {
             // scroll the view up or down
             UIView.BeginAnimations (string.Empty, System.IntPtr.Zero);
-            UIView.SetAnimationDuration (0.3);
+            UIView.SetAnimationDuration (0.2);
 
             CGRect frame = View.Frame;
 
