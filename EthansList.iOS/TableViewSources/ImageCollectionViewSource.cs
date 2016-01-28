@@ -9,13 +9,14 @@ namespace ethanslist.ios
     public class ImageCollectionViewSource : UICollectionViewSource
     {
         List<string> urls;
-        PostingDetailsViewController owner;
+        PostingInfoTableSource tableSource;
+
         static string CellID = "listingCell";
 
-        public ImageCollectionViewSource(UIViewController owner, List<string> urls)
+        public ImageCollectionViewSource(PostingInfoTableSource tableSource, List<string> urls)
         {
-            this.owner = (PostingDetailsViewController)owner;
             this.urls = urls;
+            this.tableSource = tableSource;
         }
 
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
@@ -33,8 +34,8 @@ namespace ethanslist.ios
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            owner.Image = urls[indexPath.Row];
-            owner.CurrentImageIndex = indexPath.Row;
+            tableSource.CurrentImageIndex = indexPath.Row;
+            tableSource.Image = urls[indexPath.Row];
         }
     }
 }

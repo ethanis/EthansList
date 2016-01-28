@@ -5,6 +5,7 @@ using UIKit;
 using System.Linq;
 using System.Collections.Generic;
 using EthansList.Shared;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -43,6 +44,10 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
+            NavigationItem.SetLeftBarButtonItem(
+                new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
+                true);
+
             locations = new AvailableLocations();
             state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
             currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
@@ -59,11 +64,10 @@ namespace ethanslist.ios
             ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
             {
                 var storyboard = UIStoryboard.FromName("Main", null);
-                var searchViewController = (SearchViewController)storyboard.InstantiateViewController("SearchViewController");
+                var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
 
                 Console.WriteLine(currentSelected.SiteName);
-                searchViewController.Url = currentSelected.Url;
-                searchViewController.City = currentSelected.SiteName;
+                searchViewController.Location = currentSelected;
 
                     System.Threading.Tasks.Task.Run(async () => {
                         await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
@@ -80,6 +84,7 @@ namespace ethanslist.ios
             RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) => {
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
+                recentCitiesViewController.FromMenu = false;
                 this.ShowViewController(recentCitiesViewController, this);
             };
 
@@ -119,6 +124,11 @@ namespace ethanslist.ios
             public override nint GetComponentCount(UIPickerView pickerView)
             {
                 return 1;
+            }
+
+            public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
+            {
+                return Constants.CityPickerRowHeight;
             }
 
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
@@ -163,6 +173,11 @@ namespace ethanslist.ios
                 return 1;
             }
 
+            public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
+            {
+                return Constants.CityPickerRowHeight;
+            }
+
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
             {
                 return locations.PotentialLocations.Where(loc => loc.State == state).Count();
@@ -189,6 +204,9 @@ namespace ethanslist.ios
             StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
+
+            //TODO: show table views instead if OS < 9
+            Console.WriteLine(UIDevice.CurrentDevice.SystemVersion);
 
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
             //State picker view constraints

@@ -9,6 +9,7 @@
     <RootNamespace>ethanslist.ios</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>ethanslist.ios</AssemblyName>
+    <XamarinInsightsApiKey>e1a129d9250ef64b7b796e3fd2b5cbcb7fcd8159</XamarinInsightsApiKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchProfiling>true</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -34,6 +36,9 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -58,7 +63,7 @@
     <MtouchProfiling>true</MtouchProfiling>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>6134aba8-c9aa-4d70-9d0e-3c275b735cf1</CodesignProvision>
+    <CodesignProvision>432eb3fc-530d-4644-b008-b14711a81b3e</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>
     </IpaPackageName>
@@ -81,14 +86,21 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.11.3\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\packages\Xamarin.Insights.1.11.3\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
     <Reference Include="Calabash">
-      <HintPath>..\packages\Xamarin.TestCloud.Agent.0.17.0\lib\Xamarin.iOS10\Calabash.dll</HintPath>
+      <HintPath>..\packages\Xamarin.TestCloud.Agent.0.18.0\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon29x29.png" />
-    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon29x29%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon87x87%401x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon40x40%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon40x40%403x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon57x57.png" />
@@ -103,12 +115,20 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon76x76.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon76x76%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon84x84 %402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon87x87%401x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon29x29%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="TableViewCells\SearchViewCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\FeedResultsCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingTitleCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingImageCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingImageCollectionCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingDescriptionCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PostingMapCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -120,14 +140,6 @@
     <Compile Include="Controllers\FeedResultsTableViewController.cs" />
     <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
       <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\PostingDetailsViewController.cs" />
-    <Compile Include="Controllers\PostingDetailsViewController.designer.cs">
-      <DependentUpon>PostingDetailsViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\SearchViewController.cs" />
-    <Compile Include="Controllers\SearchViewController.designer.cs">
-      <DependentUpon>SearchViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controllers\CityPickerViewController.cs" />
@@ -148,10 +160,6 @@
     <Compile Include="Controllers\postingImageViewController.designer.cs">
       <DependentUpon>postingImageViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableViewCells\SearchViewCell.cs" />
-    <Compile Include="TableViewCells\SearchViewCell.designer.cs">
-      <DependentUpon>SearchViewCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="TableViewSources\ImageCollectionViewSource.cs" />
     <Compile Include="TableViewCells\ListingImageCell.cs" />
     <Compile Include="Helpers\LoadingOverlay.cs" />
@@ -161,19 +169,73 @@
     </Compile>
     <Compile Include="TableViewSources\SavedPostingsTableViewSource.cs" />
     <Compile Include="Helpers\ColorScheme.cs" />
-    <Compile Include="Helpers\ConstraintHelper.cs" />
     <Compile Include="Controllers\RecentCitiesTableViewController.cs" />
     <Compile Include="Controllers\RecentCitiesTableViewController.designer.cs">
       <DependentUpon>RecentCitiesTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewSources\RecentCityTableViewSource.cs" />
-    <Compile Include="PickSearchCityViewController.cs" />
-    <Compile Include="PickSearchCityViewController.designer.cs">
-      <DependentUpon>PickSearchCityViewController.cs</DependentUpon>
+    <Compile Include="TableViewCells\PriceSelectorCell.cs" />
+    <Compile Include="TableViewCells\PriceSelectorCell.designer.cs">
+      <DependentUpon>PriceSelectorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\SearchTermsCell.cs" />
+    <Compile Include="TableViewCells\SearchTermsCell.designer.cs">
+      <DependentUpon>SearchTermsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SearchOptionsViewController.cs" />
+    <Compile Include="Controllers\SearchOptionsViewController.designer.cs">
+      <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SearchOptionsTableSource.cs" />
+    <Compile Include="Helpers\TableFormHelpers.cs" />
+    <Compile Include="Helpers\Reachability.cs" />
+    <Compile Include="TableViewCells\PickerSelectorCell.cs" />
+    <Compile Include="TableViewCells\PickerSelectorCell.designer.cs">
+      <DependentUpon>PickerSelectorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\SearchPickerModel.cs" />
+    <Compile Include="TableViewCells\FeedResultsCell.cs" />
+    <Compile Include="TableViewCells\FeedResultsCell.designer.cs">
+      <DependentUpon>FeedResultsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="TableViewCells\PostingTitleCell.cs" />
+    <Compile Include="TableViewCells\PostingTitleCell.designer.cs">
+      <DependentUpon>PostingTitleCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\PostingImageCell.cs" />
+    <Compile Include="TableViewCells\PostingImageCell.designer.cs">
+      <DependentUpon>PostingImageCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\PostingImageCollectionCell.cs" />
+    <Compile Include="TableViewCells\PostingImageCollectionCell.designer.cs">
+      <DependentUpon>PostingImageCollectionCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\PostingDescriptionCell.cs" />
+    <Compile Include="TableViewCells\PostingDescriptionCell.designer.cs">
+      <DependentUpon>PostingDescriptionCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\PostingInfoViewController.cs" />
+    <Compile Include="Controllers\PostingInfoViewController.designer.cs">
+      <DependentUpon>PostingInfoViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewSources\PostingInfoTableSource.cs" />
+    <Compile Include="Controllers\PostingWebViewController.cs" />
+    <Compile Include="Controllers\PostingWebViewController.designer.cs">
+      <DependentUpon>PostingWebViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\PostingMapCell.cs" />
+    <Compile Include="TableViewCells\PostingMapCell.designer.cs">
+      <DependentUpon>PostingMapCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\SavedSearchCell.cs" />
+    <Compile Include="TableViewCells\SavedSearchCell.designer.cs">
+      <DependentUpon>SavedSearchCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Insights.1.11.3\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.3\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="TableViewSources\" />
@@ -188,11 +250,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\placeholder.png" />
-    <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\Icon-Small.png" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\LaunchScreenIcon.png" />
+    <BundleResource Include="Resources\save.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\Delete-50.png" />
   </ItemGroup>
 </Project>

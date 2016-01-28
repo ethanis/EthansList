@@ -12,20 +12,25 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\AvailableLocations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posting.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CLFeedClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FileAccessHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Search.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DatabaseConnection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\QueryGeneration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ListingImageDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RecentCity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\DatabaseConnection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\FileAccessHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CraigslistClient\CLFeedClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CraigslistClient\QueryGeneration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CraigslistClient\ListingImageDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\ListingDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\SearchDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\RecentCityDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Database\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CraigslistClient\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)USCraigslistLocations.csv" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Constants\USCraigslistLocations.csv" />
   </ItemGroup>
 </Project>

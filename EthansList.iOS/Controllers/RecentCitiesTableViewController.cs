@@ -11,6 +11,11 @@ namespace ethanslist.ios
 	{
         RecentCityTableViewSource recentCitySource;
         private List<RecentCity> recentCities;
+        public bool FromMenu { 
+            get { return fromMenu; } 
+            set { fromMenu = value; } 
+        }
+        private bool fromMenu = true;
 
 		public RecentCitiesTableViewController (IntPtr handle) : base (handle)
 		{
@@ -19,6 +24,15 @@ namespace ethanslist.ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            if (FromMenu)
+            {
+                NavigationItem.SetLeftBarButtonItem(
+                    new UIBarButtonItem(UIImage.FromBundle("menu.png"), 
+                        UIBarButtonItemStyle.Plain, 
+                        (s, e) => NavigationController.PopViewController(true)), 
+                    true);
+            }
 
             recentCities = AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result;
             recentCities.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));

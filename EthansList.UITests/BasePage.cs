@@ -79,6 +79,8 @@ namespace ethanslist.UITests
 
         #region CommonPageActions
 
+        String BackButton;
+
         void InitializeQueries()
         {
             if (OnAndroid)
@@ -86,7 +88,13 @@ namespace ethanslist.UITests
             }
             if (OniOS)
             {
+                BackButton = "Back";
             }
+        }
+
+        public virtual void GoBack()
+        {
+            app.Tap(BackButton);
         }
 
         #endregion

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1456">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="5">
             <objects>
-                <tableViewController id="6" sceneMemberID="viewController" customClass="FeedResultsTableViewController" storyboardIdentifier="FeedResultsTableViewController">
+                <tableViewController storyboardIdentifier="FeedResultsTableViewController" id="6" customClass="FeedResultsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="10" reuseIdentifier="postCell" style="IBUITableViewCellStyleSubtitle" textLabel="934" detailTextLabel="935" rowHeight="44">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" textLabel="934" detailTextLabel="935" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="10">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="10" id="11">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="934">
-                                            <rect key="frame" x="16" y="4" width="35.5" height="21.5"/>
+                                            <rect key="frame" x="20" y="4" width="35.5" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="935">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -43,566 +43,84 @@
                             <outlet property="delegate" destination="6" id="9"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="245" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="245"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1028" y="225"/>
         </scene>
-        <scene sceneID="253">
-            <objects>
-                <viewController id="254" sceneMemberID="viewController" customClass="PostingDetailsViewController" storyboardIdentifier="PostingDetailsViewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="251"/>
-                        <viewControllerLayoutGuide type="bottom" id="252"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="255">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="2329" translatesAutoresizingMaskIntoConstraints="NO" alpha="0.7">
-                                <rect key="frame" x="0.0" y="120" width="320" height="180"/>
-                                <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
-                            </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" minimumFontSize="10" id="258" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="2">
-                                <rect key="frame" x="20" y="70" width="280" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingTitle"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="70" width="280" height="24"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="974" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="20" y="522" width="232" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="522" width="280" height="21"/>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" id="2141" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="280" y="0.0" width="320" height="59"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
-                                    <mask key="constraints">
-                                        <include reference="2261"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="2261" firstItem="2141" firstAttribute="height" constant="59"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2261"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2094" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="120" width="320" height="180"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="2095" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingImage"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
-                                        </variation>
-                                    </imageView>
-                                </subviews>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="120" width="320" height="180"/>
-                                    <mask key="constraints">
-                                        <include reference="2282"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="2282" firstAttribute="width" constant="320"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2282"/>
-                                    </mask>
-                                </variation>
-                            </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2107" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="303" width="320" height="53"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2109" scrollDirection="horizontal">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2108" reuseIdentifier="thumbCell">
-                                        <rect key="frame" x="0.0" y="1.5" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="1.5" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="imageCollection"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="303" width="320" height="53"/>
-                                </variation>
-                            </collectionView>
-                            <navigationBar contentMode="scaleToFill" id="1420" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Posting Details" id="1421">
-                                        <barButtonItem id="1423" translatesAutoresizingMaskIntoConstraints="NO" key="leftBarButtonItem" systemItem="save">
-                                            <accessibilityConfiguration key="accessibilityConfiguration">
-                                                <isElement key="isElement" value="YES"/>
-                                            </accessibilityConfiguration>
-                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="saveButton"/>
-                                        </barButtonItem>
-                                        <barButtonItem id="1424" translatesAutoresizingMaskIntoConstraints="NO" key="rightBarButtonItem" systemItem="done">
-                                            <accessibilityConfiguration key="accessibilityConfiguration">
-                                                <isElement key="isElement" value="YES"/>
-                                            </accessibilityConfiguration>
-                                            <userDefinedRuntimeAttribute key="userDefinedRuntimeAttribute" accessibilityIdentifier="doneButton"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="19" width="320" height="44"/>
-                                </variation>
-                            </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2164" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" editable="NO" selectable="NO">
-                                <rect key="frame" x="20" y="364" width="280" height="150"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="20" y="364" width="280" height="150"/>
-                                </variation>
-                            </textView>
-                        </subviews>
-                        <constraints>
-                            <constraint id="2258" firstItem="2141" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
-                            <constraint id="2259" firstItem="2141" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
-                            <constraint id="2260" firstItem="2141" firstAttribute="top" secondItem="255" secondAttribute="top"/>
-                            <constraint id="2264" firstItem="1420" firstAttribute="trailing" secondItem="2141" secondAttribute="trailing"/>
-                            <constraint id="2265" firstItem="1420" firstAttribute="leading" secondItem="2141" secondAttribute="leading"/>
-                            <constraint id="2266" firstItem="1420" firstAttribute="top" secondItem="2141" secondAttribute="top" constant="19"/>
-                            <constraint id="2269" firstItem="258" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
-                            <constraint id="2270" firstItem="255" firstAttribute="trailing" secondItem="258" secondAttribute="trailing" constant="20"/>
-                            <constraint id="2271" firstItem="258" firstAttribute="top" secondItem="1420" secondAttribute="bottom" constant="7"/>
-                            <constraint id="2280" firstItem="255" firstAttribute="trailing" secondItem="2094" secondAttribute="trailing"/>
-                            <constraint id="2281" firstItem="2094" firstAttribute="top" secondItem="255" secondAttribute="top" constant="120"/>
-                            <constraint id="2286" firstItem="255" firstAttribute="bottom" secondItem="2094" secondAttribute="bottom" constant="268"/>
-                            <constraint id="2296" firstItem="2107" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
-                            <constraint id="2297" firstItem="2107" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
-                            <constraint id="2298" firstItem="2107" firstAttribute="top" secondItem="2094" secondAttribute="bottom" constant="3"/>
-                            <constraint id="2299" firstItem="255" firstAttribute="bottom" secondItem="2107" secondAttribute="bottom" constant="212"/>
-                            <constraint id="2300" firstItem="2164" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
-                            <constraint id="2301" firstItem="255" firstAttribute="trailing" secondItem="2164" secondAttribute="trailing" constant="20"/>
-                            <constraint id="2302" firstItem="2164" firstAttribute="top" secondItem="2107" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2303" firstItem="255" firstAttribute="bottom" secondItem="2164" secondAttribute="bottom" constant="54"/>
-                            <constraint id="2304" firstItem="974" firstAttribute="leading" secondItem="255" secondAttribute="leading" constant="20"/>
-                            <constraint id="2305" firstItem="255" firstAttribute="trailing" secondItem="974" secondAttribute="trailing" constant="20"/>
-                            <constraint id="2306" firstItem="974" firstAttribute="top" secondItem="2164" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2330" firstItem="2329" firstAttribute="top" secondItem="255" secondAttribute="top" constant="120"/>
-                            <constraint id="2331" firstItem="2329" firstAttribute="trailing" secondItem="255" secondAttribute="trailing"/>
-                            <constraint id="2332" firstItem="2329" firstAttribute="leading" secondItem="255" secondAttribute="leading"/>
-                            <constraint id="2333" firstItem="255" firstAttribute="bottom" secondItem="2329" secondAttribute="bottom" constant="268"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2258"/>
-                                <exclude reference="2259"/>
-                                <exclude reference="2260"/>
-                                <exclude reference="2264"/>
-                                <exclude reference="2265"/>
-                                <exclude reference="2266"/>
-                                <exclude reference="2269"/>
-                                <exclude reference="2270"/>
-                                <exclude reference="2271"/>
-                                <exclude reference="2280"/>
-                                <exclude reference="2281"/>
-                                <exclude reference="2286"/>
-                                <exclude reference="2296"/>
-                                <exclude reference="2297"/>
-                                <exclude reference="2298"/>
-                                <exclude reference="2299"/>
-                                <exclude reference="2300"/>
-                                <exclude reference="2301"/>
-                                <exclude reference="2302"/>
-                                <exclude reference="2303"/>
-                                <exclude reference="2304"/>
-                                <exclude reference="2305"/>
-                                <exclude reference="2306"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="2258"/>
-                                <include reference="2259"/>
-                                <include reference="2260"/>
-                                <include reference="2264"/>
-                                <include reference="2265"/>
-                                <include reference="2266"/>
-                                <include reference="2269"/>
-                                <include reference="2270"/>
-                                <include reference="2271"/>
-                                <include reference="2280"/>
-                                <include reference="2281"/>
-                                <include reference="2286"/>
-                                <include reference="2296"/>
-                                <include reference="2297"/>
-                                <include reference="2298"/>
-                                <include reference="2299"/>
-                                <include reference="2300"/>
-                                <include reference="2301"/>
-                                <include reference="2302"/>
-                                <include reference="2303"/>
-                                <include reference="2304"/>
-                                <include reference="2305"/>
-                                <include reference="2306"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="PostingTitle" destination="258" id="name-outlet-258"/>
-                        <outlet property="dateLabel" destination="974" id="name-outlet-974"/>
-                        <outlet property="DoneButton" destination="1424" id="name-outlet-1424"/>
-                        <outlet property="SaveButton" destination="1423" id="name-outlet-1423"/>
-                        <outlet property="myNavBar" destination="1420" id="name-outlet-1420"/>
-                        <outlet property="myNavBarItem" destination="1421" id="name-outlet-1421"/>
-                        <outlet property="imageScrollView" destination="2094" id="name-outlet-2094"/>
-                        <outlet property="postingImageView" destination="2095" id="name-outlet-2095"/>
-                        <outlet property="imageCollectionView" destination="2107" id="name-outlet-2107"/>
-                        <outlet property="statusBarColorPlaceholder" destination="2141" id="name-outlet-2141"/>
-                        <outlet property="PostingDescription" destination="2164" id="name-outlet-2164"/>
-                        <outlet property="imageViewPlaceholder" destination="2329" id="name-outlet-2329"/>
-                    </connections>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="256" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1508" y="229"/>
-        </scene>
-        <scene sceneID="287">
-            <objects>
-                <viewController id="288" sceneMemberID="viewController" customClass="SearchViewController" storyboardIdentifier="SearchViewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="285"/>
-                        <viewControllerLayoutGuide type="bottom" id="286"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="289">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="292" translatesAutoresizingMaskIntoConstraints="NO" text="Search Craigslist for:" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="20" y="70" width="560" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <constraints/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="297" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" placeholder="type here..." misplaced="YES">
-                                <rect key="frame" x="20" y="133" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="searchField"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="301" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" misplaced="YES">
-                                <rect key="frame" x="20" y="200" width="560" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <state key="normal" title="Search">
-                                    <color key="titleShadowColor" colorSpace="calibratedRGB" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1"/>
-                                </state>
-                                <state key="highlighted"/>
-                                <state key="selected"/>
-                                <state key="disabled"/>
-                                <connections>
-                                    <action selector="SearchCL:" destination="288" id="406" eventType="touchUpInside"/>
-                                </connections>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="searchButton"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" id="423" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="16" y="293.5" width="268" height="31"/>
-                                <connections/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minRentSlider"/>
-                                </userDefinedRuntimeAttributes>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4000" minValue="0.0" maxValue="10000" id="424" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="320" y="293.5" width="264" height="31"/>
-                                <connections/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="maxRentSlider"/>
-                                </userDefinedRuntimeAttributes>
-                            </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min. Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="434" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="20" y="264" width="260" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Max Rent" lineBreakMode="tailTruncation" minimumFontSize="10" id="438" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="324" y="264" width="256" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="453" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="20" y="335.5" width="260" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minRentLabel"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current" lineBreakMode="tailTruncation" minimumFontSize="10" id="454" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="324" y="335.5" width="256" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="maxRentLabel"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="480" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="32" y="438" width="94" height="29"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minBedStepper"/>
-                                </userDefinedRuntimeAttributes>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                            </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0+" lineBreakMode="tailTruncation" minimumFontSize="10" id="481" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="58" y="409.5" width="182" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minBedLabel"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="482" translatesAutoresizingMaskIntoConstraints="NO" text="Min. Bedrooms" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="20" y="381" width="260" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="483" translatesAutoresizingMaskIntoConstraints="NO" text="Min Bathrooms" textAlignment="center" misplaced="YES">
-                                <rect key="frame" x="324" y="381" width="256" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="484" translatesAutoresizingMaskIntoConstraints="NO" value="1" misplaced="YES">
-                                <rect key="frame" x="333" y="438" width="94" height="29"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minBathStepper"/>
-                                </userDefinedRuntimeAttributes>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                            </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="485" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="1+" misplaced="YES">
-                                <rect key="frame" x="359" y="409.5" width="182" height="20.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="minBathLabel"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1578" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="324" y="485" width="225" height="30"/>
-                                <state key="normal" title="Save Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="saveSearchButton"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint id="1885" firstItem="292" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1886" firstItem="289" firstAttribute="trailing" secondItem="292" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1888" firstItem="292" firstAttribute="centerX" secondItem="289" secondAttribute="centerX"/>
-                            <constraint id="1889" firstItem="292" firstAttribute="top" secondItem="285" secondAttribute="bottom" constant="50"/>
-                            <constraint id="1890" firstItem="297" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1891" firstItem="289" firstAttribute="trailing" secondItem="297" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1895" firstItem="297" firstAttribute="top" secondItem="292" secondAttribute="centerY" constant="51"/>
-                            <constraint id="1896" firstItem="301" firstAttribute="top" secondItem="297" secondAttribute="bottom" constant="37"/>
-                            <constraint id="1897" firstItem="301" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1898" firstItem="289" firstAttribute="trailing" secondItem="301" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1971" firstItem="423" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="18"/>
-                            <constraint id="1972" firstItem="301" firstAttribute="centerX" secondItem="423" secondAttribute="trailing" constant="18"/>
-                            <constraint id="1974" firstItem="424" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="22"/>
-                            <constraint id="1975" firstItem="289" firstAttribute="trailing" secondItem="424" secondAttribute="trailing" constant="18"/>
-                            <constraint id="1981" firstItem="301" firstAttribute="centerX" secondItem="434" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1982" firstItem="434" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1983" firstItem="434" firstAttribute="top" secondItem="301" secondAttribute="bottom" constant="34"/>
-                            <constraint id="1984" firstItem="438" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
-                            <constraint id="1985" firstItem="289" firstAttribute="trailing" secondItem="438" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1986" firstItem="438" firstAttribute="top" secondItem="301" secondAttribute="bottom" constant="34"/>
-                            <constraint id="1987" firstItem="453" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1988" firstItem="301" firstAttribute="centerX" secondItem="453" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1991" firstItem="423" firstAttribute="top" secondItem="434" secondAttribute="bottom" constant="9"/>
-                            <constraint id="1992" firstItem="424" firstAttribute="top" secondItem="438" secondAttribute="bottom" constant="9"/>
-                            <constraint id="1993" firstItem="453" firstAttribute="top" secondItem="423" secondAttribute="bottom" constant="12"/>
-                            <constraint id="1994" firstItem="289" firstAttribute="trailing" secondItem="454" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1995" firstItem="454" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
-                            <constraint id="1996" firstItem="454" firstAttribute="top" secondItem="424" secondAttribute="bottom" constant="12"/>
-                            <constraint id="1997" firstItem="482" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="20"/>
-                            <constraint id="1998" firstItem="301" firstAttribute="centerX" secondItem="482" secondAttribute="trailing" constant="20"/>
-                            <constraint id="1999" firstItem="482" firstAttribute="top" secondItem="453" secondAttribute="bottom" constant="25"/>
-                            <constraint id="2000" firstItem="483" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
-                            <constraint id="2001" firstItem="483" firstAttribute="top" secondItem="454" secondAttribute="bottom" constant="25"/>
-                            <constraint id="2002" firstItem="289" firstAttribute="trailing" secondItem="483" secondAttribute="trailing" constant="20"/>
-                            <constraint id="2003" firstItem="481" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="58"/>
-                            <constraint id="2004" firstItem="301" firstAttribute="centerX" secondItem="481" secondAttribute="trailing" constant="60"/>
-                            <constraint id="2005" firstItem="481" firstAttribute="top" secondItem="482" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2006" firstItem="485" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="59"/>
-                            <constraint id="2007" firstItem="485" firstAttribute="top" secondItem="483" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2008" firstItem="289" firstAttribute="trailing" secondItem="485" secondAttribute="trailing" constant="59"/>
-                            <constraint id="2009" firstItem="480" firstAttribute="leading" secondItem="289" secondAttribute="leading" constant="32"/>
-                            <constraint id="2010" firstItem="480" firstAttribute="top" secondItem="481" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2011" firstItem="301" firstAttribute="centerX" secondItem="480" secondAttribute="trailing" constant="34"/>
-                            <constraint id="2012" firstItem="484" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="33"/>
-                            <constraint id="2013" firstItem="484" firstAttribute="top" secondItem="485" secondAttribute="bottom" constant="8"/>
-                            <constraint id="2014" firstItem="289" firstAttribute="trailing" secondItem="484" secondAttribute="trailing" constant="33"/>
-                            <constraint id="2015" firstItem="1578" firstAttribute="leading" secondItem="301" secondAttribute="centerX" constant="24"/>
-                            <constraint id="2016" firstItem="289" firstAttribute="trailing" secondItem="1578" secondAttribute="trailing" constant="51"/>
-                            <constraint id="2017" firstItem="1578" firstAttribute="top" secondItem="484" secondAttribute="bottom" constant="18"/>
-                        </constraints>
-                    </view>
-                    <navigationItem title="Title" id="338" key="navigationItem"/>
-                    <connections>
-                        <outlet property="SearchField" destination="297" id="name-outlet-297"/>
-                        <outlet property="SearchButton" destination="301" id="name-outlet-301"/>
-                        <outlet property="MinRentSlider" destination="423" id="name-outlet-423"/>
-                        <outlet property="MaxRentSlider" destination="424" id="name-outlet-424"/>
-                        <outlet property="MinLabel" destination="453" id="name-outlet-453"/>
-                        <outlet property="MaxLabel" destination="454" id="name-outlet-454"/>
-                        <outlet property="MinBedCountStep" destination="480" id="name-outlet-480"/>
-                        <outlet property="MinBedLabel" destination="481" id="name-outlet-481"/>
-                        <outlet property="MinBathLabel" destination="485" id="name-outlet-485"/>
-                        <outlet property="MinBathCountStep" destination="484" id="name-outlet-484"/>
-                        <outlet property="saveSearchButton" destination="1578" id="name-outlet-1578"/>
-                        <outlet property="searchCLLabel" destination="292" id="name-outlet-292"/>
-                        <outlet property="MinRentLabel" destination="434" id="name-outlet-434"/>
-                        <outlet property="MaxRentLabel" destination="438" id="name-outlet-438"/>
-                        <outlet property="MinBedTitleLabel" destination="482" id="name-outlet-482"/>
-                        <outlet property="MinBathTitleLabel" destination="483" id="name-outlet-483"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="290" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="584" y="228"/>
-        </scene>
+        <!--Select City-->
         <scene sceneID="494">
             <objects>
-                <viewController id="495" sceneMemberID="viewController" customClass="CityPickerViewController" storyboardIdentifier="CityPickerViewController">
+                <viewController storyboardIdentifier="CityPickerViewController" id="495" customClass="CityPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="492"/>
                         <viewControllerLayoutGuide type="bottom" id="493"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="496">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" id="507" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="507">
                                 <rect key="frame" x="176" y="53" width="144" height="311"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="cityPicker"/>
-                                </userDefinedRuntimeAttributes>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
-                            </pickerView>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="518" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
-                                <rect key="frame" x="15" y="457" width="200" height="30"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="proceedButton"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="cityPicker"/>
                                 </userDefinedRuntimeAttributes>
+                            </pickerView>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="518">
+                                <rect key="frame" x="15" y="457" width="200" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Proceed to Search"/>
-                            </button>
-                            <pickerView contentMode="scaleToFill" id="685" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="53" width="162" height="311"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="statePicker"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="proceedButton"/>
                                 </userDefinedRuntimeAttributes>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="685">
+                                <rect key="frame" x="0.0" y="53" width="162" height="311"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="statePicker"/>
+                                </userDefinedRuntimeAttributes>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2367" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2367">
                                 <rect key="frame" x="20" y="495" width="280" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Recent Cities"/>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Select City" id="593"/>
                     <connections>
                         <outlet property="CityPickerView" destination="507" id="name-outlet-507"/>
                         <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
-                        <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
                         <outlet property="RecentCitiesButton" destination="2367" id="name-outlet-2367"/>
+                        <outlet property="StatePickerView" destination="685" id="name-outlet-685"/>
                     </connections>
-                    <navigationItem title="Select City" id="593" key="navigationItem"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="497" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-58" y="232"/>
         </scene>
+        <!--Ethan's List-->
         <scene sceneID="1441">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="1442" sceneMemberID="viewController" customClass="MenuTableViewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="1442" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1444">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1447" rowHeight="44" reuseIdentifier="cellid">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellid" rowHeight="44" id="1447">
+                                <rect key="frame" x="0.0" y="55.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1448" tableViewCell="1447">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1447" id="1448">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -618,12 +136,13 @@
             </objects>
             <point key="canvasLocation" x="244" y="1028"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="1450">
             <objects>
                 <navigationController id="1451" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1453">
+                        <rect key="frame" x="0.0" y="20" width="880" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                     </navigationBar>
                     <connections>
                         <segue destination="1442" kind="relationship" relationship="rootViewController" id="1452"/>
@@ -633,6 +152,7 @@
             </objects>
             <point key="canvasLocation" x="-311" y="1025"/>
         </scene>
+        <!--Split View Controller-->
         <scene sceneID="1455">
             <objects>
                 <splitViewController id="1456" sceneMemberID="viewController">
@@ -645,29 +165,30 @@
             </objects>
             <point key="canvasLocation" x="-842" y="1024"/>
         </scene>
+        <!--Saved Postings-->
         <scene sceneID="1470">
             <objects>
-                <tableViewController id="1471" sceneMemberID="viewController" customClass="SavedListingsTableViewController" storyboardIdentifier="SavedPostingsTableViewController" title="Saved Postings">
+                <tableViewController storyboardIdentifier="SavedPostingsTableViewController" title="Saved Postings" id="1471" customClass="SavedListingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1472">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1475" rowHeight="44" reuseIdentifier="listingCell" style="IBUITableViewCellStyleSubtitle" textLabel="1479" detailTextLabel="1480">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listingCell" textLabel="1479" detailTextLabel="1480" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="1475">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1475" id="1476">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1479">
-                                            <rect key="frame" x="16" y="4" width="35.5" height="21.5"/>
+                                            <rect key="frame" x="20" y="4" width="35.5" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1480">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -682,27 +203,56 @@
                             <outlet property="delegate" destination="1471" id="1474"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="1563" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="1563"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1477" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="737" y="976"/>
         </scene>
+        <!--Title-->
         <scene sceneID="1591">
             <objects>
-                <tableViewController id="1592" sceneMemberID="viewController" customClass="SavedSearchesTableViewController" storyboardIdentifier="SavedSearchesTableViewController">
+                <tableViewController storyboardIdentifier="SavedSearchesTableViewController" id="1592" customClass="SavedSearchesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1593">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1596" rowHeight="44" reuseIdentifier="searchCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" rowHeight="66" id="1596" customClass="SavedSearchCell">
+                                <rect key="frame" x="0.0" y="22" width="600" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1596" id="1597">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is the city of the search" lineBreakMode="tailTruncation" minimumFontSize="10" id="2723" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="10" y="10" width="580" height="21"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search terms go here" lineBreakMode="wordWrap" id="2727" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0" adjustsFontSizeToFit="NO">
+                                            <rect key="frame" x="20" y="37.5" width="570" height="18"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint id="2724" firstItem="2723" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="10"/>
+                                        <constraint id="2725" firstItem="2723" firstAttribute="top" secondItem="1597" secondAttribute="top" constant="10"/>
+                                        <constraint id="2726" firstItem="1597" firstAttribute="trailing" secondItem="2723" secondAttribute="trailing" constant="10"/>
+                                        <constraint id="2729" firstItem="2727" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="20"/>
+                                        <constraint id="2730" firstItem="1597" firstAttribute="trailing" secondItem="2727" secondAttribute="trailing" constant="10"/>
+                                        <constraint id="2731" firstItem="1597" firstAttribute="bottom" secondItem="2727" secondAttribute="bottom" constant="10"/>
+                                        <constraint id="2740" firstItem="2727" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="5"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="LabelCity" destination="2723" id="name-outlet-2723"/>
+                                    <outlet property="LabelSearchTerms" destination="2727" id="name-outlet-2727"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -710,85 +260,70 @@
                             <outlet property="delegate" destination="1592" id="1595"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="1684" key="navigationItem"/>
+                    <navigationItem key="navigationItem" title="Title" id="1684"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1598" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1129" y="979"/>
         </scene>
+        <!--Posting Image View Controller-->
         <scene sceneID="1756">
             <objects>
-                <viewController id="1757" sceneMemberID="viewController" customClass="postingImageViewController" storyboardIdentifier="postingImageViewController">
+                <viewController storyboardIdentifier="postingImageViewController" id="1757" customClass="postingImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1754"/>
                         <viewControllerLayoutGuide type="bottom" id="1755"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1758">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1779" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1779">
                                 <rect key="frame" x="0.0" y="34" width="600" height="566"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="1780" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1780">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="postingImage"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="postingImage"/>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
+                                        </variation>
                                     </imageView>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="34" width="414" height="702"/>
+                                </variation>
                             </scrollView>
                         </subviews>
-                        <constraints>
-                            <constraint id="2124" firstItem="1779" firstAttribute="top" secondItem="1754" secondAttribute="bottom" constant="14"/>
-                            <constraint id="2125" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
-                            <constraint id="2126" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
-                            <constraint id="2127" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
-                            <constraint id="2313" firstItem="1779" firstAttribute="trailing" secondItem="1758" secondAttribute="trailing"/>
-                            <constraint id="2314" firstItem="1779" firstAttribute="leading" secondItem="1758" secondAttribute="leading"/>
-                            <constraint id="2315" firstItem="1779" firstAttribute="bottom" secondItem="1758" secondAttribute="bottom"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2313"/>
-                                <exclude reference="2314"/>
-                                <exclude reference="2315"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="2313"/>
-                                <include reference="2314"/>
-                                <include reference="2315"/>
-                            </mask>
-                        </variation>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
                         <outlet property="myImageView" destination="1780" id="name-outlet-1780"/>
+                        <outlet property="myScrollView" destination="1779" id="name-outlet-1779"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1759" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="231"/>
+            <point key="canvasLocation" x="1970" y="169"/>
         </scene>
+        <!--Recent Cities Table View Controller-->
         <scene sceneID="2346">
             <objects>
-                <tableViewController id="2347" sceneMemberID="viewController" customClass="RecentCitiesTableViewController" storyboardIdentifier="RecentCitiesTableViewController">
+                <tableViewController storyboardIdentifier="RecentCitiesTableViewController" id="2347" customClass="RecentCitiesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2348">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2351" rowHeight="44" reuseIdentifier="recentCityCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recentCityCell" rowHeight="44" id="2351">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2351" id="2352">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -803,81 +338,198 @@
             </objects>
             <point key="canvasLocation" x="1533" y="979"/>
         </scene>
-        <scene sceneID="2383">
+        <!--Search Options View Controller-->
+        <scene sceneID="2417">
             <objects>
-                <viewController id="2384" sceneMemberID="viewController" customClass="PickSearchCityViewController">
+                <viewController storyboardIdentifier="SearchOptionsViewController" id="2418" customClass="SearchOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2381"/>
-                        <viewControllerLayoutGuide type="bottom" id="2382"/>
+                        <viewControllerLayoutGuide type="top" id="2415"/>
+                        <viewControllerLayoutGuide type="bottom" id="2416"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2385">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="2419">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2396" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="40" y="515" width="280" height="30"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                <state key="normal" title="Recent Cities"/>
-                            </button>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2397" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect" fixedFrame="YES">
-                                <rect key="frame" x="35" y="477" width="200" height="30"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="proceedButton"/>
-                                </userDefinedRuntimeAttributes>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                <state key="normal" title="Proceed to Search"/>
-                            </button>
-                            <pickerView contentMode="scaleToFill" id="2398" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="196" y="73" width="144" height="311"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="cityPicker"/>
-                                </userDefinedRuntimeAttributes>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                            </pickerView>
-                            <pickerView contentMode="scaleToFill" id="2399" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="20" y="73" width="162" height="311"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="statePicker"/>
-                                </userDefinedRuntimeAttributes>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                            </pickerView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="State" borderStyle="roundedRect" minimumFontSize="17" id="2422" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="29" y="433" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="City" borderStyle="roundedRect" minimumFontSize="17" id="2423" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="172" y="433" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2545">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Search Craigslist For:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2546">
+                                        <rect key="frame" x="20" y="30" width="280" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2552">
+                                        <rect key="frame" x="20" y="68" width="280" height="30"/>
+                                        <state key="normal" title="Search">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2563">
+                                        <rect key="frame" x="0.0" y="131" width="320" height="417"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="44" id="2564">
+                                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2564" id="5le-Wi-u2k">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2545" firstAttribute="trailing" secondItem="2419" secondAttribute="trailing" id="2584"/>
+                            <constraint firstItem="2545" firstAttribute="leading" secondItem="2419" secondAttribute="leading" id="2585"/>
+                            <constraint firstItem="2545" firstAttribute="top" secondItem="2419" secondAttribute="top" constant="20" id="2586"/>
+                            <constraint firstItem="2545" firstAttribute="bottom" secondItem="2419" secondAttribute="bottom" id="2587"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="StatePickerView" destination="2399" id="name-outlet-2399"/>
-                        <outlet property="CityPickerView" destination="2398" id="name-outlet-2398"/>
-                        <outlet property="ProceedButton" destination="2397" id="name-outlet-2397"/>
-                        <outlet property="RecentCitiesButton" destination="2396" id="name-outlet-2396"/>
-                        <outlet property="CurrentStateLabel" destination="2422" id="name-outlet-2422"/>
-                        <outlet property="CurrentCityLabel" destination="2423" id="name-outlet-2423"/>
+                        <outlet property="SearchButton" destination="2552" id="name-outlet-2552"/>
+                        <outlet property="SearchCityLabel" destination="2546" id="name-outlet-2546"/>
+                        <outlet property="SearchTableView" destination="2563" id="name-outlet-2563"/>
+                        <outlet property="scrollView" destination="2545" id="name-outlet-2545"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2386" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2420" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-408" y="233"/>
+            <point key="canvasLocation" x="477" y="230"/>
+        </scene>
+        <!--Posting Info View Controller-->
+        <scene sceneID="2624">
+            <objects>
+                <viewController storyboardIdentifier="PostingInfoViewController" id="2625" customClass="PostingInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2622"/>
+                        <viewControllerLayoutGuide type="bottom" id="2623"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2626">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2663">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2629">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Posting Info" id="2630"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2631">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infoCell" rowHeight="44" id="2632">
+                                        <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2632" id="y4b-Q0-jGX">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2631" firstAttribute="leading" secondItem="2626" secondAttribute="leading" id="2638"/>
+                            <constraint firstItem="2631" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2639"/>
+                            <constraint firstItem="2631" firstAttribute="top" secondItem="2629" secondAttribute="bottom" id="2640"/>
+                            <constraint firstItem="2631" firstAttribute="bottom" secondItem="2626" secondAttribute="bottom" id="2641"/>
+                            <constraint firstItem="2629" firstAttribute="leading" secondItem="2626" secondAttribute="leading" id="2642"/>
+                            <constraint firstItem="2629" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2643"/>
+                            <constraint firstItem="2629" firstAttribute="top" secondItem="2626" secondAttribute="top" constant="20" id="2644"/>
+                            <constraint firstItem="2663" firstAttribute="leading" secondItem="2629" secondAttribute="leading" id="2664"/>
+                            <constraint firstItem="2663" firstAttribute="trailing" secondItem="2626" secondAttribute="trailing" id="2665"/>
+                            <constraint firstItem="2663" firstAttribute="top" secondItem="2626" secondAttribute="top" id="2666"/>
+                            <constraint firstItem="2663" firstAttribute="bottom" secondItem="2629" secondAttribute="bottom" id="2667"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="NavBarPlaceholder" destination="2663" id="name-outlet-2663"/>
+                        <outlet property="PostingInfoTableView" destination="2631" id="name-outlet-2631"/>
+                        <outlet property="myNavBar" destination="2629" id="name-outlet-2629"/>
+                        <outlet property="myNavItem" destination="2630" id="name-outlet-2630"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2627" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1504" y="167"/>
+        </scene>
+        <!--Posting Web View Controller-->
+        <scene sceneID="2683">
+            <objects>
+                <viewController storyboardIdentifier="PostingWebViewController" id="2684" customClass="PostingWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2681"/>
+                        <viewControllerLayoutGuide type="bottom" id="2682"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2685">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2703">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2688">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Original Posting" id="2689">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="2698"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2690">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2690" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing" id="2691"/>
+                            <constraint firstItem="2690" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2692"/>
+                            <constraint firstItem="2690" firstAttribute="bottom" secondItem="2685" secondAttribute="bottom" id="2693"/>
+                            <constraint firstItem="2690" firstAttribute="top" secondItem="2688" secondAttribute="bottom" id="2694"/>
+                            <constraint firstItem="2688" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2695"/>
+                            <constraint firstAttribute="trailing" secondItem="2688" secondAttribute="trailing" id="2696"/>
+                            <constraint firstItem="2688" firstAttribute="top" secondItem="2685" secondAttribute="top" constant="20" id="2697"/>
+                            <constraint firstItem="2703" firstAttribute="top" secondItem="2685" secondAttribute="top" id="2704"/>
+                            <constraint firstItem="2703" firstAttribute="leading" secondItem="2685" secondAttribute="leading" id="2706"/>
+                            <constraint firstItem="2703" firstAttribute="trailing" secondItem="2685" secondAttribute="trailing" id="2707"/>
+                            <constraint firstItem="2703" firstAttribute="bottom" secondItem="2690" secondAttribute="top" id="2708"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="DoneButton" destination="2698" id="name-outlet-2698"/>
+                        <outlet property="navBar" destination="2688" id="name-outlet-2688"/>
+                        <outlet property="navBarItem" destination="2689" id="name-outlet-2689"/>
+                        <outlet property="statusBarPlaceholder" destination="2703" id="name-outlet-2703"/>
+                        <outlet property="webView" destination="2690" id="name-outlet-2690"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2686" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1966" y="983"/>
         </scene>
     </scenes>
     <resources>
         <image name="placeholder.png" width="500" height="350"/>
-        <image name="Icon-60.png" width="60" height="60"/>
-        <image name="Icon-Small.png" width="29" height="29"/>
-        <image name="Icon-Small-40.png" width="40" height="40"/>
         <image name="Icon.png" width="57" height="57"/>
+        <image name="Icon-60.png" width="60" height="60"/>
+        <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
+        <image name="save.png" width="50" height="50"/>
+        <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>

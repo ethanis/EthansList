@@ -41,6 +41,13 @@
     <Compile Include="BasePage.cs" />
     <Compile Include="Tests\Tests.cs" />
     <Compile Include="AbstractSetup.cs" />
+    <Compile Include="Pages\CityPickerPage.cs" />
+    <Compile Include="Pages\SearchOptionsPage.cs" />
+    <Compile Include="Pages\FeedResultsPage.cs" />
+    <Compile Include="Pages\PostingDetailsPage.cs" />
+    <Compile Include="Pages\MenuPage.cs" />
+    <Compile Include="Pages\SavedPostingsPage.cs" />
+    <Compile Include="Pages\SavedSearchPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -54,12 +61,6 @@
     <ProjectReference Include="..\ethanslist.ios\EthansList.iOS.csproj">
       <Project>{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}</Project>
       <Name>EthansList.iOS</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\ethanslist.android\EthansList.Droid.csproj">
-      <Project>{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}</Project>
-      <Name>EthansList.Droid</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>

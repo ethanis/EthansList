@@ -14,8 +14,6 @@ namespace ethanslist.ios
 	{
         FeedResultTableSource tableSource;
         private CLFeedClient feedClient;
-        Stopwatch loadTimer;
-        int percentComplete = 0;
         protected LoadingOverlay _loadingOverlay = null;
 
 		public FeedResultsTableViewController (IntPtr handle) : base (handle)
@@ -31,19 +29,26 @@ namespace ethanslist.ios
         }
 
         public String Query { get; set;}
+        public int MaxListings 
+        { 
+            get { return maxListings; } 
+            set { maxListings = value; }
+        }
+        protected int maxListings = 25;
+
+        public int? WeeksOld
+        { 
+            get { return weeksOld; } 
+            set { weeksOld = value; }
+        }
+        protected int? weeksOld = null;
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             Console.WriteLine(Query);
 
-            loadTimer = new Stopwatch();
-            loadTimer.Start();
-
             this.Title = "Craigslist Results";
-            feedClient = null;
-            feedClient = new CLFeedClient(Query);
-            feedClient.GetPostings();
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
@@ -53,9 +58,25 @@ namespace ethanslist.ios
             this._loadingOverlay = new LoadingOverlay (bounds);
             this.View.Add ( this._loadingOverlay );
 
+            feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
+            var result = feedClient.GetAllPostingsAsync();
+
+            if (!result)
+            {
+                this._loadingOverlay.Hide();
+                UIAlertView alert = new UIAlertView();
+                alert.Message = String.Format("No network connection.{0}Please check your settings", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Clicked += (s, ev) => {
+                    this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
+                };
+                this.InvokeOnMainThread(() => alert.Show());   
+            }
+
             tableSource = new FeedResultTableSource(this, feedClient);
 
             TableView.Source = tableSource;
+            TableView.RowHeight = 80;
 
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));
@@ -69,11 +90,11 @@ namespace ethanslist.ios
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
-                feedClient.GetPostings();
+                feedClient.GetAllPostingsAsync();
             };
 
-            feedClient.loadingComplete += feedClient_LoadingComplete;
-
+            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
+            feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
                     feedClient = null;
@@ -82,25 +103,23 @@ namespace ethanslist.ios
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                     alert.AddButton("OK");
-                    alert.Clicked += (s, ev) => {this.NavigationController.PopViewController(true);};
+                    alert.Clicked += (s, ev) => {
+                        this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
+                    };
                     this.InvokeOnMainThread(() => alert.Show());
-            };
-
-            feedClient.loadingProgressChanged += (object sender, EventArgs e) =>
-            {
-                    percentComplete += 10;
-                    Console.WriteLine(percentComplete + "% Complete");
             };
         }
 
         void feedClient_LoadingComplete(object sender, EventArgs e)
         {
-            this.InvokeOnMainThread(() => this._loadingOverlay.Hide());
-            loadTimer.Stop();
-            TableView.ReloadData();
-            Console.WriteLine(loadTimer.Elapsed);
-            percentComplete = 0;
-            RefreshControl.EndRefreshing();
+            this.InvokeOnMainThread(() => {
+                this._loadingOverlay.Hide();
+                TableView.ReloadData();
+                RefreshControl.EndRefreshing();
+                Console.WriteLine (feedClient.postings.Count);
+            });
+            feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
+            feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
         }
 	}
 }

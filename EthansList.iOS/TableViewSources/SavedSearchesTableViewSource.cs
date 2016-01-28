@@ -3,6 +3,9 @@ using UIKit;
 using EthansList.Models;
 using System.Collections.Generic;
 using EthansList.Shared;
+using System.Drawing;
+using Foundation;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -10,8 +13,6 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         List<Search> savedSearches;
-        private const string cellID = "searchCellID";
-//        public event EventHandler<EventArgs> ItemDeleted;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
 
         public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)
@@ -32,29 +33,12 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            SearchViewCell cell = (SearchViewCell)tableView.DequeueReusableCell (SearchViewCell.Key);
-            if (cell == null)
-                cell = SearchViewCell.Create();
-
-            cell.Model = savedSearches[indexPath.Row];
-            cell.BackgroundColor = ColorScheme.Clouds;
+            SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
+            cell.SetCity(savedSearches[indexPath.Row].CityName);
+            cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
 
             return cell;
         }
-
-//        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
-//        {
-//            UITableViewRowAction deleteButton = UITableViewRowAction.Create (
-//                UITableViewRowActionStyle.Destructive,
-//                "Delete",
-//                async delegate {
-//                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
-//                Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-//                if (this.ItemDeleted != null)
-//                    this.ItemDeleted(this, new EventArgs());
-//            });
-//            return new UITableViewRowAction[] { deleteButton };
-//        }
 
         public override async void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
@@ -92,6 +76,8 @@ namespace ethanslist.ios
             QueryGeneration helper = new QueryGeneration();
 
             feedResultsVC.Query = helper.Generate(search.LinkUrl, searchTerms);
+            feedResultsVC.MaxListings = search.MaxListings;
+            feedResultsVC.WeeksOld = search.PostedDate;
 
             owner.ShowViewController(feedResultsVC, owner);
         }

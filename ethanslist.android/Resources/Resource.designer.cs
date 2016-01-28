@@ -1511,7 +1511,7 @@ namespace ethanslist.android
 			public const int abc_textfield_search_material = 2130837571;
 			
 			// aapt resource value: 0x7f020044
-			public const int Icon = 2130837572;
+			public const int ethanslist_icon = 2130837572;
 			
 			// aapt resource value: 0x7f02004c
 			public const int notification_template_icon_bg = 2130837580;

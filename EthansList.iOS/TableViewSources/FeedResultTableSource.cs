@@ -11,7 +11,7 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         CLFeedClient feedClient;
-        private readonly String CellId = "postCell";
+//        private readonly String CellId = "postCell";
 
         public FeedResultTableSource(UIViewController owner, CLFeedClient client)
         {
@@ -26,33 +26,30 @@ namespace ethanslist.ios
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            UITableViewCell cell = tableView.DequeueReusableCell(CellId);
+            var cell = (FeedResultsCell)tableView.DequeueReusableCell(FeedResultsCell.Key);
 
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellId);   
+                cell = FeedResultsCell.Create();
             }
 
             cell.BackgroundColor = ColorScheme.Clouds;
 
             Posting post = feedClient.postings[indexPath.Row];
 
-            cell.TextLabel.Text = post.PostTitle;
-            cell.DetailTextLabel.Text = post.Description;
+            cell.PostingTitle.Text = post.PostTitle;
+            cell.PostingDescription.Text = post.Description;
             if (post.ImageLink != "-1")
             {
-                cell.ImageView.SetImage(
+                cell.PostingImage.SetImage(
                     url: new NSUrl(post.ImageLink),
                     placeholder: UIImage.FromBundle("placeholder.png")
                 );
             }
             else
             {
-                cell.ImageView.Image = UIImage.FromBundle("placeholder.png");
+                cell.PostingImage.Image = UIImage.FromBundle("placeholder.png");
             }
-            //TODO: make sure this content mode sticks with the image view
-            cell.ImageView.ContentMode = UIViewContentMode.ScaleAspectFill;
-            cell.ImageView.ClipsToBounds = true;
 
             return cell;
         }
@@ -60,11 +57,10 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
-            var detailController = (PostingDetailsViewController)storyboard.InstantiateViewController("PostingDetailsViewController");
+            var detailController = (PostingInfoViewController)storyboard.InstantiateViewController("PostingInfoViewController");
 
             Posting post = feedClient.postings[indexPath.Row];
             detailController.Post = post;
-            detailController.Saved = false;
 
             owner.PresentModalViewController(detailController, true);
         }

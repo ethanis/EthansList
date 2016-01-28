@@ -2,6 +2,7 @@
 using UIKit;
 using System.Collections.Generic;
 using EthansList.Models;
+using EthansList.Shared;
 
 namespace ethanslist.ios
 {
@@ -36,11 +37,10 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
-            var searchViewController = (SearchViewController)storyboard.InstantiateViewController("SearchViewController");
+            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+            AvailableLocations allLocations = new AvailableLocations();
 
-            searchViewController.Url = recentCities[indexPath.Row].Url;
-            searchViewController.City = recentCities[indexPath.Row].City;
-
+            searchViewController.Location = allLocations.PotentialLocations.Find(x => x.SiteName == recentCities[indexPath.Row].City);
 
             this.owner.ShowViewController(searchViewController, this);
         }

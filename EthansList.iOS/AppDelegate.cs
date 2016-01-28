@@ -2,6 +2,7 @@
 using UIKit;
 using EthansList.Models;
 using EthansList.Shared;
+using Xamarin;
 
 namespace ethanslist.ios
 {
@@ -11,7 +12,7 @@ namespace ethanslist.ios
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
-        public static DatabaseConnection databaseConnection {get;private set;}
+        public static DatabaseConnection databaseConnection {get; private set;}
 
         public override UIWindow Window
         {
@@ -40,6 +41,7 @@ namespace ethanslist.ios
                     ForegroundColor = ColorScheme.Clouds,
                 };
 
+            Insights.Initialize("ec87be89090cdee48f57cce9ee5ca4d230b1f314");
 
             return true;
         }
