@@ -12,7 +12,7 @@ namespace ethanslist.UITests
         readonly string MenuButton;
 
         public CityPickerPage()
-            : base ("androidTrait", "cityPicker")
+            : base ("androidTrait", "Select City")
         {
             if (OniOS)
             {
