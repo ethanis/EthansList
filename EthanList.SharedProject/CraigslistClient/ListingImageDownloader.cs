@@ -95,8 +95,6 @@ namespace EthansList.Shared
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            Console.WriteLine(html);
-
             if (doc.GetElementbyId("has_been_removed") != null)
             {
                 if (this.postingRemoved != null)

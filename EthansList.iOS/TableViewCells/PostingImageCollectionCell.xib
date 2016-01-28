@@ -30,8 +30,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <accessibility key="accessibilityConfiguration" label="ImageCell">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </collectionViewCell>
                         </cells>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="PostingImageCollection"/>
+                        </userDefinedRuntimeAttributes>
                     </collectionView>
                 </subviews>
                 <constraints>
@@ -53,5 +62,6 @@
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
 </document>

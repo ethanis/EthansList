@@ -14,14 +14,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleAspectFit" id="2" translatesAutoresizingMaskIntoConstraints="NO" image="placeholder.png">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                        <rect key="frame" x="5" y="5" width="310" height="140.5"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="PostingImage"/>
+                        </userDefinedRuntimeAttributes>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint id="6" firstItem="2" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top"/>
-                    <constraint id="7" firstItem="2" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom"/>
-                    <constraint id="8" firstItem="2" firstAttribute="trailing" secondItem="YTl-1W-gDM" secondAttribute="trailing"/>
-                    <constraint id="9" firstItem="2" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading"/>
+                    <constraint id="6" firstItem="2" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="5"/>
+                    <constraint id="7" firstItem="2" firstAttribute="bottom" secondItem="YTl-1W-gDM" secondAttribute="bottom" constant="-5"/>
+                    <constraint id="8" firstItem="2" firstAttribute="trailing" secondItem="YTl-1W-gDM" secondAttribute="trailing" constant="-5"/>
+                    <constraint id="9" firstItem="2" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -36,5 +42,6 @@
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
 </document>

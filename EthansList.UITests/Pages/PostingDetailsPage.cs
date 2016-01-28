@@ -43,6 +43,8 @@ namespace ethanslist.UITests
 
         public void ExitListing()
         {
+            app.ScrollDown();
+            app.ScrollDown();
             app.Tap(DoneButton);
         }
     }

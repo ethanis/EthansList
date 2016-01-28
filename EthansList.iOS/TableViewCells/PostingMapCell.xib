@@ -15,9 +15,21 @@
                 <subviews>
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="2" translatesAutoresizingMaskIntoConstraints="NO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="246"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="PostingMap"/>
+                        </userDefinedRuntimeAttributes>
                     </mapView>
                     <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="50" id="19" translatesAutoresizingMaskIntoConstraints="NO" minimumValue="10" value="40" stepValue="2">
                         <rect key="frame" x="206" y="198" width="94" height="29"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="MapZoomStepper"/>
+                        </userDefinedRuntimeAttributes>
                     </stepper>
                 </subviews>
                 <constraints>

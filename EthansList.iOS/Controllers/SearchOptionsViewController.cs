@@ -64,7 +64,6 @@ namespace ethanslist.ios
             AddLayoutConstraints();
 
             this.Title = "Options";
-            SearchCityLabel.Text = String.Format("Search {0} for:", Location.SiteName);
             tableSource = new SearchOptionsTableSource(GetTableSetup(), this);
             SearchTableView.Source = tableSource;
 
@@ -168,17 +167,18 @@ namespace ethanslist.ios
                             {
                                 {0, "Any"},
                                 {1, "1000"},
-                                {2, "1400"},
-                                {3, "1600"},
-                                {4, "1800"},
-                                {5, "2000"},
-                                {6, "2200"},
-                                {7, "2400"},
-                                {8, "2600"},
-                                {9, "2800"},
-                                {10, "3000"},
-                                {11, "3200"},
-                                {12, "3400"},
+                                {2, "1200"},
+                                {3, "1400"},
+                                {4, "1600"},
+                                {5, "1800"},
+                                {6, "2000"},
+                                {7, "2200"},
+                                {8, "2400"},
+                                {9, "2600"},
+                                {10, "2800"},
+                                {11, "3000"},
+                                {12, "3200"},
+                                {13, "3400"},
                             }},
                     },
             });
@@ -256,17 +256,18 @@ namespace ethanslist.ios
 
         void AddLayoutConstraints()
         {
-            scrollView.TranslatesAutoresizingMaskIntoConstraints = false;
+//            scrollView.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
-            scrollView.ContentSize = new CoreGraphics.CGSize(this.View.Bounds.Width, this.View.Bounds.Height);// + 280f);
+            scrollView.ContentSize = new CoreGraphics.CGSize(this.View.Bounds.Width, this.View.Bounds.Height);
             scrollView.Frame = this.View.Frame;
+            SearchCityLabel.Text = String.Format("Search {0} for:", Location.SiteName);
 
             //Seach CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, SearchCityLabel.Superview, NSLayoutAttribute.Width, .90f, 0),
+                NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, SearchCityLabel.Superview, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 79),
             });
 

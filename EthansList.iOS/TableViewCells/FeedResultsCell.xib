@@ -52,6 +52,9 @@
                 <outlet property="DescriptionLabel" destination="9" id="name-outlet-9"/>
                 <outlet property="PostingImageView" destination="10" id="name-outlet-10"/>
             </connections>
+            <accessibility key="accessibilityConfiguration" label="FeedResultsCell">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
         </tableViewCell>
     </objects>
     <resources>
@@ -61,5 +64,6 @@
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
 </document>
