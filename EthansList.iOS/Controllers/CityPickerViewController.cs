@@ -106,6 +106,8 @@ namespace ethanslist.ios
             else
             {
                 state = locations.States.ElementAt(0);
+                currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
+
                 stateTableSource = new StateTableSource(locations);
                 cityTableSource = new CityTableSource(locations, locations.States.ElementAt(0));
                 StateTableView.Source = stateTableSource;
