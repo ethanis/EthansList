@@ -2,6 +2,7 @@
 using UIKit;
 using EthansList.Models;
 using EthansList.Shared;
+using Xamarin;
 
 namespace ethanslist.ios
 {
@@ -40,6 +41,7 @@ namespace ethanslist.ios
                     ForegroundColor = ColorScheme.Clouds,
                 };
 
+            Insights.Initialize("ec87be89090cdee48f57cce9ee5ca4d230b1f314");
 
             return true;
         }

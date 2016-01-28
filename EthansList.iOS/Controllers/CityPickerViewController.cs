@@ -5,6 +5,7 @@ using UIKit;
 using System.Linq;
 using System.Collections.Generic;
 using EthansList.Shared;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
@@ -202,6 +203,9 @@ namespace ethanslist.ios
             StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
+
+            //TODO: show table views instead if OS < 9
+            Console.WriteLine(UIDevice.CurrentDevice.SystemVersion);
 
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
             //State picker view constraints
