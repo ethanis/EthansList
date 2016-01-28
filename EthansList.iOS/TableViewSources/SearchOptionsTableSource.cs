@@ -10,7 +10,7 @@ namespace ethanslist.ios
     {
         protected List<TableItemGroup> tableItems;
         protected string cellIdentifier = "TableCell";
-        UIViewController owner;
+        SearchOptionsViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
         SearchPickerModel picker_model;
         UIPickerView picker;
@@ -20,7 +20,7 @@ namespace ethanslist.ios
         public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
         {
             this.tableItems = items;
-            this.owner = owner;
+            this.owner = (SearchOptionsViewController)owner;
         }
 
         #region -= data binding/display methods =-
@@ -76,143 +76,142 @@ namespace ethanslist.ios
         {
             Console.WriteLine("Accessory for Section, " + indexPath.Section.ToString() + " and Row, " + indexPath.Row.ToString() + " tapped");
         }
-
         #endregion
 
-        /// <summary>
-        /// Called by the TableView to get the actual UITableViewCell to render for the particular section and row
-        /// </summary>
+        private SearchTermsCell searchTermsCell {get;set;}
+        private PriceSelectorCell priceCell { get; set; }
+
         public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            // declare vars
             TableItem item = tableItems[indexPath.Section].Items[indexPath.Row];
-            UITableViewCell cell = null;
-            if (item.CellType == "SearchTermsCell")
-            {
-                cell = SearchTermsCell.Create();
-                ((SearchTermsCell)cell).TermsField.EditingChanged += delegate
+
+            UIToolbar toolbar = new UIToolbar();
+            toolbar.BarStyle = UIBarStyle.Default;
+            toolbar.Translucent = true;
+            toolbar.SizeToFit();
+
+            UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
                 {
-                    ((SearchOptionsViewController)(this.owner)).SearchTerms = ((SearchTermsCell)cell).TermsField.Text;
-                };
-                ((SearchTermsCell)cell).TermsField.EditingDidBegin += (object sender, EventArgs e) => {
-                    ((SearchOptionsViewController)this.owner).FieldSelected = ((SearchTermsCell)cell).TermsField.InputView;
-                };
-            }
-            else if (item.CellType == "PriceSelectorCell")
+                    this.owner.View.EndEditing(true);
+                });
+            toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
+
+
+            switch (item.CellType)
             {
-                cell = PriceSelectorCell.Create();
-                ((PriceSelectorCell)cell).LabelText = item.Heading;
-
-
-                picker_model = new SearchPickerModel(item.PickerOptions, true);
-                picker = new UIPickerView();
-                picker.Model = picker_model;
-                picker.ShowSelectionIndicator = true;
-
-                UIToolbar toolbar = new UIToolbar();
-                toolbar.BarStyle = UIBarStyle.Default;
-                toolbar.Translucent = true;
-                toolbar.SizeToFit();
-
-                UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+                default:
+                    return new UITableViewCell();
+                case "SearchTermsCell":
+                    if (searchTermsCell == null)
                     {
-                        this.owner.View.EndEditing(true);
-                    });
-                toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
-
-                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-                {
-                    var result = e.SelectedValue.ToString();
-                    Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
-                    if (e.FromComponent == 0)
-                    {
-                        ((PriceSelectorCell)cell).MinPrice.Text = result != "Any" ? "$" + result : result;
-                        ((SearchOptionsViewController)(this.owner)).MinPrice = result;
-                    }
-                    else
-                    {
-                        ((PriceSelectorCell)cell).MaxPrice.Text = result != "Any" ? "$" + result : result;
-                        ((SearchOptionsViewController)(this.owner)).MaxPrice = result;
+                        searchTermsCell = SearchTermsCell.Create();
+                        searchTermsCell.TermsField.EditingChanged += delegate
+                        {
+                                this.owner.SearchTerms = searchTermsCell.TermsField.Text;
+                        };
+                        searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                                this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
+                        };
                     }
 
-                        if (((PriceSelectorCell)cell).MinPrice.Text != "Any" || ((PriceSelectorCell)cell).MaxPrice.Text != "Any")
-                            ((PriceSelectorCell)cell).ToLabel.Hidden = false;
-                        else
-                            ((PriceSelectorCell)cell).ToLabel.Hidden = true;
-                };
-                        
-                ((PriceSelectorCell)cell).PickerField.InputView = picker;
-                ((PriceSelectorCell)cell).PickerField.InputAccessoryView = toolbar;
-
-                ((PriceSelectorCell)cell).PickerField.EditingDidBegin += (object sender, EventArgs e) => {
-                    ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
-                    ((SearchOptionsViewController)this.owner).FieldSelected = ((PriceSelectorCell)cell).PickerField.InputView;
-                    ((PriceSelectorCell)cell).Accessory = UITableViewCellAccessory.Checkmark;
-                };
-
-                ((PriceSelectorCell)cell).PickerField.EditingDidEnd += delegate
-                {
-                        ((PriceSelectorCell)cell).Accessory = UITableViewCellAccessory.None;
-                };
-            }
-            else if (item.CellType == "PickerSelectorCell")
-            {
-                cell = PickerSelectorCell.Create();
-                ((PickerSelectorCell)cell).Title.Text = item.Heading;
-
-
-                picker_model = new SearchPickerModel(item.PickerOptions, false);
-                picker = new UIPickerView();
-                picker.Model = picker_model;
-                picker.ShowSelectionIndicator = true;
-
-                UIToolbar toolbar = new UIToolbar();
-                toolbar.BarStyle = UIBarStyle.Default;
-                toolbar.Translucent = true;
-                toolbar.SizeToFit();
-
-                UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+                    return searchTermsCell;
+                case "PriceSelectorCell":
+                    if (priceCell == null)
                     {
-                        this.owner.View.EndEditing(true);
-                    });
-                toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
+                        priceCell = PriceSelectorCell.Create();
+                        priceCell.LabelText = item.Heading;
 
-                picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-                    {
-                        string resultKey = e.SelectedKey.ToString();
-                        string resultValue = null;
 
-                        if (e.SelectedValue != null)
-                            resultValue = e.SelectedValue.ToString();
+                        picker_model = new SearchPickerModel(item.PickerOptions, true);
+                        picker = new UIPickerView();
+                        picker.Model = picker_model;
+                        picker.ShowSelectionIndicator = true;
 
-                        Console.WriteLine(resultKey + " From " + e.FromComponent);
-                        ((PickerSelectorCell)cell).Display.Text = resultKey;
-                        if (item.Heading == "Min Bedrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBedrooms = resultValue;
-                        else if (item.Heading == "Min Bathrooms")
-                            ((SearchOptionsViewController)(this.owner)).MinBathrooms = resultValue;
-                        else if (item.Heading == "Posted Date")
-                            ((SearchOptionsViewController)(this.owner)).WeeksOld = (int?)Convert.ToInt16(resultValue);
-                        else if (item.Heading == "Max Listings")
-                            ((SearchOptionsViewController)(this.owner)).MaxListings = Convert.ToInt16(resultValue);
+
+                        picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                        {
+                            var result = e.SelectedValue.ToString();
+                            Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
+                            if (e.FromComponent == 0)
+                            {
+                                priceCell.MinPrice.Text = result != "Any" ? "$" + result : result;
+                                this.owner.MinPrice = result;
+                            }
+                            else
+                            {
+                                priceCell.MaxPrice.Text = result != "Any" ? "$" + result : result;
+                                this.owner.MaxPrice = result;
+                            }
+
+                            if (priceCell.MinPrice.Text != "Any" || priceCell.MaxPrice.Text != "Any")
+                                priceCell.ToLabel.Hidden = false;
+                            else
+                                priceCell.ToLabel.Hidden = true;
+                        };
+                            
+                        priceCell.PickerField.InputView = picker;
+                        priceCell.PickerField.InputAccessoryView = toolbar;
+
+                        priceCell.PickerField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.KeyboardBounds = picker.Bounds;
+                            this.owner.FieldSelected = priceCell.PickerField.InputView;
+                            priceCell.Accessory = UITableViewCellAccessory.Checkmark;
+                        };
+
+                        priceCell.PickerField.EditingDidEnd += delegate
+                        {
+                            priceCell.Accessory = UITableViewCellAccessory.None;
+                        };
+                    }
+                    return priceCell;
+                case "PickerSelectorCell":
+                    var pickerSelectorCell = PickerSelectorCell.Create();
+                    pickerSelectorCell.Title.Text = item.Heading;
+
+
+                    picker_model = new SearchPickerModel(item.PickerOptions, false);
+                    picker = new UIPickerView();
+                    picker.Model = picker_model;
+                    picker.ShowSelectionIndicator = true;
+
+
+                    picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                        {
+                            string resultKey = e.SelectedKey.ToString();
+                            string resultValue = null;
+
+                            if (e.SelectedValue != null)
+                                resultValue = e.SelectedValue.ToString();
+
+                            Console.WriteLine(resultKey + " From " + e.FromComponent);
+                            pickerSelectorCell.Display.Text = resultKey;
+                            if (item.Heading == "Min Bedrooms")
+                                this.owner.MinBedrooms = resultValue;
+                            else if (item.Heading == "Min Bathrooms")
+                                this.owner.MinBathrooms = resultValue;
+                            else if (item.Heading == "Posted Date")
+                                this.owner.WeeksOld = (int?)Convert.ToInt16(resultValue);
+                            else if (item.Heading == "Max Listings")
+                                this.owner.MaxListings = Convert.ToInt16(resultValue);
+                        };
+                    
+                    pickerSelectorCell.InputTextField.InputView = picker;
+                    pickerSelectorCell.InputTextField.InputAccessoryView = toolbar;
+
+                    pickerSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                        this.owner.KeyboardBounds = picker.Bounds;
+                        this.owner.FieldSelected = pickerSelectorCell;
+                        pickerSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
                     };
-                
-                ((PickerSelectorCell)cell).InputTextField.InputView = picker;
-                ((PickerSelectorCell)cell).InputTextField.InputAccessoryView = toolbar;
 
-                ((PickerSelectorCell)cell).InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-                    ((SearchOptionsViewController)this.owner).KeyboardBounds = picker.Bounds;
-                    ((SearchOptionsViewController)this.owner).FieldSelected = ((PickerSelectorCell)cell);
-                    ((PickerSelectorCell)cell).Accessory = UITableViewCellAccessory.Checkmark;
-                };
-
-                ((PickerSelectorCell)cell).InputTextField.EditingDidEnd += delegate
-                {
-                        ((PickerSelectorCell)cell).Accessory = UITableViewCellAccessory.None;
-                };
+                    pickerSelectorCell.InputTextField.EditingDidEnd += delegate
+                    {
+                            pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
+                    };
+                    return pickerSelectorCell;
             }
-
-            return cell;
         }
 
         private static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, object> options)
