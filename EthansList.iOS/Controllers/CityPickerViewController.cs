@@ -182,11 +182,11 @@ namespace ethanslist.ios
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Left, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 44));
             stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Width, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 0.75f, 0));
+            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Bottom,
+                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -40));
             this.View.AddConstraints(stateConstraints.ToArray());
 
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
@@ -196,23 +196,25 @@ namespace ethanslist.ios
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Right, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 0.75f, 0));
-
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 44));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Bottom,
+                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -40));
+            
             this.View.AddConstraints(cityConstraints.ToArray());
 
             //Proceed Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, CityPickerView, NSLayoutAttribute.Bottom, 1, 20),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -5),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 30),
             });
             //Recent Cities Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Bottom, 1, 5),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, -25),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 30),
             });
             this.View.LayoutIfNeeded();
         }
@@ -228,27 +230,27 @@ namespace ethanslist.ios
             Console.WriteLine(UIDevice.CurrentDevice.SystemVersion);
 
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
-            //State picker view constraints
+            //State table view constraints
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Left, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Top, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Width, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 0.65f, 0));
+            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Bottom,
+                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
             this.View.AddConstraints(stateConstraints.ToArray());
 
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
-            //City picker view constraints
+            //City table view constraints
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Left, 
                 NSLayoutRelation.Equal, StateTableView, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Right, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Top, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 0.65f, 0));
+            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Bottom,
+                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
 
             this.View.AddConstraints(cityConstraints.ToArray());
 
@@ -256,14 +258,15 @@ namespace ethanslist.ios
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, CityTableView, NSLayoutAttribute.Bottom, 1, 20),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -5),
             });
             //Recent Cities Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Bottom, 1, 5),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, -25),
             });
+
             this.View.LayoutIfNeeded();
         }
 	}
