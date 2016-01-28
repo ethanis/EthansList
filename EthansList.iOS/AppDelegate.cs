@@ -41,7 +41,9 @@ namespace ethanslist.ios
                     ForegroundColor = ColorScheme.Clouds,
                 };
 
+            #if RELEASE
             Insights.Initialize("ec87be89090cdee48f57cce9ee5ca4d230b1f314");
+            #endif
 
             return true;
         }

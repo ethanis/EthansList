@@ -20,6 +20,7 @@ namespace ethanslist.ios
         UITableView StateTableView, CityTableView;
         StateTableSource stateTableSource;
         CityTableSource cityTableSource;
+        private static double MinOSForPicker = 9.0;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -32,7 +33,7 @@ namespace ethanslist.ios
             FormatButton(ProceedButton, ColorScheme.MidnightBlue);
             FormatButton(RecentCitiesButton, ColorScheme.Concrete);
 
-            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion) > 9.0)
+            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion.Substring(0,1)) >= MinOSForPicker)
             {
                 StatePickerView = new UIPickerView();
                 CityPickerView = new UIPickerView();
@@ -74,7 +75,8 @@ namespace ethanslist.ios
             locations = new AvailableLocations();
 
             #region iOS 9.0 logic
-            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion) > 9.0)
+            Console.WriteLine (UIDevice.CurrentDevice.SystemVersion.Substring(0,1));
+            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion.Substring(0,1)) >= MinOSForPicker)
             {
                 state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
                 currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);

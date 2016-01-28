@@ -2,6 +2,7 @@
 using UIKit;
 using EthansList.Shared;
 using System.Linq;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -26,6 +27,21 @@ namespace ethanslist.ios
             return locations.States.Count;
         }
 
+        public override UIView GetViewForHeader(UITableView tableView, nint section)
+        {
+            var title = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, 25f));
+            title.Text = "State";
+            title.TextAlignment = UITextAlignment.Center;
+            title.BackgroundColor = ColorScheme.Concrete;
+
+            return title;
+        }
+
+        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+        {
+            return 25f;
+        }
+
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(stateCell);
@@ -42,7 +58,6 @@ namespace ethanslist.ios
         {
             return Constants.CityPickerRowHeight;
         }
-
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
@@ -85,6 +100,21 @@ namespace ethanslist.ios
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
+        }
+
+        public override UIView GetViewForHeader(UITableView tableView, nint section)
+        {
+            var title = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, 25f));
+            title.Text = "City";
+            title.TextAlignment = UITextAlignment.Center;
+            title.BackgroundColor = ColorScheme.Concrete;
+
+            return title;
+        }
+
+        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+        {
+            return 25f;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
