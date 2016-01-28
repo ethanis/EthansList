@@ -16,6 +16,7 @@ namespace ethanslist.ios
         StatePickerModel stateModel;
         LocationPickerModel cityModel;
         Location currentSelected;
+        UIPickerView StatePickerView, CityPickerView;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -28,7 +29,19 @@ namespace ethanslist.ios
             FormatButton(ProceedButton, ColorScheme.MidnightBlue);
             FormatButton(RecentCitiesButton, ColorScheme.Concrete);
 
-            AddLayoutConstraints();
+            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion) > 9.0)
+            {
+                StatePickerView = new UIPickerView();
+                CityPickerView = new UIPickerView();
+                this.View.AddSubviews(new UIView[] { StatePickerView, CityPickerView });
+
+                AddiOS9LayoutConstraints();
+            }
+            else
+            {
+                
+            }
+
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
 
@@ -48,57 +61,62 @@ namespace ethanslist.ios
                 new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
                 true);
 
-            locations = new AvailableLocations();
-            state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
-            currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
-
-            cityModel = new LocationPickerModel(locations, state);
-            CityPickerView.Model = cityModel;
-
-            stateModel = new StatePickerModel(locations);
-            StatePickerView.Model = stateModel;
-
-
-            cityModel.ValueChange += cityPickerChanged;
-
-            ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
+            #region iOS 9.0 logic
+            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion) > 9.0)
             {
-                var storyboard = UIStoryboard.FromName("Main", null);
-                var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
-
-                Console.WriteLine(currentSelected.SiteName);
-                searchViewController.Location = currentSelected;
-
-                    System.Threading.Tasks.Task.Run(async () => {
-                        await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
-
-                        if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
-                        {
-                            await AppDelegate.databaseConnection.DeleteOldestCityAsync();
-                        }
-                    });
-
-                this.ShowViewController(searchViewController, this);
-            };
-
-            RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) => {
-                var storyboard = UIStoryboard.FromName("Main", null);
-                var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
-                recentCitiesViewController.FromMenu = false;
-                this.ShowViewController(recentCitiesViewController, this);
-            };
-
-            stateModel.ValueChanged += (object sender, EventArgs e) =>
-            {
-                state = stateModel.SelectedItem;
-                CityPickerView.Select(0,0,false);
-
+                locations = new AvailableLocations();
+                state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
                 currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
-                cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
+
+                cityModel = new LocationPickerModel(locations, state);
                 CityPickerView.Model = cityModel;
-                
+
+                stateModel = new StatePickerModel(locations);
+                StatePickerView.Model = stateModel;
+
                 cityModel.ValueChange += cityPickerChanged;
-            };
+
+                ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
+                    {
+                        var storyboard = UIStoryboard.FromName("Main", null);
+                        var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+
+                        Console.WriteLine(currentSelected.SiteName);
+                        searchViewController.Location = currentSelected;
+
+                        System.Threading.Tasks.Task.Run(async () => {
+                            await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
+
+                            if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
+                            {
+                                await AppDelegate.databaseConnection.DeleteOldestCityAsync();
+                            }
+                        });
+
+                        this.ShowViewController(searchViewController, this);
+                    };
+
+                RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) => {
+                    var storyboard = UIStoryboard.FromName("Main", null);
+                    var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
+                    recentCitiesViewController.FromMenu = false;
+                    this.ShowViewController(recentCitiesViewController, this);
+                };
+
+                stateModel.ValueChanged += (object sender, EventArgs e) =>
+                    {
+                        state = stateModel.SelectedItem;
+                        CityPickerView.Select(0,0,false);
+
+                        currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
+                        cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
+                        CityPickerView.Model = cityModel;
+
+                        cityModel.ValueChange += cityPickerChanged;
+                    };
+            }
+            #endregion
+
         }
 
         void cityPickerChanged (object sender, EventArgs e)
@@ -198,9 +216,10 @@ namespace ethanslist.ios
             }
         }
 
-        void AddLayoutConstraints()
+        void AddiOS9LayoutConstraints()
         {
             this.View.RemoveConstraints(constraints: this.View.Constraints);
+
             StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -247,6 +266,5 @@ namespace ethanslist.ios
             });
             this.View.LayoutIfNeeded();
         }
-
 	}
 }
