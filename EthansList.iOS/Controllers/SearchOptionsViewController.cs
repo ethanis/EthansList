@@ -53,6 +53,8 @@ namespace ethanslist.ios
             SearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
+            SearchButton.SetAttributedTitle(new NSAttributedString(SearchButton.TitleLabel.Text, Constants.ButtonAttributes), UIControlState.Normal);
+
 
             SearchTableView.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
@@ -256,13 +258,13 @@ namespace ethanslist.ios
 
         void AddLayoutConstraints()
         {
-//            scrollView.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
             scrollView.ContentSize = new CoreGraphics.CGSize(this.View.Bounds.Width, this.View.Bounds.Height);
             scrollView.Frame = this.View.Frame;
-            SearchCityLabel.Text = String.Format("Search {0} for:", Location.SiteName);
+
+            SearchCityLabel.AttributedText = new NSAttributedString(String.Format("Search {0} for:", Location.SiteName), Constants.LabelAttributes);
 
             //Seach CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
@@ -276,6 +278,7 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchCityLabel, NSLayoutAttribute.Bottom, 1, 15),
+                NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, Constants.ButtonHeight),
             });
 
             //Seach Table Constraints

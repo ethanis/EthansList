@@ -235,15 +235,12 @@ namespace ethanslist.ios
             CityTableView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            UIStringAttributes txtAttributes = new UIStringAttributes();
-            txtAttributes.Font = UIFont.FromName(Constants.BoldFont, 16f);
-
             UILabel stateHeader = new UILabel();
-            stateHeader.AttributedText = new NSAttributedString("   State", txtAttributes);
+            stateHeader.AttributedText = new NSAttributedString("   State", Constants.HeaderAttributes);
             stateHeader.BackgroundColor = ColorScheme.Silver;
 
             UILabel cityHeader = new UILabel();
-            cityHeader.AttributedText = new NSAttributedString("   City", txtAttributes);
+            cityHeader.AttributedText = new NSAttributedString("   City", Constants.HeaderAttributes);
             cityHeader.BackgroundColor = ColorScheme.Silver;
 
             this.View.AddSubview(cityHeader);
@@ -291,25 +288,22 @@ namespace ethanslist.ios
                 NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
             this.View.AddConstraints(cityConstraints.ToArray());
 
-            UIStringAttributes btnAttributes = new UIStringAttributes();
-            btnAttributes.Font = UIFont.FromName(Constants.LightFont, 18f);
-
-            ProceedButton.TitleLabel.AttributedText = new NSAttributedString(ProceedButton.TitleLabel.Text, btnAttributes);
-            RecentCitiesButton.TitleLabel.AttributedText = new NSAttributedString(RecentCitiesButton.TitleLabel.Text, btnAttributes);
+            ProceedButton.TitleLabel.AttributedText = new NSAttributedString(ProceedButton.TitleLabel.Text, Constants.ButtonAttributes);
+            RecentCitiesButton.TitleLabel.AttributedText = new NSAttributedString(RecentCitiesButton.TitleLabel.Text, Constants.ButtonAttributes);
 
             //Proceed Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -8),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 36),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, Constants.ButtonHeight),
             });
             //Recent Cities Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, -25),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 36),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, Constants.ButtonHeight),
             });
 
             this.View.LayoutIfNeeded();

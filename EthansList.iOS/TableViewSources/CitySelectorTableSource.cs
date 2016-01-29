@@ -12,13 +12,9 @@ namespace ethanslist.ios
         public event EventHandler<EventArgs> ValueChanged;
         protected int SelectedIndex = 0;
         const string stateCell = "stateCell";
-        UIStringAttributes txtAttributes;
 
         public StateTableSource(AvailableLocations locations)
         {
-            txtAttributes = new UIStringAttributes();
-            txtAttributes.Font = UIFont.FromName(Constants.LightFont, 16f);
-
             this.locations = locations;
         }
 
@@ -37,7 +33,7 @@ namespace ethanslist.ios
             if (cell == null) 
                 cell = new UITableViewCell(UITableViewCellStyle.Default, stateCell);
             
-            cell.TextLabel.AttributedText = new NSAttributedString(locations.States.ElementAt(indexPath.Row), txtAttributes);
+            cell.TextLabel.AttributedText = new NSAttributedString(locations.States.ElementAt(indexPath.Row), Constants.CityPickerCellAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
@@ -63,13 +59,9 @@ namespace ethanslist.ios
         public event EventHandler<EventArgs> ValueChange;
         protected int SelectedIndex = 0;
         const string cityCell = "cityCell";
-        UIStringAttributes txtAttributes;
 
         public CityTableSource(AvailableLocations locations, string state)
         {
-            txtAttributes = new UIStringAttributes();
-            txtAttributes.Font = UIFont.FromName(Constants.LightFont, 16f);
-
             this.locations = locations;
             this.state = state;
         }
@@ -89,7 +81,7 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cityCell);
             
-            cell.TextLabel.AttributedText = new NSAttributedString(locations.PotentialLocations.Where(l => l.State == state).ElementAt(indexPath.Row).SiteName, txtAttributes);
+            cell.TextLabel.AttributedText = new NSAttributedString(locations.PotentialLocations.Where(l => l.State == state).ElementAt(indexPath.Row).SiteName, Constants.CityPickerCellAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;

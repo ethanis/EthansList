@@ -41,12 +41,25 @@ namespace ethanslist.ios
             return tableItems[(int)section].Items.Count;
         }
 
-        /// <summary>
-        /// Called by the TableView to retrieve the header text for the particular section(group)
-        /// </summary>
-        public override string TitleForHeader (UITableView tableView, nint section)
+//        /// <summary>
+//        /// Called by the TableView to retrieve the header text for the particular section(group)
+//        /// </summary>
+//        public override string TitleForHeader (UITableView tableView, nint section)
+//        {
+//            return tableItems[(int)section].Name;
+//        }
+//
+        public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
-            return tableItems[(int)section].Name;
+            UILabel headerLbl = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, Constants.ButtonHeight));
+            headerLbl.AttributedText = new NSAttributedString(" " + tableItems[(int)section].Name, Constants.LabelAttributes);
+
+            return headerLbl;
+        }
+
+        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+        {
+            return Constants.ButtonHeight;
         }
 
         /// <summary>
