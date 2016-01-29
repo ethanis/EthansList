@@ -20,7 +20,7 @@ namespace ethanslist.ios
         UITableView StateTableView, CityTableView;
         StateTableSource stateTableSource;
         CityTableSource cityTableSource;
-        private static double MinOSForPicker = 9.0;
+        private static double MinOSForPicker = 10.0;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -45,6 +45,8 @@ namespace ethanslist.ios
             {
                 StateTableView = new UITableView();
                 CityTableView = new UITableView();
+                StateTableView.ShowsVerticalScrollIndicator = false;
+                CityTableView.ShowsVerticalScrollIndicator = false;
                 StateTableView.BackgroundColor = ColorScheme.Clouds;
                 CityTableView.BackgroundColor = ColorScheme.Clouds;
 
@@ -118,26 +120,7 @@ namespace ethanslist.ios
             }
             #endregion
 
-            ProceedButton.TouchUpInside += (object sender, EventArgs e) =>
-                {
-                    var storyboard = UIStoryboard.FromName("Main", null);
-                    var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
-
-                    Console.WriteLine(currentSelected.SiteName);
-                    searchViewController.Location = currentSelected;
-
-                    System.Threading.Tasks.Task.Run(async () =>
-                        {
-                            await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
-
-                            if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
-                            {
-                                await AppDelegate.databaseConnection.DeleteOldestCityAsync();
-                            }
-                        });
-
-                    this.ShowViewController(searchViewController, this);
-                };
+            ProceedButton.TouchUpInside += ProceedToSearch;
 
             RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) =>
                 {
@@ -148,6 +131,27 @@ namespace ethanslist.ios
                 };
         }
 
+        void ProceedToSearch (object sender, EventArgs e)
+        {
+            var storyboard = UIStoryboard.FromName("Main", null);
+            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+
+            Console.WriteLine(currentSelected.SiteName);
+            searchViewController.Location = currentSelected;
+
+            System.Threading.Tasks.Task.Run(async () =>
+                {
+                    await AppDelegate.databaseConnection.AddNewRecentCityAsync(currentSelected.SiteName, currentSelected.Url);
+
+                    if (AppDelegate.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
+                    {
+                        await AppDelegate.databaseConnection.DeleteOldestCityAsync();
+                    }
+                });
+
+            this.ShowViewController(searchViewController, this);
+        }
+
         void StateTable_Changed (object sender, EventArgs e)
         {
             state = stateTableSource.SelectedItem;
@@ -156,7 +160,6 @@ namespace ethanslist.ios
             CityTableView.ReloadData();
             Console.WriteLine (state);
             cityTableSource.ValueChange += CityTable_Changed;
-            stateTableSource.ValueChanged += StateTable_Changed;
         }
 
         void CityTable_Changed (object sender, EventArgs e)
@@ -164,6 +167,7 @@ namespace ethanslist.ios
             currentSelected = cityTableSource.SelectedCity;
             Console.WriteLine(currentSelected.SiteName);
             cityTableSource.ValueChange += CityTable_Changed;
+            ProceedToSearch(sender, e);
         }
 
         void cityPickerChanged (object sender, EventArgs e)
@@ -231,14 +235,44 @@ namespace ethanslist.ios
             CityTableView.TranslatesAutoresizingMaskIntoConstraints = false;
             ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            Console.WriteLine(UIDevice.CurrentDevice.SystemVersion);
+            UIStringAttributes txtAttributes = new UIStringAttributes();
+            txtAttributes.Font = UIFont.FromName(Constants.BoldFont, 16f);
+
+            UILabel stateHeader = new UILabel();
+            stateHeader.AttributedText = new NSAttributedString("   State", txtAttributes);
+            stateHeader.BackgroundColor = ColorScheme.Silver;
+
+            UILabel cityHeader = new UILabel();
+            cityHeader.AttributedText = new NSAttributedString("   City", txtAttributes);
+            cityHeader.BackgroundColor = ColorScheme.Silver;
+
+            this.View.AddSubview(cityHeader);
+            this.View.AddSubview(stateHeader);
+
+            stateHeader.TranslatesAutoresizingMaskIntoConstraints = false;
+            //Recent Cities Button View Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(stateHeader, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(stateHeader, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0),
+                NSLayoutConstraint.Create(stateHeader, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64),
+                NSLayoutConstraint.Create(stateHeader, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 32),
+            });
+
+            cityHeader.TranslatesAutoresizingMaskIntoConstraints = false;
+            //Recent Cities Button View Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(cityHeader, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .50f, 0),
+                NSLayoutConstraint.Create(cityHeader, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0),
+                NSLayoutConstraint.Create(cityHeader, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64),
+                NSLayoutConstraint.Create(cityHeader, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 32),
+            });
 
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
             //State table view constraints
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Left, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
+                NSLayoutRelation.Equal, stateHeader, NSLayoutAttribute.Bottom, 1, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Width, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Bottom,
@@ -252,23 +286,30 @@ namespace ethanslist.ios
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Right, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
+                NSLayoutRelation.Equal, cityHeader, NSLayoutAttribute.Bottom, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Bottom,
                 NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
-
             this.View.AddConstraints(cityConstraints.ToArray());
+
+            UIStringAttributes btnAttributes = new UIStringAttributes();
+            btnAttributes.Font = UIFont.FromName(Constants.LightFont, 18f);
+
+            ProceedButton.TitleLabel.AttributedText = new NSAttributedString(ProceedButton.TitleLabel.Text, btnAttributes);
+            RecentCitiesButton.TitleLabel.AttributedText = new NSAttributedString(RecentCitiesButton.TitleLabel.Text, btnAttributes);
 
             //Proceed Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -5),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -8),
+                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 36),
             });
             //Recent Cities Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, -25),
+                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 36),
             });
 
             this.View.LayoutIfNeeded();

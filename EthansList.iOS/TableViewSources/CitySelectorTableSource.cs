@@ -12,9 +12,13 @@ namespace ethanslist.ios
         public event EventHandler<EventArgs> ValueChanged;
         protected int SelectedIndex = 0;
         const string stateCell = "stateCell";
+        UIStringAttributes txtAttributes;
 
         public StateTableSource(AvailableLocations locations)
         {
+            txtAttributes = new UIStringAttributes();
+            txtAttributes.Font = UIFont.FromName(Constants.LightFont, 16f);
+
             this.locations = locations;
         }
 
@@ -27,28 +31,13 @@ namespace ethanslist.ios
             return locations.States.Count;
         }
 
-        public override UIView GetViewForHeader(UITableView tableView, nint section)
-        {
-            var title = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, 25f));
-            title.Text = "State";
-            title.TextAlignment = UITextAlignment.Center;
-            title.BackgroundColor = ColorScheme.Concrete;
-
-            return title;
-        }
-
-        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
-        {
-            return 25f;
-        }
-
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(stateCell);
             if (cell == null) 
                 cell = new UITableViewCell(UITableViewCellStyle.Default, stateCell);
             
-            cell.TextLabel.Text = locations.States.ElementAt(indexPath.Row);
+            cell.TextLabel.AttributedText = new NSAttributedString(locations.States.ElementAt(indexPath.Row), txtAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
@@ -74,9 +63,13 @@ namespace ethanslist.ios
         public event EventHandler<EventArgs> ValueChange;
         protected int SelectedIndex = 0;
         const string cityCell = "cityCell";
+        UIStringAttributes txtAttributes;
 
         public CityTableSource(AvailableLocations locations, string state)
         {
+            txtAttributes = new UIStringAttributes();
+            txtAttributes.Font = UIFont.FromName(Constants.LightFont, 16f);
+
             this.locations = locations;
             this.state = state;
         }
@@ -96,25 +89,10 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cityCell);
             
-            cell.TextLabel.Text = locations.PotentialLocations.Where(l => l.State == state).ElementAt(indexPath.Row).SiteName;
+            cell.TextLabel.AttributedText = new NSAttributedString(locations.PotentialLocations.Where(l => l.State == state).ElementAt(indexPath.Row).SiteName, txtAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
-        }
-
-        public override UIView GetViewForHeader(UITableView tableView, nint section)
-        {
-            var title = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, 25f));
-            title.Text = "City";
-            title.TextAlignment = UITextAlignment.Center;
-            title.BackgroundColor = ColorScheme.Concrete;
-
-            return title;
-        }
-
-        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
-        {
-            return 25f;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)

@@ -38,6 +38,7 @@ namespace ethanslist.ios
             UINavigationBar.Appearance.TintColor = ColorScheme.Clouds;
             UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes()
                 {
+                    Font = UIFont.FromName(Constants.NormalFont, 16f),
                     ForegroundColor = ColorScheme.Clouds,
                 };
 
