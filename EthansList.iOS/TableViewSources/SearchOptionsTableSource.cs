@@ -12,8 +12,11 @@ namespace ethanslist.ios
         protected string cellIdentifier = "TableCell";
         SearchOptionsViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
-        SearchPickerModel picker_model;
-        UIPickerView picker;
+        private SearchPickerModel picker_model;
+        private UIPickerView picker;
+
+        private SearchTermsCell searchTermsCell { get; set; }
+        private PriceSelectorCell priceCell { get; set; }
 
         protected SearchOptionsTableSource() {}
 
@@ -41,14 +44,6 @@ namespace ethanslist.ios
             return tableItems[(int)section].Items.Count;
         }
 
-//        /// <summary>
-//        /// Called by the TableView to retrieve the header text for the particular section(group)
-//        /// </summary>
-//        public override string TitleForHeader (UITableView tableView, nint section)
-//        {
-//            return tableItems[(int)section].Name;
-//        }
-//
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             UILabel headerLbl = new UILabel(new CoreGraphics.CGRect(0, 0, tableView.Bounds.Width, Constants.ButtonHeight));
@@ -90,9 +85,6 @@ namespace ethanslist.ios
             Console.WriteLine("Accessory for Section, " + indexPath.Section.ToString() + " and Row, " + indexPath.Row.ToString() + " tapped");
         }
         #endregion
-
-        private SearchTermsCell searchTermsCell {get;set;}
-        private PriceSelectorCell priceCell { get; set; }
 
         public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
@@ -146,14 +138,15 @@ namespace ethanslist.ios
                         {
                             var result = e.SelectedValue.ToString();
                             Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
+                            var text = result != "Any" ? "$" + result : result;
                             if (e.FromComponent == 0)
                             {
-                                priceCell.MinPrice.Text = result != "Any" ? "$" + result : result;
+                                priceCell.MinPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
                                 this.owner.MinPrice = result;
                             }
                             else
                             {
-                                priceCell.MaxPrice.Text = result != "Any" ? "$" + result : result;
+                                priceCell.MaxPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
                                 this.owner.MaxPrice = result;
                             }
 
@@ -181,7 +174,7 @@ namespace ethanslist.ios
                     return priceCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
-                    pickerSelectorCell.Title.Text = item.Heading;
+                    pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
 
                     picker_model = new SearchPickerModel(item.PickerOptions, false);
@@ -199,7 +192,7 @@ namespace ethanslist.ios
                                 resultValue = e.SelectedValue.ToString();
 
                             Console.WriteLine(resultKey + " From " + e.FromComponent);
-                            pickerSelectorCell.Display.Text = resultKey;
+                            pickerSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
                             if (item.Heading == "Min Bedrooms")
                                 this.owner.MinBedrooms = resultValue;
                             else if (item.Heading == "Min Bathrooms")

@@ -31,5 +31,12 @@ namespace ethanslist.ios
         {
             return (PickerSelectorCell)Nib.Instantiate(null, null)[0];
         }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+            Display.AttributedText = new NSAttributedString(Display.Text, Constants.LabelAttributes);
+        }
     }
 }

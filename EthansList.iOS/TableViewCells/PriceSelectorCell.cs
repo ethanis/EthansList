@@ -45,7 +45,10 @@ namespace ethanslist.ios
         {
             base.LayoutSubviews();
 
-            this.Heading.Text = LabelText;
+            this.Heading.AttributedText = new NSAttributedString(LabelText, Constants.LabelAttributes);
+            MaxPriceField.AttributedText = new NSAttributedString(MaxPriceField.Text, Constants.LabelAttributes);
+            MinPriceField.AttributedText = new NSAttributedString(MinPriceField.Text, Constants.LabelAttributes);
+            toLabel.AttributedText = new NSAttributedString(toLabel.Text, Constants.LabelAttributes);
 
             MinPriceField.BackgroundColor = UIColor.White;
             MaxPriceField.BackgroundColor = UIColor.White;
