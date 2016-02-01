@@ -14,12 +14,12 @@ namespace ethanslist.ios
 
         public void SetCity(string city)
         {
-            LabelCity.Text = city;
+            LabelCity.AttributedText = new NSAttributedString(city, Constants.HeaderAttributes);
         }
 
         public void SetTerms(string terms)
         {
-            LabelSearchTerms.Text = terms;
+            LabelSearchTerms.AttributedText = new NSAttributedString(terms, Constants.LabelAttributes);
         }
 	}
 }

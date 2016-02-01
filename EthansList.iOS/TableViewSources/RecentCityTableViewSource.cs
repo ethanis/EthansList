@@ -3,6 +3,7 @@ using UIKit;
 using System.Collections.Generic;
 using EthansList.Models;
 using EthansList.Shared;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -29,7 +30,7 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
-            cell.TextLabel.Text = recentCities[indexPath.Row].City;
+            cell.TextLabel.AttributedText = new NSAttributedString(recentCities[indexPath.Row].City, Constants.LabelAttributes);
 
             return cell;
         }

@@ -11,7 +11,6 @@ namespace ethanslist.ios
     {
         UIViewController owner;
         CLFeedClient feedClient;
-//        private readonly String CellId = "postCell";
 
         public FeedResultTableSource(UIViewController owner, CLFeedClient client)
         {
@@ -27,7 +26,6 @@ namespace ethanslist.ios
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = (FeedResultsCell)tableView.DequeueReusableCell(FeedResultsCell.Key);
-
             if (cell == null)
             {
                 cell = FeedResultsCell.Create();
@@ -37,8 +35,9 @@ namespace ethanslist.ios
 
             Posting post = feedClient.postings[indexPath.Row];
 
-            cell.PostingTitle.Text = post.PostTitle;
-            cell.PostingDescription.Text = post.Description;
+            cell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, Constants.HeaderAttributes);
+            cell.PostingDescription.AttributedText = new NSAttributedString(post.Description, Constants.LabelAttributes);
+
             if (post.ImageLink != "-1")
             {
                 cell.PostingImage.SetImage(

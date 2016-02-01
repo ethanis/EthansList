@@ -15,7 +15,7 @@
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="2" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Search rental properties...">
                         <rect key="frame" x="20" y="7" width="280" height="30"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
@@ -35,5 +35,8 @@
         <image name="Icon.png" width="57" height="57"/>
         <image name="Icon-60.png" width="60" height="60"/>
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
+        <image name="save.png" width="50" height="50"/>
+        <image name="menu.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
     </resources>
 </document>

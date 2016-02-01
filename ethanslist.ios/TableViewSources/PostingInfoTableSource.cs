@@ -87,11 +87,8 @@ namespace ethanslist.ios
                     if (titleCell == null)
                     {
                         titleCell = PostingTitleCell.Create();
-                    
-                        UIStringAttributes txtAttributes = new UIStringAttributes();
-                        txtAttributes.Font = UIFont.FromName("San Francisco", 18f);
 
-                        titleCell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, txtAttributes);
+                        titleCell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, Constants.HeaderAttributes);
                         titleCell.PostingTitle.TextAlignment = UITextAlignment.Justified;
 
                         CoreGraphics.CGRect bounds = titleCell.PostingTitle.AttributedText.GetBoundingRect(
@@ -204,10 +201,7 @@ namespace ethanslist.ios
                     {
                         descriptioncell = PostingDescriptionCell.Create();
 
-                        UIStringAttributes desctxtAttributes = new UIStringAttributes();
-                        desctxtAttributes.Font = UIFont.FromName("HelveticaNeue-Light", 18f);
-
-                        descriptioncell.PostingDescription.AttributedText = new NSAttributedString(DescriptionText, desctxtAttributes);
+                        descriptioncell.PostingDescription.AttributedText = new NSAttributedString(DescriptionText, Constants.LabelAttributes);
                         descriptioncell.PostingDescription.TextAlignment = UITextAlignment.Left;
 
                         CoreGraphics.CGRect descbounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
@@ -269,7 +263,8 @@ namespace ethanslist.ios
                     {
                         dateCell = new UITableViewCell(UITableViewCellStyle.Default, null);
                     
-                        dateCell.TextLabel.Text = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
+                        var date = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
+                        dateCell.TextLabel.AttributedText = new NSAttributedString(date, Constants.LabelAttributes);
 
                         dateCell.BackgroundColor = ColorScheme.Clouds;
                         dateCell.SelectionStyle = UITableViewCellSelectionStyle.None;
@@ -280,7 +275,7 @@ namespace ethanslist.ios
                     {
                         linkcell = new UITableViewCell(UITableViewCellStyle.Default, null);
 
-                        linkcell.TextLabel.Text = "Original Posting";
+                        linkcell.TextLabel.AttributedText = new NSAttributedString("Original Posting", Constants.LabelAttributes);
 
                         linkcell.TextLabel.TextColor = UIColor.Blue;
                         linkcell.TextLabel.BackgroundColor = UIColor.Clear;

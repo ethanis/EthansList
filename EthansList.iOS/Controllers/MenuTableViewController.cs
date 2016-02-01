@@ -52,7 +52,7 @@ namespace ethanslist.ios
             {
                 var cell = tableView.DequeueReusableCell (CELL_ID, indexPath);
 
-                cell.TextLabel.Text = data [indexPath.Row];
+                cell.TextLabel.AttributedText = new NSAttributedString(data[indexPath.Row], Constants.LabelAttributes);
 
                 return cell;
             }
