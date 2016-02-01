@@ -44,7 +44,7 @@ namespace EthansList.Shared
 
         public bool GetAllImagesAsync()
         {
-            if (Reachability.Reachability.IsHostReachable("http://www.craigslist.org"))
+            if (Reachability.Reachability.IsNetworkAvailable())
             {
                 GetImages();
                 return true;
