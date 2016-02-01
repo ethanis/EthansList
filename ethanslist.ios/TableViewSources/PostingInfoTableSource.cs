@@ -242,7 +242,7 @@ namespace ethanslist.ios
                                 Title = "Location", 
                                 Coordinate = coords,
                             });
-
+                        mapCell.PostingMap.AccessibilityIdentifier = "PostingMap";
                         MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(10.5), MilesToLongitudeDegrees(10.5, coords.Latitude));
                         mapCell.PostingMap.Region = new MKCoordinateRegion(coords, span);
 

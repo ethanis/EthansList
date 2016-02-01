@@ -22,9 +22,9 @@ namespace ethanslist.UITests
             }
         }
 
-        public CityPickerPage SelectStateAtRow(int row, string state)
+        public CityPickerPage SelectState(string state)
         {
-            app.Query(x => x.Id("statePicker").Invoke("selectRow", row, "inComponent", 0, "animated", false));
+            app.ScrollDownTo(state, "StatePickTableView", timeout: TimeSpan.FromSeconds(20));
             app.Tap(state);
             Thread.Sleep(500);
             app.Screenshot("Selected state: " + state);
@@ -32,9 +32,9 @@ namespace ethanslist.UITests
             return this;
         }
 
-        public CityPickerPage SelectCityAtRow(int row, string city)
+        public CityPickerPage SelectCity(string city)
         {
-            app.Query(x => x.Id("cityPicker").Invoke("selectRow", row, "inComponent", 0, "animated", false));
+            app.ScrollDownTo(city, "CityPickTableView", timeout: TimeSpan.FromSeconds(60));
             app.Tap(city);
             Thread.Sleep(500);
             app.Screenshot("Selected city: " + city);

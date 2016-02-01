@@ -2,6 +2,7 @@
 using Xamarin.UITest;
 using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
 using NUnit.Framework;
+using System.Linq;
 
 namespace ethanslist.UITests
 {
@@ -41,10 +42,24 @@ namespace ethanslist.UITests
             return app.Query(TitleLabel)[0].Label;
         }
 
+        public PostingDetailsPage LookAtPosting()
+        {
+            int count = 0;
+            while (!app.Query("Original Listing").Any() && count < 5)
+            {
+                app.ScrollDown();
+                app.Screenshot("Scrolled down " + count + " times");
+                count++;
+            }
+
+            for (int i = count; i < 5; i++)
+                app.Screenshot("Scrolled down " + count + " times");
+
+            return this;
+        }
+
         public void ExitListing()
         {
-            app.ScrollDown();
-            app.ScrollDown();
             app.Tap(DoneButton);
         }
     }
