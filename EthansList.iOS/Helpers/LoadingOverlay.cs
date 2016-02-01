@@ -1,6 +1,7 @@
 ﻿using System;
 using UIKit;
 using CoreGraphics;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -43,7 +44,7 @@ namespace ethanslist.ios
             ));
             loadingLabel.BackgroundColor = UIColor.Clear;
             loadingLabel.TextColor = UIColor.White;
-            loadingLabel.Text = "Loading Data...";
+            loadingLabel.AttributedText = new NSAttributedString("Loading Data...", Constants.LabelAttributes);
             loadingLabel.TextAlignment = UITextAlignment.Center;
             loadingLabel.AutoresizingMask = UIViewAutoresizing.All;
             AddSubview (loadingLabel);

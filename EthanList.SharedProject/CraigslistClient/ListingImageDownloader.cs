@@ -122,8 +122,8 @@ namespace EthansList.Shared
 
             if (doc.GetElementbyId("postingbody") != null)
             {
-                postingDescription = doc.GetElementbyId("postingbody").InnerText;
                 PostingBodyAdded = true;
+                postingDescription = doc.GetElementbyId("postingbody").InnerText;
             }
 
             if (doc.GetElementbyId("map") != null)

@@ -49,6 +49,8 @@ namespace ethanslist.ios
                 CityTableView.ShowsVerticalScrollIndicator = false;
                 StateTableView.BackgroundColor = ColorScheme.Clouds;
                 CityTableView.BackgroundColor = ColorScheme.Clouds;
+                StateTableView.AccessibilityIdentifier = "StatePickTableView";
+                CityTableView.AccessibilityIdentifier = "CityPickTableView";
 
                 this.View.AddSubviews(new UIView[] {StateTableView, CityTableView });
 
