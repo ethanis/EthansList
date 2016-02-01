@@ -39,7 +39,7 @@ namespace EthansList.Shared
 
         public bool GetAllPostingsAsync()
         {
-            if (Reachability.Reachability.IsHostReachable("http://www.craigslist.org"))
+            if (Reachability.Reachability.InternetConnectionStatus() != Reachability.NetworkStatus.NotReachable)
             {
                 get_craigslist_postings(query);
                 return true;
