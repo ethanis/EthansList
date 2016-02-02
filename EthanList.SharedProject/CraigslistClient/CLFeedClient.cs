@@ -14,7 +14,7 @@ namespace EthansList.Shared
 {
     public class CLFeedClient
     {
-        public List<Posting> postings;
+        public List<Posting> postings { get; private set; }
         private string query;
         private int pageCounter = 25;
         readonly int MaxListings;
@@ -84,13 +84,12 @@ namespace EthansList.Shared
 //                    HtmlNode root = doc.DocumentNode; 
                     XmlDocument xmldocument = new XmlDocument();
                     xmldocument.LoadXml(t.Result);
-
                     var done = ParsePostings(xmldocument);
                     Console.WriteLine (done);
                     timer.Stop();
                     TimeSpan timespan = timer.Elapsed;
                     Console.WriteLine (timespan.ToString());
-                }, TaskScheduler.FromCurrentSynchronizationContext());
+                }, TaskScheduler.FromCurrentSynchronizationContext()).ConfigureAwait(false);
         }
 
         private bool ParsePostings(XmlDocument xmldocument)
@@ -164,6 +163,7 @@ namespace EthansList.Shared
                 if (this.asyncLoadingPartlyComplete != null)
                     this.asyncLoadingPartlyComplete(this, new EventArgs());
                 this.query += String.Format("&s={0}", pageCounter);
+                Console.WriteLine(this.query);
                 get_craigslist_postings(this.query);
                 pageCounter += 25;
             }

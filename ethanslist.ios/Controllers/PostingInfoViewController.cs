@@ -145,15 +145,6 @@ namespace ethanslist.ios
                     Heading = "Posting Description",
                     CellType = "PostingDescription",
                 });
-//            //TODO: Better way of not loading map cell
-//            if (Post.ImageLink != "-1")
-//            {
-//                tableItems.Add(new TableItem()
-//                    {
-//                        Heading = "Posting Map",
-//                        CellType = "PostingMap",
-//                    });
-//            }
             tableItems.Add(new TableItem()
                 {
                     Heading = "Posting Date",
