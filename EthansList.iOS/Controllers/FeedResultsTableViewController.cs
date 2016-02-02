@@ -97,7 +97,6 @@ namespace ethanslist.ios
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
-                    feedClient = null;
                     this._loadingOverlay.Hide();
                     RefreshControl.EndRefreshing();
                     UIAlertView alert = new UIAlertView();

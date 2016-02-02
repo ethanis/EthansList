@@ -76,9 +76,11 @@ namespace EthansList.Shared
 
         private void get_craigslist_postings(string query)
         {
+            Console.WriteLine(query);  
             Stopwatch timer = Stopwatch.StartNew();
             Task.Factory.StartNew<string>(() => DownloadString(query))
-                .ContinueWith(t => {
+                .ContinueWith(t =>
+                {
 //                    string html = t.Result;
 //                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
 //                    doc.LoadHtml(html);
@@ -86,10 +88,10 @@ namespace EthansList.Shared
                     XmlDocument xmldocument = new XmlDocument();
                     xmldocument.LoadXml(t.Result);
                     var done = ParsePostings(xmldocument);
-                    Console.WriteLine (done);
+                    Console.WriteLine(done);
                     timer.Stop();
                     TimeSpan timespan = timer.Elapsed;
-                    Console.WriteLine (timespan.ToString());
+                    Console.WriteLine(timespan.ToString());
                 }, TaskScheduler.FromCurrentSynchronizationContext()).ConfigureAwait(false);
         }
 
@@ -142,8 +144,6 @@ namespace EthansList.Shared
                     posting.ImageLink = imageLink;
                     posting.Date = date;
 
-
-                    //                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                     lock(postings)
                     {
                         if (!postings.Exists(c => c.Link.Equals(posting.Link)))
@@ -172,8 +172,8 @@ namespace EthansList.Shared
             {
                 if (this.asyncLoadingPartlyComplete != null)
                     this.asyncLoadingPartlyComplete(this, new EventArgs());
-                
-                Console.WriteLine(String.Format("{1}&s={0}", pageCounter, this.query));
+
+//                System.Threading.Thread.Sleep(2000);
                 get_craigslist_postings(String.Format("{1}&s={0}", pageCounter, this.query));
                 pageCounter += 25;
             }
