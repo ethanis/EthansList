@@ -97,7 +97,9 @@ namespace ethanslist.ios
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
-                    this._loadingOverlay.Hide();
+                    if (!this._loadingOverlay.AlreadyHidden)
+                        this._loadingOverlay.Hide();
+                    
                     RefreshControl.EndRefreshing();
                     UIAlertView alert = new UIAlertView();
                     alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
@@ -112,11 +114,17 @@ namespace ethanslist.ios
         void feedClient_LoadingComplete(object sender, EventArgs e)
         {
             this.InvokeOnMainThread(() => {
-                this._loadingOverlay.Hide();
+                if (!this._loadingOverlay.AlreadyHidden)
+                {
+                    this._loadingOverlay.Hide();
+                    this._loadingOverlay.AlreadyHidden = true;
+                }
                 TableView.ReloadData();
                 RefreshControl.EndRefreshing();
                 Console.WriteLine (feedClient.postings.Count);
             });
+
+            Console.WriteLine(TableView.NumberOfRowsInSection(0));
         }
 	}
 }

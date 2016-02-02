@@ -9,6 +9,7 @@ namespace ethanslist.ios
         // control declarations
         UIActivityIndicatorView activitySpinner;
         UILabel loadingLabel;
+        public bool AlreadyHidden = false;
 
         public LoadingOverlay (CGRect frame) : base (frame)
         {
