@@ -19,6 +19,7 @@ namespace EthansList.Shared
         private int pageCounter = 25;
         readonly int MaxListings;
         private int? WeeksOld;
+        private int dup = 0;
 
         public EventHandler<EventArgs> asyncLoadingComplete;
         public EventHandler<EventArgs> emptyPostingComplete;
@@ -143,16 +144,25 @@ namespace EthansList.Shared
 
 
                     //                    if (!postings.Exists(c => c.Link.Equals(posting.Link)))
+                    lock(postings)
                     {
-                        if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
+                        if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                         {
-                            postings.Add(posting);
-                            incremented = true;
+                            if (WeeksOld != null && DateTime.Compare(date, DateTime.Today.AddDays(Convert.ToDouble(-7 * WeeksOld))) != -1)
+                            {
+                                postings.Add(posting);
+                                incremented = true;
+                            }
+                            else if (WeeksOld == null)
+                            {
+                                postings.Add(posting);
+                                incremented = true;
+                            }
                         }
-                        else if (WeeksOld == null)
+                        else
                         {
-                            postings.Add(posting);
-                            incremented = true;
+                            Console.WriteLine("duplicate# " + dup);
+                            dup++;
                         }
                     }
                 }
@@ -162,9 +172,9 @@ namespace EthansList.Shared
             {
                 if (this.asyncLoadingPartlyComplete != null)
                     this.asyncLoadingPartlyComplete(this, new EventArgs());
-                this.query += String.Format("&s={0}", pageCounter);
-                Console.WriteLine(this.query);
-                get_craigslist_postings(this.query);
+                
+                Console.WriteLine(String.Format("{1}&s={0}", pageCounter, this.query));
+                get_craigslist_postings(String.Format("{1}&s={0}", pageCounter, this.query));
                 pageCounter += 25;
             }
             else
