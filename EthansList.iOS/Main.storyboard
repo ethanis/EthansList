@@ -61,14 +61,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="518">
-                                <rect key="frame" x="15" y="457" width="200" height="30"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                <state key="normal" title="Proceed to Search"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="proceedButton"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2367">
                                 <rect key="frame" x="20" y="495" width="280" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
@@ -79,7 +71,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select City" id="593"/>
                     <connections>
-                        <outlet property="ProceedButton" destination="518" id="name-outlet-518"/>
                         <outlet property="RecentCitiesButton" destination="2367" id="name-outlet-2367"/>
                     </connections>
                 </viewController>

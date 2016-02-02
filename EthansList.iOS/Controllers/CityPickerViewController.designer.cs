@@ -16,18 +16,10 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton ProceedButton { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton RecentCitiesButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (ProceedButton != null) {
-				ProceedButton.Dispose ();
-				ProceedButton = null;
-			}
 			if (RecentCitiesButton != null) {
 				RecentCitiesButton.Dispose ();
 				RecentCitiesButton = null;

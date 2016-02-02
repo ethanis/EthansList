@@ -13,14 +13,10 @@ namespace ethanslist.ios
 	{
         AvailableLocations locations;
         public String state {get;set;}
-        StatePickerModel stateModel;
-        LocationPickerModel cityModel;
         Location currentSelected;
-        UIPickerView StatePickerView, CityPickerView;
         UITableView StateTableView, CityTableView;
         StateTableSource stateTableSource;
         CityTableSource cityTableSource;
-        private static double MinOSForPicker = 10.0;
 
 		public CityPickerViewController (IntPtr handle) : base (handle)
 		{
@@ -30,32 +26,20 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            FormatButton(ProceedButton, ColorScheme.MidnightBlue);
-            FormatButton(RecentCitiesButton, ColorScheme.Concrete);
+            FormatButton(RecentCitiesButton, ColorScheme.WetAsphalt);
 
-            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion.Substring(0,1)) >= MinOSForPicker)
-            {
-                StatePickerView = new UIPickerView();
-                CityPickerView = new UIPickerView();
-                this.View.AddSubviews(new UIView[] { StatePickerView, CityPickerView });
+            StateTableView = new UITableView();
+            CityTableView = new UITableView();
+            StateTableView.ShowsVerticalScrollIndicator = false;
+            CityTableView.ShowsVerticalScrollIndicator = false;
+            StateTableView.BackgroundColor = ColorScheme.Clouds;
+            CityTableView.BackgroundColor = ColorScheme.Clouds;
+            StateTableView.AccessibilityIdentifier = "StatePickTableView";
+            CityTableView.AccessibilityIdentifier = "CityPickTableView";
 
-                AddiOS9LayoutConstraints();
-            }
-            else
-            {
-                StateTableView = new UITableView();
-                CityTableView = new UITableView();
-                StateTableView.ShowsVerticalScrollIndicator = false;
-                CityTableView.ShowsVerticalScrollIndicator = false;
-                StateTableView.BackgroundColor = ColorScheme.Clouds;
-                CityTableView.BackgroundColor = ColorScheme.Clouds;
-                StateTableView.AccessibilityIdentifier = "StatePickTableView";
-                CityTableView.AccessibilityIdentifier = "CityPickTableView";
+            this.View.AddSubviews(new UIView[] {StateTableView, CityTableView });
 
-                this.View.AddSubviews(new UIView[] {StateTableView, CityTableView });
-
-                AddiOS8LayoutConstraints();
-            }
+            AddLayoutConstraints();
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
@@ -78,51 +62,18 @@ namespace ethanslist.ios
             
             locations = new AvailableLocations();
 
-            #region iOS 9.0 logic
-            Console.WriteLine (UIDevice.CurrentDevice.SystemVersion.Substring(0,1));
-            if (Convert.ToDouble(UIDevice.CurrentDevice.SystemVersion.Substring(0,1)) >= MinOSForPicker)
-            {
-                state = locations.States.ElementAt((int)StatePickerView.SelectedRowInComponent(0));
-                currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
+            state = locations.States.ElementAt(0);
+            currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
 
-                cityModel = new LocationPickerModel(locations, state);
-                CityPickerView.Model = cityModel;
+            stateTableSource = new StateTableSource(locations);
+            cityTableSource = new CityTableSource(locations, locations.States.ElementAt(0));
+            StateTableView.Source = stateTableSource;
+            CityTableView.Source = cityTableSource;
 
-                stateModel = new StatePickerModel(locations);
-                StatePickerView.Model = stateModel;
+            StateTableView.SelectRow(NSIndexPath.FromRowSection(0,0),false,UITableViewScrollPosition.None);
 
-                cityModel.ValueChange += cityPickerChanged;
-
-                stateModel.ValueChanged += (object sender, EventArgs e) =>
-                {
-                    state = stateModel.SelectedItem;
-                    CityPickerView.Select(0, 0, false);
-
-                    currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
-                    cityModel = new LocationPickerModel(locations, stateModel.SelectedItem);
-                    CityPickerView.Model = cityModel;
-
-                    cityModel.ValueChange += cityPickerChanged;
-                };
-            }
-            #endregion
-            #region iOS8_And_Lower
-            else
-            {
-                state = locations.States.ElementAt(0);
-                currentSelected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(0);
-
-                stateTableSource = new StateTableSource(locations);
-                cityTableSource = new CityTableSource(locations, locations.States.ElementAt(0));
-                StateTableView.Source = stateTableSource;
-                CityTableView.Source = cityTableSource;
-
-                stateTableSource.ValueChanged += StateTable_Changed;
-                cityTableSource.ValueChange += CityTable_Changed;
-            }
-            #endregion
-
-            ProceedButton.TouchUpInside += ProceedToSearch;
+            stateTableSource.ValueChanged += StateTable_Changed;
+            cityTableSource.ValueChange += CityTable_Changed;
 
             RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) =>
                 {
@@ -172,70 +123,12 @@ namespace ethanslist.ios
             ProceedToSearch(sender, e);
         }
 
-        void cityPickerChanged (object sender, EventArgs e)
-        {
-            currentSelected = cityModel.SelectedCity;
-        }
-
-        void AddiOS9LayoutConstraints()
-        {
-            this.View.RemoveConstraints(constraints: this.View.Constraints);
-
-            StatePickerView.TranslatesAutoresizingMaskIntoConstraints = false;
-            CityPickerView.TranslatesAutoresizingMaskIntoConstraints = false;
-            ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
-
-            Console.WriteLine(UIDevice.CurrentDevice.SystemVersion);
-
-            List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
-            //State picker view constraints
-            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Left, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 44));
-            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Width, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StatePickerView, NSLayoutAttribute.Bottom,
-                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -40));
-            this.View.AddConstraints(stateConstraints.ToArray());
-
-            List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
-            //City picker view constraints
-            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Left, 
-                NSLayoutRelation.Equal, StatePickerView, NSLayoutAttribute.Right, 1, 0));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Right, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Top, 
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 44));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityPickerView, NSLayoutAttribute.Bottom,
-                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -40));
-            
-            this.View.AddConstraints(cityConstraints.ToArray());
-
-            //Proceed Button View Constraints
-            this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -5),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 30),
-            });
-            //Recent Cities Button View Constraints
-            this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, -25),
-                NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 30),
-            });
-            this.View.LayoutIfNeeded();
-        }
-
-        void AddiOS8LayoutConstraints()
+        void AddLayoutConstraints()
         {
             this.View.RemoveConstraints(constraints: this.View.Constraints);
 
             StateTableView.TranslatesAutoresizingMaskIntoConstraints = false;
             CityTableView.TranslatesAutoresizingMaskIntoConstraints = false;
-            ProceedButton.TranslatesAutoresizingMaskIntoConstraints = false;
 
             UILabel stateHeader = new UILabel();
             stateHeader.AttributedText = new NSAttributedString("   State", Constants.HeaderAttributes);
@@ -275,7 +168,7 @@ namespace ethanslist.ios
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Width, 
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Bottom,
-                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
+                NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -20));
             this.View.AddConstraints(stateConstraints.ToArray());
 
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
@@ -287,19 +180,11 @@ namespace ethanslist.ios
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Top, 
                 NSLayoutRelation.Equal, cityHeader, NSLayoutAttribute.Bottom, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Bottom,
-                NSLayoutRelation.Equal, ProceedButton, NSLayoutAttribute.Top, 1, -20));
+                NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -20));
             this.View.AddConstraints(cityConstraints.ToArray());
 
-            ProceedButton.TitleLabel.AttributedText = new NSAttributedString(ProceedButton.TitleLabel.Text, Constants.ButtonAttributes);
             RecentCitiesButton.TitleLabel.AttributedText = new NSAttributedString(RecentCitiesButton.TitleLabel.Text, Constants.ButtonAttributes);
 
-            //Proceed Button View Constraints
-            this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -8),
-                NSLayoutConstraint.Create(ProceedButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, Constants.ButtonHeight),
-            });
             //Recent Cities Button View Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(RecentCitiesButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, .90f, 0),
