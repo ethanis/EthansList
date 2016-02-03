@@ -19,9 +19,9 @@ namespace ethanslist.ios
         readonly Posting post;
         bool result;
         ListingImageDownloader imageHelper;
-        private ImageCollectionViewSource collectionSource {get;set;}
         protected SmallLoadingOverlay _loadingOverlay = null;
 
+        private ImageCollectionViewSource collectionSource {get;set;}
         private PostingTitleCell titleCell { get; set; }
         private PostingImageCell imageCell { get; set; }
         private PostingImageCollectionCell collectionCell { get; set; }
