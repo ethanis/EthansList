@@ -15,7 +15,7 @@ namespace ethanslist.ios
 
 
         public CategoryPickerViewController()
-            : base("CategoryPickerViewController", null)
+            : base()
         {
         }
 
@@ -24,7 +24,9 @@ namespace ethanslist.ios
             base.LoadView();
 
             this.View.BackgroundColor = ColorScheme.Clouds;
+
             categoryTableView = new UITableView(this.View.Bounds, UITableViewStyle.Plain);
+            categoryTableView.BackgroundColor = ColorScheme.Clouds;
             this.View.AddSubview(categoryTableView);
 
             categoryTableView.TranslatesAutoresizingMaskIntoConstraints = false;
