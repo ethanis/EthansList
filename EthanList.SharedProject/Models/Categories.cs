@@ -14,7 +14,7 @@ namespace EthansList.Shared
     {
         public List<KeyValuePair<string,string>> categories = new List<KeyValuePair<string,string>>()
         {
-            { new KeyValuePair<string, string>("sss", "all for sale / wanted" ) },
+            { new KeyValuePair<string, string>("sss", "all for sale / wanted" )},
             { new KeyValuePair<string, string>("ata", "antiques"              )},
             { new KeyValuePair<string, string>("apa", "apartments/housing rentals")},
             { new KeyValuePair<string, string>("ppa", "appliances"            )},

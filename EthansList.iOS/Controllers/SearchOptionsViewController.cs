@@ -184,56 +184,70 @@ namespace ethanslist.ios
                     },
             });
 
+
             TableItemGroup options = new TableItemGroup()
                 { 
                     Name = "Options",
                 };
-            options.Items.Add(new TableItem() {
-                Heading = "Min Bedrooms",
-                CellType = "PickerSelectorCell",
-                PickerOptions = new List<PickerOptions> ()
+            
+            if (Category.Key == "apa")
+            {
+                options.Items.Add(new TableItem()
                     {
-                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
-                            {
-                                {0, new KeyValuePair<object, object>("Any", null)},
-                                {1, new KeyValuePair<object, object>("1+","1")},
-                                {2, new KeyValuePair<object, object>("2+","2")},
-                                {3, new KeyValuePair<object, object>("3+","3")},
-                                {4, new KeyValuePair<object, object>("4+","4")},
-                            }}
-                    },
-            });
-            options.Items.Add(new TableItem() {
-                Heading = "Min Bathrooms",
-                CellType = "PickerSelectorCell",
-                PickerOptions = new List<PickerOptions> ()
+                        Heading = "Min Bedrooms",
+                        CellType = "PickerSelectorCell",
+                        PickerOptions = new List<PickerOptions>()
+                        {
+                            new PickerOptions()
+                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                                {
+                                    { 0, new KeyValuePair<object, object>("Any", null) },
+                                    { 1, new KeyValuePair<object, object>("1+", "1") },
+                                    { 2, new KeyValuePair<object, object>("2+", "2") },
+                                    { 3, new KeyValuePair<object, object>("3+", "3") },
+                                    { 4, new KeyValuePair<object, object>("4+", "4") },
+                                }
+                            }
+                        },
+                    });
+                options.Items.Add(new TableItem()
                     {
-                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
-                            {
-                                {0, new KeyValuePair<object, object>("Any", null)},
-                                {1, new KeyValuePair<object, object>("1+","1")},
-                                {2, new KeyValuePair<object, object>("2+","2")},
-                                {3, new KeyValuePair<object, object>("3+","3")},
-                                {4, new KeyValuePair<object, object>("4+","4")},
-                            }}
-                    },
-            });
-            options.Items.Add(new TableItem() {
-                Heading = "Posted Date",
-                CellType = "PickerSelectorCell",
-                PickerOptions = new List<PickerOptions> ()
+                        Heading = "Min Bathrooms",
+                        CellType = "PickerSelectorCell",
+                        PickerOptions = new List<PickerOptions>()
+                        {
+                            new PickerOptions()
+                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                                {
+                                    { 0, new KeyValuePair<object, object>("Any", null) },
+                                    { 1, new KeyValuePair<object, object>("1+", "1") },
+                                    { 2, new KeyValuePair<object, object>("2+", "2") },
+                                    { 3, new KeyValuePair<object, object>("3+", "3") },
+                                    { 4, new KeyValuePair<object, object>("4+", "4") },
+                                }
+                            }
+                        },
+                    });
+                options.Items.Add(new TableItem()
                     {
-                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
-                            {
-                                {0, new KeyValuePair<object, object>("Any", null)},
-                                {1, new KeyValuePair<object, object>("Today","-1")},
-                                {2, new KeyValuePair<object, object>("1 Week Old","1")},
-                                {3, new KeyValuePair<object, object>("2 Weeks Old","2")},
-                                {4, new KeyValuePair<object, object>("3 Weeks Old","3")},
-                                {5, new KeyValuePair<object, object>("4 Weeks Old","4")},
-                            }}
-                    },
-            });
+                        Heading = "Posted Date",
+                        CellType = "PickerSelectorCell",
+                        PickerOptions = new List<PickerOptions>()
+                        {
+                            new PickerOptions()
+                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                                {
+                                    { 0, new KeyValuePair<object, object>("Any", null) },
+                                    { 1, new KeyValuePair<object, object>("Today", "-1") },
+                                    { 2, new KeyValuePair<object, object>("1 Week Old", "1") },
+                                    { 3, new KeyValuePair<object, object>("2 Weeks Old", "2") },
+                                    { 4, new KeyValuePair<object, object>("3 Weeks Old", "3") },
+                                    { 5, new KeyValuePair<object, object>("4 Weeks Old", "4") },
+                                }
+                            }
+                        },
+                    });
+            }
             options.Items.Add(new TableItem() {
                 Heading = "Max Listings",
                 CellType = "PickerSelectorCell",
