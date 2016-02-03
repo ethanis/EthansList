@@ -86,11 +86,14 @@ namespace ethanslist.ios
 
         void ProceedToSearch (object sender, EventArgs e)
         {
-            var storyboard = UIStoryboard.FromName("Main", null);
-            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+//            var storyboard = UIStoryboard.FromName("Main", null);
+//            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+//
+//            Console.WriteLine(currentSelected.SiteName);
+//            searchViewController.Location = currentSelected;
 
-            Console.WriteLine(currentSelected.SiteName);
-            searchViewController.Location = currentSelected;
+            var categoryVC = new CategoryPickerViewController();
+            categoryVC.SelectedCity = currentSelected;
 
             System.Threading.Tasks.Task.Run(async () =>
                 {
@@ -102,7 +105,8 @@ namespace ethanslist.ios
                     }
                 });
 
-            this.ShowViewController(searchViewController, this);
+            this.ShowViewController(categoryVC, this);
+//            this.ShowViewController(searchViewController, this);
         }
 
         void StateTable_Changed (object sender, EventArgs e)
