@@ -49,6 +49,7 @@
     <Compile Include="Pages\MenuPage.cs" />
     <Compile Include="Pages\SavedPostingsPage.cs" />
     <Compile Include="Pages\SavedSearchPage.cs" />
+    <Compile Include="Pages\CategoryPickerPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -24,9 +24,11 @@ namespace ethanslist.ios
             base.LoadView();
 
             this.View.BackgroundColor = ColorScheme.Clouds;
+            this.Title = "Category";
 
             categoryTableView = new UITableView(this.View.Bounds, UITableViewStyle.Plain);
             categoryTableView.BackgroundColor = ColorScheme.Clouds;
+            categoryTableView.AccessibilityIdentifier = "CategoryPickerTable";
             this.View.AddSubview(categoryTableView);
 
             categoryTableView.TranslatesAutoresizingMaskIntoConstraints = false;

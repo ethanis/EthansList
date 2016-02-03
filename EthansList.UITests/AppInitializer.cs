@@ -32,7 +32,6 @@ namespace ethanslist.UITests
             {
                 app = ConfigureApp
     				.iOS
-                    .InstalledApp("com.xamarin.ethanslist")
     				.StartApp();
             }
 

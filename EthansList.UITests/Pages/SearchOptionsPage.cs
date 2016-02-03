@@ -19,7 +19,7 @@ namespace ethanslist.UITests
             if (OniOS)
             {
                 SaveButton = "save.png";
-                SearchTermsField = x => x.Marked("Search rental properties...");
+                SearchTermsField = x => x.Id("SearchTermsField");
                 MaxPriceField = x => x.Text("Price").Sibling().Class("UITextField");
                 MinBedroomsField = x => x.Text("Min Bedrooms").Sibling().Marked("PickerTextField");
                 MinBathroomsField = x => x.Text("Min Bathrooms").Sibling().Marked("PickerTextField");
