@@ -123,7 +123,6 @@ namespace ethanslist.ios
         {
             currentSelected = cityTableSource.SelectedCity;
             Console.WriteLine(currentSelected.SiteName);
-            cityTableSource.ValueChange += CityTable_Changed;
             ProceedToSearch(sender, e);
         }
 

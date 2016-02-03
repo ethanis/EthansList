@@ -3,6 +3,7 @@
 using UIKit;
 using System.Collections.Generic;
 using EthansList.Shared;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -22,9 +23,17 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            categoryTableView = new UITableView(this.View.Frame, UITableViewStyle.Plain);
-
+            this.View.BackgroundColor = ColorScheme.Clouds;
+            categoryTableView = new UITableView(this.View.Bounds, UITableViewStyle.Plain);
             this.View.AddSubview(categoryTableView);
+
+            categoryTableView.TranslatesAutoresizingMaskIntoConstraints = false;
+            this.View.AddConstraints(new NSLayoutConstraint[]{
+                NSLayoutConstraint.Create(categoryTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0),
+                NSLayoutConstraint.Create(categoryTableView, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0),
+                NSLayoutConstraint.Create(categoryTableView, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0),
+                NSLayoutConstraint.Create(categoryTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Bottom, 1, 0),
+            });
         }
 
         public override void ViewDidLoad()
@@ -45,10 +54,10 @@ namespace ethanslist.ios
     public class CategoryTableViewSource : UITableViewSource
     {
         CategoryPickerViewController owner;
-        Dictionary<int, KeyValuePair<string, string>> categories;
+        List<KeyValuePair<string, string>> categories;
         const string cellID = "cellID";
 
-        public CategoryTableViewSource(CategoryPickerViewController owner, Dictionary<int, KeyValuePair<string, string>> categories)
+        public CategoryTableViewSource(CategoryPickerViewController owner, List<KeyValuePair<string, string>> categories)
         {
             this.owner = owner;
             this.categories = categories;
@@ -65,7 +74,8 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
-            cell.TextLabel.Text = categories[indexPath.Row].Value;
+            cell.TextLabel.AttributedText = new NSAttributedString(categories[indexPath.Row].Value, Constants.CityPickerCellAttributes);
+            cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
         }
@@ -78,9 +88,14 @@ namespace ethanslist.ios
             var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
 
             searchViewController.Location = owner.SelectedCity;
-            searchViewController.Category = categories[indexPath.Row].Key;
+            searchViewController.Category = categories[indexPath.Row];
 
             this.owner.ShowViewController(searchViewController, this.owner);
+        }
+
+        public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            return Constants.CityPickerRowHeight;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ethanslist.ios
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
         public Location Location { get; set; }
-        public string Category {get;set;}
+        public KeyValuePair<string, string> Category {get;set;}
         public UIView FieldSelected { get; set; }
         public CGRect KeyboardBounds { get; set; }
 
@@ -55,7 +55,6 @@ namespace ethanslist.ios
             SearchButton.ClipsToBounds = true;
             SearchButton.SetAttributedTitle(new NSAttributedString(SearchButton.TitleLabel.Text, Constants.ButtonAttributes), UIControlState.Normal);
 
-
             SearchTableView.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
         }
 
@@ -71,10 +70,10 @@ namespace ethanslist.ios
 
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
+
             // Keyboard popup
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.DidShowNotification,KeyBoardUpNotification);
-
             // Keyboard Down
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.WillHideNotification,KeyBoardDownNotification);
@@ -112,7 +111,7 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var query = queryHelper.Generate(Location.Url, Category, new Dictionary<string, string>()
+                var query = queryHelper.Generate(Location.Url, Category.Key, new Dictionary<string, string>()
                     {
                         {"min_price", MinPrice},
                         {"max_price", MaxPrice},

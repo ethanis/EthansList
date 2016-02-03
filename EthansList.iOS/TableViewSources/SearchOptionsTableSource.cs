@@ -110,6 +110,9 @@ namespace ethanslist.ios
                     if (searchTermsCell == null)
                     {
                         searchTermsCell = SearchTermsCell.Create();
+
+                        searchTermsCell.TermsField.Placeholder = "Search: " + this.owner.Category.Value;
+
                         searchTermsCell.TermsField.EditingChanged += delegate
                         {
                                 this.owner.SearchTerms = searchTermsCell.TermsField.Text;
