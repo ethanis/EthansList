@@ -37,6 +37,7 @@ namespace ethanslist.UITests
 
         public void ProceedToSearch()
         {
+            app.ScrollUpTo(SearchButton);
             app.Tap(SearchButton);
             app.Screenshot("Tapped Search Button");
         }
@@ -62,6 +63,7 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage SelectMinMaxPrice(int min, int max)
         {
+            app.ScrollDownTo(MaxPriceField);
             app.Tap(MaxPriceField);
             app.Screenshot("Max and min price entered");
             app.Tap(DoneButton);
@@ -71,6 +73,7 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage SelectMinBedrooms(int i)
         {
+            app.ScrollDownTo(MinBedroomsField);
             app.Tap(MinBedroomsField);
             app.Tap(i + "+");
             app.Screenshot("Min bedrooms selected");
@@ -81,6 +84,7 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage SelectMinBathrooms(int i)
         {
+            app.ScrollDownTo(MinBathroomsField);
             app.Tap(MinBathroomsField);
             app.Tap(i + "+");
             app.Screenshot("Min bathrooms selected");
@@ -91,6 +95,7 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage SelectPostedDate(string i)
         {
+            app.ScrollDownTo(PostedDateField);
             app.Tap(PostedDateField);
             app.Tap(i);
             app.Screenshot("Posted date selected");
@@ -101,6 +106,7 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage SelectMaxListings(int i)
         {
+            app.ScrollDownTo(MaxListingsField);
             app.Tap(MaxListingsField);
             app.Tap(string.Format("{0}",i));
             app.Screenshot("Max listings selected");
