@@ -62,7 +62,8 @@ namespace ethanslist.ios
             }
 
             tableSource.DescriptionLoaded += (object sender, DescriptionLoadedEventArgs e) => {
-                PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
+//                PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
+                PostingInfoTableView.ReloadData();
             };
 
             imageHelper.loadingComplete += ImageHelper_loadingComplete;
