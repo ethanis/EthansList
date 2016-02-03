@@ -75,7 +75,8 @@ namespace ethanslist.ios
             searchTerms["query"] = search.SearchQuery;
             QueryGeneration helper = new QueryGeneration();
 
-            feedResultsVC.Query = helper.Generate(search.LinkUrl, searchTerms);
+            //TODO: Update to Correct Category!!
+            feedResultsVC.Query = helper.Generate(search.LinkUrl, "apa", searchTerms);
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;
 

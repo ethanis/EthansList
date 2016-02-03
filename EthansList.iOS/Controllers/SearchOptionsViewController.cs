@@ -35,7 +35,7 @@ namespace ethanslist.ios
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
         public Location Location { get; set; }
-
+        public string Category {get;set;}
         public UIView FieldSelected { get; set; }
         public CGRect KeyboardBounds { get; set; }
 
@@ -112,7 +112,7 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var query = queryHelper.Generate(Location.Url, new Dictionary<string, string>()
+                var query = queryHelper.Generate(Location.Url, Category, new Dictionary<string, string>()
                     {
                         {"min_price", MinPrice},
                         {"max_price", MaxPrice},

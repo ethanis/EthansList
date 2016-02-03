@@ -78,6 +78,8 @@ namespace ethanslist.ios
             var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
 
             searchViewController.Location = owner.SelectedCity;
+            searchViewController.Category = categories[indexPath.Row].Key;
+
             this.owner.ShowViewController(searchViewController, this.owner);
         }
     }

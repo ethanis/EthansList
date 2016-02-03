@@ -5,9 +5,9 @@ namespace EthansList.Shared
 {
     public class QueryGeneration
     {
-        public string Generate(string url, Dictionary<string, string> searchTerms)
+        public string Generate(string url, string cat, Dictionary<string, string> searchTerms)
         {
-            string result = url + "/search/apa?format=rss";
+            string result = url + "/search/" + cat + "?format=rss";
             foreach (KeyValuePair<string, string> kvp in searchTerms)
             {
                 if (kvp.Value != null)
