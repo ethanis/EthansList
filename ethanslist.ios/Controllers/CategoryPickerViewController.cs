@@ -44,7 +44,7 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            categoryTableSource = new CategoryTableViewSource(this, Categories.all);
+            categoryTableSource = new CategoryTableViewSource(this, Categories.Groups);
             categoryTableView.Source = categoryTableSource;
         }
 
@@ -58,18 +58,38 @@ namespace ethanslist.ios
     public class CategoryTableViewSource : UITableViewSource
     {
         CategoryPickerViewController owner;
-        List<KeyValuePair<string, string>> categories;
+        List<CatTableGroup> categories;
         const string cellID = "cellID";
 
-        public CategoryTableViewSource(CategoryPickerViewController owner, List<KeyValuePair<string, string>> categories)
+        public CategoryTableViewSource(CategoryPickerViewController owner, List<CatTableGroup> categories)
         {
             this.owner = owner;
             this.categories = categories;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section)
+        public override nint NumberOfSections(UITableView tableView)
         {
             return categories.Count;
+        }
+
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return categories[(int)section].Items.Count;
+        }
+
+        public override UIView GetViewForHeader(UITableView tableView, nint section)
+        {
+            var label = new UILabel(new CoreGraphics.CGRect(0,0,tableView.Bounds.Width, 32));
+            label.AttributedText = new NSAttributedString(categories[(int)section].Name, Constants.HeaderAttributes);
+
+            label.BackgroundColor = ColorScheme.Silver;
+
+            return label;
+        }
+
+        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+        {
+            return 32;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -78,7 +98,7 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
-            cell.TextLabel.AttributedText = new NSAttributedString(categories[indexPath.Row].Value, Constants.CityPickerCellAttributes);
+            cell.TextLabel.AttributedText = new NSAttributedString(categories[indexPath.Section].Items[indexPath.Row].Value, Constants.CityPickerCellAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;
@@ -86,13 +106,13 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            Console.WriteLine(categories[indexPath.Row].Key);
+            Console.WriteLine(categories[indexPath.Section].Items[indexPath.Row].Key);
 
             var storyboard = UIStoryboard.FromName("Main", null);
             var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
 
             searchViewController.Location = owner.SelectedCity;
-            searchViewController.Category = categories[indexPath.Row];
+            searchViewController.Category = categories[indexPath.Section].Items[indexPath.Row];
 
             this.owner.ShowViewController(searchViewController, this.owner);
         }

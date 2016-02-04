@@ -190,7 +190,7 @@ namespace ethanslist.ios
                     Name = "Options",
                 };
             
-            if (Category.Key == "apa")
+            if (Categories.Housing.Contains(Category.Key))
             {
                 options.Items.Add(new TableItem()
                     {
