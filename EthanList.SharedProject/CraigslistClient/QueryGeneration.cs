@@ -7,7 +7,7 @@ namespace EthansList.Shared
     {
         public string Generate(string url, string cat, Dictionary<string, string> searchTerms)
         {
-            string result = url + "/search/" + cat + "?format=rss";
+            string result = String.Format("{0}{1}?format=rss", url, cat);
             foreach (KeyValuePair<string, string> kvp in searchTerms)
             {
                 if (kvp.Value != null)
