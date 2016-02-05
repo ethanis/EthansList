@@ -235,6 +235,7 @@
     </Compile>
     <Compile Include="TableViewSources\CitySelectorTableSource.cs" />
     <Compile Include="Controllers\CategoryPickerViewController.cs" />
+    <Compile Include="Controllers\FavoriteCategoryViewController.cs" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

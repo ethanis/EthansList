@@ -11,6 +11,7 @@ namespace ethanslist.ios
     {
         UITableView categoryTableView;
         CategoryTableViewSource categoryTableSource;
+        UIBarButtonItem Favorites;
         public Location SelectedCity { get; set;}
 
 
@@ -46,6 +47,14 @@ namespace ethanslist.ios
 
             categoryTableSource = new CategoryTableViewSource(this, Categories.Groups);
             categoryTableView.Source = categoryTableSource;
+
+            Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
+                {
+                    var favoritesVC = new FavoriteCategoryViewController();
+                    this.PresentModalViewController(favoritesVC, true);
+                });
+            
+            NavigationItem.RightBarButtonItem = Favorites;
         }
 
         public override void DidReceiveMemoryWarning()
