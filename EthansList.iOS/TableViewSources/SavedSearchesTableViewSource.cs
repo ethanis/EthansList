@@ -34,9 +34,8 @@ namespace ethanslist.ios
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
-            cell.SetCity(savedSearches[indexPath.Row].CityName);
+            cell.SetCity(savedSearches[indexPath.Row].CityName, savedSearches[indexPath.Row].CategoryValue);
             cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
-            cell.SetCategory(savedSearches[indexPath.Row].CategoryValue);
 
             return cell;
         }
@@ -76,7 +75,6 @@ namespace ethanslist.ios
             searchTerms["query"] = search.SearchQuery;
             QueryGeneration helper = new QueryGeneration();
 
-            //TODO: Update to Correct Category!!
             feedResultsVC.Query = helper.Generate(search.LinkUrl, search.CategoryKey, searchTerms);
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;

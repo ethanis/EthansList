@@ -12,19 +12,14 @@ namespace ethanslist.ios
             this.BackgroundColor = ColorScheme.Clouds;
 		}
 
-        public void SetCity(string city)
+        public void SetCity(string city, string cat)
         {
-            LabelCity.AttributedText = new NSAttributedString(city, Constants.HeaderAttributes);
+            LabelCity.AttributedText = new NSAttributedString(city + ": " + cat, Constants.HeaderAttributes);
         }
 
         public void SetTerms(string terms)
         {
-            LabelSearchTerms.AttributedText = new NSAttributedString(terms, Constants.LabelAttributes);
-        }
-
-        public void SetCategory(string cat)
-        {
-            CategoryLabel.AttributedText = new NSAttributedString(cat, Constants.LabelAttributes);
+            LabelSearchTerms.AttributedText = new NSAttributedString(terms, Constants.CityPickerCellAttributes);
         }
 	}
 }
