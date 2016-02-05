@@ -37,13 +37,11 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            var storyboard = UIStoryboard.FromName("Main", null);
-            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
             AvailableLocations allLocations = new AvailableLocations();
+            var categoryVC = new CategoryPickerViewController();
+            categoryVC.SelectedCity = allLocations.PotentialLocations.Find(x => x.SiteName == recentCities[indexPath.Row].City);
 
-            searchViewController.Location = allLocations.PotentialLocations.Find(x => x.SiteName == recentCities[indexPath.Row].City);
-
-            this.owner.ShowViewController(searchViewController, this);
+            this.owner.ShowViewController(categoryVC, this);
         }
     }
 }

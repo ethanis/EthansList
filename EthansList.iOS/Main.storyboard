@@ -216,8 +216,8 @@
                                         <constraint id="2726" firstItem="1597" firstAttribute="trailing" secondItem="2723" secondAttribute="trailing" constant="10"/>
                                         <constraint id="2729" firstItem="2727" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="20"/>
                                         <constraint id="2730" firstItem="1597" firstAttribute="trailing" secondItem="2727" secondAttribute="trailing" constant="10"/>
-                                        <constraint id="2731" firstItem="1597" firstAttribute="bottom" secondItem="2727" secondAttribute="bottom" constant="10"/>
-                                        <constraint id="2782" firstItem="2727" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="10"/>
+                                        <constraint id="2731" firstItem="1597" firstAttribute="bottom" secondItem="2727" secondAttribute="bottom" constant="5"/>
+                                        <constraint id="2782" firstItem="2727" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
