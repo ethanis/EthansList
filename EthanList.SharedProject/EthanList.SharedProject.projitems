@@ -23,6 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\SearchDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\RecentCityDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Categories.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FavoriteCategory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\FavoriteCategoryDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

@@ -21,6 +21,7 @@ namespace EthansList.Models
             conn.CreateTableAsync<Posting>().Wait();
             conn.CreateTableAsync<Search>().Wait();
             conn.CreateTableAsync<RecentCity>().Wait();
+            conn.CreateTableAsync<FavoriteCategory>().Wait();
         }
     }
 
