@@ -46,7 +46,7 @@ namespace ethanslist.ios
         {
             base.ViewDidLoad();
 
-            categoryTableSource = new CategoryTableViewSource(this, Categories.Groups);
+            categoryTableSource = new CategoryTableViewSource(Categories.Groups);
             categoryTableView.Source = categoryTableSource;
             favoritesVC = new FavoriteCategoryViewController();
 
@@ -90,9 +90,8 @@ namespace ethanslist.ios
         const string cellID = "cellID";
         public event EventHandler<CategorySelectedEventArgs> Selected;
 
-        public CategoryTableViewSource(CategoryPickerViewController owner, List<CatTableGroup> categories)
+        public CategoryTableViewSource(List<CatTableGroup> categories)
         {
-            this.owner = owner;
             this.categories = categories;
         }
 

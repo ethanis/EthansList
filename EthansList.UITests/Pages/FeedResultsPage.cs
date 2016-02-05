@@ -18,7 +18,7 @@ namespace ethanslist.UITests
                 FirstListingCell = x => x.Class("UITableViewCell");
             }
 
-            app.WaitForNoElement(LoadingOverlay, timeout:TimeSpan.FromSeconds(10), timeoutMessage:"Timed out waiting for loading to complete");
+            app.WaitForNoElement(LoadingOverlay, timeout:TimeSpan.FromSeconds(60), timeoutMessage:"Timed out waiting for loading to complete");
             app.Screenshot("Loading icon has been removed");
         }
 
@@ -26,6 +26,14 @@ namespace ethanslist.UITests
         {
             app.Tap(FirstListingCell);
             app.Screenshot("Selected first listing");
+        }
+
+        public FeedResultsPage VerifyCatValid()
+        {
+            app.WaitForElement(FirstListingCell, timeout:TimeSpan.FromSeconds(30));
+            app.Screenshot("Verified category has listings");
+
+            return this;
         }
     }
 }

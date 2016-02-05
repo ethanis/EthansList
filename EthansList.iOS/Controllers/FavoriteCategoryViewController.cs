@@ -57,7 +57,7 @@ namespace ethanslist.ios
             var favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
             favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
 
-            FavoriteCatTableSource = new FavoriteCategoryTableSource(this, favorites);
+            FavoriteCatTableSource = new FavoriteCategoryTableSource(favorites);
             FavoriteCatTableView.Source = FavoriteCatTableSource;
 
             FavoriteCatTableSource.Selected += (object sender, FavoriteSelectedEventArgs e) => {
@@ -69,14 +69,12 @@ namespace ethanslist.ios
 
     public class FavoriteCategoryTableSource : UITableViewSource
     {
-        FavoriteCategoryViewController owner;
         List<FavoriteCategory> favorites;
         const string cellID = "favoritesCell";
         public event EventHandler<FavoriteSelectedEventArgs> Selected;
 
-        public FavoriteCategoryTableSource(FavoriteCategoryViewController owner, List<FavoriteCategory> favorites)
+        public FavoriteCategoryTableSource(List<FavoriteCategory> favorites)
         {
-            this.owner = owner;
             this.favorites = favorites;
         }
 
