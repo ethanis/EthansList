@@ -121,6 +121,19 @@ namespace ethanslist.ios
         {
             return Constants.CityPickerRowHeight;
         }
+
+        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            var item = categories[indexPath.Section].Items[indexPath.Row];
+            var favorite = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Favorite", async delegate {
+                Console.WriteLine ("Favorited cat: " + item.Value);
+                await AppDelegate.databaseConnection.AddNewFavoriteCategoryAsync(item.Key, item.Value);
+                Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
+            });
+            favorite.BackgroundColor = UIColor.Orange;
+
+            return new UITableViewRowAction[]{ favorite };
+        }
     }
 }
 

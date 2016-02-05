@@ -18,7 +18,7 @@ namespace EthansList.Models
                     {
                         past.Updated = System.DateTime.UtcNow;
                         var result = conn.UpdateAsync(past).Result;
-                        StatusMessage = string.Format("{0} recent city updated [City: {1})", result, past);
+                        StatusMessage = string.Format("{0} favorite category updated [Cat: {1})", result, past);
                         StatusCode = codes.ok;
                     }
                 }
@@ -30,7 +30,7 @@ namespace EthansList.Models
 
                     var result = await conn.InsertAsync(new FavoriteCategory() { CategoryKey = categoryKey, CategoryValue = categoryValue, Updated = System.DateTime.UtcNow })
                         .ConfigureAwait(continueOnCapturedContext: false);
-                    StatusMessage = string.Format("{0} recent city added [City: {1})", result, categoryKey);
+                    StatusMessage = string.Format("{0} category added [Cat: {1})", result, categoryKey);
                     StatusCode = codes.ok;
                 }
             }
