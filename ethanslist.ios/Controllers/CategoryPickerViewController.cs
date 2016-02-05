@@ -11,6 +11,7 @@ namespace ethanslist.ios
     {
         UITableView categoryTableView;
         CategoryTableViewSource categoryTableSource;
+        FavoriteCategoryViewController favoritesVC;
         UIBarButtonItem Favorites;
         public Location SelectedCity { get; set;}
 
@@ -47,14 +48,33 @@ namespace ethanslist.ios
 
             categoryTableSource = new CategoryTableViewSource(this, Categories.Groups);
             categoryTableView.Source = categoryTableSource;
+            favoritesVC = new FavoriteCategoryViewController();
 
             Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
                 {
-                    var favoritesVC = new FavoriteCategoryViewController();
                     this.PresentModalViewController(favoritesVC, true);
                 });
-            
+            favoritesVC.FavoriteSelected += (object sender, FavoriteSelectedEventArgs e) => {
+                this.DismissModalViewController(true);
+                Console.WriteLine (e.Selected.CategoryValue);
+                CategoryTableSource_Selected(this, new CategorySelectedEventArgs() {SelectedCat = new KeyValuePair<string, string>(e.Selected.CategoryKey,e.Selected.CategoryValue)});
+            };
+
             NavigationItem.RightBarButtonItem = Favorites;
+
+            categoryTableSource.Selected += CategoryTableSource_Selected;
+
+        }
+
+        void CategoryTableSource_Selected (object sender, CategorySelectedEventArgs e)
+        {
+            var storyboard = UIStoryboard.FromName("Main", null);
+            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
+
+            searchViewController.Location = SelectedCity;
+            searchViewController.Category = e.SelectedCat;
+
+            this.ShowViewController(searchViewController, this);
         }
 
         public override void DidReceiveMemoryWarning()
@@ -66,9 +86,9 @@ namespace ethanslist.ios
 
     public class CategoryTableViewSource : UITableViewSource
     {
-        CategoryPickerViewController owner;
         List<CatTableGroup> categories;
         const string cellID = "cellID";
+        public event EventHandler<CategorySelectedEventArgs> Selected;
 
         public CategoryTableViewSource(CategoryPickerViewController owner, List<CatTableGroup> categories)
         {
@@ -115,15 +135,8 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            Console.WriteLine(categories[indexPath.Section].Items[indexPath.Row].Key);
-
-            var storyboard = UIStoryboard.FromName("Main", null);
-            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
-
-            searchViewController.Location = owner.SelectedCity;
-            searchViewController.Category = categories[indexPath.Section].Items[indexPath.Row];
-
-            this.owner.ShowViewController(searchViewController, this.owner);
+            if (this.Selected != null)
+                this.Selected(this, new CategorySelectedEventArgs(){ SelectedCat = categories[indexPath.Section].Items[indexPath.Row] });
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -143,6 +156,11 @@ namespace ethanslist.ios
 
             return new UITableViewRowAction[]{ favorite };
         }
+    }
+
+    public class CategorySelectedEventArgs : EventArgs
+    {
+        public KeyValuePair<string, string> SelectedCat {get;set;}
     }
 }
 
