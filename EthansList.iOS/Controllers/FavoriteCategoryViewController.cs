@@ -14,7 +14,9 @@ namespace ethanslist.ios
         UINavigationItem NavBarItem;
         UIBarButtonItem DismissButton;
         public bool ViewedPreviously = false;
+        public List<FavoriteCategory> Favorites {get;set;}
         public event EventHandler<FavoriteSelectedEventArgs> FavoriteSelected;
+
 
         public FavoriteCategoryViewController()
             :base()
@@ -56,10 +58,10 @@ namespace ethanslist.ios
             NavBarItem.RightBarButtonItem = DismissButton;
             myNavBar.SetItems(new UINavigationItem[]{NavBarItem}, true);
 
-            var favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
-            favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
+            Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
+            Favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
 
-            FavoriteCatTableSource = new FavoriteCategoryTableSource(favorites);
+            FavoriteCatTableSource = new FavoriteCategoryTableSource(Favorites);
             FavoriteCatTableView.Source = FavoriteCatTableSource;
 
             FavoriteCatTableSource.Selected += (object sender, FavoriteSelectedEventArgs e) => {

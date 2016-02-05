@@ -53,20 +53,27 @@ namespace ethanslist.ios
             Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
                 {
                     if (favoritesVC.ViewedPreviously)
-                        favoritesVC = new FavoriteCategoryViewController();
+                    {
+                        favoritesVC.Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
+                        favoritesVC.Favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
+                        favoritesVC.FavoriteCatTableView.ReloadData();
+                    }
                     
                     this.PresentModalViewController(favoritesVC, true);
                 });
-            favoritesVC.FavoriteSelected += (object sender, FavoriteSelectedEventArgs e) => {
-                this.DismissModalViewController(true);
-                Console.WriteLine (e.Selected.CategoryValue);
-                CategoryTableSource_Selected(this, new CategorySelectedEventArgs() {SelectedCat = new KeyValuePair<string, string>(e.Selected.CategoryKey,e.Selected.CategoryValue)});
-            };
+            favoritesVC.FavoriteSelected += FavoritesVC_Selected;
 
             NavigationItem.RightBarButtonItem = Favorites;
 
             categoryTableSource.Selected += CategoryTableSource_Selected;
 
+        }
+
+        void FavoritesVC_Selected (object sender, FavoriteSelectedEventArgs e)
+        {
+            this.DismissModalViewController(true);
+            Console.WriteLine (e.Selected.CategoryValue);
+            CategoryTableSource_Selected(this, new CategorySelectedEventArgs() {SelectedCat = new KeyValuePair<string, string>(e.Selected.CategoryKey,e.Selected.CategoryValue)});
         }
 
         void CategoryTableSource_Selected (object sender, CategorySelectedEventArgs e)
