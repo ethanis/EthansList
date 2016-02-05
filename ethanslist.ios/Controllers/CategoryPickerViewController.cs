@@ -14,7 +14,7 @@ namespace ethanslist.ios
         FavoriteCategoryViewController favoritesVC;
         UIBarButtonItem Favorites;
         public Location SelectedCity { get; set;}
-
+        public event EventHandler<EventArgs> PageReloaded;
 
         public CategoryPickerViewController()
             : base()
@@ -48,15 +48,14 @@ namespace ethanslist.ios
 
             categoryTableSource = new CategoryTableViewSource(Categories.Groups);
             categoryTableView.Source = categoryTableSource;
-            favoritesVC = new FavoriteCategoryViewController();
+            favoritesVC = new FavoriteCategoryViewController(this);
 
             Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
                 {
                     if (favoritesVC.ViewedPreviously)
                     {
-                        favoritesVC.Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
-                        favoritesVC.Favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
-                        favoritesVC.FavoriteCatTableView.ReloadData();
+                        if (this.PageReloaded != null)
+                            this.PageReloaded(this, new EventArgs());
                     }
                     
                     this.PresentModalViewController(favoritesVC, true);
@@ -156,10 +155,20 @@ namespace ethanslist.ios
         public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
         {
             var item = categories[indexPath.Section].Items[indexPath.Row];
-            var favorite = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "\u2606", async delegate {
-                Console.WriteLine ("Favorited cat: " + item.Value);
+            var exists = AppDelegate.databaseConnection.FavoriteCategoryAlreadyPresent(item.Key);
+
+            string title = exists ? "\u2605" : "\u2606";
+
+            var favorite = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, title, async delegate {
                 tableView.SetEditing(false,true);
-                await AppDelegate.databaseConnection.AddNewFavoriteCategoryAsync(item.Key, item.Value);
+                if (exists)
+                {
+                    await AppDelegate.databaseConnection.DeleteFavoriteCategoryAsync(item.Key);
+                }
+                else
+                {
+                    await AppDelegate.databaseConnection.AddNewFavoriteCategoryAsync(item.Key, item.Value);
+                }
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
             });
             favorite.BackgroundColor = ColorScheme.Carrot;

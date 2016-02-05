@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using EthansList.Shared;
+using System.Linq;
 
 namespace EthansList.Models
 {
@@ -54,6 +55,28 @@ namespace EthansList.Models
                 StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", category, ex.Message); 
                 StatusCode = codes.bad;
             }
+        }
+
+        public async Task DeleteFavoriteCategoryAsync(string categoryKey)
+        {
+            FavoriteCategory current = conn.Table<FavoriteCategory>().Where(x => x.CategoryKey.Equals(categoryKey)).ToListAsync().Result.First();
+            try
+            {
+                var result = await conn.DeleteAsync(current).ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} dropped from database [Cat: {1}]", result, current);
+                StatusCode = codes.ok;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", current, ex.Message); 
+                StatusCode = codes.bad;
+            }
+        }
+
+        public bool FavoriteCategoryAlreadyPresent(String categoryKey)
+        {
+            var current = conn.Table<FavoriteCategory>().Where(x => x.CategoryKey.Equals(categoryKey)).ToListAsync().Result;
+            return current.Count > 0;
         }
 
         public Task<List<FavoriteCategory>> GetAllFavoriteCategoriesAsync()

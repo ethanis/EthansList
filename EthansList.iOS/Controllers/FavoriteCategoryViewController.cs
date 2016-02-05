@@ -9,19 +9,26 @@ namespace ethanslist.ios
     {
         UIView BarTintPlaceholder;
         public UITableView FavoriteCatTableView;
-        FavoriteCategoryTableSource FavoriteCatTableSource;
+        public FavoriteCategoryTableSource FavoriteCatTableSource;
         UINavigationBar myNavBar;
         UINavigationItem NavBarItem;
         UIBarButtonItem DismissButton;
         public bool ViewedPreviously = false;
-        public List<FavoriteCategory> Favorites {get;set;}
+        public List<FavoriteCategory> Favorites 
+        {
+            get { return favorites; }
+            set { favorites = value; }
+        }
+        protected List<FavoriteCategory> favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
         public event EventHandler<FavoriteSelectedEventArgs> FavoriteSelected;
 
-
-        public FavoriteCategoryViewController()
+        CategoryPickerViewController sender;
+        public FavoriteCategoryViewController(CategoryPickerViewController sender)
             :base()
         {
+            this.sender = sender;
         }
+
 
         public override void LoadView()
         {
@@ -57,34 +64,42 @@ namespace ethanslist.ios
                 });
             NavBarItem.RightBarButtonItem = DismissButton;
             myNavBar.SetItems(new UINavigationItem[]{NavBarItem}, true);
-
-            Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
-            Favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
-
-            FavoriteCatTableSource = new FavoriteCategoryTableSource(Favorites);
+            Console.WriteLine(Favorites.Count);
+            FavoriteCatTableSource = new FavoriteCategoryTableSource(this, Favorites);
             FavoriteCatTableView.Source = FavoriteCatTableSource;
 
             FavoriteCatTableSource.Selected += (object sender, FavoriteSelectedEventArgs e) => {
                 if (this.FavoriteSelected != null)
                     this.FavoriteSelected(this, e);
             };
+
+            sender.PageReloaded += (object sender, EventArgs e) => {
+                Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
+                Favorites.Sort((s1, s2)=>s2.Updated.CompareTo(s1.Updated));
+                this.InvokeOnMainThread(() => {
+                    FavoriteCatTableView.ReloadData();
+                    this.View.SetNeedsDisplay();
+                });
+            };
         }
     }
 
     public class FavoriteCategoryTableSource : UITableViewSource
     {
-        List<FavoriteCategory> favorites;
+//        List<FavoriteCategory> favorites;
+        FavoriteCategoryViewController owner;
         const string cellID = "favoritesCell";
         public event EventHandler<FavoriteSelectedEventArgs> Selected;
 
-        public FavoriteCategoryTableSource(List<FavoriteCategory> favorites)
+        public FavoriteCategoryTableSource(FavoriteCategoryViewController owner, List<FavoriteCategory> favorites)
         {
-            this.favorites = favorites;
+//            this.favorites = favorites;
+            this.owner = owner;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return favorites.Count;
+            return owner.Favorites.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -93,7 +108,8 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
-            cell.TextLabel.AttributedText = new Foundation.NSAttributedString(favorites[indexPath.Row].CategoryValue, Constants.CityPickerCellAttributes);
+            cell.BackgroundColor = ColorScheme.Clouds;
+            cell.TextLabel.AttributedText = new Foundation.NSAttributedString(owner.Favorites[indexPath.Row].CategoryValue, Constants.CityPickerCellAttributes);
 
             return cell;
         }
@@ -102,8 +118,8 @@ namespace ethanslist.ios
         {
             switch (editingStyle) {
                 case UITableViewCellEditingStyle.Delete:
-                    await AppDelegate.databaseConnection.DeleteFavoriteCategoryAsync(favorites[indexPath.Row]);
-                    favorites.RemoveAt(indexPath.Row);
+                    await AppDelegate.databaseConnection.DeleteFavoriteCategoryAsync(owner.Favorites[indexPath.Row]);
+                    owner.Favorites.RemoveAt(indexPath.Row);
                     tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                     break;
                 case UITableViewCellEditingStyle.None:
@@ -115,7 +131,7 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             if (this.Selected != null)
-                this.Selected(this, new FavoriteSelectedEventArgs(){ Selected = favorites[indexPath.Row] });
+                this.Selected(this, new FavoriteSelectedEventArgs(){ Selected = owner.Favorites[indexPath.Row] });
         }
     }
 
