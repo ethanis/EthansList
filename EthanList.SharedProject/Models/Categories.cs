@@ -33,7 +33,7 @@ namespace EthansList.Shared
                         Name = "Housing",
                         Items = new List<KeyValuePair<string, string>>()
                             {
-                                new KeyValuePair<string, string>("/search/apa", "apts / housing"),
+                                new KeyValuePair<string, string>("/search/apa", "apartments / housing rentals"),
                                 new KeyValuePair<string, string>("/search/swp", "housing swap"),
                                 new KeyValuePair<string, string>("/search/hsw", "housing wanted"),
                                 new KeyValuePair<string, string>("/search/off", "office / commercial"),

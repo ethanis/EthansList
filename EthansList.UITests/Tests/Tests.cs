@@ -20,7 +20,7 @@ namespace ethanslist.UITests
             string state = "California";
             string area = "San Francisco Bay Area";
             string title = String.Empty;
-            string cat = "free stuff";
+            string cat = "free";
 
             new CityPickerPage()
                 .SelectState(state)
@@ -61,7 +61,7 @@ namespace ethanslist.UITests
             string state = "California";
             string area = "San Francisco Bay Area";
             string searchTerms = "Min Bedrooms: 3, Min Bathrooms: 1, Search Items: parking laundry view, Max Listings: 50, Posted Date: 2";
-            string cat = "apartments/housing rentals";
+            string cat = "apartments / housing rentals";
 
             new CityPickerPage()
                 .SelectState(state)
@@ -73,6 +73,7 @@ namespace ethanslist.UITests
             new SearchOptionsPage()
                 .VerifyOnLocation(area)
                 .EnterSearchTerms(new string[] {"parking", "laundry", "view"})
+                .SelectMinMaxPrice(1000, 1200)
                 .SelectMinBedrooms(3)
                 .SelectMinBathrooms(1)
                 .SelectPostedDate("2 Weeks Old")

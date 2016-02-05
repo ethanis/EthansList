@@ -80,7 +80,7 @@ namespace ethanslist.ios
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var label = new UILabel(new CoreGraphics.CGRect(0,0,tableView.Bounds.Width, 32));
-            label.AttributedText = new NSAttributedString(categories[(int)section].Name, Constants.HeaderAttributes);
+            label.AttributedText = new NSAttributedString("  " + categories[(int)section].Name, Constants.HeaderAttributes);
 
             label.BackgroundColor = ColorScheme.Silver;
 
