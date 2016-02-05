@@ -8,11 +8,12 @@ namespace ethanslist.ios
     public class FavoriteCategoryViewController : UIViewController
     {
         UIView BarTintPlaceholder;
-        UITableView FavoriteCatTableView;
+        public UITableView FavoriteCatTableView;
         FavoriteCategoryTableSource FavoriteCatTableSource;
         UINavigationBar myNavBar;
         UINavigationItem NavBarItem;
         UIBarButtonItem DismissButton;
+        public bool ViewedPreviously = false;
         public event EventHandler<FavoriteSelectedEventArgs> FavoriteSelected;
 
         public FavoriteCategoryViewController()
@@ -49,6 +50,7 @@ namespace ethanslist.ios
 
             DismissButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) =>
                 {
+                    ViewedPreviously = true;
                     this.DismissViewControllerAsync(true);
                 });
             NavBarItem.RightBarButtonItem = DismissButton;

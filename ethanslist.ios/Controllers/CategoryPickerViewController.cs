@@ -52,6 +52,9 @@ namespace ethanslist.ios
 
             Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
                 {
+                    if (favoritesVC.ViewedPreviously)
+                        favoritesVC = new FavoriteCategoryViewController();
+                    
                     this.PresentModalViewController(favoritesVC, true);
                 });
             favoritesVC.FavoriteSelected += (object sender, FavoriteSelectedEventArgs e) => {
