@@ -149,12 +149,13 @@ namespace ethanslist.ios
         public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
         {
             var item = categories[indexPath.Section].Items[indexPath.Row];
-            var favorite = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Favorite", async delegate {
+            var favorite = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "\u2606", async delegate {
                 Console.WriteLine ("Favorited cat: " + item.Value);
+                tableView.SetEditing(false,true);
                 await AppDelegate.databaseConnection.AddNewFavoriteCategoryAsync(item.Key, item.Value);
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
             });
-            favorite.BackgroundColor = UIColor.Orange;
+            favorite.BackgroundColor = ColorScheme.Carrot;
 
             return new UITableViewRowAction[]{ favorite };
         }
