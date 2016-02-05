@@ -6,7 +6,7 @@ namespace EthansList.Models
 {
     public partial class DatabaseConnection
     {
-        public async Task AddNewSearchAsync(String linkUrl, String cityName, string minPrice, string maxPrice, string minBedrooms, string minBathrooms, string searchQuery, int? postedDate, int maxListings)
+        public async Task AddNewSearchAsync(String linkUrl, String cityName, string minPrice, string maxPrice, string minBedrooms, string minBathrooms, string searchQuery, int? postedDate, int maxListings, string categoryKey, string CategoryValue)
         {
             try
             {
@@ -18,7 +18,7 @@ namespace EthansList.Models
                 var result = await conn.InsertAsync(new Search { LinkUrl = linkUrl, 
                     CityName = cityName, MinPrice = minPrice, MaxPrice = maxPrice, 
                     MinBedrooms = minBedrooms, MinBathrooms = minBathrooms, SearchQuery = searchQuery,
-                    MaxListings = maxListings, PostedDate = postedDate})
+                    MaxListings = maxListings, PostedDate = postedDate, CategoryKey = categoryKey, CategoryValue = CategoryValue})
                     .ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} search(es) added [Link: {1})", result, linkUrl);
                 StatusCode = codes.ok;

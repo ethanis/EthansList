@@ -16,6 +16,10 @@ namespace ethanslist.ios
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel CategoryLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel LabelCity { get; set; }
 
 		[Outlet]
@@ -24,6 +28,10 @@ namespace ethanslist.ios
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (CategoryLabel != null) {
+				CategoryLabel.Dispose ();
+				CategoryLabel = null;
+			}
 			if (LabelCity != null) {
 				LabelCity.Dispose ();
 				LabelCity = null;

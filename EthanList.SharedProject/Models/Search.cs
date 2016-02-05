@@ -1,5 +1,6 @@
 ﻿using System;
 using SQLite;
+using System.Collections.Generic;
 
 namespace EthansList.Models
 {
@@ -17,6 +18,9 @@ namespace EthansList.Models
         public string SearchQuery { get; set;}
         public int? PostedDate { get; set;}
         public int MaxListings { get; set;}
+        public string CategoryKey {get;set;}
+        public string CategoryValue {get;set;}
+
     }
 }
 

@@ -188,22 +188,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" rowHeight="66" id="1596" customClass="SavedSearchCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" rowHeight="132" id="1596" customClass="SavedSearchCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1596" id="1597">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="131.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is the city of the search" lineBreakMode="tailTruncation" minimumFontSize="10" id="2723" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                            <rect key="frame" x="10" y="10" width="580" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is the city of the search" lineBreakMode="tailTruncation" minimumFontSize="10" id="2723" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="10" y="10" width="300" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search terms go here" lineBreakMode="wordWrap" id="2727" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0" adjustsFontSizeToFit="NO" misplaced="YES">
-                                            <rect key="frame" x="20" y="37.5" width="570" height="18"/>
+                                            <rect key="frame" x="30" y="87" width="290" height="18"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="2761" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                            <rect key="frame" x="30" y="39" width="280" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -217,12 +224,16 @@
                                         <constraint id="2729" firstItem="2727" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="20"/>
                                         <constraint id="2730" firstItem="1597" firstAttribute="trailing" secondItem="2727" secondAttribute="trailing" constant="10"/>
                                         <constraint id="2731" firstItem="1597" firstAttribute="bottom" secondItem="2727" secondAttribute="bottom" constant="10"/>
-                                        <constraint id="2740" firstItem="2727" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="5"/>
+                                        <constraint id="2762" firstItem="2761" firstAttribute="leading" secondItem="1597" secondAttribute="leading" constant="20"/>
+                                        <constraint id="2763" firstItem="1597" firstAttribute="trailing" secondItem="2761" secondAttribute="trailing" constant="10"/>
+                                        <constraint id="2764" firstItem="2761" firstAttribute="top" secondItem="2723" secondAttribute="bottom" constant="10"/>
+                                        <constraint id="2765" firstItem="2727" firstAttribute="top" secondItem="2761" secondAttribute="bottom" constant="5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="LabelCity" destination="2723" id="name-outlet-2723"/>
                                     <outlet property="LabelSearchTerms" destination="2727" id="name-outlet-2727"/>
+                                    <outlet property="CategoryLabel" destination="2761" id="name-outlet-2761"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

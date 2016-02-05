@@ -83,7 +83,7 @@ namespace ethanslist.ios
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => {
                     await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings);
+                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
                     if (AppDelegate.databaseConnection.StatusCode == codes.ok)

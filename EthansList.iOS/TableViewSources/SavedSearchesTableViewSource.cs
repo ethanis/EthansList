@@ -36,6 +36,7 @@ namespace ethanslist.ios
             SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
             cell.SetCity(savedSearches[indexPath.Row].CityName);
             cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
+            cell.SetCategory(savedSearches[indexPath.Row].CategoryValue);
 
             return cell;
         }
@@ -76,7 +77,7 @@ namespace ethanslist.ios
             QueryGeneration helper = new QueryGeneration();
 
             //TODO: Update to Correct Category!!
-            feedResultsVC.Query = helper.Generate(search.LinkUrl, "apa", searchTerms);
+            feedResultsVC.Query = helper.Generate(search.LinkUrl, search.CategoryKey, searchTerms);
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;
 

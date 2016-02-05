@@ -21,5 +21,10 @@ namespace ethanslist.ios
         {
             LabelSearchTerms.AttributedText = new NSAttributedString(terms, Constants.LabelAttributes);
         }
+
+        public void SetCategory(string cat)
+        {
+            CategoryLabel.AttributedText = new NSAttributedString(cat, Constants.LabelAttributes);
+        }
 	}
 }
