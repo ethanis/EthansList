@@ -261,5 +261,6 @@
     <BundleResource Include="Resources\save.png" />
     <BundleResource Include="Resources\menu.png" />
     <BundleResource Include="Resources\Delete-50.png" />
+    <BundleResource Include="Resources\favorites.png" />
   </ItemGroup>
 </Project>

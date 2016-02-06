@@ -50,8 +50,10 @@ namespace ethanslist.ios
             categoryTableView.Source = categoryTableSource;
             favoritesVC = new FavoriteCategoryViewController(this);
 
-            Favorites = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, (object sender, EventArgs e) =>
-                {
+            Favorites = new UIBarButtonItem (
+                UIImage.FromBundle("favorites.png"),
+                UIBarButtonItemStyle.Plain,
+                (object sender, EventArgs e) => {
                     if (favoritesVC.ViewedPreviously)
                     {
                         if (this.PageReloaded != null)
@@ -59,10 +61,10 @@ namespace ethanslist.ios
                     }
                     
                     this.PresentModalViewController(favoritesVC, true);
-                });
-            favoritesVC.FavoriteSelected += FavoritesVC_Selected;
+            });
 
             NavigationItem.RightBarButtonItem = Favorites;
+            favoritesVC.FavoriteSelected += FavoritesVC_Selected;
 
             categoryTableSource.Selected += CategoryTableSource_Selected;
 
