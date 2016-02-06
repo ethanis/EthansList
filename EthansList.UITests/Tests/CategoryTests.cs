@@ -11,6 +11,7 @@ namespace ethanslist.UITests
         {
         }
 
+        [Ignore]
         [Category("CategoryTests")]
         [TestCase("apartments / housing rentals")]
         [TestCase("housing swap")]

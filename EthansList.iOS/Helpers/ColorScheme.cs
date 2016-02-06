@@ -14,6 +14,7 @@ namespace ethanslist.ios
         public static UIColor MidnightBlue = UIColor.FromRGB(44, 62, 80);
 
         public static UIColor Carrot = UIColor.FromRGB(230, 126, 34);
+        public static UIColor Alizarin = UIColor.FromRGB(231, 76, 60);
     }
 }
 

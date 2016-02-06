@@ -53,20 +53,7 @@ namespace ethanslist.ios
 
             return cell;
         }
-
-        public override async void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
-        {
-            switch (editingStyle) {
-                case UITableViewCellEditingStyle.Delete:
-                    await AppDelegate.databaseConnection.DeletePostingAsync(savedListings[indexPath.Row]);
-                    savedListings.RemoveAt(indexPath.Row);
-                    tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
-                    break;
-                case UITableViewCellEditingStyle.None:
-                    Console.WriteLine ("CommitEditingStyle:None called");
-                    break;
-            }
-        }
+            
         public override bool CanEditRow (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             return true;
@@ -74,6 +61,21 @@ namespace ethanslist.ios
         public override string TitleForDeleteConfirmation (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             return "Delete";
+        }
+
+        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            //TODO fix this shit
+            var title = string.Format("\ud83d\uddd1{0}Delete", Environment.NewLine);
+            var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, title, async delegate {
+                await AppDelegate.databaseConnection.DeletePostingAsync(savedListings[indexPath.Row]);
+                savedListings.RemoveAt(indexPath.Row);
+                tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
+            });
+            deletion.BackgroundColor = ColorScheme.Alizarin;
+
+            return new UITableViewRowAction[]{ deletion };
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
