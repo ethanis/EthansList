@@ -40,6 +40,7 @@ namespace EthansList.Shared
 
         public bool GetAllPostingsAsync()
         {
+            Console.WriteLine(this.query);
             if (Reachability.Reachability.IsNetworkAvailable())
             {
                 get_craigslist_postings(query);
@@ -86,7 +87,19 @@ namespace EthansList.Shared
 //                    doc.LoadHtml(html);
 //                    HtmlNode root = doc.DocumentNode; 
                     XmlDocument xmldocument = new XmlDocument();
-                    xmldocument.LoadXml(t.Result);
+                        try
+                        {
+                            xmldocument.LoadXml(t.Result);
+                        }
+                        catch (Exception e)
+                        {
+                            //TODO: Insights track
+                            //This occurs if query returns invalid xml schema
+                            Console.WriteLine (e.Message);
+                            if (this.emptyPostingComplete != null)
+                                this.emptyPostingComplete(this, new EventArgs());
+                            return;
+                        }
                     var done = ParsePostings(xmldocument);
                     Console.WriteLine(done);
                     timer.Stop();

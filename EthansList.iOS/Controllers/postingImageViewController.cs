@@ -23,9 +23,7 @@ namespace ethanslist.ios
         string image;
         private string Image
         {
-            get{ 
-                return image;
-            }
+            get { return image; }
             set {
                 myImageView.ContentMode = UIViewContentMode.Center;
                 myImageView.SetImage(
