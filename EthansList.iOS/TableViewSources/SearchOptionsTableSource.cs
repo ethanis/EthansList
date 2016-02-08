@@ -187,10 +187,9 @@ namespace ethanslist.ios
 
                     if (item.Heading == "Sub Category")
                     {
-                        var displayText = (string)item.PickerOptions[0].PickerWheelOptions[0].Key;
-                        this.owner.SubCategory = (string)item.PickerOptions[0].PickerWheelOptions[0].Value;
-                        Console.WriteLine(displayText);
-                        pickerSelectorCell.Display.AttributedText = new NSAttributedString(displayText, Constants.LabelAttributes);
+                        var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
+                        this.owner.SubCategory = (string)firstItem.Value;
+                        pickerSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
                     }
 
                     //TODO: Sub Category needs to be preselected
