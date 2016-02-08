@@ -184,6 +184,7 @@ namespace EthansList.Shared
                     Name = "Jobs",
                     Items = new List<KeyValuePair<string, string>>()
                     {
+                        new KeyValuePair<string, string>("/search/jjj", "all jobs"),
                         new KeyValuePair<string, string>("/search/acc", "accounting+finance"),
                         new KeyValuePair<string, string>("/search/ofc", "admin / office"),
                         new KeyValuePair<string, string>("/search/egr", "arch / engineering"),
@@ -216,7 +217,7 @@ namespace EthansList.Shared
                         new KeyValuePair<string, string>("/search/web", "web / info design"),
                         new KeyValuePair<string, string>("/search/wri", "writing / editing"),
                         new KeyValuePair<string, string>("/search/etc", "[ETC]"),
-                        new KeyValuePair<string, string>("/search/jjj?employment_type=2", "[ part-time ]"),
+//                        new KeyValuePair<string, string>("/search/jjj?employment_type=2", "[ part-time ]"),
                     },
                 },
                 new CatTableGroup()
