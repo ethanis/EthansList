@@ -177,15 +177,23 @@ namespace ethanslist.ios
                     return priceCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
-                    pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
+                    pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
                     picker_model = new SearchPickerModel(item.PickerOptions, false);
                     picker = new UIPickerView();
                     picker.Model = picker_model;
                     picker.ShowSelectionIndicator = true;
 
+                    if (item.Heading == "Sub Category")
+                    {
+                        var displayText = (string)item.PickerOptions[0].PickerWheelOptions[0].Key;
+                        this.owner.SubCategory = (string)item.PickerOptions[0].PickerWheelOptions[0].Value;
+                        Console.WriteLine(displayText);
+                        pickerSelectorCell.Display.AttributedText = new NSAttributedString(displayText, Constants.LabelAttributes);
+                    }
 
+                    //TODO: Sub Category needs to be preselected
                     picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
                         {
                             string resultKey = e.SelectedKey.ToString();
