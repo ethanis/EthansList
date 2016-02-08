@@ -34,6 +34,7 @@ namespace ethanslist.ios
         }
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
+        public string SubCategory { get; set; }
         public Location Location { get; set; }
         public KeyValuePair<string, string> Category {get;set;}
         public UIView FieldSelected { get; set; }
@@ -82,6 +83,7 @@ namespace ethanslist.ios
                 UIImage.FromFile ("save.png"),
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => {
+                    //TODO: Way to save selected category
                     await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
                     MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
@@ -111,7 +113,8 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var query = queryHelper.Generate(Location.Url, Category.Key, new Dictionary<string, string>()
+                var cat = SubCategory != null ? SubCategory : Category.Key;
+                var query = queryHelper.Generate(Location.Url, cat, new Dictionary<string, string>()
                     {
                         {"min_price", MinPrice},
                         {"max_price", MaxPrice},
@@ -189,7 +192,20 @@ namespace ethanslist.ios
                 { 
                     Name = "Options",
                 };
-            
+
+            if (Categories.SubCategories.ContainsKey(Category.Key))
+            {
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Sub Category",
+                        CellType = "PickerSelectorCell",
+                        PickerOptions = new List<PickerOptions>()
+                        {
+                            new PickerOptions() {PickerWheelOptions = Categories.SubCategories[Category.Key]}
+                        },
+                    });
+            }
+
             if (Categories.Housing.Contains(Category.Key))
             {
                 options.Items.Add(new TableItem()
@@ -199,13 +215,13 @@ namespace ethanslist.ios
                         PickerOptions = new List<PickerOptions>()
                         {
                             new PickerOptions()
-                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {PickerWheelOptions = new List<KeyValuePair<object, object>>()
                                 {
-                                    { 0, new KeyValuePair<object, object>("Any", null) },
-                                    { 1, new KeyValuePair<object, object>("1+", "1") },
-                                    { 2, new KeyValuePair<object, object>("2+", "2") },
-                                    { 3, new KeyValuePair<object, object>("3+", "3") },
-                                    { 4, new KeyValuePair<object, object>("4+", "4") },
+                                    new KeyValuePair<object, object>("Any", null),
+                                    new KeyValuePair<object, object>("1+", "1"),
+                                    new KeyValuePair<object, object>("2+", "2"),
+                                    new KeyValuePair<object, object>("3+", "3"),
+                                    new KeyValuePair<object, object>("4+", "4"),
                                 }
                             }
                         },
@@ -217,13 +233,13 @@ namespace ethanslist.ios
                         PickerOptions = new List<PickerOptions>()
                         {
                             new PickerOptions()
-                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {PickerWheelOptions = new List<KeyValuePair<object, object>>()
                                 {
-                                    { 0, new KeyValuePair<object, object>("Any", null) },
-                                    { 1, new KeyValuePair<object, object>("1+", "1") },
-                                    { 2, new KeyValuePair<object, object>("2+", "2") },
-                                    { 3, new KeyValuePair<object, object>("3+", "3") },
-                                    { 4, new KeyValuePair<object, object>("4+", "4") },
+                                    new KeyValuePair<object, object>("Any", null),
+                                    new KeyValuePair<object, object>("1+", "1"),
+                                    new KeyValuePair<object, object>("2+", "2"),
+                                    new KeyValuePair<object, object>("3+", "3"),
+                                    new KeyValuePair<object, object>("4+", "4"),
                                 }
                             }
                         },
@@ -235,14 +251,14 @@ namespace ethanslist.ios
                         PickerOptions = new List<PickerOptions>()
                         {
                             new PickerOptions()
-                            {PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                            {PickerWheelOptions = new List<KeyValuePair<object, object>>()
                                 {
-                                    { 0, new KeyValuePair<object, object>("Any", null) },
-                                    { 1, new KeyValuePair<object, object>("Today", "-1") },
-                                    { 2, new KeyValuePair<object, object>("1 Week Old", "1") },
-                                    { 3, new KeyValuePair<object, object>("2 Weeks Old", "2") },
-                                    { 4, new KeyValuePair<object, object>("3 Weeks Old", "3") },
-                                    { 5, new KeyValuePair<object, object>("4 Weeks Old", "4") },
+                                    new KeyValuePair<object, object>("Any", null),
+                                    new KeyValuePair<object, object>("Today", "-1"),
+                                    new KeyValuePair<object, object>("1 Week Old", "1"),
+                                    new KeyValuePair<object, object>("2 Weeks Old", "2"),
+                                    new KeyValuePair<object, object>("3 Weeks Old", "3"),
+                                    new KeyValuePair<object, object>("4 Weeks Old", "4"),
                                 }
                             }
                         },
@@ -253,12 +269,12 @@ namespace ethanslist.ios
                 CellType = "PickerSelectorCell",
                 PickerOptions = new List<PickerOptions> ()
                     {
-                        new PickerOptions(){PickerWheelOptions = new Dictionary<object, KeyValuePair<object, object>>()
+                        new PickerOptions(){PickerWheelOptions = new List<KeyValuePair<object, object>>()
                             {
-                                {0, new KeyValuePair<object, object>(25, 25)},
-                                {1, new KeyValuePair<object, object>(50, 50)},
-                                {2, new KeyValuePair<object, object>(75, 75)},
-                                {3, new KeyValuePair<object, object>(100, 100)},
+                                new KeyValuePair<object, object>(25, 25),
+                                new KeyValuePair<object, object>(50, 50),
+                                new KeyValuePair<object, object>(75, 75),
+                                new KeyValuePair<object, object>(100, 100),
                             }}
                     },
             });

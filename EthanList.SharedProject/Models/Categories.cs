@@ -9,6 +9,7 @@ namespace EthansList.Shared
         public static List<CatTableGroup> Groups { get { return catHelper.CategoryGroups; } }
         static OptionFilters optionFilters = new OptionFilters();
         public static List<string> Housing { get { return optionFilters.Housing; } }
+        public static Dictionary<string, List<KeyValuePair<object, object>>> SubCategories { get { return optionFilters.SubCategories; } }
     }
 
     public class OptionFilters
@@ -21,6 +22,25 @@ namespace EthansList.Shared
                 "/search/rea",
                 "/search/sub",
                 "/search/vac",
+            };
+
+        public Dictionary<string, List<KeyValuePair<object, object>>> SubCategories = new Dictionary<string, List<KeyValuePair<object, object>>>()
+            { 
+                {"/i/auto_parts", new List<KeyValuePair<object, object>>()
+                {
+                    new KeyValuePair<object, object>("Wheels / Tires", "/search/wta"),
+                    new KeyValuePair<object, object>("Wheels - Owner Only", "/search/wto"),
+                    new KeyValuePair<object, object>("Wheels - Dealer Only",  "/search/wtd"),
+                    new KeyValuePair<object, object>("All General Auto Parts", "/search/pta"), 
+                    new KeyValuePair<object, object>("Auto Parts - Owner Only",  "/search/pts"),
+                    new KeyValuePair<object, object>("Auto Parts - Dealer Only", "/search/ptd")
+                }
+            },
+//                {"/i/bikes", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
+//                {"/i/boats", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
+//                {"/i/autos", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
+//                {"/i/computers", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
+//                {"/i/motorcycles", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}}
             };
     }
 

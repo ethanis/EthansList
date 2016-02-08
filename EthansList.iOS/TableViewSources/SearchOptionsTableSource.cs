@@ -204,6 +204,8 @@ namespace ethanslist.ios
                                 this.owner.WeeksOld = (int?)Convert.ToInt16(resultValue);
                             else if (item.Heading == "Max Listings")
                                 this.owner.MaxListings = Convert.ToInt16(resultValue);
+                            else if (item.Heading == "Sub Category")
+                                this.owner.SubCategory = resultValue;
                         };
                     
                     pickerSelectorCell.InputTextField.InputView = picker;
