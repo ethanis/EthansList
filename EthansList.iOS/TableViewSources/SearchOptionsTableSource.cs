@@ -192,7 +192,6 @@ namespace ethanslist.ios
                         pickerSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
                     }
 
-                    //TODO: Sub Category needs to be preselected
                     picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
                         {
                             string resultKey = e.SelectedKey.ToString();

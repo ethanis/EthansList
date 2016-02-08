@@ -27,20 +27,62 @@ namespace EthansList.Shared
         public Dictionary<string, List<KeyValuePair<object, object>>> SubCategories = new Dictionary<string, List<KeyValuePair<object, object>>>()
             { 
                 {"/i/auto_parts", new List<KeyValuePair<object, object>>()
-                {
-                    new KeyValuePair<object, object>("Wheels / Tires", "/search/wta"),
-                    new KeyValuePair<object, object>("Wheels - Owner Only", "/search/wto"),
-                    new KeyValuePair<object, object>("Wheels - Dealer Only",  "/search/wtd"),
-                    new KeyValuePair<object, object>("All General Auto Parts", "/search/pta"), 
-                    new KeyValuePair<object, object>("Auto Parts - Owner Only",  "/search/pts"),
-                    new KeyValuePair<object, object>("Auto Parts - Dealer Only", "/search/ptd")
-                }
-            },
-//                {"/i/bikes", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
-//                {"/i/boats", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
-//                {"/i/autos", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
-//                {"/i/computers", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}},
-//                {"/i/motorcycles", new List<string>(){"Wheels / Tires", "Wheels - Owner Only", "Wheels - Dealer Only", "All General Auto Parts", "Auto Parts - Owner Only", "Auto Parts - Dealer Only"}}
+                    {
+                        new KeyValuePair<object, object>("All General Auto Parts", "/search/pta"), 
+                        new KeyValuePair<object, object>("Auto Parts - Owner Only",  "/search/pts"),
+                        new KeyValuePair<object, object>("Auto Parts - Dealer Only", "/search/ptd"),
+                        new KeyValuePair<object, object>("Wheels / Tires", "/search/wta"),
+                        new KeyValuePair<object, object>("Wheels - Owner Only", "/search/wto"),
+                        new KeyValuePair<object, object>("Wheels - Dealer Only",  "/search/wtd"),
+                    }
+                },
+                {"/i/bikes", new List<KeyValuePair<object, object>>()
+                    {
+                        new KeyValuePair<object, object>("All Bicylces", "/search/bia"), 
+                        new KeyValuePair<object, object>("Bicycles - Owner Only",  "/search/bik"),
+                        new KeyValuePair<object, object>("Bicycle - Dealer Only", "/search/bid"),
+                        new KeyValuePair<object, object>("All Parts", "/search/bip"),
+                        new KeyValuePair<object, object>("Parts - Owner Only", "/search/bop"),
+                        new KeyValuePair<object, object>("Parts - Dealer Only",  "/search/bdp"),
+                    }
+                },
+                {"/i/boats", new List<KeyValuePair<object, object>>()
+                    {
+                        new KeyValuePair<object, object>("All Boats", "/search/boo"), 
+                        new KeyValuePair<object, object>("Boats - Owner Only",  "/search/boa"),
+                        new KeyValuePair<object, object>("Boats - Dealer Only", "/search/bod"),
+                        new KeyValuePair<object, object>("All Parts", "/search/bpa"),
+                        new KeyValuePair<object, object>("Parts - Owner Only", "/search/bpo"),
+                        new KeyValuePair<object, object>("Parts - Dealer Only",  "/search/bpd"),
+                    }
+                },
+                {"/i/autos", new List<KeyValuePair<object, object>>()
+                    {
+                        new KeyValuePair<object, object>("All Cars / Trucks", "/search/cta"), 
+                        new KeyValuePair<object, object>("Autos - Owner Only",  "/search/cto"),
+                        new KeyValuePair<object, object>("Autos - Dealer Only", "/search/ctd"),
+                    }
+                },
+                {"/i/computers", new List<KeyValuePair<object, object>>()
+                    {
+                        new KeyValuePair<object, object>("All Computers", "/search/sya"), 
+                        new KeyValuePair<object, object>("Computers - Owner Only",  "/search/sys"),
+                        new KeyValuePair<object, object>("Computers - Dealer Only", "/search/syd"),
+                        new KeyValuePair<object, object>("All Parts", "/search/syp"),
+                        new KeyValuePair<object, object>("Parts - Owner Only", "/search/sop"),
+                        new KeyValuePair<object, object>("Parts - Dealer Only",  "/search/sdp"),
+                    }
+                },
+                {"/i/motorcycles", new List<KeyValuePair<object, object>>()
+                    {
+                        new KeyValuePair<object, object>("All Motorcycles", "/search/mca"), 
+                        new KeyValuePair<object, object>("Motorcycles - Owner Only",  "/search/mcy"),
+                        new KeyValuePair<object, object>("Motorcycles - Dealer Only", "/search/mcd"),
+                        new KeyValuePair<object, object>("All Parts", "/search/mpa"),
+                        new KeyValuePair<object, object>("Parts - Owner Only", "/search/mpo"),
+                        new KeyValuePair<object, object>("Parts - Dealer Only",  "/search/mpd"),
+                    }
+                },
             };
     }
 
