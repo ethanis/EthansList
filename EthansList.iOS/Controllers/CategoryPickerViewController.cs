@@ -146,7 +146,10 @@ namespace ethanslist.ios
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             if (this.Selected != null)
-                this.Selected(this, new CategorySelectedEventArgs(){ SelectedCat = categories[indexPath.Section].Items[indexPath.Row] });
+                this.Selected(this, new CategorySelectedEventArgs()
+                    { 
+                        SelectedCat = categories[indexPath.Section].Items[indexPath.Row], 
+                    });
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)

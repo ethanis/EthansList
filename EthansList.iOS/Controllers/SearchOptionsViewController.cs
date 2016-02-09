@@ -27,6 +27,8 @@ namespace ethanslist.ios
         public string MinPrice { get; set; }
         public string MaxPrice { get; set; }
         public string SearchTerms { get; set; }
+        public string MinFootage { get; set; }
+        public string MaxFootage { get; set; }
         public int MaxListings 
         { 
             get { return maxListings; } 
@@ -120,6 +122,8 @@ namespace ethanslist.ios
                         {"max_price", MaxPrice},
                         {"bedrooms", MinBedrooms},
                         {"bathrooms", MinBathrooms},
+                        {"minSqft", MinFootage},
+                        {"maxSqft", MaxFootage},
                         {"query", SearchTerms}
                     }
                 );
@@ -207,6 +211,14 @@ namespace ethanslist.ios
                             new PickerOptions() {PickerWheelOptions = Categories.SubCategories[Category.Key]}
                         },
                     });
+            }
+
+            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
+            {
+                searchterms.Items.Add(new TableItem(){
+                    Heading = "Sq Feet",
+                    CellType = "SqFootageCell"
+                });
             }
 
             if (Categories.Housing.Contains(Category.Key))

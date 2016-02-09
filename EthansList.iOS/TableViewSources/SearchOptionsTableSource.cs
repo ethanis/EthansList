@@ -18,6 +18,7 @@ namespace ethanslist.ios
         private SearchTermsCell searchTermsCell { get; set; }
         private PriceInputCell priceInputCell { get; set; }
         private PriceSelectorCell priceCell { get; set; }
+        private PriceInputCell footageCell { get; set; }
 
         protected SearchOptionsTableSource() {}
 
@@ -180,8 +181,9 @@ namespace ethanslist.ios
                     if (priceInputCell == null)
                     {
                         priceInputCell = PriceInputCell.Create();
+                        priceInputCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
-                        priceInputCell.PriceChanged += (object sender, EventArgs e) =>
+                        priceInputCell.NumChanged += (object sender, EventArgs e) =>
                         {
                             this.owner.MinPrice = priceInputCell.MinPrice.Text;
                             this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
@@ -198,6 +200,29 @@ namespace ethanslist.ios
                         };
                     }
                     return priceInputCell;
+                case "SqFootageCell":
+                    if (footageCell == null)
+                    {
+                        footageCell = PriceInputCell.Create();
+                        footageCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                        footageCell.NumChanged += (object sender, EventArgs e) =>
+                        {
+                                this.owner.MinFootage = footageCell.MinPrice.Text;
+                                this.owner.MaxFootage = footageCell.MaxPrice.Text;
+                        };
+
+                        footageCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                                this.owner.FieldSelected = footageCell.MaxPrice.InputView;
+                        };
+
+                        footageCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                                this.owner.FieldSelected = footageCell.MinPrice.InputView;
+                        };
+                    }
+                    return footageCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
 

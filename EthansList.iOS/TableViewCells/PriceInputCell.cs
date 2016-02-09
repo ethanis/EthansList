@@ -12,7 +12,8 @@ namespace ethanslist.ios
         private NSNumberFormatter numberFormatter;
         public UITextField MinPrice {get{ return MinPriceField; }}
         public UITextField MaxPrice {get{ return MaxPriceField; }}
-        public event EventHandler<EventArgs> PriceChanged;
+        public UILabel HeaderLabel {get{ return PriceLabel; }}
+        public event EventHandler<EventArgs> NumChanged;
         public UILabel ToField;
 
         static PriceInputCell()
@@ -34,7 +35,6 @@ namespace ethanslist.ios
         {
             base.LayoutSubviews();
 
-            PriceLabel.AttributedText = new NSAttributedString("Price", Constants.LabelAttributes);
             ToField = new UILabel();
             ToField.Text = "to";
             ToField.TextAlignment = UITextAlignment.Center;
@@ -79,8 +79,8 @@ namespace ethanslist.ios
             NSNotificationCenter.DefaultCenter.AddObserver (UITextField.TextFieldTextDidChangeNotification, (notification) =>
                 {
 //                    Console.WriteLine ("Character received! {0}", notification.Object == MinPriceField || notification.Object == MaxPriceField);
-                    if (this.PriceChanged != null)
-                        this.PriceChanged(this, new EventArgs());
+                    if (this.NumChanged != null)
+                        this.NumChanged(this, new EventArgs());
                 });
         }
 
