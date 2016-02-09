@@ -131,6 +131,7 @@
     <InterfaceDefinition Include="TableViewCells\PostingDescriptionCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingMapCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PriceInputCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\ComboPickerCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -240,6 +241,10 @@
     <Compile Include="TableViewCells\PriceInputCell.cs" />
     <Compile Include="TableViewCells\PriceInputCell.designer.cs">
       <DependentUpon>PriceInputCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\ComboPickerCell.cs" />
+    <Compile Include="TableViewCells\ComboPickerCell.designer.cs">
+      <DependentUpon>ComboPickerCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />

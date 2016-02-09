@@ -226,7 +226,7 @@ namespace ethanslist.ios
                 options.Items.Add(new TableItem()
                     {
                         Heading = "Condition",
-                        CellType = "PickerSelectorCell",
+                        CellType = "ComboTableCell",
                         PickerOptions = new List<PickerOptions>()
                             {
                                 new PickerOptions()

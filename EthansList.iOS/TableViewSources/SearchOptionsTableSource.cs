@@ -19,6 +19,7 @@ namespace ethanslist.ios
         private PriceInputCell priceInputCell { get; set; }
         private PriceSelectorCell priceCell { get; set; }
         private PriceInputCell footageCell { get; set; }
+        private ComboPickerCell tableSelectorCell { get; set; }
 
         protected SearchOptionsTableSource() {}
 
@@ -276,6 +277,18 @@ namespace ethanslist.ios
                             pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
                     };
                     return pickerSelectorCell;
+                case "ComboTableCell":
+                    if (tableSelectorCell == null)
+                    {
+                        tableSelectorCell = ComboPickerCell.Create();
+                        tableSelectorCell.Title.Text = item.Heading;
+
+                        tableSelectorCell.AddGestureRecognizer(new UITapGestureRecognizer (delegate(UITapGestureRecognizer obj) {
+                            PopupTableView popup = new PopupTableView(this.owner.View.Frame, PopupTableView.PopUpSizeProportion.Half);
+                            popup.Show(this.owner);
+                        }){NumberOfTapsRequired = 1});
+                    }
+                    return tableSelectorCell;
             }
         }
 
