@@ -148,7 +148,7 @@ namespace ethanslist.ios
             });
             searchterms.Items.Add(new TableItem() {
                 Heading = "Price",
-                CellType = "PriceSelectorCell",
+                CellType = "PriceInputCell",
                 PickerOptions = new List<PickerOptions> ()
                     {
                         new PickerOptions(){Options = new Dictionary<object, object>()

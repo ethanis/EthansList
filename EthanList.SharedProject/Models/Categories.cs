@@ -12,6 +12,18 @@ namespace EthansList.Shared
         public static Dictionary<string, List<KeyValuePair<object, object>>> SubCategories { get { return optionFilters.SubCategories; } }
     }
 
+    public class PriceRange
+    {
+        public int min, max, inc;
+
+        public PriceRange(int min, int max, int inc)
+        {
+            this.min = min;
+            this.max = max;
+            this.inc = inc;
+        }
+    }
+
     public class OptionFilters
     {
         public List<string> Housing = new List<string>()

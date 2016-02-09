@@ -130,6 +130,7 @@
     <InterfaceDefinition Include="TableViewCells\PostingImageCollectionCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingDescriptionCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingMapCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\PriceInputCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -236,6 +237,10 @@
     <Compile Include="TableViewSources\CitySelectorTableSource.cs" />
     <Compile Include="Controllers\CategoryPickerViewController.cs" />
     <Compile Include="Controllers\FavoriteCategoryViewController.cs" />
+    <Compile Include="TableViewCells\PriceInputCell.cs" />
+    <Compile Include="TableViewCells\PriceInputCell.designer.cs">
+      <DependentUpon>PriceInputCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

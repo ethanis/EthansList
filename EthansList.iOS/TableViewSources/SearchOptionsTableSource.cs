@@ -175,6 +175,10 @@ namespace ethanslist.ios
                         };
                     }
                     return priceCell;
+                case "PriceInputCell":
+                    var priceInputCell = PriceInputCell.Create();
+
+                    return priceInputCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
 
