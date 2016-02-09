@@ -221,6 +221,29 @@ namespace ethanslist.ios
                 });
             }
 
+            if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
+            {
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Condition",
+                        CellType = "PickerSelectorCell",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("New", 10),
+                                        new KeyValuePair<object, object>("Like New", 20),
+                                        new KeyValuePair<object, object>("Excellent", 30),
+                                        new KeyValuePair<object, object>("Good", 40),
+                                        new KeyValuePair<object, object>("Fair", 50),
+                                        new KeyValuePair<object, object>("Salvage", 60),
+                                    }
+                                }
+                            },
+                    });
+            }
+
             if (Categories.Housing.Contains(Category.Key))
             {
                 options.Items.Add(new TableItem()

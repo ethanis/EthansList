@@ -30,6 +30,11 @@ namespace ethanslist.ios
                 return values[(int)component].PickerWheelOptions.Count;
         }
 
+//        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+//        {
+//            throw new System.NotImplementedException ();
+//        }
+
         public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
             if (price)
