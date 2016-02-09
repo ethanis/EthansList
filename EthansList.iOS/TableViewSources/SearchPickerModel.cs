@@ -143,6 +143,12 @@ namespace ethanslist.ios
             ContentView.Frame = new CoreGraphics.CGRect(centerX - (popupWidth / 2), (float)contentContainerY, (float)popupWidth, (float)popupHeight);
 
             Overlay.Frame = _frame;
+            Overlay.BackgroundColor = ColorScheme.Clouds;
+            Overlay.BackgroundColor.ColorWithAlpha(.2f);
+
+            Overlay.AddGestureRecognizer(new UITapGestureRecognizer(delegate(UITapGestureRecognizer obj) {
+                this.Hide();
+            }){NumberOfTapsRequired = 1});
 
             ContentView.AddSubview(TitleLabel);
             ContentView.AddSubview(Table);
@@ -168,6 +174,37 @@ namespace ethanslist.ios
                 () => RemoveFromSuperview());
 
             this.Dispose();
+        }
+    }
+
+    public class PopupTableViewSource : UITableViewSource
+    {
+        List<KeyValuePair<object,object>> options;
+        private const string cellID = "cellID";
+
+        public PopupTableViewSource(List<KeyValuePair<object,object>> options)
+        {
+            this.options = options;
+        }
+
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return options.Count;
+        }
+
+        public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
+        {
+            var cell = tableView.DequeueReusableCell(cellID);
+            if (cell == null)
+                cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
+
+            cell.TextLabel.Text = (string)options[indexPath.Row].Key;
+
+            cell.AddGestureRecognizer(new UITapGestureRecognizer(delegate(UITapGestureRecognizer obj) {
+                cell.Accessory = UITableViewCellAccessory.Checkmark;
+            }){NumberOfTapsRequired = 1});
+
+            return cell;
         }
     }
 }

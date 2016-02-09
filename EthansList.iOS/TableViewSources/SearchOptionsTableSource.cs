@@ -284,7 +284,8 @@ namespace ethanslist.ios
                         tableSelectorCell.Title.Text = item.Heading;
 
                         tableSelectorCell.AddGestureRecognizer(new UITapGestureRecognizer (delegate(UITapGestureRecognizer obj) {
-                            PopupTableView popup = new PopupTableView(this.owner.View.Frame, PopupTableView.PopUpSizeProportion.Half);
+                            PopupTableView popup = new PopupTableView(this.owner.View.Frame, PopupTableView.PopUpSizeProportion.TwoThird);
+                            popup.Table.Source = new PopupTableViewSource(item.PickerOptions[0].PickerWheelOptions);
                             popup.Show(this.owner);
                         }){NumberOfTapsRequired = 1});
                     }
