@@ -11,7 +11,12 @@ namespace EthansList.Shared
             foreach (KeyValuePair<string, string> kvp in searchTerms)
             {
                 if (kvp.Value != null)
-                    result += String.Format("&{0}={1}", kvp.Key, kvp.Value);
+                {
+                    var val = kvp.Value;
+                    if (val.Substring(0, 1) == "$")
+                        val = val.Substring(1, val.Length - 1);
+                    result += String.Format("&{0}={1}", kvp.Key, val);
+                }
             }
 
             return result;

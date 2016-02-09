@@ -146,46 +146,50 @@ namespace ethanslist.ios
                 Heading = "Search Terms",
                 CellType = "SearchTermsCell",
             });
-            searchterms.Items.Add(new TableItem() {
+            searchterms.Items.Add(new TableItem(){
                 Heading = "Price",
                 CellType = "PriceInputCell",
-                PickerOptions = new List<PickerOptions> ()
-                    {
-                        new PickerOptions(){Options = new Dictionary<object, object>()
-                            {
-                                {0, "Any"},
-                                {1, "400"},
-                                {2, "600"},
-                                {3, "800"},
-                                {4, "1000"},
-                                {5, "1200"},
-                                {6, "1400"},
-                                {7, "1600"},
-                                {8, "1800"},
-                                {9, "2000"},
-                                {10, "2200"},
-                                {11, "2400"},
-                                {12, "2600"},
-                            }},
-                        new PickerOptions(){Options = new Dictionary<object, object>()
-                            {
-                                {0, "Any"},
-                                {1, "1000"},
-                                {2, "1200"},
-                                {3, "1400"},
-                                {4, "1600"},
-                                {5, "1800"},
-                                {6, "2000"},
-                                {7, "2200"},
-                                {8, "2400"},
-                                {9, "2600"},
-                                {10, "2800"},
-                                {11, "3000"},
-                                {12, "3200"},
-                                {13, "3400"},
-                            }},
-                    },
             });
+//            searchterms.Items.Add(new TableItem() {
+//                Heading = "Price",
+//                CellType = "PriceSelectorCell",
+//                PickerOptions = new List<PickerOptions> ()
+//                    {
+//                        new PickerOptions(){Options = new Dictionary<object, object>()
+//                            {
+//                                {0, "Any"},
+//                                {1, "400"},
+//                                {2, "600"},
+//                                {3, "800"},
+//                                {4, "1000"},
+//                                {5, "1200"},
+//                                {6, "1400"},
+//                                {7, "1600"},
+//                                {8, "1800"},
+//                                {9, "2000"},
+//                                {10, "2200"},
+//                                {11, "2400"},
+//                                {12, "2600"},
+//                            }},
+//                        new PickerOptions(){Options = new Dictionary<object, object>()
+//                            {
+//                                {0, "Any"},
+//                                {1, "1000"},
+//                                {2, "1200"},
+//                                {3, "1400"},
+//                                {4, "1600"},
+//                                {5, "1800"},
+//                                {6, "2000"},
+//                                {7, "2200"},
+//                                {8, "2400"},
+//                                {9, "2600"},
+//                                {10, "2800"},
+//                                {11, "3000"},
+//                                {12, "3200"},
+//                                {13, "3400"},
+//                            }},
+//                    },
+//            });
 
 
             TableItemGroup options = new TableItemGroup()

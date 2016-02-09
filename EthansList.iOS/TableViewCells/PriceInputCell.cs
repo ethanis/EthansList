@@ -10,6 +10,10 @@ namespace ethanslist.ios
         public static readonly NSString Key = new NSString("PriceInputCell");
         public static readonly UINib Nib;
         private NSNumberFormatter numberFormatter;
+        public UITextField MinPrice {get{ return MinPriceField; }}
+        public UITextField MaxPrice {get{ return MaxPriceField; }}
+        public event EventHandler<EventArgs> PriceChanged;
+        public UILabel ToField;
 
         static PriceInputCell()
         {
@@ -31,24 +35,29 @@ namespace ethanslist.ios
             base.LayoutSubviews();
 
             PriceLabel.AttributedText = new NSAttributedString("Price", Constants.LabelAttributes);
-//            MinPriceField = new UITextField() { Delegate = new PriceTextDelegate() };
-//            this.AddSubview(MinPriceField);
-//
-//            MinPriceField.BorderStyle = UITextBorderStyle.RoundedRect;
-//            MinPriceField.Placeholder = "Min";
-//
+            ToField = new UILabel();
+            ToField.Text = "to";
+            ToField.TextAlignment = UITextAlignment.Center;
+            ToField.TextColor = ColorScheme.Silver;
+            this.AddSubview(ToField);
+
+            ToField.TranslatesAutoresizingMaskIntoConstraints = false;
             MinPriceField.TranslatesAutoresizingMaskIntoConstraints = false;
             MaxPriceField.TranslatesAutoresizingMaskIntoConstraints = false;
 
             this.AddConstraints(new NSLayoutConstraint[]{
-                NSLayoutConstraint.Create(MinPriceField, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this, NSLayoutAttribute.Top, 1, this.Bounds.Height * 0.1f),
-                NSLayoutConstraint.Create(MaxPriceField, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this, NSLayoutAttribute.Top, 1, this.Bounds.Height * 0.1f),
+                NSLayoutConstraint.Create(MinPriceField, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0),
+                NSLayoutConstraint.Create(MaxPriceField, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0),
                 NSLayoutConstraint.Create(MinPriceField, NSLayoutAttribute.Height, NSLayoutRelation.Equal, this, NSLayoutAttribute.Height, 0.8f, 0),
                 NSLayoutConstraint.Create(MaxPriceField, NSLayoutAttribute.Height, NSLayoutRelation.Equal, this, NSLayoutAttribute.Height, 0.8f, 0),
                 NSLayoutConstraint.Create(MinPriceField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 0.30f, 0),
                 NSLayoutConstraint.Create(MaxPriceField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 0.30f, 0),
-                NSLayoutConstraint.Create(MinPriceField, NSLayoutAttribute.Right, NSLayoutRelation.Equal, MaxPriceField, NSLayoutAttribute.Left, 1, -15),
                 NSLayoutConstraint.Create(MaxPriceField, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this, NSLayoutAttribute.Right, 1, -15),
+
+                NSLayoutConstraint.Create(ToField, NSLayoutAttribute.Right, NSLayoutRelation.Equal, MaxPriceField, NSLayoutAttribute.Left, 1, 0),
+                NSLayoutConstraint.Create(ToField, NSLayoutAttribute.Left, NSLayoutRelation.Equal, MinPriceField, NSLayoutAttribute.Right, 1, 0),
+                NSLayoutConstraint.Create(ToField, NSLayoutAttribute.Width, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 25),
+                NSLayoutConstraint.Create(ToField, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0),
             });
 
             numberFormatter = new NSNumberFormatter();
@@ -62,6 +71,14 @@ namespace ethanslist.ios
 
             MinPriceField.Delegate = new PriceTextDelegate();
             MaxPriceField.Delegate = new PriceTextDelegate();
+
+
+            NSNotificationCenter.DefaultCenter.AddObserver (UITextField.TextFieldTextDidChangeNotification, (notification) =>
+                {
+//                    Console.WriteLine ("Character received! {0}", notification.Object == MinPriceField || notification.Object == MaxPriceField);
+                    if (this.PriceChanged != null)
+                        this.PriceChanged(this, new EventArgs());
+                });
         }
 
     }
@@ -78,6 +95,16 @@ namespace ethanslist.ios
                 textField.Text = "$" + text;
 
             return true;
+        }
+
+        public override void DidChange(NSKeyValueChange changeKind, NSIndexSet indexes, NSString forKey)
+        {
+            base.DidChange(changeKind, indexes, forKey);
+        }
+
+        public override void EditingStarted(UITextField textField)
+        {
+//            throw new System.NotImplementedException ();
         }
     }
 }

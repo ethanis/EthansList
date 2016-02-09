@@ -16,6 +16,7 @@ namespace ethanslist.ios
         private UIPickerView picker;
 
         private SearchTermsCell searchTermsCell { get; set; }
+        private PriceInputCell priceInputCell { get; set; }
         private PriceSelectorCell priceCell { get; set; }
 
         protected SearchOptionsTableSource() {}
@@ -176,8 +177,26 @@ namespace ethanslist.ios
                     }
                     return priceCell;
                 case "PriceInputCell":
-                    var priceInputCell = PriceInputCell.Create();
+                    if (priceInputCell == null)
+                    {
+                        priceInputCell = PriceInputCell.Create();
 
+                        priceInputCell.PriceChanged += (object sender, EventArgs e) =>
+                        {
+                            this.owner.MinPrice = priceInputCell.MinPrice.Text;
+                            this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
+                        };
+
+                        priceInputCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = priceInputCell.MaxPrice.InputView;
+                        };
+                            
+                        priceInputCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = priceInputCell.MinPrice.InputView;
+                        };
+                    }
                     return priceInputCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
