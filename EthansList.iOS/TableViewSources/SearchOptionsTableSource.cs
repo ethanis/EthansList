@@ -125,57 +125,57 @@ namespace ethanslist.ios
                     }
 
                     return searchTermsCell;
-                case "PriceSelectorCell":
-                    if (priceCell == null)
-                    {
-                        priceCell = PriceSelectorCell.Create();
-                        priceCell.LabelText = item.Heading;
-
-
-                        picker_model = new SearchPickerModel(item.PickerOptions, true);
-                        picker = new UIPickerView();
-                        picker.Model = picker_model;
-                        picker.ShowSelectionIndicator = true;
-
-
-                        picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-                        {
-                            var result = e.SelectedValue.ToString();
-                            Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
-                            var text = result != "Any" ? "$" + result : result;
-                            if (e.FromComponent == 0)
-                            {
-                                priceCell.MinPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
-                                this.owner.MinPrice = result;
-                            }
-                            else
-                            {
-                                priceCell.MaxPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
-                                this.owner.MaxPrice = result;
-                            }
-
-                            if (priceCell.MinPrice.Text != "Any" || priceCell.MaxPrice.Text != "Any")
-                                priceCell.ToLabel.Hidden = false;
-                            else
-                                priceCell.ToLabel.Hidden = true;
-                        };
-                            
-                        priceCell.PickerField.InputView = picker;
-                        priceCell.PickerField.InputAccessoryView = toolbar;
-
-                        priceCell.PickerField.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                            this.owner.KeyboardBounds = picker.Bounds;
-                            this.owner.FieldSelected = priceCell.PickerField.InputView;
-                            priceCell.Accessory = UITableViewCellAccessory.Checkmark;
-                        };
-
-                        priceCell.PickerField.EditingDidEnd += delegate
-                        {
-                            priceCell.Accessory = UITableViewCellAccessory.None;
-                        };
-                    }
-                    return priceCell;
+//                case "PriceSelectorCell":
+//                    if (priceCell == null)
+//                    {
+//                        priceCell = PriceSelectorCell.Create();
+//                        priceCell.LabelText = item.Heading;
+//
+//
+//                        picker_model = new SearchPickerModel(item.PickerOptions, true);
+//                        picker = new UIPickerView();
+//                        picker.Model = picker_model;
+//                        picker.ShowSelectionIndicator = true;
+//
+//
+//                        picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+//                        {
+//                            var result = e.SelectedValue.ToString();
+//                            Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
+//                            var text = result != "Any" ? "$" + result : result;
+//                            if (e.FromComponent == 0)
+//                            {
+//                                priceCell.MinPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
+//                                this.owner.MinPrice = result;
+//                            }
+//                            else
+//                            {
+//                                priceCell.MaxPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
+//                                this.owner.MaxPrice = result;
+//                            }
+//
+//                            if (priceCell.MinPrice.Text != "Any" || priceCell.MaxPrice.Text != "Any")
+//                                priceCell.ToLabel.Hidden = false;
+//                            else
+//                                priceCell.ToLabel.Hidden = true;
+//                        };
+//                            
+//                        priceCell.PickerField.InputView = picker;
+//                        priceCell.PickerField.InputAccessoryView = toolbar;
+//
+//                        priceCell.PickerField.EditingDidBegin += (object sender, EventArgs e) =>
+//                        {
+//                            this.owner.KeyboardBounds = picker.Bounds;
+//                            this.owner.FieldSelected = priceCell.PickerField.InputView;
+//                            priceCell.Accessory = UITableViewCellAccessory.Checkmark;
+//                        };
+//
+//                        priceCell.PickerField.EditingDidEnd += delegate
+//                        {
+//                            priceCell.Accessory = UITableViewCellAccessory.None;
+//                        };
+//                    }
+//                    return priceCell;
                 case "PriceInputCell":
                     if (priceInputCell == null)
                     {

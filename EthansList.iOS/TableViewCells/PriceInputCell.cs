@@ -60,6 +60,9 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(ToField, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0),
             });
 
+            MaxPriceField.AccessibilityIdentifier = "MaxPriceField";
+            MinPriceField.AccessibilityIdentifier = "MinPriceField";
+
             numberFormatter = new NSNumberFormatter();
             numberFormatter.NumberStyle = NSNumberFormatterStyle.Currency;
 

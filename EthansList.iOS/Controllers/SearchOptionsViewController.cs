@@ -191,7 +191,6 @@ namespace ethanslist.ios
 //                    },
 //            });
 
-
             TableItemGroup options = new TableItemGroup()
                 { 
                     Name = "Options",
