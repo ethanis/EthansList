@@ -58,10 +58,14 @@ namespace ethanslist.ios
                     {
                         if (this.PageReloaded != null)
                             this.PageReloaded(this, new EventArgs());
+                        else
+                            favoritesVC.Favorites = AppDelegate.databaseConnection.GetAllFavoriteCategoriesAsync().Result;
                     }
-                    
+
                     this.PresentModalViewController(favoritesVC, true);
             });
+
+            categoryTableSource.Favorited += delegate { favoritesVC.ViewedPreviously = true; };
 
             NavigationItem.RightBarButtonItem = Favorites;
             favoritesVC.FavoriteSelected += FavoritesVC_Selected;
@@ -100,6 +104,7 @@ namespace ethanslist.ios
         List<CatTableGroup> categories;
         const string cellID = "cellID";
         public event EventHandler<CategorySelectedEventArgs> Selected;
+        public event EventHandler<CategorySelectedEventArgs> Favorited;
 
         public CategoryTableViewSource(List<CatTableGroup> categories)
         {
@@ -175,6 +180,10 @@ namespace ethanslist.ios
                     await AppDelegate.databaseConnection.AddNewFavoriteCategoryAsync(item.Key, item.Value);
                 }
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
+
+                if (this.Favorited != null)
+                    this.Favorited(this, new CategorySelectedEventArgs(){SelectedCat = item});
+                        
             });
             favorite.BackgroundColor = ColorScheme.Carrot;
 
