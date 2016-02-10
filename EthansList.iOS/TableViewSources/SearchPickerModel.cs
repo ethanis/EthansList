@@ -2,6 +2,7 @@
 using UIKit;
 using System.Collections.Generic;
 using System.Drawing;
+using Foundation;
 
 namespace ethanslist.ios
 {
@@ -59,63 +60,93 @@ namespace ethanslist.ios
         public object SelectedKey { get; set; }
         public int FromComponent {get;set;}
     }
-
-    public class ComboPickerModel : UIPickerViewModel
+   
+    public class ComboPickerDelegate : NSObject, IUIPickerViewDelegate
     {
-        public List<PickerOptions> values;
-        private readonly bool price;
         private const string cellID = "cellID";
-
+        public List<PickerOptions> values;
         public event EventHandler<PickerChangedEventArgs> PickerChanged;
 
-        public ComboPickerModel(List<PickerOptions> values, bool price)
+        public ComboPickerDelegate(List<PickerOptions> values)
         {
             this.values = values;
-            this.price = price;
         }
 
-        public override nint GetComponentCount (UIPickerView picker)
+        [Foundation.Export("pickerView:didSelectRow:inComponent:")]
+        public void Selected(UIKit.UIPickerView pickerView, System.nint row, System.nint component)
         {
-            return values.Count;
+            if (this.PickerChanged != null)
+            {
+                this.PickerChanged(this, new PickerChangedEventArgs
+                    {SelectedValue = values[(int)component].PickerWheelOptions[(int)row].Value, 
+                        SelectedKey = values[(int)component].PickerWheelOptions[(int)row].Key, 
+                        FromComponent = (int)component
+                    });
+            }
+
+            UITableViewCell cell = (UITableViewCell)pickerView.ViewFor(row, component);
+            cell.Accessory = UITableViewCellAccessory.Checkmark;
+            cell.SelectionStyle = UITableViewCellSelectionStyle.Gray;
         }
 
-        public override nint GetRowsInComponent (UIPickerView picker, nint component)
-        {
-            if (price)
-                return values[(int)component].Options.Count;
-            else
-                return values[(int)component].PickerWheelOptions.Count;
-        }
-
-        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+        [Foundation.Export("pickerView:viewForRow:forComponent:reusingView:")]
+        public UIKit.UIView GetView(UIKit.UIPickerView pickerView, System.nint row, System.nint component, UIKit.UIView view)
         {
             UITableViewCell cell = (UITableViewCell)view;
             if (cell == null)
+            {
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
+            }
 
             cell.TextLabel.Text = values[(int)component].PickerWheelOptions[(int)row].Key.ToString();
-            cell.Accessory = UITableViewCellAccessory.Checkmark;
+
+            cell.Tag = row;
 
             return cell;
         }
 
-        public override void Selected (UIPickerView picker, nint row, nint component)
+        #region IDisposable implementation
+        
+        new public void Dispose()
         {
-            if (this.PickerChanged != null)
-            {
-                if (price)
-                    this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[(int)component].Options[(int)row], FromComponent = (int)component});
-                else
-                    this.PickerChanged(this, new PickerChangedEventArgs
-                        {SelectedValue = values[(int)component].PickerWheelOptions[(int)row].Value, 
-                            SelectedKey = values[(int)component].PickerWheelOptions[(int)row].Key, 
-                            FromComponent = (int)component
-                        });
-            }
-
-            UITableViewCell cell = (UITableViewCell)picker.ViewFor(row, component);
-            cell.TextLabel.Text = "Hello";
+            this.Dispose();
         }
+        
+        #endregion
+        #region INativeObject implementation
+        
+        new public IntPtr Handle
+        {
+            get
+            {
+                return IntPtr.Zero;
+            }
+        }
+        
+        #endregion
+    }
+
+    public class ComboPickerDataSource : UIPickerViewDataSource
+    {
+        private const string cellID = "cellID";
+        public List<PickerOptions> values;
+
+        public ComboPickerDataSource(List<PickerOptions> values)
+        {
+            this.values = values;   
+        }
+
+        #region implemented abstract members of UIPickerViewDataSource
+        public override nint GetComponentCount(UIPickerView pickerView)
+        {
+            return 1;
+        }
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+        {
+            return values[0].PickerWheelOptions.Count;
+        }
+        #endregion
+        
     }
 }
 

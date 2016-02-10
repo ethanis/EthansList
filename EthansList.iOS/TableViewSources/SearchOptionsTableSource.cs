@@ -13,8 +13,8 @@ namespace ethanslist.ios
         SearchOptionsViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
         private SearchPickerModel picker_model;
-        private ComboPickerModel combo_picker_model;
         private UIPickerView picker;
+        private UIPickerView comboPicker;
 
         private SearchTermsCell searchTermsCell { get; set; }
         private PriceInputCell priceInputCell { get; set; }
@@ -285,10 +285,11 @@ namespace ethanslist.ios
 
                         tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
-                        combo_picker_model = new ComboPickerModel(item.PickerOptions, false);
-                        picker = new UIPickerView();
-                        picker.Model = combo_picker_model;
-                        picker.ShowSelectionIndicator = true;
+                        comboPicker = new UIPickerView();
+                        comboPicker.ShowSelectionIndicator = true;
+
+                        comboPicker.DataSource = new ComboPickerDataSource(item.PickerOptions);
+                        comboPicker.Delegate = new ComboPickerDelegate(item.PickerOptions);
 
                         if (item.Heading == "Sub Category")
                         {
@@ -297,24 +298,24 @@ namespace ethanslist.ios
                             tableSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
                         }
 
-                        combo_picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-                            {
-                                string resultKey = e.SelectedKey.ToString();
-                                string resultValue = null;
+//                        combo_picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+//                            {
+//                                string resultKey = e.SelectedKey.ToString();
+//                                string resultValue = null;
+//
+//                                if (e.SelectedValue != null)
+//                                    resultValue = e.SelectedValue.ToString();
+//
+//                                Console.WriteLine(resultKey + " From " + e.FromComponent);
+//                                tableSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
+//
+//                            };
 
-                                if (e.SelectedValue != null)
-                                    resultValue = e.SelectedValue.ToString();
-
-                                Console.WriteLine(resultKey + " From " + e.FromComponent);
-                                tableSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
-
-                            };
-
-                        tableSelectorCell.InputTextField.InputView = picker;
+                        tableSelectorCell.InputTextField.InputView = comboPicker;
                         tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
 
                         tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-                            this.owner.KeyboardBounds = picker.Bounds;
+                            this.owner.KeyboardBounds = comboPicker.Bounds;
                             this.owner.FieldSelected = tableSelectorCell;
                             tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
                         };
