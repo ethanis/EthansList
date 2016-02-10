@@ -13,13 +13,14 @@ namespace ethanslist.ios
         SearchOptionsViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
         private SearchPickerModel picker_model;
+        private ComboPickerModel combo_picker_model;
         private UIPickerView picker;
 
         private SearchTermsCell searchTermsCell { get; set; }
         private PriceInputCell priceInputCell { get; set; }
         private PriceSelectorCell priceCell { get; set; }
         private PriceInputCell footageCell { get; set; }
-        private ComboPickerCell tableSelectorCell { get; set; }
+        private PickerSelectorCell tableSelectorCell { get; set; }
 
         protected SearchOptionsTableSource() {}
 
@@ -280,14 +281,48 @@ namespace ethanslist.ios
                 case "ComboTableCell":
                     if (tableSelectorCell == null)
                     {
-                        tableSelectorCell = ComboPickerCell.Create();
-                        tableSelectorCell.Title.Text = item.Heading;
+                        tableSelectorCell = PickerSelectorCell.Create();
 
-                        tableSelectorCell.AddGestureRecognizer(new UITapGestureRecognizer (delegate(UITapGestureRecognizer obj) {
-                            PopupTableView popup = new PopupTableView(this.owner.View.Frame, PopupTableView.PopUpSizeProportion.TwoThird);
-                            popup.Table.Source = new PopupTableViewSource(item.PickerOptions[0].PickerWheelOptions);
-                            popup.Show(this.owner);
-                        }){NumberOfTapsRequired = 1});
+                        tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                        combo_picker_model = new ComboPickerModel(item.PickerOptions, false);
+                        picker = new UIPickerView();
+                        picker.Model = combo_picker_model;
+                        picker.ShowSelectionIndicator = true;
+
+                        if (item.Heading == "Sub Category")
+                        {
+                            var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
+                            this.owner.SubCategory = (string)firstItem.Value;
+                            tableSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
+                        }
+
+                        combo_picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                            {
+                                string resultKey = e.SelectedKey.ToString();
+                                string resultValue = null;
+
+                                if (e.SelectedValue != null)
+                                    resultValue = e.SelectedValue.ToString();
+
+                                Console.WriteLine(resultKey + " From " + e.FromComponent);
+                                tableSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
+
+                            };
+
+                        tableSelectorCell.InputTextField.InputView = picker;
+                        tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
+
+                        tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                            this.owner.KeyboardBounds = picker.Bounds;
+                            this.owner.FieldSelected = tableSelectorCell;
+                            tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
+                        };
+
+                        tableSelectorCell.InputTextField.EditingDidEnd += delegate
+                            {
+                                tableSelectorCell.Accessory = UITableViewCellAccessory.None;
+                            };
                     }
                     return tableSelectorCell;
             }

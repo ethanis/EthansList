@@ -9,7 +9,6 @@ namespace ethanslist.ios
     {
         public List<PickerOptions> values;
         private readonly bool price;
-        private const string cellID = "cellID";
 
         public event EventHandler<PickerChangedEventArgs> PickerChanged;
 
@@ -31,7 +30,7 @@ namespace ethanslist.ios
             else
                 return values[(int)component].PickerWheelOptions.Count;
         }
-
+            
         public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
             if (price)
@@ -39,7 +38,6 @@ namespace ethanslist.ios
             else
                 return values[(int)component].PickerWheelOptions[(int)row].Key.ToString ();
         }
-
         public override void Selected (UIPickerView picker, nint row, nint component)
         {
             if (this.PickerChanged != null)
@@ -62,149 +60,61 @@ namespace ethanslist.ios
         public int FromComponent {get;set;}
     }
 
-    public class PopupTableView : UIView
+    public class ComboPickerModel : UIPickerViewModel
     {
-        public enum PopUpSizeProportion
-        {
-            Full,
-            Half,
-            TwoThird,
-        };
-
-        private float GetPopupSizeProportionValue(PopUpSizeProportion proportion)
-        {
-            switch (proportion)
-            {
-                case PopUpSizeProportion.Half:
-                    return 0.5f;
-                case PopUpSizeProportion.TwoThird:
-                    return 0.75f;
-                case PopUpSizeProportion.Full:
-                    return 1.0f;
-                default:
-                    return 0.5f;
-            }
-        }
-
-        public UITableView Table { get; set; }
-        public UILabel TitleLabel { get; set; }
-        public UIView Overlay { get; set; }
-        public UIButton Button { get; set; }
-        public UIView ContentView { get; set; }
-
-        CoreGraphics.CGRect _frame;
-        PopUpSizeProportion _proportion;
-
-
-        public PopupTableView (CoreGraphics.CGRect frame, PopUpSizeProportion proportion)
-            :base(frame)
-        {
-            _frame = frame;
-            _proportion = proportion;
-
-            Table = new UITableView();
-            TitleLabel = new UILabel();
-            Overlay = new UIView();
-            Button = new UIButton();
-            ContentView = new UIView();
-        }
-
-        public void Show(UIViewController parent)
-        {
-            Alpha = 0.0f;
-
-            nfloat centerX = _frame.Width / 2;
-            nfloat centerY = _frame.Height / 2;
-
-            var margin = 15.0f;
-
-            var popupHeight = (_proportion == PopUpSizeProportion.Full) ?
-                (_frame.Height * GetPopupSizeProportionValue(_proportion)) - (margin * 2 + parent.NavigationController.NavigationBar.Bounds.Height + 5.0f)
-                : _frame.Height * GetPopupSizeProportionValue(_proportion);
-
-            var popupWidth = (_proportion == PopUpSizeProportion.Full) ? (_frame.Width * GetPopupSizeProportionValue(_proportion)) - margin : _frame.Width * GetPopupSizeProportionValue(_proportion);
-
-            var popupCenterX = popupWidth / 2;
-
-            var contentContainerY = (_proportion == PopUpSizeProportion.Full) ? parent.NavigationController.NavigationBar.Bounds.Height + margin + 5.0f : centerY - (popupHeight / 2);
-
-            var buttonWidth = 140.0f;
-            var buttonHeight = 60.0f;
-
-            var titleHeight = 100;
-            var titleWidth = popupWidth - (margin * 2);
-
-            var tableHeight = popupHeight - (( titleHeight ) + ( margin * 2 ) + ( buttonHeight ) + ( margin * 2 ));
-            var tableY = titleHeight + (margin * 2);                
-
-            TitleLabel.Frame = new CoreGraphics.CGRect(margin, margin, titleWidth, titleHeight);
-            Table.Frame = new CoreGraphics.CGRect(margin, tableY, (float)titleWidth, (float)tableHeight);
-            Button.Frame = new CoreGraphics.CGRect(popupCenterX - (buttonWidth / 2), (float)(popupHeight - (buttonHeight + margin)), (float)buttonWidth, (float)buttonHeight);
-            ContentView.Frame = new CoreGraphics.CGRect(centerX - (popupWidth / 2), (float)contentContainerY, (float)popupWidth, (float)popupHeight);
-
-            Overlay.Frame = _frame;
-            Overlay.BackgroundColor = ColorScheme.Clouds;
-            Overlay.BackgroundColor.ColorWithAlpha(.2f);
-
-            Overlay.AddGestureRecognizer(new UITapGestureRecognizer(delegate(UITapGestureRecognizer obj) {
-                this.Hide();
-            }){NumberOfTapsRequired = 1});
-
-            ContentView.AddSubview(TitleLabel);
-            ContentView.AddSubview(Table);
-            ContentView.AddSubview(Button);
-
-            AddSubview(Overlay);
-            AddSubview(ContentView);
-
-            parent.Add(this);
-
-            Animate(
-                0.3f,
-                () => Alpha = 1.0f);
-
-        }
-
-        public void Hide()
-        {
-
-            UIView.Animate(
-                0.3f,
-                () => { Alpha = 0; },
-                () => RemoveFromSuperview());
-
-            this.Dispose();
-        }
-    }
-
-    public class PopupTableViewSource : UITableViewSource
-    {
-        List<KeyValuePair<object,object>> options;
+        public List<PickerOptions> values;
+        private readonly bool price;
         private const string cellID = "cellID";
 
-        public PopupTableViewSource(List<KeyValuePair<object,object>> options)
+        public event EventHandler<PickerChangedEventArgs> PickerChanged;
+
+        public ComboPickerModel(List<PickerOptions> values, bool price)
         {
-            this.options = options;
+            this.values = values;
+            this.price = price;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section)
+        public override nint GetComponentCount (UIPickerView picker)
         {
-            return options.Count;
+            return values.Count;
         }
 
-        public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
+        public override nint GetRowsInComponent (UIPickerView picker, nint component)
         {
-            var cell = tableView.DequeueReusableCell(cellID);
+            if (price)
+                return values[(int)component].Options.Count;
+            else
+                return values[(int)component].PickerWheelOptions.Count;
+        }
+
+        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+        {
+            UITableViewCell cell = (UITableViewCell)view;
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
-            cell.TextLabel.Text = (string)options[indexPath.Row].Key;
-
-            cell.AddGestureRecognizer(new UITapGestureRecognizer(delegate(UITapGestureRecognizer obj) {
-                cell.Accessory = UITableViewCellAccessory.Checkmark;
-            }){NumberOfTapsRequired = 1});
+            cell.TextLabel.Text = values[(int)component].PickerWheelOptions[(int)row].Key.ToString();
+            cell.Accessory = UITableViewCellAccessory.Checkmark;
 
             return cell;
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            if (this.PickerChanged != null)
+            {
+                if (price)
+                    this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[(int)component].Options[(int)row], FromComponent = (int)component});
+                else
+                    this.PickerChanged(this, new PickerChangedEventArgs
+                        {SelectedValue = values[(int)component].PickerWheelOptions[(int)row].Value, 
+                            SelectedKey = values[(int)component].PickerWheelOptions[(int)row].Key, 
+                            FromComponent = (int)component
+                        });
+            }
+
+            UITableViewCell cell = (UITableViewCell)picker.ViewFor(row, component);
+            cell.TextLabel.Text = "Hello";
         }
     }
 }
