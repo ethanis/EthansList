@@ -126,7 +126,8 @@ namespace ethanslist.ios
                         {"minSqft", MinFootage},
                         {"maxSqft", MaxFootage},
                         {"query", SearchTerms}
-                    }
+                    },
+                    Conditions
                 );
                 Console.WriteLine (query);
 

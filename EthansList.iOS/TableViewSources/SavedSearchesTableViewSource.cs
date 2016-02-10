@@ -77,8 +77,8 @@ namespace ethanslist.ios
             searchTerms["bathrooms"] = search.MinBathrooms;
             searchTerms["query"] = search.SearchQuery;
             QueryGeneration helper = new QueryGeneration();
-
-            feedResultsVC.Query = helper.Generate(search.LinkUrl, search.CategoryKey, searchTerms);
+            //TODO: Need to save search conditions
+            feedResultsVC.Query = helper.Generate(search.LinkUrl, search.CategoryKey, searchTerms, null);
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;
 

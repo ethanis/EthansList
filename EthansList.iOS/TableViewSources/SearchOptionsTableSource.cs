@@ -14,7 +14,6 @@ namespace ethanslist.ios
         public EventHandler<EventArgs> actionSheetSelected;
         private SearchPickerModel picker_model;
         private UIPickerView picker;
-        private UIPickerView comboPicker;
 
         private SearchTermsCell searchTermsCell { get; set; }
         private PriceInputCell priceInputCell { get; set; }
@@ -282,32 +281,12 @@ namespace ethanslist.ios
                     if (tableSelectorCell == null)
                     {
                         tableSelectorCell = PickerSelectorCell.Create();
-
                         tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-
-//                        comboPicker = new UIPickerView();
-//                        comboPicker.ShowSelectionIndicator = true;
-//
-//                        comboPicker.DataSource = new ComboPickerDataSource(item.PickerOptions);
-//                        comboPicker.Delegate = new ComboPickerDelegate(item.PickerOptions);
 
                         ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
                         UITableView comboPicker = new UITableView();
                         comboPicker.Source = comboSource;
                         comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
-
-//                        combo_picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-//                            {
-//                                string resultKey = e.SelectedKey.ToString();
-//                                string resultValue = null;
-//
-//                                if (e.SelectedValue != null)
-//                                    resultValue = e.SelectedValue.ToString();
-//
-//                                Console.WriteLine(resultKey + " From " + e.FromComponent);
-//                                tableSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
-//
-//                            };
 
                         comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
                             string resultKey = e.SelectedKey.ToString();
@@ -315,6 +294,7 @@ namespace ethanslist.ios
                             if (e.SelectedValue != null)
                                 resultValue = e.SelectedValue.ToString();
 
+                            //TODO: Update cell text based on selection
                             if (this.owner.Conditions.ContainsKey(resultKey))
                             {
                                 this.owner.Conditions.Remove(resultKey);
