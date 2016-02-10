@@ -210,8 +210,19 @@ namespace ethanslist.ios
 
                         footageCell.NumChanged += (object sender, EventArgs e) =>
                         {
-                                this.owner.MinFootage = footageCell.MinPrice.Text;
-                                this.owner.MaxFootage = footageCell.MaxPrice.Text;
+                                switch (item.Heading) {
+
+                                    case "Sq Feet":
+                                        this.owner.MinFootage = footageCell.MinPrice.Text;
+                                        this.owner.MaxFootage = footageCell.MaxPrice.Text;
+                                        break;
+                                    case "Odometer":
+                                        this.owner.MinMiles = footageCell.MinPrice.Text;
+                                        this.owner.MaxMiles = footageCell.MaxPrice.Text;
+                                        break;
+                                    default:
+                                        break;
+                                }
                         };
 
                         footageCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>

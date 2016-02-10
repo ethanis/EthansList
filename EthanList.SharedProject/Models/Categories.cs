@@ -9,6 +9,7 @@ namespace EthansList.Shared
         public static List<CatTableGroup> Groups { get { return catHelper.CategoryGroups; } }
         static OptionFilters optionFilters = new OptionFilters();
         public static List<string> Housing { get { return optionFilters.Housing; } }
+        public static List<string> Autos { get { return optionFilters.Autos; } }
         public static Dictionary<string, List<KeyValuePair<object, object>>> SubCategories { get { return optionFilters.SubCategories; } }
     }
 
@@ -26,6 +27,13 @@ namespace EthansList.Shared
 
     public class OptionFilters
     {
+        public List<string> Autos = new List<string>()
+            { 
+                "/i/autos",
+                "/search/rva",
+                "/i/motorcycles"
+            };
+
         public List<string> Housing = new List<string>()
             { 
                 "/search/apa",

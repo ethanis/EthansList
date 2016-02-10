@@ -29,6 +29,8 @@ namespace ethanslist.ios
         public string SearchTerms { get; set; }
         public string MinFootage { get; set; }
         public string MaxFootage { get; set; }
+        public string MinMiles { get; set; }
+        public string MaxMiles { get; set; }
         public int MaxListings 
         { 
             get { return maxListings; } 
@@ -125,6 +127,8 @@ namespace ethanslist.ios
                         {"bathrooms", MinBathrooms},
                         {"minSqft", MinFootage},
                         {"maxSqft", MaxFootage},
+                        {"min_auto_miles", MinMiles},
+                        {"max_auto_miles", MaxMiles},
                         {"query", SearchTerms}
                     },
                     Conditions
@@ -197,6 +201,21 @@ namespace ethanslist.ios
 //                    },
 //            });
 
+            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
+            {
+                searchterms.Items.Add(new TableItem(){
+                    Heading = "Sq Feet",
+                    CellType = "SqFootageCell"
+                });
+            }
+
+            if (Categories.Autos.Contains(Category.Key))
+            {
+                searchterms.Items.Add(new TableItem(){
+                    Heading = "Odometer",
+                    CellType = "SqFootageCell"
+                });
+            }
             TableItemGroup options = new TableItemGroup()
                 { 
                     Name = "Options",
@@ -213,14 +232,6 @@ namespace ethanslist.ios
                             new PickerOptions() {PickerWheelOptions = Categories.SubCategories[Category.Key]}
                         },
                     });
-            }
-
-            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
-            {
-                searchterms.Items.Add(new TableItem(){
-                    Heading = "Sq Feet",
-                    CellType = "SqFootageCell"
-                });
             }
 
             if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
