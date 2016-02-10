@@ -284,26 +284,26 @@ namespace ethanslist.ios
                             }
                         },
                     });
-                options.Items.Add(new TableItem()
-                    {
-                        Heading = "Posted Date",
-                        CellType = "PickerSelectorCell",
-                        PickerOptions = new List<PickerOptions>()
-                        {
-                            new PickerOptions()
-                            {PickerWheelOptions = new List<KeyValuePair<object, object>>()
-                                {
-                                    new KeyValuePair<object, object>("Any", null),
-                                    new KeyValuePair<object, object>("Today", "-1"),
-                                    new KeyValuePair<object, object>("1 Week Old", "1"),
-                                    new KeyValuePair<object, object>("2 Weeks Old", "2"),
-                                    new KeyValuePair<object, object>("3 Weeks Old", "3"),
-                                    new KeyValuePair<object, object>("4 Weeks Old", "4"),
-                                }
-                            }
-                        },
-                    });
             }
+            options.Items.Add(new TableItem()
+                {
+                    Heading = "Posted Date",
+                    CellType = "PickerSelectorCell",
+                    PickerOptions = new List<PickerOptions>()
+                    {
+                        new PickerOptions()
+                        {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                            {
+                                new KeyValuePair<object, object>("Any", null),
+                                new KeyValuePair<object, object>("Today", "-1"),
+                                new KeyValuePair<object, object>("1 Week Old", "1"),
+                                new KeyValuePair<object, object>("2 Weeks Old", "2"),
+                                new KeyValuePair<object, object>("3 Weeks Old", "3"),
+                                new KeyValuePair<object, object>("4 Weeks Old", "4"),
+                            }
+                        }
+                    },
+                });
             options.Items.Add(new TableItem() {
                 Heading = "Max Listings",
                 CellType = "PickerSelectorCell",
