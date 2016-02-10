@@ -24,7 +24,7 @@ namespace EthansList.Shared
             {
                 if (kvp.Value != null)
                 {
-                    result += String.Format("&{0}={1}", kvp.Key, kvp.Value);
+                    result += String.Format("&condition={0}", kvp.Value);
                 }
             }
 
