@@ -72,30 +72,34 @@ namespace ethanslist.ios
             this.values = values;
         }
 
-        [Foundation.Export("pickerView:didSelectRow:inComponent:")]
-        public void Selected(UIKit.UIPickerView pickerView, System.nint row, System.nint component)
-        {
-            if (this.PickerChanged != null)
-            {
-                this.PickerChanged(this, new PickerChangedEventArgs
-                    {SelectedValue = values[(int)component].PickerWheelOptions[(int)row].Value, 
-                        SelectedKey = values[(int)component].PickerWheelOptions[(int)row].Key, 
-                        FromComponent = (int)component
-                    });
-            }
-
-            UITableViewCell cell = (UITableViewCell)pickerView.ViewFor(row, component);
-            cell.Accessory = UITableViewCellAccessory.Checkmark;
-            cell.SelectionStyle = UITableViewCellSelectionStyle.Gray;
-        }
+//        [Foundation.Export("pickerView:didSelectRow:inComponent:")]
+//        public void Selected(UIKit.UIPickerView pickerView, System.nint row, System.nint component)
+//        {
+//            if (this.PickerChanged != null)
+//            {
+//                this.PickerChanged(this, new PickerChangedEventArgs
+//                    {SelectedValue = values[(int)component].PickerWheelOptions[(int)row].Value, 
+//                        SelectedKey = values[(int)component].PickerWheelOptions[(int)row].Key, 
+//                        FromComponent = (int)component
+//                    });
+//            }
+//
+//            UITableViewCell cell = (UITableViewCell)pickerView.ViewFor(row, component);
+//            cell.Accessory = UITableViewCellAccessory.Checkmark;
+//            cell.SelectionStyle = UITableViewCellSelectionStyle.Gray;
+//        }
 
         [Foundation.Export("pickerView:viewForRow:forComponent:reusingView:")]
         public UIKit.UIView GetView(UIKit.UIPickerView pickerView, System.nint row, System.nint component, UIKit.UIView view)
         {
             UITableViewCell cell = (UITableViewCell)view;
+            UITapGestureRecognizer tap;
             if (cell == null)
             {
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
+                tap = new UITapGestureRecognizer(OnTap);
+                tap.ShouldRecognizeSimultaneously = (d1, d2) => true;
+                cell.AddGestureRecognizer(tap);
             }
 
             cell.TextLabel.Text = values[(int)component].PickerWheelOptions[(int)row].Key.ToString();
@@ -103,6 +107,11 @@ namespace ethanslist.ios
             cell.Tag = row;
 
             return cell;
+        }
+
+        void OnTap (UITapGestureRecognizer tap)
+        {
+            Console.WriteLine("hello");
         }
 
         #region IDisposable implementation
@@ -146,6 +155,49 @@ namespace ethanslist.ios
             return values[0].PickerWheelOptions.Count;
         }
         #endregion
+        
+    }
+
+
+    public class ComboPickerTableSource : UITableViewSource
+    {
+        private List<PickerOptions> values;
+        private const string cellID = "cellID";
+        public event EventHandler<PickerChangedEventArgs> ValueChanged;
+
+        public ComboPickerTableSource(List<PickerOptions> values)
+        {
+            this.values = values;
+        }
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+        {
+            var cell = tableView.DequeueReusableCell(cellID);
+            var item = values[0].PickerWheelOptions[indexPath.Row];
+            UITapGestureRecognizer tap;
+            if (cell == null)
+            {
+                cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
+                tap = new UITapGestureRecognizer( delegate(UITapGestureRecognizer obj) {
+                    if (cell.Accessory == UITableViewCellAccessory.None)
+                        cell.Accessory = UITableViewCellAccessory.Checkmark;
+                    else
+                        cell.Accessory = UITableViewCellAccessory.None;
+                    if (this.ValueChanged != null)
+                        this.ValueChanged(this, new PickerChangedEventArgs(){SelectedKey = item.Key, SelectedValue = item.Value});
+                });
+                tap.ShouldRecognizeSimultaneously = (d1, d2) => true;
+                cell.AddGestureRecognizer(tap);
+            }
+            cell.TextLabel.Text = item.Key.ToString();
+            cell.BackgroundColor = ColorScheme.Clouds;
+
+            return cell;
+        }
+
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return values[0].PickerWheelOptions.Count;
+        }
         
     }
 }

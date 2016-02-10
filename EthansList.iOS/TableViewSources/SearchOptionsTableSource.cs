@@ -285,18 +285,16 @@ namespace ethanslist.ios
 
                         tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
-                        comboPicker = new UIPickerView();
-                        comboPicker.ShowSelectionIndicator = true;
+//                        comboPicker = new UIPickerView();
+//                        comboPicker.ShowSelectionIndicator = true;
+//
+//                        comboPicker.DataSource = new ComboPickerDataSource(item.PickerOptions);
+//                        comboPicker.Delegate = new ComboPickerDelegate(item.PickerOptions);
 
-                        comboPicker.DataSource = new ComboPickerDataSource(item.PickerOptions);
-                        comboPicker.Delegate = new ComboPickerDelegate(item.PickerOptions);
-
-                        if (item.Heading == "Sub Category")
-                        {
-                            var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
-                            this.owner.SubCategory = (string)firstItem.Value;
-                            tableSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
-                        }
+                        ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
+                        UITableView comboPicker = new UITableView();
+                        comboPicker.Source = comboSource;
+                        comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
 
 //                        combo_picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
 //                            {
@@ -310,6 +308,24 @@ namespace ethanslist.ios
 //                                tableSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
 //
 //                            };
+
+                        comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
+                            string resultKey = e.SelectedKey.ToString();
+                            string resultValue = null;
+                            if (e.SelectedValue != null)
+                                resultValue = e.SelectedValue.ToString();
+
+                            if (this.owner.Conditions.ContainsKey(resultKey))
+                            {
+                                this.owner.Conditions.Remove(resultKey);
+                                Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
+                            }
+                            else
+                            {
+                                this.owner.Conditions.Add(resultKey, resultValue);
+                                Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
+                            }
+                        };
 
                         tableSelectorCell.InputTextField.InputView = comboPicker;
                         tableSelectorCell.InputTextField.InputAccessoryView = toolbar;

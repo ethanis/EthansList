@@ -41,6 +41,7 @@ namespace ethanslist.ios
         public KeyValuePair<string, string> Category {get;set;}
         public UIView FieldSelected { get; set; }
         public CGRect KeyboardBounds { get; set; }
+        public Dictionary<object, object> Conditions { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -66,8 +67,8 @@ namespace ethanslist.ios
             base.ViewDidLoad();
 
             AddLayoutConstraints();
-
             this.Title = "Options";
+            Conditions = new Dictionary<object, object>();
             tableSource = new SearchOptionsTableSource(GetTableSetup(), this);
             SearchTableView.Source = tableSource;
 
