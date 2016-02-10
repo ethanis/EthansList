@@ -3,6 +3,7 @@ using UIKit;
 using System.Collections.Generic;
 using Foundation;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ethanslist.ios
 {
@@ -294,7 +295,6 @@ namespace ethanslist.ios
                             if (e.SelectedValue != null)
                                 resultValue = e.SelectedValue.ToString();
 
-                            //TODO: Update cell text based on selection
                             if (this.owner.Conditions.ContainsKey(resultKey))
                             {
                                 this.owner.Conditions.Remove(resultKey);
@@ -305,6 +305,10 @@ namespace ethanslist.ios
                                 this.owner.Conditions.Add(resultKey, resultValue);
                                 Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
                             }
+
+                            var keys = this.owner.Conditions.Keys;
+                            var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
+                            tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
                         };
 
                         tableSelectorCell.InputTextField.InputView = comboPicker;
