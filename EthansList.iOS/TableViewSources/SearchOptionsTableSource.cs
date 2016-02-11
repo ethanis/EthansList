@@ -191,7 +191,7 @@ namespace ethanslist.ios
                     if (item.Heading == "Sub Category")
                     {
                         var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
-                        this.owner.SubCategory = (string)firstItem.Value;
+                        this.owner.SubCategory = firstItem;
                         pickerSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
                     }
 
@@ -214,7 +214,7 @@ namespace ethanslist.ios
                             else if (item.Heading == "Max Listings")
                                 this.owner.MaxListings = Convert.ToInt16(resultValue);
                             else if (item.Heading == "Sub Category")
-                                this.owner.SubCategory = resultValue;
+                                this.owner.SubCategory = new KeyValuePair<object, object>(resultKey, resultValue);
                         };
                     
                     pickerSelectorCell.InputTextField.InputView = picker;

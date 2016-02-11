@@ -5,6 +5,9 @@ using UIKit;
 using EthansList.Models;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
+using EthansList.Shared;
+using Newtonsoft.Json;
 
 namespace ethanslist.ios
 {
@@ -25,7 +28,7 @@ namespace ethanslist.ios
             this.TableView.BackgroundColor = ColorScheme.Clouds;
         }
 
-        public override void ViewDidLoad()
+        public async override void ViewDidLoad()
         {
             base.ViewDidLoad();
             this.Title = "Saved Searches";
@@ -38,9 +41,24 @@ namespace ethanslist.ios
             TableView.EstimatedRowHeight = 70;
 
             savedSearches = AppDelegate.databaseConnection.GetAllSearchesAsync().Result;
-            searchTableViewSource = new SavedSearchesTableViewSource(this, savedSearches);
+            searchTableViewSource = new SavedSearchesTableViewSource(this, await DeserializeSearches(savedSearches));
+
             TableView.Source = searchTableViewSource;
             TableView.ReloadData();
+        }
+
+        private async Task<List<SearchObject>> DeserializeSearches(List<Search> savedSearches)
+        {
+            List<SearchObject> searchObjects = new List<SearchObject>();
+            await Task.Run(() =>
+                {
+                    foreach (Search search in savedSearches)
+                    {
+                        searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
+                    }
+                });
+
+            return searchObjects;
         }
 	}
 }

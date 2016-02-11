@@ -12,10 +12,10 @@ namespace ethanslist.ios
     public class SavedSearchesTableViewSource : UITableViewSource
     {
         UIViewController owner;
-        List<Search> savedSearches;
+        List<SearchObject> savedSearches;
         Dictionary<string, string> searchTerms = new Dictionary<string, string>();
 
-        public SavedSearchesTableViewSource(UIViewController owner, List<Search> savedSearches)
+        public SavedSearchesTableViewSource(UIViewController owner, List<SearchObject> savedSearches)
         {
             this.owner = owner;
             this.savedSearches = savedSearches;
@@ -36,7 +36,7 @@ namespace ethanslist.ios
             SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, "searchCell") as SavedSearchCell;
-            cell.SetCity(savedSearches[indexPath.Row].CityName, savedSearches[indexPath.Row].CategoryValue);
+            cell.SetCity(savedSearches[indexPath.Row].SearchLocation.SiteName, (string)savedSearches[indexPath.Row].Category.Value);
             cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
 
             return cell;
@@ -48,7 +48,8 @@ namespace ethanslist.ios
             var title = string.Format("\ud83d\uddd1{0}Delete", Environment.NewLine);
 //            var title = "Delete";
             var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, title, async delegate {
-                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row]);
+                
+                await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row].SearchLocation.Url, savedSearches[indexPath.Row]);
                 savedSearches.RemoveAt(indexPath.Row);
                 tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
@@ -73,14 +74,15 @@ namespace ethanslist.ios
             var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
             var search = savedSearches[indexPath.Row];
-            searchTerms["min_price"] = search.MinPrice;
-            searchTerms["max_price"] = search.MaxPrice;
-            searchTerms["bedrooms"] = search.MinBedrooms;
-            searchTerms["bathrooms"] = search.MinBathrooms;
-            searchTerms["query"] = search.SearchQuery;
+//            searchTerms["min_price"] = search.MinPrice;
+//            searchTerms["max_price"] = search.MaxPrice;
+//            searchTerms["bedrooms"] = search.MinBedrooms;
+//            searchTerms["bathrooms"] = search.MinBathrooms;
+//            searchTerms["query"] = search.SearchQuery;
             QueryGeneration helper = new QueryGeneration();
             //TODO: Need to save search conditions
-            feedResultsVC.Query = helper.Generate(search.LinkUrl, search.CategoryKey, searchTerms, null);
+            feedResultsVC.Query = helper.Generate(search);
+
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;
 

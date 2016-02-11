@@ -31,7 +31,7 @@ namespace ethanslist.ios
         }
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
-        public string SubCategory { get; set; }
+        public KeyValuePair<object,object> SubCategory { get; set; }
         public Dictionary<string, string> SearchItems { get; set;}
         public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
         #endregion
@@ -85,31 +85,38 @@ namespace ethanslist.ios
             saveButton = new UIBarButtonItem (
                 UIImage.FromFile ("save.png"),
                 UIBarButtonItemStyle.Plain,
-                async (sender, e) => {
+                async (sender, e) => 
+                {
                     //TODO: Saving all of the options now
+                    SearchObject forSerial = new SearchObject();
+                    forSerial.SearchLocation = Location;
+                    forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
+                    forSerial.SearchItems = this.SearchItems;
+                    forSerial.Conditions = this.Conditions;
+                    string serialized = JsonConvert.SerializeObject(forSerial);
+                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, serialized);
 //                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
 //                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
+                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+                    {
+                        UIAlertView alert = new UIAlertView();
+                        alert.Message = "Search Saved!";
+                        alert.AddButton("OK");
+                        alert.Show();
 
-//                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-//                    {
-//                        UIAlertView alert = new UIAlertView();
-//                        alert.Message = "Search Saved!";
-//                        alert.AddButton("OK");
-//                        alert.Show();
-//
-//                        this.NavigationItem.RightBarButtonItem.Enabled = false;
-//                    }
-//                    else
-//                    {
-//                        UIAlertView alert = new UIAlertView();
-//                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-//                        alert.AddButton("OK");
-//                        alert.Show();
-//
-//                        this.NavigationItem.RightBarButtonItem.Enabled = true;
-//                    }
+                        this.NavigationItem.RightBarButtonItem.Enabled = false;
+                    }
+                    else
+                    {
+                        UIAlertView alert = new UIAlertView();
+                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                        alert.AddButton("OK");
+                        alert.Show();
+
+                        this.NavigationItem.RightBarButtonItem.Enabled = true;
+                    }
                 }
             );
 
@@ -117,7 +124,7 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var cat = SubCategory != null ? SubCategory : Category.Key;
+                var cat = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
 
 //                var query = queryHelper.Generate(Location.Url, cat, SearchItems, Conditions);
 
@@ -126,7 +133,7 @@ namespace ethanslist.ios
 
                 SearchObject forSerial = new SearchObject();
                 forSerial.SearchLocation = Location;
-                forSerial.Category = SubCategory != null ? SubCategory : Category.Key;
+                forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
                 forSerial.SearchItems = this.SearchItems;
                 forSerial.Conditions = this.Conditions;
 //                string output = JsonConvert.SerializeObject(forSerial);
