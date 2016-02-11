@@ -12,6 +12,11 @@ namespace ethanslist.ios
             this.BackgroundColor = ColorScheme.Clouds;
 		}
 
+        public SavedSearchCell()
+        {
+            this.BackgroundColor = ColorScheme.Clouds;
+        }
+
         public void SetCity(string city, string cat)
         {
             LabelCity.AttributedText = new NSAttributedString(city + ": " + cat, Constants.HeaderAttributes);

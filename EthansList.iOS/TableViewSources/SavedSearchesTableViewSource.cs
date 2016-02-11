@@ -34,6 +34,8 @@ namespace ethanslist.ios
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             SavedSearchCell cell = (SavedSearchCell)tableView.DequeueReusableCell("searchCell");
+            if (cell == null)
+                cell = new UITableViewCell(UITableViewCellStyle.Default, "searchCell") as SavedSearchCell;
             cell.SetCity(savedSearches[indexPath.Row].CityName, savedSearches[indexPath.Row].CategoryValue);
             cell.SetTerms(AppDelegate.databaseConnection.SecondFormatSearch(savedSearches[indexPath.Row]));
 

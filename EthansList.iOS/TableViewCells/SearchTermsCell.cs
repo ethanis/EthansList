@@ -9,10 +9,7 @@ namespace ethanslist.ios
     {
         public static readonly NSString Key = new NSString("SearchTermsCell");
         public static readonly UINib Nib;
-        public UITextField TermsField 
-        {
-            get { return this.SearchTermField; }
-        }
+        public UITextField TermsField { get { return this.SearchTermField; }}
 
         static SearchTermsCell()
         {

@@ -10,7 +10,7 @@ namespace EthansList.Shared
             string result = String.Format("{0}{1}?format=rss", url, cat);
             foreach (KeyValuePair<string, string> kvp in searchTerms)
             {
-                if (kvp.Value != null)
+                if (kvp.Value != null && kvp.Value.Length > 0)
                 {
                     var val = kvp.Value;
                     //HACK: Needs improvement for removing $
