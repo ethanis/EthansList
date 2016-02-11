@@ -72,13 +72,13 @@ namespace ethanslist.ios
             MinPriceField.KeyboardType = UIKeyboardType.NumberPad;
             MaxPriceField.KeyboardType = UIKeyboardType.NumberPad;
 
+
             MinPriceField.Delegate = new PriceTextDelegate();
             MaxPriceField.Delegate = new PriceTextDelegate();
 
 
             NSNotificationCenter.DefaultCenter.AddObserver (UITextField.TextFieldTextDidChangeNotification, (notification) =>
                 {
-//                    Console.WriteLine ("Character received! {0}", notification.Object == MinPriceField || notification.Object == MaxPriceField);
                     if (this.NumChanged != null)
                         this.NumChanged(this, new EventArgs());
                 });

@@ -132,6 +132,7 @@
     <InterfaceDefinition Include="TableViewCells\PostingMapCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PriceInputCell.xib" />
     <InterfaceDefinition Include="TableViewCells\SearchLabeledCell.xib" />
+    <InterfaceDefinition Include="TableViewCells\DoubleInputCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -245,6 +246,10 @@
     <Compile Include="TableViewCells\SearchLabeledCell.cs" />
     <Compile Include="TableViewCells\SearchLabeledCell.designer.cs">
       <DependentUpon>SearchLabeledCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableViewCells\DoubleInputCell.cs" />
+    <Compile Include="TableViewCells\DoubleInputCell.designer.cs">
+      <DependentUpon>DoubleInputCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />

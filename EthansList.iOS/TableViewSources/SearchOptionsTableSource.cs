@@ -17,14 +17,6 @@ namespace ethanslist.ios
         private UIPickerView picker;
         private const string comboCell = "comboCell";
 
-        private SearchTermsCell searchTermsCell { get; set; }
-        private SearchLabeledCell makeModelCell {get;set;}
-
-        private PriceInputCell priceInputCell { get; set; }
-        private PriceSelectorCell priceCell { get; set; }
-        private PriceInputCell footageCell { get; set; }
-        private PriceInputCell yearMinMaxCell { get; set; }
-
         protected SearchOptionsTableSource() {}
 
         public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
@@ -33,19 +25,11 @@ namespace ethanslist.ios
             this.owner = (SearchOptionsViewController)owner;
         }
 
-        #region -= data binding/display methods =-
-
-        /// <summary>
-        /// Called by the TableView to determine how many sections(groups) there are.
-        /// </summary>
         public override nint NumberOfSections (UITableView tableView)
         {
             return tableItems.Count;
         }
 
-        /// <summary>
-        /// Called by the TableView to determine how many cells to create for that particular section.
-        /// </summary>
         public override nint RowsInSection (UITableView tableview, nint section)
         {
             return tableItems[(int)section].Items.Count;
@@ -63,35 +47,6 @@ namespace ethanslist.ios
         {
             return Constants.ButtonHeight;
         }
-
-        /// <summary>
-        /// Called by the TableView to retrieve the footer text for the particular section(group)
-        /// </summary>
-        public override string TitleForFooter (UITableView tableView, nint section)
-        {
-            return tableItems[(int)section].Footer;
-        }
-
-        #endregion
-
-        #region -= user interaction methods =-
-
-        public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-        {
-            //            new UIAlertView("Row Selected"
-            //                , tableItems[indexPath.Section].Items[indexPath.Row].Heading, null, "OK", null).Show();
-        }
-
-        public override void RowDeselected (UITableView tableView, NSIndexPath indexPath)
-        {
-            Console.WriteLine("Row " + indexPath.Row.ToString() + " deselected");   
-        }
-
-        public override void AccessoryButtonTapped (UITableView tableView, NSIndexPath indexPath)
-        {
-            Console.WriteLine("Accessory for Section, " + indexPath.Section.ToString() + " and Row, " + indexPath.Row.ToString() + " tapped");
-        }
-        #endregion
 
         public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
@@ -114,123 +69,109 @@ namespace ethanslist.ios
                 default:
                     return new UITableViewCell();
                 case "SearchTermsCell":
+                    var searchTermsCell = (SearchTermsCell)tableView.DequeueReusableCell(SearchTermsCell.Key);
                     if (searchTermsCell == null)
-                    {
                         searchTermsCell = SearchTermsCell.Create();
 
-                        searchTermsCell.TermsField.Placeholder = "Search: " + this.owner.Category.Value;
-                        searchTermsCell.AccessibilityIdentifier = "SearchTermsField";
-                        searchTermsCell.TermsField.EditingChanged += delegate
-                        {
-                                this.owner.SearchTerms = searchTermsCell.TermsField.Text;
-                        };
-                        searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                                this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
-                        };
-                    }
+                    searchTermsCell.TermsField.Placeholder = "Search: " + this.owner.Category.Value;
+                    searchTermsCell.AccessibilityIdentifier = "SearchTermsField";
+                    searchTermsCell.TermsField.EditingChanged += delegate
+                    {
+                            this.owner.SearchTerms = searchTermsCell.TermsField.Text;
+                    };
+                    searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
+                    {
+                            this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
+                    };
 
                     return searchTermsCell;
                 case "PriceInputCell":
+                    var priceInputCell = (PriceInputCell)tableView.DequeueReusableCell(PriceInputCell.Key);
                     if (priceInputCell == null)
-                    {
                         priceInputCell = PriceInputCell.Create();
-                        priceInputCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+                    
+                    priceInputCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
-                        priceInputCell.NumChanged += (object sender, EventArgs e) =>
-                        {
-                            this.owner.MinPrice = priceInputCell.MinPrice.Text;
-                            this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
-                        };
-
-                        priceInputCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                            this.owner.FieldSelected = priceInputCell.MaxPrice.InputView;
-                        };
-                            
-                        priceInputCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                            this.owner.FieldSelected = priceInputCell.MinPrice.InputView;
-                        };
-                    }
-                    return priceInputCell;
-                case "MakeModelCell":
-                    if (makeModelCell == null)
+                    priceInputCell.NumChanged += (object sender, EventArgs e) =>
                     {
+                        this.owner.MinPrice = priceInputCell.MinPrice.Text;
+                        this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
+                    };
+
+                    priceInputCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                    {
+                        this.owner.FieldSelected = priceInputCell.MaxPrice.InputView;
+                    };
+                        
+                    priceInputCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                    {
+                        this.owner.FieldSelected = priceInputCell.MinPrice.InputView;
+                    };
+                    return priceInputCell;
+                case "MinMaxCell":
+                    var minMaxCell = (DoubleInputCell)tableView.DequeueReusableCell(DoubleInputCell.Key);
+                    if (minMaxCell == null)
+                        minMaxCell = DoubleInputCell.Create();
+
+                    minMaxCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                    minMaxCell.NumChanged += delegate
+                    {
+                            switch (item.Heading) 
+                            {
+                                case "Sq Feet":
+                                    this.owner.MinFootage = minMaxCell.MinField.Text;
+                                    this.owner.MaxFootage = minMaxCell.MaxField.Text;
+
+                                    break;
+                                case "Year":
+                                    this.owner.MinYear = minMaxCell.MinField.Text;
+                                    this.owner.MaxYear = minMaxCell.MaxField.Text;
+
+                                    break;
+                                case "Odometer":
+                                    this.owner.MinMiles = minMaxCell.MinField.Text;
+                                    this.owner.MaxMiles = minMaxCell.MaxField.Text;
+
+                                    break;
+                                default:
+                                    break;
+                            }
+                    };
+
+                    minMaxCell.MaxField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = minMaxCell.MaxField.InputView;
+                        };
+
+                    minMaxCell.MinField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = minMaxCell.MinField.InputView;
+                        };
+
+                    return minMaxCell;
+                case "MakeModelCell":
+                    var makeModelCell = (SearchLabeledCell)tableView.DequeueReusableCell(SearchLabeledCell.Key);
+                    if (makeModelCell == null)
                         makeModelCell = SearchLabeledCell.Create();
 
-                        makeModelCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-                        makeModelCell.TermsField.Placeholder = item.SubHeading;
+                    makeModelCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+                    makeModelCell.TermsField.Placeholder = item.SubHeading;
 
-                        makeModelCell.TermsField.EditingChanged += delegate
-                        {
-                                this.owner.MakeModel = makeModelCell.TermsField.Text;
-                        };
-                        makeModelCell.TermsField.EditingDidBegin += delegate
-                        {
-                                this.owner.FieldSelected = makeModelCell.TermsField.InputView;
-                        };
-                    }
+                    makeModelCell.TermsField.EditingChanged += delegate
+                    {
+                            this.owner.MakeModel = makeModelCell.TermsField.Text;
+                    };
+                    makeModelCell.TermsField.EditingDidBegin += delegate
+                    {
+                            this.owner.FieldSelected = makeModelCell.TermsField.InputView;
+                    };
+                    
                     return makeModelCell;
-                case "SqFootageCell":
-                    if (footageCell == null)
-                    {
-                        footageCell = PriceInputCell.Create();
-                        footageCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-
-                        footageCell.NumChanged += (object sender, EventArgs e) =>
-                        {
-                                switch (item.Heading) {
-
-                                    case "Sq Feet":
-                                        this.owner.MinFootage = footageCell.MinPrice.Text;
-                                        this.owner.MaxFootage = footageCell.MaxPrice.Text;
-                                        break;
-                                    case "Odometer":
-                                        this.owner.MinMiles = footageCell.MinPrice.Text;
-                                        this.owner.MaxMiles = footageCell.MaxPrice.Text;
-                                        break;
-                                    default:
-                                        break;
-                                }
-                        };
-
-                        footageCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                                this.owner.FieldSelected = footageCell.MaxPrice.InputView;
-                        };
-
-                        footageCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                        {
-                                this.owner.FieldSelected = footageCell.MinPrice.InputView;
-                        };
-                    }
-                    return footageCell;
-                case "YearMinMaxCell":
-                    if (yearMinMaxCell == null)
-                    {
-                        yearMinMaxCell = PriceInputCell.Create();
-                        yearMinMaxCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-
-                        yearMinMaxCell.NumChanged += (object sender, EventArgs e) =>
-                            {
-                                this.owner.MinYear = yearMinMaxCell.MinPrice.Text;
-                                this.owner.MaxYear = yearMinMaxCell.MaxPrice.Text;
-                            };
-
-                        yearMinMaxCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                            {
-                                this.owner.FieldSelected = footageCell.MaxPrice.InputView;
-                            };
-
-                        yearMinMaxCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
-                            {
-                                this.owner.FieldSelected = footageCell.MinPrice.InputView;
-                            };
-                    }
-                    return yearMinMaxCell;
                 case "PickerSelectorCell":
-                    var pickerSelectorCell = PickerSelectorCell.Create();
+                    var pickerSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
+                    if (pickerSelectorCell == null)
+                        pickerSelectorCell = PickerSelectorCell.Create();
 
                     pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
@@ -311,7 +252,6 @@ namespace ethanslist.ios
                             Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
                         }
 
-//                        var keys = this.owner.Conditions.Where(x=>x.Value.Key.Equals(item.SubHeading)).ToList();
                         var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.SubHeading select (string)kvp.Key).ToList();
                         var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
                         tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
@@ -333,31 +273,6 @@ namespace ethanslist.ios
                     
                     return tableSelectorCell;
             }
-        }
-
-        private static Task<String> ShowNumberOptions(UIViewController parent, string strTitle, string strMsg, Dictionary<string, object> options)
-        {
-            var taskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<string>();
-
-            UIAlertController actionSheetAlert = UIAlertController.Create(strTitle, strMsg, UIAlertControllerStyle.ActionSheet);
-
-            foreach (KeyValuePair<string, object> option in options)
-            {
-                actionSheetAlert.AddAction(UIAlertAction.Create(option.Key,UIAlertActionStyle.Default, (a) => taskCompletionSource.SetResult(option.Key)));
-            }
-
-            actionSheetAlert.AddAction(UIAlertAction.Create("Cancel",UIAlertActionStyle.Cancel, (action) => Console.WriteLine ("Cancel button pressed.")));
-
-            // Required for iPad - You must specify a source for the Action Sheet since it is
-            // displayed as a popover
-            UIPopoverPresentationController presentationPopover = actionSheetAlert.PopoverPresentationController;
-            if (presentationPopover!=null) {
-                presentationPopover.SourceView = parent.View;
-                presentationPopover.PermittedArrowDirections = UIPopoverArrowDirection.Up;
-            }
-            // Display the alert
-            parent.PresentViewController(actionSheetAlert,true,null);
-            return taskCompletionSource.Task;
         }
     }
 }

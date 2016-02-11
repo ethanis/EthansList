@@ -176,7 +176,7 @@ namespace ethanslist.ios
                 searchterms.Items.Add(new TableItem()
                     {
                         Heading = "Year",
-                        CellType = "YearMinMaxCell"
+                        CellType = "MinMaxCell"
                     });
             }
 
@@ -193,7 +193,7 @@ namespace ethanslist.ios
             {
                 searchterms.Items.Add(new TableItem(){
                     Heading = "Sq Feet",
-                    CellType = "SqFootageCell"
+                    CellType = "MinMaxCell"
                 });
             }
 
@@ -201,7 +201,7 @@ namespace ethanslist.ios
             {
                 searchterms.Items.Add(new TableItem(){
                     Heading = "Odometer",
-                    CellType = "SqFootageCell"
+                    CellType = "MinMaxCell"
                 });
 
             }
