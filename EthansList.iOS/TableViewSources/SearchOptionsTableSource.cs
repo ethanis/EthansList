@@ -307,7 +307,7 @@ namespace ethanslist.ios
                         }
                         else
                         {
-                            this.owner.Conditions.Add(resultKey, resultValue);
+                            this.owner.Conditions.Add(resultKey, new KeyValuePair<object, object>(item.SubHeading, resultValue));
                             Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
                         }
 

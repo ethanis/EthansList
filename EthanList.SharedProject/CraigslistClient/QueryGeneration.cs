@@ -5,7 +5,7 @@ namespace EthansList.Shared
 {
     public class QueryGeneration
     {
-        public string Generate(string url, string cat, Dictionary<string, string> searchTerms, Dictionary<object, object> conditions)
+        public string Generate(string url, string cat, Dictionary<string, string> searchTerms, Dictionary<object,  KeyValuePair<object, object>> conditions)
         {
             string result = String.Format("{0}{1}?format=rss", url, cat);
             foreach (KeyValuePair<string, string> kvp in searchTerms)
@@ -20,11 +20,11 @@ namespace EthansList.Shared
                 }
             }
 
-            foreach (KeyValuePair<object, object> kvp in conditions)
+            foreach (KeyValuePair<object, KeyValuePair<object, object>> kvp in conditions)
             {
-                if (kvp.Value != null)
+                if (kvp.Value.Key != null)
                 {
-                    result += String.Format("&condition={0}", kvp.Value);
+                    result += String.Format("&{0}={1}", kvp.Value.Key, kvp.Value.Value);
                 }
             }
 
