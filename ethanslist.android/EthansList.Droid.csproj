@@ -64,6 +64,9 @@
     <Reference Include="PullToRefresharp">
       <HintPath>..\Components\pulltorefresharp-1.0.2\lib\android\PullToRefresharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
