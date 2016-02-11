@@ -48,6 +48,14 @@ namespace ethanslist.ios
             return Constants.ButtonHeight;
         }
 
+        private void AddSearchItem (string itemKey, string itemValue)
+        {
+            if (this.owner.SearchItems.ContainsKey(itemKey))
+                this.owner.SearchItems[itemKey] = itemValue;
+            else
+                this.owner.SearchItems.Add(itemKey, itemValue);
+        }
+
         public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             TableItem item = tableItems[indexPath.Section].Items[indexPath.Row];
@@ -77,7 +85,8 @@ namespace ethanslist.ios
                     searchTermsCell.AccessibilityIdentifier = "SearchTermsField";
                     searchTermsCell.TermsField.EditingChanged += delegate
                     {
-                            this.owner.SearchTerms = searchTermsCell.TermsField.Text;
+                            AddSearchItem("query", searchTermsCell.TermsField.Text);
+//                            this.owner.SearchTerms = searchTermsCell.TermsField.Text;
                     };
                     searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
                     {
@@ -94,8 +103,11 @@ namespace ethanslist.ios
 
                     priceInputCell.NumChanged += (object sender, EventArgs e) =>
                     {
-                        this.owner.MinPrice = priceInputCell.MinPrice.Text;
-                        this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
+//                        this.owner.MinPrice = priceInputCell.MinPrice.Text;
+//                        this.owner.MaxPrice = priceInputCell.MaxPrice.Text;
+                            AddSearchItem("min_price", priceInputCell.MinPrice.Text);
+                            AddSearchItem("max_price", priceInputCell.MaxPrice.Text);
+
                     };
 
                     priceInputCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
@@ -120,18 +132,27 @@ namespace ethanslist.ios
                             switch (item.Heading) 
                             {
                                 case "Sq Feet":
-                                    this.owner.MinFootage = minMaxCell.MinField.Text;
-                                    this.owner.MaxFootage = minMaxCell.MaxField.Text;
+//                                    this.owner.MinFootage = minMaxCell.MinField.Text;
+//                                    this.owner.MaxFootage = minMaxCell.MaxField.Text;
+
+                                    AddSearchItem("minSqft", minMaxCell.MinField.Text);
+                                    AddSearchItem("maxSqft", minMaxCell.MaxField.Text);
 
                                     break;
                                 case "Year":
-                                    this.owner.MinYear = minMaxCell.MinField.Text;
-                                    this.owner.MaxYear = minMaxCell.MaxField.Text;
+//                                    this.owner.MinYear = minMaxCell.MinField.Text;
+//                                    this.owner.MaxYear = minMaxCell.MaxField.Text;
+
+                                    AddSearchItem("min_auto_year", minMaxCell.MinField.Text);
+                                    AddSearchItem("max_auto_year", minMaxCell.MaxField.Text);
 
                                     break;
                                 case "Odometer":
-                                    this.owner.MinMiles = minMaxCell.MinField.Text;
-                                    this.owner.MaxMiles = minMaxCell.MaxField.Text;
+//                                    this.owner.MinMiles = minMaxCell.MinField.Text;
+//                                    this.owner.MaxMiles = minMaxCell.MaxField.Text;
+//
+                                    AddSearchItem("min_auto_miles", minMaxCell.MinField.Text);
+                                    AddSearchItem("max_auto_miles", minMaxCell.MaxField.Text);
 
                                     break;
                                 default:
@@ -160,7 +181,8 @@ namespace ethanslist.ios
 
                     makeModelCell.TermsField.EditingChanged += delegate
                     {
-                            this.owner.MakeModel = makeModelCell.TermsField.Text;
+//                            this.owner.MakeModel = makeModelCell.TermsField.Text;
+                            AddSearchItem("auto_make_model", makeModelCell.TermsField.Text);
                     };
                     makeModelCell.TermsField.EditingDidBegin += delegate
                     {
@@ -198,9 +220,11 @@ namespace ethanslist.ios
                             Console.WriteLine(resultKey + " From " + e.FromComponent);
                             pickerSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
                             if (item.Heading == "Min Bedrooms")
-                                this.owner.MinBedrooms = resultValue;
+//                                this.owner.MinBedrooms = resultValue;
+                                AddSearchItem("bedrooms", resultValue);
                             else if (item.Heading == "Min Bathrooms")
-                                this.owner.MinBathrooms = resultValue;
+//                                this.owner.MinBathrooms = resultValue;
+                                AddSearchItem("bathrooms", resultValue);
                             else if (item.Heading == "Posted Date")
                                 this.owner.WeeksOld = (int?)Convert.ToInt16(resultValue);
                             else if (item.Heading == "Max Listings")

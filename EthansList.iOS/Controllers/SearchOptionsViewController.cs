@@ -22,18 +22,18 @@ namespace ethanslist.ios
         private bool moveViewUp = false;           // which direction are we moving
         private bool keyboardSet = false;
 
-        public string MinBedrooms { get; set; }
-        public string MinBathrooms { get; set; }
-        public string MinPrice { get; set; }
-        public string MaxPrice { get; set; }
-        public string SearchTerms { get; set; }
-        public string MakeModel { get; set; }
-        public string MinFootage { get; set; }
-        public string MaxFootage { get; set; }
-        public string MinMiles { get; set; }
-        public string MaxMiles { get; set; }
-        public string MinYear { get; set; }
-        public string MaxYear { get; set;}
+//        public string MinBedrooms { get; set; }
+//        public string MinBathrooms { get; set; }
+//        public string MinPrice { get; set; }
+//        public string MaxPrice { get; set; }
+//        public string SearchTerms { get; set; }
+//        public string MakeModel { get; set; }
+//        public string MinFootage { get; set; }
+//        public string MaxFootage { get; set; }
+//        public string MinMiles { get; set; }
+//        public string MaxMiles { get; set; }
+//        public string MinYear { get; set; }
+//        public string MaxYear { get; set;}
         public int MaxListings 
         { 
             get { return maxListings; } 
@@ -46,6 +46,7 @@ namespace ethanslist.ios
         public KeyValuePair<string, string> Category {get;set;}
         public UIView FieldSelected { get; set; }
         public CGRect KeyboardBounds { get; set; }
+        public Dictionary<string, string> SearchItems { get; set;}
         public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
@@ -63,8 +64,8 @@ namespace ethanslist.ios
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
             SearchButton.SetAttributedTitle(new NSAttributedString(SearchButton.TitleLabel.Text, Constants.ButtonAttributes), UIControlState.Normal);
-
             SearchTableView.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
+
         }
 
         public override void ViewDidLoad()
@@ -73,6 +74,8 @@ namespace ethanslist.ios
 
             AddLayoutConstraints();
             this.Title = "Options";
+
+            SearchItems = new Dictionary<string, string>();
             Conditions = new Dictionary<object,  KeyValuePair<object, object>>();
             tableSource = new SearchOptionsTableSource(GetTableSetup(), this);
             SearchTableView.Source = tableSource;
@@ -91,9 +94,9 @@ namespace ethanslist.ios
                 UIImage.FromFile ("save.png"),
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => {
-                    //TODO: Way to save selected category
-                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
+                    //TODO: Saving all of the options now
+//                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
+//                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
                     if (AppDelegate.databaseConnection.StatusCode == codes.ok)
@@ -122,24 +125,24 @@ namespace ethanslist.ios
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
                 var cat = SubCategory != null ? SubCategory : Category.Key;
-                var query = queryHelper.Generate(Location.Url, cat, new Dictionary<string, string>()
-                    {
-                        {"min_price", MinPrice},
-                        {"max_price", MaxPrice},
-                        {"bedrooms", MinBedrooms},
-                        {"bathrooms", MinBathrooms},
-                        {"minSqft", MinFootage},
-                        {"maxSqft", MaxFootage},
-                        {"auto_make_model", MakeModel},
-                        {"min_auto_year", MinYear},
-                        {"max_auto_year", MaxYear},
-                        {"min_auto_miles", MinMiles},
-                        {"max_auto_miles", MaxMiles},
-                        {"query", SearchTerms}
-                    },
-                    Conditions
-                );
-                Console.WriteLine (query);
+//                var query = queryHelper.Generate(Location.Url, cat, new Dictionary<string, string>()
+//                    {
+////                        {"min_price", MinPrice},
+////                        {"max_price", MaxPrice},
+////                        {"bedrooms", MinBedrooms},
+////                        {"bathrooms", MinBathrooms},
+////                        {"minSqft", MinFootage},
+////                        {"maxSqft", MaxFootage},
+////                        {"auto_make_model", MakeModel},
+////                        {"min_auto_year", MinYear},
+////                        {"max_auto_year", MaxYear},
+////                        {"min_auto_miles", MinMiles},
+////                        {"max_auto_miles", MaxMiles},
+////                        {"query", SearchTerms}
+//                    },
+//                    Conditions
+//                );
+                var query = queryHelper.Generate(Location.Url, cat, SearchItems, Conditions);
 
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
