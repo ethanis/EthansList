@@ -87,7 +87,6 @@ namespace ethanslist.ios
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => 
                 {
-                    //TODO: Saving all of the options now
                     SearchObject forSerial = new SearchObject();
                     forSerial.SearchLocation = Location;
                     forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);

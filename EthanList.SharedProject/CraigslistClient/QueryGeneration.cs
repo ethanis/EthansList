@@ -33,7 +33,7 @@ namespace EthansList.Shared
 
         public string Generate(SearchObject search)
         {
-            string result = String.Format("{0}{1}?format=rss", search.SearchLocation.Url, search.Category);
+            string result = String.Format("{0}{1}?format=rss", search.SearchLocation.Url, search.Category.Key);
             foreach (KeyValuePair<string, string> kvp in search.SearchItems)
             {
                 if (kvp.Value != null && kvp.Value.Length > 0)

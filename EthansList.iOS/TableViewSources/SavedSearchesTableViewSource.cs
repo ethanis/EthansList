@@ -81,7 +81,9 @@ namespace ethanslist.ios
 
             var search = savedSearches[indexPath.Row];
             QueryGeneration helper = new QueryGeneration();
-            feedResultsVC.Query = helper.Generate(search);
+            var query = helper.Generate(savedSearches[indexPath.Row]);
+            Console.WriteLine(query);
+            feedResultsVC.Query = query;
 
             feedResultsVC.MaxListings = search.MaxListings;
             feedResultsVC.WeeksOld = search.PostedDate;
