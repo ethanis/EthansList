@@ -15,12 +15,15 @@ namespace ethanslist.ios
         public EventHandler<EventArgs> actionSheetSelected;
         private SearchPickerModel picker_model;
         private UIPickerView picker;
+        private const string comboCell = "comboCell";
 
         private SearchTermsCell searchTermsCell { get; set; }
+        private SearchLabeledCell makeModelCell {get;set;}
+
         private PriceInputCell priceInputCell { get; set; }
         private PriceSelectorCell priceCell { get; set; }
         private PriceInputCell footageCell { get; set; }
-        private PickerSelectorCell tableSelectorCell { get; set; }
+        private PriceInputCell yearMinMaxCell { get; set; }
 
         protected SearchOptionsTableSource() {}
 
@@ -128,57 +131,6 @@ namespace ethanslist.ios
                     }
 
                     return searchTermsCell;
-//                case "PriceSelectorCell":
-//                    if (priceCell == null)
-//                    {
-//                        priceCell = PriceSelectorCell.Create();
-//                        priceCell.LabelText = item.Heading;
-//
-//
-//                        picker_model = new SearchPickerModel(item.PickerOptions, true);
-//                        picker = new UIPickerView();
-//                        picker.Model = picker_model;
-//                        picker.ShowSelectionIndicator = true;
-//
-//
-//                        picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-//                        {
-//                            var result = e.SelectedValue.ToString();
-//                            Console.WriteLine(e.SelectedValue + "From" + e.FromComponent);
-//                            var text = result != "Any" ? "$" + result : result;
-//                            if (e.FromComponent == 0)
-//                            {
-//                                priceCell.MinPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
-//                                this.owner.MinPrice = result;
-//                            }
-//                            else
-//                            {
-//                                priceCell.MaxPrice.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
-//                                this.owner.MaxPrice = result;
-//                            }
-//
-//                            if (priceCell.MinPrice.Text != "Any" || priceCell.MaxPrice.Text != "Any")
-//                                priceCell.ToLabel.Hidden = false;
-//                            else
-//                                priceCell.ToLabel.Hidden = true;
-//                        };
-//                            
-//                        priceCell.PickerField.InputView = picker;
-//                        priceCell.PickerField.InputAccessoryView = toolbar;
-//
-//                        priceCell.PickerField.EditingDidBegin += (object sender, EventArgs e) =>
-//                        {
-//                            this.owner.KeyboardBounds = picker.Bounds;
-//                            this.owner.FieldSelected = priceCell.PickerField.InputView;
-//                            priceCell.Accessory = UITableViewCellAccessory.Checkmark;
-//                        };
-//
-//                        priceCell.PickerField.EditingDidEnd += delegate
-//                        {
-//                            priceCell.Accessory = UITableViewCellAccessory.None;
-//                        };
-//                    }
-//                    return priceCell;
                 case "PriceInputCell":
                     if (priceInputCell == null)
                     {
@@ -202,6 +154,24 @@ namespace ethanslist.ios
                         };
                     }
                     return priceInputCell;
+                case "MakeModelCell":
+                    if (makeModelCell == null)
+                    {
+                        makeModelCell = SearchLabeledCell.Create();
+
+                        makeModelCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+                        makeModelCell.TermsField.Placeholder = item.SubHeading;
+
+                        makeModelCell.TermsField.EditingChanged += delegate
+                        {
+                                this.owner.MakeModel = makeModelCell.TermsField.Text;
+                        };
+                        makeModelCell.TermsField.EditingDidBegin += delegate
+                        {
+                                this.owner.FieldSelected = makeModelCell.TermsField.InputView;
+                        };
+                    }
+                    return makeModelCell;
                 case "SqFootageCell":
                     if (footageCell == null)
                     {
@@ -236,6 +206,29 @@ namespace ethanslist.ios
                         };
                     }
                     return footageCell;
+                case "YearMinMaxCell":
+                    if (yearMinMaxCell == null)
+                    {
+                        yearMinMaxCell = PriceInputCell.Create();
+                        yearMinMaxCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                        yearMinMaxCell.NumChanged += (object sender, EventArgs e) =>
+                            {
+                                this.owner.MinYear = yearMinMaxCell.MinPrice.Text;
+                                this.owner.MaxYear = yearMinMaxCell.MaxPrice.Text;
+                            };
+
+                        yearMinMaxCell.MaxPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                            {
+                                this.owner.FieldSelected = footageCell.MaxPrice.InputView;
+                            };
+
+                        yearMinMaxCell.MinPrice.EditingDidBegin += (object sender, EventArgs e) =>
+                            {
+                                this.owner.FieldSelected = footageCell.MinPrice.InputView;
+                            };
+                    }
+                    return yearMinMaxCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = PickerSelectorCell.Create();
 
@@ -290,52 +283,53 @@ namespace ethanslist.ios
                     };
                     return pickerSelectorCell;
                 case "ComboTableCell":
+                    var tableSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
                     if (tableSelectorCell == null)
-                    {
                         tableSelectorCell = PickerSelectorCell.Create();
-                        tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+                    
+                    tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
-                        ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
-                        UITableView comboPicker = new UITableView();
-                        comboPicker.Source = comboSource;
-                        comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
+                    ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
+                    UITableView comboPicker = new UITableView();
+                    comboPicker.Source = comboSource;
+                    comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
 
-                        comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
-                            string resultKey = e.SelectedKey.ToString();
-                            string resultValue = null;
-                            if (e.SelectedValue != null)
-                                resultValue = e.SelectedValue.ToString();
+                    comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
+                        string resultKey = e.SelectedKey.ToString();
+                        string resultValue = null;
+                        if (e.SelectedValue != null)
+                            resultValue = e.SelectedValue.ToString();
 
-                            if (this.owner.Conditions.ContainsKey(resultKey))
-                            {
-                                this.owner.Conditions.Remove(resultKey);
-                                Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
-                            }
-                            else
-                            {
-                                this.owner.Conditions.Add(resultKey, resultValue);
-                                Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
-                            }
+                        if (this.owner.Conditions.ContainsKey(resultKey))
+                        {
+                            this.owner.Conditions.Remove(resultKey);
+                            Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
+                        }
+                        else
+                        {
+                            this.owner.Conditions.Add(resultKey, resultValue);
+                            Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
+                        }
 
-                            var keys = this.owner.Conditions.Keys;
-                            var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
-                            tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
+                        var keys = this.owner.Conditions.Keys;
+                        var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
+                        tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
+                    };
+
+                    tableSelectorCell.InputTextField.InputView = comboPicker;
+                    tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
+
+                    tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                        this.owner.KeyboardBounds = comboPicker.Bounds;
+                        this.owner.FieldSelected = tableSelectorCell;
+                        tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
+                    };
+
+                    tableSelectorCell.InputTextField.EditingDidEnd += delegate
+                        {
+                            tableSelectorCell.Accessory = UITableViewCellAccessory.None;
                         };
-
-                        tableSelectorCell.InputTextField.InputView = comboPicker;
-                        tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
-
-                        tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-                            this.owner.KeyboardBounds = comboPicker.Bounds;
-                            this.owner.FieldSelected = tableSelectorCell;
-                            tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
-                        };
-
-                        tableSelectorCell.InputTextField.EditingDidEnd += delegate
-                            {
-                                tableSelectorCell.Accessory = UITableViewCellAccessory.None;
-                            };
-                    }
+                    
                     return tableSelectorCell;
             }
         }

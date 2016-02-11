@@ -27,10 +27,13 @@ namespace ethanslist.ios
         public string MinPrice { get; set; }
         public string MaxPrice { get; set; }
         public string SearchTerms { get; set; }
+        public string MakeModel { get; set; }
         public string MinFootage { get; set; }
         public string MaxFootage { get; set; }
         public string MinMiles { get; set; }
         public string MaxMiles { get; set; }
+        public string MinYear { get; set; }
+        public string MaxYear { get; set;}
         public int MaxListings 
         { 
             get { return maxListings; } 
@@ -127,6 +130,9 @@ namespace ethanslist.ios
                         {"bathrooms", MinBathrooms},
                         {"minSqft", MinFootage},
                         {"maxSqft", MaxFootage},
+                        {"auto_make_model", MakeModel},
+                        {"min_auto_year", MinYear},
+                        {"max_auto_year", MaxYear},
                         {"min_auto_miles", MinMiles},
                         {"max_auto_miles", MaxMiles},
                         {"query", SearchTerms}
@@ -152,54 +158,31 @@ namespace ethanslist.ios
 
             TableItemGroup searchterms = new TableItemGroup()
                 { Name = "Search Terms"};
+            TableItemGroup options = new TableItemGroup()
+                { Name = "Options" };
+            
             searchterms.Items.Add(new TableItem() { 
                 Heading = "Search Terms",
                 CellType = "SearchTermsCell",
             });
+            if (Categories.Autos.Contains(Category.Key))
+            {
+                searchterms.Items.Add(new TableItem()
+                    {
+                        Heading = "Make/Model",
+                        SubHeading = "make / model",
+                        CellType = "MakeModelCell"
+                    });
+                searchterms.Items.Add(new TableItem()
+                    {
+                        Heading = "Year",
+                        CellType = "YearMinMaxCell"
+                    });
+            }
             searchterms.Items.Add(new TableItem(){
                 Heading = "Price",
                 CellType = "PriceInputCell",
             });
-//            searchterms.Items.Add(new TableItem() {
-//                Heading = "Price",
-//                CellType = "PriceSelectorCell",
-//                PickerOptions = new List<PickerOptions> ()
-//                    {
-//                        new PickerOptions(){Options = new Dictionary<object, object>()
-//                            {
-//                                {0, "Any"},
-//                                {1, "400"},
-//                                {2, "600"},
-//                                {3, "800"},
-//                                {4, "1000"},
-//                                {5, "1200"},
-//                                {6, "1400"},
-//                                {7, "1600"},
-//                                {8, "1800"},
-//                                {9, "2000"},
-//                                {10, "2200"},
-//                                {11, "2400"},
-//                                {12, "2600"},
-//                            }},
-//                        new PickerOptions(){Options = new Dictionary<object, object>()
-//                            {
-//                                {0, "Any"},
-//                                {1, "1000"},
-//                                {2, "1200"},
-//                                {3, "1400"},
-//                                {4, "1600"},
-//                                {5, "1800"},
-//                                {6, "2000"},
-//                                {7, "2200"},
-//                                {8, "2400"},
-//                                {9, "2600"},
-//                                {10, "2800"},
-//                                {11, "3000"},
-//                                {12, "3200"},
-//                                {13, "3400"},
-//                            }},
-//                    },
-//            });
 
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
             {
@@ -215,11 +198,8 @@ namespace ethanslist.ios
                     Heading = "Odometer",
                     CellType = "SqFootageCell"
                 });
+
             }
-            TableItemGroup options = new TableItemGroup()
-                { 
-                    Name = "Options",
-                };
 
             if (Categories.SubCategories.ContainsKey(Category.Key))
             {
@@ -234,12 +214,13 @@ namespace ethanslist.ios
                     });
             }
 
-            if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
+            if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category) || Categories.Autos.Contains(Category.Key))
             {
                 options.Items.Add(new TableItem()
                     {
                         Heading = "Condition",
                         CellType = "ComboTableCell",
+                        SubHeading = "condition",
                         PickerOptions = new List<PickerOptions>()
                             {
                                 new PickerOptions()
@@ -251,6 +232,131 @@ namespace ethanslist.ios
                                         new KeyValuePair<object, object>("Good", 40),
                                         new KeyValuePair<object, object>("Fair", 50),
                                         new KeyValuePair<object, object>("Salvage", 60),
+                                    }
+                                }
+                            },
+                    });
+            }
+
+            if (Categories.Autos.Contains(Category.Key))
+            {
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Cylinders",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_cylinders",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("3 cylinders", 1),
+                                        new KeyValuePair<object, object>("4 cylinders", 2),
+                                        new KeyValuePair<object, object>("5 cylinders", 3),
+                                        new KeyValuePair<object, object>("6 cylinders", 4),
+                                        new KeyValuePair<object, object>("8 cylinders", 5),
+                                        new KeyValuePair<object, object>("10 cylinders", 6),
+                                        new KeyValuePair<object, object>("12 cylinders", 7),
+                                        new KeyValuePair<object, object>("other", 8),
+                                    }
+                                }
+                            },
+                    });
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Drive",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_drivetrain",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("fwd", 1),
+                                        new KeyValuePair<object, object>("rwd", 2),
+                                        new KeyValuePair<object, object>("4wd", 3),
+                                    }
+                                }
+                            },
+                    });
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Fuel",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_fuel_type",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("gas", 1),
+                                        new KeyValuePair<object, object>("diesel", 2),
+                                        new KeyValuePair<object, object>("hybrid", 3),
+                                        new KeyValuePair<object, object>("electric", 4),
+                                        new KeyValuePair<object, object>("other", 6),
+                                    }
+                                }
+                            },
+                    });
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Paint Color",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_paint",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("black", 1),
+                                        new KeyValuePair<object, object>("blue", 2),
+                                        new KeyValuePair<object, object>("brown", 20),
+                                        new KeyValuePair<object, object>("green", 3),
+                                        new KeyValuePair<object, object>("grey", 4),
+                                        new KeyValuePair<object, object>("orange", 5),
+                                        new KeyValuePair<object, object>("purple", 6),
+                                        new KeyValuePair<object, object>("red", 7),
+                                        new KeyValuePair<object, object>("silver", 8),
+                                        new KeyValuePair<object, object>("white", 9),
+                                        new KeyValuePair<object, object>("yellow", 10),
+                                        new KeyValuePair<object, object>("custom", 11),
+                                    }
+                                }
+                            },
+                    });
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Title Status",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_title_status",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("clean", 1),
+                                        new KeyValuePair<object, object>("salvage", 2),
+                                        new KeyValuePair<object, object>("rebuilt", 3),
+                                        new KeyValuePair<object, object>("parts only", 4),
+                                        new KeyValuePair<object, object>("lien", 5),
+                                        new KeyValuePair<object, object>("missing", 6),
+                                    }
+                                }
+                            },
+                    });
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Transmission",
+                        CellType = "ComboTableCell",
+                        SubHeading = "auto_transmission",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("manual", 1),
+                                        new KeyValuePair<object, object>("automatic", 2),
+                                        new KeyValuePair<object, object>("other", 3),
                                     }
                                 }
                             },
@@ -344,7 +450,8 @@ namespace ethanslist.ios
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
             scrollView.TranslatesAutoresizingMaskIntoConstraints = false;
-
+            SearchTableView.ScrollEnabled = true;
+            SearchTableView.Bounces = false;
             SearchCityLabel.AttributedText = new NSAttributedString(String.Format("Search {0} for:", Location.SiteName), Constants.LabelAttributes);
 
             //Scrollview Constraints
