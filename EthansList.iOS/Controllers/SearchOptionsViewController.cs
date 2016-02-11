@@ -8,6 +8,7 @@ using EthansList.Shared;
 using EthansList.Models;
 using System.Drawing;
 using CoreGraphics;
+using Newtonsoft.Json;
 
 namespace ethanslist.ios
 {
@@ -22,18 +23,7 @@ namespace ethanslist.ios
         private bool moveViewUp = false;           // which direction are we moving
         private bool keyboardSet = false;
 
-//        public string MinBedrooms { get; set; }
-//        public string MinBathrooms { get; set; }
-//        public string MinPrice { get; set; }
-//        public string MaxPrice { get; set; }
-//        public string SearchTerms { get; set; }
-//        public string MakeModel { get; set; }
-//        public string MinFootage { get; set; }
-//        public string MaxFootage { get; set; }
-//        public string MinMiles { get; set; }
-//        public string MaxMiles { get; set; }
-//        public string MinYear { get; set; }
-//        public string MaxYear { get; set;}
+        #region GeneratedFromSearchOptions
         public int MaxListings 
         { 
             get { return maxListings; } 
@@ -42,12 +32,14 @@ namespace ethanslist.ios
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
         public string SubCategory { get; set; }
+        public Dictionary<string, string> SearchItems { get; set;}
+        public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
+        #endregion
+
         public Location Location { get; set; }
         public KeyValuePair<string, string> Category {get;set;}
         public UIView FieldSelected { get; set; }
         public CGRect KeyboardBounds { get; set; }
-        public Dictionary<string, string> SearchItems { get; set;}
-        public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
 
 		public SearchOptionsViewController (IntPtr handle) : base (handle)
 		{
@@ -99,24 +91,25 @@ namespace ethanslist.ios
 //                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
-                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = "Search Saved!";
-                        alert.AddButton("OK");
-                        alert.Show();
 
-                        this.NavigationItem.RightBarButtonItem.Enabled = false;
-                    }
-                    else
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-                        alert.AddButton("OK");
-                        alert.Show();
-
-                        this.NavigationItem.RightBarButtonItem.Enabled = true;
-                    }
+//                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+//                    {
+//                        UIAlertView alert = new UIAlertView();
+//                        alert.Message = "Search Saved!";
+//                        alert.AddButton("OK");
+//                        alert.Show();
+//
+//                        this.NavigationItem.RightBarButtonItem.Enabled = false;
+//                    }
+//                    else
+//                    {
+//                        UIAlertView alert = new UIAlertView();
+//                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+//                        alert.AddButton("OK");
+//                        alert.Show();
+//
+//                        this.NavigationItem.RightBarButtonItem.Enabled = true;
+//                    }
                 }
             );
 
@@ -125,27 +118,20 @@ namespace ethanslist.ios
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
                 var cat = SubCategory != null ? SubCategory : Category.Key;
-//                var query = queryHelper.Generate(Location.Url, cat, new Dictionary<string, string>()
-//                    {
-////                        {"min_price", MinPrice},
-////                        {"max_price", MaxPrice},
-////                        {"bedrooms", MinBedrooms},
-////                        {"bathrooms", MinBathrooms},
-////                        {"minSqft", MinFootage},
-////                        {"maxSqft", MaxFootage},
-////                        {"auto_make_model", MakeModel},
-////                        {"min_auto_year", MinYear},
-////                        {"max_auto_year", MaxYear},
-////                        {"min_auto_miles", MinMiles},
-////                        {"max_auto_miles", MaxMiles},
-////                        {"query", SearchTerms}
-//                    },
-//                    Conditions
-//                );
-                var query = queryHelper.Generate(Location.Url, cat, SearchItems, Conditions);
+
+//                var query = queryHelper.Generate(Location.Url, cat, SearchItems, Conditions);
 
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
+
+                SearchObject forSerial = new SearchObject();
+                forSerial.SearchLocation = Location;
+                forSerial.Category = SubCategory != null ? SubCategory : Category.Key;
+                forSerial.SearchItems = this.SearchItems;
+                forSerial.Conditions = this.Conditions;
+//                string output = JsonConvert.SerializeObject(forSerial);
+//                Console.WriteLine (output);
+                var query = queryHelper.Generate(forSerial);
 
                 feedViewController.Query = query;
                 feedViewController.MaxListings = MaxListings;

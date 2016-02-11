@@ -25,7 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Categories.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FavoriteCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\FavoriteCategoryDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializedSearch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SearchObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
