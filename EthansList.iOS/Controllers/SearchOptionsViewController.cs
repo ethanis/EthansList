@@ -179,10 +179,15 @@ namespace ethanslist.ios
                         CellType = "YearMinMaxCell"
                     });
             }
-            searchterms.Items.Add(new TableItem(){
-                Heading = "Price",
-                CellType = "PriceInputCell",
-            });
+
+            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category) || Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
+            {
+                searchterms.Items.Add(new TableItem()
+                    {
+                        Heading = "Price",
+                        CellType = "PriceInputCell",
+                    });
+            }
 
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
             {
