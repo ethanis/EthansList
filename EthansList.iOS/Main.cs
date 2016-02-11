@@ -7,7 +7,7 @@ namespace ethanslist.ios
 		// This is the main entry point of the application.
 		static void Main (string[] args)
 		{
-			Xamarin.Insights.Initialize (XamarinInsights.ApiKey);
+//			Xamarin.Insights.Initialize (XamarinInsights.ApiKey);
 			UIApplication.Main (args, null, "AppDelegate");
 		}
 	}

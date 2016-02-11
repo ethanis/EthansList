@@ -11,7 +11,6 @@ namespace EthansList.Shared
         public Dictionary<object,KeyValuePair<object, object>> Conditions { get; set;}
         public int? PostedDate { get; set;}
         public int MaxListings { get; set;}
-        public int ID { get; set; }
     }
 }
 

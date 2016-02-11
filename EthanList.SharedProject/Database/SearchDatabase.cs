@@ -32,7 +32,12 @@ namespace EthansList.Models
 
         public async Task DeleteSearchAsync(String linkUrl, SearchObject searchObject)
         {
-            var search = conn.Table<Search>().Where(x => x.ID.Equals(searchObject.ID)).ToListAsync().Result.FirstOrDefault();
+            var currentSerialized = JsonConvert.SerializeObject(searchObject);
+            var search = conn.Table<Search>().Where(x => x.SerializedSearch.Equals(currentSerialized)).ToListAsync().Result.First();
+
+            if (search == null)
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+            
             try
             {
                 var result = await conn.DeleteAsync(search).ConfigureAwait(continueOnCapturedContext: false);
@@ -62,7 +67,7 @@ namespace EthansList.Models
             }
             result = result.Trim();
 
-            if (result[result.Length - 1].Equals(','))
+            if (searchObject.SearchItems.Count > 0 && result[result.Length - 1].Equals(','))
                 result = result.TrimEnd(',');
 
             return result;

@@ -46,12 +46,18 @@ namespace ethanslist.ios
         {
             //TODO fix this shit
             var title = string.Format("\ud83d\uddd1{0}Delete", Environment.NewLine);
-//            var title = "Delete";
             var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, title, async delegate {
                 
                 await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row].SearchLocation.Url, savedSearches[indexPath.Row]);
-                savedSearches.RemoveAt(indexPath.Row);
-                tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+                {
+                    savedSearches.RemoveAt(indexPath.Row);
+                    tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
+                }
+                else
+                {
+                    DidEndEditing(tableView, indexPath);
+                }
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
             });
             deletion.BackgroundColor = ColorScheme.Alizarin;
@@ -74,13 +80,7 @@ namespace ethanslist.ios
             var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
             var search = savedSearches[indexPath.Row];
-//            searchTerms["min_price"] = search.MinPrice;
-//            searchTerms["max_price"] = search.MaxPrice;
-//            searchTerms["bedrooms"] = search.MinBedrooms;
-//            searchTerms["bathrooms"] = search.MinBathrooms;
-//            searchTerms["query"] = search.SearchQuery;
             QueryGeneration helper = new QueryGeneration();
-            //TODO: Need to save search conditions
             feedResultsVC.Query = helper.Generate(search);
 
             feedResultsVC.MaxListings = search.MaxListings;

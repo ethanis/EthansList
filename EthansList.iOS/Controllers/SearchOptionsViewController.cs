@@ -93,10 +93,12 @@ namespace ethanslist.ios
                     forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
                     forSerial.SearchItems = this.SearchItems;
                     forSerial.Conditions = this.Conditions;
+                    forSerial.MaxListings = this.MaxListings;
+                    forSerial.PostedDate = this.WeeksOld;
+
                     string serialized = JsonConvert.SerializeObject(forSerial);
                     await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, serialized);
-//                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, Location.SiteName, MinPrice, MaxPrice, 
-//                    MinBedrooms, MinBathrooms, SearchTerms, WeeksOld, MaxListings, Category.Key, Category.Value);
+
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
 
                     if (AppDelegate.databaseConnection.StatusCode == codes.ok)
@@ -124,10 +126,6 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var cat = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
-
-//                var query = queryHelper.Generate(Location.Url, cat, SearchItems, Conditions);
-
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
@@ -136,8 +134,7 @@ namespace ethanslist.ios
                 forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
                 forSerial.SearchItems = this.SearchItems;
                 forSerial.Conditions = this.Conditions;
-//                string output = JsonConvert.SerializeObject(forSerial);
-//                Console.WriteLine (output);
+
                 var query = queryHelper.Generate(forSerial);
 
                 feedViewController.Query = query;
