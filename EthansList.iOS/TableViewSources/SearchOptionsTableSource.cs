@@ -311,7 +311,8 @@ namespace ethanslist.ios
                             Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
                         }
 
-                        var keys = this.owner.Conditions.Keys;
+//                        var keys = this.owner.Conditions.Where(x=>x.Value.Key.Equals(item.SubHeading)).ToList();
+                        var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.SubHeading select (string)kvp.Key).ToList();
                         var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
                         tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
                     };
