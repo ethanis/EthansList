@@ -243,6 +243,49 @@ namespace ethanslist.ios
                     });
             }
 
+            if (Categories.Groups.Find(x => x.Name == "Jobs").Items.Contains(Category))
+            {
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Job Type",
+                        CellType = "ComboTableCell",
+                        SubHeading = "employment_type",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("full time", 1),
+                                        new KeyValuePair<object, object>("part time", 2),
+                                        new KeyValuePair<object, object>("contract", 3),
+                                        new KeyValuePair<object, object>("employee's choice", 4),
+                                    }
+                                }
+                            },
+                    });
+            }
+
+            if (Categories.Groups.Find(x => x.Name == "Gigs").Items.Contains(Category))
+            {
+                options.Items.Add(new TableItem()
+                    {
+                        Heading = "Paid",
+                        CellType = "ComboTableCell",
+                        SubHeading = "is_paid",
+                        PickerOptions = new List<PickerOptions>()
+                            {
+                                new PickerOptions()
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                    {
+                                        new KeyValuePair<object, object>("All", null),
+                                        new KeyValuePair<object, object>("Paid", "yes"),
+                                        new KeyValuePair<object, object>("UnPaid", "no"),
+                                    }
+                                }
+                            },
+                    });
+            }
+
             if (Categories.Autos.Contains(Category.Key))
             {
                 options.Items.Add(new TableItem()
