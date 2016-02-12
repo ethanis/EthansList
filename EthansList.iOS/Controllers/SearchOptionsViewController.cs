@@ -89,7 +89,7 @@ namespace ethanslist.ios
                 {
                     SearchObject forSerial = new SearchObject();
                     forSerial.SearchLocation = Location;
-                    forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
+                    forSerial.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
                     forSerial.SearchItems = this.SearchItems;
                     forSerial.Conditions = this.Conditions;
                     forSerial.MaxListings = this.MaxListings;
@@ -130,7 +130,7 @@ namespace ethanslist.ios
 
                 SearchObject forSerial = new SearchObject();
                 forSerial.SearchLocation = Location;
-                forSerial.Category = SubCategory.Value != null ? SubCategory : new KeyValuePair<object,object>(Category.Key, Category.Value);
+                forSerial.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
                 forSerial.SearchItems = this.SearchItems;
                 forSerial.Conditions = this.Conditions;
 

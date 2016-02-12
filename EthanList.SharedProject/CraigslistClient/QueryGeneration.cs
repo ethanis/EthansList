@@ -28,6 +28,8 @@ namespace EthansList.Shared
                 }
             }
 
+            Console.WriteLine(result);
+
             return result;
         }
     }
