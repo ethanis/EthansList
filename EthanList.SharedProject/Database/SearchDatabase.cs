@@ -63,8 +63,14 @@ namespace EthansList.Models
             foreach (KeyValuePair<string, string> prop in searchObject.SearchItems)
             {
                 if (prop.Value != null)
-                    result += String.Format("{0}{1}, ", prop.Key, prop.Value);
+                    result += String.Format("{0}: {1}, ", prop.Key, prop.Value);
             }
+            foreach (KeyValuePair<object, KeyValuePair<object,object>> cond in searchObject.Conditions)
+            {
+                if (cond.Value.Key != null)
+                    result += String.Format("{0}: {1}, ", cond.Value.Key, cond.Key);
+            }
+
             result = result.Trim();
 
             if (searchObject.SearchItems.Count > 0 && result[result.Length - 1].Equals(','))
