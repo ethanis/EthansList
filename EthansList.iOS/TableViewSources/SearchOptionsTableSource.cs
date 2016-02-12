@@ -158,24 +158,24 @@ namespace ethanslist.ios
                         };
 
                     return minMaxCell;
-//                case "MakeModelCell":
-//                    var makeModelCell = (SearchLabeledCell)tableView.DequeueReusableCell(SearchLabeledCell.Key);
-//                    if (makeModelCell == null)
-//                        makeModelCell = SearchLabeledCell.Create();
-//
-//                    makeModelCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-//                    makeModelCell.TermsField.Placeholder = item.SubHeading;
-//
-//                    makeModelCell.TermsField.EditingChanged += delegate
-//                    {
-//                            AddSearchItem("auto_make_model", makeModelCell.TermsField.Text);
-//                    };
-//                    makeModelCell.TermsField.EditingDidBegin += delegate
-//                    {
-//                            this.owner.FieldSelected = makeModelCell.TermsField.InputView;
-//                    };
-//                    
-//                    return makeModelCell;
+                case "MakeModelCell":
+                    var makeModelCell = (TitledSearchCell)tableView.DequeueReusableCell(TitledSearchCell.Key);
+                    if (makeModelCell == null)
+                        makeModelCell = new TitledSearchCell();
+
+                    makeModelCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+                    makeModelCell.TermsField.Placeholder = item.SubHeading;
+
+                    makeModelCell.TermsField.EditingChanged += delegate
+                    {
+                            AddSearchItem("auto_make_model", makeModelCell.TermsField.Text);
+                    };
+                    makeModelCell.TermsField.EditingDidBegin += delegate
+                    {
+                            this.owner.FieldSelected = makeModelCell.TermsField.InputView;
+                    };
+                    
+                    return makeModelCell;
 //                case "PickerSelectorCell":
 //                    var pickerSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
 //                    if (pickerSelectorCell == null)
