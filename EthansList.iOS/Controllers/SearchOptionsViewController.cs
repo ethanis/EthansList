@@ -541,9 +541,8 @@ namespace ethanslist.ios
             
             // Bottom of the controller = initial position + height + offset      
             bottom = (float)(FieldSelected.Frame.Y + FieldSelected.Frame.Height + offset);
-
-            //Added 180 for toolbar, navbar, constraints and padding height
-            scroll_amount = (float)(KeyboardBounds.Height + (180) - (View.Frame.Size.Height - bottom)) ;
+            //Added 180 for toolbar, navbar, constraints and padding height, the content offset for amount of scrolled down
+            scroll_amount = (float)(KeyboardBounds.Height + 180 - SearchTableView.ContentOffset.Y - (View.Frame.Size.Height - bottom));
 
             // Perform the scrolling
             if (scroll_amount > 0) {
