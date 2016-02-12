@@ -11,7 +11,7 @@ namespace ethanslist.ios
     {
         protected List<TableItemGroup> tableItems;
         protected string cellIdentifier = "TableCell";
-        SearchOptionsViewController owner;
+        SearchViewController owner;
         public EventHandler<EventArgs> actionSheetSelected;
         private SearchPickerModel picker_model;
         private UIPickerView picker;
@@ -22,7 +22,7 @@ namespace ethanslist.ios
         public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
         {
             this.tableItems = items;
-            this.owner = (SearchOptionsViewController)owner;
+            this.owner = (SearchViewController)owner;
         }
 
         public override nint NumberOfSections (UITableView tableView)
