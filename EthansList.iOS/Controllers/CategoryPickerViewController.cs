@@ -83,8 +83,6 @@ namespace ethanslist.ios
 
         void CategoryTableSource_Selected (object sender, CategorySelectedEventArgs e)
         {
-            var storyboard = UIStoryboard.FromName("Main", null);
-//            var searchViewController = (SearchOptionsViewController)storyboard.InstantiateViewController("SearchOptionsViewController");
             var searchViewController = new SearchViewController();
 
             searchViewController.Location = SelectedCity;

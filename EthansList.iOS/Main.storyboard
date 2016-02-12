@@ -310,69 +310,6 @@
             <point key="canvasLocation" x="1533" y="979"/>
         </scene>
         <!--Search Options View Controller-->
-        <scene sceneID="2417">
-            <objects>
-                <viewController storyboardIdentifier="SearchOptionsViewController" id="2418" customClass="SearchOptionsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2415"/>
-                        <viewControllerLayoutGuide type="bottom" id="2416"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2419">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2545">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Search Craigslist For:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2546">
-                                        <rect key="frame" x="20" y="30" width="280" height="21"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2552">
-                                        <rect key="frame" x="20" y="68" width="280" height="30"/>
-                                        <state key="normal" title="Search">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2563">
-                                        <rect key="frame" x="0.0" y="131" width="320" height="417"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="44" id="2564">
-                                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2564" id="5le-Wi-u2k">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="2545" firstAttribute="trailing" secondItem="2419" secondAttribute="trailing" id="2584"/>
-                            <constraint firstItem="2545" firstAttribute="leading" secondItem="2419" secondAttribute="leading" id="2585"/>
-                            <constraint firstItem="2545" firstAttribute="top" secondItem="2419" secondAttribute="top" constant="20" id="2586"/>
-                            <constraint firstItem="2545" firstAttribute="bottom" secondItem="2419" secondAttribute="bottom" id="2587"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="SearchButton" destination="2552" id="name-outlet-2552"/>
-                        <outlet property="SearchCityLabel" destination="2546" id="name-outlet-2546"/>
-                        <outlet property="SearchTableView" destination="2563" id="name-outlet-2563"/>
-                        <outlet property="scrollView" destination="2545" id="name-outlet-2545"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2420" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="477" y="230"/>
-        </scene>
         <!--Posting Info View Controller-->
         <scene sceneID="2624">
             <objects>
@@ -501,6 +438,8 @@
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
         <image name="Delete-50.png" width="50" height="50"/>
+        <image name="favorites.png" width="50" height="50"/>
+        <image name="Trash-50.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>

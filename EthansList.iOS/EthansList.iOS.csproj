@@ -189,10 +189,6 @@
     <Compile Include="TableViewCells\SearchTermsCell.designer.cs">
       <DependentUpon>SearchTermsCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\SearchOptionsViewController.cs" />
-    <Compile Include="Controllers\SearchOptionsViewController.designer.cs">
-      <DependentUpon>SearchOptionsViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="TableViewSources\SearchOptionsTableSource.cs" />
     <Compile Include="Helpers\TableFormHelpers.cs" />
     <Compile Include="Helpers\Reachability.cs" />
