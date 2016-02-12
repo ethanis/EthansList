@@ -2,38 +2,61 @@
 
 using Foundation;
 using UIKit;
+using CoreGraphics;
 
 namespace ethanslist.ios
 {
-    public partial class FeedResultsCell : UITableViewCell
+    public partial class FeedResultsCell : CustomTableViewCell
     {
-        public static readonly NSString Key = new NSString("FeedResultsCell");
-        public static readonly UINib Nib;
-        public UILabel PostingTitle { get{ return TitleLabel; }}
-        public UILabel PostingDescription { get{ return DescriptionLabel; }}
-        public UIImageView PostingImage { get{ return PostingImageView; }}
+        internal static readonly string Key = "FeedResultsCell";
+        public UILabel PostingTitle { get; set;}
+        public UILabel PostingDescription { get; set;}
+        public UIImageView PostingImage { get; set;}
 
-        static FeedResultsCell()
+        public FeedResultsCell()
+            : base(Key)
         {
-            Nib = UINib.FromName("FeedResultsCell", NSBundle.MainBundle);
-        }
+            PostingImage = new UIImageView(){
+            };
+            AddSubview(PostingImage);
 
-        public FeedResultsCell(IntPtr handle)
-            : base(handle)
-        {
-        }
+            PostingTitle = new UILabel(){
+                
+            };
+            AddSubview(PostingTitle);
 
-        public static FeedResultsCell Create()
-        {
-            return (FeedResultsCell)Nib.Instantiate(null, null)[0];
+            PostingDescription = new UILabel(){
+                TextColor = ColorScheme.Asbestos,
+                Lines = 5,
+                LineBreakMode = UILineBreakMode.WordWrap
+            };
+            AddSubview(PostingDescription);
         }
 
         public override void LayoutSubviews()
         {
-            base.LayoutSubviews();
+            var bounds = Bounds;
 
-//            TitleLabel.TextColor = ColorScheme.MidnightBlue;
-            DescriptionLabel.TextColor = ColorScheme.Asbestos;
+            PostingImage.Frame = new CGRect(
+                15,
+                10,
+                bounds.Width * 0.25f,
+                bounds.Height - 20
+            );
+
+            PostingTitle.Frame = new CGRect(
+                (bounds.Width * 0.25f) + 25,
+                10,
+                (bounds.Width * 0.75) - 40,
+                20
+            );
+
+            PostingDescription.Frame = new CGRect(
+                (bounds.Width * 0.25f) + 25,
+                40,
+                (bounds.Width * 0.75) - 40,
+                30
+            );
         }
     }
 }

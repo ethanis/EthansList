@@ -23,12 +23,17 @@ namespace ethanslist.ios
             return feedClient.postings.Count;
         }
 
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 80f;
+        }
+
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = (FeedResultsCell)tableView.DequeueReusableCell(FeedResultsCell.Key);
             if (cell == null)
             {
-                cell = FeedResultsCell.Create();
+                cell = new FeedResultsCell();
             }
 
             cell.BackgroundColor = ColorScheme.Clouds;

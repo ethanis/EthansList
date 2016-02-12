@@ -30,7 +30,7 @@ namespace ethanslist.ios
 
             if (cell == null)
             {
-                cell = FeedResultsCell.Create();
+                cell = new FeedResultsCell();
             }
 
             cell.BackgroundColor = ColorScheme.Clouds;

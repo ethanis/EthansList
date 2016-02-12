@@ -126,7 +126,6 @@
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
-    <InterfaceDefinition Include="TableViewCells\FeedResultsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingTitleCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingImageCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingImageCollectionCell.xib" />
@@ -191,9 +190,6 @@
     </Compile>
     <Compile Include="TableViewSources\SearchPickerModel.cs" />
     <Compile Include="TableViewCells\FeedResultsCell.cs" />
-    <Compile Include="TableViewCells\FeedResultsCell.designer.cs">
-      <DependentUpon>FeedResultsCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="TableViewCells\PostingTitleCell.cs" />
     <Compile Include="TableViewCells\PostingTitleCell.designer.cs">
