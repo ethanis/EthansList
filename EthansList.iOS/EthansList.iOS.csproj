@@ -125,7 +125,6 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="TableViewCells\PriceSelectorCell.xib" />
-    <InterfaceDefinition Include="TableViewCells\SearchTermsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PickerSelectorCell.xib" />
     <InterfaceDefinition Include="TableViewCells\FeedResultsCell.xib" />
     <InterfaceDefinition Include="TableViewCells\PostingTitleCell.xib" />
@@ -183,9 +182,6 @@
       <DependentUpon>PriceSelectorCell.cs</DependentUpon>
     </Compile>
     <Compile Include="TableViewCells\SearchTermsCell.cs" />
-    <Compile Include="TableViewCells\SearchTermsCell.designer.cs">
-      <DependentUpon>SearchTermsCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="TableViewSources\SearchOptionsTableSource.cs" />
     <Compile Include="Helpers\TableFormHelpers.cs" />
     <Compile Include="Helpers\Reachability.cs" />

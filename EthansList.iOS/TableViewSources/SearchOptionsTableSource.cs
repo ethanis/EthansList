@@ -78,7 +78,7 @@ namespace ethanslist.ios
                 case "SearchTermsCell":
                     var searchTermsCell = (SearchTermsCell)tableView.DequeueReusableCell(SearchTermsCell.Key);
                     if (searchTermsCell == null)
-                        searchTermsCell = SearchTermsCell.Create();
+                        searchTermsCell = new SearchTermsCell();
 
                     searchTermsCell.TermsField.Placeholder = "Search: " + this.owner.Category.Value;
                     searchTermsCell.AccessibilityIdentifier = "SearchTermsField";
@@ -176,110 +176,110 @@ namespace ethanslist.ios
                     };
                     
                     return makeModelCell;
-//                case "PickerSelectorCell":
-//                    var pickerSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
-//                    if (pickerSelectorCell == null)
-//                        pickerSelectorCell = PickerSelectorCell.Create();
-//
-//                    pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-//
-//                    picker_model = new SearchPickerModel(item.PickerOptions, false);
-//                    picker = new UIPickerView();
-//                    picker.Model = picker_model;
-//                    picker.ShowSelectionIndicator = true;
-//
-//                    if (item.Heading == "Sub Category")
-//                    {
-//                        var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
-//                        this.owner.SubCategory = firstItem;
-//                        pickerSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
-//                    }
-//
-//                    picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
-//                        {
-//                            string resultKey = e.SelectedKey.ToString();
-//                            string resultValue = null;
-//
-//                            if (e.SelectedValue != null)
-//                                resultValue = e.SelectedValue.ToString();
-//
-//                            Console.WriteLine(resultKey + " From " + e.FromComponent);
-//                            pickerSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
-//                            if (item.Heading == "Min Bedrooms")
-//                                AddSearchItem("bedrooms", resultValue);
-//                            else if (item.Heading == "Min Bathrooms")
-//                                AddSearchItem("bathrooms", resultValue);
-//                            else if (item.Heading == "Posted Date")
-//                                this.owner.WeeksOld = (int?)Convert.ToInt16(resultValue);
-//                            else if (item.Heading == "Max Listings")
-//                                this.owner.MaxListings = Convert.ToInt16(resultValue);
-//                            else if (item.Heading == "Sub Category")
-//                                this.owner.SubCategory = new KeyValuePair<object, object>(resultKey, resultValue);
-//                        };
-//                    
-//                    pickerSelectorCell.InputTextField.InputView = picker;
-//                    pickerSelectorCell.InputTextField.InputAccessoryView = toolbar;
-//
-//                    pickerSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-//                        this.owner.KeyboardBounds = picker.Bounds;
-//                        this.owner.FieldSelected = pickerSelectorCell;
-//                        pickerSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
-//                    };
-//
-//                    pickerSelectorCell.InputTextField.EditingDidEnd += delegate
-//                    {
-//                            pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
-//                    };
-//                    return pickerSelectorCell;
-//                case "ComboTableCell":
-//                    var tableSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
-//                    if (tableSelectorCell == null)
-//                        tableSelectorCell = PickerSelectorCell.Create();
-//                    
-//                    tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-//
-//                    ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
-//                    UITableView comboPicker = new UITableView();
-//                    comboPicker.Source = comboSource;
-//                    comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
-//
-//                    comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
-//                        string resultKey = e.SelectedKey.ToString();
-//                        string resultValue = null;
-//                        if (e.SelectedValue != null)
-//                            resultValue = e.SelectedValue.ToString();
-//
-//                        if (this.owner.Conditions.ContainsKey(resultKey))
-//                        {
-//                            this.owner.Conditions.Remove(resultKey);
-//                            Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
-//                        }
-//                        else
-//                        {
-//                            this.owner.Conditions.Add(resultKey, new KeyValuePair<object, object>(item.SubHeading, resultValue));
-//                            Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
-//                        }
-//
-//                        var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.SubHeading select (string)kvp.Key).ToList();
-//                        var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
-//                        tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
-//                    };
-//
-//                    tableSelectorCell.InputTextField.InputView = comboPicker;
-//                    tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
-//
-//                    tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
-//                        this.owner.KeyboardBounds = comboPicker.Bounds;
-//                        this.owner.FieldSelected = tableSelectorCell;
-//                        tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
-//                    };
-//
-//                    tableSelectorCell.InputTextField.EditingDidEnd += delegate
-//                        {
-//                            tableSelectorCell.Accessory = UITableViewCellAccessory.None;
-//                        };
-//                    
-//                    return tableSelectorCell;
+                case "PickerSelectorCell":
+                    var pickerSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
+                    if (pickerSelectorCell == null)
+                        pickerSelectorCell = PickerSelectorCell.Create();
+
+                    pickerSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                    picker_model = new SearchPickerModel(item.PickerOptions, false);
+                    picker = new UIPickerView();
+                    picker.Model = picker_model;
+                    picker.ShowSelectionIndicator = true;
+
+                    if (item.Heading == "Sub Category")
+                    {
+                        var firstItem = item.PickerOptions[0].PickerWheelOptions[0];
+                        this.owner.SubCategory = firstItem;
+                        pickerSelectorCell.Display.AttributedText = new NSAttributedString((string)firstItem.Key, Constants.LabelAttributes);
+                    }
+
+                    picker_model.PickerChanged += (object sender, PickerChangedEventArgs e) =>
+                        {
+                            string resultKey = e.SelectedKey.ToString();
+                            string resultValue = null;
+
+                            if (e.SelectedValue != null)
+                                resultValue = e.SelectedValue.ToString();
+
+                            Console.WriteLine(resultKey + " From " + e.FromComponent);
+                            pickerSelectorCell.Display.AttributedText = new NSAttributedString(resultKey, Constants.LabelAttributes);
+                            if (item.Heading == "Min Bedrooms")
+                                AddSearchItem("bedrooms", resultValue);
+                            else if (item.Heading == "Min Bathrooms")
+                                AddSearchItem("bathrooms", resultValue);
+                            else if (item.Heading == "Posted Date")
+                                this.owner.WeeksOld = (int?)Convert.ToInt16(resultValue);
+                            else if (item.Heading == "Max Listings")
+                                this.owner.MaxListings = Convert.ToInt16(resultValue);
+                            else if (item.Heading == "Sub Category")
+                                this.owner.SubCategory = new KeyValuePair<object, object>(resultKey, resultValue);
+                        };
+                    
+                    pickerSelectorCell.InputTextField.InputView = picker;
+                    pickerSelectorCell.InputTextField.InputAccessoryView = toolbar;
+
+                    pickerSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                        this.owner.KeyboardBounds = picker.Bounds;
+                        this.owner.FieldSelected = pickerSelectorCell;
+                        pickerSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
+                    };
+
+                    pickerSelectorCell.InputTextField.EditingDidEnd += delegate
+                    {
+                            pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
+                    };
+                    return pickerSelectorCell;
+                case "ComboTableCell":
+                    var tableSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
+                    if (tableSelectorCell == null)
+                        tableSelectorCell = PickerSelectorCell.Create();
+                    
+                    tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                    ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
+                    UITableView comboPicker = new UITableView();
+                    comboPicker.Source = comboSource;
+                    comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
+
+                    comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
+                        string resultKey = e.SelectedKey.ToString();
+                        string resultValue = null;
+                        if (e.SelectedValue != null)
+                            resultValue = e.SelectedValue.ToString();
+
+                        if (this.owner.Conditions.ContainsKey(resultKey))
+                        {
+                            this.owner.Conditions.Remove(resultKey);
+                            Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
+                        }
+                        else
+                        {
+                            this.owner.Conditions.Add(resultKey, new KeyValuePair<object, object>(item.SubHeading, resultValue));
+                            Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
+                        }
+
+                        var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.SubHeading select (string)kvp.Key).ToList();
+                        var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
+                        tableSelectorCell.Display.AttributedText = new NSAttributedString(text, Constants.LabelAttributes);
+                    };
+
+                    tableSelectorCell.InputTextField.InputView = comboPicker;
+                    tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
+
+                    tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                        this.owner.KeyboardBounds = comboPicker.Bounds;
+                        this.owner.FieldSelected = tableSelectorCell;
+                        tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
+                    };
+
+                    tableSelectorCell.InputTextField.EditingDidEnd += delegate
+                        {
+                            tableSelectorCell.Accessory = UITableViewCellAccessory.None;
+                        };
+                    
+                    return tableSelectorCell;
             }
         }
     }

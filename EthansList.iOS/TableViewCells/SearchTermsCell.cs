@@ -5,45 +5,39 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-    public partial class SearchTermsCell : UITableViewCell
+    public class SearchTermsCell : CustomTableViewCell
     {
-        public static readonly NSString Key = new NSString("SearchTermsCell");
-        public static readonly UINib Nib;
-        public UITextField TermsField { get { return this.SearchTermField; }}
+        internal static readonly string Key = "SearchTermsCell";
+        public UITextField TermsField { get; set;}
 
-        static SearchTermsCell()
+        public SearchTermsCell()
+            :base(Key)
         {
-            Nib = UINib.FromName("SearchTermsCell", NSBundle.MainBundle);
-        }
+            TermsField = new UITextField() { BorderStyle = UITextBorderStyle.RoundedRect};
+            AddSubview(TermsField);
 
-        public SearchTermsCell(IntPtr handle)
-            : base(handle)
-        {
-        }
+            this.TermsField.EditingDidBegin += delegate { this.TermsField.BecomeFirstResponder(); };
+            this.TermsField.EditingDidEnd += delegate
+                {
+                    this.TermsField.ResignFirstResponder();
+                };
 
-        public SearchTermsCell() : base()
-        {
-        }
-
-        public static SearchTermsCell Create()
-        {
-            return (SearchTermsCell)Nib.Instantiate(null, null)[0];
+            this.TermsField.ShouldReturn += delegate {
+                TermsField.ResignFirstResponder();
+                return true;
+            };
         }
 
         public override void LayoutSubviews()
         {
-            base.LayoutSubviews();
+            var bounds = Bounds;
 
-            this.SearchTermField.EditingDidBegin += delegate { this.SearchTermField.BecomeFirstResponder(); };
-            this.SearchTermField.EditingDidEnd += delegate
-            {
-                    this.SearchTermField.ResignFirstResponder();
-            };
-
-            this.SearchTermField.ShouldReturn += delegate {
-                SearchTermField.ResignFirstResponder();
-                return true;
-            };
+            TermsField.Frame = new CoreGraphics.CGRect(
+                15,
+                bounds.Height * 0.1f,
+                bounds.Width - 30,
+                bounds.Height * 0.8f
+            );
         }
     }
 }
