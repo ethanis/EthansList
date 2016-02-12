@@ -60,7 +60,7 @@ namespace ethanslist.UITests
         {
             string state = "California";
             string area = "San Francisco Bay Area";
-            string searchTerms = "Min Bedrooms: 3, Min Bathrooms: 1, Search Items: parking laundry view, Max Listings: 50, Posted Date: 2";
+            string searchTerms = "query: parking laundry view, min_price: $1000, max_price: $5000, minSqft: , maxSqft: , bedrooms: 3, bathrooms: 1";
             string cat = "apartments / housing rentals";
 
             new CityPickerPage()
@@ -73,7 +73,7 @@ namespace ethanslist.UITests
             new SearchOptionsPage()
                 .VerifyOnLocation(area)
                 .EnterSearchTerms(new string[] {"parking", "laundry", "view"})
-                .SelectMinMaxPrice(1000, 1200)
+                .SelectMinMaxPrice(1000, 5000)
                 .SelectMinBedrooms(3)
                 .SelectMinBathrooms(1)
                 .SelectPostedDate("2 Weeks Old")

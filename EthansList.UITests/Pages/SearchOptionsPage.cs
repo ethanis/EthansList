@@ -10,7 +10,7 @@ namespace ethanslist.UITests
         readonly string SearchButton = "Search";
         readonly string SaveButton;
         readonly Query SearchTermsField;
-        readonly Query MaxPriceField, MinBedroomsField, MinBathroomsField, PostedDateField, MaxListingsField;
+        readonly Query MinPriceField, MaxPriceField, MinBedroomsField, MinBathroomsField, PostedDateField, MaxListingsField;
         readonly string DoneButton = "Done";
 
         public SearchOptionsPage()
@@ -20,7 +20,8 @@ namespace ethanslist.UITests
             {
                 SaveButton = "save.png";
                 SearchTermsField = x => x.Id("SearchTermsField");
-                MaxPriceField = x => x.Text("Price").Sibling().Class("UITextField");
+                MaxPriceField = x => x.Id("MaxPriceField");
+                MinPriceField = x => x.Id("MinPriceField");
                 MinBedroomsField = x => x.Text("Min Bedrooms").Sibling().Marked("PickerTextField");
                 MinBathroomsField = x => x.Text("Min Bathrooms").Sibling().Marked("PickerTextField");
                 PostedDateField = x => x.Text("Posted Date").Sibling().Marked("PickerTextField");
@@ -64,9 +65,12 @@ namespace ethanslist.UITests
         public SearchOptionsPage SelectMinMaxPrice(int min, int max)
         {
             app.ScrollDownTo(MaxPriceField);
+            app.Tap(MinPriceField);
+            app.EnterText(min.ToString());
             app.Tap(MaxPriceField);
+            app.EnterText(max.ToString());
             app.Screenshot("Max and min price entered");
-            app.Tap(DoneButton);
+            app.DismissKeyboard();
 
             return this;
         }
