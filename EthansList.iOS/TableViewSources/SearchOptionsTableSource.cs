@@ -116,48 +116,48 @@ namespace ethanslist.ios
                     };
 
                     return priceInputCell;
-//                case "MinMaxCell":
-//                    var minMaxCell = (DoubleInputCell)tableView.DequeueReusableCell(DoubleInputCell.Key);
-//                    if (minMaxCell == null)
-//                        minMaxCell = DoubleInputCell.Create();
-//
-//                    minMaxCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
-//
-//                    minMaxCell.NumChanged += delegate
-//                    {
-//                            switch (item.Heading) 
-//                            {
-//                                case "Sq Feet":
-//                                    AddSearchItem("minSqft", minMaxCell.MinField.Text);
-//                                    AddSearchItem("maxSqft", minMaxCell.MaxField.Text);
-//
-//                                    break;
-//                                case "Year":
-//                                    AddSearchItem("min_auto_year", minMaxCell.MinField.Text);
-//                                    AddSearchItem("max_auto_year", minMaxCell.MaxField.Text);
-//
-//                                    break;
-//                                case "Odometer":
-//                                    AddSearchItem("min_auto_miles", minMaxCell.MinField.Text);
-//                                    AddSearchItem("max_auto_miles", minMaxCell.MaxField.Text);
-//
-//                                    break;
-//                                default:
-//                                    break;
-//                            }
-//                    };
-//
-//                    minMaxCell.MaxField.EditingDidBegin += (object sender, EventArgs e) =>
-//                        {
-//                            this.owner.FieldSelected = minMaxCell.MaxField.InputView;
-//                        };
-//
-//                    minMaxCell.MinField.EditingDidBegin += (object sender, EventArgs e) =>
-//                        {
-//                            this.owner.FieldSelected = minMaxCell.MinField.InputView;
-//                        };
-//
-//                    return minMaxCell;
+                case "MinMaxCell":
+                    var minMaxCell = (GenericPriceCell)tableView.DequeueReusableCell(GenericPriceCell.Key);
+                    if (minMaxCell == null)
+                        minMaxCell = new GenericPriceCell();
+
+                    minMaxCell.HeaderLabel.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
+
+                    minMaxCell.NumChanged += delegate
+                    {
+                            switch (item.Heading) 
+                            {
+                                case "Sq Feet":
+                                    AddSearchItem("minSqft", minMaxCell.MinField.Text);
+                                    AddSearchItem("maxSqft", minMaxCell.MaxField.Text);
+
+                                    break;
+                                case "Year":
+                                    AddSearchItem("min_auto_year", minMaxCell.MinField.Text);
+                                    AddSearchItem("max_auto_year", minMaxCell.MaxField.Text);
+
+                                    break;
+                                case "Odometer":
+                                    AddSearchItem("min_auto_miles", minMaxCell.MinField.Text);
+                                    AddSearchItem("max_auto_miles", minMaxCell.MaxField.Text);
+
+                                    break;
+                                default:
+                                    break;
+                            }
+                    };
+
+                    minMaxCell.MaxField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = minMaxCell.MaxField.InputView;
+                        };
+
+                    minMaxCell.MinField.EditingDidBegin += (object sender, EventArgs e) =>
+                        {
+                            this.owner.FieldSelected = minMaxCell.MinField.InputView;
+                        };
+
+                    return minMaxCell;
 //                case "MakeModelCell":
 //                    var makeModelCell = (SearchLabeledCell)tableView.DequeueReusableCell(SearchLabeledCell.Key);
 //                    if (makeModelCell == null)
