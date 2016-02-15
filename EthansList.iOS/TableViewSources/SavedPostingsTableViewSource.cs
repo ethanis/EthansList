@@ -34,11 +34,10 @@ namespace ethanslist.ios
             }
 
             cell.BackgroundColor = ColorScheme.Clouds;
-
             Posting post = savedListings[indexPath.Row];
 
             cell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, Constants.HeaderAttributes);
-            cell.PostingDescription.AttributedText = new NSAttributedString(post.Description, Constants.LabelAttributes);
+            cell.PostingDescription.AttributedText = new NSAttributedString(post.Description, Constants.FeedDescriptionAttributes);
             if (post.ImageLink != "-1")
             {
                 cell.PostingImage.SetImage(
@@ -52,6 +51,11 @@ namespace ethanslist.ios
             }
 
             return cell;
+        }
+
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 80f;
         }
             
         public override bool CanEditRow (UITableView tableView, Foundation.NSIndexPath indexPath)
