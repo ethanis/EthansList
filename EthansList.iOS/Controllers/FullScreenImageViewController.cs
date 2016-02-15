@@ -74,7 +74,6 @@ namespace ethanslist.ios
                 {
                     Direction = UISwipeGestureRecognizerDirection.Right
                 };
-
             closeIcon.AddGestureRecognizer(new UITapGestureRecognizer(CloseIconTap));
             holderView.AddGestureRecognizer(doubletap);
             holderView.AddGestureRecognizer(dismissSwipe);
@@ -84,8 +83,6 @@ namespace ethanslist.ios
 
         private void CloseIconTap (UITapGestureRecognizer gesture)
         {
-            //TODO: Why isnt this being fired????
-            Console.WriteLine("Dismissed");
             UIApplication.SharedApplication.SetStatusBarHidden(false, false);
             this.DismissViewController(true, null);
         }
@@ -136,6 +133,7 @@ namespace ethanslist.ios
             scrollview.BackgroundColor = ColorScheme.Clouds;
             scrollview.BackgroundColor.ColorWithAlpha(0.7f);
             CurrentImage.ContentMode = UIViewContentMode.ScaleAspectFit;
+            closeIcon.UserInteractionEnabled = true;
         }
 
         void AddLayoutConstraints()
