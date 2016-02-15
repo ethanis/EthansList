@@ -335,8 +335,7 @@ namespace ethanslist.ios
         {
             if (imageHelper.images.Count > 0)
             {
-                var storyboard = UIStoryboard.FromName("Main", null);
-                postingImageViewController postingImageVC = (postingImageViewController)storyboard.InstantiateViewController("postingImageViewController");
+                var postingImageVC = new FullScreenImageViewController();
                 postingImageVC.ImageLinks = imageHelper.images;
                 postingImageVC.ImageIndex = CurrentImageIndex;
 
