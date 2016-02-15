@@ -41,7 +41,7 @@ namespace ethanslist.ios
             Posting post = feedClient.postings[indexPath.Row];
 
             cell.PostingTitle.AttributedText = new NSAttributedString(post.PostTitle, Constants.HeaderAttributes);
-            cell.PostingDescription.AttributedText = new NSAttributedString(post.Description, Constants.LabelAttributes);
+            cell.PostingDescription.AttributedText = new NSAttributedString(post.Description, Constants.FeedDescriptionAttributes);
 
             if (post.ImageLink != "-1")
             {

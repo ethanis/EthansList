@@ -28,8 +28,8 @@ namespace ethanslist.ios
 
             PostingDescription = new UILabel(){
                 TextColor = ColorScheme.Asbestos,
-                Lines = 5,
-                LineBreakMode = UILineBreakMode.WordWrap
+                Lines = 0,
+                LineBreakMode = UILineBreakMode.WordWrap,
             };
             AddSubview(PostingDescription);
 
@@ -42,30 +42,30 @@ namespace ethanslist.ios
             var bounds = Bounds;
 
             PostingImage.Frame = new CGRect(
-                15,
-                10,
+                5,
+                5,
                 bounds.Width * 0.25f,
-                bounds.Height - 20
+                bounds.Height - 10
             );
 
             PostingTitle.Frame = new CGRect(
-                (bounds.Width * 0.25f) + 25,
-                10,
-                (bounds.Width * 0.75) - 40,
-                20
+                (bounds.Width * 0.25f) + 15,
+                5,
+                (bounds.Width * 0.75) - 20,
+                16
             );
 
             PostingDescription.Frame = new CGRect(
-                (bounds.Width * 0.25f) + 25,
-                40,
-                (bounds.Width * 0.75) - 40,
-                30
+                (bounds.Width * 0.25f) + 15,
+                21,
+                (bounds.Width * 0.75) - 20,
+                54
             );
 
             Separator.Frame = new CGRect(
-                15,
+                5,
                 bounds.Height-1,
-                bounds.Width,
+                bounds.Width -5,
                 1
             );
         }

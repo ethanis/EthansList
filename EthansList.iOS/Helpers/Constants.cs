@@ -14,7 +14,7 @@ namespace ethanslist.ios
         public static UIStringAttributes ButtonAttributes {get{ return att.btnAttributes; }}
         public static UIStringAttributes HeaderAttributes {get{ return att.headerAttributes; }}
         public static UIStringAttributes CityPickerCellAttributes {get{return att.cityPickerCellAttributes;}}
-
+        public static UIStringAttributes FeedDescriptionAttributes {get{ return att.feedDescriptionAttributes; }}
         public static int ButtonHeight {get{ return 36; }}
 
         static StringAttributes att = new StringAttributes();
@@ -36,6 +36,10 @@ namespace ethanslist.ios
 
         public UIStringAttributes cityPickerCellAttributes = new UIStringAttributes() {
             Font = UIFont.FromName(Constants.LightFont, 16f),
+        };
+
+        public UIStringAttributes feedDescriptionAttributes = new UIStringAttributes() {
+            Font = UIFont.FromName(Constants.LightFont, 14f)
         };
     }
 }

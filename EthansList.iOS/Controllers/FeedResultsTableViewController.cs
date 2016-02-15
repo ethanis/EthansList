@@ -26,6 +26,8 @@ namespace ethanslist.ios
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             this.TableView.BackgroundColor = ColorScheme.Clouds;
+
+            AddLayoutConstraints();
         }
 
         public String Query { get; set;}
@@ -78,15 +80,6 @@ namespace ethanslist.ios
             TableView.Source = tableSource;
             TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
-            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Left,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Width,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
-            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
-
             RefreshControl = new UIRefreshControl();
 
             RefreshControl.ValueChanged += (object sender, EventArgs e) => {
@@ -125,6 +118,18 @@ namespace ethanslist.ios
             });
 
             Console.WriteLine(TableView.NumberOfRowsInSection(0));
+        }
+
+        void AddLayoutConstraints()
+        {
+//            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
+//                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Left,
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Width,
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
+            this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Height,
+                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
         }
 	}
 }

@@ -209,11 +209,10 @@ namespace ethanslist.ios
                                                          new SizeF((float)this.owner.View.Bounds.Width, float.MaxValue),
                                                          NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
 
-                        imageHelper.loadingComplete += async (object sender, EventArgs e) =>
+                        imageHelper.loadingComplete += (object sender, EventArgs e) =>
                         {
                             if (imageHelper.PostingBodyAdded)
                             {
-                                    await Task.Delay(2000);
                                 DescriptionText = imageHelper.postingDescription;
                                 descriptioncell.PostingDescription.AttributedText = new NSAttributedString(DescriptionText, Constants.LabelAttributes);
                                 CoreGraphics.CGRect newBounds = descriptioncell.PostingDescription.AttributedText.GetBoundingRect(
