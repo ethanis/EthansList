@@ -12,6 +12,7 @@ namespace ethanslist.ios
         public UILabel PostingTitle { get; set;}
         public UILabel PostingDescription { get; set;}
         public UIImageView PostingImage { get; set;}
+        public UIView Separator;
 
         public FeedResultsCell()
             : base(Key)
@@ -31,6 +32,9 @@ namespace ethanslist.ios
                 LineBreakMode = UILineBreakMode.WordWrap
             };
             AddSubview(PostingDescription);
+
+            Separator = new UIView(){BackgroundColor = ColorScheme.Concrete};
+            AddSubview(Separator);
         }
 
         public override void LayoutSubviews()
@@ -56,6 +60,13 @@ namespace ethanslist.ios
                 40,
                 (bounds.Width * 0.75) - 40,
                 30
+            );
+
+            Separator.Frame = new CGRect(
+                15,
+                bounds.Height-1,
+                bounds.Width,
+                1
             );
         }
     }

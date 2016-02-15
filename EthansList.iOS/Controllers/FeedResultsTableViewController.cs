@@ -48,7 +48,7 @@ namespace ethanslist.ios
             base.ViewDidLoad();
             Console.WriteLine(Query);
 
-            this.Title = "Craigslist Results";
+            this.Title = "Search Results";
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
             if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
@@ -76,7 +76,7 @@ namespace ethanslist.ios
             tableSource = new FeedResultTableSource(this, feedClient);
 
             TableView.Source = tableSource;
-            TableView.RowHeight = 80;
+            TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
             this.View.AddConstraint(NSLayoutConstraint.Create(TableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.TopMargin, 1, 0));
