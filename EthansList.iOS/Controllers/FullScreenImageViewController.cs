@@ -54,26 +54,11 @@ namespace ethanslist.ios
             scrollview.MinimumZoomScale = .1f;
             scrollview.ViewForZoomingInScrollView += (UIScrollView sv) => { return CurrentImage; };
 
-
-            UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap) 
-                {
-                    NumberOfTapsRequired = 2 // double tap
-                };
-
-            UISwipeGestureRecognizer dismissSwipe = new UISwipeGestureRecognizer(OnDismissSwipe)
-                {
-                    Direction = UISwipeGestureRecognizerDirection.Down
-                };
-
-            UISwipeGestureRecognizer onSwipeNext = new UISwipeGestureRecognizer(OnSwipeNext)
-                { 
-                    Direction = UISwipeGestureRecognizerDirection.Left
-                };
-
-            UISwipeGestureRecognizer onSwipePrevious = new UISwipeGestureRecognizer(OnSwipePrevious)
-                {
-                    Direction = UISwipeGestureRecognizerDirection.Right
-                };
+            UITapGestureRecognizer doubletap = new UITapGestureRecognizer(OnDoubleTap){ NumberOfTapsRequired = 2 };
+            UISwipeGestureRecognizer dismissSwipe = new UISwipeGestureRecognizer(OnDismissSwipe){ Direction = UISwipeGestureRecognizerDirection.Down };
+            UISwipeGestureRecognizer onSwipeNext = new UISwipeGestureRecognizer(OnSwipeNext) { Direction = UISwipeGestureRecognizerDirection.Left };
+            UISwipeGestureRecognizer onSwipePrevious = new UISwipeGestureRecognizer(OnSwipePrevious) { Direction = UISwipeGestureRecognizerDirection.Right};
+            
             closeIcon.AddGestureRecognizer(new UITapGestureRecognizer(CloseIconTap));
             holderView.AddGestureRecognizer(doubletap);
             holderView.AddGestureRecognizer(dismissSwipe);

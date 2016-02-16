@@ -18,6 +18,8 @@ namespace ethanslist.ios
             : base(Key)
         {
             PostingImage = new UIImageView(){
+                ContentMode = UIViewContentMode.ScaleAspectFill,
+                ClipsToBounds = true
             };
             AddSubview(PostingImage);
 
