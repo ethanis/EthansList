@@ -100,16 +100,6 @@ namespace ethanslist.ios
 
             return true;
         }
-
-        public override void DidChange(NSKeyValueChange changeKind, NSIndexSet indexes, NSString forKey)
-        {
-            base.DidChange(changeKind, indexes, forKey);
-        }
-
-        public override void EditingStarted(UITextField textField)
-        {
-            //            throw new System.NotImplementedException ();
-        }
     }
 }
 

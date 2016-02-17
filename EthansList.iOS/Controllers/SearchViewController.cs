@@ -294,7 +294,7 @@ namespace ethanslist.ios
                         CellType = "PriceInputCell",
                     });
             }
-
+            //TODO: Should not mask values
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
             {
                 searchterms.Items.Add(new TableItem(){

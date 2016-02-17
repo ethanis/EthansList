@@ -44,9 +44,7 @@ namespace ethanslist.ios
 
         public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            //TODO fix this shit
-            var title = string.Format("\ud83d\uddd1{0}Delete", Environment.NewLine);
-            var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, title, async delegate {
+            var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, "Delete", async delegate {
                 
                 await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row].SearchLocation.Url, savedSearches[indexPath.Row]);
                 if (AppDelegate.databaseConnection.StatusCode == codes.ok)
@@ -60,8 +58,11 @@ namespace ethanslist.ios
                 }
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
             });
+//            var bg = UIImage.FromBundle("DeletePatternImage.png");
+//            bg.Scale(new CGSize(80f, tableView.RectForRowAtIndexPath(indexPath).Height));
+//            deletion.BackgroundColor = UIColor.FromPatternImage(bg);
             deletion.BackgroundColor = ColorScheme.Alizarin;
-//            deletion.BackgroundColor = UIColor.FromPatternImage(UIImage.FromBundle("Trash-50.png"));
+
             return new UITableViewRowAction[]{ deletion };
         }
 
