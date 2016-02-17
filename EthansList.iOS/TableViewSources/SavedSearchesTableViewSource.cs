@@ -45,7 +45,6 @@ namespace ethanslist.ios
         public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
         {
             var deletion = UITableViewRowAction.Create(UITableViewRowActionStyle.Destructive, "Delete", async delegate {
-                
                 await AppDelegate.databaseConnection.DeleteSearchAsync(savedSearches[indexPath.Row].SearchLocation.Url, savedSearches[indexPath.Row]);
                 if (AppDelegate.databaseConnection.StatusCode == codes.ok)
                 {

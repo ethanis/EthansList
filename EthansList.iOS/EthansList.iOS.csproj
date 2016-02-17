@@ -256,6 +256,8 @@
     <BundleResource Include="Resources\favorites.png" />
     <BundleResource Include="Resources\Trash-50.png" />
     <BundleResource Include="Resources\Delete-50.png" />
-    <BundleResource Include="Resources\DeletePatternImage.png" />
+    <BundleResource Include="Resources\DeletePattern%402x.png" />
+    <BundleResource Include="Resources\DeletePattern%403x.png" />
+    <BundleResource Include="Resources\DeletePattern.png" />
   </ItemGroup>
 </Project>

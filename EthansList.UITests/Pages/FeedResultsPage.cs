@@ -10,12 +10,12 @@ namespace ethanslist.UITests
         readonly Query FirstListingCell;
 
         public FeedResultsPage()
-            : base ("androidTrait", "Craigslist Results")
+            : base ("androidTrait", "Search Results")
         {
             if (OniOS)
             {
                 LoadingOverlay = x => x.Class("ethanslist_ios_LoadingOverlay");
-                FirstListingCell = x => x.Class("UITableViewCell");
+                FirstListingCell = x => x.ClassFull("ethanslist_ios_FeedResultsCell");
             }
 
             app.WaitForNoElement(LoadingOverlay, timeout:TimeSpan.FromSeconds(60), timeoutMessage:"Timed out waiting for loading to complete");

@@ -75,7 +75,7 @@ namespace ethanslist.ios
                 tableView.DeleteRows(new [] { indexPath }, UITableViewRowAnimation.Fade);
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
             });
-            deletion.BackgroundColor = UIColor.FromPatternImage(UIImage.FromBundle("DeletePatternImage.png"));
+            deletion.BackgroundColor = UIColor.FromPatternImage(UIImage.FromBundle("DeletePattern.png"));
             return new UITableViewRowAction[]{ deletion };
         }
 

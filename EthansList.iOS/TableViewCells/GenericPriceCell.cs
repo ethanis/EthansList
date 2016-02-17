@@ -30,8 +30,7 @@ namespace ethanslist.ios
                 BorderStyle = UITextBorderStyle.RoundedRect,
                 KeyboardType = UIKeyboardType.NumberPad,
                 ClearButtonMode = UITextFieldViewMode.WhileEditing,
-                Delegate = new PriceTextDelegate(),
-                AccessibilityIdentifier = "MinPriceField"
+                AccessibilityIdentifier = "MinField"
             };
             AddSubview (MinField);
 
@@ -41,8 +40,7 @@ namespace ethanslist.ios
                 BorderStyle = UITextBorderStyle.RoundedRect,
                 KeyboardType = UIKeyboardType.NumberPad,
                 ClearButtonMode = UITextFieldViewMode.WhileEditing,
-                Delegate = new PriceTextDelegate(),
-                AccessibilityIdentifier = "MaxPriceField"
+                AccessibilityIdentifier = "MaxField"
             };
             AddSubview (MaxField);
         }
