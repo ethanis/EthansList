@@ -66,6 +66,12 @@ namespace ethanslist.ios
             Posting post = feedClient.postings[indexPath.Row];
             detailController.Post = post;
 
+            detailController.ItemDeleted += async delegate
+            {
+                    await AppDelegate.databaseConnection.DeletePostingAsync(feedClient.postings[indexPath.Row].Link);
+                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+            };
+
             owner.PresentModalViewController(detailController, true);
         }
     }

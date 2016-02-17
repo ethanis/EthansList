@@ -93,8 +93,6 @@ namespace EthansList.Shared
                         }
                         catch (Exception e)
                         {
-                            //TODO: Insights track
-                            //This occurs if query returns invalid xml schema
                             Console.WriteLine (e.Message);
                             if (this.emptyPostingComplete != null)
                                 this.emptyPostingComplete(this, new EventArgs());

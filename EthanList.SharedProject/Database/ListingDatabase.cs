@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EthansList.Models
 {
@@ -45,9 +46,15 @@ namespace EthansList.Models
             }
         }
 
+        public async Task DeletePostingAsync(string link)
+        {
+            var query = conn.Table<Posting>().Where(x => x.Link.Equals(link)).ToListAsync().Result.First();
+            if (query != null)
+                await DeletePostingAsync(query).ConfigureAwait(false);
+        }
+
         public Task<List<Posting>> GetAllPostingsAsync()
         {
-            //return a list of people saved to the Person table in the database
             return conn.Table<Posting>().ToListAsync();
         }
 

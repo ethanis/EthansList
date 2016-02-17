@@ -110,9 +110,11 @@ namespace ethanslist.ios
 
         void DeleteListing(object sender, EventArgs e)
         {
-            //TODO This needs to be linked up properly
+
             if (this.ItemDeleted != null)
                 this.ItemDeleted(this, new EventArgs());
+            if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+                deleteButton.Enabled = false;
         }
 
         void DismissClicked(object sender, EventArgs e)

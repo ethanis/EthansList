@@ -57,19 +57,17 @@ namespace ethanslist.ios
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
 
-
             SearchButton = new UIButton();
             holderView = new UIView(this.View.Frame);
             SearchTableView = new UITableView(new CGRect(), UITableViewStyle.Grouped);
             scrollView = new UIScrollView(this.View.Frame);
             SearchCityLabel = new UILabel(){TextAlignment = UITextAlignment.Center};
 
-            //TODO: Why doesnt title color change
             SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
-            SearchButton.SetTitleColor(ColorScheme.Clouds, UIControlState.Normal);
             SearchButton.Layer.CornerRadius = 10;
             SearchButton.ClipsToBounds = true;
             SearchButton.SetAttributedTitle(new NSAttributedString("Search", Constants.ButtonAttributes), UIControlState.Normal);
+
             SearchTableView.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
 
             holderView.AddSubviews(new UIView[]{SearchButton, SearchCityLabel, SearchTableView});

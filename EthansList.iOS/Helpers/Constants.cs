@@ -28,6 +28,7 @@ namespace ethanslist.ios
 
         public UIStringAttributes btnAttributes = new UIStringAttributes() {
             Font = UIFont.FromName(Constants.LightFont, 18f),
+            ForegroundColor = ColorScheme.Clouds
         };
 
         public UIStringAttributes headerAttributes = new UIStringAttributes() {
