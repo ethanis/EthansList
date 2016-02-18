@@ -250,7 +250,6 @@
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\LaunchScreenIcon.png" />
     <BundleResource Include="Resources\save.png" />
     <BundleResource Include="Resources\menu.png" />
     <BundleResource Include="Resources\favorites.png" />
@@ -259,7 +258,8 @@
     <BundleResource Include="Resources\DeletePattern%402x.png" />
     <BundleResource Include="Resources\DeletePattern%403x.png" />
     <BundleResource Include="Resources\DeletePattern.png" />
-    <BundleResource Include="Resources\Default.png" />
-    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\LaunchScreenImage.png" />
+    <BundleResource Include="Resources\LaunchScreenImage%402x.png" />
+    <BundleResource Include="Resources\LaunchScreenImage%403x.png" />
   </ItemGroup>
 </Project>

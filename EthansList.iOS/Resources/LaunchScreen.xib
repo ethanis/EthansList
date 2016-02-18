@@ -11,8 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016 Ethan Dennis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye" adjustsLetterSpacingToFitWidth="YES" misplaced="YES">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016 Ethan Dennis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye" adjustsLetterSpacingToFitWidth="YES">
+                    <rect key="frame" x="20" y="439.5" width="440" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" colorSpace="calibratedRGB" red="0.25098039215686274" green="0.31372549019607843" blue="0.3843137254901961" alpha="1"/>
                     <nil key="highlightedColor"/>
@@ -26,8 +26,8 @@
                         <constraint id="54" firstAttribute="height" constant="64"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="57" translatesAutoresizingMaskIntoConstraints="NO" image="LaunchScreenIcon.png">
-                    <rect key="frame" x="20" y="120" width="440" height="240"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="69" translatesAutoresizingMaskIntoConstraints="NO" image="LaunchScreenImage.png">
+                    <rect key="frame" x="20" y="100" width="440" height="280"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedRGB" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1"/>
@@ -37,10 +37,10 @@
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint id="51" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="19" secondAttribute="trailing"/>
                 <constraint id="52" firstItem="19" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top"/>
-                <constraint id="58" firstItem="57" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20"/>
-                <constraint id="59" firstItem="57" firstAttribute="top" secondItem="19" secondAttribute="bottom" constant="56"/>
-                <constraint id="60" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="57" secondAttribute="trailing" constant="20"/>
-                <constraint id="62" firstItem="iN0-l3-epB" firstAttribute="bottom" secondItem="57" secondAttribute="bottom" constant="120"/>
+                <constraint id="70" firstItem="69" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20"/>
+                <constraint id="71" firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="69" secondAttribute="trailing" constant="20"/>
+                <constraint id="85" firstItem="69" firstAttribute="top" secondItem="19" secondAttribute="top" constant="100"/>
+                <constraint id="86" firstItem="iN0-l3-epB" firstAttribute="bottom" secondItem="69" secondAttribute="bottom" constant="100"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -52,5 +52,12 @@
         <image name="Icon.png" width="57" height="57"/>
         <image name="Icon-60.png" width="60" height="60"/>
         <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
+        <image name="save.png" width="50" height="50"/>
+        <image name="menu.png" width="50" height="50"/>
+        <image name="favorites.png" width="50" height="50"/>
+        <image name="Trash-50.png" width="50" height="50"/>
+        <image name="Delete-50.png" width="50" height="50"/>
+        <image name="DeletePattern.png" width="80" height="80"/>
+        <image name="LaunchScreenImage.png" width="219" height="219"/>
     </resources>
 </document>
