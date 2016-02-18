@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
+using Newtonsoft.Json;
 
 namespace ethanslist.android
 {
@@ -95,8 +96,13 @@ namespace ethanslist.android
 
         async void SaveSearchButton_Click (object sender, EventArgs e)
         {
-            await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
-                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text, null, 25);
+            SearchObject search = new SearchObject();
+            //TODO: Initialize searchObject with parameters;
+            string serializedSearch = JsonConvert.SerializeObject(search);
+//            await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
+//                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text, null, 25);
+            await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serializedSearch);
+
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             if (MainActivity.databaseConnection.StatusCode == EthansList.Models.codes.ok)
             {
@@ -124,7 +130,12 @@ namespace ethanslist.android
             searchTerms["bathrooms"] = minBathroomPicker.Value.ToString();
             searchTerms["query"] = searchTextField.Text;
 
-            string query = helper.Generate(location.Url, searchTerms);
+            //TODO: Link  in all new stuff to this
+            SearchObject search = new SearchObject();
+            search.SearchLocation = location;
+            search.SearchItems = searchTerms;
+
+            string query = helper.Generate(search);
 
             Console.WriteLine(query);
 

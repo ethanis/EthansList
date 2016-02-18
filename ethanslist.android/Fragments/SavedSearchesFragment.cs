@@ -14,6 +14,7 @@ using Android.Widget;
 using EthansList.Models;
 using System.Collections.ObjectModel;
 using EthansList.Shared;
+using Newtonsoft.Json;
 
 namespace ethanslist.android
 {
@@ -58,15 +59,16 @@ namespace ethanslist.android
             var transaction = this.FragmentManager.BeginTransaction();
             var feedResultsFragment = new FeedResultsFragment();
 
-            var search = savedSearches[e.Position];
+            SearchObject search = JsonConvert.DeserializeObject<SearchObject>(savedSearches[e.Position].SerializedSearch);
             QueryGeneration helper = new QueryGeneration();
-            searchTerms["min_price"] = search.MinPrice;
-            searchTerms["max_price"] = search.MaxPrice;
-            searchTerms["bedrooms"] = search.MinBedrooms;
-            searchTerms["bathrooms"] = search.MinBathrooms;
-            searchTerms["query"] = search.SearchQuery;
+//            searchTerms["min_price"] = search.MinPrice;
+//            searchTerms["max_price"] = search.MaxPrice;
+//            searchTerms["bedrooms"] = search.MinBedrooms;
+//            searchTerms["bathrooms"] = search.MinBathrooms;
+//            searchTerms["query"] = search.SearchQuery;
+//            feedResultsFragment.query = helper.Generate(search.LinkUrl, searchTerms);
 
-            feedResultsFragment.query = helper.Generate(search.LinkUrl, searchTerms);
+            feedResultsFragment.query = helper.Generate(search);
 
             transaction.Replace(Resource.Id.frameLayout, feedResultsFragment);
             transaction.AddToBackStack(null);

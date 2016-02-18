@@ -4,6 +4,8 @@ using EthansList.Models;
 using Android.App;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+using EthansList.Shared;
 
 namespace ethanslist.android
 {
@@ -42,6 +44,7 @@ namespace ethanslist.android
 
         public override Android.Views.View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
+            SearchObject searchObj = new SearchObject();
             var view = convertView;
             if (view == null)
             {
@@ -50,8 +53,9 @@ namespace ethanslist.android
                 var _searchInformation = view.FindViewById<TextView>(Resource.Id.searchInformationText);
                 var _deleteBtn = view.FindViewById<Button>(Resource.Id.deleteSearchButton);
 
+                searchObj = JsonConvert.DeserializeObject<SearchObject>(savedSearches[position].SerializedSearch);
                 _deleteBtn.Click += async (sender, e) => {
-                    await MainActivity.databaseConnection.DeleteSearchAsync(savedSearches[position]);
+                    await MainActivity.databaseConnection.DeleteSearchAsync(searchObj.SearchLocation.Url, searchObj);
                     savedSearches.RemoveAt(position);
                     if (MainActivity.databaseConnection.StatusCode == codes.ok)
                         Toast.MakeText(this.context, "Search removed successfully",ToastLength.Short).Show();
@@ -64,8 +68,8 @@ namespace ethanslist.android
             }
 
             var holder = (SavedSearchesViewHolder)view.Tag;
-            holder.SearchCity.Text = savedSearches[position].CityName;
-            holder.SearchInformation.Text = MainActivity.databaseConnection.FormatSearchQuery(savedSearches[position]);
+            holder.SearchCity.Text = searchObj.SearchLocation.SiteName;
+            holder.SearchInformation.Text = MainActivity.databaseConnection.SecondFormatSearch(searchObj);
            
             return view;
         }
