@@ -57,14 +57,16 @@ namespace ethanslist.android
             cityPickerListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 Location selected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position);
                 FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
-                SearchFragment searchFragment = new SearchFragment();
-                searchFragment.location = selected;
+//                SearchFragment searchFragment = new SearchFragment();
+//                searchFragment.location = selected;
+                SearchOptionsFragment searchFragment = new SearchOptionsFragment();
+
                 transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
 
                 Task.Run(async () => {
-                    await MainActivity.databaseConnection.AddNewRecentCityAsync(searchFragment.location.SiteName, searchFragment.location.Url).ConfigureAwait(true);
+                    await MainActivity.databaseConnection.AddNewRecentCityAsync(selected.SiteName, selected.Url).ConfigureAwait(true);
 
                     if (MainActivity.databaseConnection.GetAllRecentCitiesAsync().Result.Count > 5)
                         await MainActivity.databaseConnection.DeleteOldestCityAsync().ConfigureAwait(true);

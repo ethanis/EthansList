@@ -94,6 +94,9 @@
     <Compile Include="Fragments\SavedPostingsFragment.cs" />
     <Compile Include="Fragments\RecentCitiesFragment.cs" />
     <Compile Include="Helpers\Reachability.cs" />
+    <Compile Include="Fragments\SearchOptionsFragment.cs" />
+    <Compile Include="Views\SearchView.cs" />
+    <Compile Include="Helpers\ColorScheme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -134,6 +137,7 @@
     <Folder Include="ViewHolders\" />
     <Folder Include="Fragments\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="urlimageviewhelper">

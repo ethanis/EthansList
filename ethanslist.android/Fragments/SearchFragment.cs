@@ -98,9 +98,17 @@ namespace ethanslist.android
         {
             SearchObject search = new SearchObject();
             //TODO: Initialize searchObject with parameters;
+            searchTerms["min_price"] = minRentTextView.Text.Substring(1);
+            searchTerms["max_price"] = maxRentTextView.Text.Substring(1);
+            searchTerms["bedrooms"] = minBedroomPicker.Value.ToString();
+            searchTerms["bathrooms"] = minBathroomPicker.Value.ToString();
+            searchTerms["query"] = searchTextField.Text;
+            search.SearchLocation = location;
+            search.SearchItems = searchTerms;
+            search.Conditions = new Dictionary<object, KeyValuePair<object, object>>();
+            search.Category = new KeyValuePair<object, object>("/search/apa", "apartments / housing rentals");
+
             string serializedSearch = JsonConvert.SerializeObject(search);
-//            await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, location.SiteName, minRentTextView.Text, 
-//                maxRentTextView.Text, minBedroomPicker.Value.ToString(), minBathroomPicker.Value.ToString(), searchTextField.Text, null, 25);
             await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serializedSearch);
 
             Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
@@ -134,6 +142,8 @@ namespace ethanslist.android
             SearchObject search = new SearchObject();
             search.SearchLocation = location;
             search.SearchItems = searchTerms;
+            search.Conditions = new Dictionary<object, KeyValuePair<object, object>>();
+            search.Category = new KeyValuePair<object, object>("/search/apa", "apartments / housing rentals");
 
             string query = helper.Generate(search);
 

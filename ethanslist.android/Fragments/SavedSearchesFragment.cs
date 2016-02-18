@@ -15,6 +15,7 @@ using EthansList.Models;
 using System.Collections.ObjectModel;
 using EthansList.Shared;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ethanslist.android
 {
@@ -43,8 +44,7 @@ namespace ethanslist.android
 
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
 
-//            savedSearches = new ObservableCollection<Search>(MainActivity.databaseConnection.GetAllSearchesAsync().Result);
-            searchListAdapter = new SavedSearchesListAdapter(this.Activity, savedSearches);
+            searchListAdapter = new SavedSearchesListAdapter(this.Activity, DeserializeSearches(savedSearches));
 
             savedSearchesListView = view.FindViewById<ListView>(Resource.Id.savedSearchListView);
             savedSearchesListView.Adapter = searchListAdapter;
@@ -61,18 +61,26 @@ namespace ethanslist.android
 
             SearchObject search = JsonConvert.DeserializeObject<SearchObject>(savedSearches[e.Position].SerializedSearch);
             QueryGeneration helper = new QueryGeneration();
-//            searchTerms["min_price"] = search.MinPrice;
-//            searchTerms["max_price"] = search.MaxPrice;
-//            searchTerms["bedrooms"] = search.MinBedrooms;
-//            searchTerms["bathrooms"] = search.MinBathrooms;
-//            searchTerms["query"] = search.SearchQuery;
-//            feedResultsFragment.query = helper.Generate(search.LinkUrl, searchTerms);
-
             feedResultsFragment.query = helper.Generate(search);
 
             transaction.Replace(Resource.Id.frameLayout, feedResultsFragment);
             transaction.AddToBackStack(null);
             transaction.Commit();
+        }
+
+        private List<SearchObject> DeserializeSearches(List<Search> savedSearches)
+        {
+            //TODO: make this async again
+            List<SearchObject> searchObjects = new List<SearchObject>();
+//            await Task.Run(() =>
+//                {
+                    foreach (Search search in savedSearches)
+                    {
+                        searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
+                    }
+//                });
+
+            return searchObjects;
         }
 
     }

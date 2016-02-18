@@ -9,19 +9,18 @@ using EthansList.Shared;
 
 namespace ethanslist.android
 {
-    public class SavedSearchesListAdapter : BaseAdapter<Search>
+    public class SavedSearchesListAdapter : BaseAdapter<SearchObject>
     {
-        List<Search> savedSearches;
-//        ObservableCollection<Search> observedSearches;
+        List<SearchObject> savedSearches;
         Activity context;
 
-        public SavedSearchesListAdapter(Activity context, List<Search> savedSearches)
+        public SavedSearchesListAdapter(Activity context, List<SearchObject> savedSearches)
         {
             this.context = context;
             this.savedSearches = savedSearches;
         }
 
-        public override Search this[int index]
+        public override SearchObject this[int index]
         {
             get
             {
@@ -44,7 +43,7 @@ namespace ethanslist.android
 
         public override Android.Views.View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
-            SearchObject searchObj = new SearchObject();
+            var item = savedSearches[position];
             var view = convertView;
             if (view == null)
             {
@@ -53,9 +52,8 @@ namespace ethanslist.android
                 var _searchInformation = view.FindViewById<TextView>(Resource.Id.searchInformationText);
                 var _deleteBtn = view.FindViewById<Button>(Resource.Id.deleteSearchButton);
 
-                searchObj = JsonConvert.DeserializeObject<SearchObject>(savedSearches[position].SerializedSearch);
                 _deleteBtn.Click += async (sender, e) => {
-                    await MainActivity.databaseConnection.DeleteSearchAsync(searchObj.SearchLocation.Url, searchObj);
+                    await MainActivity.databaseConnection.DeleteSearchAsync(item.SearchLocation.Url, item);
                     savedSearches.RemoveAt(position);
                     if (MainActivity.databaseConnection.StatusCode == codes.ok)
                         Toast.MakeText(this.context, "Search removed successfully",ToastLength.Short).Show();
@@ -68,8 +66,8 @@ namespace ethanslist.android
             }
 
             var holder = (SavedSearchesViewHolder)view.Tag;
-            holder.SearchCity.Text = searchObj.SearchLocation.SiteName;
-            holder.SearchInformation.Text = MainActivity.databaseConnection.SecondFormatSearch(searchObj);
+            holder.SearchCity.Text = item.SearchLocation != null ? item.SearchLocation.SiteName : "null name";
+            holder.SearchInformation.Text = MainActivity.databaseConnection.SecondFormatSearch(item);
            
             return view;
         }
