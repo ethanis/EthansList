@@ -30,6 +30,7 @@ namespace ethanslist.ios
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cellID);
 
+            cell.BackgroundColor = ColorScheme.Clouds;
             cell.TextLabel.AttributedText = new NSAttributedString(recentCities[indexPath.Row].City, Constants.LabelAttributes);
 
             return cell;

@@ -39,6 +39,7 @@ namespace ethanslist.ios
 
             recentCitySource = new RecentCityTableViewSource(this, recentCities);
             TableView.Source = recentCitySource;
+            TableView.BackgroundColor = ColorScheme.Clouds;
         }
 	}
 }
