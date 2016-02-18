@@ -86,7 +86,11 @@ namespace ethanslist.ios
                     {
                             AddSearchItem("query", searchTermsCell.TermsField.Text);
                     };
-                    searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
+//                    searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
+//                    {
+//                            this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
+//                    };
+                    searchTermsCell.TermsField.TouchUpInside += delegate
                     {
                             this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
                     };

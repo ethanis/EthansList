@@ -95,6 +95,7 @@ namespace ethanslist.ios
             // Keyboard popup
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.DidShowNotification,KeyBoardUpNotification);
+
             // Keyboard Down
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.WillHideNotification,KeyBoardDownNotification);
@@ -104,15 +105,15 @@ namespace ethanslist.ios
                 UIBarButtonItemStyle.Plain,
                 async (sender, e) => 
                 {
-                    SearchObject forSerial = new SearchObject();
-                    forSerial.SearchLocation = Location;
-                    forSerial.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
-                    forSerial.SearchItems = this.SearchItems;
-                    forSerial.Conditions = this.Conditions;
-                    forSerial.MaxListings = this.MaxListings;
-                    forSerial.PostedDate = this.WeeksOld;
+                    SearchObject searchObject = new SearchObject();
+                    searchObject.SearchLocation = Location;
+                    searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
+                    searchObject.SearchItems = this.SearchItems;
+                    searchObject.Conditions = this.Conditions;
+                    searchObject.MaxListings = this.MaxListings;
+                    searchObject.PostedDate = this.WeeksOld;
 
-                    string serialized = JsonConvert.SerializeObject(forSerial);
+                    string serialized = JsonConvert.SerializeObject(searchObject);
                     await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, serialized);
 
                     Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
@@ -145,13 +146,13 @@ namespace ethanslist.ios
                 var storyboard = UIStoryboard.FromName("Main", null);
                 var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
 
-                SearchObject forSerial = new SearchObject();
-                forSerial.SearchLocation = Location;
-                forSerial.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
-                forSerial.SearchItems = this.SearchItems;
-                forSerial.Conditions = this.Conditions;
+                SearchObject searchObject = new SearchObject();
+                searchObject.SearchLocation = Location;
+                searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(Category.Key, Category.Value);
+                searchObject.SearchItems = this.SearchItems;
+                searchObject.Conditions = this.Conditions;
 
-                var query = queryHelper.Generate(forSerial);
+                var query = queryHelper.Generate(searchObject);
 
                 feedViewController.Query = query;
                 feedViewController.MaxListings = MaxListings;
@@ -231,7 +232,6 @@ namespace ethanslist.ios
             } else {
                 moveViewUp = false;
             }
-
         }
 
         private void KeyBoardDownNotification(NSNotification notification)
@@ -242,7 +242,7 @@ namespace ethanslist.ios
         private void ScrollTheView(bool move)
         {
             // scroll the view up or down
-            UIView.BeginAnimations (string.Empty, System.IntPtr.Zero);
+            UIView.BeginAnimations (string.Empty, IntPtr.Zero);
             UIView.SetAnimationDuration (0.2);
 
             CGRect frame = View.Frame;
@@ -294,7 +294,7 @@ namespace ethanslist.ios
                         CellType = "PriceInputCell",
                     });
             }
-            //TODO: Should not mask values
+
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
             {
                 searchterms.Items.Add(new TableItem(){
