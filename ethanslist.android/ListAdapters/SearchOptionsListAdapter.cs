@@ -35,29 +35,54 @@ namespace ethanslist.android
             var item = searchOptions[position];
             var view = new LinearLayout(context);
             view.Orientation = Orientation.Horizontal;
-            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
             view.WeightSum = 1;
-
-            TextView title = new TextView(context);
-            title.LayoutParameters = p;
-            title.Text = item.Title;
-            title.SetTextColor(ColorScheme.MidnightBlue);
-            view.AddView(title);
 
             switch (item.RowType)
             {
                 case SearchRowTypes.Heading:
+                    view.AddView(Heading(item));
 
+                   
                     break;
                 case SearchRowTypes.SearchTerms:
                     EditText searchfield = new EditText(context);
                     searchfield.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
                     searchfield.SetBackgroundColor(ColorScheme.Silver);
                     searchfield.SetTextColor(ColorScheme.MidnightBlue);
+                    searchfield.Hint = "search apartments / housing rentals";
+                    searchfield.TextSize = 14f;
+                    searchfield.SetSingleLine(true);
                     view.AddView(searchfield);
 
                     break;
+                case SearchRowTypes.Price:
+                    view.AddView(Title(item));
+
+                    LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.3f);
+                    EditText minPricefield = new EditText(context);
+                    minPricefield.LayoutParameters = p;
+                    minPricefield.SetBackgroundColor(ColorScheme.Silver);
+                    minPricefield.SetTextColor(ColorScheme.MidnightBlue);
+                    minPricefield.Hint = "min";
+                    minPricefield.TextSize = 14f;
+                    minPricefield.SetSingleLine(true);
+                    minPricefield.InputType = Android.Text.InputTypes.ClassNumber;
+                    view.AddView(minPricefield);
+
+                    EditText maxPricefield = new EditText(context);
+                    maxPricefield.LayoutParameters = p;
+                    maxPricefield.SetBackgroundColor(ColorScheme.Silver);
+                    maxPricefield.SetTextColor(ColorScheme.MidnightBlue);
+                    maxPricefield.Hint = "min";
+                    maxPricefield.TextSize = 14f;
+                    maxPricefield.SetSingleLine(true);
+                    maxPricefield.InputType = Android.Text.InputTypes.ClassNumber;
+                    view.AddView(maxPricefield);
+
+                    break;
                 default:
+                    view.AddView(Title(item));
+
                     break;
             }
             return view;
@@ -69,6 +94,29 @@ namespace ethanslist.android
             {
                 return searchOptions.Count;
             }
+        }
+
+        TextView Heading(SearchRow item)
+        {
+            TextView heading = new TextView(context);
+            heading.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
+            heading.Text = item.Title;
+            heading.SetTextColor(ColorScheme.MidnightBlue);
+            heading.TextSize = 20f;
+            heading.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
+
+            return heading;
+        }
+
+        TextView Title(SearchRow item)
+        {
+            TextView title = new TextView(context);
+            title.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
+            title.Text = item.Title;
+            title.SetTextColor(ColorScheme.MidnightBlue);
+            title.SetPadding(10,0,10,0);
+
+            return title;
         }
     }
 }
