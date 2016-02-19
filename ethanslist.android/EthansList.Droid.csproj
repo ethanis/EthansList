@@ -97,6 +97,8 @@
     <Compile Include="Fragments\SearchOptionsFragment.cs" />
     <Compile Include="Views\SearchView.cs" />
     <Compile Include="Helpers\ColorScheme.cs" />
+    <Compile Include="ListAdapters\SearchOptionsListAdapter.cs" />
+    <Compile Include="Helpers\SearchTableHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
