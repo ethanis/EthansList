@@ -35,6 +35,7 @@ namespace ethanslist.android
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.SelectCity, container, false);
+            view.SetBackgroundColor(ColorScheme.Clouds);
 
             locations = new AvailableLocations();
             state = locations.States.ElementAt(0);
@@ -47,6 +48,9 @@ namespace ethanslist.android
 
             cityPickerListView.Adapter = cityAdapter;
             statePickerListView.Adapter = stateAdapter;
+
+            cityPickerListView.SetBackgroundColor(ColorScheme.Clouds);
+            statePickerListView.SetBackgroundColor(ColorScheme.Clouds);
 
             statePickerListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 state = locations.States.ElementAt(e.Position);

@@ -51,10 +51,8 @@ namespace ethanslist.android
 
             var holder = (StateListViewHolder)view.Tag;
             holder.State.Text = states.ElementAt(position);
-//
-//            var state = view.FindViewById<TextView>(Resource.Id.stateListViewItem);
-//            state.Text = states.ElementAt(position);
-//
+            holder.State.SetTextColor(ColorScheme.MidnightBlue);
+
             return view;
         }
     }

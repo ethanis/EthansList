@@ -53,6 +53,7 @@ namespace ethanslist.android
             var holder = (CityListViewHolder)view.Tag;
 
             holder.City.Text = cities.ElementAt(position).SiteName;
+            holder.City.SetTextColor(ColorScheme.MidnightBlue);
             return view;
         }
     }
