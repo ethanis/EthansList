@@ -9,6 +9,7 @@ using EthansList.Models;
 using System.Drawing;
 using CoreGraphics;
 using Newtonsoft.Json;
+using iAd;
 
 namespace ethanslist.ios
 {
@@ -21,6 +22,7 @@ namespace ethanslist.ios
         UITableView SearchTableView;
         UIScrollView scrollView;
         UILabel SearchCityLabel;
+        ADBannerView ads;
 
         private float scroll_amount = 0.0f;    // amount to scroll 
         private float bottom = 0.0f;           // bottom point
@@ -62,6 +64,7 @@ namespace ethanslist.ios
             SearchTableView = new UITableView(new CGRect(), UITableViewStyle.Grouped);
             scrollView = new UIScrollView(this.View.Frame);
             SearchCityLabel = new UILabel(){TextAlignment = UITextAlignment.Center};
+            ads = new ADBannerView();
 
             SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
             SearchButton.Layer.CornerRadius = 10;
@@ -70,7 +73,7 @@ namespace ethanslist.ios
 
             SearchTableView.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
 
-            holderView.AddSubviews(new UIView[]{SearchButton, SearchCityLabel, SearchTableView});
+            holderView.AddSubviews(new UIView[]{SearchButton, SearchCityLabel, SearchTableView, ads});
             scrollView.AddSubview(holderView);
             this.View.AddSubview(scrollView);
 
@@ -169,6 +172,7 @@ namespace ethanslist.ios
             SearchCityLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchButton.TranslatesAutoresizingMaskIntoConstraints = false;
             SearchTableView.TranslatesAutoresizingMaskIntoConstraints = false;
+            ads.TranslatesAutoresizingMaskIntoConstraints = false;
 
             SearchTableView.ScrollEnabled = true;
             SearchTableView.Bounces = false;
@@ -202,9 +206,16 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
                 NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
-                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0),
+                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Top, 1, 0),
             });
-           
+
+            //Ads Constraints
+            this.View.AddConstraints(new NSLayoutConstraint[] {
+                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
+                NSLayoutConstraint.Create(ads, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0),
+                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
+            });
             this.View.LayoutIfNeeded();
         }
 
