@@ -108,7 +108,6 @@ namespace ethanslist.ios
             (UIKeyboard.WillHideNotification,KeyBoardDownNotification);
 
             ads.AdLoaded += (object sender, EventArgs e) => {
-                //TODO: Link up event to show ad banner
                 AddAdBanner (true);
             };
 

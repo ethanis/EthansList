@@ -74,6 +74,22 @@ namespace ethanslist.ios
 
             owner.PresentModalViewController(detailController, true);
         }
+
+        public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            var item = feedClient.postings [indexPath.Row];
+            var saveListing = UITableViewRowAction.Create(UITableViewRowActionStyle.Normal, "Save", async delegate {
+                await AppDelegate.databaseConnection.AddNewListingAsync (item.PostTitle, item.Description, item.Link, item.ImageLink, item.Date);
+                //TODO: Make pattern image for background
+
+                tableView.EndEditing (true);
+                tableView.SetEditing (false, true);
+                Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
+            });
+            saveListing.BackgroundColor = ColorScheme.Carrot;
+
+            return new UITableViewRowAction[]{ saveListing };
+        }
     }
 }
 
