@@ -23,6 +23,8 @@ namespace ethanslist.ios
         UIScrollView scrollView;
         UILabel SearchCityLabel;
         ADBannerView ads;
+        NSLayoutConstraint searchTableBottom;
+
 
         private float scroll_amount = 0.0f;    // amount to scroll 
         private float bottom = 0.0f;           // bottom point
@@ -63,8 +65,10 @@ namespace ethanslist.ios
             holderView = new UIView(this.View.Frame);
             SearchTableView = new UITableView(new CGRect(), UITableViewStyle.Grouped);
             scrollView = new UIScrollView(this.View.Frame);
-            SearchCityLabel = new UILabel(){TextAlignment = UITextAlignment.Center};
-            ads = new ADBannerView();
+            SearchCityLabel = new UILabel { TextAlignment = UITextAlignment.Center};
+            SearchCityLabel.AttributedText = new NSAttributedString(String.Format("Search {0} for:", Location.SiteName), Constants.LabelAttributes);
+
+            ads = new ADBannerView ();
 
             SearchButton.Layer.BackgroundColor = ColorScheme.MidnightBlue.CGColor;
             SearchButton.Layer.CornerRadius = 10;
@@ -102,6 +106,11 @@ namespace ethanslist.ios
             // Keyboard Down
             NSNotificationCenter.DefaultCenter.AddObserver
             (UIKeyboard.WillHideNotification,KeyBoardDownNotification);
+
+            ads.AdLoaded += (object sender, EventArgs e) => {
+                //TODO: Link up event to show ad banner
+                AddAdBanner (true);
+            };
 
             saveButton = new UIBarButtonItem (
                 UIImage.FromFile ("save.png"),
@@ -165,6 +174,46 @@ namespace ethanslist.ios
             };
         }
 
+        void AddAdBanner (bool show)
+        {
+            if (searchTableBottom != null)
+                View.RemoveConstraint (searchTableBottom);
+
+            if (show) 
+            {
+                ads.Hidden = false;
+                //Seach Table Constraints
+                this.View.AddConstraints (new NSLayoutConstraint [] {
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
+                });
+
+                //Ads Constraints
+                this.View.AddConstraints (new NSLayoutConstraint [] {
+                    NSLayoutConstraint.Create(ads, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
+                    NSLayoutConstraint.Create(ads, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
+                    NSLayoutConstraint.Create(ads, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0),
+                    //NSLayoutConstraint.Create(ads, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
+                });
+
+                searchTableBottom = NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Bottom, 1, 0);
+            }
+            else
+            {
+                ads.Hidden = true;
+                //Seach Table Constraints
+                this.View.AddConstraints (new NSLayoutConstraint [] {
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
+                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
+                });
+
+                searchTableBottom = NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0);
+            }
+            View.AddConstraint (searchTableBottom);
+            this.View.LayoutIfNeeded ();
+        }
 
         void AddLayoutConstraints()
         {
@@ -176,7 +225,6 @@ namespace ethanslist.ios
 
             SearchTableView.ScrollEnabled = true;
             SearchTableView.Bounces = false;
-            SearchCityLabel.AttributedText = new NSAttributedString(String.Format("Search {0} for:", Location.SiteName), Constants.LabelAttributes);
 
             //Scrollview Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
@@ -201,21 +249,8 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, Constants.ButtonHeight),
             });
 
-            //Seach Table Constraints
-            this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
-                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
-                NSLayoutConstraint.Create(SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Top, 1, 0),
-            });
+            AddAdBanner (false);
 
-            //Ads Constraints
-            this.View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
-                NSLayoutConstraint.Create(ads, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
-                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0),
-                NSLayoutConstraint.Create(ads, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
-            });
             this.View.LayoutIfNeeded();
         }
 
@@ -273,25 +308,21 @@ namespace ethanslist.ios
         {
             List<TableItemGroup> tableItems = new List<TableItemGroup>();
 
-            TableItemGroup searchterms = new TableItemGroup()
-                { Name = "Search Terms"};
-            TableItemGroup options = new TableItemGroup()
-                { Name = "Options" };
+            TableItemGroup searchterms = new TableItemGroup { Name = "Search Terms"};
+            TableItemGroup options = new TableItemGroup { Name = "Options" };
 
-            searchterms.Items.Add(new TableItem() { 
+            searchterms.Items.Add(new TableItem { 
                 Heading = "Search Terms",
                 CellType = "SearchTermsCell",
             });
             if (Categories.Autos.Contains(Category.Key))
             {
-                searchterms.Items.Add(new TableItem()
-                    {
+                searchterms.Items.Add(new TableItem {
                         Heading = "Make/Model",
                         SubHeading = "make / model",
                         CellType = "MakeModelCell"
                     });
-                searchterms.Items.Add(new TableItem()
-                    {
+                searchterms.Items.Add(new TableItem {
                         Heading = "Year",
                         CellType = "MinMaxCell"
                     });
@@ -299,8 +330,7 @@ namespace ethanslist.ios
 
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category) || Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
             {
-                searchterms.Items.Add(new TableItem()
-                    {
+                searchterms.Items.Add(new TableItem {
                         Heading = "Price",
                         CellType = "PriceInputCell",
                     });
@@ -308,7 +338,7 @@ namespace ethanslist.ios
 
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category))
             {
-                searchterms.Items.Add(new TableItem(){
+                searchterms.Items.Add(new TableItem {
                     Heading = "Sq Feet",
                     CellType = "MinMaxCell"
                 });
@@ -316,7 +346,7 @@ namespace ethanslist.ios
 
             if (Categories.Autos.Contains(Category.Key))
             {
-                searchterms.Items.Add(new TableItem(){
+                searchterms.Items.Add(new TableItem {
                     Heading = "Odometer",
                     CellType = "MinMaxCell"
                 });
@@ -325,28 +355,26 @@ namespace ethanslist.ios
 
             if (Categories.SubCategories.ContainsKey(Category.Key))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Sub Category",
                         CellType = "PickerSelectorCell",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions() {PickerWheelOptions = Categories.SubCategories[Category.Key]}
+                                new PickerOptions {PickerWheelOptions = Categories.SubCategories[Category.Key]}
                             },
                     });
             }
 
             if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category) || Categories.Autos.Contains(Category.Key))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Condition",
                         CellType = "ComboTableCell",
                         SubHeading = "condition",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("New", 10),
                                         new KeyValuePair<object, object>("Like New", 20),
@@ -362,15 +390,14 @@ namespace ethanslist.ios
 
             if (Categories.Groups.Find(x => x.Name == "Jobs").Items.Contains(Category))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Job Type",
                         CellType = "ComboTableCell",
                         SubHeading = "employment_type",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("full time", 1),
                                         new KeyValuePair<object, object>("part time", 2),
@@ -384,15 +411,14 @@ namespace ethanslist.ios
 
             if (Categories.Groups.Find(x => x.Name == "Gigs").Items.Contains(Category))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Paid",
                         CellType = "ComboTableCell",
                         SubHeading = "is_paid",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("All", null),
                                         new KeyValuePair<object, object>("Paid", "yes"),
@@ -405,15 +431,14 @@ namespace ethanslist.ios
 
             if (Categories.Autos.Contains(Category.Key))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Cylinders",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_cylinders",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("3 cylinders", 1),
                                         new KeyValuePair<object, object>("4 cylinders", 2),
@@ -427,15 +452,14 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Drive",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_drivetrain",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("fwd", 1),
                                         new KeyValuePair<object, object>("rwd", 2),
@@ -444,15 +468,14 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Fuel",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_fuel_type",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("gas", 1),
                                         new KeyValuePair<object, object>("diesel", 2),
@@ -463,15 +486,14 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Paint Color",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_paint",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("black", 1),
                                         new KeyValuePair<object, object>("blue", 2),
@@ -489,15 +511,14 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Title Status",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_title_status",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("clean", 1),
                                         new KeyValuePair<object, object>("salvage", 2),
@@ -509,15 +530,14 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Transmission",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_transmission",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("manual", 1),
                                         new KeyValuePair<object, object>("automatic", 2),
@@ -530,14 +550,13 @@ namespace ethanslist.ios
 
             if (Categories.Housing.Contains(Category.Key))
             {
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Min Bedrooms",
                         CellType = "PickerSelectorCell",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("Any", null),
                                         new KeyValuePair<object, object>("1+", "1"),
@@ -548,14 +567,13 @@ namespace ethanslist.ios
                                 }
                             },
                     });
-                options.Items.Add(new TableItem()
-                    {
+                options.Items.Add(new TableItem {
                         Heading = "Min Bathrooms",
                         CellType = "PickerSelectorCell",
-                        PickerOptions = new List<PickerOptions>()
+                        PickerOptions = new List<PickerOptions>
                             {
-                                new PickerOptions()
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                                new PickerOptions
+                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                     {
                                         new KeyValuePair<object, object>("Any", null),
                                         new KeyValuePair<object, object>("1+", "1"),
@@ -567,14 +585,13 @@ namespace ethanslist.ios
                             },
                     });
             }
-            options.Items.Add(new TableItem()
-                {
+            options.Items.Add(new TableItem {
                     Heading = "Posted Date",
                     CellType = "PickerSelectorCell",
-                    PickerOptions = new List<PickerOptions>()
+                    PickerOptions = new List<PickerOptions>
                         {
-                            new PickerOptions()
-                            {PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                            new PickerOptions
+                            {PickerWheelOptions = new List<KeyValuePair<object, object>>
                                 {
                                     new KeyValuePair<object, object>("Any", null),
                                     new KeyValuePair<object, object>("Today", "-1"),
@@ -586,12 +603,12 @@ namespace ethanslist.ios
                             }
                         },
                 });
-            options.Items.Add(new TableItem() {
+            options.Items.Add(new TableItem {
                 Heading = "Max Listings",
                 CellType = "PickerSelectorCell",
-                PickerOptions = new List<PickerOptions> ()
+                PickerOptions = new List<PickerOptions>
                     {
-                        new PickerOptions(){PickerWheelOptions = new List<KeyValuePair<object, object>>()
+                        new PickerOptions{PickerWheelOptions = new List<KeyValuePair<object, object>>
                             {
                                 new KeyValuePair<object, object>(25, 25),
                                 new KeyValuePair<object, object>(50, 50),
