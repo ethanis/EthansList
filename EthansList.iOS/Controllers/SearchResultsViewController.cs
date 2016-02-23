@@ -1,26 +1,24 @@
-using Foundation;
-using System;
-using System.CodeDom.Compiler;
+﻿using System;
 using UIKit;
 using CoreGraphics;
-using System.Linq;
-using System.Threading;
-using System.Diagnostics;
 using EthansList.Shared;
+using iAd;
 
 namespace ethanslist.ios
 {
-	partial class FeedResultsTableViewController : UIViewController
-	{
+    public class SearchResultsViewController : UIViewController
+    {
         FeedResultTableSource tableSource;
         private CLFeedClient feedClient;
         protected LoadingOverlay _loadingOverlay = null;
         UITableView feedResultTable;
         UIRefreshControl refreshControl;
+        ADBannerView ads;
+        NSLayoutConstraint searchTableBottom;
 
-		public FeedResultsTableViewController (IntPtr handle) : base (handle)
-		{
-		}
+        public SearchResultsViewController ()
+        {
+        }
 
         public override void LoadView()
         {
@@ -28,6 +26,8 @@ namespace ethanslist.ios
 
             feedResultTable = new UITableView ();
             View.AddSubview (feedResultTable);
+            ads = new ADBannerView ();
+            View.AddSubview (ads);
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             this.feedResultTable.BackgroundColor = ColorScheme.Clouds;
@@ -95,18 +95,50 @@ namespace ethanslist.ios
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
             feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
             {
-                    if (!this._loadingOverlay.AlreadyHidden)
-                        this._loadingOverlay.Hide();
-                    
-                    refreshControl.EndRefreshing();
-                    UIAlertView alert = new UIAlertView();
-                    alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
-                    alert.AddButton("OK");
-                    alert.Clicked += (s, ev) => {
-                        this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
-                    };
-                    this.InvokeOnMainThread(() => alert.Show());
+                if (!this._loadingOverlay.AlreadyHidden)
+                    this._loadingOverlay.Hide();
+
+                refreshControl.EndRefreshing();
+                UIAlertView alert = new UIAlertView();
+                alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Clicked += (s, ev) => {
+                    this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
+                };
+                this.InvokeOnMainThread(() => alert.Show());
             };
+
+            ads.AdLoaded += (object sender, EventArgs e) => { 
+                AddAdBanner (true);
+            };
+        }
+
+        void AddAdBanner (bool show)
+        {
+            if (searchTableBottom != null)
+                View.RemoveConstraint (searchTableBottom);
+
+            if (show) 
+            {
+                ads.Hidden = false;
+
+                //Ads Constraints
+                this.View.AddConstraints (new NSLayoutConstraint [] {
+                    NSLayoutConstraint.Create(ads, NSLayoutAttribute.Width, NSLayoutRelation.Equal, View, NSLayoutAttribute.Width, 1, 0),
+                      NSLayoutConstraint.Create(ads, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, View, NSLayoutAttribute.CenterX, 1, 0),
+                      NSLayoutConstraint.Create(ads, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0),
+                      //NSLayoutConstraint.Create(ads, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
+                });
+
+                searchTableBottom = NSLayoutConstraint.Create (feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Bottom, 1, 0);
+            }
+            else
+            {
+                ads.Hidden = true;
+                searchTableBottom = NSLayoutConstraint.Create (feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
+            }
+            View.AddConstraint (searchTableBottom);
+            this.View.LayoutIfNeeded ();
         }
 
         void feedClient_LoadingComplete(object sender, EventArgs e)
@@ -128,15 +160,19 @@ namespace ethanslist.ios
         void AddLayoutConstraints()
         {
             feedResultTable.TranslatesAutoresizingMaskIntoConstraints = false;
+            ads.TranslatesAutoresizingMaskIntoConstraints = false;
 
             this.View.AddConstraint(NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Top,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64));
+                                                          NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 0));
             this.View.AddConstraint(NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Left,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
+                                                          NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
             this.View.AddConstraint(NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Width,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
+                                                          NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 1, 0));
             this.View.AddConstraint(NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
+                                                          NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
+
+            AddAdBanner (false);
         }
-	}
+    }
 }
+

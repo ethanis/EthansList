@@ -154,8 +154,9 @@ namespace ethanslist.ios
 
             SearchButton.TouchUpInside += (sender, e) => {
                 QueryGeneration queryHelper = new QueryGeneration();
-                var storyboard = UIStoryboard.FromName("Main", null);
-                var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
+                //var storyboard = UIStoryboard.FromName("Main", null);
+                //var feedViewController = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
+                var feedViewController = new SearchResultsViewController ();
 
                 SearchObject searchObject = new SearchObject();
                 searchObject.SearchLocation = Location;

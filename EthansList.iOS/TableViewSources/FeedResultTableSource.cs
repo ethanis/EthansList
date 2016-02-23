@@ -58,7 +58,7 @@ namespace ethanslist.ios
             return cell;
         }
 
-        public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             var storyboard = UIStoryboard.FromName("Main", null);
             var detailController = (PostingInfoViewController)storyboard.InstantiateViewController("PostingInfoViewController");
@@ -81,7 +81,6 @@ namespace ethanslist.ios
             var saveListing = UITableViewRowAction.Create(UITableViewRowActionStyle.Normal, "Save", async delegate {
                 await AppDelegate.databaseConnection.AddNewListingAsync (item.PostTitle, item.Description, item.Link, item.ImageLink, item.Date);
                 //TODO: Make pattern image for background
-
                 tableView.EndEditing (true);
                 tableView.SetEditing (false, true);
                 Console.WriteLine (AppDelegate.databaseConnection.StatusMessage);
