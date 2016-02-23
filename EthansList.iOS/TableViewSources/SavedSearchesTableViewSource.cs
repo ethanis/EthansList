@@ -76,8 +76,7 @@ namespace ethanslist.ios
 
         public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
-            var storyboard = UIStoryboard.FromName("Main", null);
-            var feedResultsVC = (FeedResultsTableViewController)storyboard.InstantiateViewController("FeedResultsTableViewController");
+            var feedResultsVC = new SearchResultsViewController ();
 
             var search = savedSearches[indexPath.Row];
             QueryGeneration helper = new QueryGeneration();

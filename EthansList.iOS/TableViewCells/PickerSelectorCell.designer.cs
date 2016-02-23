@@ -11,35 +11,37 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("PickerSelectorCell")]
-	partial class PickerSelectorCell
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel NumberLabel { get; set; }
+    [Register ("PickerSelectorCell")]
+    partial class PickerSelectorCell
+    {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel NumberLabel { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField TextField { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField TextField { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel TitleLabel { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel TitleLabel { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-			if (NumberLabel != null) {
-				NumberLabel.Dispose ();
-				NumberLabel = null;
-			}
-			if (TextField != null) {
-				TextField.Dispose ();
-				TextField = null;
-			}
-			if (TitleLabel != null) {
-				TitleLabel.Dispose ();
-				TitleLabel = null;
-			}
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (NumberLabel != null) {
+                NumberLabel.Dispose ();
+                NumberLabel = null;
+            }
+
+            if (TextField != null) {
+                TextField.Dispose ();
+                TextField = null;
+            }
+
+            if (TitleLabel != null) {
+                TitleLabel.Dispose ();
+                TitleLabel = null;
+            }
+        }
+    }
 }

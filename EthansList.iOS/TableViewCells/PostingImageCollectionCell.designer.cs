@@ -11,19 +11,19 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("PostingImageCollectionCell")]
-	partial class PostingImageCollectionCell
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UICollectionView ImageCollection { get; set; }
+    [Register ("PostingImageCollectionCell")]
+    partial class PostingImageCollectionCell
+    {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UICollectionView ImageCollection { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-			if (ImageCollection != null) {
-				ImageCollection.Dispose ();
-				ImageCollection = null;
-			}
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (ImageCollection != null) {
+                ImageCollection.Dispose ();
+                ImageCollection = null;
+            }
+        }
+    }
 }

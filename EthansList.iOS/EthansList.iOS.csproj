@@ -139,10 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="Controllers\FeedResultsTableViewController.cs" />
-    <Compile Include="Controllers\FeedResultsTableViewController.designer.cs">
-      <DependentUpon>FeedResultsTableViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controllers\CityPickerViewController.cs" />
     <Compile Include="Controllers\CityPickerViewController.designer.cs">

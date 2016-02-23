@@ -11,19 +11,19 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("PostingTitleCell")]
-	partial class PostingTitleCell
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel TitleLabel { get; set; }
+    [Register ("PostingTitleCell")]
+    partial class PostingTitleCell
+    {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel TitleLabel { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-			if (TitleLabel != null) {
-				TitleLabel.Dispose ();
-				TitleLabel = null;
-			}
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (TitleLabel != null) {
+                TitleLabel.Dispose ();
+                TitleLabel = null;
+            }
+        }
+    }
 }
