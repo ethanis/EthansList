@@ -182,12 +182,6 @@ namespace ethanslist.ios
             if (show) 
             {
                 ads.Hidden = false;
-                //Seach Table Constraints
-                this.View.AddConstraints (new NSLayoutConstraint [] {
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
-                });
 
                 //Ads Constraints
                 this.View.AddConstraints (new NSLayoutConstraint [] {
@@ -202,13 +196,6 @@ namespace ethanslist.ios
             else
             {
                 ads.Hidden = true;
-                //Seach Table Constraints
-                this.View.AddConstraints (new NSLayoutConstraint [] {
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
-                    NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
-                });
-
                 searchTableBottom = NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Bottom, 1, 0);
             }
             View.AddConstraint (searchTableBottom);
@@ -233,7 +220,12 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(holderView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 20),
                 NSLayoutConstraint.Create(holderView, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0),
             });
-
+            //Seach Table Constraints
+            this.View.AddConstraints (new NSLayoutConstraint [] {
+                NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
+                NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
+                NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
+            });
 //            Seach CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 0.9f, 0),
