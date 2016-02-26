@@ -35,7 +35,16 @@ namespace ethanslist.android
             var item = searchOptions[position];
             var view = new LinearLayout(context);
             view.Orientation = Orientation.Horizontal;
+            var entryHolder = new LinearLayout(context);
+            entryHolder.Orientation = Orientation.Horizontal;
+            entryHolder.SetHorizontalGravity(GravityFlags.Right);
+            entryHolder.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+            entryHolder.ShowDividers = ShowDividers.Middle;
+            entryHolder.DividerPadding = 20;
+            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.5f);
             view.WeightSum = 1;
+
+            //Android.Util.IAttributeSet attrs = new Android.Util.IAttributeSet();
 
             switch (item.RowType)
             {
@@ -58,7 +67,6 @@ namespace ethanslist.android
                 case SearchRowTypes.Price:
                     view.AddView(Title(item));
 
-                    LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.3f);
                     EditText minPricefield = new EditText(context);
                     minPricefield.LayoutParameters = p;
                     minPricefield.SetBackgroundColor(ColorScheme.Silver);
@@ -67,7 +75,7 @@ namespace ethanslist.android
                     minPricefield.TextSize = 14f;
                     minPricefield.SetSingleLine(true);
                     minPricefield.InputType = Android.Text.InputTypes.ClassNumber;
-                    view.AddView(minPricefield);
+                    entryHolder.AddView(minPricefield);
 
                     EditText maxPricefield = new EditText(context);
                     maxPricefield.LayoutParameters = p;
@@ -77,8 +85,37 @@ namespace ethanslist.android
                     maxPricefield.TextSize = 14f;
                     maxPricefield.SetSingleLine(true);
                     maxPricefield.InputType = Android.Text.InputTypes.ClassNumber;
-                    view.AddView(maxPricefield);
+                    maxPricefield.Gravity = GravityFlags.Right;
+                    entryHolder.AddView(maxPricefield);
 
+                    view.AddView(entryHolder);
+                    break;
+
+                case SearchRowTypes.SqFeet:
+                    view.AddView(Title(item));
+
+                    EditText minfield = new EditText(context);
+                    minfield.LayoutParameters = p;
+                    //minfield.SetBackgroundColor(ColorScheme.Silver);
+                    minfield.SetHintTextColor(ColorScheme.WetAsphalt);
+                    minfield.SetTextColor(ColorScheme.MidnightBlue);
+                    minfield.Hint = "min";
+                    minfield.TextSize = 14f;
+                    minfield.SetSingleLine(true);
+                    minfield.InputType = Android.Text.InputTypes.ClassNumber;
+                    entryHolder.AddView(minfield);
+
+                    EditText maxfield = new EditText(context);
+                    maxfield.LayoutParameters = p;
+                    //maxfield.SetBackgroundColor(ColorScheme.Silver);
+                    maxfield.SetTextColor(ColorScheme.MidnightBlue);
+                    maxfield.Hint = "min";
+                    maxfield.TextSize = 14f;
+                    maxfield.SetSingleLine(true);
+                    maxfield.InputType = Android.Text.InputTypes.ClassNumber;
+                    entryHolder.AddView(maxfield);
+
+                    view.AddView(entryHolder);
                     break;
                 default:
                     view.AddView(Title(item));

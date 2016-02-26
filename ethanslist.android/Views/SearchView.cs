@@ -87,9 +87,10 @@ namespace ethanslist.android
         {
             List<SearchRow> searchOptions = new List<SearchRow>()
             {
-                    new SearchRow(){Title = "Heading", RowType = SearchRowTypes.Heading},
-                    new SearchRow(){Title = "Search Terms", RowType = SearchRowTypes.SearchTerms},
-                    new SearchRow(){Title = "Price Cell", RowType = SearchRowTypes.Price},
+                    new SearchRow {Title = "Heading", RowType = SearchRowTypes.Heading},
+                    new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms},
+                    new SearchRow {Title = "Price Cell", RowType = SearchRowTypes.Price},
+                    new SearchRow {Title = "Sq Feet", RowType = SearchRowTypes.SqFeet}
             };
 
             return searchOptions;
