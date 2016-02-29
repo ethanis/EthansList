@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.UITests", "ethan
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthansList.Shared", "EthanList.SharedProject\EthansList.Shared.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.NewDroid", "EthansList.NewDroid\EthansList.NewDroid.csproj", "{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,5 +54,17 @@ Global
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|iPhone.Build.0 = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{11A4B4D3-AFB4-49FA-8653-B93C8AD266FE}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
