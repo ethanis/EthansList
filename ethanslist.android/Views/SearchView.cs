@@ -47,7 +47,7 @@ namespace ethanslist.android
 
         void Initialize()
         {
-            this.SetBackgroundColor(ColorScheme.Clouds);
+            this.SetBackgroundColor(ColorScheme.Concrete);
             this.Orientation = Orientation.Vertical;
             this.WeightSum = 1;
 

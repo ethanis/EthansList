@@ -51,7 +51,6 @@ namespace ethanslist.android
                 case SearchRowTypes.Heading:
                     view.AddView(Heading(item));
 
-                   
                     break;
                 case SearchRowTypes.SearchTerms:
                     EditText searchfield = new EditText(context);
@@ -96,9 +95,9 @@ namespace ethanslist.android
 
                     EditText minfield = new EditText(context);
                     minfield.LayoutParameters = p;
-                    //minfield.SetBackgroundColor(ColorScheme.Silver);
                     minfield.SetHintTextColor(ColorScheme.WetAsphalt);
                     minfield.SetTextColor(ColorScheme.MidnightBlue);
+
                     minfield.Hint = "min";
                     minfield.TextSize = 14f;
                     minfield.SetSingleLine(true);
