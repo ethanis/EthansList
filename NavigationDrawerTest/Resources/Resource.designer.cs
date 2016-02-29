@@ -26,6 +26,55 @@ namespace EthansList.MaterialDroid
 		
 		public static void UpdateIdValues()
 		{
+			global::PullToRefresharp.Resource.Attribute.contentViewId = global::EthansList.MaterialDroid.Resource.Attribute.contentViewId;
+			global::PullToRefresharp.Resource.Attribute.fastScrollThumbWidth = global::EthansList.MaterialDroid.Resource.Attribute.fastScrollThumbWidth;
+			global::PullToRefresharp.Resource.Attribute.headerIconDrawable = global::EthansList.MaterialDroid.Resource.Attribute.headerIconDrawable;
+			global::PullToRefresharp.Resource.Attribute.headerId = global::EthansList.MaterialDroid.Resource.Attribute.headerId;
+			global::PullToRefresharp.Resource.Attribute.headerTextColor = global::EthansList.MaterialDroid.Resource.Attribute.headerTextColor;
+			global::PullToRefresharp.Resource.Attribute.ptrHeaderBackground = global::EthansList.MaterialDroid.Resource.Attribute.ptrHeaderBackground;
+			global::PullToRefresharp.Resource.Attribute.pullDownProgressIndicatorId = global::EthansList.MaterialDroid.Resource.Attribute.pullDownProgressIndicatorId;
+			global::PullToRefresharp.Resource.Attribute.pullDownTension = global::EthansList.MaterialDroid.Resource.Attribute.pullDownTension;
+			global::PullToRefresharp.Resource.Attribute.pullEnabled = global::EthansList.MaterialDroid.Resource.Attribute.pullEnabled;
+			global::PullToRefresharp.Resource.Attribute.pullToRefreshText = global::EthansList.MaterialDroid.Resource.Attribute.pullToRefreshText;
+			global::PullToRefresharp.Resource.Attribute.refreshingText = global::EthansList.MaterialDroid.Resource.Attribute.refreshingText;
+			global::PullToRefresharp.Resource.Attribute.releaseToRefreshText = global::EthansList.MaterialDroid.Resource.Attribute.releaseToRefreshText;
+			global::PullToRefresharp.Resource.Attribute.snapbackDuration = global::EthansList.MaterialDroid.Resource.Attribute.snapbackDuration;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_gradient_end = global::EthansList.MaterialDroid.Resource.Color.ptrsharp_sb_gradient_end;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_gradient_start = global::EthansList.MaterialDroid.Resource.Color.ptrsharp_sb_gradient_start;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_header_text = global::EthansList.MaterialDroid.Resource.Color.ptrsharp_sb_header_text;
+			global::PullToRefresharp.Resource.Color.ptrsharp_sb_header_text_shadow = global::EthansList.MaterialDroid.Resource.Color.ptrsharp_sb_header_text_shadow;
+			global::PullToRefresharp.Resource.Dimension.fastscroll_thumb_width = global::EthansList.MaterialDroid.Resource.Dimension.fastscroll_thumb_width;
+			global::PullToRefresharp.Resource.Drawable.progress_medium_holo = global::EthansList.MaterialDroid.Resource.Drawable.progress_medium_holo;
+			global::PullToRefresharp.Resource.Drawable.ptrsharp_serious_business_gradient = global::EthansList.MaterialDroid.Resource.Drawable.ptrsharp_serious_business_gradient;
+			global::PullToRefresharp.Resource.Drawable.serious_business_arrow = global::EthansList.MaterialDroid.Resource.Drawable.serious_business_arrow;
+			global::PullToRefresharp.Resource.Drawable.serious_business_arrow2 = global::EthansList.MaterialDroid.Resource.Drawable.serious_business_arrow2;
+			global::PullToRefresharp.Resource.Drawable.spinner_20_inner_holo = global::EthansList.MaterialDroid.Resource.Drawable.spinner_20_inner_holo;
+			global::PullToRefresharp.Resource.Drawable.spinner_20_outer_holo = global::EthansList.MaterialDroid.Resource.Drawable.spinner_20_outer_holo;
+			global::PullToRefresharp.Resource.Id.header = global::EthansList.MaterialDroid.Resource.Id.header;
+			global::PullToRefresharp.Resource.Id.header_container = global::EthansList.MaterialDroid.Resource.Id.header_container;
+			global::PullToRefresharp.Resource.Id.icon = global::EthansList.MaterialDroid.Resource.Id.icon;
+			global::PullToRefresharp.Resource.Id.pullDownProgressIndicator = global::EthansList.MaterialDroid.Resource.Id.pullDownProgressIndicator;
+			global::PullToRefresharp.Resource.Id.text = global::EthansList.MaterialDroid.Resource.Id.text;
+			global::PullToRefresharp.Resource.Layout.ptrsharp_header = global::EthansList.MaterialDroid.Resource.Layout.ptrsharp_header;
+			global::PullToRefresharp.Resource.String.library_name = global::EthansList.MaterialDroid.Resource.String.library_name;
+			global::PullToRefresharp.Resource.String.ptrsharp_pull_to_refresh = global::EthansList.MaterialDroid.Resource.String.ptrsharp_pull_to_refresh;
+			global::PullToRefresharp.Resource.String.ptrsharp_refreshing = global::EthansList.MaterialDroid.Resource.String.ptrsharp_refreshing;
+			global::PullToRefresharp.Resource.String.ptrsharp_release_to_refresh = global::EthansList.MaterialDroid.Resource.String.ptrsharp_release_to_refresh;
+			global::PullToRefresharp.Resource.Style.HoloProgressMedium = global::EthansList.MaterialDroid.Resource.Style.HoloProgressMedium;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_contentViewId = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_contentViewId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_fastScrollThumbWidth = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_fastScrollThumbWidth;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerIconDrawable = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_headerIconDrawable;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerId = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_headerId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_headerTextColor = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_headerTextColor;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_ptrHeaderBackground = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_ptrHeaderBackground;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullDownProgressIndicatorId = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_pullDownProgressIndicatorId;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullDownTension = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_pullDownTension;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullEnabled = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_pullEnabled;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_pullToRefreshText = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_pullToRefreshText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_refreshingText = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_refreshingText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_releaseToRefreshText = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_releaseToRefreshText;
+			global::PullToRefresharp.Resource.Styleable.PullToRefresharpWrapper_snapbackDuration = global::EthansList.MaterialDroid.Resource.Styleable.PullToRefresharpWrapper_snapbackDuration;
 		}
 		
 		public partial class Animation
@@ -335,6 +384,9 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f01000c
 			public const int contentScrim = 2130771980;
 			
+			// aapt resource value: 0x7f010105
+			public const int contentViewId = 2130772229;
+			
 			// aapt resource value: 0x7f0100dd
 			public const int controlBackground = 2130772189;
 			
@@ -425,14 +477,26 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f010019
 			public const int fabSize = 2130771993;
 			
+			// aapt resource value: 0x7f010110
+			public const int fastScrollThumbWidth = 2130772240;
+			
 			// aapt resource value: 0x7f010063
 			public const int gapBetweenBars = 2130772067;
 			
 			// aapt resource value: 0x7f010077
 			public const int goIcon = 2130772087;
 			
+			// aapt resource value: 0x7f01010e
+			public const int headerIconDrawable = 2130772238;
+			
+			// aapt resource value: 0x7f010104
+			public const int headerId = 2130772228;
+			
 			// aapt resource value: 0x7f010021
 			public const int headerLayout = 2130772001;
+			
+			// aapt resource value: 0x7f01010d
+			public const int headerTextColor = 2130772237;
 			
 			// aapt resource value: 0x7f01003a
 			public const int height = 2130772026;
@@ -614,6 +678,21 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f01004a
 			public const int progressBarStyle = 2130772042;
 			
+			// aapt resource value: 0x7f01010c
+			public const int ptrHeaderBackground = 2130772236;
+			
+			// aapt resource value: 0x7f010106
+			public const int pullDownProgressIndicatorId = 2130772230;
+			
+			// aapt resource value: 0x7f010108
+			public const int pullDownTension = 2130772232;
+			
+			// aapt resource value: 0x7f01010f
+			public const int pullEnabled = 2130772239;
+			
+			// aapt resource value: 0x7f010109
+			public const int pullToRefreshText = 2130772233;
+			
 			// aapt resource value: 0x7f01007d
 			public const int queryBackground = 2130772093;
 			
@@ -625,6 +704,12 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0x7f0100ed
 			public const int ratingBarStyle = 2130772205;
+			
+			// aapt resource value: 0x7f01010b
+			public const int refreshingText = 2130772235;
+			
+			// aapt resource value: 0x7f01010a
+			public const int releaseToRefreshText = 2130772234;
 			
 			// aapt resource value: 0x7f010018
 			public const int rippleColor = 2130771992;
@@ -655,6 +740,9 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0x7f01005b
 			public const int singleChoiceItemLayout = 2130772059;
+			
+			// aapt resource value: 0x7f010107
+			public const int snapbackDuration = 2130772231;
 			
 			// aapt resource value: 0x7f010061
 			public const int spinBars = 2130772065;
@@ -913,29 +1001,29 @@ namespace EthansList.MaterialDroid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f080043
-			public const int abc_background_cache_hint_selector_material_dark = 2131230787;
+			// aapt resource value: 0x7f080047
+			public const int abc_background_cache_hint_selector_material_dark = 2131230791;
 			
-			// aapt resource value: 0x7f080044
-			public const int abc_background_cache_hint_selector_material_light = 2131230788;
+			// aapt resource value: 0x7f080048
+			public const int abc_background_cache_hint_selector_material_light = 2131230792;
 			
 			// aapt resource value: 0x7f080009
 			public const int abc_input_method_navigation_guard = 2131230729;
 			
-			// aapt resource value: 0x7f080045
-			public const int abc_primary_text_disable_only_material_dark = 2131230789;
-			
-			// aapt resource value: 0x7f080046
-			public const int abc_primary_text_disable_only_material_light = 2131230790;
-			
-			// aapt resource value: 0x7f080047
-			public const int abc_primary_text_material_dark = 2131230791;
-			
-			// aapt resource value: 0x7f080048
-			public const int abc_primary_text_material_light = 2131230792;
-			
 			// aapt resource value: 0x7f080049
-			public const int abc_search_url_text = 2131230793;
+			public const int abc_primary_text_disable_only_material_dark = 2131230793;
+			
+			// aapt resource value: 0x7f08004a
+			public const int abc_primary_text_disable_only_material_light = 2131230794;
+			
+			// aapt resource value: 0x7f08004b
+			public const int abc_primary_text_material_dark = 2131230795;
+			
+			// aapt resource value: 0x7f08004c
+			public const int abc_primary_text_material_light = 2131230796;
+			
+			// aapt resource value: 0x7f08004d
+			public const int abc_search_url_text = 2131230797;
 			
 			// aapt resource value: 0x7f08000a
 			public const int abc_search_url_text_normal = 2131230730;
@@ -946,11 +1034,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f08000c
 			public const int abc_search_url_text_selected = 2131230732;
 			
-			// aapt resource value: 0x7f08004a
-			public const int abc_secondary_text_material_dark = 2131230794;
+			// aapt resource value: 0x7f08004e
+			public const int abc_secondary_text_material_dark = 2131230798;
 			
-			// aapt resource value: 0x7f08004b
-			public const int abc_secondary_text_material_light = 2131230795;
+			// aapt resource value: 0x7f08004f
+			public const int abc_secondary_text_material_light = 2131230799;
 			
 			// aapt resource value: 0x7f08000d
 			public const int accent_material_dark = 2131230733;
@@ -1111,6 +1199,18 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f080038
 			public const int primary_text_disabled_material_light = 2131230776;
 			
+			// aapt resource value: 0x7f080044
+			public const int ptrsharp_sb_gradient_end = 2131230788;
+			
+			// aapt resource value: 0x7f080043
+			public const int ptrsharp_sb_gradient_start = 2131230787;
+			
+			// aapt resource value: 0x7f080045
+			public const int ptrsharp_sb_header_text = 2131230789;
+			
+			// aapt resource value: 0x7f080046
+			public const int ptrsharp_sb_header_text_shadow = 2131230790;
+			
 			// aapt resource value: 0x7f080039
 			public const int ripple_material_dark = 2131230777;
 			
@@ -1135,11 +1235,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f080040
 			public const int switch_thumb_disabled_material_light = 2131230784;
 			
-			// aapt resource value: 0x7f08004c
-			public const int switch_thumb_material_dark = 2131230796;
+			// aapt resource value: 0x7f080050
+			public const int switch_thumb_material_dark = 2131230800;
 			
-			// aapt resource value: 0x7f08004d
-			public const int switch_thumb_material_light = 2131230797;
+			// aapt resource value: 0x7f080051
+			public const int switch_thumb_material_light = 2131230801;
 			
 			// aapt resource value: 0x7f080041
 			public const int switch_thumb_normal_material_dark = 2131230785;
@@ -1436,6 +1536,9 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f06005b
 			public const int disabled_alpha_material_light = 2131099739;
 			
+			// aapt resource value: 0x7f060062
+			public const int fastscroll_thumb_width = 2131099746;
+			
 			// aapt resource value: 0x7f06005c
 			public const int highlight_alpha_material_colored = 2131099740;
 			
@@ -1671,8 +1774,29 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f020043
 			public const int Icon = 2130837571;
 			
+			// aapt resource value: 0x7f02004b
+			public const int notification_template_icon_bg = 2130837579;
+			
 			// aapt resource value: 0x7f020044
-			public const int notification_template_icon_bg = 2130837572;
+			public const int placeholder = 2130837572;
+			
+			// aapt resource value: 0x7f020045
+			public const int progress_medium_holo = 2130837573;
+			
+			// aapt resource value: 0x7f020046
+			public const int ptrsharp_serious_business_gradient = 2130837574;
+			
+			// aapt resource value: 0x7f020047
+			public const int serious_business_arrow = 2130837575;
+			
+			// aapt resource value: 0x7f020048
+			public const int serious_business_arrow2 = 2130837576;
+			
+			// aapt resource value: 0x7f020049
+			public const int spinner_20_inner_holo = 2130837577;
+			
+			// aapt resource value: 0x7f02004a
+			public const int spinner_20_outer_holo = 2130837578;
 			
 			static Drawable()
 			{
@@ -1687,8 +1811,8 @@ namespace EthansList.MaterialDroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090069
-			public const int action0 = 2131296361;
+			// aapt resource value: 0x7f09006a
+			public const int action0 = 2131296362;
 			
 			// aapt resource value: 0x7f090055
 			public const int action_bar = 2131296341;
@@ -1714,8 +1838,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090056
 			public const int action_context_bar = 2131296342;
 			
-			// aapt resource value: 0x7f09006d
-			public const int action_divider = 2131296365;
+			// aapt resource value: 0x7f09006e
+			public const int action_divider = 2131296366;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -1750,8 +1874,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09004b
 			public const int buttonPanel = 2131296331;
 			
-			// aapt resource value: 0x7f09006a
-			public const int cancel_action = 2131296362;
+			// aapt resource value: 0x7f09006b
+			public const int cancel_action = 2131296363;
 			
 			// aapt resource value: 0x7f090012
 			public const int center = 2131296274;
@@ -1765,8 +1889,14 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09004d
 			public const int checkbox = 2131296333;
 			
-			// aapt resource value: 0x7f090070
-			public const int chronometer = 2131296368;
+			// aapt resource value: 0x7f090071
+			public const int chronometer = 2131296369;
+			
+			// aapt resource value: 0x7f090064
+			public const int cityListViewItem = 2131296356;
+			
+			// aapt resource value: 0x7f09007b
+			public const int city_picker = 2131296379;
 			
 			// aapt resource value: 0x7f09001b
 			public const int clip_horizontal = 2131296283;
@@ -1795,8 +1925,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090025
 			public const int disableHome = 2131296293;
 			
-			// aapt resource value: 0x7f090066
-			public const int drawer_layout = 2131296358;
+			// aapt resource value: 0x7f090067
+			public const int drawer_layout = 2131296359;
 			
 			// aapt resource value: 0x7f090057
 			public const int edit_query = 2131296343;
@@ -1804,8 +1934,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090015
 			public const int end = 2131296277;
 			
-			// aapt resource value: 0x7f090075
-			public const int end_padder = 2131296373;
+			// aapt resource value: 0x7f090076
+			public const int end_padder = 2131296374;
 			
 			// aapt resource value: 0x7f09000a
 			public const int enterAlways = 2131296266;
@@ -1834,6 +1964,12 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090021
 			public const int @fixed = 2131296289;
 			
+			// aapt resource value: 0x7f090078
+			public const int header = 2131296376;
+			
+			// aapt resource value: 0x7f090077
+			public const int header_container = 2131296375;
+			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
 			
@@ -1849,17 +1985,17 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09003d
 			public const int image = 2131296317;
 			
-			// aapt resource value: 0x7f090074
-			public const int info = 2131296372;
+			// aapt resource value: 0x7f090075
+			public const int info = 2131296373;
 			
 			// aapt resource value: 0x7f090017
 			public const int left = 2131296279;
 			
-			// aapt resource value: 0x7f09006e
-			public const int line1 = 2131296366;
+			// aapt resource value: 0x7f09006f
+			public const int line1 = 2131296367;
 			
-			// aapt resource value: 0x7f090072
-			public const int line3 = 2131296370;
+			// aapt resource value: 0x7f090073
+			public const int line3 = 2131296371;
 			
 			// aapt resource value: 0x7f090023
 			public const int listMode = 2131296291;
@@ -1867,8 +2003,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09003f
 			public const int list_item = 2131296319;
 			
-			// aapt resource value: 0x7f09006c
-			public const int media_actions = 2131296364;
+			// aapt resource value: 0x7f09006d
+			public const int media_actions = 2131296365;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -1879,20 +2015,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09002b
 			public const int multiply = 2131296299;
 			
-			// aapt resource value: 0x7f090079
-			public const int nav_discussion = 2131296377;
-			
-			// aapt resource value: 0x7f090078
-			public const int nav_friends = 2131296376;
-			
-			// aapt resource value: 0x7f090076
-			public const int nav_home = 2131296374;
-			
-			// aapt resource value: 0x7f090077
-			public const int nav_messages = 2131296375;
-			
-			// aapt resource value: 0x7f090068
-			public const int nav_view = 2131296360;
+			// aapt resource value: 0x7f090069
+			public const int nav_view = 2131296361;
 			
 			// aapt resource value: 0x7f090035
 			public const int never = 2131296309;
@@ -1918,11 +2042,23 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090007
 			public const int progress_horizontal = 2131296263;
 			
+			// aapt resource value: 0x7f090079
+			public const int pullDownProgressIndicator = 2131296377;
+			
 			// aapt resource value: 0x7f09004f
 			public const int radio = 2131296335;
 			
+			// aapt resource value: 0x7f09007c
+			public const int recent_cities = 2131296380;
+			
 			// aapt resource value: 0x7f090018
 			public const int right = 2131296280;
+			
+			// aapt resource value: 0x7f09007d
+			public const int saved_postings = 2131296381;
+			
+			// aapt resource value: 0x7f09007e
+			public const int saved_searches = 2131296382;
 			
 			// aapt resource value: 0x7f09002c
 			public const int screen = 2131296300;
@@ -1981,11 +2117,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090029
 			public const int showTitle = 2131296297;
 			
-			// aapt resource value: 0x7f090065
-			public const int snackbar_action = 2131296357;
+			// aapt resource value: 0x7f090066
+			public const int snackbar_action = 2131296358;
 			
-			// aapt resource value: 0x7f090064
-			public const int snackbar_text = 2131296356;
+			// aapt resource value: 0x7f090065
+			public const int snackbar_text = 2131296357;
 			
 			// aapt resource value: 0x7f090008
 			public const int split_action_bar = 2131296264;
@@ -2002,8 +2138,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090019
 			public const int start = 2131296281;
 			
-			// aapt resource value: 0x7f09006b
-			public const int status_bar_latest_event_content = 2131296363;
+			// aapt resource value: 0x7f09007a
+			public const int stateListViewItem = 2131296378;
+			
+			// aapt resource value: 0x7f09006c
+			public const int status_bar_latest_event_content = 2131296364;
 			
 			// aapt resource value: 0x7f090060
 			public const int submit_area = 2131296352;
@@ -2011,17 +2150,17 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090024
 			public const int tabMode = 2131296292;
 			
-			// aapt resource value: 0x7f090073
-			public const int text = 2131296371;
+			// aapt resource value: 0x7f090074
+			public const int text = 2131296372;
 			
-			// aapt resource value: 0x7f090071
-			public const int text2 = 2131296369;
+			// aapt resource value: 0x7f090072
+			public const int text2 = 2131296370;
 			
 			// aapt resource value: 0x7f090048
 			public const int textSpacerNoButtons = 2131296328;
 			
-			// aapt resource value: 0x7f09006f
-			public const int time = 2131296367;
+			// aapt resource value: 0x7f090070
+			public const int time = 2131296368;
 			
 			// aapt resource value: 0x7f090041
 			public const int title = 2131296321;
@@ -2029,8 +2168,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090044
 			public const int title_template = 2131296324;
 			
-			// aapt resource value: 0x7f090067
-			public const int toolbar = 2131296359;
+			// aapt resource value: 0x7f090068
+			public const int toolbar = 2131296360;
 			
 			// aapt resource value: 0x7f09001a
 			public const int top = 2131296282;
@@ -2170,73 +2309,82 @@ namespace EthansList.MaterialDroid
 			public const int abc_select_dialog_material = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int design_layout_snackbar = 2130903064;
+			public const int CityRow = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int design_layout_snackbar_include = 2130903065;
+			public const int design_layout_snackbar = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int design_layout_tab_icon = 2130903066;
+			public const int design_layout_snackbar_include = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int design_layout_tab_text = 2130903067;
+			public const int design_layout_tab_icon = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int design_navigation_item = 2130903068;
+			public const int design_layout_tab_text = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int design_navigation_item_header = 2130903069;
+			public const int design_navigation_item = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int design_navigation_item_separator = 2130903070;
+			public const int design_navigation_item_header = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int design_navigation_item_subheader = 2130903071;
+			public const int design_navigation_item_separator = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int design_navigation_menu = 2130903072;
+			public const int design_navigation_item_subheader = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int Header = 2130903073;
+			public const int design_navigation_menu = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int Main = 2130903074;
+			public const int Header = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int notification_media_action = 2130903075;
+			public const int Main = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int notification_media_cancel_action = 2130903076;
+			public const int notification_media_action = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int notification_template_big_media = 2130903077;
+			public const int notification_media_cancel_action = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int notification_template_big_media_narrow = 2130903078;
+			public const int notification_template_big_media = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int notification_template_lines = 2130903079;
+			public const int notification_template_big_media_narrow = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int notification_template_media = 2130903080;
+			public const int notification_template_lines = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int notification_template_part_chronometer = 2130903081;
+			public const int notification_template_media = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_template_part_time = 2130903082;
+			public const int notification_template_part_chronometer = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int select_dialog_item_material = 2130903083;
+			public const int notification_template_part_time = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int select_dialog_multichoice_material = 2130903084;
+			public const int ptrsharp_header = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int select_dialog_singlechoice_material = 2130903085;
+			public const int select_dialog_item_material = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int support_simple_spinner_dropdown_item = 2130903086;
+			public const int select_dialog_multichoice_material = 2130903086;
+			
+			// aapt resource value: 0x7f03002f
+			public const int select_dialog_singlechoice_material = 2130903087;
+			
+			// aapt resource value: 0x7f030030
+			public const int StateRow = 2130903088;
+			
+			// aapt resource value: 0x7f030031
+			public const int support_simple_spinner_dropdown_item = 2130903089;
 			
 			static Layout()
 			{
@@ -2318,20 +2466,32 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f0a0011
 			public const int abc_toolbar_collapse_description = 2131361809;
 			
-			// aapt resource value: 0x7f0a0014
-			public const int app_name = 2131361812;
+			// aapt resource value: 0x7f0a0018
+			public const int app_name = 2131361816;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int appbar_scrolling_view_behavior = 2131361792;
 			
-			// aapt resource value: 0x7f0a0016
-			public const int close_drawer = 2131361814;
+			// aapt resource value: 0x7f0a001a
+			public const int close_drawer = 2131361818;
+			
+			// aapt resource value: 0x7f0a0017
+			public const int hello = 2131361815;
 			
 			// aapt resource value: 0x7f0a0013
-			public const int hello = 2131361811;
+			public const int library_name = 2131361811;
+			
+			// aapt resource value: 0x7f0a0019
+			public const int open_drawer = 2131361817;
+			
+			// aapt resource value: 0x7f0a0014
+			public const int ptrsharp_pull_to_refresh = 2131361812;
+			
+			// aapt resource value: 0x7f0a0016
+			public const int ptrsharp_refreshing = 2131361814;
 			
 			// aapt resource value: 0x7f0a0015
-			public const int open_drawer = 2131361813;
+			public const int ptrsharp_release_to_refresh = 2131361813;
 			
 			// aapt resource value: 0x7f0a0012
 			public const int status_bar_notification_info_overflow = 2131361810;
@@ -2772,11 +2932,14 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f050001
 			public const int Base_Widget_Design_TabLayout = 2131034113;
 			
-			// aapt resource value: 0x7f05013c
-			public const int MyTheme = 2131034428;
-			
 			// aapt resource value: 0x7f05013b
-			public const int MyTheme_Base = 2131034427;
+			public const int HoloProgressMedium = 2131034427;
+			
+			// aapt resource value: 0x7f05013d
+			public const int MyTheme = 2131034429;
+			
+			// aapt resource value: 0x7f05013c
+			public const int MyTheme_Base = 2131034428;
 			
 			// aapt resource value: 0x7f05001e
 			public const int Platform_AppCompat = 2131034142;
@@ -3993,6 +4156,61 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0
 			public const int PopupWindowBackgroundState_state_above_anchor = 0;
+			
+			public static int[] PullToRefresharpWrapper = new int[]
+			{
+					2130772228,
+					2130772229,
+					2130772230,
+					2130772231,
+					2130772232,
+					2130772233,
+					2130772234,
+					2130772235,
+					2130772236,
+					2130772237,
+					2130772238,
+					2130772239,
+					2130772240};
+			
+			// aapt resource value: 1
+			public const int PullToRefresharpWrapper_contentViewId = 1;
+			
+			// aapt resource value: 12
+			public const int PullToRefresharpWrapper_fastScrollThumbWidth = 12;
+			
+			// aapt resource value: 10
+			public const int PullToRefresharpWrapper_headerIconDrawable = 10;
+			
+			// aapt resource value: 0
+			public const int PullToRefresharpWrapper_headerId = 0;
+			
+			// aapt resource value: 9
+			public const int PullToRefresharpWrapper_headerTextColor = 9;
+			
+			// aapt resource value: 8
+			public const int PullToRefresharpWrapper_ptrHeaderBackground = 8;
+			
+			// aapt resource value: 2
+			public const int PullToRefresharpWrapper_pullDownProgressIndicatorId = 2;
+			
+			// aapt resource value: 4
+			public const int PullToRefresharpWrapper_pullDownTension = 4;
+			
+			// aapt resource value: 11
+			public const int PullToRefresharpWrapper_pullEnabled = 11;
+			
+			// aapt resource value: 5
+			public const int PullToRefresharpWrapper_pullToRefreshText = 5;
+			
+			// aapt resource value: 7
+			public const int PullToRefresharpWrapper_refreshingText = 7;
+			
+			// aapt resource value: 6
+			public const int PullToRefresharpWrapper_releaseToRefreshText = 6;
+			
+			// aapt resource value: 3
+			public const int PullToRefresharpWrapper_snapbackDuration = 3;
 			
 			public static int[] ScrimInsetsFrameLayout = new int[]
 			{

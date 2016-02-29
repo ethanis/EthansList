@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <group android:checkableBehavior="single">
     <item
-      android:id="@+id/nav_home"
+      android:id="@+id/city_picker"
       android:icon="@drawable/ic_home_black_24dp"
-      android:title="Home" />
+      android:title="Search" />
     <item
-      android:id="@+id/nav_messages"
+      android:id="@+id/recent_cities"
       android:icon="@drawable/ic_question_answer_black_24dp"
-      android:title="Messages" />
+      android:title="Recent Cities" />
     <item
-      android:id="@+id/nav_friends"
+      android:id="@+id/saved_postings"
       android:icon="@drawable/ic_supervisor_account_black_24dp"
-      android:title="Friends" />
+      android:title="Saved Postings" />
     <item
-      android:id="@+id/nav_discussion"
+      android:id="@+id/saved_searches"
       android:icon="@drawable/ic_devices_black_24dp"
-      android:title="Devices" />
+      android:title="Saved Searches" />
   </group>
 
   <item android:title="Sub items">

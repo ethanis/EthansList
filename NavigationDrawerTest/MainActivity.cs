@@ -10,6 +10,8 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Support.Design.Widget;
+using EthansList.Shared;
+using EthansList.Models;
 
 namespace EthansList.MaterialDroid
 {
@@ -17,10 +19,16 @@ namespace EthansList.MaterialDroid
 	public class MainActivity : AppCompatActivity
 	{
 		DrawerLayout drawerLayout;
+        public static DatabaseConnection databaseConnection { get; set; }
+        readonly Fragment[] fragments = { new SelectCityFragment() };//, new RecentCitiesFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
-		protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
 		{			
 			base.OnCreate(bundle);
+
+            string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
+            databaseConnection = new DatabaseConnection(dbpath);
 
 			// Create UI
 			SetContentView(Resource.Layout.Main);
@@ -42,24 +50,41 @@ namespace EthansList.MaterialDroid
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
+            int position = -1;
             switch (e.MenuItem.ItemId)
             {
-                case (Resource.Id.nav_home):
-                    // React on 'Home' selection
+                case (Resource.Id.city_picker):
+                    position = 0;
                     break;
-                case (Resource.Id.nav_messages):
-                    // React on 'Messages' selection
+                case (Resource.Id.recent_cities):
+                    position = 0;
                     break;
-                case (Resource.Id.nav_friends):
-                    // React on 'Friends' selection
+                case (Resource.Id.saved_postings):
+                    position = 0;
                     break;
-                case (Resource.Id.nav_discussion):
-                    // React on 'Discussion' selection
-                    break;                
+                case (Resource.Id.saved_searches):
+                    position = 0;
+                    break;   
             }
+
+            base.FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive);
+            // Show the selected Fragment to the user
+            base.FragmentManager.BeginTransaction().Replace(Resource.Id.drawer_layout, fragments[position]).Commit();
+
+            // Update the Activity title in the ActionBar
+            this.Title = titles[position];
 
             // Close drawer
             drawerLayout.CloseDrawers();
+
+            var builder = new Android.Support.V7.App.AlertDialog.Builder (this);
+
+            builder.SetTitle (titles[position])
+            .SetMessage ("Is this material design?")
+            .SetPositiveButton ("Yes", delegate { Console.WriteLine("Yes"); })
+            .SetNegativeButton ("No", delegate { Console.WriteLine("No"); }); 
+
+            builder.Create().Show ();
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace EthansList.Shared
             #if __IOS__
             var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.Constants.USCraigslistLocations.csv"));
             #elif __ANDROID__
-            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.android.Constants.USCraigslistLocations.csv"));
+            var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("EthansList.MaterialDroid.Constants.USCraigslistLocations.csv"));
             #endif
 
             using (accountsStream)
