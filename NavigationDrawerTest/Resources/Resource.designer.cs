@@ -1811,8 +1811,8 @@ namespace EthansList.MaterialDroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f09006a
-			public const int action0 = 2131296362;
+			// aapt resource value: 0x7f09006b
+			public const int action0 = 2131296363;
 			
 			// aapt resource value: 0x7f090055
 			public const int action_bar = 2131296341;
@@ -1838,8 +1838,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090056
 			public const int action_context_bar = 2131296342;
 			
-			// aapt resource value: 0x7f09006e
-			public const int action_divider = 2131296366;
+			// aapt resource value: 0x7f09006f
+			public const int action_divider = 2131296367;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -1874,8 +1874,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09004b
 			public const int buttonPanel = 2131296331;
 			
-			// aapt resource value: 0x7f09006b
-			public const int cancel_action = 2131296363;
+			// aapt resource value: 0x7f09006c
+			public const int cancel_action = 2131296364;
 			
 			// aapt resource value: 0x7f090012
 			public const int center = 2131296274;
@@ -1889,14 +1889,14 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09004d
 			public const int checkbox = 2131296333;
 			
-			// aapt resource value: 0x7f090071
-			public const int chronometer = 2131296369;
+			// aapt resource value: 0x7f090072
+			public const int chronometer = 2131296370;
 			
 			// aapt resource value: 0x7f090064
 			public const int cityListViewItem = 2131296356;
 			
-			// aapt resource value: 0x7f09007b
-			public const int city_picker = 2131296379;
+			// aapt resource value: 0x7f09007c
+			public const int city_picker = 2131296380;
 			
 			// aapt resource value: 0x7f09001b
 			public const int clip_horizontal = 2131296283;
@@ -1934,8 +1934,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090015
 			public const int end = 2131296277;
 			
-			// aapt resource value: 0x7f090076
-			public const int end_padder = 2131296374;
+			// aapt resource value: 0x7f090077
+			public const int end_padder = 2131296375;
 			
 			// aapt resource value: 0x7f09000a
 			public const int enterAlways = 2131296266;
@@ -1964,11 +1964,14 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090021
 			public const int @fixed = 2131296289;
 			
-			// aapt resource value: 0x7f090078
-			public const int header = 2131296376;
+			// aapt resource value: 0x7f090069
+			public const int frameLayout = 2131296361;
 			
-			// aapt resource value: 0x7f090077
-			public const int header_container = 2131296375;
+			// aapt resource value: 0x7f090079
+			public const int header = 2131296377;
+			
+			// aapt resource value: 0x7f090078
+			public const int header_container = 2131296376;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -1985,17 +1988,17 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09003d
 			public const int image = 2131296317;
 			
-			// aapt resource value: 0x7f090075
-			public const int info = 2131296373;
+			// aapt resource value: 0x7f090076
+			public const int info = 2131296374;
 			
 			// aapt resource value: 0x7f090017
 			public const int left = 2131296279;
 			
-			// aapt resource value: 0x7f09006f
-			public const int line1 = 2131296367;
+			// aapt resource value: 0x7f090070
+			public const int line1 = 2131296368;
 			
-			// aapt resource value: 0x7f090073
-			public const int line3 = 2131296371;
+			// aapt resource value: 0x7f090074
+			public const int line3 = 2131296372;
 			
 			// aapt resource value: 0x7f090023
 			public const int listMode = 2131296291;
@@ -2003,8 +2006,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09003f
 			public const int list_item = 2131296319;
 			
-			// aapt resource value: 0x7f09006d
-			public const int media_actions = 2131296365;
+			// aapt resource value: 0x7f09006e
+			public const int media_actions = 2131296366;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -2015,8 +2018,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f09002b
 			public const int multiply = 2131296299;
 			
-			// aapt resource value: 0x7f090069
-			public const int nav_view = 2131296361;
+			// aapt resource value: 0x7f09006a
+			public const int nav_view = 2131296362;
 			
 			// aapt resource value: 0x7f090035
 			public const int never = 2131296309;
@@ -2042,23 +2045,23 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090007
 			public const int progress_horizontal = 2131296263;
 			
-			// aapt resource value: 0x7f090079
-			public const int pullDownProgressIndicator = 2131296377;
+			// aapt resource value: 0x7f09007a
+			public const int pullDownProgressIndicator = 2131296378;
 			
 			// aapt resource value: 0x7f09004f
 			public const int radio = 2131296335;
 			
-			// aapt resource value: 0x7f09007c
-			public const int recent_cities = 2131296380;
+			// aapt resource value: 0x7f09007d
+			public const int recent_cities = 2131296381;
 			
 			// aapt resource value: 0x7f090018
 			public const int right = 2131296280;
 			
-			// aapt resource value: 0x7f09007d
-			public const int saved_postings = 2131296381;
-			
 			// aapt resource value: 0x7f09007e
-			public const int saved_searches = 2131296382;
+			public const int saved_postings = 2131296382;
+			
+			// aapt resource value: 0x7f09007f
+			public const int saved_searches = 2131296383;
 			
 			// aapt resource value: 0x7f09002c
 			public const int screen = 2131296300;
@@ -2138,11 +2141,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090019
 			public const int start = 2131296281;
 			
-			// aapt resource value: 0x7f09007a
-			public const int stateListViewItem = 2131296378;
+			// aapt resource value: 0x7f09007b
+			public const int stateListViewItem = 2131296379;
 			
-			// aapt resource value: 0x7f09006c
-			public const int status_bar_latest_event_content = 2131296364;
+			// aapt resource value: 0x7f09006d
+			public const int status_bar_latest_event_content = 2131296365;
 			
 			// aapt resource value: 0x7f090060
 			public const int submit_area = 2131296352;
@@ -2150,17 +2153,17 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090024
 			public const int tabMode = 2131296292;
 			
-			// aapt resource value: 0x7f090074
-			public const int text = 2131296372;
+			// aapt resource value: 0x7f090075
+			public const int text = 2131296373;
 			
-			// aapt resource value: 0x7f090072
-			public const int text2 = 2131296370;
+			// aapt resource value: 0x7f090073
+			public const int text2 = 2131296371;
 			
 			// aapt resource value: 0x7f090048
 			public const int textSpacerNoButtons = 2131296328;
 			
-			// aapt resource value: 0x7f090070
-			public const int time = 2131296368;
+			// aapt resource value: 0x7f090071
+			public const int time = 2131296369;
 			
 			// aapt resource value: 0x7f090041
 			public const int title = 2131296321;

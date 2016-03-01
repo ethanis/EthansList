@@ -25,21 +25,21 @@ namespace EthansList.MaterialDroid
 
         protected override void OnCreate(Bundle bundle)
 		{			
-			base.OnCreate(bundle);
+            base.OnCreate(bundle);
 
             string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
 
-			// Create UI
-			SetContentView(Resource.Layout.Main);
-			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            // Create UI
+            SetContentView(Resource.Layout.Main);
+            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
-			// Init toolbar
-			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            // Init toolbar
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(toolbar);	
 
 			// Attach item selected handler to navigation view
-			var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
 			navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
 			// Create ActionBarDrawerToggle button and add it to the toolbar
@@ -69,7 +69,7 @@ namespace EthansList.MaterialDroid
 
             base.FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive);
             // Show the selected Fragment to the user
-            base.FragmentManager.BeginTransaction().Replace(Resource.Id.drawer_layout, fragments[position]).Commit();
+            base.FragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[position]).Commit();
 
             // Update the Activity title in the ActionBar
             this.Title = titles[position];

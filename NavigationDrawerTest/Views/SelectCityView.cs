@@ -53,7 +53,6 @@ namespace EthansList.MaterialDroid
             AvailableLocations locations = new AvailableLocations();
             state = locations.States.ElementAt(0);
 
-
             state_picker = new ListView(context);
             state_picker.LayoutParameters = p;
             state_picker.Adapter = new StateListAdapter(context, locations.States);
@@ -74,13 +73,15 @@ namespace EthansList.MaterialDroid
             {
                 Location selected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position);
                 //FragmentTransaction transaction = this.context.FragmentManager.BeginTransaction();
+                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
                 //SearchFragment searchFragment = new SearchFragment();
                 //searchFragment.location = selected;
                 //SearchOptionsFragment searchFragment = new SearchOptionsFragment();
+                CategoryPickerFragment categoryFragment = new CategoryPickerFragment();
 
-                //transaction.Replace(Resource.Id.drawer_layout, searchFragment);
-                //transaction.AddToBackStack(null);
-                //transaction.Commit();
+                transaction.Replace(Resource.Id.frameLayout, categoryFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
 
                 Task.Run(async () =>
                 {

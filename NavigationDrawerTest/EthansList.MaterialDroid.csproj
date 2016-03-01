@@ -89,6 +89,9 @@
     <Compile Include="Helpers\MyScaleListener.cs" />
     <Compile Include="Helpers\Reachability.cs" />
     <Compile Include="Helpers\ScaleImageView.cs" />
+    <Compile Include="Fragments\CategoryPickerFragment.cs" />
+    <Compile Include="Views\CategoryPickerView.cs" />
+    <Compile Include="Adapters\CategoryListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
