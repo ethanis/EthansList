@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -9,13 +10,15 @@ namespace EthansList.MaterialDroid
 {
     public class CategoryListAdapter : BaseAdapter<CatTableGroup>
     {
+        readonly Context context;
         List<CatTableGroup> categories;
-        LayoutInflater layoutInflater;
+        Location SelectedLocation;
 
-        public CategoryListAdapter(Context context, List<CatTableGroup> categories)
+        public CategoryListAdapter(Context context, List<CatTableGroup> categories, Location searchLocation)
         {
+            this.context = context;
             this.categories = categories;
-            layoutInflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
+            this.SelectedLocation = searchLocation;
         }
 
         public override CatTableGroup this[int position]
@@ -44,15 +47,23 @@ namespace EthansList.MaterialDroid
             var view = convertView;
             if (view == null)
             {
-                view = layoutInflater.Inflate(Resource.Layout.CityRow, parent, false);
-                var _city = view.FindViewById<TextView>(Resource.Id.cityListViewItem);
-
-                view.Tag = new CityListViewHolder { City = _city };
+                view = new CategoryGroupRow(context);
+                ((CategoryGroupRow)view).Items = categories[position].Items;
             }
 
-            var holder = (CityListViewHolder)view.Tag;
+            ((CategoryGroupRow)view).headerLabel.Text = categories[position].Name;
 
-            holder.City.Text = categories[position].Name;
+            ((CategoryGroupRow)view).CategorySelected += (object sender, CategorySelectedEventArgs e) => 
+            { 
+                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+                SearchOptionsFragment searchFragment = new SearchOptionsFragment();
+                searchFragment.Category = e.Selected;
+                searchFragment.SearchLocation = this.SelectedLocation;
+
+                transaction.Replace(Resource.Id.frameLayout, searchFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            }; 
 
             return view;
         }

@@ -1,21 +1,17 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
+using EthansList.Shared;
 
 namespace EthansList.MaterialDroid
 {
     public class CategoryPickerFragment : Fragment
     {
+        public Location SelectedLocation { get; set; }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,6 +22,7 @@ namespace EthansList.MaterialDroid
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = new CategoryPickerView(this.Activity);
+            view.SelectedLocation = SelectedLocation;
 
             return view;
         }

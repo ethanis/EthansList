@@ -46,6 +46,8 @@ namespace EthansList.MaterialDroid
 			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
 			drawerLayout.SetDrawerListener(drawerToggle);
 			drawerToggle.SyncState();
+
+            base.FragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
 		}
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -77,14 +79,14 @@ namespace EthansList.MaterialDroid
             // Close drawer
             drawerLayout.CloseDrawers();
 
-            var builder = new Android.Support.V7.App.AlertDialog.Builder (this);
+            //var builder = new Android.Support.V7.App.AlertDialog.Builder (this);
 
-            builder.SetTitle (titles[position])
-            .SetMessage ("Is this material design?")
-            .SetPositiveButton ("Yes", delegate { Console.WriteLine("Yes"); })
-            .SetNegativeButton ("No", delegate { Console.WriteLine("No"); }); 
+            //builder.SetTitle (titles[position])
+            //.SetMessage ("Is this material design?")
+            //.SetPositiveButton ("Yes", delegate { Console.WriteLine("Yes"); })
+            //.SetNegativeButton ("No", delegate { Console.WriteLine("No"); }); 
 
-            builder.Create().Show ();
+            //builder.Create().Show ();
 		}
 	}
 }

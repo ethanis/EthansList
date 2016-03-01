@@ -18,7 +18,8 @@ namespace EthansList.MaterialDroid
     public class CategoryPickerView : RelativeLayout
     {
         ListView categoryList;
-        Context context;
+        readonly Context context;
+        public Location SelectedLocation { get; set; }
 
         public CategoryPickerView(Context context) :
             base(context)
@@ -44,7 +45,7 @@ namespace EthansList.MaterialDroid
         void Initialize()
         {
             categoryList = new ListView(context);
-            categoryList.Adapter = new CategoryListAdapter(context, Categories.Groups);
+            categoryList.Adapter = new CategoryListAdapter(context, Categories.Groups, SelectedLocation);
             categoryList.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
             AddView(categoryList);
         }

@@ -92,6 +92,10 @@
     <Compile Include="Fragments\CategoryPickerFragment.cs" />
     <Compile Include="Views\CategoryPickerView.cs" />
     <Compile Include="Adapters\CategoryListAdapter.cs" />
+    <Compile Include="Views\CategoryGroupRow.cs" />
+    <Compile Include="Fragments\SearchOptionsFragment.cs" />
+    <Compile Include="Helpers\SearchTableHelpers.cs" />
+    <Compile Include="Adapters\SearchOptionsListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

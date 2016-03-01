@@ -72,16 +72,13 @@ namespace EthansList.MaterialDroid
             city_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
                 Location selected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position);
-                //FragmentTransaction transaction = this.context.FragmentManager.BeginTransaction();
-                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
-                //SearchFragment searchFragment = new SearchFragment();
-                //searchFragment.location = selected;
-                //SearchOptionsFragment searchFragment = new SearchOptionsFragment();
-                CategoryPickerFragment categoryFragment = new CategoryPickerFragment();
 
-                transaction.Replace(Resource.Id.frameLayout, categoryFragment);
-                transaction.AddToBackStack(null);
-                transaction.Commit();
+                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+                CategoryPickerFragment categoryFragment = new CategoryPickerFragment();
+                categoryFragment.SelectedLocation = selected;
+                transaction.Replace(Resource.Id.frameLayout, categoryFragment)
+                           .AddToBackStack(null)
+                           .Commit();
 
                 Task.Run(async () =>
                 {
