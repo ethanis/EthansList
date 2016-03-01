@@ -15,7 +15,9 @@ namespace EthansList.MaterialDroid
         SingleEntryLabel,
         PriceDoubleEntry,
         DoubleEntry,
-        Space
+        Space,
+        SinglePicker,
+        ComboPicker
     }
 }
 

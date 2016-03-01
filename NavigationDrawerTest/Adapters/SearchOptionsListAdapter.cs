@@ -3,6 +3,8 @@ using Android.Widget;
 using Android.Content;
 using System.Collections.Generic;
 using Android.Views;
+using Android.App;
+using Android.OS;
 
 namespace EthansList.MaterialDroid
 {
@@ -11,12 +13,14 @@ namespace EthansList.MaterialDroid
         readonly Context context;
         List<SearchRow> searchOptions;
         SearchOptionsView owner;
+        LayoutInflater layoutInflater;
 
         public SearchOptionsListAdapter(SearchOptionsView owner, Context context, List<SearchRow> searchOptions)
         {
             this.context = context;
             this.searchOptions = searchOptions;
             this.owner = owner;
+            layoutInflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
         }
 
         public override SearchRow this[int position]
@@ -120,7 +124,37 @@ namespace EthansList.MaterialDroid
 
                     view.AddView(entryHolder);
                     break;
+                case SearchRowTypes.SinglePicker:
+                    view.AddView(Title(item));
 
+                    TextView display = new TextView(context);
+                    display.LayoutParameters = f;
+                    display.Gravity = GravityFlags.Right;
+                    display.Text = "Any";
+                    display.SetPadding(0,0,ConvertDpToPx(50),0);
+
+                    display.Click += (object sender, EventArgs e) => 
+                    { 
+                        //var builder = new Android.Support.V7.App.AlertDialog.Builder (context);
+
+                        //builder.SetTitle ("Hello")
+                        //    .SetMessage ("Is this material design?")
+                        //    .SetPositiveButton ("Ok", delegate { Console.WriteLine("Yes"); })
+                        //    .SetNegativeButton ("Cancel", delegate { Console.WriteLine("No"); }); 
+
+                        //builder.Create().Show ();
+
+                        //var numberPicker = layoutInflater.Inflate(Resource.Layout.NumberPickerDialog, null);
+                        //numberPicker.Click += 
+
+                        var dialog = new NumberPickerDialogFragment(context, 10, 1337, 42, null);
+                        dialog.Show(((Activity)context).FragmentManager, "number"); 
+
+                    };
+
+                    view.AddView(display);
+
+                    break;
                 case SearchRowTypes.Space:
                     View strut = new View(context);
                     strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 
@@ -168,6 +202,40 @@ namespace EthansList.MaterialDroid
         private int ConvertDpToPx(float dip)
         {
             return (int)(dip * this.context.Resources.DisplayMetrics.Density);
+        }
+    }
+
+    public class NumberPickerDialogFragment : DialogFragment
+    {
+        private readonly Context _context;
+        private readonly int _min, _max, _current;
+        private readonly NumberPicker.IOnValueChangeListener _listener;
+
+        public NumberPickerDialogFragment(Context context, int min, int max, int current, NumberPicker.IOnValueChangeListener listener)
+        {
+            _context = context;
+            _min = min;
+            _max = max;
+            _current = current;
+            _listener = listener;
+        }
+
+        public override Dialog OnCreateDialog(Bundle savedInstanceState)
+        {
+            var inflater = (LayoutInflater)_context.GetSystemService(Context.LayoutInflaterService);
+            var view = inflater.Inflate(Resource.Layout.NumberPickerDialog, null);
+            var numberPicker = view.FindViewById<NumberPicker>(Resource.Id.numberPicker);
+            numberPicker.MaxValue = _max;
+            numberPicker.MinValue = _min;
+            numberPicker.Value = _current;
+            numberPicker.SetOnValueChangedListener(_listener);
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
+            dialog.SetTitle("Hello");
+            dialog.SetView(view);
+            dialog.SetNegativeButton("Cancel", (s, a) => { });
+            dialog.SetPositiveButton("Ok", (s, a) => { });
+            return dialog.Create();
         }
     }
 }

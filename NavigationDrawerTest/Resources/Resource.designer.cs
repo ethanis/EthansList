@@ -1895,8 +1895,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090064
 			public const int cityListViewItem = 2131296356;
 			
-			// aapt resource value: 0x7f09007c
-			public const int city_picker = 2131296380;
+			// aapt resource value: 0x7f09007d
+			public const int city_picker = 2131296381;
 			
 			// aapt resource value: 0x7f09001b
 			public const int clip_horizontal = 2131296283;
@@ -1967,11 +1967,11 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090069
 			public const int frameLayout = 2131296361;
 			
-			// aapt resource value: 0x7f090079
-			public const int header = 2131296377;
+			// aapt resource value: 0x7f09007a
+			public const int header = 2131296378;
 			
-			// aapt resource value: 0x7f090078
-			public const int header_container = 2131296376;
+			// aapt resource value: 0x7f090079
+			public const int header_container = 2131296377;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -2030,6 +2030,9 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090020
 			public const int normal = 2131296288;
 			
+			// aapt resource value: 0x7f090078
+			public const int numberPicker = 2131296376;
+			
 			// aapt resource value: 0x7f09000f
 			public const int parallax = 2131296271;
 			
@@ -2045,23 +2048,23 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090007
 			public const int progress_horizontal = 2131296263;
 			
-			// aapt resource value: 0x7f09007a
-			public const int pullDownProgressIndicator = 2131296378;
+			// aapt resource value: 0x7f09007b
+			public const int pullDownProgressIndicator = 2131296379;
 			
 			// aapt resource value: 0x7f09004f
 			public const int radio = 2131296335;
 			
-			// aapt resource value: 0x7f09007d
-			public const int recent_cities = 2131296381;
+			// aapt resource value: 0x7f09007e
+			public const int recent_cities = 2131296382;
 			
 			// aapt resource value: 0x7f090018
 			public const int right = 2131296280;
 			
-			// aapt resource value: 0x7f09007e
-			public const int saved_postings = 2131296382;
-			
 			// aapt resource value: 0x7f09007f
-			public const int saved_searches = 2131296383;
+			public const int saved_postings = 2131296383;
+			
+			// aapt resource value: 0x7f090080
+			public const int saved_searches = 2131296384;
 			
 			// aapt resource value: 0x7f09002c
 			public const int screen = 2131296300;
@@ -2141,8 +2144,8 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f090019
 			public const int start = 2131296281;
 			
-			// aapt resource value: 0x7f09007b
-			public const int stateListViewItem = 2131296379;
+			// aapt resource value: 0x7f09007c
+			public const int stateListViewItem = 2131296380;
 			
 			// aapt resource value: 0x7f09006d
 			public const int status_bar_latest_event_content = 2131296365;
@@ -2372,22 +2375,25 @@ namespace EthansList.MaterialDroid
 			public const int notification_template_part_time = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int ptrsharp_header = 2130903084;
+			public const int NumberPickerDialog = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int select_dialog_item_material = 2130903085;
+			public const int ptrsharp_header = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int select_dialog_multichoice_material = 2130903086;
+			public const int select_dialog_item_material = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int select_dialog_singlechoice_material = 2130903087;
+			public const int select_dialog_multichoice_material = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int StateRow = 2130903088;
+			public const int select_dialog_singlechoice_material = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int support_simple_spinner_dropdown_item = 2130903089;
+			public const int StateRow = 2130903089;
+			
+			// aapt resource value: 0x7f030032
+			public const int support_simple_spinner_dropdown_item = 2130903090;
 			
 			static Layout()
 			{
