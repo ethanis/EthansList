@@ -11,8 +11,8 @@ namespace EthansList.MaterialDroid
     public class CategoryListAdapter : BaseAdapter<CatTableGroup>
     {
         readonly Context context;
-        List<CatTableGroup> categories;
-        Location SelectedLocation;
+        readonly List<CatTableGroup> categories;
+        readonly Location SelectedLocation;
 
         public CategoryListAdapter(Context context, List<CatTableGroup> categories, Location searchLocation)
         {

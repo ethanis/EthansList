@@ -85,6 +85,7 @@ namespace EthansList.MaterialDroid
                 subCategory.Text = item.Value;
                 row.AddView(subCategory);
 
+                //TODO: Add selected view to row to show that it was clicked
                 row.Click += (object sender, EventArgs e) => 
                 { 
                     if (this.CategorySelected != null)
@@ -92,7 +93,6 @@ namespace EthansList.MaterialDroid
                 };
 
                 AddView(row);
-                Console.WriteLine(item.Value);
             }
         }
     }

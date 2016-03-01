@@ -10,11 +10,13 @@ namespace EthansList.MaterialDroid
     {
         readonly Context context;
         List<SearchRow> searchOptions;
+        SearchOptionsView owner;
 
-        public SearchOptionsListAdapter(Context context, List<SearchRow> searchOptions)
+        public SearchOptionsListAdapter(SearchOptionsView owner, Context context, List<SearchRow> searchOptions)
         {
             this.context = context;
             this.searchOptions = searchOptions;
+            this.owner = owner;
         }
 
         public override SearchRow this[int position]
@@ -53,7 +55,7 @@ namespace EthansList.MaterialDroid
                 case SearchRowTypes.SearchTerms:
                     EditText searchfield = new EditText(context);
                     searchfield.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-                    searchfield.Hint = "search apartments / housing rentals";
+                    searchfield.Hint = string.Format("Search {0}:", owner.category.Value);
                     searchfield.TextSize = 14f;
                     searchfield.SetSingleLine(true);
                     view.AddView(searchfield);

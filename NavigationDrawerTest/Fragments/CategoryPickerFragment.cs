@@ -21,8 +21,7 @@ namespace EthansList.MaterialDroid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = new CategoryPickerView(this.Activity);
-            view.SelectedLocation = SelectedLocation;
+            var view = new CategoryPickerView(this.Activity, SelectedLocation);
 
             return view;
         }

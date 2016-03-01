@@ -29,8 +29,9 @@ namespace EthansList.MaterialDroid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = new SearchOptionsView(this.Activity);
-
+            var view = new SearchOptionsView(this.Activity, SearchLocation, Category);
+            Console.WriteLine(SearchLocation.SiteName);
+            Console.WriteLine(Category.Value);
             return view;
         }
     }
@@ -38,17 +39,21 @@ namespace EthansList.MaterialDroid
     public class SearchOptionsView : LinearLayout
     {
         readonly Context context;
+        readonly Location location;
+        public readonly KeyValuePair<string, string> category;
 
         public TextView SearchCityText;
         public Button proceedButton;
         public ListView SearchTermsTable;
         public ListView OptionsTable;
-        SearchOptionsListAdapter OptionsTableSource;
 
-        public SearchOptionsView(Context context)
+        public SearchOptionsView(Context context, Location location, KeyValuePair<string,string> category)
             : base(context)
         {
             this.context = context;
+            this.location = location;
+            this.category = category;
+
             Initialize();
         }
 
@@ -59,7 +64,7 @@ namespace EthansList.MaterialDroid
 
             SearchCityText = new TextView(context);
             SearchCityText.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
-            SearchCityText.Text = string.Format("Search {0} for: ", "Your Dreams");
+            SearchCityText.Text = string.Format("Search {0} for: ", location.SiteName);
 
             LinearLayout searchCityHolder = RowHolder();
             searchCityHolder.AddView(SearchCityText);
@@ -73,7 +78,7 @@ namespace EthansList.MaterialDroid
             AddView(buttonLayout);
 
             SearchTermsTable = new ListView(context);
-            SearchTermsTable.Adapter = OptionsTableSource = new SearchOptionsListAdapter(context, GetTableSetup());
+            SearchTermsTable.Adapter = new SearchOptionsListAdapter(this, context, GetTableSetup());
             AddView(SearchTermsTable);
         }
 

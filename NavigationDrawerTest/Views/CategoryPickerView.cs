@@ -19,12 +19,13 @@ namespace EthansList.MaterialDroid
     {
         ListView categoryList;
         readonly Context context;
-        public Location SelectedLocation { get; set; }
+        public readonly Location SelectedLocation;
 
-        public CategoryPickerView(Context context) :
+        public CategoryPickerView(Context context, Location location) :
             base(context)
         {
             this.context = context;
+            this.SelectedLocation = location;
             Initialize();
         }
 
