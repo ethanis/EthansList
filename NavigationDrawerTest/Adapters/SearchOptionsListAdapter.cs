@@ -8,19 +8,17 @@ using Android.OS;
 
 namespace EthansList.MaterialDroid
 {
-    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>
+    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>, NumberPicker.IOnValueChangeListener
     {
         readonly Context context;
         List<SearchRow> searchOptions;
         SearchOptionsView owner;
-        LayoutInflater layoutInflater;
 
         public SearchOptionsListAdapter(SearchOptionsView owner, Context context, List<SearchRow> searchOptions)
         {
             this.context = context;
             this.searchOptions = searchOptions;
             this.owner = owner;
-            layoutInflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
         }
 
         public override SearchRow this[int position]
@@ -135,21 +133,8 @@ namespace EthansList.MaterialDroid
 
                     display.Click += (object sender, EventArgs e) => 
                     { 
-                        //var builder = new Android.Support.V7.App.AlertDialog.Builder (context);
-
-                        //builder.SetTitle ("Hello")
-                        //    .SetMessage ("Is this material design?")
-                        //    .SetPositiveButton ("Ok", delegate { Console.WriteLine("Yes"); })
-                        //    .SetNegativeButton ("Cancel", delegate { Console.WriteLine("No"); }); 
-
-                        //builder.Create().Show ();
-
-                        //var numberPicker = layoutInflater.Inflate(Resource.Layout.NumberPickerDialog, null);
-                        //numberPicker.Click += 
-
-                        var dialog = new NumberPickerDialogFragment(context, 10, 1337, 42, null);
-                        dialog.Show(((Activity)context).FragmentManager, "number"); 
-
+                        var dialog = new NumberPickerDialogFragment(context, 0, 10, 1, this);
+                        dialog.Show(((Activity)context).FragmentManager, "number");
                     };
 
                     view.AddView(display);
@@ -203,39 +188,10 @@ namespace EthansList.MaterialDroid
         {
             return (int)(dip * this.context.Resources.DisplayMetrics.Density);
         }
-    }
 
-    public class NumberPickerDialogFragment : DialogFragment
-    {
-        private readonly Context _context;
-        private readonly int _min, _max, _current;
-        private readonly NumberPicker.IOnValueChangeListener _listener;
-
-        public NumberPickerDialogFragment(Context context, int min, int max, int current, NumberPicker.IOnValueChangeListener listener)
+        public void OnValueChange(NumberPicker picker, int oldVal, int newVal)
         {
-            _context = context;
-            _min = min;
-            _max = max;
-            _current = current;
-            _listener = listener;
-        }
-
-        public override Dialog OnCreateDialog(Bundle savedInstanceState)
-        {
-            var inflater = (LayoutInflater)_context.GetSystemService(Context.LayoutInflaterService);
-            var view = inflater.Inflate(Resource.Layout.NumberPickerDialog, null);
-            var numberPicker = view.FindViewById<NumberPicker>(Resource.Id.numberPicker);
-            numberPicker.MaxValue = _max;
-            numberPicker.MinValue = _min;
-            numberPicker.Value = _current;
-            numberPicker.SetOnValueChangedListener(_listener);
-
-            var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
-            dialog.SetTitle("Hello");
-            dialog.SetView(view);
-            dialog.SetNegativeButton("Cancel", (s, a) => { });
-            dialog.SetPositiveButton("Ok", (s, a) => { });
-            return dialog.Create();
+            Toast.MakeText(context, string.Format("Changed from {0} to {1}", oldVal, newVal), ToastLength.Short).Show();
         }
     }
 }

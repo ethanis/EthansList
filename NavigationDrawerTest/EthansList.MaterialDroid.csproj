@@ -96,6 +96,7 @@
     <Compile Include="Fragments\SearchOptionsFragment.cs" />
     <Compile Include="Helpers\SearchTableHelpers.cs" />
     <Compile Include="Adapters\SearchOptionsListAdapter.cs" />
+    <Compile Include="Helpers\NumberPickerDialogFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
