@@ -94,12 +94,19 @@ namespace EthansList.MaterialDroid
 
         private List<SearchRow> GetTableSetup()
         {
-            List<SearchRow> searchOptions = new List<SearchRow>()
+            List<SearchRow> searchOptions = new List<SearchRow>
             {
-                new SearchRow {Title = "Heading", RowType = SearchRowTypes.Heading},
+                new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.Heading},
                 new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms},
-                new SearchRow {Title = "Price Cell", RowType = SearchRowTypes.Price},
-                new SearchRow {Title = "Sq Feet", RowType = SearchRowTypes.SqFeet}
+                new SearchRow {Title = "Price Cell", RowType = SearchRowTypes.PriceDoubleEntry},
+                new SearchRow {Title = "Sq Feet", RowType = SearchRowTypes.DoubleEntry},
+
+                new SearchRow {Title = "Make/Model", RowType = SearchRowTypes.SingleEntryLabel},
+                new SearchRow {Title = "Year", RowType = SearchRowTypes.DoubleEntry},
+                new SearchRow {Title = "Odometer", RowType = SearchRowTypes.DoubleEntry},
+
+                new SearchRow {Title = "Space", RowType = SearchRowTypes.Space},
+                new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading},
             };
 
             return searchOptions;

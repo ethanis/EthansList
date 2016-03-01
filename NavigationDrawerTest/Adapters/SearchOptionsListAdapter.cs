@@ -44,6 +44,8 @@ namespace EthansList.MaterialDroid
             entryHolder.ShowDividers = ShowDividers.Middle;
             entryHolder.DividerPadding = 20;
             LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.5f);
+            LinearLayout.LayoutParams f = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+
             view.WeightSum = 1;
 
             switch (item.RowType)
@@ -61,7 +63,7 @@ namespace EthansList.MaterialDroid
                     view.AddView(searchfield);
 
                     break;
-                case SearchRowTypes.Price:
+                case SearchRowTypes.PriceDoubleEntry:
                     view.AddView(Title(item));
 
                     EditText minPricefield = new EditText(context);
@@ -83,7 +85,7 @@ namespace EthansList.MaterialDroid
                     view.AddView(entryHolder);
                     break;
 
-                case SearchRowTypes.SqFeet:
+                case SearchRowTypes.DoubleEntry:
                     view.AddView(Title(item));
 
                     EditText minfield = new EditText(context);
@@ -104,6 +106,27 @@ namespace EthansList.MaterialDroid
                     entryHolder.AddView(maxfield);
 
                     view.AddView(entryHolder);
+                    break;
+                case SearchRowTypes.SingleEntryLabel:
+                    view.AddView(Title(item));
+
+                    EditText inputField = new EditText(context);
+                    inputField.LayoutParameters = f;
+
+                    inputField.Hint = "make / model";
+                    inputField.TextSize = 14f;
+                    inputField.SetSingleLine(true);
+                    entryHolder.AddView(inputField);
+
+                    view.AddView(entryHolder);
+                    break;
+
+                case SearchRowTypes.Space:
+                    View strut = new View(context);
+                    strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 
+                                                                        ConvertDpToPx(25));
+                    view.ShowDividers = ShowDividers.None;
+                    view.AddView(strut);
                     break;
                 default:
                     view.AddView(Title(item));
@@ -126,7 +149,7 @@ namespace EthansList.MaterialDroid
             TextView heading = new TextView(context);
             heading.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
             heading.Text = item.Title;
-            heading.TextSize = 20f;
+            heading.TextSize = 18f;
             heading.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
 
             return heading;
@@ -140,6 +163,11 @@ namespace EthansList.MaterialDroid
             title.SetPadding(10,0,10,0);
 
             return title;
+        }
+
+        private int ConvertDpToPx(float dip)
+        {
+            return (int)(dip * this.context.Resources.DisplayMetrics.Density);
         }
     }
 }

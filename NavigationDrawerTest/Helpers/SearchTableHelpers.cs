@@ -12,9 +12,10 @@ namespace EthansList.MaterialDroid
     {
         Heading,
         SearchTerms,
-        Price,
-        SqFeet,
-        Odometer
+        SingleEntryLabel,
+        PriceDoubleEntry,
+        DoubleEntry,
+        Space
     }
 }
 
