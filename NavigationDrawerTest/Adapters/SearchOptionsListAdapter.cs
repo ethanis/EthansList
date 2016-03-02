@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using Android.Views;
 using Android.App;
 using Android.OS;
+using Android.Text;
 
 namespace EthansList.MaterialDroid
 {
-    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>, NumberPicker.IOnValueChangeListener
+    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>, NumberPicker.IOnValueChangeListener, Android.Text.ITextWatcher
     {
         readonly Context context;
         List<SearchRow> searchOptions;
@@ -16,9 +17,9 @@ namespace EthansList.MaterialDroid
 
         public SearchOptionsListAdapter(SearchOptionsView owner, Context context, List<SearchRow> searchOptions)
         {
+            this.owner = owner;
             this.context = context;
             this.searchOptions = searchOptions;
-            this.owner = owner;
         }
 
         public override SearchRow this[int position]
@@ -58,11 +59,17 @@ namespace EthansList.MaterialDroid
                     break;
                 case SearchRowTypes.SearchTerms:
                     EditText searchfield = new EditText(context);
-                    searchfield.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+                    searchfield.LayoutParameters = f;
                     searchfield.Hint = string.Format("Search {0}:", owner.category.Value);
                     searchfield.TextSize = 14f;
                     searchfield.SetSingleLine(true);
                     view.AddView(searchfield);
+
+                    //searchfield.AddTextChangedListener(this);
+                    //searchfield.TextChanged += (object sender, TextChangedEventArgs e) => {
+
+                    //    searchfield.Text = e.Text.ToString();
+                    //};
 
                     break;
                 case SearchRowTypes.PriceDoubleEntry:
@@ -83,6 +90,10 @@ namespace EthansList.MaterialDroid
                     maxPricefield.SetSingleLine(true);
                     maxPricefield.InputType = Android.Text.InputTypes.ClassNumber;
                     entryHolder.AddView(maxPricefield);
+
+                    //minPricefield.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    //    AddSearchItem("min_price", minPricefield.Text);
+                    //};
 
                     view.AddView(entryHolder);
                     break;
@@ -133,8 +144,7 @@ namespace EthansList.MaterialDroid
 
                     display.Click += (object sender, EventArgs e) => 
                     {
-                        var options = item.NumberPickerOptions;
-                        var dialog = new NumberPickerDialogFragment(context, options.Minimum, options.Maximum, options.Initial, options.Step, item.Title, options.DisplaySuffix, this);
+                        var dialog = new NumberPickerDialogFragment(context, item.Title,item.NumberPickerOptions, this);
                         dialog.Show(((Activity)context).FragmentManager, "number");
                     };
 
@@ -143,8 +153,6 @@ namespace EthansList.MaterialDroid
                     break;
                 case SearchRowTypes.ComboPicker:
                     view.AddView(Title(item));
-                    
-                    string[] items = { "item1", "item2", "item3" };
 
                     TextView comboLabel = new TextView(context);
                     comboLabel.LayoutParameters = f;
@@ -215,10 +223,32 @@ namespace EthansList.MaterialDroid
             Toast.MakeText(context, string.Format("Changed from {0} to {1}", oldVal, newVal), ToastLength.Short).Show();
         }
 
-        void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void AddSearchItem (string itemKey, string itemValue)
         {
-
+            if (this.owner.SearchItems.ContainsKey(itemKey))
+                this.owner.SearchItems[itemKey] = itemValue;
+            else
+                this.owner.SearchItems.Add(itemKey, itemValue);
         }
+
+        #region ITextWatcher implementation
+
+        public void AfterTextChanged (IEditable s)
+        {
+            //Not Implemented
+        }
+
+        public void BeforeTextChanged (Java.Lang.ICharSequence s, int start, int count, int after)
+        {
+            //Not implemented
+        }
+
+        public void OnTextChanged (Java.Lang.ICharSequence s, int start, int before, int count)
+        {
+            AddSearchItem("query", s.ToString());
+        }
+
+        #endregion
     }
 }
 

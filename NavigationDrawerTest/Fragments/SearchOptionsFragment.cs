@@ -30,8 +30,7 @@ namespace EthansList.MaterialDroid
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = new SearchOptionsView(this.Activity, SearchLocation, Category);
-            Console.WriteLine(SearchLocation.SiteName);
-            Console.WriteLine(Category.Value);
+
             return view;
         }
     }
@@ -41,6 +40,20 @@ namespace EthansList.MaterialDroid
         readonly Context context;
         readonly Location location;
         public readonly KeyValuePair<string, string> category;
+
+        #region GeneratedFromSearchOptions
+        public int MaxListings 
+        { 
+            get { return maxListings; } 
+            set { maxListings = value; }
+        }
+        private int maxListings = 25;
+        public int? WeeksOld { get; set; }
+        public KeyValuePair<object,object> SubCategory { get; set; }
+        public Dictionary<string, string> SearchItems { get; set;}
+        public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
+        #endregion
+
 
         public TextView SearchCityText;
         public Button proceedButton;
@@ -53,6 +66,9 @@ namespace EthansList.MaterialDroid
             this.context = context;
             this.location = location;
             this.category = category;
+
+            SearchItems = new Dictionary<string, string>();
+            Conditions = new Dictionary<object,  KeyValuePair<object, object>>();
 
             Initialize();
         }
@@ -80,6 +96,22 @@ namespace EthansList.MaterialDroid
             SearchTermsTable = new ListView(context);
             SearchTermsTable.Adapter = new SearchOptionsListAdapter(this, context, GetTableSetup());
             AddView(SearchTermsTable);
+
+            proceedButton.Click += ProceedButton_Click;
+        }
+
+        void ProceedButton_Click(object sender, EventArgs e)
+        {
+            QueryGeneration queryHelper = new QueryGeneration();
+
+            SearchObject searchObject = new SearchObject();
+            searchObject.SearchLocation = location;
+            searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(category.Key, category.Value);
+            searchObject.SearchItems = this.SearchItems;
+            searchObject.Conditions = this.Conditions;
+
+            var query = queryHelper.Generate(searchObject);
+            Toast.MakeText(context, query, ToastLength.Short).Show();
         }
 
         private LinearLayout RowHolder(GravityFlags gravity = GravityFlags.CenterHorizontal)
