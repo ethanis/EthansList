@@ -6,6 +6,7 @@ using Android.Views;
 using Android.App;
 using Android.OS;
 using Android.Text;
+using System.Linq;
 
 namespace EthansList.MaterialDroid
 {
@@ -169,6 +170,23 @@ namespace EthansList.MaterialDroid
                     comboLabel.Click += (object sender, EventArgs e) => 
                     {
                         comboDialog.Show(((Activity)context).FragmentManager, "combo");
+                    };
+
+                    comboDialog.ItemChanged += (object sender, ComboPickerItemChangedEventArgs e) => { 
+                        if (e.InitialArgs.IsChecked)
+                        {
+                            this.owner.Conditions.Add(e.Item.Key, new KeyValuePair<object, object>(item.QueryPrefix, e.Item.Value));
+                            Console.WriteLine ("Added Key: " + e.Item.Key + ", Value: " + e.Item.Value + " with prefix: " + item.QueryPrefix);
+                        }
+                        else
+                        {
+                            this.owner.Conditions.Remove(e.Item.Key);
+                            Console.WriteLine ("Removed Key: " + e.Item.Key + ", Value: " + e.Item.Value);
+                        }
+
+                        var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.QueryPrefix select (string)kvp.Key).ToList();
+                        var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
+                        comboLabel.Text = text;
                     };
 
                     view.AddView(comboLabel);

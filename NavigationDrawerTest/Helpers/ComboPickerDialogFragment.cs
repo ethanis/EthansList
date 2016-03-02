@@ -13,6 +13,7 @@ namespace EthansList.MaterialDroid
         readonly Context _context;
         readonly string _title;
         readonly List<KeyValuePair<object,object>> _options;
+        public event EventHandler<ComboPickerItemChangedEventArgs> ItemChanged;
 
         public ComboPickerDialogFragment(Context context, string title, List<KeyValuePair<object,object>> options)
         {
@@ -29,8 +30,15 @@ namespace EthansList.MaterialDroid
 
             var list = new ListView(_context);
             list.LayoutParameters = p;
-            list.Adapter = new ComboPickerAdapter(_context, _options);
+            var adapter = new ComboPickerAdapter(_context, _options);
+            list.Adapter = adapter;
             view.AddView(list);
+
+            adapter.CheckedChanged += (object sender, ComboPickerItemChangedEventArgs e) => {
+                if (this.ItemChanged != null)
+                    this.ItemChanged(this, e);
+            };
+
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
             dialog.SetTitle(_title);

@@ -13,6 +13,7 @@ namespace EthansList.MaterialDroid
     {
         readonly List<KeyValuePair<object, object>> _options;
         readonly Context _context;
+        public event EventHandler<ComboPickerItemChangedEventArgs> CheckedChanged;
 
         public ComboPickerAdapter(Context context, List<KeyValuePair<object, object>> options)
         {
@@ -43,13 +44,28 @@ namespace EthansList.MaterialDroid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            return new ComboRowView(_context, _options[position]);
+            var view = new ComboRowView(_context, _options[position]);
+
+            view.ItemSelected += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
+            {
+                if (CheckedChanged != null)
+                    CheckedChanged(this, new ComboPickerItemChangedEventArgs {InitialArgs = e, Item = _options[position]});
+            };
+
+            return view;
         }
+    }
+
+    public class ComboPickerItemChangedEventArgs : EventArgs
+    { 
+        public CompoundButton.CheckedChangeEventArgs InitialArgs { get; set; }
+        public KeyValuePair<object, object> Item { get; set; }
     }
 
     public class ComboRowView : LinearLayout
     {
         readonly Context _context;
+        public event EventHandler<CompoundButton.CheckedChangeEventArgs> ItemSelected;
 
         public ComboRowView(Context context, KeyValuePair<object,object> option)
             : base(context)
@@ -63,7 +79,6 @@ namespace EthansList.MaterialDroid
             this.Orientation = Orientation.Horizontal;
             this.WeightSum = 1;
             this.LayoutParameters = new ListView.LayoutParams(LayoutParams.MatchParent, ConvertDpToPx(40));
-
 
             var text = new TextView(_context) { Text = (string)title.Key };
             text.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
@@ -79,6 +94,13 @@ namespace EthansList.MaterialDroid
             checkbox.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.MatchParent);
             checkbox.SetPadding(0,0, ConvertDpToPx(15), 0);
             checkBoxPlacer.AddView(checkbox);
+
+            checkbox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
+            { 
+                Console.WriteLine(e.IsChecked);
+                if (ItemSelected != null)
+                    ItemSelected(this, e);
+            };
 
             AddView(checkBoxPlacer);
         }
