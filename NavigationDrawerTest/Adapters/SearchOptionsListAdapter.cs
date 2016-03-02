@@ -141,6 +141,26 @@ namespace EthansList.MaterialDroid
                     view.AddView(display);
 
                     break;
+                case SearchRowTypes.ComboPicker:
+                    view.AddView(Title(item));
+                    
+                    string[] items = { "item1", "item2", "item3" };
+
+                    TextView comboLabel = new TextView(context);
+                    comboLabel.LayoutParameters = f;
+                    comboLabel.Gravity = GravityFlags.Right;
+                    comboLabel.Text = "Any";
+                    comboLabel.SetPadding(0,0,ConvertDpToPx(50),0);
+
+                    comboLabel.Click += (object sender, EventArgs e) => 
+                    {
+                        var dialog = new ComboPickerDialogFragment(context, item.Title, items);
+                        dialog.Show(((Activity)context).FragmentManager, "combo");
+                    };
+
+                    view.AddView(comboLabel);
+
+                    break;
                 case SearchRowTypes.Space:
                     View strut = new View(context);
                     strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 
@@ -193,6 +213,11 @@ namespace EthansList.MaterialDroid
         public void OnValueChange(NumberPicker picker, int oldVal, int newVal)
         {
             Toast.MakeText(context, string.Format("Changed from {0} to {1}", oldVal, newVal), ToastLength.Short).Show();
+        }
+
+        void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+
         }
     }
 }

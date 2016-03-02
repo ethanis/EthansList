@@ -39,7 +39,7 @@ namespace EthansList.MaterialDroid
             List<string> values = new List<string>();
             for (var i = _min; i <= _max; i += 1)
             {
-                values.Add((i*_step).ToString() + _suffix);
+                values.Add((i*_step) + _suffix);
             }
             numberPicker.SetDisplayedValues(values.ToArray());
             numberPicker.SetOnValueChangedListener(_listener);

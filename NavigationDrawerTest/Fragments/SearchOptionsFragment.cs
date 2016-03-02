@@ -123,6 +123,13 @@ namespace EthansList.MaterialDroid
                     NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
                 },
 
+
+                new SearchRow
+                {
+                    Title = "Condition",
+                    RowType = SearchRowTypes.ComboPicker,
+                },
+
                 new SearchRow 
                 {
                     Title = "Posted Date", 
@@ -133,7 +140,7 @@ namespace EthansList.MaterialDroid
                 {
                     Title = "Max Listings", 
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 4, Step = 25}
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 1, Maximum = 4, Step = 25}
                 },
 
             };
