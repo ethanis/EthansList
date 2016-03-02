@@ -130,11 +130,11 @@ namespace EthansList.MaterialDroid
             {
                 new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.Heading},
 
-                new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms},
+                new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms, QueryPrefix = "query"},
                 new SearchRow {Title = "Price Cell", RowType = SearchRowTypes.PriceDoubleEntry},
                 new SearchRow {Title = "Sq Feet", RowType = SearchRowTypes.DoubleEntry},
 
-                new SearchRow {Title = "Make/Model", RowType = SearchRowTypes.SingleEntryLabel},
+                new SearchRow {Title = "Make/Model", RowType = SearchRowTypes.SingleEntryLabel, QueryPrefix = "auto_make_model"},
                 new SearchRow {Title = "Year", RowType = SearchRowTypes.DoubleEntry},
                 new SearchRow {Title = "Odometer", RowType = SearchRowTypes.DoubleEntry},
 
@@ -146,13 +146,15 @@ namespace EthansList.MaterialDroid
                 {
                     Title = "Bedrooms", 
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"},
+                    QueryPrefix = "bedrooms"
                 },
                 new SearchRow 
                 {
                     Title = "Bathrooms", 
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"},
+                    QueryPrefix = "bathrooms"
                 },
 
                 #region ComboPickers
@@ -161,63 +163,63 @@ namespace EthansList.MaterialDroid
                     Title = "Condition",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["condition"],
-                    ComboQueryPrefix = "condition"
+                    QueryPrefix = "condition"
                 },
                 new SearchRow
                 {
                     Title = "Job Type",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["employment_type"],
-                    ComboQueryPrefix = "employment_type"
+                    QueryPrefix = "employment_type"
                 },
                 new SearchRow
                 {
                     Title = "Paid",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["is_paid"],
-                    ComboQueryPrefix = "is_paid"
+                    QueryPrefix = "is_paid"
                 },
                 new SearchRow
                 {
                     Title = "Cylinders",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_cylinders"],
-                    ComboQueryPrefix = "auto_cylinders"
+                    QueryPrefix = "auto_cylinders"
                 },
                 new SearchRow
                 {
                     Title = "Drivetrain",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_drivetrain"],
-                    ComboQueryPrefix = "auto_drivetrain"
+                    QueryPrefix = "auto_drivetrain"
                 },
                 new SearchRow
                 {
                     Title = "Fuel Type",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_fuel_type"],
-                    ComboQueryPrefix = "auto_fuel_type"
+                    QueryPrefix = "auto_fuel_type"
                 },
                 new SearchRow
                 {
                     Title = "Paint Color",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_paint"],
-                    ComboQueryPrefix = "auto_paint"
+                    QueryPrefix = "auto_paint"
                 },
                 new SearchRow
                 {
                     Title = "Title Status",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_title_status"],
-                    ComboQueryPrefix = "auto_title_status"
+                    QueryPrefix = "auto_title_status"
                 },
                 new SearchRow
                 {
                     Title = "Transmission",
                     RowType = SearchRowTypes.ComboPicker,
                     ComboPickerOptions = Categories.ComboOptions["auto_transmission"],
-                    ComboQueryPrefix = "auto_transmission"
+                    QueryPrefix = "auto_transmission"
                 },
 
                 #endregion
@@ -226,13 +228,15 @@ namespace EthansList.MaterialDroid
                 {
                     Title = "Posted Date", 
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 5, Step = 1}
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 5, Step = 1},
+                    QueryPrefix = "posted_date"
                 },
                 new SearchRow 
                 {
                     Title = "Max Listings", 
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 1, Maximum = 4, Step = 25}
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 1, Maximum = 4, Step = 25},
+                    QueryPrefix = "max listings"
                 },
 
             };

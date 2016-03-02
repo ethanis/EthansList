@@ -9,7 +9,7 @@ namespace EthansList.MaterialDroid
         public SearchRowTypes RowType {get;set;}
         public NumberPickerOptions NumberPickerOptions { get; set; }
         public List<KeyValuePair<object,object>> ComboPickerOptions { get; set; }
-        public string ComboQueryPrefix { get; set; }
+        public string QueryPrefix { get; set; }
     }
 
     public class NumberPickerOptions

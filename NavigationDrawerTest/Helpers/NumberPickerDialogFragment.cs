@@ -12,15 +12,17 @@ namespace EthansList.MaterialDroid
     {
         private readonly Context _context;
         private readonly NumberPicker.IOnValueChangeListener _listener;
-        private readonly string _title;
+        private readonly string _title, _callerKey;
         private readonly NumberPickerOptions _options;
 
-        public NumberPickerDialogFragment(Context context, string title, NumberPickerOptions options, NumberPicker.IOnValueChangeListener listener)
+        public event EventHandler<NumberPickerValueChanged> NumberChanged;
+
+        public NumberPickerDialogFragment(Context context, string title, NumberPickerOptions options, string callerKey)
         {
             _context = context;
-            _listener = listener;
             _title = title;
             _options = options;
+            _callerKey = callerKey;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -38,14 +40,25 @@ namespace EthansList.MaterialDroid
                 values.Add((i*_options.Step) + _options.DisplaySuffix);
             }
             numberPicker.SetDisplayedValues(values.ToArray());
-            numberPicker.SetOnValueChangedListener(_listener);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
             dialog.SetTitle(_title);
             dialog.SetView(view);
             dialog.SetNegativeButton("Cancel", (s, a) => { });
             dialog.SetPositiveButton("Ok", (s, a) => { });
+
+            numberPicker.ValueChanged += (object sender, NumberPicker.ValueChangeEventArgs e) => {
+                if (NumberChanged != null)
+                    NumberChanged(this, new NumberPickerValueChanged() { CallerKey = _callerKey, Value = e.NewVal });
+            };
+
             return dialog.Create();
+        }
+
+        public class NumberPickerValueChanged : EventArgs
+        { 
+            public string CallerKey { get; set; }
+            public int Value { get; set; }
         }
     }
 }

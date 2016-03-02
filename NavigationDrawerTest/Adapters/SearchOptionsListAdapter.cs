@@ -9,7 +9,7 @@ using Android.Text;
 
 namespace EthansList.MaterialDroid
 {
-    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>, NumberPicker.IOnValueChangeListener, Android.Text.ITextWatcher
+    public class SearchOptionsListAdapter : BaseAdapter<SearchRow>, Android.Text.ITextWatcher
     {
         readonly Context context;
         List<SearchRow> searchOptions;
@@ -142,10 +142,15 @@ namespace EthansList.MaterialDroid
                     display.Text = "Any";
                     display.SetPadding(0,0,ConvertDpToPx(50),0);
 
+                    var dialog = new NumberPickerDialogFragment(context, item.Title, item.NumberPickerOptions, item.QueryPrefix);
                     display.Click += (object sender, EventArgs e) => 
                     {
-                        var dialog = new NumberPickerDialogFragment(context, item.Title,item.NumberPickerOptions, this);
                         dialog.Show(((Activity)context).FragmentManager, "number");
+                    };
+
+                    dialog.NumberChanged += (object sender, NumberPickerDialogFragment.NumberPickerValueChanged e) => {
+                        display.Text = e.Value.ToString() + item.NumberPickerOptions.DisplaySuffix;
+                        AddSearchItem(e.CallerKey, e.Value.ToString());
                     };
 
                     view.AddView(display);
@@ -160,10 +165,10 @@ namespace EthansList.MaterialDroid
                     comboLabel.Text = "Any";
                     comboLabel.SetPadding(0,0,ConvertDpToPx(50),0);
 
+                    var comboDialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
                     comboLabel.Click += (object sender, EventArgs e) => 
                     {
-                        var dialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
-                        dialog.Show(((Activity)context).FragmentManager, "combo");
+                        comboDialog.Show(((Activity)context).FragmentManager, "combo");
                     };
 
                     view.AddView(comboLabel);
@@ -216,11 +221,6 @@ namespace EthansList.MaterialDroid
         private int ConvertDpToPx(float dip)
         {
             return (int)(dip * this.context.Resources.DisplayMetrics.Density);
-        }
-
-        public void OnValueChange(NumberPicker picker, int oldVal, int newVal)
-        {
-            Toast.MakeText(context, string.Format("Changed from {0} to {1}", oldVal, newVal), ToastLength.Short).Show();
         }
 
         private void AddSearchItem (string itemKey, string itemValue)
