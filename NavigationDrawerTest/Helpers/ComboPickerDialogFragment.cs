@@ -14,7 +14,7 @@ namespace EthansList.MaterialDroid
         readonly string _title;
         readonly string[] _options;
 
-        public ComboPickerDialogFragment(Context context, String title, String[] options)
+        public ComboPickerDialogFragment(Context context, string title, string[] options)
         {
             _context = context;
             _title = title;
@@ -29,7 +29,7 @@ namespace EthansList.MaterialDroid
 
             var list = new ListView(_context);
             list.LayoutParameters = p;
-            list.Adapter = new ArrayAdapter(_context, Android.Resource.Layout.SimpleListItem1, _options);
+            list.Adapter = new ComboPickerAdapter(_context, _options);
             view.AddView(list);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
@@ -40,5 +40,7 @@ namespace EthansList.MaterialDroid
             return dialog.Create();
         }
     }
+
+    
 }
 
