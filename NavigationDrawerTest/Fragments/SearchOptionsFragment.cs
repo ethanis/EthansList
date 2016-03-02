@@ -107,7 +107,12 @@ namespace EthansList.MaterialDroid
 
                 new SearchRow {Title = "Space", RowType = SearchRowTypes.Space},
                 new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading},
-                new SearchRow {Title = "Bedrooms", RowType = SearchRowTypes.SinglePicker}
+                new SearchRow {Title = "Bedrooms", RowType = SearchRowTypes.SinglePicker},
+                new SearchRow {Title = "Bathrooms", RowType = SearchRowTypes.SinglePicker},
+
+                new SearchRow {Title = "Posted Date", RowType = SearchRowTypes.SinglePicker},
+                new SearchRow {Title = "Max Listings", RowType = SearchRowTypes.SinglePicker},
+
             };
 
             return searchOptions;

@@ -4,22 +4,26 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace EthansList.MaterialDroid
 {
     public class NumberPickerDialogFragment : DialogFragment
     {
         private readonly Context _context;
-        private readonly int _min, _max, _current;
+        private readonly int _min, _max, _current, _step;
         private readonly NumberPicker.IOnValueChangeListener _listener;
+        private readonly string _title;
 
-        public NumberPickerDialogFragment(Context context, int min, int max, int current, NumberPicker.IOnValueChangeListener listener)
+        public NumberPickerDialogFragment(Context context, int min, int max, int current, int step, string title, NumberPicker.IOnValueChangeListener listener)
         {
             _context = context;
             _min = min;
             _max = max;
             _current = current;
+            _step = step;
             _listener = listener;
+            _title = title;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -30,10 +34,18 @@ namespace EthansList.MaterialDroid
             numberPicker.MaxValue = _max;
             numberPicker.MinValue = _min;
             numberPicker.Value = _current;
+
+            List<string> values = new List<string>();
+            for (var i = _min; i <= _max; i += 1)
+            {
+//                values.Add(i.ToString() + "+");
+                values.Add((i*_step).ToString() + "+");
+            }
+            numberPicker.SetDisplayedValues(values.ToArray());
             numberPicker.SetOnValueChangedListener(_listener);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
-            dialog.SetTitle("Hello");
+            dialog.SetTitle(_title);
             dialog.SetView(view);
             dialog.SetNegativeButton("Cancel", (s, a) => { });
             dialog.SetPositiveButton("Ok", (s, a) => { });

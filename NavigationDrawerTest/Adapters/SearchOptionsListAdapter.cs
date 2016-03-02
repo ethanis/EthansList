@@ -133,7 +133,7 @@ namespace EthansList.MaterialDroid
 
                     display.Click += (object sender, EventArgs e) => 
                     { 
-                        var dialog = new NumberPickerDialogFragment(context, 0, 10, 1, this);
+                        var dialog = new NumberPickerDialogFragment(context, 0, 10, 1, 1, item.Title, this);
                         dialog.Show(((Activity)context).FragmentManager, "number");
                     };
 
