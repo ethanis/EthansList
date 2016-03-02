@@ -12,9 +12,9 @@ namespace EthansList.MaterialDroid
     {
         readonly Context _context;
         readonly string _title;
-        readonly string[] _options;
+        readonly List<KeyValuePair<object,object>> _options;
 
-        public ComboPickerDialogFragment(Context context, string title, string[] options)
+        public ComboPickerDialogFragment(Context context, string title, List<KeyValuePair<object,object>> options)
         {
             _context = context;
             _title = title;

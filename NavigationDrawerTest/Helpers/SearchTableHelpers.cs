@@ -8,6 +8,7 @@ namespace EthansList.MaterialDroid
         public string Title {get;set;}
         public SearchRowTypes RowType {get;set;}
         public NumberPickerOptions NumberPickerOptions { get; set; }
+        public List<KeyValuePair<object,object>> ComboPickerOptions { get; set; }
     }
 
     public class NumberPickerOptions

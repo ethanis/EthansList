@@ -154,7 +154,7 @@ namespace EthansList.MaterialDroid
 
                     comboLabel.Click += (object sender, EventArgs e) => 
                     {
-                        var dialog = new ComboPickerDialogFragment(context, item.Title, items);
+                        var dialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
                         dialog.Show(((Activity)context).FragmentManager, "combo");
                     };
 

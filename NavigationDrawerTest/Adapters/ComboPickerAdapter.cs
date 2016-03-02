@@ -9,18 +9,18 @@ using System.Collections.Generic;
 namespace EthansList.MaterialDroid
 {
 
-    public class ComboPickerAdapter : BaseAdapter<string>
+    public class ComboPickerAdapter : BaseAdapter<KeyValuePair<object, object>>
     {
-        readonly string[] _options;
+        readonly List<KeyValuePair<object, object>> _options;
         readonly Context _context;
 
-        public ComboPickerAdapter(Context context, string[] options)
+        public ComboPickerAdapter(Context context, List<KeyValuePair<object, object>> options)
         {
             _context = context;
             _options = options;
         }
 
-        public override string this[int position]
+        public override KeyValuePair<object, object> this[int position]
         {
             get
             {
@@ -37,7 +37,7 @@ namespace EthansList.MaterialDroid
         {
             get
             {
-                return _options.Length;
+                return _options.Count;
             }
         }
 
@@ -51,21 +51,21 @@ namespace EthansList.MaterialDroid
     {
         readonly Context _context;
 
-        public ComboRowView(Context context, string title)
+        public ComboRowView(Context context, KeyValuePair<object,object> option)
             : base(context)
         {
             _context = context;
-            Initialize(title);
+            Initialize(option);
         }
 
-        void Initialize(string title)
+        void Initialize(KeyValuePair<object,object> title)
         {
             this.Orientation = Orientation.Horizontal;
             this.WeightSum = 1;
             this.LayoutParameters = new ListView.LayoutParams(LayoutParams.MatchParent, ConvertDpToPx(40));
 
 
-            var text = new TextView(_context) { Text = title };
+            var text = new TextView(_context) { Text = (string)title.Key };
             text.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
             text.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.MatchParent);
 
@@ -73,7 +73,6 @@ namespace EthansList.MaterialDroid
 
             var checkBoxPlacer = new LinearLayout(_context);
             checkBoxPlacer.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
-            checkBoxPlacer.SetBackgroundColor(Android.Graphics.Color.AliceBlue);
             checkBoxPlacer.SetHorizontalGravity(GravityFlags.Right);
 
             var checkbox = new CheckBox(_context);

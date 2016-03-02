@@ -128,6 +128,15 @@ namespace EthansList.MaterialDroid
                 {
                     Title = "Condition",
                     RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = new List<KeyValuePair<object, object>>
+                    {
+                        new KeyValuePair<object, object>("New", 10),
+                        new KeyValuePair<object, object>("Like New", 20),
+                        new KeyValuePair<object, object>("Excellent", 30),
+                        new KeyValuePair<object, object>("Good", 40),
+                        new KeyValuePair<object, object>("Fair", 50),
+                        new KeyValuePair<object, object>("Salvage", 60),
+                    }
                 },
 
                 new SearchRow 
