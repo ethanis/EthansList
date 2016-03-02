@@ -13,9 +13,9 @@ namespace EthansList.MaterialDroid
         private readonly Context _context;
         private readonly int _min, _max, _current, _step;
         private readonly NumberPicker.IOnValueChangeListener _listener;
-        private readonly string _title;
+        private readonly string _title, _suffix;
 
-        public NumberPickerDialogFragment(Context context, int min, int max, int current, int step, string title, NumberPicker.IOnValueChangeListener listener)
+        public NumberPickerDialogFragment(Context context, int min, int max, int current, int step, string title, string suffix, NumberPicker.IOnValueChangeListener listener)
         {
             _context = context;
             _min = min;
@@ -24,6 +24,7 @@ namespace EthansList.MaterialDroid
             _step = step;
             _listener = listener;
             _title = title;
+            _suffix = suffix;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -38,8 +39,7 @@ namespace EthansList.MaterialDroid
             List<string> values = new List<string>();
             for (var i = _min; i <= _max; i += 1)
             {
-//                values.Add(i.ToString() + "+");
-                values.Add((i*_step).ToString() + "+");
+                values.Add((i*_step).ToString() + _suffix);
             }
             numberPicker.SetDisplayedValues(values.ToArray());
             numberPicker.SetOnValueChangedListener(_listener);

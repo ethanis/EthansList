@@ -97,6 +97,7 @@ namespace EthansList.MaterialDroid
             List<SearchRow> searchOptions = new List<SearchRow>
             {
                 new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.Heading},
+
                 new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms},
                 new SearchRow {Title = "Price Cell", RowType = SearchRowTypes.PriceDoubleEntry},
                 new SearchRow {Title = "Sq Feet", RowType = SearchRowTypes.DoubleEntry},
@@ -106,12 +107,34 @@ namespace EthansList.MaterialDroid
                 new SearchRow {Title = "Odometer", RowType = SearchRowTypes.DoubleEntry},
 
                 new SearchRow {Title = "Space", RowType = SearchRowTypes.Space},
-                new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading},
-                new SearchRow {Title = "Bedrooms", RowType = SearchRowTypes.SinglePicker},
-                new SearchRow {Title = "Bathrooms", RowType = SearchRowTypes.SinglePicker},
 
-                new SearchRow {Title = "Posted Date", RowType = SearchRowTypes.SinglePicker},
-                new SearchRow {Title = "Max Listings", RowType = SearchRowTypes.SinglePicker},
+                new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading},
+
+                new SearchRow 
+                {
+                    Title = "Bedrooms", 
+                    RowType = SearchRowTypes.SinglePicker,
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
+                },
+                new SearchRow 
+                {
+                    Title = "Bathrooms", 
+                    RowType = SearchRowTypes.SinglePicker,
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
+                },
+
+                new SearchRow 
+                {
+                    Title = "Posted Date", 
+                    RowType = SearchRowTypes.SinglePicker,
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 5, Step = 1}
+                },
+                new SearchRow 
+                {
+                    Title = "Max Listings", 
+                    RowType = SearchRowTypes.SinglePicker,
+                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 4, Step = 25}
+                },
 
             };
 

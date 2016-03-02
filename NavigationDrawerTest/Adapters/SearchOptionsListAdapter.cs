@@ -132,8 +132,9 @@ namespace EthansList.MaterialDroid
                     display.SetPadding(0,0,ConvertDpToPx(50),0);
 
                     display.Click += (object sender, EventArgs e) => 
-                    { 
-                        var dialog = new NumberPickerDialogFragment(context, 0, 10, 1, 1, item.Title, this);
+                    {
+                        var options = item.NumberPickerOptions;
+                        var dialog = new NumberPickerDialogFragment(context, options.Minimum, options.Maximum, options.Initial, options.Step, item.Title, options.DisplaySuffix, this);
                         dialog.Show(((Activity)context).FragmentManager, "number");
                     };
 

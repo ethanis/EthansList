@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EthansList.MaterialDroid
 {
@@ -6,6 +7,16 @@ namespace EthansList.MaterialDroid
     {
         public string Title {get;set;}
         public SearchRowTypes RowType {get;set;}
+        public NumberPickerOptions NumberPickerOptions { get; set; }
+    }
+
+    public class NumberPickerOptions
+    { 
+        public int Initial { get; set; }
+        public int Minimum { get; set; }
+        public int Maximum { get; set; }
+        public int Step { get; set; }
+        public string DisplaySuffix { get; set; }
     }
 
     public enum SearchRowTypes
