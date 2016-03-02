@@ -363,20 +363,7 @@ namespace ethanslist.ios
                         Heading = "Condition",
                         CellType = "ComboTableCell",
                         SubHeading = "condition",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("New", 10),
-                                        new KeyValuePair<object, object>("Like New", 20),
-                                        new KeyValuePair<object, object>("Excellent", 30),
-                                        new KeyValuePair<object, object>("Good", 40),
-                                        new KeyValuePair<object, object>("Fair", 50),
-                                        new KeyValuePair<object, object>("Salvage", 60),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["condition"]}},
                     });
             }
 
@@ -386,18 +373,7 @@ namespace ethanslist.ios
                         Heading = "Job Type",
                         CellType = "ComboTableCell",
                         SubHeading = "employment_type",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("full time", 1),
-                                        new KeyValuePair<object, object>("part time", 2),
-                                        new KeyValuePair<object, object>("contract", 3),
-                                        new KeyValuePair<object, object>("employee's choice", 4),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["employment_type"]}},
                     });
             }
 
@@ -407,17 +383,7 @@ namespace ethanslist.ios
                         Heading = "Paid",
                         CellType = "ComboTableCell",
                         SubHeading = "is_paid",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("All", null),
-                                        new KeyValuePair<object, object>("Paid", "yes"),
-                                        new KeyValuePair<object, object>("UnPaid", "no"),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["is_paid"]}},
                     });
             }
 
@@ -427,116 +393,37 @@ namespace ethanslist.ios
                         Heading = "Cylinders",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_cylinders",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("3 cylinders", 1),
-                                        new KeyValuePair<object, object>("4 cylinders", 2),
-                                        new KeyValuePair<object, object>("5 cylinders", 3),
-                                        new KeyValuePair<object, object>("6 cylinders", 4),
-                                        new KeyValuePair<object, object>("8 cylinders", 5),
-                                        new KeyValuePair<object, object>("10 cylinders", 6),
-                                        new KeyValuePair<object, object>("12 cylinders", 7),
-                                        new KeyValuePair<object, object>("other", 8),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_cylinders"]}},
                     });
                 options.Items.Add(new TableItem {
                         Heading = "Drive",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_drivetrain",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("fwd", 1),
-                                        new KeyValuePair<object, object>("rwd", 2),
-                                        new KeyValuePair<object, object>("4wd", 3),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_drivetrain"]}},
                     });
                 options.Items.Add(new TableItem {
                         Heading = "Fuel",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_fuel_type",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("gas", 1),
-                                        new KeyValuePair<object, object>("diesel", 2),
-                                        new KeyValuePair<object, object>("hybrid", 3),
-                                        new KeyValuePair<object, object>("electric", 4),
-                                        new KeyValuePair<object, object>("other", 6),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_fuel_type"]}},
                     });
                 options.Items.Add(new TableItem {
                         Heading = "Paint Color",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_paint",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("black", 1),
-                                        new KeyValuePair<object, object>("blue", 2),
-                                        new KeyValuePair<object, object>("brown", 20),
-                                        new KeyValuePair<object, object>("green", 3),
-                                        new KeyValuePair<object, object>("grey", 4),
-                                        new KeyValuePair<object, object>("orange", 5),
-                                        new KeyValuePair<object, object>("purple", 6),
-                                        new KeyValuePair<object, object>("red", 7),
-                                        new KeyValuePair<object, object>("silver", 8),
-                                        new KeyValuePair<object, object>("white", 9),
-                                        new KeyValuePair<object, object>("yellow", 10),
-                                        new KeyValuePair<object, object>("custom", 11),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_paint"]}},
                     });
                 options.Items.Add(new TableItem {
                         Heading = "Title Status",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_title_status",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("clean", 1),
-                                        new KeyValuePair<object, object>("salvage", 2),
-                                        new KeyValuePair<object, object>("rebuilt", 3),
-                                        new KeyValuePair<object, object>("parts only", 4),
-                                        new KeyValuePair<object, object>("lien", 5),
-                                        new KeyValuePair<object, object>("missing", 6),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_title_status"]}},
                     });
                 options.Items.Add(new TableItem {
                         Heading = "Transmission",
                         CellType = "ComboTableCell",
                         SubHeading = "auto_transmission",
-                        PickerOptions = new List<PickerOptions>
-                            {
-                                new PickerOptions
-                                {PickerWheelOptions = new List<KeyValuePair<object, object>>
-                                    {
-                                        new KeyValuePair<object, object>("manual", 1),
-                                        new KeyValuePair<object, object>("automatic", 2),
-                                        new KeyValuePair<object, object>("other", 3),
-                                    }
-                                }
-                            },
+                        PickerOptions = new List<PickerOptions> { new PickerOptions { PickerWheelOptions = Categories.ComboOptions["auto_transmission"]}},
                     });
             }
 
