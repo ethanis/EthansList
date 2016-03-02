@@ -123,21 +123,72 @@ namespace EthansList.MaterialDroid
                     NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"}
                 },
 
-
+                #region ComboPickers
                 new SearchRow
                 {
                     Title = "Condition",
                     RowType = SearchRowTypes.ComboPicker,
-                    ComboPickerOptions = new List<KeyValuePair<object, object>>
-                    {
-                        new KeyValuePair<object, object>("New", 10),
-                        new KeyValuePair<object, object>("Like New", 20),
-                        new KeyValuePair<object, object>("Excellent", 30),
-                        new KeyValuePair<object, object>("Good", 40),
-                        new KeyValuePair<object, object>("Fair", 50),
-                        new KeyValuePair<object, object>("Salvage", 60),
-                    }
+                    ComboPickerOptions = Categories.ComboOptions["condition"],
+                    ComboQueryPrefix = "condition"
                 },
+                new SearchRow
+                {
+                    Title = "Job Type",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["employment_type"],
+                    ComboQueryPrefix = "employment_type"
+                },
+                new SearchRow
+                {
+                    Title = "Paid",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["is_paid"],
+                    ComboQueryPrefix = "is_paid"
+                },
+                new SearchRow
+                {
+                    Title = "Cylinders",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_cylinders"],
+                    ComboQueryPrefix = "auto_cylinders"
+                },
+                new SearchRow
+                {
+                    Title = "Drivetrain",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_drivetrain"],
+                    ComboQueryPrefix = "auto_drivetrain"
+                },
+                new SearchRow
+                {
+                    Title = "Fuel Type",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_fuel_type"],
+                    ComboQueryPrefix = "auto_fuel_type"
+                },
+                new SearchRow
+                {
+                    Title = "Paint Color",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_paint"],
+                    ComboQueryPrefix = "auto_paint"
+                },
+                new SearchRow
+                {
+                    Title = "Title Status",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_title_status"],
+                    ComboQueryPrefix = "auto_title_status"
+                },
+                new SearchRow
+                {
+                    Title = "Transmission",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_transmission"],
+                    ComboQueryPrefix = "auto_transmission"
+                },
+
+                #endregion
 
                 new SearchRow 
                 {
