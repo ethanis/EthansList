@@ -14,11 +14,13 @@ namespace EthansList.MaterialDroid
         readonly List<KeyValuePair<object, object>> _options;
         readonly Context _context;
         public event EventHandler<ComboPickerItemChangedEventArgs> CheckedChanged;
+        readonly List<string> _selectedKeys;
 
-        public ComboPickerAdapter(Context context, List<KeyValuePair<object, object>> options)
+        public ComboPickerAdapter(Context context, List<KeyValuePair<object, object>> options, List<string> selectedKeys)
         {
             _context = context;
             _options = options;
+            _selectedKeys = selectedKeys;
         }
 
         public override KeyValuePair<object, object> this[int position]
@@ -44,7 +46,8 @@ namespace EthansList.MaterialDroid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = new ComboRowView(_context, _options[position]);
+            var already_selected = _selectedKeys.Contains((string)_options[position].Key);
+            var view = new ComboRowView(_context, _options[position], already_selected);
 
             view.ItemSelected += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
             {
@@ -67,14 +70,14 @@ namespace EthansList.MaterialDroid
         readonly Context _context;
         public event EventHandler<CompoundButton.CheckedChangeEventArgs> ItemSelected;
 
-        public ComboRowView(Context context, KeyValuePair<object,object> option)
+        public ComboRowView(Context context, KeyValuePair<object,object> option, bool selectedAlready)
             : base(context)
         {
             _context = context;
-            Initialize(option);
+            Initialize(option, selectedAlready);
         }
 
-        void Initialize(KeyValuePair<object,object> title)
+        void Initialize(KeyValuePair<object,object> title, bool selectedAlready)
         {
             this.Orientation = Orientation.Horizontal;
             this.WeightSum = 1;
@@ -91,6 +94,10 @@ namespace EthansList.MaterialDroid
             checkBoxPlacer.SetHorizontalGravity(GravityFlags.Right);
 
             var checkbox = new CheckBox(_context);
+
+            if (selectedAlready)
+                checkbox.Checked = true;
+
             checkbox.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.MatchParent);
             checkbox.SetPadding(0,0, ConvertDpToPx(15), 0);
             checkBoxPlacer.AddView(checkbox);

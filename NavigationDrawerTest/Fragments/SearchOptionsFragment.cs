@@ -236,7 +236,7 @@ namespace EthansList.MaterialDroid
                     Title = "Max Listings", 
                     RowType = SearchRowTypes.SinglePicker,
                     NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 1, Maximum = 4, Step = 25},
-                    QueryPrefix = "max listings"
+                    QueryPrefix = "max_listings"
                 },
 
             };

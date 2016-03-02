@@ -167,8 +167,11 @@ namespace EthansList.MaterialDroid
                     comboLabel.SetPadding(0,0,ConvertDpToPx(50),0);
 
                     var comboDialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
+
                     comboLabel.Click += (object sender, EventArgs e) => 
                     {
+                        var selectedKeys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.QueryPrefix select (string)kvp.Key).ToList();
+                        comboDialog._selectedKeys = selectedKeys;
                         comboDialog.Show(((Activity)context).FragmentManager, "combo");
                     };
 
@@ -185,7 +188,7 @@ namespace EthansList.MaterialDroid
                         }
 
                         var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.QueryPrefix select (string)kvp.Key).ToList();
-                        var text = keys.Count > 0 ? String.Join(", ", keys.ToArray()) : "Any";
+                        var text = keys.Count > 0 ? string.Join(", ", keys.ToArray()) : "Any";
                         comboLabel.Text = text;
                     };
 
