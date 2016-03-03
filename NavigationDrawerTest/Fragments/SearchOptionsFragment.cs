@@ -194,7 +194,6 @@ namespace EthansList.MaterialDroid
             searchOptions.Add(new SearchRow {Title = "Space", RowType = SearchRowTypes.Space});
             searchOptions.Add(new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading});
 
-            //TODO: Add in subcategory
             if (Categories.SubCategories.ContainsKey(category.Key))
             {
                 searchOptions.Add(new SearchRow
@@ -303,14 +302,28 @@ namespace EthansList.MaterialDroid
 
             searchOptions.Add(new SearchRow {
                 Title = "Posted Date", 
-                RowType = SearchRowTypes.SinglePicker,
-                NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 5, Step = 1},
+                RowType = SearchRowTypes.SubCatPicker,
+                ComboPickerOptions = new List<KeyValuePair<object, object>>
+                {
+                    new KeyValuePair<object, object>("Any", null),
+                    new KeyValuePair<object, object>("Today", -1),
+                    new KeyValuePair<object, object>("1 Week Old", 1),
+                    new KeyValuePair<object, object>("2 Weeks Old", 2),
+                    new KeyValuePair<object, object>("3 Weeks Old", 3),
+                    new KeyValuePair<object, object>("4 Weeks Old", 4),
+                },
                 QueryPrefix = "posted_date"
             });
             searchOptions.Add(new SearchRow {
                 Title = "Max Listings", 
-                RowType = SearchRowTypes.SinglePicker,
-                NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 1, Maximum = 4, Step = 25},
+                RowType = SearchRowTypes.SubCatPicker,
+                ComboPickerOptions = new List<KeyValuePair<object, object>>
+                {
+                    new KeyValuePair<object, object>("25", 25),
+                    new KeyValuePair<object, object>("50", 50),
+                    new KeyValuePair<object, object>("75", 75),
+                    new KeyValuePair<object, object>("100", 100),
+                },
                 QueryPrefix = "max_listings"
             });
 
@@ -445,7 +458,8 @@ namespace EthansList.MaterialDroid
                         dialog.Show(((Activity)context).FragmentManager, "number");
                     };
 
-                    dialog.NumberChanged += (object sender, NumberPickerDialogFragment.NumberPickerValueChanged e) => {
+                    dialog.NumberChanged += (object sender, NumberPickerDialogFragment.NumberPickerValueChanged e) =>
+                    {
                         display.Text = e.Value.ToString() + item.NumberPickerOptions.DisplaySuffix;
                         AddSearchItem(e.CallerKey, e.Value.ToString());
                     };
@@ -510,8 +524,21 @@ namespace EthansList.MaterialDroid
 
                     categoryDialog.CatPicked += (object sender, SubCatSelectedEventArgs e) => { 
                         categoryDialog.Dismiss();
-                        SubCategory = e.SubCatPicked;
-                        catLabel.Text = (string)SubCategory.Key;
+
+                        if (item.Title != "Posted Date" && item.Title != "Max Listings")
+                        {
+                            SubCategory = e.SubCatPicked;
+                        }
+                        else if (item.Title == "Posted Date")
+                        {
+                            WeeksOld = (int?)e.SubCatPicked.Value;
+                        }
+                        else if (item.Title == "Max Listings")
+                        {
+                            MaxListings = (int)e.SubCatPicked.Value;
+                        }
+
+                        catLabel.Text = (string)e.SubCatPicked.Key;
                     };
 
                     row.AddView(catLabel);
