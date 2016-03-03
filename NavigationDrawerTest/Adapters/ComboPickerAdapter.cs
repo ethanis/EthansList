@@ -47,7 +47,9 @@ namespace EthansList.MaterialDroid
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var already_selected = _selectedKeys.Contains((string)_options[position].Key);
-            var view = new ComboRowView(_context, _options[position], already_selected);
+            var view = (ComboRowView)convertView;
+            if (view == null)
+                view = new ComboRowView(_context, _options[position], already_selected);
 
             view.ItemSelected += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
             {

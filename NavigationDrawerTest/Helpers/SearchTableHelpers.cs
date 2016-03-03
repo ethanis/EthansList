@@ -10,6 +10,7 @@ namespace EthansList.MaterialDroid
         public NumberPickerOptions NumberPickerOptions { get; set; }
         public List<KeyValuePair<object,object>> ComboPickerOptions { get; set; }
         public string QueryPrefix { get; set; }
+        public string SecondQueryPrefix { get; set; }
     }
 
     public class NumberPickerOptions

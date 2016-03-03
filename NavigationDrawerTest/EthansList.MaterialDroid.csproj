@@ -95,7 +95,6 @@
     <Compile Include="Views\CategoryGroupRow.cs" />
     <Compile Include="Fragments\SearchOptionsFragment.cs" />
     <Compile Include="Helpers\SearchTableHelpers.cs" />
-    <Compile Include="Adapters\SearchOptionsListAdapter.cs" />
     <Compile Include="Helpers\NumberPickerDialogFragment.cs" />
     <Compile Include="Helpers\ComboPickerDialogFragment.cs" />
     <Compile Include="Adapters\ComboPickerAdapter.cs" />
