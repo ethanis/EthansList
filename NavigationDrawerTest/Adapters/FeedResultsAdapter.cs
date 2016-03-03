@@ -43,8 +43,12 @@ namespace EthansList.MaterialDroid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = new FeedResultRow(activity, postings[position]);
-            //return new TextView(activity) { Text = postings[position].PostTitle };
+            var view = (FeedResultRow)convertView;
+            if (view == null)
+            {
+                view = new FeedResultRow(activity);
+            }
+
             string imageLink = postings[position].ImageLink;
             if (imageLink != "-1")
             {
@@ -55,6 +59,9 @@ namespace EthansList.MaterialDroid
                 view._postingImage.SetImageResource(Resource.Drawable.placeholder);
             }
 
+            view._postingTitle.Text = postings[position].PostTitle;
+            view._postingDescription.Text = postings[position].Description;
+
             return view;
         }
     }
@@ -62,17 +69,15 @@ namespace EthansList.MaterialDroid
     public class FeedResultRow : LinearLayout
     {
         readonly Context _context;
-        readonly Posting _posting;
 
         public ImageView _postingImage { get; set; }
         public TextView _postingTitle { get; set; }
         public TextView _postingDescription { get; set; }
 
-        public FeedResultRow(Context context, Posting posting)
+        public FeedResultRow(Context context)
             :base(context)
         {
             _context = context;
-            _posting = posting;
             Initialize();
         }
 
@@ -85,14 +90,31 @@ namespace EthansList.MaterialDroid
 
             var imageHolder = new LinearLayout(_context);
             //imageHolder.LayoutParameters = new LayoutParams(0, ConvertDpToPx(100), 0.30f);
-            imageHolder.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.30f);
+            imageHolder.LayoutParameters = new LayoutParams(0, LayoutParams.MatchParent, 0.30f);
 
             _postingImage = new ImageView(_context);
             _postingImage.LayoutParameters = imageParams;
             imageHolder.AddView(_postingImage);
-            imageHolder.SetBackgroundColor(Android.Graphics.Color.Blue);
-
             AddView(imageHolder);
+
+            var titleDescriptionHolder = new LinearLayout(_context) { Orientation = Orientation.Vertical };
+            titleDescriptionHolder.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.70f);
+            //titleDescriptionHolder.SetBackgroundColor(Android.Graphics.Color.AliceBlue);
+
+            _postingTitle = new TextView(_context);
+            _postingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
+            _postingTitle.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
+            _postingTitle.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            _postingTitle.SetMaxLines(2);
+            titleDescriptionHolder.AddView(_postingTitle);
+
+            _postingDescription = new TextView(_context);
+            _postingDescription.SetTextSize(Android.Util.ComplexUnitType.Dip, 16);
+            _postingDescription.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            _postingDescription.SetMaxLines(3);
+            titleDescriptionHolder.AddView(_postingDescription);
+
+            AddView(titleDescriptionHolder);
         }
 
         private int ConvertDpToPx(float dip)
