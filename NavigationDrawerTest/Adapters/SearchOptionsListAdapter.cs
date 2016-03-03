@@ -64,6 +64,7 @@ namespace EthansList.MaterialDroid
                     searchfield.Hint = string.Format("Search {0}:", owner.category.Value);
                     searchfield.TextSize = 14f;
                     searchfield.SetSingleLine(true);
+                    searchfield.InputType = InputTypes.ClassText;
                     view.AddView(searchfield);
 
                     //searchfield.AddTextChangedListener(this);
@@ -81,7 +82,7 @@ namespace EthansList.MaterialDroid
                     minPricefield.Hint = "min";
                     minPricefield.TextSize = 14f;
                     minPricefield.SetSingleLine(true);
-                    minPricefield.InputType = Android.Text.InputTypes.ClassNumber;
+                    minPricefield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(minPricefield);
 
                     EditText maxPricefield = new EditText(context);
@@ -89,7 +90,7 @@ namespace EthansList.MaterialDroid
                     maxPricefield.Hint = "min";
                     maxPricefield.TextSize = 14f;
                     maxPricefield.SetSingleLine(true);
-                    maxPricefield.InputType = Android.Text.InputTypes.ClassNumber;
+                    maxPricefield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxPricefield);
 
                     //minPricefield.TextChanged += (object sender, TextChangedEventArgs e) => { 
@@ -108,7 +109,7 @@ namespace EthansList.MaterialDroid
                     minfield.Hint = "min";
                     minfield.TextSize = 14f;
                     minfield.SetSingleLine(true);
-                    minfield.InputType = Android.Text.InputTypes.ClassNumber;
+                    minfield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(minfield);
 
                     EditText maxfield = new EditText(context);
@@ -116,7 +117,7 @@ namespace EthansList.MaterialDroid
                     maxfield.Hint = "min";
                     maxfield.TextSize = 14f;
                     maxfield.SetSingleLine(true);
-                    maxfield.InputType = Android.Text.InputTypes.ClassNumber;
+                    maxfield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxfield);
 
                     view.AddView(entryHolder);

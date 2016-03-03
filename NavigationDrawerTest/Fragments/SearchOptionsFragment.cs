@@ -111,7 +111,15 @@ namespace EthansList.MaterialDroid
             searchObject.Conditions = this.Conditions;
 
             var query = queryHelper.Generate(searchObject);
-            Toast.MakeText(context, query, ToastLength.Short).Show();
+            //Toast.MakeText(context, query, ToastLength.Short).Show();
+
+            FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+            SearchResultsFragment resultsFragment = new SearchResultsFragment();
+            resultsFragment.Query = query;
+
+            transaction.Replace(Resource.Id.frameLayout, resultsFragment);
+            transaction.AddToBackStack(null);
+            transaction.Commit();
         }
 
         private LinearLayout RowHolder(GravityFlags gravity = GravityFlags.CenterHorizontal)

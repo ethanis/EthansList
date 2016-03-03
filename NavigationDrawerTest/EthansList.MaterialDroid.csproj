@@ -99,6 +99,8 @@
     <Compile Include="Helpers\NumberPickerDialogFragment.cs" />
     <Compile Include="Helpers\ComboPickerDialogFragment.cs" />
     <Compile Include="Adapters\ComboPickerAdapter.cs" />
+    <Compile Include="Fragments\SearchResultsFragment.cs" />
+    <Compile Include="Adapters\FeedResultsAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
