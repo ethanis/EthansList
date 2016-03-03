@@ -508,6 +508,12 @@ namespace EthansList.MaterialDroid
                         categoryDialog.Show(((Activity)context).FragmentManager, "stringPick");
                     };
 
+                    categoryDialog.CatPicked += (object sender, SubCatSelectedEventArgs e) => { 
+                        categoryDialog.Dismiss();
+                        SubCategory = e.SubCatPicked;
+                        catLabel.Text = (string)SubCategory.Key;
+                    };
+
                     row.AddView(catLabel);
                 break;
                 case SearchRowTypes.Space:
