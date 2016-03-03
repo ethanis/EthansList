@@ -45,7 +45,7 @@ namespace EthansList.MaterialDroid
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
             dialog.SetTitle(_title);
             dialog.SetView(view);
-            dialog.SetNegativeButton("Cancel", (s, a) => { });
+            //dialog.SetNegativeButton("Cancel", (s, a) => { });
             dialog.SetPositiveButton("Ok", (s, a) => { });
             return dialog.Create();
         }

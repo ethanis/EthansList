@@ -140,115 +140,165 @@ namespace EthansList.MaterialDroid
             List<SearchRow> searchOptions = new List<SearchRow>
             {
                 new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.Heading},
+            };
 
-                new SearchRow {Title = "Search Terms", RowType = SearchRowTypes.SearchTerms, QueryPrefix = "query"},
-                new SearchRow 
+            searchOptions.Add(new SearchRow { Title = "Search Terms", RowType = SearchRowTypes.SearchTerms, QueryPrefix = "query" });
+
+            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(category) || Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(category))
+            {
+                searchOptions.Add(new SearchRow
                 {
-                    Title = "Price Cell", 
+                    Title = "Price",
                     RowType = SearchRowTypes.PriceDoubleEntry,
                     QueryPrefix = "min_price",
                     SecondQueryPrefix = "max_price"
-                },
-            };
-            searchOptions.Add(new SearchRow {
-                    Title = "Sq Feet", 
+                });
+            }
+
+            if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(category))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Sq Feet",
                     RowType = SearchRowTypes.DoubleEntry,
                     QueryPrefix = "minSqft",
                     SecondQueryPrefix = "maxSqft"
-            });
+                });
+            }
 
-            searchOptions.Add(new SearchRow {
-                    Title = "Make/Model", 
-                    RowType = SearchRowTypes.SingleEntryLabel, 
+            if (Categories.Autos.Contains(category.Key))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Make/Model",
+                    RowType = SearchRowTypes.SingleEntryLabel,
                     QueryPrefix = "auto_make_model"
-            });
-                
-            searchOptions.Add(new SearchRow {
-                    Title = "Year", 
+                });
+
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Year",
                     RowType = SearchRowTypes.DoubleEntry,
                     QueryPrefix = "min_auto_year",
                     SecondQueryPrefix = "max_auto_year"
-            });
-            searchOptions.Add(new SearchRow {
-                    Title = "Odometer", 
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Odometer",
                     RowType = SearchRowTypes.DoubleEntry,
                     QueryPrefix = "min_auto_miles",
-                    SecondQueryPrefix = "max_auto_miles"
-            });
+                SecondQueryPrefix = "max_auto_miles"
+                });
+            }
 
             searchOptions.Add(new SearchRow {Title = "Space", RowType = SearchRowTypes.Space});
-
             searchOptions.Add(new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading});
 
-            searchOptions.Add(new SearchRow {
-                    Title = "Bedrooms", 
+            //TODO: Add in subcategory
+            if (Categories.SubCategories.ContainsKey(category.Key))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Sub Category",
+                    RowType = SearchRowTypes.SubCatPicker,
+                    ComboPickerOptions = Categories.SubCategories[category.Key],
+                    QueryPrefix = category.Key
+                });
+            }
+
+            if (Categories.Housing.Contains(category.Key))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Bedrooms",
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"},
+                    NumberPickerOptions = new NumberPickerOptions { Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+" },
                     QueryPrefix = "bedrooms"
-            });
-            searchOptions.Add(new SearchRow {
-                    Title = "Bathrooms", 
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Bathrooms",
                     RowType = SearchRowTypes.SinglePicker,
-                    NumberPickerOptions = new NumberPickerOptions {Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+"},
+                    NumberPickerOptions = new NumberPickerOptions { Initial = 1, Minimum = 0, Maximum = 10, Step = 1, DisplaySuffix = "+" },
                     QueryPrefix = "bathrooms"
-            });
-
+                });
+            }
             #region ComboPickers
-            searchOptions.Add(new SearchRow {
-                Title = "Condition",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["condition"],
-                QueryPrefix = "condition"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Job Type",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["employment_type"],
-                QueryPrefix = "employment_type"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Paid",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["is_paid"],
-                QueryPrefix = "is_paid"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Cylinders",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_cylinders"],
-                QueryPrefix = "auto_cylinders"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Drivetrain",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_drivetrain"],
-                QueryPrefix = "auto_drivetrain"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Fuel Type",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_fuel_type"],
-                QueryPrefix = "auto_fuel_type"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Paint Color",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_paint"],
-                QueryPrefix = "auto_paint"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Title Status",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_title_status"],
-                QueryPrefix = "auto_title_status"
-            });
-            searchOptions.Add(new SearchRow {
-                Title = "Transmission",
-                RowType = SearchRowTypes.ComboPicker,
-                ComboPickerOptions = Categories.ComboOptions["auto_transmission"],
-                QueryPrefix = "auto_transmission"
-            });
-
+            if (Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(category) || Categories.Autos.Contains(category.Key))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Condition",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["condition"],
+                    QueryPrefix = "condition"
+                });
+            }
+            if (Categories.Groups.Find(x => x.Name == "Jobs").Items.Contains(category))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Job Type",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["employment_type"],
+                    QueryPrefix = "employment_type"
+                });
+            }
+            if (Categories.Groups.Find(x => x.Name == "Gigs").Items.Contains(category))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Paid",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["is_paid"],
+                    QueryPrefix = "is_paid"
+                });
+            }
+            if (Categories.Autos.Contains(category.Key))
+            {
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Cylinders",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_cylinders"],
+                    QueryPrefix = "auto_cylinders"
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Drivetrain",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_drivetrain"],
+                    QueryPrefix = "auto_drivetrain"
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Fuel Type",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_fuel_type"],
+                    QueryPrefix = "auto_fuel_type"
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Paint Color",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_paint"],
+                    QueryPrefix = "auto_paint"
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Title Status",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_title_status"],
+                    QueryPrefix = "auto_title_status"
+                });
+                searchOptions.Add(new SearchRow
+                {
+                    Title = "Transmission",
+                    RowType = SearchRowTypes.ComboPicker,
+                    ComboPickerOptions = Categories.ComboOptions["auto_transmission"],
+                    QueryPrefix = "auto_transmission"
+                });
+            }
             #endregion
 
             searchOptions.Add(new SearchRow {
@@ -440,6 +490,25 @@ namespace EthansList.MaterialDroid
 
                     row.AddView(comboLabel);
 
+                break;
+                case SearchRowTypes.SubCatPicker:
+                    row.AddView(Title(item));
+
+                    TextView catLabel = new TextView(context);
+                    catLabel.LayoutParameters = f;
+                    catLabel.Gravity = GravityFlags.Right;
+                    catLabel.Text = (string)item.ComboPickerOptions.First().Key;
+                    catLabel.SetPadding(0,0,ConvertDpToPx(50),0);
+
+                    SubCategory = item.ComboPickerOptions.First();
+
+                    var categoryDialog = new SingleStringDialogFragment(context, item.Title, item.ComboPickerOptions);
+
+                    catLabel.Click += (object sender, EventArgs e) => {
+                        categoryDialog.Show(((Activity)context).FragmentManager, "stringPick");
+                    };
+
+                    row.AddView(catLabel);
                 break;
                 case SearchRowTypes.Space:
                     View strut = new View(context);

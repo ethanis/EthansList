@@ -316,6 +316,10 @@ namespace ethanslist.ios
                         Heading = "Year",
                         CellType = "MinMaxCell"
                     });
+                searchterms.Items.Add(new TableItem {
+                    Heading = "Odometer",
+                    CellType = "MinMaxCell"
+                });
             }
 
             if (Categories.Groups.Find(x => x.Name == "Housing").Items.Contains(Category) || Categories.Groups.Find(x => x.Name == "For Sale").Items.Contains(Category))
@@ -332,15 +336,6 @@ namespace ethanslist.ios
                     Heading = "Sq Feet",
                     CellType = "MinMaxCell"
                 });
-            }
-
-            if (Categories.Autos.Contains(Category.Key))
-            {
-                searchterms.Items.Add(new TableItem {
-                    Heading = "Odometer",
-                    CellType = "MinMaxCell"
-                });
-
             }
 
             if (Categories.SubCategories.ContainsKey(Category.Key))

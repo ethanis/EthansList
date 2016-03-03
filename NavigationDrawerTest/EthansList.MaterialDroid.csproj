@@ -99,6 +99,7 @@
     <Compile Include="Helpers\ComboPickerDialogFragment.cs" />
     <Compile Include="Fragments\SearchResultsFragment.cs" />
     <Compile Include="Adapters\FeedResultsAdapter.cs" />
+    <Compile Include="Helpers\SingleStringDialogFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

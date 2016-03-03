@@ -140,7 +140,7 @@ namespace EthansList.Shared
             { 
                 {"/i/auto_parts", new List<KeyValuePair<object, object>>()
                     {
-                        new KeyValuePair<object, object>("All General Auto Parts", "/search/pta"), 
+                        new KeyValuePair<object, object>("All Auto Parts", "/search/pta"), 
                         new KeyValuePair<object, object>("Auto Parts - Owner Only",  "/search/pts"),
                         new KeyValuePair<object, object>("Auto Parts - Dealer Only", "/search/ptd"),
                         new KeyValuePair<object, object>("Wheels / Tires", "/search/wta"),
@@ -329,7 +329,6 @@ namespace EthansList.Shared
                         new KeyValuePair<string, string>("/search/web", "web / info design"),
                         new KeyValuePair<string, string>("/search/wri", "writing / editing"),
                         new KeyValuePair<string, string>("/search/etc", "[ETC]"),
-//                        new KeyValuePair<string, string>("/search/jjj?employment_type=2", "[ part-time ]"),
                     },
                 },
                 new CatTableGroup()

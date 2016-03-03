@@ -50,7 +50,6 @@ namespace EthansList.MaterialDroid
                 view = new CategoryGroupRow(context);
                 ((CategoryGroupRow)view).Items = categories[position].Items;
             }
-
             ((CategoryGroupRow)view).headerLabel.Text = categories[position].Name;
 
             ((CategoryGroupRow)view).CategorySelected += (object sender, CategorySelectedEventArgs e) => 

@@ -31,7 +31,8 @@ namespace EthansList.MaterialDroid
         DoubleEntry,
         Space,
         SinglePicker,
-        ComboPicker
+        ComboPicker,
+        SubCatPicker
     }
 }
 
