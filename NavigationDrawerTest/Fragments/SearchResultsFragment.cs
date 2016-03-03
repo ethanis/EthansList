@@ -19,6 +19,8 @@ namespace EthansList.MaterialDroid
     {
         //TODO set max listings and posted date too
         public string Query { get; set; }
+        public int MaxListings { get; set; }
+        public int? WeeksOld { get; set; }
 
         CLFeedClient feedClient;
         FeedResultsAdapter feedAdapter;
@@ -34,7 +36,8 @@ namespace EthansList.MaterialDroid
         {
             var view = new ListView(this.Activity);
 
-            feedClient = new CLFeedClient(Query);
+            Console.WriteLine("Max Listings: " + MaxListings + ", Weeks Old: " +WeeksOld);
+            feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
             var connected = feedClient.GetAllPostingsAsync();
 
             if (!connected)

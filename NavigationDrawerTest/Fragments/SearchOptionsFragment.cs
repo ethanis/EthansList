@@ -119,6 +119,8 @@ namespace EthansList.MaterialDroid
             FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
             SearchResultsFragment resultsFragment = new SearchResultsFragment();
             resultsFragment.Query = queryHelper.Generate(searchObject);
+            resultsFragment.MaxListings = MaxListings;
+            resultsFragment.WeeksOld = WeeksOld;
 
             transaction.Replace(Resource.Id.frameLayout, resultsFragment);
             transaction.AddToBackStack(null);
@@ -514,7 +516,8 @@ namespace EthansList.MaterialDroid
                     catLabel.Text = (string)item.ComboPickerOptions.First().Key;
                     catLabel.SetPadding(0,0,ConvertDpToPx(50),0);
 
-                    SubCategory = item.ComboPickerOptions.First();
+                    if (item.Title == "Sub Category")
+                        SubCategory = item.ComboPickerOptions.First();
 
                     var categoryDialog = new SingleStringDialogFragment(context, item.Title, item.ComboPickerOptions);
 
