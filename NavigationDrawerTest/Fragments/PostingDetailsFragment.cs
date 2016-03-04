@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using EthansList.Models;
@@ -19,7 +20,15 @@ namespace EthansList.MaterialDroid
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Android.OS.Bundle savedInstanceState)
         {
             var view = new PostingDetailsView(this.Activity);
+
             view.PostingTitle.Text = Posting.PostTitle;
+
+            if (Posting.ImageLink != "-1")
+            {
+                view.CurrentImage = Posting.ImageLink;
+            }
+
+            view.PostingDescription.Text = Posting.Description;
 
             return view;
         }
@@ -39,6 +48,16 @@ namespace EthansList.MaterialDroid
 
         //todo: posting map and weblink
 
+        public string CurrentImage
+        {
+            get { return currentImage; }
+            set { 
+                Koush.UrlImageViewHelper.SetUrlDrawable(PostingImage, value, Resource.Drawable.placeholder);
+                currentImage = value;
+            }
+        }
+        string currentImage;
+
         public PostingDetailsView(Context context)
             :base (context)
         {
@@ -56,9 +75,17 @@ namespace EthansList.MaterialDroid
             PostingTitle = new TextView(_context) { LayoutParameters = textRowParams};
             PostingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
             PostingTitle.SetPadding(10, 10, 10, 10);
-            PostingTitle.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
+            PostingTitle.SetTypeface(Typeface.DefaultBold, TypefaceStyle.Bold);
             AddRowItem(PostingTitle);
 
+            PostingImage = new ImageView(_context) { LayoutParameters = textRowParams};
+            AddRowItem(PostingImage);
+
+            PostingDescription = new TextView(_context) { LayoutParameters = textRowParams };
+            PostingDescription.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
+            PostingDescription.SetPadding(10, 10, 10, 10);
+            PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
+            AddRowItem(PostingDescription);
         }
 
         private void AddRowItem(View item)
