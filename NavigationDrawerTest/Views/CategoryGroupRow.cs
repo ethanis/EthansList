@@ -20,6 +20,7 @@ namespace EthansList.MaterialDroid
         readonly Context context;
         public TextView headerLabel { get; set; }
         public event EventHandler<CategorySelectedEventArgs> CategorySelected;
+        private int rowHeight;
 
         public List<KeyValuePair<string, string>> Items
         {
@@ -35,6 +36,7 @@ namespace EthansList.MaterialDroid
             base(context)
         {
             this.context = context;
+            rowHeight = ConvertDpToPx(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
@@ -62,7 +64,12 @@ namespace EthansList.MaterialDroid
 
             headerLabel = new TextView(context);
             headerLabel.LayoutParameters = p;
-            headerLabel.SetTextSize(ComplexUnitType.Dip, 20);
+            //headerLabel.SetTextSize(ComplexUnitType.Dip, 20);
+
+            headerLabel.Gravity = GravityFlags.CenterVertical;
+            headerLabel.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            headerLabel.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+
 
             row.AddView(headerLabel);
 
@@ -81,7 +88,11 @@ namespace EthansList.MaterialDroid
 
                 TextView subCategory = new TextView(context);
                 subCategory.LayoutParameters = p;
-                subCategory.SetTextSize(ComplexUnitType.Dip, 16);
+
+                subCategory.Gravity = GravityFlags.CenterVertical;
+                subCategory.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                subCategory.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+
                 subCategory.Text = item.Value;
                 row.AddView(subCategory);
 
@@ -94,6 +105,11 @@ namespace EthansList.MaterialDroid
 
                 AddView(row);
             }
+        }
+
+        private int ConvertDpToPx(float dip)
+        {
+            return (int)(dip * context.Resources.DisplayMetrics.Density);
         }
     }
 

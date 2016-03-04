@@ -38,6 +38,7 @@ namespace EthansList.MaterialDroid
         {
             ImageView imageView;
 
+            //TODO: Set layoutparams to use dip instead
             if (convertView == null)
             {
                 imageView = new ImageView(context);

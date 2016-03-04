@@ -36,13 +36,17 @@ namespace EthansList.MaterialDroid
             if (!connected)
             { 
                 //TODO: handle no network connection here
+                Console.WriteLine("Not connectioned to network");
             }
 
             imageHelper.loadingComplete += (sender, e) =>
             {
-                view.ImageCollection.SetNumColumns(imageHelper.images.Count/4);
-                //view.ImageCollection.SetColumnWidth(150);
-                view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
+                if (imageHelper.PostingImagesFound)
+                {
+                    //view.ImageCollection.SetNumColumns(imageHelper.images.Count / 4);
+                    //view.ImageCollection.SetColumnWidth(150);
+                    view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
+                }
 
                 if (imageHelper.PostingBodyAdded)
                     view.PostingDescription.Text = imageHelper.postingDescription;
