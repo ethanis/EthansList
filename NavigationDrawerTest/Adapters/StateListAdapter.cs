@@ -11,12 +11,12 @@ namespace EthansList.MaterialDroid
     public class StateListAdapter : BaseAdapter<String>
     {
         SortedSet<String> states;
-        LayoutInflater layoutInflater;
+        readonly Context _context;
 
         public StateListAdapter(Context context, SortedSet<String> states)
         {
             this.states = states;
-            this.layoutInflater = (LayoutInflater)context.GetSystemService (Context.LayoutInflaterService);
+            _context = context;
         }
 
         public override string this[int index]
@@ -42,17 +42,13 @@ namespace EthansList.MaterialDroid
 
         public override Android.Views.View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
-            var view = convertView;
+            var view = (CityPickerRow)convertView;
             if (view == null)
             {
-                view = layoutInflater.Inflate(Resource.Layout.StateRow, parent, false);
-                var _state = view.FindViewById<TextView>(Resource.Id.stateListViewItem);
-
-                view.Tag = new StateListViewHolder { State = _state };
+                view = new CityPickerRow(_context);
             }
 
-            var holder = (StateListViewHolder)view.Tag;
-            holder.State.Text = states.ElementAt(position);
+            view.ItemLabel.Text = states.ElementAt(position);
 
             return view;
         }

@@ -81,10 +81,8 @@
     <Compile Include="Views\SelectCityView.cs" />
     <Compile Include="Adapters\CityListAdapter.cs" />
     <Compile Include="Adapters\StateListAdapter.cs" />
-    <Compile Include="ViewHolders\CityListViewHolder.cs" />
     <Compile Include="ViewHolders\PostingListViewHolder.cs" />
     <Compile Include="ViewHolders\SavedSearchesViewHolder.cs" />
-    <Compile Include="ViewHolders\StateListViewHolder.cs" />
     <Compile Include="Helpers\GestureRecognizerView.cs" />
     <Compile Include="Helpers\MyScaleListener.cs" />
     <Compile Include="Helpers\Reachability.cs" />
@@ -144,6 +142,7 @@
     <AndroidResource Include="Resources\layout\StateRow.axml" />
     <AndroidResource Include="Resources\drawable\placeholder.png" />
     <AndroidResource Include="Resources\layout\NumberPickerDialog.axml" />
+    <AndroidResource Include="Resources\values\sizes.xml" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

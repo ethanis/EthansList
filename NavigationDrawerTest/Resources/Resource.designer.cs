@@ -2229,6 +2229,9 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f070005
 			public const int status_bar_notification_info_maxnum = 2131165189;
 			
+			// aapt resource value: 0x7f070006
+			public const int textLabelRowHeight = 2131165190;
+			
 			static Integer()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

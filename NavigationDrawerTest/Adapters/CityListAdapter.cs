@@ -11,13 +11,14 @@ namespace EthansList.MaterialDroid
 {
     public class CityListAdapter : BaseAdapter<Location>
     {
+        readonly Context _context;
         IEnumerable<Location> cities;
         LayoutInflater layoutInflater;
 
         public CityListAdapter(Context context, IEnumerable<Location> cities)
         {
             this.cities = cities;
-            this.layoutInflater = (LayoutInflater)context.GetSystemService (Context.LayoutInflaterService);
+            this._context = context;
         }
 
         public override Location this[int index]
@@ -43,20 +44,49 @@ namespace EthansList.MaterialDroid
 
         public override Android.Views.View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
-            var view = convertView;
+            var view = (CityPickerRow)convertView;
             if (view == null)
             {
-                view = layoutInflater.Inflate(Resource.Layout.CityRow, parent, false);
-                var _city = view.FindViewById<TextView>(Resource.Id.cityListViewItem);
-
-                view.Tag = new CityListViewHolder { City = _city };
+                view = new CityPickerRow(_context);
             }
 
-            var holder = (CityListViewHolder)view.Tag;
-
-            holder.City.Text = cities.ElementAt(position).SiteName;
+            view.ItemLabel.Text = cities.ElementAt(position).SiteName;
 
             return view;
+        }
+    }
+
+    public class CityPickerRow : LinearLayout
+    {
+        readonly Context _context;
+        public TextView ItemLabel { get; set; }
+
+        private int rowHeight;
+
+        public CityPickerRow(Context context)
+            :base (context)
+        {
+            _context = context;
+            rowHeight = ConvertDpToPx(_context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            Orientation = Orientation.Horizontal;
+
+            ItemLabel = new TextView(_context);
+            ItemLabel.Gravity = GravityFlags.CenterVertical;
+            ItemLabel.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            ItemLabel.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+
+            ItemLabel.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            AddView(ItemLabel);
+        }
+
+        private int ConvertDpToPx(float dip)
+        {
+            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }
