@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -73,7 +74,7 @@ namespace EthansList.MaterialDroid
             {
                 Location selected = locations.PotentialLocations.Where(loc => loc.State == state).ElementAt(e.Position);
 
-                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+                var transaction = ((AppCompatActivity)context).SupportFragmentManager.BeginTransaction();
                 CategoryPickerFragment categoryFragment = new CategoryPickerFragment();
                 categoryFragment.SelectedLocation = selected;
                 transaction.Replace(Resource.Id.frameLayout, categoryFragment)

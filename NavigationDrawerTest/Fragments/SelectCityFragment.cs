@@ -14,7 +14,7 @@ using Android.Widget;
 
 namespace EthansList.MaterialDroid
 {
-    public class SelectCityFragment : Fragment
+    public class SelectCityFragment : Android.Support.V4.App.Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {

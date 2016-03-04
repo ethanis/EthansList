@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
@@ -54,7 +55,7 @@ namespace EthansList.MaterialDroid
 
             ((CategoryGroupRow)view).CategorySelected += (object sender, CategorySelectedEventArgs e) => 
             { 
-                FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+                var transaction = ((AppCompatActivity)context).SupportFragmentManager.BeginTransaction();
                 SearchOptionsFragment searchFragment = new SearchOptionsFragment();
                 searchFragment.Category = e.Selected;
                 searchFragment.SearchLocation = this.SelectedLocation;

@@ -99,6 +99,7 @@
     <Compile Include="Adapters\FeedResultsAdapter.cs" />
     <Compile Include="Helpers\SingleStringDialogFragment.cs" />
     <Compile Include="Fragments\PostingDetailsFragment.cs" />
+    <Compile Include="Adapters\ImageAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

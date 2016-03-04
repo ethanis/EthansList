@@ -15,7 +15,7 @@ using EthansList.Shared;
 
 namespace EthansList.MaterialDroid
 {
-    public class SearchResultsFragment : Fragment
+    public class SearchResultsFragment : Android.Support.V4.App.Fragment
     {
         public string Query { get; set; }
         public int MaxListings { get; set; }
@@ -81,7 +81,7 @@ namespace EthansList.MaterialDroid
             })).Start();
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
-                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
                 postingDetailsFragment.Posting = feedClient.postings[e.Position];
                 transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);

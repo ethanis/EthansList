@@ -20,7 +20,7 @@ namespace EthansList.MaterialDroid
 	{
 		DrawerLayout drawerLayout;
         public static DatabaseConnection databaseConnection { get; set; }
-        readonly Fragment[] fragments = { new SelectCityFragment() };//, new RecentCitiesFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() };//, new RecentCitiesFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
         readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
         protected override void OnCreate(Bundle bundle)
@@ -47,7 +47,7 @@ namespace EthansList.MaterialDroid
 			drawerLayout.SetDrawerListener(drawerToggle);
 			drawerToggle.SyncState();
 
-            base.FragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
+            base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
 		}
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -69,24 +69,15 @@ namespace EthansList.MaterialDroid
                     break;   
             }
 
-            base.FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive);
+            base.SupportFragmentManager.PopBackStack(null, (int)PopBackStackFlags.Inclusive);
             // Show the selected Fragment to the user
-            base.FragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[position]).Commit();
+            base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[position]).Commit();
 
             // Update the Activity title in the ActionBar
             this.Title = titles[position];
 
             // Close drawer
             drawerLayout.CloseDrawers();
-
-            //var builder = new Android.Support.V7.App.AlertDialog.Builder (this);
-
-            //builder.SetTitle (titles[position])
-            //.SetMessage ("Is this material design?")
-            //.SetPositiveButton ("Yes", delegate { Console.WriteLine("Yes"); })
-            //.SetNegativeButton ("No", delegate { Console.WriteLine("No"); }); 
-
-            //builder.Create().Show ();
 		}
 	}
 }

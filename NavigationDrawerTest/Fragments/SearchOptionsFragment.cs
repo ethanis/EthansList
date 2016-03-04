@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Text;
 using Android.Util;
 using Android.Views;
@@ -16,7 +17,7 @@ using EthansList.Shared;
 
 namespace EthansList.MaterialDroid
 {
-    public class SearchOptionsFragment : Fragment
+    public class SearchOptionsFragment : Android.Support.V4.App.Fragment
     {
         public Location SearchLocation { get; set; }
         public KeyValuePair<string, string> Category { get; set; }
@@ -116,7 +117,7 @@ namespace EthansList.MaterialDroid
             searchObject.SearchItems = this.SearchItems;
             searchObject.Conditions = this.Conditions;
 
-            FragmentTransaction transaction = ((Activity)context).FragmentManager.BeginTransaction();
+            var transaction = ((AppCompatActivity)context).SupportFragmentManager.BeginTransaction();
             SearchResultsFragment resultsFragment = new SearchResultsFragment();
             resultsFragment.Query = queryHelper.Generate(searchObject);
             resultsFragment.MaxListings = MaxListings;

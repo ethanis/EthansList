@@ -8,7 +8,7 @@ using EthansList.Shared;
 
 namespace EthansList.MaterialDroid
 {
-    public class CategoryPickerFragment : Fragment
+    public class CategoryPickerFragment : Android.Support.V4.App.Fragment
     {
         public Location SelectedLocation { get; set; }
 
