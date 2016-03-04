@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Views;
 using Android.Widget;
 using EthansList.Models;
 
@@ -15,15 +16,20 @@ namespace EthansList.MaterialDroid
             base.OnCreate(savedInstanceState);
         }
 
-        public override Android.Views.View OnCreateView(Android.Views.LayoutInflater inflater, Android.Views.ViewGroup container, Android.OS.Bundle savedInstanceState)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Android.OS.Bundle savedInstanceState)
         {
-            return new TextView(this.Activity) { Text = Posting.PostTitle };
+            var view = new PostingDetailsView(this.Activity);
+            view.PostingTitle.Text = Posting.PostTitle;
+
+            return view;
         }
     }
 
     public class PostingDetailsView : LinearLayout
     {
         readonly Context _context;
+        readonly LayoutParams rowParams;
+        readonly LayoutParams textRowParams;
 
         public TextView PostingTitle { get; set; }
         public ImageView PostingImage { get; set; }
@@ -37,6 +43,8 @@ namespace EthansList.MaterialDroid
             :base (context)
         {
             _context = context;
+            rowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            textRowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             Initialize();
         }
 
@@ -45,7 +53,21 @@ namespace EthansList.MaterialDroid
             Orientation = Orientation.Vertical;
             WeightSum = 1;
 
+            PostingTitle = new TextView(_context) { LayoutParameters = textRowParams};
+            PostingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
+            PostingTitle.SetPadding(10, 10, 10, 10);
+            PostingTitle.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
+            AddRowItem(PostingTitle);
 
+        }
+
+        private void AddRowItem(View item)
+        {
+            var view = new LinearLayout(_context) { Orientation = Orientation.Horizontal };
+            view.LayoutParameters = rowParams;
+            view.AddView(item);
+
+            AddView(view);
         }
     }
 }
