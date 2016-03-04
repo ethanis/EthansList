@@ -17,7 +17,6 @@ namespace EthansList.MaterialDroid
 {
     public class SearchResultsFragment : Fragment
     {
-        //TODO set max listings and posted date too
         public string Query { get; set; }
         public int MaxListings { get; set; }
         public int? WeeksOld { get; set; }
@@ -28,8 +27,6 @@ namespace EthansList.MaterialDroid
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -70,20 +67,27 @@ namespace EthansList.MaterialDroid
                     this.Activity.RunOnUiThread(() => progressDialog.Hide());
 
                     var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
-                    Dialog dialog;
                     builder.SetTitle("Error loading listings");
                     builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
                     builder.SetPositiveButton("Ok", delegate {
                         this.FragmentManager.PopBackStack();
                     });
-                    dialog = builder.Create();
 
                     this.Activity.RunOnUiThread(() => {
-                        dialog.Show();
+                        builder.Create().Show();
                     });
                 };
 
             })).Start();
+
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+                FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+                PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
+                postingDetailsFragment.Posting = feedClient.postings[e.Position];
+                transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            };
 
             return view;
         }

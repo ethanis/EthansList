@@ -100,6 +100,7 @@
     <Compile Include="Fragments\SearchResultsFragment.cs" />
     <Compile Include="Adapters\FeedResultsAdapter.cs" />
     <Compile Include="Helpers\SingleStringDialogFragment.cs" />
+    <Compile Include="Fragments\PostingDetailsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

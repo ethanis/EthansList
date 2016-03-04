@@ -89,7 +89,6 @@ namespace EthansList.MaterialDroid
             var imageParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
 
             var imageHolder = new LinearLayout(_context);
-            //imageHolder.LayoutParameters = new LayoutParams(0, ConvertDpToPx(100), 0.30f);
             imageHolder.LayoutParameters = new LayoutParams(0, LayoutParams.MatchParent, 0.30f);
 
             _postingImage = new ImageView(_context);
@@ -99,7 +98,6 @@ namespace EthansList.MaterialDroid
 
             var titleDescriptionHolder = new LinearLayout(_context) { Orientation = Orientation.Vertical };
             titleDescriptionHolder.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.70f);
-            //titleDescriptionHolder.SetBackgroundColor(Android.Graphics.Color.AliceBlue);
 
             _postingTitle = new TextView(_context);
             _postingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
@@ -115,11 +113,6 @@ namespace EthansList.MaterialDroid
             titleDescriptionHolder.AddView(_postingDescription);
 
             AddView(titleDescriptionHolder);
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }
