@@ -82,6 +82,14 @@ namespace EthansList.MaterialDroid
 
             view.PostingDescription.Text = Posting.Description;
             view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
+            view.WebLink.Text = Posting.Link;
+
+            view.WebLink.Click += (sender, e) => {
+                var intent = new Intent();
+                intent.SetAction(Intent.ActionView);
+                intent.SetData(Android.Net.Uri.Parse(Posting.Link));
+                StartActivity(intent);
+            };
 
             ScrollView viewContainer = new ScrollView(this.Activity);
             viewContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
@@ -120,6 +128,7 @@ namespace EthansList.MaterialDroid
 
         //todo: posting map and weblink
         public MapView PostingMap { get; set; }
+        public TextView WebLink { get; set; }
 
         public GoogleMap map { get; set; }
         public bool SetUpGoogleMap()
@@ -191,12 +200,17 @@ namespace EthansList.MaterialDroid
             AddRowItem(PostingDescription, textRowParams);
 
             PostingMap = new MapView(_context);
-            AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
+            //AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
 
             PostingDate = new TextView(_context) { LayoutParameters = textRowParams };
             PostingDate.SetPadding(10, 10, 10, 10);
             PostingDate.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
             AddRowItem(PostingDate, textRowParams);
+
+            WebLink = new TextView(_context) { LayoutParameters = textRowParams };
+            WebLink.SetPadding(10, 10, 10, 10);
+            WebLink.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
+            AddRowItem(WebLink, textRowParams);
         }
 
         private void AddRowItem(View item, LayoutParams par)
