@@ -120,6 +120,8 @@ namespace EthansList.Shared
             if (images.Count == 0 && rssImageUrl != "-1")
                 images.Insert(0, rssImageUrl);
 
+            Console.WriteLine("Found " + images.Count + " more images!");
+
             if (doc.GetElementbyId("postingbody") != null)
             {
                 PostingBodyAdded = true;

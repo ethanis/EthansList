@@ -72,7 +72,7 @@ namespace ethanslist.android
             }
             postingImageView.Click += PostingImageView_Click;
 
-            saveButton.Click += SaveButton_Click;;
+            saveButton.Click += SaveButton_Click;
 
             imageGV.ItemClick += (Object sender, AdapterView.ItemClickEventArgs args) => {
                 CurrentImage = imageHelper.images.ElementAt(args.Position);

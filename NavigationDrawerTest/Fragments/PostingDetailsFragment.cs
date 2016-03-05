@@ -43,14 +43,13 @@ namespace EthansList.MaterialDroid
             {
                 if (imageHelper.PostingImagesFound)
                 {
-                    //view.ImageCollection.SetNumColumns(imageHelper.images.Count / 4);
+                    view.ImageCollection.SetNumColumns(imageHelper.images.Count);
                     //view.ImageCollection.SetColumnWidth(150);
                     view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
                 }
 
                 if (imageHelper.PostingBodyAdded)
                     view.PostingDescription.Text = imageHelper.postingDescription;
-
 
             };
 
@@ -59,6 +58,7 @@ namespace EthansList.MaterialDroid
             };
 
             view.PostingDescription.Text = Posting.Description;
+            view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
 
             ScrollView viewContainer = new ScrollView(this.Activity);
             viewContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
@@ -79,7 +79,6 @@ namespace EthansList.MaterialDroid
         public GridView ImageCollection { get; set; }
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
-
         //todo: posting map and weblink
 
         public string CurrentImage
@@ -115,16 +114,30 @@ namespace EthansList.MaterialDroid
             PostingImage = new ImageView(_context) { LayoutParameters = textRowParams};
             AddRowItem(PostingImage, textRowParams);
 
+            //TODO fix this fuckiness
             ImageCollection = new GridView(_context);
-            ImageCollection.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
-            AddRowItem(ImageCollection, textRowParams);
-            //AddRowItem(ImageCollection, new LayoutParams(LayoutParams.WrapContent, 150));
+            ImageCollection.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            ImageCollection.SetColumnWidth(150);
+            ImageCollection.StretchMode = StretchMode.StretchColumnWidth;
+            ImageCollection.NumColumns = (int)StretchMode.AutoFit;
+            //AddView(ImageCollection);
+            //LinearLayout imageContainer = new LinearLayout(_context) { Orientation = Orientation.Horizontal };
+            //imageContainer.LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
+            //imageContainer.AddView(ImageCollection);
+            ScrollView imageScroller = new ScrollView(_context);
+            imageScroller.AddView(ImageCollection); 
+            AddRowItem(imageScroller, new LayoutParams(LayoutParams.WrapContent, 150));
 
             PostingDescription = new TextView(_context) { LayoutParameters = textRowParams };
             PostingDescription.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
             PostingDescription.SetPadding(10, 10, 10, 10);
             PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
             AddRowItem(PostingDescription, textRowParams);
+
+            PostingDate = new TextView(_context) { LayoutParameters = textRowParams };
+            PostingDate.SetPadding(10, 10, 10, 10);
+            PostingDate.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
+            AddRowItem(PostingDate, textRowParams);
         }
 
         private void AddRowItem(View item, LayoutParams par)
