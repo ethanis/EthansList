@@ -54,20 +54,25 @@ namespace EthansList.MaterialDroid
                     view.PostingDescription.Text = imageHelper.postingDescription;
 
                 if (imageHelper.PostingMapFound)
-                { 
-                    CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                    builder.Target(imageHelper.postingCoordinates);
-                    builder.Zoom(18);
-                    builder.Bearing(155);
-                    builder.Tilt(65);
-                    CameraPosition cameraPosition = builder.Build();
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-                    view.PostingMap.Map.MoveCamera(cameraUpdate);
+                {
+                    if (view.SetUpGoogleMap())
+                    {
+                        view.MapReady += delegate {
+                            //To initialize the map 
+                            view.map.MapType = GoogleMap.MapTypeNormal; //select the map type
+                            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                            builder.Target(imageHelper.postingCoordinates); //Target to some location hardcoded
+                            builder.Zoom(8); //Zoom multiplier
+                            CameraPosition cameraPosition = builder.Build();
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                            view.map.AnimateCamera(cameraUpdate);
 
-                    MarkerOptions markerOpt1 = new MarkerOptions();
-                    markerOpt1.SetPosition(imageHelper.postingCoordinates);
-                    markerOpt1.SetTitle("Here's your listing!");
-                    view.PostingMap.Map.AddMarker(markerOpt1);
+                            MarkerOptions markerOpt1 = new MarkerOptions();
+                            markerOpt1.SetPosition(imageHelper.postingCoordinates);
+                            markerOpt1.SetTitle("Here's your listing!");
+                            view.map.AddMarker(markerOpt1);
+                        };
+                    }
                 }
             };
 
@@ -86,6 +91,21 @@ namespace EthansList.MaterialDroid
         }
     }
 
+    //OnMapReadyClass
+    public class OnMapReadyClass : Java.Lang.Object, IOnMapReadyCallback
+    { 
+        public GoogleMap Map { get; private set; }
+        public event Action<GoogleMap> MapReadyAction;
+
+        public void OnMapReady (GoogleMap googleMap)
+        {
+            Map = googleMap; 
+
+            if ( MapReadyAction != null )
+                MapReadyAction (Map);
+        }
+    }
+
     public class PostingDetailsView : LinearLayout
     {
         readonly Context _context;
@@ -97,8 +117,29 @@ namespace EthansList.MaterialDroid
         public GridView ImageCollection { get; set; }
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
+
         //todo: posting map and weblink
         public MapView PostingMap { get; set; }
+
+        public GoogleMap map { get; set; }
+        public bool SetUpGoogleMap()
+        {
+            if(null != map ) return false;
+
+            var mapReadyCallback = new OnMapReadyClass();
+
+            mapReadyCallback.MapReadyAction += delegate(GoogleMap googleMap )
+            {
+                map = googleMap;
+                if (this.MapReady != null)
+                    this.MapReady(this, new EventArgs());
+            };
+
+            PostingMap.GetMapAsync(mapReadyCallback); 
+            return true;
+        }
+
+        public event EventHandler<EventArgs> MapReady;
 
         public string CurrentImage
         {
@@ -139,10 +180,6 @@ namespace EthansList.MaterialDroid
             ImageCollection.SetColumnWidth(150);
             ImageCollection.StretchMode = StretchMode.StretchColumnWidth;
             ImageCollection.NumColumns = (int)StretchMode.AutoFit;
-            //AddView(ImageCollection);
-            //LinearLayout imageContainer = new LinearLayout(_context) { Orientation = Orientation.Horizontal };
-            //imageContainer.LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
-            //imageContainer.AddView(ImageCollection);
             ScrollView imageScroller = new ScrollView(_context);
             imageScroller.AddView(ImageCollection); 
             AddRowItem(imageScroller, new LayoutParams(LayoutParams.WrapContent, 150));
@@ -154,7 +191,6 @@ namespace EthansList.MaterialDroid
             AddRowItem(PostingDescription, textRowParams);
 
             PostingMap = new MapView(_context);
-            //PostingMap.Map.MapType = GoogleMap.MapTypeNormal;
             AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
 
             PostingDate = new TextView(_context) { LayoutParameters = textRowParams };
