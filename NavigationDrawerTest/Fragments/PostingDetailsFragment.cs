@@ -85,7 +85,7 @@ namespace EthansList.MaterialDroid
             view.WebLink.Text = Posting.Link;
 
             view.WebLink.Click += (sender, e) => {
-                var intent = new Intent();
+                var intent = new Intent();      
                 intent.SetAction(Intent.ActionView);
                 intent.SetData(Android.Net.Uri.Parse(Posting.Link));
                 StartActivity(intent);

@@ -20,7 +20,7 @@ namespace EthansList.MaterialDroid
 	{
 		DrawerLayout drawerLayout;
         public static DatabaseConnection databaseConnection { get; set; }
-        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() };//, new RecentCitiesFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() , new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
         readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
         protected override void OnCreate(Bundle bundle)
@@ -59,13 +59,13 @@ namespace EthansList.MaterialDroid
                     position = 0;
                     break;
                 case (Resource.Id.recent_cities):
-                    position = 0;
+                    position = 1;
                     break;
                 case (Resource.Id.saved_postings):
-                    position = 0;
+                    position = 2;
                     break;
                 case (Resource.Id.saved_searches):
-                    position = 0;
+                    position = 3;
                     break;   
             }
 

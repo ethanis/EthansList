@@ -109,6 +109,9 @@
     <Compile Include="Helpers\SingleStringDialogFragment.cs" />
     <Compile Include="Fragments\PostingDetailsFragment.cs" />
     <Compile Include="Adapters\ImageAdapter.cs" />
+    <Compile Include="Fragments\RecentCityFragment.cs" />
+    <Compile Include="Fragments\SavedPostingsFragment.cs" />
+    <Compile Include="Fragments\SavedSearchesFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
