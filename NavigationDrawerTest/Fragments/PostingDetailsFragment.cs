@@ -2,6 +2,8 @@
 using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
@@ -51,6 +53,22 @@ namespace EthansList.MaterialDroid
                 if (imageHelper.PostingBodyAdded)
                     view.PostingDescription.Text = imageHelper.postingDescription;
 
+                if (imageHelper.PostingMapFound)
+                { 
+                    CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                    builder.Target(imageHelper.postingCoordinates);
+                    builder.Zoom(18);
+                    builder.Bearing(155);
+                    builder.Tilt(65);
+                    CameraPosition cameraPosition = builder.Build();
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                    view.PostingMap.Map.MoveCamera(cameraUpdate);
+
+                    MarkerOptions markerOpt1 = new MarkerOptions();
+                    markerOpt1.SetPosition(imageHelper.postingCoordinates);
+                    markerOpt1.SetTitle("Here's your listing!");
+                    view.PostingMap.Map.AddMarker(markerOpt1);
+                }
             };
 
             view.ImageCollection.ItemClick += (Object sender, AdapterView.ItemClickEventArgs args) => {
@@ -80,6 +98,7 @@ namespace EthansList.MaterialDroid
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
         //todo: posting map and weblink
+        public MapView PostingMap { get; set; }
 
         public string CurrentImage
         {
@@ -133,6 +152,10 @@ namespace EthansList.MaterialDroid
             PostingDescription.SetPadding(10, 10, 10, 10);
             PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
             AddRowItem(PostingDescription, textRowParams);
+
+            PostingMap = new MapView(_context);
+            //PostingMap.Map.MapType = GoogleMap.MapTypeNormal;
+            AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
 
             PostingDate = new TextView(_context) { LayoutParameters = textRowParams };
             PostingDate.SetPadding(10, 10, 10, 10);

@@ -12,7 +12,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 #if __IOS__
 using CoreLocation;
+#elif __ANDROID__
 #endif
+using Android.Gms.Maps.Model;
 
 namespace EthansList.Shared
 {
@@ -30,8 +32,10 @@ namespace EthansList.Shared
         public event EventHandler<EventArgs> postingRemoved;
         #if __IOS__
         public CLLocationCoordinate2D postingCoordinates;
+        #elif __ANDROID__
         #endif
-        public String postAddress;
+        public LatLng postingCoordinates;
+        public string postAddress;
 
         public ListingImageDownloader(string url, string rssImageUrl)
         {
@@ -134,7 +138,10 @@ namespace EthansList.Shared
                 #if __IOS__
                 postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), 
                     Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                #elif __ANDROID__
                 #endif
+                postingCoordinates = new LatLng(Convert.ToDouble(element.Attributes["data-latitude"].Value),
+                                                Convert.ToDouble(element.Attributes["data-longitude"].Value));
                 PostingMapFound = true;
             }
 
