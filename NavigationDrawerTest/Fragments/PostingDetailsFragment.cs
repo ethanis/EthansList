@@ -33,6 +33,8 @@ namespace EthansList.MaterialDroid
                 view.CurrentImage = Posting.ImageLink;
             }
 
+            //TODO: Add mechanism to save posting
+
             imageHelper = new ListingImageDownloader(Posting.Link, Posting.ImageLink);
             var connected = imageHelper.GetAllImagesAsync();
             if (!connected)

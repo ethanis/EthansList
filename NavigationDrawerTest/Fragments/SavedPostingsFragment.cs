@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EthansList.Models;
 
 namespace EthansList.MaterialDroid
 {
@@ -25,9 +26,22 @@ namespace EthansList.MaterialDroid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = new TextView(this.Activity) { Text = "Saved Postings Fragment" };
+            var view = new ListView(Activity);
+
+            var savedPostings = MainActivity.databaseConnection.GetAllPostingsAsync().Result;
+            view.Adapter = new FeedResultsAdapter(Activity, savedPostings);
+
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+                var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
+                PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
+                postingDetailsFragment.Posting = savedPostings[e.Position];
+                transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            };
+
             return view;
-        }
+        }        
     }
 }
 

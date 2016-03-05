@@ -81,7 +81,6 @@ namespace EthansList.MaterialDroid
             _searches = searches;
         }
 
-
         public override SearchObject this[int position]
         {
             get
