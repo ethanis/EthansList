@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,6 +14,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
+using Newtonsoft.Json;
 
 namespace EthansList.MaterialDroid
 {
@@ -59,7 +60,7 @@ namespace EthansList.MaterialDroid
         public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
         #endregion
 
-
+        public Button SaveSearchButton;
         public TextView SearchCityText;
         public Button proceedButton;
         public ListView SearchTermsTable;
@@ -82,6 +83,38 @@ namespace EthansList.MaterialDroid
         {
             this.Orientation = Orientation.Vertical;
             this.WeightSum = 1;
+
+            SaveSearchButton = new Button(context);
+            SaveSearchButton.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.5f);
+            SaveSearchButton.Text = "Save Search";
+            LinearLayout saveHolder = RowHolder();
+            saveHolder.AddView(SaveSearchButton);
+            AddView(saveHolder);
+
+            SaveSearchButton.Click += async (object sender, EventArgs e) => { 
+                SearchObject searchObject = new SearchObject();
+                searchObject.SearchLocation = location;
+                searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(category.Key, category.Value);
+                searchObject.SearchItems = this.SearchItems;
+                searchObject.Conditions = this.Conditions;
+                searchObject.MaxListings = this.MaxListings;
+                searchObject.PostedDate = this.WeeksOld;
+
+                string serialized = JsonConvert.SerializeObject(searchObject);
+                await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serialized);
+
+                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+
+                if (MainActivity.databaseConnection.StatusCode == Models.codes.ok)
+                {
+                    Toast.MakeText(context, "Search Saved!", ToastLength.Short).Show();
+                }
+                else
+                {
+                    var message = String.Format("Oops, something went wrong{0}Please try again...", System.Environment.NewLine);
+                    Toast.MakeText(context, message, ToastLength.Short).Show();
+                }
+            };
 
             SearchCityText = new TextView(context);
             SearchCityText.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
