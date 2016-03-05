@@ -35,7 +35,22 @@ namespace EthansList.MaterialDroid
 
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
             //TODO: make this into an async call
-            view.Adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches));
+            var deserialized = DeserializeSearches(savedSearches);
+            view.Adapter = new SavedSearchesAdapter(this.Activity, deserialized);
+
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+                QueryGeneration queryHelper = new QueryGeneration();
+
+                var transaction = Activity.SupportFragmentManager.BeginTransaction();
+                SearchResultsFragment resultsFragment = new SearchResultsFragment();
+                resultsFragment.Query = queryHelper.Generate(deserialized[e.Position]);
+                resultsFragment.MaxListings = deserialized[e.Position].MaxListings;
+                resultsFragment.WeeksOld = deserialized[e.Position].PostedDate;
+
+                transaction.Replace(Resource.Id.frameLayout, resultsFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            };
 
             return view;
         }
@@ -107,6 +122,7 @@ namespace EthansList.MaterialDroid
     public class SavedSearchRow : LinearLayout
     {
         readonly Context _context;
+        private int rowHeight;
 
         public TextView CityTitle { get; set; }
         public TextView SearchTerms { get; set; }
@@ -115,19 +131,31 @@ namespace EthansList.MaterialDroid
             :base(context)
         {
             _context = context;
+            rowHeight = ConvertDpToPx(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
         void Initialize()
         {
             Orientation = Orientation.Vertical;
-            //LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
 
             CityTitle = new TextView(_context);
+
+            CityTitle.Gravity = GravityFlags.CenterVertical;
+            CityTitle.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            CityTitle.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
             AddView(CityTitle);
 
             SearchTerms = new TextView(_context);
+            SearchTerms.Gravity = GravityFlags.CenterVertical;
+            SearchTerms.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+            SearchTerms.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
             AddView(SearchTerms);
+        }
+        
+        private int ConvertDpToPx(float dip)
+        {
+            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }
