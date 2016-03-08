@@ -105,7 +105,7 @@ namespace EthansList.MaterialDroid
                     }
                     else
                     {
-                        var message = String.Format("Oops, something went wrong{0}Please try again...", System.Environment.NewLine);
+                        var message = string.Format("Oops, something went wrong{0}Please try again...", System.Environment.NewLine);
                         Toast.MakeText(context, message, ToastLength.Short).Show();
                     }
                 }

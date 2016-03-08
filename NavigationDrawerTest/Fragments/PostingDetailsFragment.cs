@@ -78,7 +78,7 @@ namespace EthansList.MaterialDroid
                 }
             };
 
-            view.ImageCollection.ItemClick += (Object sender, AdapterView.ItemClickEventArgs args) => {
+            view.ImageCollection.ItemClick += (object sender, AdapterView.ItemClickEventArgs args) => {
                 view.CurrentImage = imageHelper.images.ElementAt(args.Position);
             };
 
@@ -101,6 +101,7 @@ namespace EthansList.MaterialDroid
                                                                        Posting.Link,
                                                                        Posting.ImageLink,
                                                                        Posting.Date);
+                    
                     if (MainActivity.databaseConnection.StatusCode == codes.ok)
                         Toast.MakeText(this.Activity, string.Format("Saved Posting!"), ToastLength.Short).Show();
                     else

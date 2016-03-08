@@ -60,10 +60,17 @@ namespace EthansList.MaterialDroid
             List<SearchObject> searchObjects = new List<SearchObject>();
             //await Task.Run(() =>
             //{
-                foreach (Search search in savedSearches)
+            foreach (Search search in savedSearches)
+            {
+                try
                 {
                     searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
                 }
+                catch (Exception ex)
+                { 
+                    Console.WriteLine(ex.Message);
+                }
+            }
             //});
 
             return searchObjects;
