@@ -23,6 +23,8 @@ namespace EthansList.MaterialDroid
         readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() , new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
         readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
+        public event EventHandler<OptionItemEventArgs> OptionItemSelected;
+
         protected override void OnCreate(Bundle bundle)
 		{			
             base.OnCreate(bundle);
@@ -49,6 +51,19 @@ namespace EthansList.MaterialDroid
 
             base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
 		}
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.Save, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (this.OptionItemSelected != null)
+                this.OptionItemSelected(this, new OptionItemEventArgs { Item = item });
+            return base.OnOptionsItemSelected(item);
+        }
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
@@ -80,4 +95,9 @@ namespace EthansList.MaterialDroid
             drawerLayout.CloseDrawers();
 		}
 	}
+
+    public class OptionItemEventArgs : EventArgs
+    {
+        public IMenuItem Item { get; set; }
+    }
 }

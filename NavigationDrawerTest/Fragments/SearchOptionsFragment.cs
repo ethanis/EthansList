@@ -60,7 +60,6 @@ namespace EthansList.MaterialDroid
         public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
         #endregion
 
-        public Button SaveSearchButton;
         public TextView SearchCityText;
         public Button proceedButton;
         public ListView SearchTermsTable;
@@ -84,14 +83,7 @@ namespace EthansList.MaterialDroid
             this.Orientation = Orientation.Vertical;
             this.WeightSum = 1;
 
-            SaveSearchButton = new Button(context);
-            SaveSearchButton.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.5f);
-            SaveSearchButton.Text = "Save Search";
-            LinearLayout saveHolder = RowHolder();
-            saveHolder.AddView(SaveSearchButton);
-            AddView(saveHolder);
-
-            SaveSearchButton.Click += async (object sender, EventArgs e) => { 
+            ((MainActivity)(this.context)).OptionItemSelected += async (object sender, OptionItemEventArgs e) => { 
                 SearchObject searchObject = new SearchObject();
                 searchObject.SearchLocation = location;
                 searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(category.Key, category.Value);

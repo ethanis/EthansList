@@ -1934,43 +1934,46 @@ namespace EthansList.MaterialDroid
 			public const int design_snackbar_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int ic_devices_black_24dp = 2130837593;
+			public const int ic_action_content_save = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_home_black_24dp = 2130837594;
+			public const int ic_devices_black_24dp = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_question_answer_black_24dp = 2130837595;
+			public const int ic_home_black_24dp = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ic_supervisor_account_black_24dp = 2130837596;
+			public const int ic_question_answer_black_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int Icon = 2130837597;
-			
-			// aapt resource value: 0x7f020065
-			public const int notification_template_icon_bg = 2130837605;
+			public const int ic_supervisor_account_black_24dp = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int placeholder = 2130837598;
+			public const int Icon = 2130837598;
+			
+			// aapt resource value: 0x7f020066
+			public const int notification_template_icon_bg = 2130837606;
 			
 			// aapt resource value: 0x7f02005f
-			public const int progress_medium_holo = 2130837599;
+			public const int placeholder = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int ptrsharp_serious_business_gradient = 2130837600;
+			public const int progress_medium_holo = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int serious_business_arrow = 2130837601;
+			public const int ptrsharp_serious_business_gradient = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int serious_business_arrow2 = 2130837602;
+			public const int serious_business_arrow = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int spinner_20_inner_holo = 2130837603;
+			public const int serious_business_arrow2 = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int spinner_20_outer_holo = 2130837604;
+			public const int spinner_20_inner_holo = 2130837604;
+			
+			// aapt resource value: 0x7f020065
+			public const int spinner_20_outer_holo = 2130837605;
 			
 			static Drawable()
 			{
@@ -2191,6 +2194,9 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0x7f0a0073
 			public const int media_actions = 2131361907;
+			
+			// aapt resource value: 0x7f0a0086
+			public const int menu_share = 2131361926;
 			
 			// aapt resource value: 0x7f0a0036
 			public const int middle = 2131361846;
@@ -2605,6 +2611,9 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0x7f0c0000
 			public const int NavMenu = 2131492864;
+			
+			// aapt resource value: 0x7f0c0001
+			public const int Save = 2131492865;
 			
 			static Menu()
 			{
