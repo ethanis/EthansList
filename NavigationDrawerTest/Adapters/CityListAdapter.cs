@@ -6,26 +6,26 @@ using System.Linq;
 using EthansList.Shared;
 using Android.Content;
 using Android.Views;
+using System.Collections.ObjectModel;
 
 namespace EthansList.MaterialDroid
 {
     public class CityListAdapter : BaseAdapter<Location>
     {
         readonly Context _context;
-        IEnumerable<Location> cities;
-        LayoutInflater layoutInflater;
+        public IEnumerable<Location> Cities { get; set; }
 
         public CityListAdapter(Context context, IEnumerable<Location> cities)
         {
-            this.cities = cities;
-            this._context = context;
+            this.Cities = cities;
+            _context = context;
         }
 
-        public override Location this[int index]
+        public override Location this[int position]
         {
             get
             {
-                return cities.ElementAt(index);
+                return Cities.ElementAt(position);
             }
         }
 
@@ -33,7 +33,7 @@ namespace EthansList.MaterialDroid
         {
             get
             {
-                return cities.Count();
+                return Cities.Count();
             }
         }
 
@@ -50,7 +50,7 @@ namespace EthansList.MaterialDroid
                 view = new CityPickerRow(_context);
             }
 
-            view.ItemLabel.Text = cities.ElementAt(position).SiteName;
+            view.ItemLabel.Text = Cities.ElementAt(position).SiteName;
 
             return view;
         }

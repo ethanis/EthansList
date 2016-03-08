@@ -11,7 +11,7 @@ namespace EthansList.MaterialDroid
     public class NumberPickerDialogFragment : DialogFragment
     {
         private readonly Context _context;
-        private readonly NumberPicker.IOnValueChangeListener _listener;
+        //private readonly NumberPicker.IOnValueChangeListener _listener;
         private readonly string _title, _callerKey;
         private readonly NumberPickerOptions _options;
 

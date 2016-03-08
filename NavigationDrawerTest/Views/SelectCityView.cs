@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace EthansList.MaterialDroid
         ListView city_picker, state_picker;
         Context context;
         CityListAdapter cityAdapter;
-        StateListAdapter stateAdapter;
         protected string state;
 
 
@@ -61,13 +61,14 @@ namespace EthansList.MaterialDroid
 
             city_picker = new ListView(context);
             city_picker.LayoutParameters = p;
-            city_picker.Adapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state));
+            cityAdapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state));
+            city_picker.Adapter = cityAdapter;
             AddView(city_picker);
 
             state_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 state = locations.States.ElementAt(e.Position);
-                cityAdapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state));
-                city_picker.Adapter = cityAdapter;
+                cityAdapter.Cities = locations.PotentialLocations.Where(l => l.State.Equals(state));
+                cityAdapter.NotifyDataSetChanged();
             };
 
             city_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
