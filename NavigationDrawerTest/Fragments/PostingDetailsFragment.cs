@@ -93,6 +93,21 @@ namespace EthansList.MaterialDroid
                 StartActivity(intent);
             };
 
+            ((MainActivity)this.Activity).OptionItemSelected += async (object sender, OptionItemEventArgs e) => {
+                if (e.Item.TitleFormatted.ToString() == "Save")
+                {
+                    await MainActivity.databaseConnection.AddNewListingAsync(Posting.PostTitle,
+                                                                       Posting.Description,
+                                                                       Posting.Link,
+                                                                       Posting.ImageLink,
+                                                                       Posting.Date);
+                    if (MainActivity.databaseConnection.StatusCode == codes.ok)
+                        Toast.MakeText(this.Activity, string.Format("Saved Posting!"), ToastLength.Short).Show();
+                    else
+                        Toast.MakeText(this.Activity, string.Format("Oops, something went wrong"), ToastLength.Short).Show();
+                }
+            };
+
             ScrollView viewContainer = new ScrollView(this.Activity);
             viewContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
 
