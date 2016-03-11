@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class SearchResultsFragment : Android.Support.V4.App.Fragment
     {

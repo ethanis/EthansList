@@ -14,7 +14,7 @@ using Android.Widget;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class GestureRecognizerView : View
     {

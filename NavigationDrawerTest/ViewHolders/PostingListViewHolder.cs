@@ -1,6 +1,6 @@
 ﻿using Android.Widget;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class PostingListViewHolder : Java.Lang.Object
     {

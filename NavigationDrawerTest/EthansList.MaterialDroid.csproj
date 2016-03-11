@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>EthansList.MaterialDroid</RootNamespace>
+    <RootNamespace>EthansList.Droid</RootNamespace>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>

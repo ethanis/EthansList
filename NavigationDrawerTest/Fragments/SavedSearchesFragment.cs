@@ -15,7 +15,7 @@ using EthansList.Models;
 using EthansList.Shared;
 using Newtonsoft.Json;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class SavedSearchesFragment : Android.Support.V4.App.Fragment
     {

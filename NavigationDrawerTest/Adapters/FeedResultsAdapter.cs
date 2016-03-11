@@ -7,7 +7,7 @@ using Android.Widget;
 using EthansList.Models;
 using Java.Lang;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     class FeedResultsAdapter : BaseAdapter<Posting>
     {

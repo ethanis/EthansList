@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.iOS", "ethanslist.ios\EthansList.iOS.csproj", "{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.Droid", "ethanslist.android\EthansList.Droid.csproj", "{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.UITests", "ethanslist.UITests\ethanslist.UITests.csproj", "{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthansList.Shared", "EthanList.SharedProject\EthansList.Shared.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
@@ -45,15 +43,6 @@ Global
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhone.Build.0 = Release|Any CPU
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6D0E1DC5-29BA-40BE-8255-EFF22FAA3D19}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{8B4EFD92-DF86-4022-A4CC-E20B6E8ADC9B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU

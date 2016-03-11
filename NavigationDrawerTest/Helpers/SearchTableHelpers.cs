@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class SearchRow
     {

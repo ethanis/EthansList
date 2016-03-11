@@ -13,7 +13,7 @@ using Android.Support.Design.Widget;
 using EthansList.Shared;
 using EthansList.Models;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
 	[Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : AppCompatActivity

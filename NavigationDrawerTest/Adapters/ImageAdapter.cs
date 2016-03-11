@@ -3,7 +3,7 @@ using Android.Widget;
 using Android.Content;
 using System.Collections.Generic;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class ImageAdapter : BaseAdapter
     {

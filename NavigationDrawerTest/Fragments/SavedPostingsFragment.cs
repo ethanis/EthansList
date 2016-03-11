@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Models;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class SavedPostingsFragment : Android.Support.V4.App.Fragment
     {

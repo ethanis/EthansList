@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.Widget;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class SavedSearchesViewHolder : Java.Lang.Object
     {

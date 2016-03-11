@@ -6,7 +6,7 @@ using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class ComboPickerDialogFragment : DialogFragment
     {

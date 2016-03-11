@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using EthansList.Shared;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class CategoryListAdapter : BaseAdapter<CatTableGroup>
     {

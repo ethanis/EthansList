@@ -10,7 +10,7 @@ using Android.Widget;
 using EthansList.Models;
 using EthansList.Shared;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class PostingDetailsFragment : Android.Support.V4.App.Fragment
     {

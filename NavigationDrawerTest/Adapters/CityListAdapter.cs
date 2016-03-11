@@ -8,7 +8,7 @@ using Android.Content;
 using Android.Views;
 using System.Collections.ObjectModel;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class CityListAdapter : BaseAdapter<Location>
     {

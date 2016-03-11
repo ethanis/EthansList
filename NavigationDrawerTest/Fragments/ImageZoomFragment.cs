@@ -12,7 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class ImageZoomFragment : Android.Support.V4.App.Fragment
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using Android.Content;
 using Android.Views;
 
-namespace EthansList.MaterialDroid
+namespace EthansList.Droid
 {
     public class StateListAdapter : BaseAdapter<String>
     {
