@@ -2195,9 +2195,6 @@ namespace EthansList.MaterialDroid
 			// aapt resource value: 0x7f0a0073
 			public const int media_actions = 2131361907;
 			
-			// aapt resource value: 0x7f0a0086
-			public const int menu_share = 2131361926;
-			
 			// aapt resource value: 0x7f0a0036
 			public const int middle = 2131361846;
 			
@@ -2251,6 +2248,9 @@ namespace EthansList.MaterialDroid
 			
 			// aapt resource value: 0x7f0a000d
 			public const int satellite = 2131361805;
+			
+			// aapt resource value: 0x7f0a0086
+			public const int save_action_button = 2131361926;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int saved_postings = 2131361924;

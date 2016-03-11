@@ -38,7 +38,7 @@ namespace EthansList.MaterialDroid
 
             // Init toolbar
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-			SetSupportActionBar(toolbar);	
+            SetSupportActionBar(toolbar);   
 
 			// Attach item selected handler to navigation view
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
