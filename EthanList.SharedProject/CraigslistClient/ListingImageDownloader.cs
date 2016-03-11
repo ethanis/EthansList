@@ -13,8 +13,8 @@ using System.Diagnostics;
 #if __IOS__
 using CoreLocation;
 #elif __ANDROID__
-#endif
 using Android.Gms.Maps.Model;
+#endif
 
 namespace EthansList.Shared
 {
@@ -33,8 +33,8 @@ namespace EthansList.Shared
         #if __IOS__
         public CLLocationCoordinate2D postingCoordinates;
         #elif __ANDROID__
-        #endif
         public LatLng postingCoordinates;
+        #endif
         public string postAddress;
 
         public ListingImageDownloader(string url, string rssImageUrl)
@@ -139,9 +139,9 @@ namespace EthansList.Shared
                 postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), 
                     Convert.ToDouble(element.Attributes["data-longitude"].Value));
                 #elif __ANDROID__
-                #endif
                 postingCoordinates = new LatLng(Convert.ToDouble(element.Attributes["data-latitude"].Value),
-                                                Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                Convert.ToDouble(element.Attributes["data-longitude"].Value));
+                #endif
                 PostingMapFound = true;
             }
 

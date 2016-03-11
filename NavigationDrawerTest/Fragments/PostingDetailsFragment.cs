@@ -20,6 +20,8 @@ namespace EthansList.MaterialDroid
         public override void OnCreate(Android.OS.Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            HasOptionsMenu = true;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Android.OS.Bundle savedInstanceState)
@@ -32,8 +34,6 @@ namespace EthansList.MaterialDroid
             {
                 view.CurrentImage = Posting.ImageLink;
             }
-
-            //TODO: Add mechanism to save posting
 
             imageHelper = new ListingImageDownloader(Posting.Link, Posting.ImageLink);
             var connected = imageHelper.GetAllImagesAsync();
@@ -114,6 +114,14 @@ namespace EthansList.MaterialDroid
 
             viewContainer.AddView(view);
             return viewContainer;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            IMenuItem save_item = menu.FindItem(Resource.Id.save_action_button);
+            save_item.SetVisible(true);
+
+            base.OnPrepareOptionsMenu(menu);
         }
     }
 

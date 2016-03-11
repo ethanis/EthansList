@@ -23,6 +23,7 @@ namespace EthansList.MaterialDroid
         readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() , new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
         readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
+        public IMenu Menu { get; private set;}
         public event EventHandler<OptionItemEventArgs> OptionItemSelected;
 
         protected override void OnCreate(Bundle bundle)
@@ -55,6 +56,11 @@ namespace EthansList.MaterialDroid
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.Save, menu);
+            Menu = menu;
+
+            var save_button = Menu.FindItem(Resource.Id.save_action_button);
+            save_button.SetVisible(false);
+
             return base.OnCreateOptionsMenu(menu);
         }
 

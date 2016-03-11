@@ -23,6 +23,9 @@ namespace EthansList.MaterialDroid
         {
             var view = new CategoryPickerView(this.Activity, SelectedLocation);
 
+            //var save_button = ((MainActivity)Activity).Menu.FindItem(Resource.Id.save_action_button);
+            //save_button.SetVisible(false);
+
             return view;
         }
     }

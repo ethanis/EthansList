@@ -26,7 +26,7 @@ namespace EthansList.MaterialDroid
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            HasOptionsMenu = true;
             // Create your fragment here
         }
 
@@ -38,6 +38,14 @@ namespace EthansList.MaterialDroid
             scrollView.AddView(view);
 
             return scrollView;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            IMenuItem save_item = menu.FindItem(Resource.Id.save_action_button);
+            save_item.SetVisible(true);
+
+            base.OnPrepareOptionsMenu(menu);
         }
     }
 
