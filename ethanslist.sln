@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ethanslist.UITests", "ethan
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EthansList.Shared", "EthanList.SharedProject\EthansList.Shared.shproj", "{651A0769-36D6-4543-8235-9AEF8ABB1384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.Droid", "NavigationDrawerTest\EthansList.Droid.csproj", "{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthansList.Droid", "EthansList.Droid\EthansList.Droid.csproj", "{01A99E85-0FD2-41A8-90C6-B0A8CA1BD5D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
