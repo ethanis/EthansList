@@ -31,6 +31,8 @@ namespace EthansList.MaterialDroid
             var savedPostings = MainActivity.databaseConnection.GetAllPostingsAsync().Result;
             view.Adapter = new FeedResultsAdapter(Activity, savedPostings);
 
+            //TODO: mechanism to delete saved postings
+
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
                 var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
