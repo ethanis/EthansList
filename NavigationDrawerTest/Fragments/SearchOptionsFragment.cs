@@ -102,6 +102,7 @@ namespace EthansList.MaterialDroid
                     searchObject.MaxListings = this.MaxListings;
                     searchObject.PostedDate = this.WeeksOld;
 
+                    //TODO: Check that this doesnt add multiple instances of object
                     string serialized = JsonConvert.SerializeObject(searchObject);
                     await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serialized);
 

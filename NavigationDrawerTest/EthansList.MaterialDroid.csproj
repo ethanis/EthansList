@@ -92,7 +92,6 @@
     <Compile Include="Adapters\StateListAdapter.cs" />
     <Compile Include="ViewHolders\PostingListViewHolder.cs" />
     <Compile Include="ViewHolders\SavedSearchesViewHolder.cs" />
-    <Compile Include="Helpers\GestureRecognizerView.cs" />
     <Compile Include="Helpers\MyScaleListener.cs" />
     <Compile Include="Helpers\Reachability.cs" />
     <Compile Include="Helpers\ScaleImageView.cs" />
@@ -112,6 +111,8 @@
     <Compile Include="Fragments\RecentCityFragment.cs" />
     <Compile Include="Fragments\SavedPostingsFragment.cs" />
     <Compile Include="Fragments\SavedSearchesFragment.cs" />
+    <Compile Include="Fragments\ImageZoomFragment.cs" />
+    <Compile Include="Views\GestureRecognizerView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -86,11 +86,22 @@ namespace EthansList.MaterialDroid
             view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
             view.WebLink.Text = Posting.Link;
 
+            //TODO: move to a self contained webview
             view.WebLink.Click += (sender, e) => {
                 var intent = new Intent();      
                 intent.SetAction(Intent.ActionView);
                 intent.SetData(Android.Net.Uri.Parse(Posting.Link));
                 StartActivity(intent);
+            };
+
+            view.PostingImage.Click += (sender, e) => { 
+                var transaction = Activity.SupportFragmentManager.BeginTransaction();
+                ImageZoomFragment zoomFragment = new ImageZoomFragment();
+                zoomFragment.ImageUrl = view.CurrentImage;
+
+                transaction.Replace(Resource.Id.frameLayout, zoomFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
 
             ((MainActivity)this.Activity).OptionItemSelected += async (object sender, OptionItemEventArgs e) => {
@@ -225,6 +236,7 @@ namespace EthansList.MaterialDroid
             PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
             AddRowItem(PostingDescription, textRowParams);
 
+            //TODO Added mapview to details
             PostingMap = new MapView(_context);
             //AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
 
