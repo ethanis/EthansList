@@ -26,9 +26,12 @@ namespace EthansList.Droid
         public IMenu Menu { get; private set;}
         public event EventHandler<OptionItemEventArgs> OptionItemSelected;
 
+        public static Context Instance { get; private set;}
+
         protected override void OnCreate(Bundle bundle)
 		{			
             base.OnCreate(bundle);
+            Instance = this;
 
             string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
@@ -41,14 +44,14 @@ namespace EthansList.Droid
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);   
 
-			// Attach item selected handler to navigation view
+            // Attach item selected handler to navigation view
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-			navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
+            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
-			// Create ActionBarDrawerToggle button and add it to the toolbar
-			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
-			drawerLayout.SetDrawerListener(drawerToggle);
-			drawerToggle.SyncState();
+            // Create ActionBarDrawerToggle button and add it to the toolbar
+            var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
+            drawerLayout.SetDrawerListener(drawerToggle);
+            drawerToggle.SyncState();
 
             base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
 		}

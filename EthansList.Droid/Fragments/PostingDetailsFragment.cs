@@ -39,8 +39,16 @@ namespace EthansList.Droid
             var connected = imageHelper.GetAllImagesAsync();
             if (!connected)
             { 
-                //TODO: handle no network connection here
-                Console.WriteLine("Not connectioned to network");
+                var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
+
+                builder.SetTitle("No internet connection")
+                    .SetMessage("Please connect and try again")
+                    .SetPositiveButton("Ok", delegate
+                    {
+                        Console.WriteLine("Not connected");
+                    });
+
+                builder.Create().Show();
             }
 
             imageHelper.loadingComplete += (sender, e) =>

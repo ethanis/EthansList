@@ -38,47 +38,58 @@ namespace EthansList.Droid
             var connected = feedClient.GetAllPostingsAsync();
 
             if (!connected)
-            { 
-                var builder = new Android.Support.V7.App.AlertDialog.Builder (this.Activity);
-
-                builder.SetTitle("No internet connectiong")
-                    .SetMessage("Please connect and try again")
-                    .SetPositiveButton("Ok", delegate { Console.WriteLine("Yes"); });
-                
-                builder.Create().Show ();
-            }
-
-            var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
-            new Thread(new ThreadStart(delegate
             {
-                //HIDE PROGRESS DIALOG
-                feedClient.asyncLoadingComplete += (object sender, EventArgs e) => {
-                    this.Activity.RunOnUiThread(() => {
-                        progressDialog.Hide();
-                    });
-                    Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
-                    feedAdapter = new FeedResultsAdapter(this.Activity, feedClient.postings);
-                    this.Activity.RunOnUiThread(() => {
-                        view.Adapter = feedAdapter;
-                    });
-                };
+                var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
 
-                feedClient.emptyPostingComplete += (object sender, EventArgs e) => {
-                    this.Activity.RunOnUiThread(() => progressDialog.Hide());
-
-                    var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
-                    builder.SetTitle("Error loading listings");
-                    builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
-                    builder.SetPositiveButton("Ok", delegate {
+                builder.SetTitle("No internet connection")
+                    .SetMessage("Please connect and try again")
+                    .SetPositiveButton("Ok", delegate
+                    {
                         this.FragmentManager.PopBackStack();
                     });
 
-                    this.Activity.RunOnUiThread(() => {
-                        builder.Create().Show();
-                    });
-                };
+                builder.Create().Show();
+            }
+            else
+            {
+                var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
+                new Thread(new ThreadStart(delegate
+                {
+                //HIDE PROGRESS DIALOG
+                feedClient.asyncLoadingComplete += (object sender, EventArgs e) =>
+                    {
+                        this.Activity.RunOnUiThread(() =>
+                        {
+                            progressDialog.Hide();
+                        });
+                        Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
+                        feedAdapter = new FeedResultsAdapter(this.Activity, feedClient.postings);
+                        this.Activity.RunOnUiThread(() =>
+                        {
+                            view.Adapter = feedAdapter;
+                        });
+                    };
 
-            })).Start();
+                    feedClient.emptyPostingComplete += (object sender, EventArgs e) =>
+                    {
+                        this.Activity.RunOnUiThread(() => progressDialog.Hide());
+
+                        var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
+                        builder.SetTitle("Error loading listings");
+                        builder.SetMessage(String.Format("No listings found.{0}Try a different search", System.Environment.NewLine));
+                        builder.SetPositiveButton("Ok", delegate
+                        {
+                            this.FragmentManager.PopBackStack();
+                        });
+
+                        this.Activity.RunOnUiThread(() =>
+                        {
+                            builder.Create().Show();
+                        });
+                    };
+
+                })).Start();
+            }
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
                 var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
