@@ -36,7 +36,7 @@ namespace EthansList.Droid
             base(context)
         {
             this.context = context;
-            rowHeight = ConvertDpToPx(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
+            rowHeight = PixelConverter.DpToPixels(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
@@ -105,11 +105,6 @@ namespace EthansList.Droid
 
                 AddView(row);
             }
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * context.Resources.DisplayMetrics.Density);
         }
     }
 

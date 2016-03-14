@@ -39,14 +39,8 @@ namespace EthansList.Droid
             _scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 
             var metrics = Resources.DisplayMetrics;
-            _posX = GetCornerPosition(ConvertPixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
-            _posY = GetCornerPosition(ConvertPixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
-        }
-
-        private int ConvertPixelsToDp(float pixelValue)
-        {
-            var dp = (int) ((pixelValue)/Resources.DisplayMetrics.Density);
-            return dp;
+            _posX = GetCornerPosition(PixelConverter.PixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
+            _posY = GetCornerPosition(PixelConverter.PixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
         }
 
         private int GetCornerPosition(int screenWidth, int imageWidth)

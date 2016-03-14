@@ -63,7 +63,7 @@ namespace EthansList.Droid
         {
             _context = context;
             _recentCities = recentCities;
-            rowHeight = ConvertDpToPx(_context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
+            rowHeight = PixelConverter.DpToPixels(_context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
         }
 
         public override RecentCity this[int position]
@@ -102,11 +102,6 @@ namespace EthansList.Droid
             view.Text = _recentCities[position].City;
 
             return view;
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }

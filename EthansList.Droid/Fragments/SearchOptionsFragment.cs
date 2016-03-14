@@ -490,7 +490,7 @@ namespace EthansList.Droid
                     display.LayoutParameters = f;
                     display.Gravity = GravityFlags.Right;
                     display.Text = "Any";
-                    display.SetPadding(0,0,ConvertDpToPx(50),0);
+                    display.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
 
                     var dialog = new NumberPickerDialogFragment(context, item.Title, item.NumberPickerOptions, item.QueryPrefix);
                     display.Click += (object sender, EventArgs e) => 
@@ -514,7 +514,7 @@ namespace EthansList.Droid
                     comboLabel.LayoutParameters = f;
                     comboLabel.Gravity = GravityFlags.Right;
                     comboLabel.Text = "Any";
-                    comboLabel.SetPadding(0,0,ConvertDpToPx(50),0);
+                    comboLabel.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
 
                     var comboDialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
 
@@ -552,7 +552,7 @@ namespace EthansList.Droid
                     catLabel.LayoutParameters = f;
                     catLabel.Gravity = GravityFlags.Right;
                     catLabel.Text = (string)item.ComboPickerOptions.First().Key;
-                    catLabel.SetPadding(0,0,ConvertDpToPx(50),0);
+                    catLabel.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
 
                     if (item.Title == "Sub Category")
                         SubCategory = item.ComboPickerOptions.First();
@@ -587,7 +587,7 @@ namespace EthansList.Droid
                 case SearchRowTypes.Space:
                     View strut = new View(context);
                     strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 
-                                                                        ConvertDpToPx(25));
+                                                                        PixelConverter.DpToPixels(25));
                     row.ShowDividers = ShowDividers.None;
                     row.AddView(strut);
                 break;
@@ -619,11 +619,6 @@ namespace EthansList.Droid
             title.SetPadding(10,0,10,0);
 
             return title;
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * context.Resources.DisplayMetrics.Density);
         }
 
         private void AddSearchItem (string itemKey, string itemValue)

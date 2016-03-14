@@ -137,7 +137,7 @@ namespace EthansList.Droid
             :base(context)
         {
             _context = context;
-            rowHeight = ConvertDpToPx(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
+            rowHeight = PixelConverter.DpToPixels(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
@@ -157,11 +157,6 @@ namespace EthansList.Droid
             SearchTerms.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
             SearchTerms.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
             AddView(SearchTerms);
-        }
-        
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }

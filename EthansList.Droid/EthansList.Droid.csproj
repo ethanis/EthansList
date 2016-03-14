@@ -113,6 +113,7 @@
     <Compile Include="Fragments\SavedSearchesFragment.cs" />
     <Compile Include="Fragments\ImageZoomFragment.cs" />
     <Compile Include="Views\GestureRecognizerView.cs" />
+    <Compile Include="Helpers\PixelConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

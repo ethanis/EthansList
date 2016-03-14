@@ -22,7 +22,7 @@ namespace EthansList.Droid
             _context = context;
             _title = title;
             _options = options;
-            rowParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ConvertDpToPx(40));
+            rowParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, PixelConverter.DpToPixels(40));
             textParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
         }
 
@@ -61,7 +61,7 @@ namespace EthansList.Droid
 
             var text = new TextView(_context);
             text.Text = (string)option.Key;
-            text.SetPadding(ConvertDpToPx(20),0,0,0);
+            text.SetPadding(PixelConverter.DpToPixels(20),0,0,0);
             text.LayoutParameters = textParams;
             text.Gravity = GravityFlags.CenterVertical;
 
@@ -73,11 +73,6 @@ namespace EthansList.Droid
 
             row.AddView(text);
             return row;
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 

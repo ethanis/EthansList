@@ -67,7 +67,7 @@ namespace EthansList.Droid
             :base (context)
         {
             _context = context;
-            rowHeight = ConvertDpToPx(_context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
+            rowHeight = PixelConverter.DpToPixels(_context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
@@ -82,11 +82,6 @@ namespace EthansList.Droid
 
             ItemLabel.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             AddView(ItemLabel);
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 }

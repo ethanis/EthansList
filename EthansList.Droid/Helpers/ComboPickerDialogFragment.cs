@@ -81,7 +81,7 @@ namespace EthansList.Droid
         {
             this.Orientation = Orientation.Horizontal;
             this.WeightSum = 1;
-            this.LayoutParameters = new ListView.LayoutParams(LayoutParams.MatchParent, ConvertDpToPx(40));
+            this.LayoutParameters = new ListView.LayoutParams(LayoutParams.MatchParent, PixelConverter.DpToPixels(40));
 
             var text = new TextView(_context) { Text = (string)title.Key };
             text.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
@@ -99,7 +99,7 @@ namespace EthansList.Droid
                 checkbox.Checked = true;
 
             checkbox.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.MatchParent);
-            checkbox.SetPadding(0,0, ConvertDpToPx(15), 0);
+            checkbox.SetPadding(0,0, PixelConverter.DpToPixels(15), 0);
             checkBoxPlacer.AddView(checkbox);
 
             checkbox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
@@ -110,11 +110,6 @@ namespace EthansList.Droid
             };
 
             AddView(checkBoxPlacer);
-        }
-
-        private int ConvertDpToPx(float dip)
-        {
-            return (int)(dip * _context.Resources.DisplayMetrics.Density);
         }
     }
 
