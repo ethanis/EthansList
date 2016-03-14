@@ -14,8 +14,19 @@ namespace ethanslist.UITests
         readonly string DoneButton = "Done";
 
         public SearchOptionsPage()
-            : base ("androidTrait", "save.png")
+            : base ("Search Terms", "save.png")
         {
+            if (OnAndroid)
+            {
+                SaveButton = "save_action_button";
+                SearchTermsField = x => x.Class("TextView").Index(2);
+                MinPriceField = x => x.Marked("Price").Sibling().Descendant().Index(1);
+                MaxPriceField = x => x.Marked("Price").Sibling().Descendant().Index(2);
+                MinBedroomsField = x => x.Marked("Bedrooms").Sibling();
+                MinBathroomsField = x => x.Marked("Bathrooms").Sibling();
+                PostedDateField = x => x.Marked("Posted Date").Sibling();
+                MaxListingsField = x => x.Marked("Max Listings").Sibling();
+            }
             if (OniOS)
             {
                 SaveButton = "save.png";
@@ -31,7 +42,11 @@ namespace ethanslist.UITests
 
         public SearchOptionsPage VerifyOnLocation(string state)
         {
-            app.WaitForElement(string.Format("Search {0} for:", state));
+            if (OniOS)
+                app.WaitForElement(string.Format("Search {0} for:", state));
+            if (OnAndroid)
+                app.WaitForElement(string.Format("Search {0} for: ", state));
+            
             app.Screenshot("Verified searching: " + state);
             return this;
         }

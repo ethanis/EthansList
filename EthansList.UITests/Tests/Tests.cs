@@ -20,7 +20,7 @@ namespace ethanslist.UITests
             string state = "California";
             string area = "San Francisco Bay Area";
             string title = String.Empty;
-            string cat = "free";
+            string cat = "real estate for sale";
 
             new CityPickerPage()
                 .SelectState(state)
@@ -28,7 +28,7 @@ namespace ethanslist.UITests
 
             new CategoryPickerPage()
                 .SelectCategory(cat);
-
+            
             new SearchOptionsPage()
                 .VerifyOnLocation(area)
                 .ProceedToSearch();
