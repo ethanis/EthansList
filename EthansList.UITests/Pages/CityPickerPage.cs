@@ -12,7 +12,7 @@ namespace ethanslist.UITests
         readonly string MenuButton;
 
         public CityPickerPage()
-            : base ("androidTrait", "Select City")
+            : base (x => x.Class("CityPickerRow"),x => x.Marked("Select City"))
         {
             if (OniOS)
             {
@@ -24,8 +24,17 @@ namespace ethanslist.UITests
 
         public CityPickerPage SelectState(string state)
         {
-            app.ScrollDownTo(state, "StatePickTableView", timeout: TimeSpan.FromSeconds(20));
-            app.Tap(state);
+            if (OniOS)
+            {
+                app.ScrollDownTo(state, "StatePickTableView", timeout: TimeSpan.FromSeconds(20));
+                app.Tap(state);
+            }
+            else
+            { 
+                app.ScrollDownTo(x=>x.Marked(state), x => x.Class("ListView").Index(0), timeout: TimeSpan.FromSeconds(20));
+                app.Tap(state);
+
+            }
             Thread.Sleep(500);
             app.Screenshot("Selected state: " + state);
 
@@ -34,8 +43,18 @@ namespace ethanslist.UITests
 
         public CityPickerPage SelectCity(string city)
         {
-            app.ScrollDownTo(city, "CityPickTableView", timeout: TimeSpan.FromSeconds(60));
-            app.Tap(city);
+            if (OniOS)
+            {
+                app.ScrollDownTo(city, "CityPickTableView", timeout: TimeSpan.FromSeconds(20));
+                app.Tap(city);
+            }
+            else
+            {
+                app.ScrollDownTo(x => x.Marked(city), x => x.Class("ListView").Index(1), timeout: TimeSpan.FromSeconds(20));
+                app.Tap(city);
+
+            }
+
             Thread.Sleep(500);
             app.Screenshot("Selected city: " + city);
 

@@ -60,12 +60,4 @@
     <Folder Include="Tests\" />
     <Folder Include="Pages\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ethanslist.ios\EthansList.iOS.csproj">
-      <Project>{2DCD9433-2BB0-4254-8379-DCCCF27CB9DE}</Project>
-      <Name>EthansList.iOS</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

@@ -26,6 +26,7 @@ namespace ethanslist.UITests
             {
                 app = ConfigureApp
 					.Android
+                    .ApkFile("../../../EthansList.Droid/bin/Release/com.xamarin.ethanslist-Signed.apk")
 					.StartApp();
             }
             else
