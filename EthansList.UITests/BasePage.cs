@@ -94,7 +94,10 @@ namespace ethanslist.UITests
 
         public virtual void GoBack()
         {
-            app.Tap(BackButton);
+            if (OniOS)
+                app.Tap(BackButton);
+            if (OnAndroid)
+                app.Back();
         }
 
         #endregion

@@ -56,6 +56,14 @@ namespace EthansList.Droid
             base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
 		}
 
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+
+            //this clears the event handler for lingering subscriptions
+            OptionItemSelected = null;
+        }
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.Save, menu);
@@ -108,5 +116,10 @@ namespace EthansList.Droid
     public class OptionItemEventArgs : EventArgs
     {
         public IMenuItem Item { get; set; }
+
+        public static explicit operator OptionItemEventArgs(Delegate v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace ethanslist.UITests
             new CityPickerPage()
                 .SelectState(state)
                 .SelectCity(area);
-
+            app.Repl();
             new CategoryPickerPage()
                 .SelectCategory(cat);
             
@@ -35,7 +35,7 @@ namespace ethanslist.UITests
 
             new FeedResultsPage()
                 .SelectFirstListing();
-
+            
             title = new PostingDetailsPage().GetListingTitle();
 
             new PostingDetailsPage()

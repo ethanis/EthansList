@@ -13,8 +13,13 @@ namespace ethanslist.UITests
         readonly Query TitleLabel;
 
         public PostingDetailsPage()
-            : base ("androidTrait", "Posting Info")
+            : base ("save_action_button", "Posting Info")
         {
+            if (OnAndroid)
+            {
+                SaveButton = x => x.Id("save_action_button");
+                TitleLabel = x => x.Class("TextView").Index(1);
+            }
             if (OniOS)
             {
                 SaveButton = x => x.Id("save.png");
@@ -26,14 +31,24 @@ namespace ethanslist.UITests
         public PostingDetailsPage SaveListing()
         {
             app.Tap(SaveButton);
-            app.WaitForElement("Listing Saved!");
             app.Screenshot("Tapped Save Button");
-            app.Tap("OK");
-            app.Screenshot("Dismissed Dialog");
 
-            var result = app.Query(SaveButton)[0].Enabled;
-            Assert.IsFalse(result, "Save button not disabled after save");
+            if (OniOS)
+                app.WaitForElement("Listing Saved!");
+            if (OnAndroid)
+                app.WaitForElement("Saved Posting!");
 
+            if (OniOS)
+            {
+                app.Tap("OK");
+                app.Screenshot("Dismissed Dialog");
+                var result = app.Query(SaveButton)[0].Enabled;
+                Assert.IsFalse(result, "Save button not disabled after save");
+            }
+            if (OnAndroid)
+            {
+                //TODO: implement this for android
+            }
             return this;
         }
 
@@ -60,7 +75,12 @@ namespace ethanslist.UITests
 
         public void ExitListing()
         {
-            app.Tap(DoneButton);
+            if (OniOS)
+            {
+                app.Tap(DoneButton);
+            }
+            if (OnAndroid)
+                app.Back();
         }
     }
 }

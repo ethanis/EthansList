@@ -86,39 +86,43 @@ namespace EthansList.Droid
             Initialize();
         }
 
+        async void OnOptionItemSelected(object sender, OptionItemEventArgs e)
+        {
+            if (e.Item.TitleFormatted.ToString() == "Save")
+            {
+                SearchObject searchObject = new SearchObject();
+                searchObject.SearchLocation = location;
+                searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(category.Key, category.Value);
+                searchObject.SearchItems = this.SearchItems;
+                searchObject.Conditions = this.Conditions;
+                searchObject.MaxListings = this.MaxListings;
+                searchObject.PostedDate = this.WeeksOld;
+
+                //TODO: Check that this doesnt add multiple instances of object
+                string serialized = JsonConvert.SerializeObject(searchObject);
+                await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serialized);
+
+                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+
+                if (MainActivity.databaseConnection.StatusCode == Models.codes.ok)
+                {
+                    Toast.MakeText(context, "Search Saved!", ToastLength.Short).Show();
+                }
+                else
+                {
+                    var message = string.Format("Oops, something went wrong{0}Please try again...", System.Environment.NewLine);
+                    Toast.MakeText(context, message, ToastLength.Short).Show();
+                }
+            }
+        }
+
         void Initialize()
         {
             this.Orientation = Orientation.Vertical;
             this.WeightSum = 1;
 
-            ((MainActivity)(this.context)).OptionItemSelected += async (object sender, OptionItemEventArgs e) => {
-                if (e.Item.TitleFormatted.ToString() == "Save")
-                {
-                    SearchObject searchObject = new SearchObject();
-                    searchObject.SearchLocation = location;
-                    searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(category.Key, category.Value);
-                    searchObject.SearchItems = this.SearchItems;
-                    searchObject.Conditions = this.Conditions;
-                    searchObject.MaxListings = this.MaxListings;
-                    searchObject.PostedDate = this.WeeksOld;
-
-                    //TODO: Check that this doesnt add multiple instances of object
-                    string serialized = JsonConvert.SerializeObject(searchObject);
-                    await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serialized);
-
-                    Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
-
-                    if (MainActivity.databaseConnection.StatusCode == Models.codes.ok)
-                    {
-                        Toast.MakeText(context, "Search Saved!", ToastLength.Short).Show();
-                    }
-                    else
-                    {
-                        var message = string.Format("Oops, something went wrong{0}Please try again...", System.Environment.NewLine);
-                        Toast.MakeText(context, message, ToastLength.Short).Show();
-                    }
-                }
-            };
+            //Event handler is detached in proceed button handler. Very important!
+            ((MainActivity)(this.context)).OptionItemSelected += OnOptionItemSelected;
 
             SearchCityText = new TextView(context);
             SearchCityText.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
@@ -159,6 +163,8 @@ namespace EthansList.Droid
             resultsFragment.Query = queryHelper.Generate(searchObject);
             resultsFragment.MaxListings = MaxListings;
             resultsFragment.WeeksOld = WeeksOld;
+
+            ((MainActivity)(this.context)).OptionItemSelected -= OnOptionItemSelected;
 
             transaction.Replace(Resource.Id.frameLayout, resultsFragment);
             transaction.AddToBackStack(null);

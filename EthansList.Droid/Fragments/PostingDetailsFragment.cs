@@ -112,27 +112,30 @@ namespace EthansList.Droid
                 transaction.Commit();
             };
 
-            ((MainActivity)this.Activity).OptionItemSelected += async (object sender, OptionItemEventArgs e) => {
-                if (e.Item.TitleFormatted.ToString() == "Save")
-                {
-                    await MainActivity.databaseConnection.AddNewListingAsync(Posting.PostTitle,
-                                                                       Posting.Description,
-                                                                       Posting.Link,
-                                                                       Posting.ImageLink,
-                                                                       Posting.Date);
-                    
-                    if (MainActivity.databaseConnection.StatusCode == codes.ok)
-                        Toast.MakeText(this.Activity, string.Format("Saved Posting!"), ToastLength.Short).Show();
-                    else
-                        Toast.MakeText(this.Activity, string.Format("Oops, something went wrong"), ToastLength.Short).Show();
-                }
-            };
+            ((MainActivity)this.Activity).OptionItemSelected += OnOptionItemSelected;
 
             ScrollView viewContainer = new ScrollView(this.Activity);
             viewContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
 
             viewContainer.AddView(view);
             return viewContainer;
+        }
+
+        async void OnOptionItemSelected(object sender, OptionItemEventArgs e)
+        {
+            if (e.Item.TitleFormatted.ToString() == "Save")
+            {
+                await MainActivity.databaseConnection.AddNewListingAsync(Posting.PostTitle,
+                                                                   Posting.Description,
+                                                                   Posting.Link,
+                                                                   Posting.ImageLink,
+                                                                   Posting.Date);
+
+                if (MainActivity.databaseConnection.StatusCode == codes.ok)
+                    Toast.MakeText(this.Activity, string.Format("Saved Posting!"), ToastLength.Short).Show();
+                else
+                    Toast.MakeText(this.Activity, string.Format("Oops, something went wrong"), ToastLength.Short).Show();
+            }
         }
 
         public override void OnPrepareOptionsMenu(IMenu menu)

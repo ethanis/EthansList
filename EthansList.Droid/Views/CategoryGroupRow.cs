@@ -70,7 +70,6 @@ namespace EthansList.Droid
             headerLabel.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
             headerLabel.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
 
-
             row.AddView(headerLabel);
 
             AddView(row);
