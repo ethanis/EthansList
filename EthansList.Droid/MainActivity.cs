@@ -58,10 +58,9 @@ namespace EthansList.Droid
 
         public override void OnBackPressed()
         {
-            base.OnBackPressed();
-
             //this clears the event handler for lingering subscriptions
             OptionItemSelected = null;
+            base.OnBackPressed();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

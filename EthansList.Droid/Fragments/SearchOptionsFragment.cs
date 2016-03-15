@@ -81,7 +81,7 @@ namespace EthansList.Droid
             this.category = category;
 
             SearchItems = new Dictionary<string, string>();
-            Conditions = new Dictionary<object,  KeyValuePair<object, object>>();
+            Conditions = new Dictionary<object, KeyValuePair<object, object>>();
 
             Initialize();
         }
@@ -98,7 +98,6 @@ namespace EthansList.Droid
                 searchObject.MaxListings = this.MaxListings;
                 searchObject.PostedDate = this.WeeksOld;
 
-                //TODO: Check that this doesnt add multiple instances of object
                 string serialized = JsonConvert.SerializeObject(searchObject);
                 await MainActivity.databaseConnection.AddNewSearchAsync(location.Url, serialized);
 
