@@ -115,6 +115,7 @@
     <Compile Include="Fragments\ImageZoomFragment.cs" />
     <Compile Include="Views\GestureRecognizerView.cs" />
     <Compile Include="Helpers\PixelConverter.cs" />
+    <Compile Include="Fragments\WebviewFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

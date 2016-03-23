@@ -94,12 +94,14 @@ namespace EthansList.Droid
             view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
             view.WebLink.Text = Posting.Link;
 
-            //TODO: move to a self contained webview
             view.WebLink.Click += (sender, e) => {
-                var intent = new Intent();      
-                intent.SetAction(Intent.ActionView);
-                intent.SetData(Android.Net.Uri.Parse(Posting.Link));
-                StartActivity(intent);
+                var transaction = Activity.SupportFragmentManager.BeginTransaction();
+                WebviewFragment webviewFragment = new WebviewFragment();
+                webviewFragment.Link = Posting.Link;
+
+                transaction.Replace(Resource.Id.frameLayout, webviewFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
 
             view.PostingImage.Click += (sender, e) => { 
