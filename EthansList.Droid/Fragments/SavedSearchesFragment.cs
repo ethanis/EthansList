@@ -20,6 +20,7 @@ namespace EthansList.Droid
     public class SavedSearchesFragment : Android.Support.V4.App.Fragment
     {
         private List<Search> savedSearches;
+        private List<SearchObject> deserialized;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,12 +31,10 @@ namespace EthansList.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            //var view = new TextView(this.Activity) { Text = "Saved Searches" };
             var view = new ListView(this.Activity);
 
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
-            //TODO: make this into an async call
-            var deserialized = DeserializeSearches(savedSearches);
+            deserialized = DeserializeSearches(savedSearches).Result;
             view.Adapter = new SavedSearchesAdapter(this.Activity, deserialized);
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
@@ -55,25 +54,25 @@ namespace EthansList.Droid
             return view;
         }
 
-        private List<SearchObject> DeserializeSearches(List<Search> savedSearches)
+        private Task<List<SearchObject>> DeserializeSearches(List<Search> savedSearches)
         {
             List<SearchObject> searchObjects = new List<SearchObject>();
-            //await Task.Run(() =>
-            //{
-            foreach (Search search in savedSearches)
+            return Task.Run(() =>
             {
-                try
+                foreach (Search search in savedSearches)
                 {
-                    searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
+                    try
+                    {
+                        searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
+                    }
+                    catch (Exception ex)
+                    { 
+                        Console.WriteLine(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                { 
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            //});
+                return searchObjects;
+            });
 
-            return searchObjects;
         }
     }
 
@@ -132,6 +131,7 @@ namespace EthansList.Droid
 
         public TextView CityTitle { get; set; }
         public TextView SearchTerms { get; set; }
+        public ImageButton DeleteButton { get; set; }
 
         public SavedSearchRow(Context context)
             :base(context)
@@ -144,13 +144,28 @@ namespace EthansList.Droid
         void Initialize()
         {
             Orientation = Orientation.Vertical;
+            LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+
+            LinearLayout CityButtonHolder = new LinearLayout(_context);
+            CityButtonHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
 
             CityTitle = new TextView(_context);
-
             CityTitle.Gravity = GravityFlags.CenterVertical;
             CityTitle.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
             CityTitle.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
-            AddView(CityTitle);
+            CityButtonHolder.AddView(CityTitle);
+
+            var buttonHolder = new LinearLayout(_context);
+            buttonHolder.LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
+            buttonHolder.SetHorizontalGravity(GravityFlags.Right);
+
+            DeleteButton = new ImageButton(_context);
+            DeleteButton.SetImageResource(Android.Resource.Drawable.IcMenuDelete);
+            DeleteButton.SetBackgroundResource(0);
+            buttonHolder.AddView(DeleteButton);
+            CityButtonHolder.AddView(buttonHolder);
+
+            AddView(CityButtonHolder);
 
             SearchTerms = new TextView(_context);
             SearchTerms.Gravity = GravityFlags.CenterVertical;

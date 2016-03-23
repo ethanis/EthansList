@@ -116,9 +116,9 @@ namespace EthansList.Droid
     {
         public IMenuItem Item { get; set; }
 
-        public static explicit operator OptionItemEventArgs(Delegate v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static explicit operator OptionItemEventArgs(Delegate v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
