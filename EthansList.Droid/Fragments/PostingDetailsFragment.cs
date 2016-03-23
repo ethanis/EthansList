@@ -92,7 +92,7 @@ namespace EthansList.Droid
 
             view.PostingDescription.Text = Posting.Description;
             view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
-            view.WebLink.Text = Posting.Link;
+            view.WebLink.Text = "Original Posting";
 
             view.WebLink.Click += (sender, e) => {
                 var transaction = Activity.SupportFragmentManager.BeginTransaction();
@@ -168,7 +168,7 @@ namespace EthansList.Droid
     {
         readonly Context _context;
         //readonly LayoutParams rowParams;
-        readonly LayoutParams textRowParams;
+        readonly LayoutParams rowParams;
 
         public TextView PostingTitle { get; set; }
         public ImageView PostingImage { get; set; }
@@ -214,8 +214,7 @@ namespace EthansList.Droid
             :base (context)
         {
             _context = context;
-            //rowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            textRowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            rowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             Initialize();
         }
 
@@ -224,14 +223,14 @@ namespace EthansList.Droid
             Orientation = Orientation.Vertical;
             WeightSum = 1;
 
-            PostingTitle = new TextView(_context) { LayoutParameters = textRowParams};
+            PostingTitle = new TextView(_context) { LayoutParameters = rowParams};
             PostingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
             PostingTitle.SetPadding(10, 10, 10, 10);
             PostingTitle.SetTypeface(Typeface.DefaultBold, TypefaceStyle.Bold);
-            AddRowItem(PostingTitle, textRowParams);
+            AddRowItem(PostingTitle, rowParams);
 
-            PostingImage = new ImageView(_context) { LayoutParameters = textRowParams};
-            AddRowItem(PostingImage, textRowParams);
+            PostingImage = new ImageView(_context) { LayoutParameters = rowParams};
+            AddRowItem(PostingImage, rowParams);
 
             //TODO fix this fuckiness
             ImageCollection = new GridView(_context);
@@ -243,25 +242,25 @@ namespace EthansList.Droid
             imageScroller.AddView(ImageCollection); 
             AddRowItem(imageScroller, new LayoutParams(LayoutParams.WrapContent, 150));
 
-            PostingDescription = new TextView(_context) { LayoutParameters = textRowParams };
+            PostingDescription = new TextView(_context) { LayoutParameters = rowParams };
             PostingDescription.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
             PostingDescription.SetPadding(10, 10, 10, 10);
             PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
-            AddRowItem(PostingDescription, textRowParams);
+            AddRowItem(PostingDescription, rowParams);
 
             //TODO Added mapview to details
             PostingMap = new MapView(_context);
             //AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
 
-            PostingDate = new TextView(_context) { LayoutParameters = textRowParams };
+            PostingDate = new TextView(_context) { LayoutParameters = rowParams };
             PostingDate.SetPadding(10, 10, 10, 10);
             PostingDate.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
-            AddRowItem(PostingDate, textRowParams);
+            AddRowItem(PostingDate, rowParams);
 
-            WebLink = new TextView(_context) { LayoutParameters = textRowParams };
+            WebLink = new TextView(_context) { LayoutParameters = rowParams };
             WebLink.SetPadding(10, 10, 10, 10);
             WebLink.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
-            AddRowItem(WebLink, textRowParams);
+            AddRowItem(WebLink, rowParams);
         }
 
         private void AddRowItem(View item, LayoutParams par)
