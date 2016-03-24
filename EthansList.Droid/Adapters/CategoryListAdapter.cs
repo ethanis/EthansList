@@ -45,16 +45,11 @@ namespace EthansList.Droid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = convertView;
-            if (view == null)
-            {
-                view = new CategoryGroupRow(context);
-                ((CategoryGroupRow)view).Items = categories[position].Items;
-            }
-            ((CategoryGroupRow)view).headerLabel.Text = categories[position].Name;
+            var view = new CategoryGroupRow(context);
+            view.Items = categories[position].Items;
 
-            ((CategoryGroupRow)view).CategorySelected += (object sender, CategorySelectedEventArgs e) => 
-            { 
+            view.CategorySelected += (object sender, CategorySelectedEventArgs e) =>
+            {
                 var transaction = ((AppCompatActivity)context).SupportFragmentManager.BeginTransaction();
                 SearchOptionsFragment searchFragment = new SearchOptionsFragment();
                 searchFragment.Category = e.Selected;
@@ -63,7 +58,11 @@ namespace EthansList.Droid
                 transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
-            }; 
+            };
+
+            view.headerLabel.Text = categories[position].Name;
+
+            view.Clickable = false;
 
             return view;
         }

@@ -95,9 +95,9 @@ namespace EthansList.Droid
                 subCategory.Text = item.Value;
                 row.AddView(subCategory);
 
-                //TODO: Add selected view to row to show that it was clicked
-                row.Click += (object sender, EventArgs e) => 
-                { 
+                row.Click += (object sender, EventArgs e) =>
+                {
+                    row.SetBackgroundResource(Android.Resource.Color.HoloBlueLight);
                     if (this.CategorySelected != null)
                         this.CategorySelected(this, new CategorySelectedEventArgs { Selected = item });
                 };

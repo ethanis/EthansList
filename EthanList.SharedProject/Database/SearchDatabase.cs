@@ -18,7 +18,7 @@ namespace EthansList.Models
                     throw new Exception("Valid search required");
 
                 //insert a new person into the Person table
-                var result = await conn.InsertAsync(new Search {SerializedSearch = serialized}).ConfigureAwait(false);
+                var result = await conn.InsertAsync(new Search { SerializedSearch = serialized }).ConfigureAwait(false);
 
                 StatusMessage = string.Format("{0} search(es) added [Link: {1})", result, linkUrl);
                 StatusCode = codes.ok;
@@ -37,7 +37,7 @@ namespace EthansList.Models
 
             if (search == null)
                 Console.WriteLine("----------------------------------------------------------------------------------------------");
-            
+
             try
             {
                 var result = await conn.DeleteAsync(search).ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace EthansList.Models
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", linkUrl, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", linkUrl, ex.Message);
                 StatusCode = codes.bad;
                 return false;
             }
@@ -67,7 +67,7 @@ namespace EthansList.Models
                 if (prop.Value != null)
                     result += String.Format("{0}: {1}, ", prop.Key, prop.Value);
             }
-            foreach (KeyValuePair<object, KeyValuePair<object,object>> cond in searchObject.Conditions)
+            foreach (KeyValuePair<object, KeyValuePair<object, object>> cond in searchObject.Conditions)
             {
                 if (cond.Value.Key != null)
                     result += String.Format("{0}: {1}, ", cond.Value.Key, cond.Key);

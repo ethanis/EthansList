@@ -16,12 +16,15 @@ using Android.Graphics;
 
 namespace EthansList.Droid
 {
-    public class GestureRecognizerView : View
+    public class GestureRecognizerView : View, Koush.IUrlImageViewCallback
     {
         private static readonly int InvalidPointerId = -1;
+        private ImageView imageView;
 
-        private readonly Drawable _image;
-        private readonly ScaleGestureDetector _scaleDetector;
+        private readonly Context _context;
+
+        private Drawable _image;
+        private ScaleGestureDetector _scaleDetector;
 
         private int _activePointerId = InvalidPointerId;
         private float _lastTouchX;
@@ -32,15 +35,17 @@ namespace EthansList.Droid
 
         public GestureRecognizerView(Context context, String imageUrl): base(context, null, 0)
         {
-            ImageView imageView = new ImageView(context);
-            Koush.UrlImageViewHelper.SetUrlDrawable(imageView, imageUrl, Resource.Drawable.placeholder);
+            _context = context;
+            imageView = new ImageView(context);
+            Koush.UrlImageViewHelper.SetUrlDrawable(imageView, imageUrl, Resource.Drawable.placeholder, this);
             _image = imageView.Drawable;
             _image.SetBounds(0, 0, _image.IntrinsicWidth, _image.IntrinsicHeight);
-            _scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 
-            var metrics = Resources.DisplayMetrics;
-            _posX = GetCornerPosition(PixelConverter.PixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
-            _posY = GetCornerPosition(PixelConverter.PixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
+            //_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
+
+            //var metrics = Resources.DisplayMetrics;
+            //_posX = GetCornerPosition(PixelConverter.PixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
+            //_posY = GetCornerPosition(PixelConverter.PixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
         }
 
         private int GetCornerPosition(int screenWidth, int imageWidth)
@@ -115,6 +120,17 @@ namespace EthansList.Droid
 
             }
             return true;
+        }
+
+        public void OnLoaded(ImageView p0, Bitmap p1, string p2, bool p3)
+        {
+            _image = imageView.Drawable;
+            _image.SetBounds(0, 0, _image.IntrinsicWidth, _image.IntrinsicHeight);
+            _scaleDetector = new ScaleGestureDetector(_context, new MyScaleListener(this));
+
+            var metrics = Resources.DisplayMetrics;
+            _posX = GetCornerPosition(PixelConverter.PixelsToDp(metrics.WidthPixels), _image.Bounds.Width()) * (int)_scaleFactor;
+            _posY = GetCornerPosition(PixelConverter.PixelsToDp(metrics.HeightPixels), _image.Bounds.Height());
         }
     }
 }

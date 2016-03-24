@@ -38,7 +38,8 @@ namespace EthansList.Droid
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
             view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches).Result);
 
-            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+            {
                 QueryGeneration queryHelper = new QueryGeneration();
 
                 var transaction = Activity.SupportFragmentManager.BeginTransaction();
@@ -52,13 +53,17 @@ namespace EthansList.Droid
                 transaction.Commit();
             };
 
-            adapter.DeleteClicked += (sender, e) => { 
+            adapter.DeleteClicked += (sender, e) =>
+            {
                 Console.WriteLine("Deleting: " + e.Position);
                 Console.WriteLine("Data set size: " + adapter._searches.Count());
                 var result = MainActivity.databaseConnection.DeleteSearchAsync(adapter._searches[e.Position].SearchLocation.Url, adapter._searches[e.Position]).Result;
                 if (MainActivity.databaseConnection.StatusCode == codes.ok && result)
                 {
-                    adapter._searches.RemoveAt(e.Position);
+                    Activity.RunOnUiThread(() =>
+                    {
+                        adapter._searches.RemoveAt(e.Position);
+                    });
 
                     adapter.NotifyDataSetChanged();
                 }
@@ -83,7 +88,7 @@ namespace EthansList.Droid
                         searchObjects.Add(JsonConvert.DeserializeObject<SearchObject>(search.SerializedSearch));
                     }
                     catch (Exception ex)
-                    { 
+                    {
                         Console.WriteLine(ex.Message);
                     }
                 }
@@ -133,7 +138,8 @@ namespace EthansList.Droid
             {
                 view = new SavedSearchRow(_context);
 
-                view.DeleteButton.Click += delegate {
+                view.DeleteButton.Click += delegate
+                {
                     Console.WriteLine("Deleting from row: " + position);
                     if (this.DeleteClicked != null)
                         this.DeleteClicked(this, new AdapterView.ItemClickEventArgs(null, view, position, position));
@@ -159,7 +165,7 @@ namespace EthansList.Droid
         public ImageButton DeleteButton { get; set; }
 
         public SavedSearchRow(Context context)
-            :base(context)
+            : base(context)
         {
             _context = context;
             rowHeight = PixelConverter.DpToPixels(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
