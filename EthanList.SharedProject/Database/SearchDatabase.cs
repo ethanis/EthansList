@@ -30,7 +30,7 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeleteSearchAsync(String linkUrl, SearchObject searchObject)
+        public async Task<bool> DeleteSearchAsync(String linkUrl, SearchObject searchObject)
         {
             var currentSerialized = JsonConvert.SerializeObject(searchObject);
             var search = conn.Table<Search>().Where(x => x.SerializedSearch.Equals(currentSerialized)).ToListAsync().Result.First();
@@ -40,14 +40,16 @@ namespace EthansList.Models
             
             try
             {
-                var result = await conn.DeleteAsync(search).ConfigureAwait(continueOnCapturedContext: false);
+                var result = await conn.DeleteAsync(search).ConfigureAwait(false);
                 StatusMessage = string.Format("{0} dropped from database [Link: {1}]", result, linkUrl);
                 StatusCode = codes.ok;
+                return true;
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", linkUrl, ex.Message); 
                 StatusCode = codes.bad;
+                return false;
             }
         }
 

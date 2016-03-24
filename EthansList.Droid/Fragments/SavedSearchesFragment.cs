@@ -1,8 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -20,7 +22,7 @@ namespace EthansList.Droid
     public class SavedSearchesFragment : Android.Support.V4.App.Fragment
     {
         private List<Search> savedSearches;
-        private List<SearchObject> deserialized;
+        private SavedSearchesAdapter adapter;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,29 +36,44 @@ namespace EthansList.Droid
             var view = new ListView(this.Activity);
 
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
-            deserialized = DeserializeSearches(savedSearches).Result;
-            view.Adapter = new SavedSearchesAdapter(this.Activity, deserialized);
+            view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches).Result);
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
                 QueryGeneration queryHelper = new QueryGeneration();
 
                 var transaction = Activity.SupportFragmentManager.BeginTransaction();
                 SearchResultsFragment resultsFragment = new SearchResultsFragment();
-                resultsFragment.Query = queryHelper.Generate(deserialized[e.Position]);
-                resultsFragment.MaxListings = deserialized[e.Position].MaxListings;
-                resultsFragment.WeeksOld = deserialized[e.Position].PostedDate;
+                resultsFragment.Query = queryHelper.Generate(adapter._searches[e.Position]);
+                resultsFragment.MaxListings = adapter._searches[e.Position].MaxListings;
+                resultsFragment.WeeksOld = adapter._searches[e.Position].PostedDate;
 
                 transaction.Replace(Resource.Id.frameLayout, resultsFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
             };
 
+            adapter.DeleteClicked += (sender, e) => { 
+                Console.WriteLine("Deleting: " + e.Position);
+                Console.WriteLine("Data set size: " + adapter._searches.Count());
+                var result = MainActivity.databaseConnection.DeleteSearchAsync(adapter._searches[e.Position].SearchLocation.Url, adapter._searches[e.Position]).Result;
+                if (MainActivity.databaseConnection.StatusCode == codes.ok && result)
+                {
+                    adapter._searches.RemoveAt(e.Position);
+
+                    adapter.NotifyDataSetChanged();
+                }
+                else
+                {
+                }
+                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+            };
+
             return view;
         }
 
-        private Task<List<SearchObject>> DeserializeSearches(List<Search> savedSearches)
+        private Task<ObservableCollection<SearchObject>> DeserializeSearches(List<Search> savedSearches)
         {
-            List<SearchObject> searchObjects = new List<SearchObject>();
+            ObservableCollection<SearchObject> searchObjects = new ObservableCollection<SearchObject>();
             return Task.Run(() =>
             {
                 foreach (Search search in savedSearches)
@@ -79,9 +96,10 @@ namespace EthansList.Droid
     public class SavedSearchesAdapter : BaseAdapter<SearchObject>
     {
         readonly Context _context;
-        readonly List<SearchObject> _searches;
+        public ObservableCollection<SearchObject> _searches { get; set; }
+        public event EventHandler<AdapterView.ItemClickEventArgs> DeleteClicked;
 
-        public SavedSearchesAdapter(Context context, List<SearchObject> searches)
+        public SavedSearchesAdapter(Context context, ObservableCollection<SearchObject> searches)
         {
             _context = context;
             _searches = searches;
@@ -114,11 +132,18 @@ namespace EthansList.Droid
             if (view == null)
             {
                 view = new SavedSearchRow(_context);
+
+                view.DeleteButton.Click += delegate {
+                    Console.WriteLine("Deleting from row: " + position);
+                    if (this.DeleteClicked != null)
+                        this.DeleteClicked(this, new AdapterView.ItemClickEventArgs(null, view, position, position));
+                };
             }
 
             view.CityTitle.Text = _searches[position].SearchLocation.SiteName;
 
             view.SearchTerms.Text = MainActivity.databaseConnection.SecondFormatSearch(_searches[position]);
+
 
             return view;
         }
