@@ -10,10 +10,10 @@ namespace ethanslist.UITests
     public class Tests : AbstractSetup
     {
         public Tests(Platform platform)
-            :base(platform)
+            : base(platform)
         {
         }
-            
+
         [Test]
         public void SavePosting()
         {
@@ -25,17 +25,17 @@ namespace ethanslist.UITests
             new CityPickerPage()
                 .SelectState(state)
                 .SelectCity(area);
-            app.Repl();
+
             new CategoryPickerPage()
                 .SelectCategory(cat);
-            
+
             new SearchOptionsPage()
                 .VerifyOnLocation(area)
                 .ProceedToSearch();
 
             new FeedResultsPage()
                 .SelectFirstListing();
-            
+
             title = new PostingDetailsPage().GetListingTitle();
 
             new PostingDetailsPage()
@@ -44,13 +44,13 @@ namespace ethanslist.UITests
                 .ExitListing();
 
             new FeedResultsPage().GoBack();
-            new CategoryPickerPage().GoBack();
             new SearchOptionsPage().GoBack();
+            new CategoryPickerPage().GoBack();
             new CityPickerPage().GoBack();
 
             new MenuPage()
                 .SavedPostings();
-            
+
             new SavedPostingsPage()
                 .ConfirmPostingVisible(title);
         }
@@ -72,7 +72,7 @@ namespace ethanslist.UITests
 
             new SearchOptionsPage()
                 .VerifyOnLocation(area)
-                .EnterSearchTerms(new string[] {"parking", "laundry", "view"})
+                .EnterSearchTerms(new string[] { "parking", "laundry", "view" })
                 .SelectMinMaxPrice(1000, 5000)
                 .SelectMinBedrooms(3)
                 .SelectMinBathrooms(1)

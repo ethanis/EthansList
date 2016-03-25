@@ -38,7 +38,7 @@ namespace EthansList.Droid
             imageHelper = new ListingImageDownloader(Posting.Link, Posting.ImageLink);
             var connected = imageHelper.GetAllImagesAsync();
             if (!connected)
-            { 
+            {
                 var builder = new Android.Support.V7.App.AlertDialog.Builder(this.Activity);
 
                 builder.SetTitle("No internet connection")
@@ -67,7 +67,8 @@ namespace EthansList.Droid
                 {
                     if (view.SetUpGoogleMap())
                     {
-                        view.MapReady += delegate {
+                        view.MapReady += delegate
+                        {
                             //To initialize the map 
                             view.map.MapType = GoogleMap.MapTypeNormal; //select the map type
                             CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
@@ -86,15 +87,17 @@ namespace EthansList.Droid
                 }
             };
 
-            view.ImageCollection.ItemClick += (object sender, AdapterView.ItemClickEventArgs args) => {
+            view.ImageCollection.ItemClick += (object sender, AdapterView.ItemClickEventArgs args) =>
+            {
                 view.CurrentImage = imageHelper.images.ElementAt(args.Position);
             };
 
             view.PostingDescription.Text = Posting.Description;
             view.PostingDate.Text = "Listed: " + Posting.Date.ToShortDateString() + " at " + Posting.Date.ToShortTimeString();
-            view.WebLink.Text = "Original Posting";
+            view.WebLink.Text = "Original Listing";
 
-            view.WebLink.Click += (sender, e) => {
+            view.WebLink.Click += (sender, e) =>
+            {
                 var transaction = Activity.SupportFragmentManager.BeginTransaction();
                 WebviewFragment webviewFragment = new WebviewFragment();
                 webviewFragment.Link = Posting.Link;
@@ -104,7 +107,8 @@ namespace EthansList.Droid
                 transaction.Commit();
             };
 
-            view.PostingImage.Click += (sender, e) => { 
+            view.PostingImage.Click += (sender, e) =>
+            {
                 var transaction = Activity.SupportFragmentManager.BeginTransaction();
                 ImageZoomFragment zoomFragment = new ImageZoomFragment();
                 zoomFragment.ImageUrl = view.CurrentImage;
@@ -151,16 +155,16 @@ namespace EthansList.Droid
 
     //OnMapReadyClass
     public class OnMapReadyClass : Java.Lang.Object, IOnMapReadyCallback
-    { 
+    {
         public GoogleMap Map { get; private set; }
         public event Action<GoogleMap> MapReadyAction;
 
-        public void OnMapReady (GoogleMap googleMap)
+        public void OnMapReady(GoogleMap googleMap)
         {
-            Map = googleMap; 
+            Map = googleMap;
 
-            if ( MapReadyAction != null )
-                MapReadyAction (Map);
+            if (MapReadyAction != null)
+                MapReadyAction(Map);
         }
     }
 
@@ -183,18 +187,18 @@ namespace EthansList.Droid
         public GoogleMap map { get; set; }
         public bool SetUpGoogleMap()
         {
-            if(null != map ) return false;
+            if (null != map) return false;
 
             var mapReadyCallback = new OnMapReadyClass();
 
-            mapReadyCallback.MapReadyAction += delegate(GoogleMap googleMap )
+            mapReadyCallback.MapReadyAction += delegate (GoogleMap googleMap)
             {
                 map = googleMap;
                 if (this.MapReady != null)
                     this.MapReady(this, new EventArgs());
             };
 
-            PostingMap.GetMapAsync(mapReadyCallback); 
+            PostingMap.GetMapAsync(mapReadyCallback);
             return true;
         }
 
@@ -203,7 +207,8 @@ namespace EthansList.Droid
         public string CurrentImage
         {
             get { return currentImage; }
-            set { 
+            set
+            {
                 Koush.UrlImageViewHelper.SetUrlDrawable(PostingImage, value, Resource.Drawable.placeholder);
                 currentImage = value;
             }
@@ -211,7 +216,7 @@ namespace EthansList.Droid
         string currentImage;
 
         public PostingDetailsView(Context context)
-            :base (context)
+            : base(context)
         {
             _context = context;
             rowParams = new LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
@@ -223,13 +228,13 @@ namespace EthansList.Droid
             Orientation = Orientation.Vertical;
             WeightSum = 1;
 
-            PostingTitle = new TextView(_context) { LayoutParameters = rowParams};
+            PostingTitle = new TextView(_context) { LayoutParameters = rowParams };
             PostingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);
             PostingTitle.SetPadding(10, 10, 10, 10);
             PostingTitle.SetTypeface(Typeface.DefaultBold, TypefaceStyle.Bold);
             AddRowItem(PostingTitle, rowParams);
 
-            PostingImage = new ImageView(_context) { LayoutParameters = rowParams};
+            PostingImage = new ImageView(_context) { LayoutParameters = rowParams };
             AddRowItem(PostingImage, rowParams);
 
             //TODO fix this fuckiness
@@ -239,7 +244,7 @@ namespace EthansList.Droid
             ImageCollection.StretchMode = StretchMode.StretchColumnWidth;
             ImageCollection.NumColumns = (int)StretchMode.AutoFit;
             ScrollView imageScroller = new ScrollView(_context);
-            imageScroller.AddView(ImageCollection); 
+            imageScroller.AddView(ImageCollection);
             AddRowItem(imageScroller, new LayoutParams(LayoutParams.WrapContent, 150));
 
             PostingDescription = new TextView(_context) { LayoutParameters = rowParams };

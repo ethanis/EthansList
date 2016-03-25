@@ -7,11 +7,11 @@ namespace ethanslist.UITests
     public class CategoryTests : AbstractSetup
     {
         public CategoryTests(Platform platform)
-            :base(platform)
+            : base(platform)
         {
         }
 
-        [Ignore]
+        //[Ignore]
         [Category("CategoryTests")]
         [TestCase("apartments / housing rentals")]
         [TestCase("housing swap")]
@@ -133,7 +133,7 @@ namespace ethanslist.UITests
 
             new CategoryPickerPage()
                 .SelectCategory(cat);
-            
+
             new SearchOptionsPage()
                 .ProceedToSearch();
 

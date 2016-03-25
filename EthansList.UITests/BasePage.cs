@@ -97,7 +97,10 @@ namespace ethanslist.UITests
             if (OniOS)
                 app.Tap(BackButton);
             if (OnAndroid)
+            {
                 app.Back();
+                WaitForPageToLeave();
+            }
         }
 
         #endregion

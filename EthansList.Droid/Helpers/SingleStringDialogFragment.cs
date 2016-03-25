@@ -12,12 +12,12 @@ namespace EthansList.Droid
     {
         readonly Context _context;
         readonly string _title;
-        readonly List<KeyValuePair<object,object>> _options;
+        readonly List<KeyValuePair<object, object>> _options;
         ViewGroup.LayoutParams rowParams, textParams;
 
         public event EventHandler<SubCatSelectedEventArgs> CatPicked;
 
-        public SingleStringDialogFragment(Context context, string title, List<KeyValuePair<object,object>> options)
+        public SingleStringDialogFragment(Context context, string title, List<KeyValuePair<object, object>> options)
         {
             _context = context;
             _title = title;
@@ -61,12 +61,12 @@ namespace EthansList.Droid
 
             var text = new TextView(_context);
             text.Text = (string)option.Key;
-            text.SetPadding(PixelConverter.DpToPixels(20),0,0,0);
+            text.SetPadding(PixelConverter.DpToPixels(20), 0, 0, 0);
             text.LayoutParameters = textParams;
             text.Gravity = GravityFlags.CenterVertical;
 
-            //TODO: Visual indicator of selection of row
-            row.Click += (object sender, EventArgs e) => {
+            row.Click += (object sender, EventArgs e) =>
+            {
                 if (this.CatPicked != null)
                     this.CatPicked(this, new SubCatSelectedEventArgs { SubCatPicked = option });
             };
@@ -77,7 +77,7 @@ namespace EthansList.Droid
     }
 
     public class SubCatSelectedEventArgs : EventArgs
-    { 
+    {
         public KeyValuePair<object, object> SubCatPicked { get; set; }
     }
 }

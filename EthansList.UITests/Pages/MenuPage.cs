@@ -6,13 +6,13 @@ namespace ethanslist.UITests
 {
     public class MenuPage : BasePage
     {
-        readonly string SearchCraigslistButton = "Search Craigslist";
+        readonly string SearchCraigslistButton = "Search";
         readonly string RecentCitiesButton = "Recent Cities";
         readonly string SavedSearchesButton = "Saved Searches";
         readonly string SavedPostingsButton = "Saved Postings";
 
         public MenuPage()
-            : base("androidTrait", "Ethan's List")
+            : base("A better craigslist client", "Ethan's List")
         {
         }
 

@@ -14,7 +14,7 @@ namespace ethanslist.UITests
         readonly string DoneButton = "Done";
 
         public SearchOptionsPage()
-            : base ("Search Terms", "save.png")
+            : base("Search Terms", "save.png")
         {
             if (OnAndroid)
             {
@@ -46,13 +46,14 @@ namespace ethanslist.UITests
                 app.WaitForElement(string.Format("Search {0} for:", state));
             if (OnAndroid)
                 app.WaitForElement(string.Format("Search {0} for: ", state));
-            
+
             app.Screenshot("Verified searching: " + state);
             return this;
         }
 
         public void ProceedToSearch()
         {
+            app.DismissKeyboard();
             app.ScrollUpTo(SearchButton);
             app.Tap(SearchButton);
             app.Screenshot("Tapped Search Button");
@@ -62,7 +63,8 @@ namespace ethanslist.UITests
         {
             app.Tap(SaveButton);
             app.Screenshot("Tapped Save Button");
-            app.Tap("OK");
+            if (OniOS)
+                app.Tap("OK");
 
             return this;
         }
@@ -94,9 +96,19 @@ namespace ethanslist.UITests
         {
             app.ScrollDownTo(MinBedroomsField);
             app.Tap(MinBedroomsField);
-            app.Tap(i + "+");
-            app.Screenshot("Min bedrooms selected");
-            app.Tap(DoneButton);
+            if (OniOS)
+            {
+                app.Tap(i + "+");
+                app.Screenshot("Min bedrooms selected");
+                app.Tap(DoneButton);
+            }
+            if (OnAndroid)
+            {
+                app.Query(x => x.Id("numberPicker").Invoke("setValue", i));
+                app.Tap(i + "+");
+                app.Screenshot("Min bedrooms selected");
+                app.Tap("Ok");
+            }
 
             return this;
         }
@@ -105,9 +117,19 @@ namespace ethanslist.UITests
         {
             app.ScrollDownTo(MinBathroomsField);
             app.Tap(MinBathroomsField);
-            app.Tap(i + "+");
-            app.Screenshot("Min bathrooms selected");
-            app.Tap(DoneButton);
+            if (OniOS)
+            {
+                app.Tap(i + "+");
+                app.Screenshot("Min bathrooms selected");
+                app.Tap(DoneButton);
+            }
+            if (OnAndroid)
+            {
+                app.Query(x => x.Id("numberPicker").Invoke("setValue", i));
+                app.Tap(i + "+");
+                app.Screenshot("Min bathrooms selected");
+                app.Tap("Ok");
+            }
 
             return this;
         }
@@ -118,7 +140,8 @@ namespace ethanslist.UITests
             app.Tap(PostedDateField);
             app.Tap(i);
             app.Screenshot("Posted date selected");
-            app.Tap(DoneButton);
+            if (OniOS)
+                app.Tap(DoneButton);
 
             return this;
         }
@@ -127,9 +150,10 @@ namespace ethanslist.UITests
         {
             app.ScrollDownTo(MaxListingsField);
             app.Tap(MaxListingsField);
-            app.Tap(string.Format("{0}",i));
+            app.Tap(string.Format("{0}", i));
             app.Screenshot("Max listings selected");
-            app.Tap(DoneButton);
+            if (OniOS)
+                app.Tap(DoneButton);
 
             return this;
         }

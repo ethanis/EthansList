@@ -12,13 +12,17 @@ namespace ethanslist.UITests
         readonly string MenuButton;
 
         public CityPickerPage()
-            : base (x => x.Class("CityPickerRow"),x => x.Marked("Select City"))
+            : base(x => x.Class("CityPickerRow"), x => x.Marked("Select City"))
         {
             if (OniOS)
             {
                 ProceedButton = "proceedButton";
                 RecentCityButton = "Recent Cities";
                 MenuButton = "menu.png";
+            }
+            if (OnAndroid)
+            {
+                MenuButton = "Open drawer";
             }
         }
 
@@ -30,8 +34,8 @@ namespace ethanslist.UITests
                 app.Tap(state);
             }
             else
-            { 
-                app.ScrollDownTo(x=>x.Marked(state), x => x.Class("ListView").Index(0), timeout: TimeSpan.FromSeconds(20));
+            {
+                app.ScrollDownTo(x => x.Marked(state), x => x.Class("ListView").Index(0), timeout: TimeSpan.FromSeconds(20));
                 app.Tap(state);
 
             }

@@ -13,7 +13,7 @@ namespace ethanslist.UITests
         readonly Query TitleLabel;
 
         public PostingDetailsPage()
-            : base ("save_action_button", "Posting Info")
+            : base("save_action_button", "Posting Info")
         {
             if (OnAndroid)
             {
@@ -80,7 +80,7 @@ namespace ethanslist.UITests
                 app.Tap(DoneButton);
             }
             if (OnAndroid)
-                app.Back();
+                base.GoBack();
         }
     }
 }

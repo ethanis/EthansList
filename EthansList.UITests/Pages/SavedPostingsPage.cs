@@ -8,7 +8,7 @@ namespace ethanslist.UITests
     public class SavedPostingsPage : BasePage
     {
         public SavedPostingsPage()
-            : base("androidTrait", "Saved Postings")
+            : base("Saved Postings", "Saved Postings")
         {
         }
 

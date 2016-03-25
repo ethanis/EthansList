@@ -33,7 +33,8 @@ namespace EthansList.Droid
 
             //TODO: mechanism to delete saved postings
 
-            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+            {
                 var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
                 postingDetailsFragment.Posting = savedPostings[e.Position];
@@ -43,7 +44,7 @@ namespace EthansList.Droid
             };
 
             return view;
-        }        
+        }
     }
 }
 

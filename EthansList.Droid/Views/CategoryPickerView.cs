@@ -45,7 +45,6 @@ namespace EthansList.Droid
 
         void Initialize()
         {
-            //TODO: categories groups disappear for bottom group
             categoryList = new ListView(context);
             categoryList.Adapter = new CategoryListAdapter(context, Categories.Groups, SelectedLocation);
             categoryList.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);

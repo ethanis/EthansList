@@ -42,11 +42,11 @@ namespace EthansList.Droid
             if (convertView == null)
             {
                 imageView = new ImageView(context);
-                imageView.LayoutParameters = new GridView.LayoutParams(150, 150);
+                imageView.LayoutParameters = new GridView.LayoutParams(PixelConverter.DpToPixels(150), PixelConverter.DpToPixels(150));
                 imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
                 imageView.SetPadding(1, 1, 1, 1);
-            } 
-            else 
+            }
+            else
             {
                 imageView = (ImageView)convertView;
             }
