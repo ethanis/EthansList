@@ -75,7 +75,7 @@ namespace EthansList.Droid
         public TextView _postingDescription { get; set; }
 
         public FeedResultRow(Context context)
-            :base(context)
+            : base(context)
         {
             _context = context;
             Initialize();
@@ -96,8 +96,12 @@ namespace EthansList.Droid
             imageHolder.AddView(_postingImage);
             AddView(imageHolder);
 
+            var spacingHolder = new LinearLayout(_context);
+            spacingHolder.LayoutParameters = new LayoutParams(0, LayoutParams.MatchParent, 0.01f);
+            AddView(spacingHolder);
+
             var titleDescriptionHolder = new LinearLayout(_context) { Orientation = Orientation.Vertical };
-            titleDescriptionHolder.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.70f);
+            titleDescriptionHolder.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.69f);
 
             _postingTitle = new TextView(_context);
             _postingTitle.SetTextSize(Android.Util.ComplexUnitType.Dip, 18);

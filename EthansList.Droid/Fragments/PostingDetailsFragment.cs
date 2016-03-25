@@ -56,10 +56,6 @@ namespace EthansList.Droid
             {
                 if (imageHelper.PostingImagesFound)
                 {
-                    //view.ImageCollection.SetNumColumns(imageHelper.images.Count);
-                    //view.ImageCollection.SetColumnWidth(150);
-                    //view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
-
                     view.SetImageCollection(imageHelper.images);
                 }
 
@@ -181,8 +177,6 @@ namespace EthansList.Droid
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
         public LinearLayout ImageCollectionHolder { get; set; }
-
-        //todo: posting map
         public MapView PostingMap { get; set; }
         public TextView WebLink { get; set; }
 
