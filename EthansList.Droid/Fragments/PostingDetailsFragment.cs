@@ -180,7 +180,6 @@ namespace EthansList.Droid
         public ImageView PostingImage { get; set; }
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
-
         public LinearLayout ImageCollectionHolder { get; set; }
 
         //todo: posting map
@@ -240,6 +239,11 @@ namespace EthansList.Droid
             PostingImage = new ImageView(_context) { LayoutParameters = rowParams };
             AddRowItem(PostingImage, rowParams);
 
+            LinearLayout spacing = new LinearLayout(_context);
+            spacing.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, PixelConverter.DpToPixels(5));
+
+            AddView(spacing);
+
             ImageCollectionHolder = new LinearLayout(_context) { Orientation = Orientation.Horizontal };
             ImageCollectionHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
             ImageCollectionHolder.Clickable = false;
@@ -287,7 +291,7 @@ namespace EthansList.Droid
             {
                 ImageView imgView = new ImageView(_context);
                 Koush.UrlImageViewHelper.SetUrlDrawable(imgView, image, Resource.Drawable.placeholder);
-                imgView.LayoutParameters = new ViewGroup.LayoutParams(PixelConverter.DpToPixels(100), PixelConverter.DpToPixels(100));
+                imgView.LayoutParameters = new ViewGroup.LayoutParams(PixelConverter.DpToPixels(75), PixelConverter.DpToPixels(75));
 
                 int current = index;
                 imgView.Click += (sender, e) =>
@@ -295,9 +299,16 @@ namespace EthansList.Droid
                     if (ImageClick != null)
                         ImageClick(this, new ImageCollectionClickEventArgs { Index = current });
                 };
-                imgView.SetAdjustViewBounds(true);
+
+                imgView.SetScaleType(ImageView.ScaleType.CenterCrop);
 
                 ImageCollectionHolder.AddView(imgView);
+
+                LinearLayout imagePadding = new LinearLayout(_context);
+                imagePadding.LayoutParameters = new ViewGroup.LayoutParams(PixelConverter.DpToPixels(5), LayoutParams.MatchParent);
+
+                ImageCollectionHolder.AddView(imagePadding);
+
                 index++;
             }
         }
