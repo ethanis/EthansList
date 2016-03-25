@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -55,9 +56,11 @@ namespace EthansList.Droid
             {
                 if (imageHelper.PostingImagesFound)
                 {
-                    view.ImageCollection.SetNumColumns(imageHelper.images.Count);
+                    //view.ImageCollection.SetNumColumns(imageHelper.images.Count);
                     //view.ImageCollection.SetColumnWidth(150);
-                    view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
+                    //view.ImageCollection.Adapter = new ImageAdapter(this.Activity, imageHelper.images);
+
+                    view.SetImageCollection(imageHelper.images);
                 }
 
                 if (imageHelper.PostingBodyAdded)
@@ -87,9 +90,9 @@ namespace EthansList.Droid
                 }
             };
 
-            view.ImageCollection.ItemClick += (object sender, AdapterView.ItemClickEventArgs args) =>
+            view.ImageClick += (sender, e) =>
             {
-                view.CurrentImage = imageHelper.images.ElementAt(args.Position);
+                view.CurrentImage = imageHelper.images.ElementAt(e.Index);
             };
 
             view.PostingDescription.Text = Posting.Description;
@@ -171,14 +174,14 @@ namespace EthansList.Droid
     public class PostingDetailsView : LinearLayout
     {
         readonly Context _context;
-        //readonly LayoutParams rowParams;
         readonly LayoutParams rowParams;
 
         public TextView PostingTitle { get; set; }
         public ImageView PostingImage { get; set; }
-        public GridView ImageCollection { get; set; }
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
+
+        public LinearLayout ImageCollectionHolder { get; set; }
 
         //todo: posting map and weblink
         public MapView PostingMap { get; set; }
@@ -237,15 +240,13 @@ namespace EthansList.Droid
             PostingImage = new ImageView(_context) { LayoutParameters = rowParams };
             AddRowItem(PostingImage, rowParams);
 
-            //TODO fix this fuckiness
-            ImageCollection = new GridView(_context);
-            ImageCollection.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            ImageCollection.SetColumnWidth(150);
-            ImageCollection.StretchMode = StretchMode.StretchColumnWidth;
-            ImageCollection.NumColumns = (int)StretchMode.AutoFit;
-            ScrollView imageScroller = new ScrollView(_context);
-            imageScroller.AddView(ImageCollection);
-            AddRowItem(imageScroller, new LayoutParams(LayoutParams.WrapContent, 150));
+            ImageCollectionHolder = new LinearLayout(_context) { Orientation = Orientation.Horizontal };
+            ImageCollectionHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
+            ImageCollectionHolder.Clickable = false;
+            HorizontalScrollView scrollView = new HorizontalScrollView(_context);
+            scrollView.AddView(ImageCollectionHolder);
+            scrollView.Clickable = false;
+            AddView(scrollView);
 
             PostingDescription = new TextView(_context) { LayoutParameters = rowParams };
             PostingDescription.SetTextSize(Android.Util.ComplexUnitType.Dip, 14);
@@ -276,6 +277,35 @@ namespace EthansList.Droid
 
             AddView(view);
         }
+
+        public event EventHandler<ImageCollectionClickEventArgs> ImageClick;
+
+        public void SetImageCollection(List<string> images)
+        {
+            int index = 0;
+            foreach (var image in images)
+            {
+                ImageView imgView = new ImageView(_context);
+                Koush.UrlImageViewHelper.SetUrlDrawable(imgView, image, Resource.Drawable.placeholder);
+                imgView.LayoutParameters = new ViewGroup.LayoutParams(PixelConverter.DpToPixels(100), PixelConverter.DpToPixels(100));
+
+                int current = index;
+                imgView.Click += (sender, e) =>
+                {
+                    if (ImageClick != null)
+                        ImageClick(this, new ImageCollectionClickEventArgs { Index = current });
+                };
+                imgView.SetAdjustViewBounds(true);
+
+                ImageCollectionHolder.AddView(imgView);
+                index++;
+            }
+        }
+    }
+
+    public class ImageCollectionClickEventArgs : EventArgs
+    {
+        public int Index { get; set; }
     }
 }
 

@@ -38,11 +38,10 @@ namespace EthansList.Droid
         {
             ImageView imageView;
 
-            //TODO: Set layoutparams to use dip instead
             if (convertView == null)
             {
                 imageView = new ImageView(context);
-                imageView.LayoutParameters = new GridView.LayoutParams(PixelConverter.DpToPixels(150), PixelConverter.DpToPixels(150));
+                imageView.LayoutParameters = new Android.Views.ViewGroup.LayoutParams(PixelConverter.DpToPixels(100), PixelConverter.DpToPixels(100));
                 imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
                 imageView.SetPadding(1, 1, 1, 1);
             }
