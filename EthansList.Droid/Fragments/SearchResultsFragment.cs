@@ -33,7 +33,7 @@ namespace EthansList.Droid
         {
             var view = new ListView(this.Activity);
 
-            Console.WriteLine("Max Listings: " + MaxListings + ", Weeks Old: " +WeeksOld);
+            Console.WriteLine("Max Listings: " + MaxListings + ", Weeks Old: " + WeeksOld);
             feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
             var connected = feedClient.GetAllPostingsAsync();
 
@@ -55,20 +55,20 @@ namespace EthansList.Droid
                 var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
                 new Thread(new ThreadStart(delegate
                 {
-                //HIDE PROGRESS DIALOG
-                feedClient.asyncLoadingComplete += (object sender, EventArgs e) =>
-                    {
-                        this.Activity.RunOnUiThread(() =>
+                    //HIDE PROGRESS DIALOG
+                    feedClient.asyncLoadingComplete += (object sender, EventArgs e) =>
                         {
-                            progressDialog.Hide();
-                        });
-                        Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
-                        feedAdapter = new FeedResultsAdapter(this.Activity, feedClient.postings);
-                        this.Activity.RunOnUiThread(() =>
-                        {
-                            view.Adapter = feedAdapter;
-                        });
-                    };
+                            this.Activity.RunOnUiThread(() =>
+                            {
+                                progressDialog.Hide();
+                            });
+                            Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
+                            feedAdapter = new FeedResultsAdapter(this.Activity, feedClient.postings);
+                            this.Activity.RunOnUiThread(() =>
+                            {
+                                view.Adapter = feedAdapter;
+                            });
+                        };
 
                     feedClient.emptyPostingComplete += (object sender, EventArgs e) =>
                     {
@@ -91,7 +91,8 @@ namespace EthansList.Droid
                 })).Start();
             }
 
-            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
+            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+            {
                 var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
                 postingDetailsFragment.Posting = feedClient.postings[e.Position];

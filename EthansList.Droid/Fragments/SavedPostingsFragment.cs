@@ -17,6 +17,8 @@ namespace EthansList.Droid
 {
     public class SavedPostingsFragment : Android.Support.V4.App.Fragment
     {
+        FeedResultsAdapter adapter;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,9 +31,7 @@ namespace EthansList.Droid
             var view = new ListView(Activity);
 
             var savedPostings = MainActivity.databaseConnection.GetAllPostingsAsync().Result;
-            view.Adapter = new FeedResultsAdapter(Activity, savedPostings);
-
-            //TODO: mechanism to delete saved postings
+            view.Adapter = adapter = new FeedResultsAdapter(Activity, savedPostings, true);
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
@@ -41,6 +41,12 @@ namespace EthansList.Droid
                 transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
+            };
+
+            //TODO: mechanism to delete saved postings
+            adapter.ItemDeleted += (sender, e) =>
+            {
+                Console.WriteLine("Deleting posting index: " + e.Index);
             };
 
             return view;
