@@ -63,7 +63,7 @@ namespace EthansList.Droid
                                 progressDialog.Hide();
                             });
                             Console.WriteLine("NUM POSTINGS: " + feedClient.postings.Count);
-                            feedAdapter = new FeedResultsAdapter(this.Activity, feedClient.postings);
+                            feedAdapter = new FeedResultsAdapter(this.Activity, new System.Collections.ObjectModel.ObservableCollection<Models.Posting>(feedClient.postings));
                             this.Activity.RunOnUiThread(() =>
                             {
                                 view.Adapter = feedAdapter;

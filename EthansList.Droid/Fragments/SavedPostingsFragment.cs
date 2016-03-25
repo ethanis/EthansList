@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -30,23 +31,32 @@ namespace EthansList.Droid
         {
             var view = new ListView(Activity);
 
-            var savedPostings = MainActivity.databaseConnection.GetAllPostingsAsync().Result;
-            view.Adapter = adapter = new FeedResultsAdapter(Activity, savedPostings, true);
+            view.Adapter = adapter = new FeedResultsAdapter(Activity,
+                                                            new ObservableCollection<Posting>(MainActivity.databaseConnection.GetAllPostingsAsync().Result),
+                                                            true);
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
                 var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
-                postingDetailsFragment.Posting = savedPostings[e.Position];
+                postingDetailsFragment.Posting = adapter.Postings[e.Position];
                 transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
             };
 
-            //TODO: mechanism to delete saved postings
             adapter.ItemDeleted += (sender, e) =>
             {
                 Console.WriteLine("Deleting posting index: " + e.Index);
+                lock (adapter.Postings)
+                {
+                    var del = MainActivity.databaseConnection.DeletePostingAsync(adapter.Postings[e.Index]).Result;
+
+                    Activity.RunOnUiThread(() => adapter.Postings.RemoveAt(e.Index));
+
+                    adapter.NotifyDataSetChanged();
+                }
+                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
             };
 
             return view;

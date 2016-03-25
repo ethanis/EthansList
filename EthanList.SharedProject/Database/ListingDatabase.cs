@@ -17,9 +17,14 @@ namespace EthansList.Models
                     throw new Exception("Valid listing required");
 
                 //insert a new posting into the Posting table
-                var result = await conn.InsertAsync(new Posting { PostTitle = title, 
-                    Description = description, Link = link, 
-                    ImageLink = imageLink, Date = date })
+                var result = await conn.InsertAsync(new Posting
+                {
+                    PostTitle = title,
+                    Description = description,
+                    Link = link,
+                    ImageLink = imageLink,
+                    Date = date
+                })
                     .ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} record(s) added [Title: {1})", result, title);
                 StatusCode = codes.ok;
@@ -31,18 +36,20 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeletePostingAsync(Posting posting)
+        public async Task<bool> DeletePostingAsync(Posting posting)
         {
             try
             {
                 var result = await conn.DeleteAsync(posting).ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} dropped from database [Title: {1}]", result, posting.PostTitle);
                 StatusCode = codes.ok;
+                return true;
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", posting.PostTitle, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", posting.PostTitle, ex.Message);
                 StatusCode = codes.bad;
+                return false;
             }
         }
 

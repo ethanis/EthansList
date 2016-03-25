@@ -55,8 +55,6 @@ namespace EthansList.Droid
 
             adapter.DeleteClicked += (sender, e) =>
             {
-                Console.WriteLine("Deleting: " + e.Position);
-                Console.WriteLine("Data set size: " + adapter._searches.Count());
                 var result = MainActivity.databaseConnection.DeleteSearchAsync(adapter._searches[e.Position].SearchLocation.Url, adapter._searches[e.Position]).Result;
                 if (MainActivity.databaseConnection.StatusCode == codes.ok && result)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Android.App;
 using Android.Content;
 using Android.Views;
@@ -12,15 +13,15 @@ namespace EthansList.Droid
     class FeedResultsAdapter : BaseAdapter<Posting>
     {
         Activity activity;
-        List<Posting> postings;
+        public ObservableCollection<Posting> Postings { get; set; }
         bool _deleteable;
 
         public event EventHandler<ImageCollectionClickEventArgs> ItemDeleted;
 
-        public FeedResultsAdapter(Activity activity, List<Posting> postings, bool deleteable = false)
+        public FeedResultsAdapter(Activity activity, ObservableCollection<Posting> postings, bool deleteable = false)
         {
             this.activity = activity;
-            this.postings = postings;
+            Postings = postings;
             _deleteable = deleteable;
         }
 
@@ -28,7 +29,7 @@ namespace EthansList.Droid
         {
             get
             {
-                return postings[position];
+                return Postings[position];
             }
         }
 
@@ -36,7 +37,7 @@ namespace EthansList.Droid
         {
             get
             {
-                return postings.Count;
+                return Postings.Count;
             }
         }
 
@@ -60,7 +61,7 @@ namespace EthansList.Droid
 
             }
 
-            string imageLink = postings[position].ImageLink;
+            string imageLink = Postings[position].ImageLink;
             if (imageLink != "-1")
             {
                 Koush.UrlImageViewHelper.SetUrlDrawable(view._postingImage, imageLink, Resource.Drawable.placeholder);
@@ -70,8 +71,8 @@ namespace EthansList.Droid
                 view._postingImage.SetImageResource(Resource.Drawable.placeholder);
             }
 
-            view._postingTitle.Text = postings[position].PostTitle;
-            view._postingDescription.Text = postings[position].Description;
+            view._postingTitle.Text = Postings[position].PostTitle;
+            view._postingDescription.Text = Postings[position].Description;
 
             return view;
         }
