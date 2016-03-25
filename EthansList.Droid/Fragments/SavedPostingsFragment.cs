@@ -18,8 +18,6 @@ namespace EthansList.Droid
 {
     public class SavedPostingsFragment : Android.Support.V4.App.Fragment
     {
-        FeedResultsAdapter adapter;
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,15 +27,34 @@ namespace EthansList.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = new ListView(Activity);
+            var view = new SavedPostingsView(Activity, true);
 
-            view.Adapter = adapter = new FeedResultsAdapter(Activity,
-                                                            new ObservableCollection<Posting>(MainActivity.databaseConnection.GetAllPostingsAsync().Result),
-                                                            true);
+            return view;
+        }
+    }
 
-            view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+    public class SavedPostingsView : ListView
+    {
+        readonly Context _context;
+        FeedResultsAdapter adapter;
+        bool _deleteable;
+
+        public SavedPostingsView(Context context, bool deleteable = false)
+            : base(context)
+        {
+            _context = context;
+            _deleteable = deleteable;
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            Adapter = adapter = new FeedResultsAdapter(_context,
+                                                new ObservableCollection<Posting>(MainActivity.databaseConnection.GetAllPostingsAsync().Result));
+
+            ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
-                var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
+                var transaction = ((MainActivity)_context).SupportFragmentManager.BeginTransaction();
                 PostingDetailsFragment postingDetailsFragment = new PostingDetailsFragment();
                 postingDetailsFragment.Posting = adapter.Postings[e.Position];
                 transaction.Replace(Resource.Id.frameLayout, postingDetailsFragment);
@@ -45,22 +62,33 @@ namespace EthansList.Droid
                 transaction.Commit();
             };
 
-            adapter.ItemDeleted += (sender, e) =>
+            if (_deleteable)
             {
-                Console.WriteLine("Deleting posting index: " + e.Index);
-                lock (adapter.Postings)
+                ItemLongClick += (sender, e) =>
                 {
-                    var del = MainActivity.databaseConnection.DeletePostingAsync(adapter.Postings[e.Index]).Result;
+                    //TODO: Make this show up in right place
+                    PopupMenu menu = new PopupMenu(_context, adapter.GetView(e.Position, null, null));
+                    menu.Inflate(Resource.Menu.DeleteMenu);
+                    menu.Show();
 
-                    Activity.RunOnUiThread(() => adapter.Postings.RemoveAt(e.Index));
+                    menu.MenuItemClick += (se, args) =>
+                    {
+                        Console.WriteLine("Deleting posting index: " + e.Position);
+                        lock (adapter.Postings)
+                        {
+                            var del = MainActivity.databaseConnection.DeletePostingAsync(adapter.Postings[e.Position]).Result;
 
-                    adapter.NotifyDataSetChanged();
-                }
-                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+                            ((Activity)_context).RunOnUiThread(() => adapter.Postings.RemoveAt(e.Position));
+
+                            adapter.NotifyDataSetChanged();
+                        }
+                        Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+                    };
+                };
             };
-
-            return view;
         }
     }
+
 }
+
 

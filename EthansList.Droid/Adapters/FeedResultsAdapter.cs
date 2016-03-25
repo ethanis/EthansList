@@ -12,17 +12,14 @@ namespace EthansList.Droid
 {
     class FeedResultsAdapter : BaseAdapter<Posting>
     {
-        Activity activity;
+        Context activity;
         public ObservableCollection<Posting> Postings { get; set; }
-        bool _deleteable;
 
-        public event EventHandler<ImageCollectionClickEventArgs> ItemDeleted;
 
-        public FeedResultsAdapter(Activity activity, ObservableCollection<Posting> postings, bool deleteable = false)
+        public FeedResultsAdapter(Context activity, ObservableCollection<Posting> postings)
         {
             this.activity = activity;
             Postings = postings;
-            _deleteable = deleteable;
         }
 
         public override Posting this[int position]
@@ -51,14 +48,7 @@ namespace EthansList.Droid
             var view = (FeedResultRow)convertView;
             if (view == null)
             {
-                view = new FeedResultRow(activity, _deleteable);
-
-                view.DeleteCalled += (sender, e) =>
-                {
-                    if (ItemDeleted != null)
-                        ItemDeleted(sender, new ImageCollectionClickEventArgs { Index = position });
-                };
-
+                view = new FeedResultRow(activity);
             }
 
             string imageLink = Postings[position].ImageLink;
@@ -81,17 +71,15 @@ namespace EthansList.Droid
     public class FeedResultRow : LinearLayout
     {
         readonly Context _context;
-        bool _deleteable;
 
         public ImageView _postingImage { get; set; }
         public TextView _postingTitle { get; set; }
         public TextView _postingDescription { get; set; }
 
-        public FeedResultRow(Context context, bool deleteable)
+        public FeedResultRow(Context context)
             : base(context)
         {
             _context = context;
-            _deleteable = deleteable;
 
             Initialize();
         }
@@ -132,24 +120,6 @@ namespace EthansList.Droid
             titleDescriptionHolder.AddView(_postingDescription);
 
             AddView(titleDescriptionHolder);
-
-            if (_deleteable)
-            {
-                this.LongClick += (sender, e) =>
-                {
-                    PopupMenu menu = new PopupMenu(_context, this);
-                    menu.Inflate(Resource.Menu.DeleteMenu);
-                    menu.Show();
-
-                    menu.MenuItemClick += (se, args) =>
-                    {
-                        if (DeleteCalled != null)
-                            DeleteCalled(this, new ImageCollectionClickEventArgs());
-                    };
-                };
-            }
         }
-
-        public event EventHandler<ImageCollectionClickEventArgs> DeleteCalled;
     }
 }
