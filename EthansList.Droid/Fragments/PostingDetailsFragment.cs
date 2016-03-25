@@ -183,7 +183,7 @@ namespace EthansList.Droid
 
         public LinearLayout ImageCollectionHolder { get; set; }
 
-        //todo: posting map and weblink
+        //todo: posting map
         public MapView PostingMap { get; set; }
         public TextView WebLink { get; set; }
 
