@@ -66,8 +66,7 @@ namespace EthansList.Droid
             {
                 ItemLongClick += (sender, e) =>
                 {
-                    //TODO: Make this show up in right place
-                    PopupMenu menu = new PopupMenu(_context, adapter.GetView(e.Position, null, null));
+                    PopupMenu menu = new PopupMenu(_context, GetChildAt(e.Position));
                     menu.Inflate(Resource.Menu.DeleteMenu);
                     menu.Show();
 
