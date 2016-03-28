@@ -64,25 +64,32 @@ namespace EthansList.Droid
 
                 if (imageHelper.PostingMapFound)
                 {
-                    if (view.SetUpGoogleMap())
-                    {
-                        view.MapReady += delegate
-                        {
-                            //To initialize the map 
-                            view.map.MapType = GoogleMap.MapTypeNormal; //select the map type
-                            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                            builder.Target(imageHelper.postingCoordinates); //Target to some location hardcoded
-                            builder.Zoom(8); //Zoom multiplier
-                            CameraPosition cameraPosition = builder.Build();
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-                            view.map.AnimateCamera(cameraUpdate);
 
-                            MarkerOptions markerOpt1 = new MarkerOptions();
-                            markerOpt1.SetPosition(imageHelper.postingCoordinates);
-                            markerOpt1.SetTitle("Here's your listing!");
-                            view.map.AddMarker(markerOpt1);
-                        };
-                    }
+                    SupportMapFragment _myMapFragment = SupportMapFragment.NewInstance();
+                    view.mapFrame.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, 500);
+                    var tx = Activity.SupportFragmentManager.BeginTransaction();
+                    tx.Replace(view.mapFrame.Id, _myMapFragment);
+                    tx.Commit();
+
+                    //if (view.SetUpGoogleMap())
+                    //{
+                    //    view.MapReady += delegate
+                    //    {
+                    //        //To initialize the map 
+                    //        view.map.MapType = GoogleMap.MapTypeNormal; //select the map type
+                    //        CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                    //        builder.Target(imageHelper.postingCoordinates); //Target to some location hardcoded
+                    //        builder.Zoom(8); //Zoom multiplier
+                    //        CameraPosition cameraPosition = builder.Build();
+                    //        CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                    //        view.map.AnimateCamera(cameraUpdate);
+
+                    //        MarkerOptions markerOpt1 = new MarkerOptions();
+                    //        markerOpt1.SetPosition(imageHelper.postingCoordinates);
+                    //        markerOpt1.SetTitle("Here's your listing!");
+                    //        view.map.AddMarker(markerOpt1);
+                    //    };
+                    //}
                 }
             };
 
@@ -178,6 +185,11 @@ namespace EthansList.Droid
         public TextView PostingDate { get; set; }
         public LinearLayout ImageCollectionHolder { get; set; }
         public MapView PostingMap { get; set; }
+
+        public FrameLayout mapFrame { get; set; }
+
+        public MapFragment PostingMapFragment { get; set; }
+
         public TextView WebLink { get; set; }
 
         public GoogleMap map { get; set; }
@@ -255,6 +267,18 @@ namespace EthansList.Droid
             //TODO Added mapview to details
             PostingMap = new MapView(_context);
             //AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
+
+
+            //PostingMapFragment = MapFragment.NewInstance();
+            //PostingMapFragment.View.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, 500);
+            //AddView(PostingMapFragment.View);
+
+            mapFrame = new FrameLayout(_context);
+            //mapFrame.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            mapFrame.SetBackgroundColor(Android.Graphics.Color.Blue);
+            mapFrame.Id = 12345;
+            AddView(mapFrame);
+
 
             PostingDate = new TextView(_context) { LayoutParameters = rowParams };
             PostingDate.SetPadding(10, 10, 10, 10);
