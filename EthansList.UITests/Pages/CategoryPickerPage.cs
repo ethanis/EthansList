@@ -11,7 +11,7 @@ namespace ethanslist.UITests
         readonly Query CategoryTable;
 
         public CategoryPickerPage()
-            : base ("Housing", "Category")
+            : base("Housing", "Category")
         {
             if (OniOS)
             {
@@ -25,12 +25,13 @@ namespace ethanslist.UITests
                 app.ScrollDownTo(x => x.Marked(cat), CategoryTable, timeout: TimeSpan.FromSeconds(20));
             else
             {
-                int count = 0;
-                while (!app.Query(cat).Any() && count < 10)
-                { 
-                    app.ScrollDown();
-                    count++;
-                }
+                //int count = 0;
+                //while (!app.Query(cat).Any() && count < 10)
+                //{ 
+                //    app.ScrollDown();
+                //    count++;
+                //}
+                app.ScrollTo(cat);
             }
             app.Screenshot("Scrolled down to category: " + cat);
             app.Tap(cat);
