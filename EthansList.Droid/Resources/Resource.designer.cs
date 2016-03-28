@@ -1934,22 +1934,22 @@ namespace EthansList.Droid
 			public const int design_snackbar_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int ic_action_content_save = 2130837593;
+			public const int ethanslist_icon = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_devices_black_24dp = 2130837594;
+			public const int ic_action_content_save = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_home_black_24dp = 2130837595;
+			public const int ic_devices_black_24dp = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ic_question_answer_black_24dp = 2130837596;
+			public const int ic_home_black_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int ic_supervisor_account_black_24dp = 2130837597;
+			public const int ic_question_answer_black_24dp = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int Icon = 2130837598;
+			public const int ic_supervisor_account_black_24dp = 2130837598;
 			
 			// aapt resource value: 0x7f020066
 			public const int notification_template_icon_bg = 2130837606;

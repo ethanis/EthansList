@@ -15,7 +15,7 @@ using EthansList.Models;
 
 namespace EthansList.Droid
 {
-    [Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/ethanslist_icon")]
     public class MainActivity : AppCompatActivity
     {
         DrawerLayout drawerLayout;
