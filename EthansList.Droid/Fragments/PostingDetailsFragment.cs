@@ -66,30 +66,33 @@ namespace EthansList.Droid
                 {
 
                     SupportMapFragment _myMapFragment = SupportMapFragment.NewInstance();
-                    view.mapFrame.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, 500);
+                    view.mapFrame.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, Convert.ToInt16(Activity.Resources.DisplayMetrics.HeightPixels * 0.5));
                     var tx = Activity.SupportFragmentManager.BeginTransaction();
                     tx.Replace(view.mapFrame.Id, _myMapFragment);
                     tx.Commit();
 
-                    //if (view.SetUpGoogleMap())
-                    //{
-                    //    view.MapReady += delegate
-                    //    {
-                    //        //To initialize the map 
-                    //        view.map.MapType = GoogleMap.MapTypeNormal; //select the map type
-                    //        CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                    //        builder.Target(imageHelper.postingCoordinates); //Target to some location hardcoded
-                    //        builder.Zoom(8); //Zoom multiplier
-                    //        CameraPosition cameraPosition = builder.Build();
-                    //        CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-                    //        view.map.AnimateCamera(cameraUpdate);
+                    SetUpGoogleMap(_myMapFragment);
 
-                    //        MarkerOptions markerOpt1 = new MarkerOptions();
-                    //        markerOpt1.SetPosition(imageHelper.postingCoordinates);
-                    //        markerOpt1.SetTitle("Here's your listing!");
-                    //        view.map.AddMarker(markerOpt1);
-                    //    };
-                    //}
+                    this.MapReady += (s, ev) =>
+                    {
+                        if (map != null)
+                        {
+                            //To initialize the map 
+                            map.MapType = GoogleMap.MapTypeNormal; //select the map type
+                            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                            builder.Target(imageHelper.postingCoordinates); //Target to some location hardcoded
+                            builder.Zoom(10); //Zoom multiplier
+                            CameraPosition cameraPosition = builder.Build();
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                            //map.AnimateCamera(cameraUpdate);
+                            map.MoveCamera(cameraUpdate);
+
+                            MarkerOptions markerOpt1 = new MarkerOptions();
+                            markerOpt1.SetPosition(imageHelper.postingCoordinates);
+                            markerOpt1.SetTitle("Here's your listing!");
+                            map.AddMarker(markerOpt1);
+                        }
+                    };
                 }
             };
 
@@ -157,6 +160,26 @@ namespace EthansList.Droid
 
             base.OnPrepareOptionsMenu(menu);
         }
+
+        GoogleMap map;
+        bool SetUpGoogleMap(SupportMapFragment mapFrag)
+        {
+            if (null != map) return false;
+
+            var mapReadyCallback = new OnMapReadyClass();
+
+            mapReadyCallback.MapReadyAction += delegate (GoogleMap googleMap)
+            {
+                map = googleMap;
+                if (MapReady != null)
+                    this.MapReady(this, new EventArgs());
+            };
+
+            mapFrag.GetMapAsync(mapReadyCallback);
+            return true;
+        }
+
+        public event EventHandler<EventArgs> MapReady;
     }
 
     //OnMapReadyClass
@@ -184,33 +207,8 @@ namespace EthansList.Droid
         public TextView PostingDescription { get; set; }
         public TextView PostingDate { get; set; }
         public LinearLayout ImageCollectionHolder { get; set; }
-        public MapView PostingMap { get; set; }
-
         public FrameLayout mapFrame { get; set; }
-
-        public MapFragment PostingMapFragment { get; set; }
-
         public TextView WebLink { get; set; }
-
-        public GoogleMap map { get; set; }
-        public bool SetUpGoogleMap()
-        {
-            if (null != map) return false;
-
-            var mapReadyCallback = new OnMapReadyClass();
-
-            mapReadyCallback.MapReadyAction += delegate (GoogleMap googleMap)
-            {
-                map = googleMap;
-                if (this.MapReady != null)
-                    this.MapReady(this, new EventArgs());
-            };
-
-            PostingMap.GetMapAsync(mapReadyCallback);
-            return true;
-        }
-
-        public event EventHandler<EventArgs> MapReady;
 
         public string CurrentImage
         {
@@ -264,18 +262,7 @@ namespace EthansList.Droid
             PostingDescription.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
             AddRowItem(PostingDescription, rowParams);
 
-            //TODO Added mapview to details
-            PostingMap = new MapView(_context);
-            //AddRowItem(PostingMap, new LayoutParams(ViewGroup.LayoutParams.MatchParent, 300));
-
-
-            //PostingMapFragment = MapFragment.NewInstance();
-            //PostingMapFragment.View.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, 500);
-            //AddView(PostingMapFragment.View);
-
             mapFrame = new FrameLayout(_context);
-            //mapFrame.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            mapFrame.SetBackgroundColor(Android.Graphics.Color.Blue);
             mapFrame.Id = 12345;
             AddView(mapFrame);
 
