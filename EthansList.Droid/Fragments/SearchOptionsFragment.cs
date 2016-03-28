@@ -56,15 +56,15 @@ namespace EthansList.Droid
         public readonly KeyValuePair<string, string> category;
 
         #region GeneratedFromSearchOptions
-        public int MaxListings 
-        { 
-            get { return maxListings; } 
+        public int MaxListings
+        {
+            get { return maxListings; }
             set { maxListings = value; }
         }
         private int maxListings = 25;
         public int? WeeksOld { get; set; }
-        public KeyValuePair<object,object> SubCategory { get; set; }
-        public Dictionary<string, string> SearchItems { get; set;}
+        public KeyValuePair<object, object> SubCategory { get; set; }
+        public Dictionary<string, string> SearchItems { get; set; }
         public Dictionary<object, KeyValuePair<object, object>> Conditions { get; set; }
         #endregion
 
@@ -73,7 +73,7 @@ namespace EthansList.Droid
         public ListView SearchTermsTable;
         public ListView OptionsTable;
 
-        public SearchOptionsView(Context context, Location location, KeyValuePair<string,string> category)
+        public SearchOptionsView(Context context, Location location, KeyValuePair<string, string> category)
             : base(context)
         {
             this.context = context;
@@ -137,7 +137,7 @@ namespace EthansList.Droid
             LinearLayout buttonLayout = RowHolder();
             buttonLayout.AddView(proceedButton);
             AddView(buttonLayout);
- 
+
             var tableItems = GetTableSetup();
             foreach (var item in tableItems)
             {
@@ -153,7 +153,7 @@ namespace EthansList.Droid
 
             SearchObject searchObject = new SearchObject();
             searchObject.SearchLocation = location;
-            searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object,object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object,object>(category.Key, category.Value);
+            searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(category.Key, category.Value);
             searchObject.SearchItems = this.SearchItems;
             searchObject.Conditions = this.Conditions;
 
@@ -232,12 +232,12 @@ namespace EthansList.Droid
                     Title = "Odometer",
                     RowType = SearchRowTypes.DoubleEntry,
                     QueryPrefix = "min_auto_miles",
-                SecondQueryPrefix = "max_auto_miles"
+                    SecondQueryPrefix = "max_auto_miles"
                 });
             }
 
-            searchOptions.Add(new SearchRow {Title = "Space", RowType = SearchRowTypes.Space});
-            searchOptions.Add(new SearchRow {Title = "Options", RowType = SearchRowTypes.Heading});
+            searchOptions.Add(new SearchRow { Title = "Space", RowType = SearchRowTypes.Space });
+            searchOptions.Add(new SearchRow { Title = "Options", RowType = SearchRowTypes.Heading });
 
             if (Categories.SubCategories.ContainsKey(category.Key))
             {
@@ -345,8 +345,9 @@ namespace EthansList.Droid
             }
             #endregion
 
-            searchOptions.Add(new SearchRow {
-                Title = "Posted Date", 
+            searchOptions.Add(new SearchRow
+            {
+                Title = "Posted Date",
                 RowType = SearchRowTypes.SubCatPicker,
                 ComboPickerOptions = new List<KeyValuePair<object, object>>
                 {
@@ -359,8 +360,9 @@ namespace EthansList.Droid
                 },
                 QueryPrefix = "posted_date"
             });
-            searchOptions.Add(new SearchRow {
-                Title = "Max Listings", 
+            searchOptions.Add(new SearchRow
+            {
+                Title = "Max Listings",
                 RowType = SearchRowTypes.SubCatPicker,
                 ComboPickerOptions = new List<KeyValuePair<object, object>>
                 {
@@ -395,7 +397,7 @@ namespace EthansList.Droid
                 case SearchRowTypes.Heading:
                     row.AddView(Heading(item));
 
-                break;
+                    break;
                 case SearchRowTypes.SearchTerms:
                     EditText searchfield = new EditText(context);
                     searchfield.LayoutParameters = f;
@@ -405,11 +407,12 @@ namespace EthansList.Droid
                     searchfield.InputType = InputTypes.ClassText;
                     row.AddView(searchfield);
 
-                    searchfield.TextChanged += (object sender, TextChangedEventArgs e) => {
+                    searchfield.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.QueryPrefix, e.Text.ToString());
                     };
 
-                break;
+                    break;
                 case SearchRowTypes.PriceDoubleEntry:
                     row.AddView(Title(item));
 
@@ -429,16 +432,18 @@ namespace EthansList.Droid
                     maxPricefield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxPricefield);
 
-                    minPricefield.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    minPricefield.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.QueryPrefix, e.Text.ToString());
                     };
 
-                    maxPricefield.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    maxPricefield.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.SecondQueryPrefix, e.Text.ToString());
                     };
 
                     row.AddView(entryHolder);
-                break;
+                    break;
 
                 case SearchRowTypes.DoubleEntry:
                     row.AddView(Title(item));
@@ -460,17 +465,19 @@ namespace EthansList.Droid
                     maxfield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxfield);
 
-                    minfield.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    minfield.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.QueryPrefix, e.Text.ToString());
                     };
 
-                    maxfield.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    maxfield.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.SecondQueryPrefix, e.Text.ToString());
                     };
 
                     row.AddView(entryHolder);
 
-                break;
+                    break;
                 case SearchRowTypes.SingleEntryLabel:
                     row.AddView(Title(item));
 
@@ -482,12 +489,13 @@ namespace EthansList.Droid
                     inputField.SetSingleLine(true);
                     entryHolder.AddView(inputField);
 
-                    inputField.TextChanged += (object sender, TextChangedEventArgs e) => { 
+                    inputField.TextChanged += (object sender, TextChangedEventArgs e) =>
+                    {
                         AddSearchItem(item.QueryPrefix, e.Text.ToString());
                     };
 
                     row.AddView(entryHolder);
-                break;
+                    break;
                 case SearchRowTypes.SinglePicker:
                     row.AddView(Title(item));
 
@@ -495,10 +503,10 @@ namespace EthansList.Droid
                     display.LayoutParameters = f;
                     display.Gravity = GravityFlags.Right;
                     display.Text = "Any";
-                    display.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
+                    display.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
 
                     var dialog = new NumberPickerDialogFragment(context, item.Title, item.NumberPickerOptions, item.QueryPrefix);
-                    display.Click += (object sender, EventArgs e) => 
+                    display.Click += (object sender, EventArgs e) =>
                     {
                         dialog.Show(((Activity)context).FragmentManager, "number");
                     };
@@ -511,7 +519,7 @@ namespace EthansList.Droid
 
                     row.AddView(display);
 
-                break;
+                    break;
                 case SearchRowTypes.ComboPicker:
                     row.AddView(Title(item));
 
@@ -519,27 +527,28 @@ namespace EthansList.Droid
                     comboLabel.LayoutParameters = f;
                     comboLabel.Gravity = GravityFlags.Right;
                     comboLabel.Text = "Any";
-                    comboLabel.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
+                    comboLabel.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
 
                     var comboDialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
 
-                    comboLabel.Click += (object sender, EventArgs e) => 
+                    comboLabel.Click += (object sender, EventArgs e) =>
                     {
                         var selectedKeys = (from kvp in Conditions where (string)kvp.Value.Key == item.QueryPrefix select (string)kvp.Key).ToList();
                         comboDialog._selectedKeys = selectedKeys;
                         comboDialog.Show(((Activity)context).FragmentManager, "combo");
                     };
 
-                    comboDialog.ItemChanged += (object sender, ComboPickerItemChangedEventArgs e) => { 
+                    comboDialog.ItemChanged += (object sender, ComboPickerItemChangedEventArgs e) =>
+                    {
                         if (e.InitialArgs.IsChecked)
                         {
                             Conditions.Add(e.Item.Key, new KeyValuePair<object, object>(item.QueryPrefix, e.Item.Value));
-                            Console.WriteLine ("Added Key: " + e.Item.Key + ", Value: " + e.Item.Value + " with prefix: " + item.QueryPrefix);
+                            Console.WriteLine("Added Key: " + e.Item.Key + ", Value: " + e.Item.Value + " with prefix: " + item.QueryPrefix);
                         }
                         else
                         {
                             Conditions.Remove(e.Item.Key);
-                            Console.WriteLine ("Removed Key: " + e.Item.Key + ", Value: " + e.Item.Value);
+                            Console.WriteLine("Removed Key: " + e.Item.Key + ", Value: " + e.Item.Value);
                         }
 
                         var keys = (from kvp in Conditions where (string)kvp.Value.Key == item.QueryPrefix select (string)kvp.Key).ToList();
@@ -549,7 +558,7 @@ namespace EthansList.Droid
 
                     row.AddView(comboLabel);
 
-                break;
+                    break;
                 case SearchRowTypes.SubCatPicker:
                     row.AddView(Title(item));
 
@@ -557,18 +566,20 @@ namespace EthansList.Droid
                     catLabel.LayoutParameters = f;
                     catLabel.Gravity = GravityFlags.Right;
                     catLabel.Text = (string)item.ComboPickerOptions.First().Key;
-                    catLabel.SetPadding(0,0,PixelConverter.DpToPixels(50),0);
+                    catLabel.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
 
                     if (item.Title == "Sub Category")
                         SubCategory = item.ComboPickerOptions.First();
 
                     var categoryDialog = new SingleStringDialogFragment(context, item.Title, item.ComboPickerOptions);
 
-                    catLabel.Click += (object sender, EventArgs e) => {
+                    catLabel.Click += (object sender, EventArgs e) =>
+                    {
                         categoryDialog.Show(((Activity)context).FragmentManager, "stringPick");
                     };
 
-                    categoryDialog.CatPicked += (object sender, SubCatSelectedEventArgs e) => { 
+                    categoryDialog.CatPicked += (object sender, SubCatSelectedEventArgs e) =>
+                    {
                         categoryDialog.Dismiss();
 
                         if (item.Title != "Posted Date" && item.Title != "Max Listings")
@@ -588,18 +599,18 @@ namespace EthansList.Droid
                     };
 
                     row.AddView(catLabel);
-                break;
+                    break;
                 case SearchRowTypes.Space:
                     View strut = new View(context);
-                    strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 
+                    strut.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent,
                                                                         PixelConverter.DpToPixels(25));
                     row.ShowDividers = ShowDividers.None;
                     row.AddView(strut);
-                break;
+                    break;
                 default:
                     row.AddView(Title(item));
 
-                break;
+                    break;
             }
 
             AddView(row);
@@ -621,12 +632,12 @@ namespace EthansList.Droid
             TextView title = new TextView(context);
             title.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
             title.Text = item.Title;
-            title.SetPadding(10,0,10,0);
+            title.SetPadding(10, 0, 10, 0);
 
             return title;
         }
 
-        private void AddSearchItem (string itemKey, string itemValue)
+        private void AddSearchItem(string itemKey, string itemValue)
         {
             if (SearchItems.ContainsKey(itemKey))
                 SearchItems[itemKey] = itemValue;

@@ -15,21 +15,21 @@ using EthansList.Models;
 
 namespace EthansList.Droid
 {
-	[Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : AppCompatActivity
-	{
-		DrawerLayout drawerLayout;
+    [Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/icon")]
+    public class MainActivity : AppCompatActivity
+    {
+        DrawerLayout drawerLayout;
         public static DatabaseConnection databaseConnection { get; set; }
-        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment() , new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment()};
+        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment(), new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment() };
         readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches" };
 
-        public IMenu Menu { get; private set;}
+        public IMenu Menu { get; private set; }
         public event EventHandler<OptionItemEventArgs> OptionItemSelected;
 
-        public static Context Instance { get; private set;}
+        public static Context Instance { get; private set; }
 
         protected override void OnCreate(Bundle bundle)
-		{			
+        {
             base.OnCreate(bundle);
             Instance = this;
 
@@ -42,7 +42,7 @@ namespace EthansList.Droid
 
             // Init toolbar
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);   
+            SetSupportActionBar(toolbar);
 
             // Attach item selected handler to navigation view
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
@@ -54,7 +54,7 @@ namespace EthansList.Droid
             drawerToggle.SyncState();
 
             base.SupportFragmentManager.BeginTransaction().Replace(Resource.Id.frameLayout, fragments[0]).Commit();
-		}
+        }
 
         public override void OnBackPressed()
         {
@@ -81,8 +81,8 @@ namespace EthansList.Droid
             return base.OnOptionsItemSelected(item);
         }
 
-		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
-		{
+        void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+        {
             int position = -1;
             switch (e.MenuItem.ItemId)
             {
@@ -97,7 +97,7 @@ namespace EthansList.Droid
                     break;
                 case (Resource.Id.saved_searches):
                     position = 3;
-                    break;   
+                    break;
             }
 
             base.SupportFragmentManager.PopBackStack(null, (int)PopBackStackFlags.Inclusive);
@@ -107,10 +107,12 @@ namespace EthansList.Droid
             // Update the Activity title in the ActionBar
             this.Title = titles[position];
 
+            OptionItemSelected = null;
+
             // Close drawer
             drawerLayout.CloseDrawers();
-		}
-	}
+        }
+    }
 
     public class OptionItemEventArgs : EventArgs
     {
