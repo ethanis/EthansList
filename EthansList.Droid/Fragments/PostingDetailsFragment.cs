@@ -66,7 +66,8 @@ namespace EthansList.Droid
                 {
 
                     SupportMapFragment _myMapFragment = SupportMapFragment.NewInstance();
-                    view.mapFrame.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, Convert.ToInt16(Activity.Resources.DisplayMetrics.HeightPixels * 0.5));
+                    view.mapFrame.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent,
+                                                                                   Convert.ToInt16(Activity.Resources.DisplayMetrics.HeightPixels * 0.5));
                     var tx = Activity.SupportFragmentManager.BeginTransaction();
                     tx.Replace(view.mapFrame.Id, _myMapFragment);
                     tx.Commit();
@@ -265,7 +266,6 @@ namespace EthansList.Droid
             mapFrame = new FrameLayout(_context);
             mapFrame.Id = 12345;
             AddView(mapFrame);
-
 
             PostingDate = new TextView(_context) { LayoutParameters = rowParams };
             PostingDate.SetPadding(10, 10, 10, 10);
