@@ -15,7 +15,7 @@ using EthansList.Models;
 
 namespace EthansList.Droid
 {
-    [Activity(Label = "EthansList", MainLauncher = true, Icon = "@drawable/ethanslist_icon", Theme = "@style/MyTheme.Base")]
+    [Activity(Label = "EthansList", Icon = "@drawable/ethanslist_icon", Theme = "@style/MyTheme.Base")]
     public class MainActivity : AppCompatActivity
     {
         DrawerLayout drawerLayout;
@@ -32,7 +32,7 @@ namespace EthansList.Droid
         {
             base.OnCreate(bundle);
             Instance = this;
-
+            //Resource.Color.accent_material_light
             string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
 

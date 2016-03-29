@@ -2005,8 +2005,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f02005e
 			public const int ic_supervisor_account_black_24dp = 2130837598;
 			
-			// aapt resource value: 0x7f020066
-			public const int notification_template_icon_bg = 2130837606;
+			// aapt resource value: 0x7f020067
+			public const int notification_template_icon_bg = 2130837607;
 			
 			// aapt resource value: 0x7f02005f
 			public const int placeholder = 2130837599;
@@ -2028,6 +2028,9 @@ namespace EthansList.Droid
 			
 			// aapt resource value: 0x7f020065
 			public const int spinner_20_outer_holo = 2130837605;
+			
+			// aapt resource value: 0x7f020066
+			public const int splash = 2130837606;
 			
 			static Drawable()
 			{
@@ -2654,10 +2657,13 @@ namespace EthansList.Droid
 			public const int select_dialog_singlechoice_material = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int StateRow = 2130903089;
+			public const int splashlayer = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int support_simple_spinner_dropdown_item = 2130903090;
+			public const int StateRow = 2130903090;
+			
+			// aapt resource value: 0x7f030033
+			public const int support_simple_spinner_dropdown_item = 2130903091;
 			
 			static Layout()
 			{
@@ -3330,6 +3336,9 @@ namespace EthansList.Droid
 			
 			// aapt resource value: 0x7f07013f
 			public const int MyTheme_Base = 2131165503;
+			
+			// aapt resource value: 0x7f070141
+			public const int MyTheme_Splash = 2131165505;
 			
 			// aapt resource value: 0x7f070021
 			public const int Platform_AppCompat = 2131165217;
