@@ -32,6 +32,24 @@ namespace EthansList.Models
                 Description = "PullToRefresharp is the only C# library that provides pull-to-refresh functionality to ListView, GridView, and ScrollView on Android. It is simple to integrate with, customizable and extensible.",
                 Link = "https://components.xamarin.com/view/pulltorefresharp"
             },
+            new Acknowledgement
+            {
+                Title = "HTML Agility Pack",
+                Description = "This is an agile HTML parser that builds a read/write DOM and supports plain XPATH or XSLT (you actually don't HAVE to understand XPATH nor XSLT to use it, don't worry...). It is a .NET code library that allows you to parse \"out of the web\" HTML files. The parser is very tolerant with \"real world\" malformed HTML. The object model is very similar to what proposes System.Xml, but for HTML documents (or streams). ",
+                Link = "https://htmlagilitypack.codeplex.com/"
+            },
+            new Acknowledgement
+            {
+                Title = "Json.NET",
+                Description = "Popular high-performance JSON framework for .NET",
+                Link = "http://www.newtonsoft.com/json"
+            },
+            new Acknowledgement
+            {
+                Title = "SQLite-Net",
+                Description = "SQLite-net is an open source and light weight library providing easy SQLite database storage for .NET, Mono, and Xamarin applications. This version uses SQLitePCL.raw_basic to provide platform independent versions of SQLite.",
+                Link = "https://github.com/praeclarum/sqlite-net"
+            },
         };
     }
 }
