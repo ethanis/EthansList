@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.Content;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
@@ -30,6 +31,8 @@ namespace EthansList.Droid
             var view = new ListView(this.Activity);
             var adapter = new AcknowledgementAdapter(this.Activity);
             view.Adapter = adapter;
+            view.Divider = null;
+            view.DividerHeight = 0;
 
             return view;
         }
@@ -108,6 +111,10 @@ namespace EthansList.Droid
             CardView card = new CardView(_context);
             card.LayoutParameters = new CardView.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             card.SetForegroundGravity(GravityFlags.CenterHorizontal);
+            card.Radius = PixelConverter.DpToPixels(6);
+            card.CardElevation = PixelConverter.DpToPixels(4);
+            //TODO: settle on a color for this
+            card.SetCardBackgroundColor(Android.Graphics.Color.ParseColor("#FF4081"));
 
             LinearLayout layoutHolder = new LinearLayout(_context);
             layoutHolder.Orientation = Orientation.Vertical;
@@ -115,19 +122,20 @@ namespace EthansList.Droid
             var padding = PixelConverter.DpToPixels(8);
             layoutHolder.SetPadding(padding, padding, padding, padding);
 
-            //TODO: Why isnt text size being set here?
             TextView titleDisplay = new TextView(_context) { Text = _ack.Title };
             titleDisplay.Gravity = GravityFlags.CenterVertical;
             titleDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            titleDisplay.SetTextSize(ComplexUnitType.Dip, 50);
+            titleDisplay.SetTextSize(ComplexUnitType.Dip, 24);
             titleDisplay.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
+            titleDisplay.SetTextColor(Android.Graphics.Color.AntiqueWhite);
             layoutHolder.AddView(titleDisplay);
 
             TextView descriptionDisplay = new TextView(_context) { Text = _ack.Description };
             descriptionDisplay.Gravity = GravityFlags.CenterVertical;
             descriptionDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            titleDisplay.SetTextSize(ComplexUnitType.Dip, 16);
-            titleDisplay.SetTypeface(Android.Graphics.Typeface.Default, Android.Graphics.TypefaceStyle.Normal);
+            descriptionDisplay.SetTextSize(ComplexUnitType.Dip, 16);
+            descriptionDisplay.SetTypeface(Android.Graphics.Typeface.Default, Android.Graphics.TypefaceStyle.Normal);
+            descriptionDisplay.SetTextColor(Android.Graphics.Color.AntiqueWhite);
             layoutHolder.AddView(descriptionDisplay);
 
             card.AddView(layoutHolder);
