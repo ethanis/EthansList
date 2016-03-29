@@ -12,6 +12,7 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EthansList.Models;
 
 namespace EthansList.Droid
 {
@@ -34,20 +35,22 @@ namespace EthansList.Droid
         }
     }
 
-    public class AcknowledgementAdapter : BaseAdapter<string>
+    public class AcknowledgementAdapter : BaseAdapter<Acknowledgement>
     {
         readonly Context _context;
+        readonly List<Acknowledgement> _acks;
 
         public AcknowledgementAdapter(Context context)
         {
             _context = context;
+            _acks = Acknowledgements.All;
         }
 
-        public override string this[int position]
+        public override Acknowledgement this[int position]
         {
             get
             {
-                return "Hello Cardview!";
+                return _acks[position];
             }
         }
 
@@ -55,7 +58,7 @@ namespace EthansList.Droid
         {
             get
             {
-                return 2;
+                return _acks.Count;
             }
         }
 
@@ -69,8 +72,19 @@ namespace EthansList.Droid
             var view = (AcknowledgementRow)convertView;
             if (view == null)
             {
-                view = new AcknowledgementRow(_context);
+                view = new AcknowledgementRow(_context, _acks[position]);
             }
+
+            view.Click += (sender, e) =>
+            {
+                var transaction = ((MainActivity)_context).SupportFragmentManager.BeginTransaction();
+                WebviewFragment webviewFragment = new WebviewFragment();
+                webviewFragment.Link = _acks[position].Link;
+
+                transaction.Replace(Resource.Id.frameLayout, webviewFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
+            };
 
             return view;
         }
@@ -79,30 +93,42 @@ namespace EthansList.Droid
     public class AcknowledgementRow : LinearLayout
     {
         readonly Context _context;
+        readonly Acknowledgement _ack;
 
-        public AcknowledgementRow(Context context)
+        public AcknowledgementRow(Context context, Acknowledgement ack)
             : base(context)
         {
             _context = context;
+            _ack = ack;
             Initialize();
         }
 
         void Initialize()
         {
             CardView card = new CardView(_context);
-            card.LayoutParameters = new CardView.LayoutParams(LayoutParams.MatchParent, PixelConverter.DpToPixels(245));
+            card.LayoutParameters = new CardView.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             card.SetForegroundGravity(GravityFlags.CenterHorizontal);
 
             LinearLayout layoutHolder = new LinearLayout(_context);
-            layoutHolder.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, PixelConverter.DpToPixels(240));
+            layoutHolder.Orientation = Orientation.Vertical;
+            layoutHolder.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             var padding = PixelConverter.DpToPixels(8);
             layoutHolder.SetPadding(padding, padding, padding, padding);
 
-            TextView textDisplay = new TextView(_context) { Text = "Hello CardView!" };
-            textDisplay.Gravity = GravityFlags.Center;
-            textDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            //TODO: Why isnt text size being set here?
+            TextView titleDisplay = new TextView(_context) { Text = _ack.Title };
+            titleDisplay.Gravity = GravityFlags.CenterVertical;
+            titleDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            titleDisplay.SetTextSize(ComplexUnitType.Dip, 50);
+            titleDisplay.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
+            layoutHolder.AddView(titleDisplay);
 
-            layoutHolder.AddView(textDisplay);
+            TextView descriptionDisplay = new TextView(_context) { Text = _ack.Description };
+            descriptionDisplay.Gravity = GravityFlags.CenterVertical;
+            descriptionDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            titleDisplay.SetTextSize(ComplexUnitType.Dip, 16);
+            titleDisplay.SetTypeface(Android.Graphics.Typeface.Default, Android.Graphics.TypefaceStyle.Normal);
+            layoutHolder.AddView(descriptionDisplay);
 
             card.AddView(layoutHolder);
             AddView(card);
