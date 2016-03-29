@@ -25,13 +25,16 @@ namespace ethanslist.UITests
                 app.ScrollDownTo(x => x.Marked(cat), CategoryTable, timeout: TimeSpan.FromSeconds(20));
             else
             {
-                //int count = 0;
-                //while (!app.Query(cat).Any() && count < 10)
-                //{ 
-                //    app.ScrollDown();
-                //    count++;
-                //}
-                app.ScrollTo(cat);
+                var coords = app.Query(x => x.Id("frameLayout"))[0].Rect;
+                int count = 0;
+                while (!app.Query(cat).Any() && count < 25)
+                {
+                    //app.ScrollDown();
+                    app.DragCoordinates(coords.CenterX, coords.Height * 0.75f, coords.CenterX, coords.Height * 0.25f);
+                    System.Threading.Thread.Sleep(500);
+                    count++;
+                }
+                //app.ScrollDownTo(cat, timeout: TimeSpan.FromSeconds(20));
             }
             app.Screenshot("Scrolled down to category: " + cat);
             app.Tap(cat);

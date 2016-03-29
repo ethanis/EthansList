@@ -38,6 +38,7 @@ namespace EthansList.Droid
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
             view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches).Result);
 
+            //TODO: format searches better
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
                 QueryGeneration queryHelper = new QueryGeneration();
