@@ -76,18 +76,18 @@ namespace EthansList.Droid
             if (view == null)
             {
                 view = new AcknowledgementRow(_context, _acks[position]);
+                view.Click += (sender, e) =>
+                {
+                    var transaction = ((MainActivity)_context).SupportFragmentManager.BeginTransaction();
+                    WebviewFragment webviewFragment = new WebviewFragment();
+                    webviewFragment.Link = _acks[position].Link;
+
+                    transaction.Replace(Resource.Id.frameLayout, webviewFragment);
+                    transaction.AddToBackStack(null);
+                    transaction.Commit();
+                };
             }
 
-            view.Click += (sender, e) =>
-            {
-                var transaction = ((MainActivity)_context).SupportFragmentManager.BeginTransaction();
-                WebviewFragment webviewFragment = new WebviewFragment();
-                webviewFragment.Link = _acks[position].Link;
-
-                transaction.Replace(Resource.Id.frameLayout, webviewFragment);
-                transaction.AddToBackStack(null);
-                transaction.Commit();
-            };
 
             return view;
         }
