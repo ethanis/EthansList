@@ -32,7 +32,7 @@ namespace EthansList.Droid
         {
             base.OnCreate(bundle);
             Instance = this;
-            //Resource.Color.accent_material_light
+
             string dbpath = FileAccessHelper.GetLocalFilePath("ethanslist.db3");
             databaseConnection = new DatabaseConnection(dbpath);
 
