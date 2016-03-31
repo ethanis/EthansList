@@ -38,7 +38,6 @@ namespace EthansList.Droid
             savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
             view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches).Result);
 
-            //TODO: format searches better
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
                 QueryGeneration queryHelper = new QueryGeneration();
@@ -54,22 +53,32 @@ namespace EthansList.Droid
                 transaction.Commit();
             };
 
-            adapter.DeleteClicked += (sender, e) =>
+            view.ItemLongClick += (sender, e) =>
             {
-                var result = MainActivity.databaseConnection.DeleteSearchAsync(adapter._searches[e.Position].SearchLocation.Url, adapter._searches[e.Position]).Result;
-                if (MainActivity.databaseConnection.StatusCode == codes.ok && result)
-                {
-                    Activity.RunOnUiThread(() =>
-                    {
-                        adapter._searches.RemoveAt(e.Position);
-                    });
+                PopupMenu menu = new PopupMenu(this.Activity, view.GetChildAt(e.Position));
+                menu.Inflate(Resource.Menu.DeleteMenu);
+                menu.Show();
 
-                    adapter.NotifyDataSetChanged();
-                }
-                else
+                menu.MenuItemClick += (se, args) =>
                 {
-                }
-                Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+                    var result = MainActivity.databaseConnection.DeleteSearchAsync(adapter._searches[e.Position].SearchLocation.Url, adapter._searches[e.Position]).Result;
+                    if (MainActivity.databaseConnection.StatusCode == codes.ok && result)
+                    {
+                        lock (adapter._searches)
+                        {
+                            Activity.RunOnUiThread(() =>
+                            {
+                                adapter._searches.RemoveAt(e.Position);
+                            });
+
+                            adapter.NotifyDataSetChanged();
+                        }
+                    }
+                    else
+                    {
+                    }
+                    Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
+                };
             };
 
             return view;
@@ -101,7 +110,6 @@ namespace EthansList.Droid
     {
         readonly Context _context;
         public ObservableCollection<SearchObject> _searches { get; set; }
-        public event EventHandler<AdapterView.ItemClickEventArgs> DeleteClicked;
 
         public SavedSearchesAdapter(Context context, ObservableCollection<SearchObject> searches)
         {
@@ -136,19 +144,11 @@ namespace EthansList.Droid
             if (view == null)
             {
                 view = new SavedSearchRow(_context);
-
-                view.DeleteButton.Click += delegate
-                {
-                    Console.WriteLine("Deleting from row: " + position);
-                    if (this.DeleteClicked != null)
-                        this.DeleteClicked(this, new AdapterView.ItemClickEventArgs(null, view, position, position));
-                };
             }
 
-            view.CityTitle.Text = _searches[position].SearchLocation.SiteName;
+            view.CityTitle.Text = _searches[position].SearchLocation.SiteName + ": " + _searches[position].Category.Value;
 
             view.SearchTerms.Text = MainActivity.databaseConnection.SecondFormatSearch(_searches[position]);
-
 
             return view;
         }
@@ -161,7 +161,6 @@ namespace EthansList.Droid
 
         public TextView CityTitle { get; set; }
         public TextView SearchTerms { get; set; }
-        public ImageButton DeleteButton { get; set; }
 
         public SavedSearchRow(Context context)
             : base(context)
@@ -174,28 +173,14 @@ namespace EthansList.Droid
         void Initialize()
         {
             Orientation = Orientation.Vertical;
-            LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-
-            LinearLayout CityButtonHolder = new LinearLayout(_context);
-            CityButtonHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            LayoutParameters = new ListView.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
 
             CityTitle = new TextView(_context);
             CityTitle.Gravity = GravityFlags.CenterVertical;
-            CityTitle.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            CityTitle.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
             CityTitle.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
-            CityButtonHolder.AddView(CityTitle);
 
-            var buttonHolder = new LinearLayout(_context);
-            buttonHolder.LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
-            buttonHolder.SetHorizontalGravity(GravityFlags.Right);
-
-            DeleteButton = new ImageButton(_context);
-            DeleteButton.SetImageResource(Android.Resource.Drawable.IcMenuDelete);
-            DeleteButton.SetBackgroundResource(0);
-            buttonHolder.AddView(DeleteButton);
-            CityButtonHolder.AddView(buttonHolder);
-
-            AddView(CityButtonHolder);
+            AddView(CityTitle);
 
             SearchTerms = new TextView(_context);
             SearchTerms.Gravity = GravityFlags.CenterVertical;

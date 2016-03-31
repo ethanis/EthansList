@@ -78,7 +78,7 @@ namespace EthansList.Models
             if (searchObject.SearchItems.Count > 0 && result[result.Length - 1].Equals(','))
                 result = result.TrimEnd(',');
 
-            return result;
+            return result.Length == 0 ? "all" : result;
         }
     }
 }

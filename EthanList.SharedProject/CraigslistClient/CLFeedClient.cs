@@ -209,7 +209,6 @@ namespace EthansList.Shared
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
                     asyncLoadingComplete = null;
                     asyncLoadingPartlyComplete = null;
                     emptyPostingComplete = null;

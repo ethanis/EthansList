@@ -56,6 +56,7 @@ namespace EthansList.Droid
                 progressDialog.SetCancelable(true);
                 progressDialog.SetCanceledOnTouchOutside(false);
                 progressDialog.SetOnCancelListener(this);
+
                 new Thread(new ThreadStart(delegate
                 {
                     //HIDE PROGRESS DIALOG
