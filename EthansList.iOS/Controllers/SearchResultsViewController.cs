@@ -16,7 +16,7 @@ namespace ethanslist.ios
         ADBannerView ads;
         NSLayoutConstraint searchTableBottom;
 
-        public SearchResultsViewController ()
+        public SearchResultsViewController()
         {
         }
 
@@ -24,10 +24,10 @@ namespace ethanslist.ios
         {
             base.LoadView();
 
-            feedResultTable = new UITableView ();
-            View.AddSubview (feedResultTable);
-            ads = new ADBannerView ();
-            View.AddSubview (ads);
+            feedResultTable = new UITableView();
+            View.AddSubview(feedResultTable);
+            ads = new ADBannerView();
+            View.AddSubview(ads);
 
             this.View.Layer.BackgroundColor = ColorScheme.Clouds.CGColor;
             this.feedResultTable.BackgroundColor = ColorScheme.Clouds;
@@ -35,17 +35,17 @@ namespace ethanslist.ios
             AddLayoutConstraints();
         }
 
-        public String Query { get; set;}
-        public int MaxListings 
-        { 
-            get { return maxListings; } 
+        public String Query { get; set; }
+        public int MaxListings
+        {
+            get { return maxListings; }
             set { maxListings = value; }
         }
         protected int maxListings = 25;
 
         public int? WeeksOld
-        { 
-            get { return weeksOld; } 
+        {
+            get { return weeksOld; }
             set { weeksOld = value; }
         }
         protected int? weeksOld = null;
@@ -58,12 +58,13 @@ namespace ethanslist.ios
             this.Title = "Search Results";
 
             var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
-            if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
+            if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight)
+            {
                 bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
             }
             // show the loading overlay on the UI thread using the correct orientation sizing
-            this._loadingOverlay = new LoadingOverlay (bounds);
-            this.View.Add ( this._loadingOverlay );
+            this._loadingOverlay = new LoadingOverlay(bounds);
+            this.View.Add(this._loadingOverlay);
 
             feedClient = new CLFeedClient(Query, MaxListings, WeeksOld);
             var result = feedClient.GetAllPostingsAsync();
@@ -74,10 +75,11 @@ namespace ethanslist.ios
                 UIAlertView alert = new UIAlertView();
                 alert.Message = String.Format("No network connection.{0}Please check your settings", Environment.NewLine);
                 alert.AddButton("OK");
-                alert.Clicked += (s, ev) => {
+                alert.Clicked += (s, ev) =>
+                {
                     this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
                 };
-                this.InvokeOnMainThread(() => alert.Show());   
+                this.InvokeOnMainThread(() => alert.Show());
             }
 
             tableSource = new FeedResultTableSource(this, feedClient);
@@ -86,14 +88,15 @@ namespace ethanslist.ios
             feedResultTable.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
             refreshControl = new UIRefreshControl();
-            feedResultTable.AddSubview (refreshControl);
-            refreshControl.ValueChanged += (object sender, EventArgs e) => {
+            feedResultTable.AddSubview(refreshControl);
+            refreshControl.ValueChanged += (object sender, EventArgs e) =>
+            {
                 feedClient.GetAllPostingsAsync();
             };
 
             feedClient.asyncLoadingComplete += feedClient_LoadingComplete;
             feedClient.asyncLoadingPartlyComplete += feedClient_LoadingComplete;
-            feedClient.emptyPostingComplete += (object sender, EventArgs e) => 
+            feedClient.emptyPostingComplete += (object sender, EventArgs e) =>
             {
                 if (!this._loadingOverlay.AlreadyHidden)
                     this._loadingOverlay.Hide();
@@ -102,48 +105,51 @@ namespace ethanslist.ios
                 UIAlertView alert = new UIAlertView();
                 alert.Message = String.Format("No listings found.{0}Try another search", Environment.NewLine);
                 alert.AddButton("OK");
-                alert.Clicked += (s, ev) => {
+                alert.Clicked += (s, ev) =>
+                {
                     this.InvokeOnMainThread(() => this.NavigationController.PopViewController(true));
                 };
                 this.InvokeOnMainThread(() => alert.Show());
             };
 
-            ads.AdLoaded += (object sender, EventArgs e) => { 
-                AddAdBanner (true);
+            ads.AdLoaded += (object sender, EventArgs e) =>
+            {
+                AddAdBanner(true);
             };
         }
 
-        void AddAdBanner (bool show)
+        void AddAdBanner(bool show)
         {
             if (searchTableBottom != null)
-                View.RemoveConstraint (searchTableBottom);
+                View.RemoveConstraint(searchTableBottom);
 
-            if (show) 
+            if (show)
             {
                 ads.Hidden = false;
 
                 //Ads Constraints
-                this.View.AddConstraints (new NSLayoutConstraint [] {
+                this.View.AddConstraints(new NSLayoutConstraint[] {
                     NSLayoutConstraint.Create(ads, NSLayoutAttribute.Width, NSLayoutRelation.Equal, View, NSLayoutAttribute.Width, 1, 0),
                       NSLayoutConstraint.Create(ads, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, View, NSLayoutAttribute.CenterX, 1, 0),
                       NSLayoutConstraint.Create(ads, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0),
                       //NSLayoutConstraint.Create(ads, NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 50),
                 });
 
-                searchTableBottom = NSLayoutConstraint.Create (feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Bottom, 1, 0);
+                searchTableBottom = NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ads, NSLayoutAttribute.Bottom, 1, 0);
             }
             else
             {
                 ads.Hidden = true;
-                searchTableBottom = NSLayoutConstraint.Create (feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
+                searchTableBottom = NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
             }
-            View.AddConstraint (searchTableBottom);
-            this.View.LayoutIfNeeded ();
+            View.AddConstraint(searchTableBottom);
+            this.View.LayoutIfNeeded();
         }
 
         void feedClient_LoadingComplete(object sender, EventArgs e)
         {
-            this.InvokeOnMainThread(() => {
+            this.InvokeOnMainThread(() =>
+            {
                 if (!this._loadingOverlay.AlreadyHidden)
                 {
                     this._loadingOverlay.Hide();
@@ -151,7 +157,7 @@ namespace ethanslist.ios
                 }
                 feedResultTable.ReloadData();
                 refreshControl.EndRefreshing();
-                Console.WriteLine (feedClient.postings.Count);
+                Console.WriteLine(feedClient.postings.Count);
             });
 
             Console.WriteLine(feedResultTable.NumberOfRowsInSection(0));
@@ -171,7 +177,7 @@ namespace ethanslist.ios
             this.View.AddConstraint(NSLayoutConstraint.Create(feedResultTable, NSLayoutAttribute.Height,
                                                           NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Height, 1, 0));
 
-            AddAdBanner (false);
+            AddAdBanner(false);
         }
     }
 }

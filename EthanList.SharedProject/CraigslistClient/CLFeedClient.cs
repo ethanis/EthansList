@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace EthansList.Shared
 {
-    public class CLFeedClient
+    public class CLFeedClient : IDisposable
     {
         public List<Posting> postings { get; private set; }
         private string query;
@@ -54,7 +54,7 @@ namespace EthansList.Shared
 
         private string DownloadString(string add)
         {
-            string html = "";            
+            string html = "";
             using (WebClient client = new WebClient())
             {
                 client.Proxy = null;
@@ -77,27 +77,27 @@ namespace EthansList.Shared
 
         private void get_craigslist_postings(string query)
         {
-            Console.WriteLine(query);  
+            Console.WriteLine(query);
             Stopwatch timer = Stopwatch.StartNew();
             Task.Factory.StartNew<string>(() => DownloadString(query))
                 .ContinueWith(t =>
                 {
-//                    string html = t.Result;
-//                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-//                    doc.LoadHtml(html);
-//                    HtmlNode root = doc.DocumentNode; 
+                    //                    string html = t.Result;
+                    //                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    //                    doc.LoadHtml(html);
+                    //                    HtmlNode root = doc.DocumentNode; 
                     XmlDocument xmldocument = new XmlDocument();
-                        try
-                        {
-                            xmldocument.LoadXml(t.Result);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine (e.Message);
-                            if (this.emptyPostingComplete != null)
-                                this.emptyPostingComplete(this, new EventArgs());
-                            return;
-                        }
+                    try
+                    {
+                        xmldocument.LoadXml(t.Result);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        if (this.emptyPostingComplete != null)
+                            this.emptyPostingComplete(this, new EventArgs());
+                        return;
+                    }
                     var done = ParsePostings(xmldocument);
                     Console.WriteLine(done);
                     timer.Stop();
@@ -155,7 +155,7 @@ namespace EthansList.Shared
                     posting.ImageLink = imageLink;
                     posting.Date = date;
 
-                    lock(postings)
+                    lock (postings)
                     {
                         if (!postings.Exists(c => c.Link.Equals(posting.Link)))
                         {
@@ -184,7 +184,7 @@ namespace EthansList.Shared
                 if (this.asyncLoadingPartlyComplete != null)
                     this.asyncLoadingPartlyComplete(this, new EventArgs());
 
-//                System.Threading.Thread.Sleep(2000);
+                //                System.Threading.Thread.Sleep(2000);
                 get_craigslist_postings(String.Format("{1}&s={0}", pageCounter, this.query));
                 pageCounter += 25;
             }
@@ -196,9 +196,38 @@ namespace EthansList.Shared
                 if (postings.Count == 0 && this.emptyPostingComplete != null)
                     this.emptyPostingComplete(this, new EventArgs());
             }
-            
+
             return true;
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                    asyncLoadingComplete = null;
+                    asyncLoadingPartlyComplete = null;
+                    emptyPostingComplete = null;
+                }
+
+                postings = null;
+
+                disposedValue = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+        }
+        #endregion
     }
 }
 

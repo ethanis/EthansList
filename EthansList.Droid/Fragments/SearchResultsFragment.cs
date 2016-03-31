@@ -15,7 +15,7 @@ using EthansList.Shared;
 
 namespace EthansList.Droid
 {
-    public class SearchResultsFragment : Android.Support.V4.App.Fragment
+    public class SearchResultsFragment : Android.Support.V4.App.Fragment, IDialogInterfaceOnCancelListener
     {
         public string Query { get; set; }
         public int MaxListings { get; set; }
@@ -53,6 +53,9 @@ namespace EthansList.Droid
             else
             {
                 var progressDialog = ProgressDialog.Show(this.Activity, "Please wait...", "Loading listings...", true);
+                progressDialog.SetCancelable(true);
+                progressDialog.SetCanceledOnTouchOutside(false);
+                progressDialog.SetOnCancelListener(this);
                 new Thread(new ThreadStart(delegate
                 {
                     //HIDE PROGRESS DIALOG
@@ -102,6 +105,14 @@ namespace EthansList.Droid
             };
 
             return view;
+        }
+
+        public void OnCancel(IDialogInterface dialog)
+        {
+            if (feedClient != null)
+                feedClient.Dispose();
+
+            this.Activity.OnBackPressed();
         }
     }
 }
