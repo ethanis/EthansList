@@ -30,7 +30,7 @@ namespace EthansList.Droid
 
             view.Adapter = new ArrayAdapter<string>(this.Activity,
                                                     Android.Resource.Layout.SimpleListItem1,
-                                                    favorites.Select(x => x.CategoryKey).ToList());
+                                                    favorites.OrderByDescending(x => x.Updated).Select(x => x.CategoryValue).ToList());
 
             return view;
         }

@@ -20,6 +20,7 @@ namespace EthansList.Droid
         readonly Context context;
         public TextView headerLabel { get; set; }
         public event EventHandler<CategorySelectedEventArgs> CategorySelected;
+        public event EventHandler<CategorySelectedEventArgs> CategoryLongClick;
         private int rowHeight;
 
         public List<KeyValuePair<string, string>> Items
@@ -79,6 +80,7 @@ namespace EthansList.Droid
         {
             ViewGroup.LayoutParams p = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
 
+            var index = 0;
             foreach (var item in items)
             {
                 LinearLayout row = new LinearLayout(context);
@@ -102,7 +104,14 @@ namespace EthansList.Droid
                         this.CategorySelected(this, new CategorySelectedEventArgs { Selected = item });
                 };
 
+                row.LongClick += (sender, e) =>
+                {
+                    if (this.CategoryLongClick != null)
+                        CategoryLongClick(this, new CategorySelectedEventArgs { Selected = item });
+                };
+
                 AddView(row);
+                index++;
             }
         }
     }

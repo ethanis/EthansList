@@ -14,6 +14,7 @@ namespace EthansList.Droid
         readonly Context context;
         readonly List<CatTableGroup> categories;
         readonly Location SelectedLocation;
+        public event EventHandler<CategorySelectedEventArgs> CategoryLongClick;
 
         public CategoryListAdapter(Context context, List<CatTableGroup> categories, Location searchLocation)
         {
@@ -58,6 +59,12 @@ namespace EthansList.Droid
                 transaction.Replace(Resource.Id.frameLayout, searchFragment);
                 transaction.AddToBackStack(null);
                 transaction.Commit();
+            };
+
+            view.CategoryLongClick += (sender, e) =>
+            {
+                if (this.CategoryLongClick != null)
+                    CategoryLongClick(sender, e);
             };
 
             view.headerLabel.Text = categories[position].Name;

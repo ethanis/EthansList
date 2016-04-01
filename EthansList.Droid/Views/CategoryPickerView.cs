@@ -20,6 +20,8 @@ namespace EthansList.Droid
         ListView categoryList;
         readonly Context context;
         public readonly Location SelectedLocation;
+        CategoryListAdapter adapter;
+        public event EventHandler<CategorySelectedEventArgs> CategoryLongClick;
 
         public CategoryPickerView(Context context, Location location) :
             base(context)
@@ -46,9 +48,16 @@ namespace EthansList.Droid
         void Initialize()
         {
             categoryList = new ListView(context);
-            categoryList.Adapter = new CategoryListAdapter(context, Categories.Groups, SelectedLocation);
+            categoryList.Adapter = adapter = new CategoryListAdapter(context, Categories.Groups, SelectedLocation);
             categoryList.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
             categoryList.Clickable = false;
+
+            adapter.CategoryLongClick += (sender, e) =>
+            {
+                if (this.CategoryLongClick != null)
+                    CategoryLongClick(sender, e);
+            };
+
             AddView(categoryList);
         }
     }

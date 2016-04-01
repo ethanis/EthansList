@@ -2,8 +2,10 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
+using Android.Widget;
 using EthansList.Shared;
 
 namespace EthansList.Droid
@@ -36,6 +38,24 @@ namespace EthansList.Droid
                     transaction.Commit();
                 }
             };
+
+
+            view.CategoryLongClick += (sender, e) =>
+            {
+                System.Console.WriteLine("Selected cat: " + e.Selected.Value);
+
+                var menu = new Android.Support.V7.Widget.PopupMenu(this.Activity, view);
+                menu.Inflate(Resource.Menu.DeleteMenu);
+                menu.Show();
+
+                menu.MenuItemClick += async (s, ev) =>
+                {
+                    await MainActivity.databaseConnection.AddNewFavoriteCategoryAsync(e.Selected.Key, e.Selected.Value);
+
+                    Toast.MakeText(this.Activity, $"{MainActivity.databaseConnection.StatusMessage}", ToastLength.Short).Show();
+                };
+            };
+
 
             return view;
         }

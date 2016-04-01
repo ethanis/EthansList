@@ -2045,11 +2045,11 @@ namespace EthansList.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0087
-			public const int about = 2131361927;
-			
 			// aapt resource value: 0x7f0a0088
-			public const int acknowledgements = 2131361928;
+			public const int about = 2131361928;
+			
+			// aapt resource value: 0x7f0a0089
+			public const int acknowledgements = 2131361929;
 			
 			// aapt resource value: 0x7f0a0070
 			public const int action0 = 2131361904;
@@ -2141,8 +2141,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0069
 			public const int cityListViewItem = 2131361897;
 			
-			// aapt resource value: 0x7f0a0083
-			public const int city_picker = 2131361923;
+			// aapt resource value: 0x7f0a0084
+			public const int city_picker = 2131361924;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int clip_horizontal = 2131361825;
@@ -2201,8 +2201,11 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0051
 			public const int expanded_menu = 2131361873;
 			
-			// aapt resource value: 0x7f0a008a
-			public const int favorite_action_button = 2131361930;
+			// aapt resource value: 0x7f0a008b
+			public const int favorite_action_button = 2131361931;
+			
+			// aapt resource value: 0x7f0a0083
+			public const int favorite_context_button = 2131361923;
 			
 			// aapt resource value: 0x7f0a0023
 			public const int fill = 2131361827;
@@ -2309,8 +2312,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0054
 			public const int radio = 2131361876;
 			
-			// aapt resource value: 0x7f0a0084
-			public const int recent_cities = 2131361924;
+			// aapt resource value: 0x7f0a0085
+			public const int recent_cities = 2131361925;
 			
 			// aapt resource value: 0x7f0a001e
 			public const int right = 2131361822;
@@ -2318,14 +2321,14 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a000d
 			public const int satellite = 2131361805;
 			
-			// aapt resource value: 0x7f0a0089
-			public const int save_action_button = 2131361929;
-			
-			// aapt resource value: 0x7f0a0085
-			public const int saved_postings = 2131361925;
+			// aapt resource value: 0x7f0a008a
+			public const int save_action_button = 2131361930;
 			
 			// aapt resource value: 0x7f0a0086
-			public const int saved_searches = 2131361926;
+			public const int saved_postings = 2131361926;
+			
+			// aapt resource value: 0x7f0a0087
+			public const int saved_searches = 2131361927;
 			
 			// aapt resource value: 0x7f0a0031
 			public const int screen = 2131361841;
@@ -2685,10 +2688,13 @@ namespace EthansList.Droid
 			public const int DeleteMenu = 2131492864;
 			
 			// aapt resource value: 0x7f0c0001
-			public const int NavMenu = 2131492865;
+			public const int FavoriteMenu = 2131492865;
 			
 			// aapt resource value: 0x7f0c0002
-			public const int Save = 2131492866;
+			public const int NavMenu = 2131492866;
+			
+			// aapt resource value: 0x7f0c0003
+			public const int Save = 2131492867;
 			
 			static Menu()
 			{
