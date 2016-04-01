@@ -32,6 +32,7 @@ namespace EthansList.Droid
                 {
                     var transaction = Activity.SupportFragmentManager.BeginTransaction();
                     FavoriteCategoriesFragment favoriteFragment = new FavoriteCategoriesFragment();
+                    favoriteFragment.SelectedLocation = SelectedLocation;
 
                     transaction.Replace(Resource.Id.frameLayout, favoriteFragment);
                     transaction.AddToBackStack(null);
@@ -42,11 +43,7 @@ namespace EthansList.Droid
 
             view.CategoryLongClick += (sender, e) =>
             {
-                System.Console.WriteLine("Selected cat: " + e.Selected.Value);
-
-                //todo: attach to correct subview
-                var menu = new Android.Support.V7.Widget.PopupMenu(this.Activity, view);
-
+                var menu = new Android.Support.V7.Widget.PopupMenu(this.Activity, e.SelectedView);
                 var presentAlready = MainActivity.databaseConnection.FavoriteCategoryAlreadyPresent(e.Selected.Key);
 
                 if (presentAlready)
@@ -55,7 +52,6 @@ namespace EthansList.Droid
                     menu.Inflate(Resource.Menu.FavoriteMenu);
 
                 menu.Show();
-
                 menu.MenuItemClick += async (s, ev) =>
                 {
                     if (presentAlready)
@@ -63,7 +59,10 @@ namespace EthansList.Droid
                     else
                         await MainActivity.databaseConnection.AddNewFavoriteCategoryAsync(e.Selected.Key, e.Selected.Value);
 
-                    Toast.MakeText(this.Activity, $"{MainActivity.databaseConnection.StatusMessage}", ToastLength.Short).Show();
+                    if (MainActivity.databaseConnection.StatusCode == Models.codes.ok)
+                        Toast.MakeText(this.Activity, $"Successfully (un)favorited: {e.Selected.Value}", ToastLength.Short).Show();
+                    else
+                        Toast.MakeText(this.Activity, $"Something went wrong, we're sorry!", ToastLength.Short).Show();
                 };
             };
 

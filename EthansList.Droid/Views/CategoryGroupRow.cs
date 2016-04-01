@@ -107,7 +107,7 @@ namespace EthansList.Droid
                 row.LongClick += (sender, e) =>
                 {
                     if (this.CategoryLongClick != null)
-                        CategoryLongClick(this, new CategorySelectedEventArgs { Selected = item });
+                        CategoryLongClick(this, new CategorySelectedEventArgs { Selected = item, SelectedView = row });
                 };
 
                 AddView(row);
@@ -119,6 +119,7 @@ namespace EthansList.Droid
     public class CategorySelectedEventArgs : EventArgs
     {
         public KeyValuePair<string, string> Selected { get; set; }
+        public View SelectedView { get; set; }
     }
 }
 

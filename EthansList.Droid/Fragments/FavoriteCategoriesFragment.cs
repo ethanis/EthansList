@@ -8,15 +8,18 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EthansList.Shared;
 
 namespace EthansList.Droid
 {
     public class FavoriteCategoriesFragment : Android.Support.V4.App.Fragment
     {
-        ArrayAdapter<string> adapter;
+        public Location SelectedLocation { get; set; }
+        List<FavoriteCategory> favorites;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,15 +31,14 @@ namespace EthansList.Droid
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = new ListView(this.Activity);
-            var favorites = (MainActivity.databaseConnection.GetAllFavoriteCategoriesAsync().
+            favorites = (MainActivity.databaseConnection.GetAllFavoriteCategoriesAsync().
                              Result).
-                                    OrderByDescending(x => x.Updated).
-                                    Select(x => x.CategoryValue).
-                                    ToList();
+                                    OrderByDescending(x => x.Updated).ToList();
 
-            view.Adapter = adapter = new ArrayAdapter<string>(this.Activity,
+
+            view.Adapter = new ArrayAdapter<string>(this.Activity,
                                                     Android.Resource.Layout.SimpleListItem1,
-                                                    favorites);
+                                                    favorites.Select(x => x.CategoryValue).ToList());
 
             view.ItemLongClick += (sender, e) =>
             {
@@ -46,7 +48,7 @@ namespace EthansList.Droid
 
                 menu.MenuItemClick += (se, args) =>
                 {
-                    var result = MainActivity.databaseConnection.DeleteFavoriteCategoryAsync(favorites.ElementAt(e.Position), true).Result;
+                    var result = MainActivity.databaseConnection.DeleteFavoriteCategoryAsync(favorites.ElementAt(e.Position)).Result;
                     if (MainActivity.databaseConnection.StatusCode == Models.codes.ok && result)
                     {
                         lock (favorites)
@@ -54,9 +56,9 @@ namespace EthansList.Droid
                             Activity.RunOnUiThread(() =>
                             {
                                 favorites.RemoveAt(e.Position);
-                                view.Adapter = adapter = new ArrayAdapter<string>(this.Activity,
+                                view.Adapter = new ArrayAdapter<string>(this.Activity,
                                         Android.Resource.Layout.SimpleListItem1,
-                                        favorites);
+                                                                        favorites.Select(x => x.CategoryValue).ToList());
                             });
                         }
                     }
@@ -66,6 +68,19 @@ namespace EthansList.Droid
                     }
                     Console.WriteLine(MainActivity.databaseConnection.StatusMessage);
                 };
+            };
+
+            view.ItemClick += (sender, e) =>
+            {
+                var transaction = this.Activity.SupportFragmentManager.BeginTransaction();
+                SearchOptionsFragment searchFragment = new SearchOptionsFragment();
+                var cat = favorites.ElementAt(e.Position);
+                searchFragment.Category = new KeyValuePair<string, string>(cat.CategoryKey, cat.CategoryValue);
+                searchFragment.SearchLocation = this.SelectedLocation;
+
+                transaction.Replace(Resource.Id.frameLayout, searchFragment);
+                transaction.AddToBackStack(null);
+                transaction.Commit();
             };
 
             return view;
