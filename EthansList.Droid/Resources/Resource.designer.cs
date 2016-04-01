@@ -2201,6 +2201,9 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0051
 			public const int expanded_menu = 2131361873;
 			
+			// aapt resource value: 0x7f0a008a
+			public const int favorite_action_button = 2131361930;
+			
 			// aapt resource value: 0x7f0a0023
 			public const int fill = 2131361827;
 			

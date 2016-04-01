@@ -15,7 +15,7 @@ namespace EthansList.Droid
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            HasOptionsMenu = true;
             // Create your fragment here
         }
 
@@ -23,10 +23,15 @@ namespace EthansList.Droid
         {
             var view = new CategoryPickerView(this.Activity, SelectedLocation);
 
-            //var save_button = ((MainActivity)Activity).Menu.FindItem(Resource.Id.save_action_button);
-            //save_button.SetVisible(false);
-
             return view;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            IMenuItem fav_item = menu.FindItem(Resource.Id.favorite_action_button);
+            fav_item.SetVisible(true);
+
+            base.OnPrepareOptionsMenu(menu);
         }
     }
 }

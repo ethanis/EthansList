@@ -71,6 +71,10 @@ namespace EthansList.Droid
             var save_button = Menu.FindItem(Resource.Id.save_action_button);
             save_button.SetVisible(false);
 
+            var fav_button = Menu.FindItem(Resource.Id.favorite_action_button);
+            fav_button.SetIcon(Android.Resource.Drawable.ButtonStar);
+            fav_button.SetVisible(false);
+
             return base.OnCreateOptionsMenu(menu);
         }
 
