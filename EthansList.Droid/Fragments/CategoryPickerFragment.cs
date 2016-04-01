@@ -44,18 +44,28 @@ namespace EthansList.Droid
             {
                 System.Console.WriteLine("Selected cat: " + e.Selected.Value);
 
+                //todo: attach to correct subview
                 var menu = new Android.Support.V7.Widget.PopupMenu(this.Activity, view);
-                menu.Inflate(Resource.Menu.DeleteMenu);
+
+                var presentAlready = MainActivity.databaseConnection.FavoriteCategoryAlreadyPresent(e.Selected.Key);
+
+                if (presentAlready)
+                    menu.Inflate(Resource.Menu.UnfavoriteMenu);
+                else
+                    menu.Inflate(Resource.Menu.FavoriteMenu);
+
                 menu.Show();
 
                 menu.MenuItemClick += async (s, ev) =>
                 {
-                    await MainActivity.databaseConnection.AddNewFavoriteCategoryAsync(e.Selected.Key, e.Selected.Value);
+                    if (presentAlready)
+                        await MainActivity.databaseConnection.DeleteFavoriteCategoryAsync(e.Selected.Key);
+                    else
+                        await MainActivity.databaseConnection.AddNewFavoriteCategoryAsync(e.Selected.Key, e.Selected.Value);
 
                     Toast.MakeText(this.Activity, $"{MainActivity.databaseConnection.StatusMessage}", ToastLength.Short).Show();
                 };
             };
-
 
             return view;
         }

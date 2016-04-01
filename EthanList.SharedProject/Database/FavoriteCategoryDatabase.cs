@@ -23,7 +23,7 @@ namespace EthansList.Models
                         StatusCode = codes.ok;
                     }
                 }
-                else 
+                else
                 {
                     //basic validation to ensure a name was entered
                     if (categoryKey == null)
@@ -42,22 +42,24 @@ namespace EthansList.Models
             }
         }
 
-        public async Task DeleteFavoriteCategoryAsync(FavoriteCategory category)
+        public async Task<bool> DeleteFavoriteCategoryAsync(FavoriteCategory category)
         {
             try
             {
                 var result = await conn.DeleteAsync(category).ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} dropped from database [Cat: {1}]", result, category);
                 StatusCode = codes.ok;
+                return true;
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", category, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", category, ex.Message);
                 StatusCode = codes.bad;
+                return false;
             }
         }
 
-        public async Task DeleteFavoriteCategoryAsync(string categoryKey)
+        public async Task<bool> DeleteFavoriteCategoryAsync(string categoryKey)
         {
             FavoriteCategory current = conn.Table<FavoriteCategory>().Where(x => x.CategoryKey.Equals(categoryKey)).ToListAsync().Result.First();
             try
@@ -65,11 +67,31 @@ namespace EthansList.Models
                 var result = await conn.DeleteAsync(current).ConfigureAwait(continueOnCapturedContext: false);
                 StatusMessage = string.Format("{0} dropped from database [Cat: {1}]", result, current);
                 StatusCode = codes.ok;
+                return true;
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", current, ex.Message); 
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", current, ex.Message);
                 StatusCode = codes.bad;
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteFavoriteCategoryAsync(string categoryValue, bool val)
+        {
+            FavoriteCategory current = conn.Table<FavoriteCategory>().Where(x => x.CategoryValue.Equals(categoryValue)).ToListAsync().Result.First();
+            try
+            {
+                var result = await conn.DeleteAsync(current).ConfigureAwait(continueOnCapturedContext: false);
+                StatusMessage = string.Format("{0} dropped from database [Cat: {1}]", result, current);
+                StatusCode = codes.ok;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", current, ex.Message);
+                StatusCode = codes.bad;
+                return false;
             }
         }
 

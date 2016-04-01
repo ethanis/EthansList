@@ -2450,6 +2450,9 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0048
 			public const int topPanel = 2131361864;
 			
+			// aapt resource value: 0x7f0a008c
+			public const int unfavorite_context_button = 2131361932;
+			
 			// aapt resource value: 0x7f0a0009
 			public const int up = 2131361801;
 			
@@ -2695,6 +2698,9 @@ namespace EthansList.Droid
 			
 			// aapt resource value: 0x7f0c0003
 			public const int Save = 2131492867;
+			
+			// aapt resource value: 0x7f0c0004
+			public const int UnfavoriteMenu = 2131492868;
 			
 			static Menu()
 			{
