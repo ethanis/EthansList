@@ -121,6 +121,7 @@
     <Compile Include="Fragments\AboutFragment.cs" />
     <Compile Include="Fragments\AcknowledgementsFragment.cs" />
     <Compile Include="SplashActivity.cs" />
+    <Compile Include="Fragments\FavoriteCategoriesFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

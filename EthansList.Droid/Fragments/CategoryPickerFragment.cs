@@ -23,6 +23,20 @@ namespace EthansList.Droid
         {
             var view = new CategoryPickerView(this.Activity, SelectedLocation);
 
+
+            ((MainActivity)this.Activity).OptionItemSelected += (sender, e) =>
+            {
+                if (e.Item.TitleFormatted.ToString() == "Favorite")
+                {
+                    var transaction = Activity.SupportFragmentManager.BeginTransaction();
+                    FavoriteCategoriesFragment favoriteFragment = new FavoriteCategoriesFragment();
+
+                    transaction.Replace(Resource.Id.frameLayout, favoriteFragment);
+                    transaction.AddToBackStack(null);
+                    transaction.Commit();
+                }
+            };
+
             return view;
         }
 
