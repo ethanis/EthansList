@@ -77,24 +77,6 @@ namespace EthansList.Models
             }
         }
 
-        public async Task<bool> DeleteFavoriteCategoryAsync(string categoryValue, bool val)
-        {
-            FavoriteCategory current = conn.Table<FavoriteCategory>().Where(x => x.CategoryValue.Equals(categoryValue)).ToListAsync().Result.First();
-            try
-            {
-                var result = await conn.DeleteAsync(current).ConfigureAwait(continueOnCapturedContext: false);
-                StatusMessage = string.Format("{0} dropped from database [Cat: {1}]", result, current);
-                StatusCode = codes.ok;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = string.Format("Failed to delete record: {0}, Error: {1}", current, ex.Message);
-                StatusCode = codes.bad;
-                return false;
-            }
-        }
-
         public bool FavoriteCategoryAlreadyPresent(String categoryKey)
         {
             var current = conn.Table<FavoriteCategory>().Where(x => x.CategoryKey.Equals(categoryKey)).ToListAsync().Result;

@@ -25,8 +25,8 @@ namespace EthansList.Droid
         {
             var view = new CategoryPickerView(this.Activity, SelectedLocation);
 
-
-            ((MainActivity)this.Activity).OptionItemSelected += (sender, e) =>
+            //This simply opens up the favorite category fragment
+            ((MainActivity)Activity).OptionItemSelected += (sender, e) =>
             {
                 if (e.Item.TitleFormatted.ToString() == "Favorite")
                 {
@@ -40,7 +40,7 @@ namespace EthansList.Droid
                 }
             };
 
-
+            //This handles favoriting and unfavoriting categories
             view.CategoryLongClick += (sender, e) =>
             {
                 var menu = new Android.Support.V7.Widget.PopupMenu(this.Activity, e.SelectedView);
