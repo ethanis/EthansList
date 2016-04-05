@@ -65,7 +65,8 @@ namespace EthansList.Droid
             city_picker.Adapter = cityAdapter;
             AddView(city_picker);
 
-            state_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+            state_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+            {
                 state = locations.States.ElementAt(e.Position);
                 cityAdapter.Cities = locations.PotentialLocations.Where(l => l.State.Equals(state));
                 cityAdapter.NotifyDataSetChanged();

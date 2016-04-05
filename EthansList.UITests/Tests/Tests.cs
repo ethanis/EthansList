@@ -60,7 +60,8 @@ namespace ethanslist.UITests
         {
             string state = "California";
             string area = "San Francisco Bay Area";
-            string searchTerms = "query: parking laundry view, min_price: $1000, max_price: $5000, minSqft: , maxSqft: , bedrooms: 3, bathrooms: 1";
+            string searchTerms = "query: parking laundry view, min_price: 1000, max_price: 5000, bedrooms: 3, bathrooms: 1";
+            //string searchTerms = "query: parking laundry view, min_price: $1000, max_price: $5000, minSqft: , maxSqft: , bedrooms: 3, bathrooms: 1";
             string cat = "apartments / housing rentals";
 
             new CityPickerPage()
@@ -82,12 +83,19 @@ namespace ethanslist.UITests
                 .ProceedToSearch();
 
             new FeedResultsPage().GoBack();
-            new CategoryPickerPage().GoBack();
             new SearchOptionsPage().GoBack();
+            new CategoryPickerPage().GoBack();
             new CityPickerPage().GoBack();
             new MenuPage().SavedSearches();
 
             new SavedSearchPage().VerifyPreset(searchTerms);
+        }
+
+        [Test]
+        [Ignore]
+        public void OpenRepl()
+        {
+            app.Repl();
         }
     }
 }

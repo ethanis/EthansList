@@ -19,7 +19,7 @@ namespace ethanslist.UITests
             if (OnAndroid)
             {
                 SaveButton = "save_action_button";
-                SearchTermsField = x => x.Class("TextView").Index(2);
+                SearchTermsField = x => x.Id("frameLayout").Descendant().Class("EditText").Index(0);
                 MinPriceField = x => x.Marked("Price").Sibling().Descendant().Index(1);
                 MaxPriceField = x => x.Marked("Price").Sibling().Descendant().Index(2);
                 MinBedroomsField = x => x.Marked("Bedrooms").Sibling();

@@ -37,26 +37,33 @@ namespace EthansList.Droid
             List<string> values = new List<string>();
             for (var i = _options.Minimum; i <= _options.Maximum; i += 1)
             {
-                values.Add((i*_options.Step) + _options.DisplaySuffix);
+                values.Add((i * _options.Step) + _options.DisplaySuffix);
             }
             numberPicker.SetDisplayedValues(values.ToArray());
+
+            //numberPicker.SetDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(_context);
             dialog.SetTitle(_title);
             dialog.SetView(view);
             dialog.SetNegativeButton("Cancel", (s, a) => { });
-            dialog.SetPositiveButton("Ok", (s, a) => { });
-
-            numberPicker.ValueChanged += (object sender, NumberPicker.ValueChangeEventArgs e) => {
+            dialog.SetPositiveButton("Ok", (s, a) =>
+            {
                 if (NumberChanged != null)
-                    NumberChanged(this, new NumberPickerValueChanged() { CallerKey = _callerKey, Value = e.NewVal });
+                    NumberChanged(this, new NumberPickerValueChanged { CallerKey = _callerKey, Value = numberPicker.Value });
+            });
+
+            numberPicker.ValueChanged += (object sender, NumberPicker.ValueChangeEventArgs e) =>
+            {
+                if (NumberChanged != null)
+                    NumberChanged(this, new NumberPickerValueChanged { CallerKey = _callerKey, Value = e.NewVal });
             };
 
             return dialog.Create();
         }
 
         public class NumberPickerValueChanged : EventArgs
-        { 
+        {
             public string CallerKey { get; set; }
             public int Value { get; set; }
         }
