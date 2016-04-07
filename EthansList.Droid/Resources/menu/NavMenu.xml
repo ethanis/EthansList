@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<group android:checkableBehavior="single">
 		<item android:id="@+id/city_picker" android:icon="@drawable/ic_search_icon" android:title="Search" />
-		<item android:id="@+id/recent_cities" android:icon="@drawable/ic_question_answer_black_24dp" android:title="Recent Cities" />
-		<item android:id="@+id/saved_postings" android:icon="@drawable/ic_supervisor_account_black_24dp" android:title="Saved Postings" />
-		<item android:id="@+id/saved_searches" android:icon="@drawable/ic_devices_black_24dp" android:title="Saved Searches" />
+		<item android:id="@+id/recent_cities" android:icon="@drawable/ic_recent_city" android:title="Recent Cities" />
+		<item android:id="@+id/saved_postings" android:icon="@drawable/ic_favfolder_icon" android:title="Saved Postings" />
+		<item android:id="@+id/saved_searches" android:icon="@drawable/ic_bookmark_icon" android:title="Saved Searches" />
 	</group>
 	<item android:title="More information">
 		<menu>
-			<item android:id="@+id/acknowledgements" android:title="Acknowledgements" />
+			<item android:id="@+id/acknowledgements" android:title="Acknowledgements" android:icon="@drawable/ic_info_icon" />
 		</menu>
 	</item>
 </menu>
