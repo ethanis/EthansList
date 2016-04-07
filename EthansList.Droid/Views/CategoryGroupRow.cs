@@ -61,7 +61,7 @@ namespace EthansList.Droid
             LinearLayout row = new LinearLayout(context);
             row.Orientation = Orientation.Horizontal;
             row.LayoutParameters = p;
-            row.SetBackgroundColor(Android.Graphics.Color.LightGray);
+            row.SetBackgroundResource(Resource.Color.headerColor);
 
             headerLabel = new TextView(context);
             headerLabel.LayoutParameters = p;

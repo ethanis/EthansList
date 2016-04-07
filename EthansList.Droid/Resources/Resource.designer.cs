@@ -1094,29 +1094,29 @@ namespace EthansList.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f050058
-			public const int abc_background_cache_hint_selector_material_dark = 2131034200;
-			
 			// aapt resource value: 0x7f050059
-			public const int abc_background_cache_hint_selector_material_light = 2131034201;
+			public const int abc_background_cache_hint_selector_material_dark = 2131034201;
+			
+			// aapt resource value: 0x7f05005a
+			public const int abc_background_cache_hint_selector_material_light = 2131034202;
 			
 			// aapt resource value: 0x7f050017
 			public const int abc_input_method_navigation_guard = 2131034135;
 			
-			// aapt resource value: 0x7f05005a
-			public const int abc_primary_text_disable_only_material_dark = 2131034202;
-			
 			// aapt resource value: 0x7f05005b
-			public const int abc_primary_text_disable_only_material_light = 2131034203;
+			public const int abc_primary_text_disable_only_material_dark = 2131034203;
 			
 			// aapt resource value: 0x7f05005c
-			public const int abc_primary_text_material_dark = 2131034204;
+			public const int abc_primary_text_disable_only_material_light = 2131034204;
 			
 			// aapt resource value: 0x7f05005d
-			public const int abc_primary_text_material_light = 2131034205;
+			public const int abc_primary_text_material_dark = 2131034205;
 			
 			// aapt resource value: 0x7f05005e
-			public const int abc_search_url_text = 2131034206;
+			public const int abc_primary_text_material_light = 2131034206;
+			
+			// aapt resource value: 0x7f05005f
+			public const int abc_search_url_text = 2131034207;
 			
 			// aapt resource value: 0x7f050018
 			public const int abc_search_url_text_normal = 2131034136;
@@ -1127,11 +1127,11 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f05001a
 			public const int abc_search_url_text_selected = 2131034138;
 			
-			// aapt resource value: 0x7f05005f
-			public const int abc_secondary_text_material_dark = 2131034207;
-			
 			// aapt resource value: 0x7f050060
-			public const int abc_secondary_text_material_light = 2131034208;
+			public const int abc_secondary_text_material_dark = 2131034208;
+			
+			// aapt resource value: 0x7f050061
+			public const int abc_secondary_text_material_light = 2131034209;
 			
 			// aapt resource value: 0x7f050057
 			public const int accent = 2131034199;
@@ -1220,11 +1220,11 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f050009
 			public const int common_signin_btn_light_text_pressed = 2131034121;
 			
-			// aapt resource value: 0x7f050061
-			public const int common_signin_btn_text_dark = 2131034209;
-			
 			// aapt resource value: 0x7f050062
-			public const int common_signin_btn_text_light = 2131034210;
+			public const int common_signin_btn_text_dark = 2131034210;
+			
+			// aapt resource value: 0x7f050063
+			public const int common_signin_btn_text_light = 2131034211;
 			
 			// aapt resource value: 0x7f05000e
 			public const int design_fab_shadow_end_color = 2131034126;
@@ -1270,6 +1270,9 @@ namespace EthansList.Droid
 			
 			// aapt resource value: 0x7f05002e
 			public const int foreground_material_light = 2131034158;
+			
+			// aapt resource value: 0x7f050058
+			public const int headerColor = 2131034200;
 			
 			// aapt resource value: 0x7f05002f
 			public const int highlighted_text_material_dark = 2131034159;
@@ -1385,11 +1388,11 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f05004e
 			public const int switch_thumb_disabled_material_light = 2131034190;
 			
-			// aapt resource value: 0x7f050063
-			public const int switch_thumb_material_dark = 2131034211;
-			
 			// aapt resource value: 0x7f050064
-			public const int switch_thumb_material_light = 2131034212;
+			public const int switch_thumb_material_dark = 2131034212;
+			
+			// aapt resource value: 0x7f050065
+			public const int switch_thumb_material_light = 2131034213;
 			
 			// aapt resource value: 0x7f05004f
 			public const int switch_thumb_normal_material_dark = 2131034191;

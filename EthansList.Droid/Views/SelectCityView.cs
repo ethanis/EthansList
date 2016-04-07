@@ -23,47 +23,59 @@ namespace EthansList.Droid
         Context context;
         CityListAdapter cityAdapter;
         protected string state;
-
+        private int rowHeight;
 
         public SelectCityView(Context context) :
             base(context)
         {
             this.context = context;
-            Initialize();
-        }
-
-        public SelectCityView(Context context, IAttributeSet attrs) :
-            base(context, attrs)
-        {
-            this.context = context;
-            Initialize();
-        }
-
-        public SelectCityView(Context context, IAttributeSet attrs, int defStyle) :
-            base(context, attrs, defStyle)
-        {
-            this.context = context;
+            rowHeight = PixelConverter.DpToPixels(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
             Initialize();
         }
 
         void Initialize()
         {
             this.WeightSum = 1;
-            this.Orientation = Orientation.Horizontal;
+            this.Orientation = Orientation.Vertical;
             LayoutParams p = new LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.5f);
             AvailableLocations locations = new AvailableLocations();
             state = locations.States.ElementAt(0);
 
+            LinearLayout headerHolder = new LinearLayout(context);
+            headerHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            headerHolder.Orientation = Orientation.Horizontal;
+            headerHolder.SetBackgroundResource(Resource.Color.headerColor);
+
+            TextView stateHeader = new TextView(context) { Text = "State" };
+            stateHeader.LayoutParameters = p;
+            stateHeader.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            stateHeader.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+            headerHolder.AddView(stateHeader);
+
+            TextView cityHeader = new TextView(context) { Text = "City" };
+            cityHeader.LayoutParameters = p;
+            cityHeader.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            cityHeader.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+            headerHolder.AddView(cityHeader);
+
+            AddView(headerHolder);
+
+            LinearLayout pickerHolder = new LinearLayout(context);
+            pickerHolder.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
+            pickerHolder.Orientation = Orientation.Horizontal;
+
             state_picker = new ListView(context);
             state_picker.LayoutParameters = p;
             state_picker.Adapter = new StateListAdapter(context, locations.States);
-            AddView(state_picker);
+            pickerHolder.AddView(state_picker);
 
             city_picker = new ListView(context);
             city_picker.LayoutParameters = p;
             cityAdapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state));
             city_picker.Adapter = cityAdapter;
-            AddView(city_picker);
+            pickerHolder.AddView(city_picker);
+
+            AddView(pickerHolder);
 
             state_picker.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {

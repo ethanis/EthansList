@@ -114,7 +114,7 @@ namespace EthansList.Droid
             card.Radius = PixelConverter.DpToPixels(6);
             card.CardElevation = PixelConverter.DpToPixels(4);
             //TODO: settle on a color for this
-            card.SetCardBackgroundColor(Android.Graphics.Color.ParseColor("#FF4081"));
+            card.SetCardBackgroundColor(Resource.Color.accent);
 
             LinearLayout layoutHolder = new LinearLayout(_context);
             layoutHolder.Orientation = Orientation.Vertical;
