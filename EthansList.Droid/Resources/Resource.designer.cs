@@ -2012,10 +2012,10 @@ namespace EthansList.Droid
 			public const int ic_devices_black_24dp = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ic_home_black_24dp = 2130837596;
+			public const int ic_question_answer_black_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int ic_question_answer_black_24dp = 2130837597;
+			public const int ic_search_icon = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
 			public const int ic_supervisor_account_black_24dp = 2130837598;

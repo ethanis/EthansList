@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<group android:checkableBehavior="single">
-		<item android:id="@+id/city_picker" android:icon="@drawable/ic_home_black_24dp" android:title="Search" />
+		<item android:id="@+id/city_picker" android:icon="@drawable/ic_search_icon" android:title="Search" />
 		<item android:id="@+id/recent_cities" android:icon="@drawable/ic_question_answer_black_24dp" android:title="Recent Cities" />
 		<item android:id="@+id/saved_postings" android:icon="@drawable/ic_supervisor_account_black_24dp" android:title="Saved Postings" />
 		<item android:id="@+id/saved_searches" android:icon="@drawable/ic_devices_black_24dp" android:title="Saved Searches" />

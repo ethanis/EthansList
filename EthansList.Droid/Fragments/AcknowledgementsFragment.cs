@@ -88,7 +88,6 @@ namespace EthansList.Droid
                 };
             }
 
-
             return view;
         }
     }

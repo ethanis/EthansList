@@ -87,6 +87,7 @@ namespace EthansList.Droid
 
         void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
+            //todo: add correct icons for these items
             int position = -1;
             switch (e.MenuItem.ItemId)
             {
@@ -124,10 +125,5 @@ namespace EthansList.Droid
     public class OptionItemEventArgs : EventArgs
     {
         public IMenuItem Item { get; set; }
-
-        //public static explicit operator OptionItemEventArgs(Delegate v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
