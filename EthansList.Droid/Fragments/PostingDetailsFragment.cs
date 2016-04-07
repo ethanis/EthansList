@@ -241,7 +241,9 @@ namespace EthansList.Droid
             PostingTitle.SetTypeface(Typeface.DefaultBold, TypefaceStyle.Bold);
             AddRowItem(PostingTitle, rowParams);
 
-            PostingImage = new ImageView(_context) { LayoutParameters = rowParams };
+            PostingImage = new ImageView(_context);// { LayoutParameters = rowParams };
+            PostingImage.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent,
+                                                                       Convert.ToInt16(_context.Resources.DisplayMetrics.HeightPixels * 0.4));
             AddRowItem(PostingImage, rowParams);
 
             LinearLayout spacing = new LinearLayout(_context);
@@ -296,7 +298,10 @@ namespace EthansList.Droid
             {
                 ImageView imgView = new ImageView(_context);
                 Koush.UrlImageViewHelper.SetUrlDrawable(imgView, image, Resource.Drawable.placeholder);
-                imgView.LayoutParameters = new ViewGroup.LayoutParams(PixelConverter.DpToPixels(75), PixelConverter.DpToPixels(75));
+                imgView.LayoutParameters = new ViewGroup.LayoutParams(
+                    Convert.ToInt16(_context.Resources.DisplayMetrics.HeightPixels * 0.1),
+                    Convert.ToInt16(_context.Resources.DisplayMetrics.HeightPixels * 0.1)
+                );
 
                 int current = index;
                 imgView.Click += (sender, e) =>

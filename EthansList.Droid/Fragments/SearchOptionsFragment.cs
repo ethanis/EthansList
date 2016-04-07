@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Graphics.Drawables.Shapes;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
@@ -72,6 +73,7 @@ namespace EthansList.Droid
         public Button proceedButton;
         public ListView SearchTermsTable;
         public ListView OptionsTable;
+        private int rowHeight;
 
         public SearchOptionsView(Context context, Location location, KeyValuePair<string, string> category)
             : base(context)
@@ -82,6 +84,8 @@ namespace EthansList.Droid
 
             SearchItems = new Dictionary<string, string>();
             Conditions = new Dictionary<object, KeyValuePair<object, object>>();
+
+            rowHeight = PixelConverter.DpToPixels(context.Resources.GetInteger(Resource.Integer.textLabelRowHeight));
 
             Initialize();
         }
@@ -120,12 +124,17 @@ namespace EthansList.Droid
             this.Orientation = Orientation.Vertical;
             this.WeightSum = 1;
 
+            var padding = PixelConverter.DpToPixels(5);
+            SetPadding(padding, padding, padding, padding);
+
             //Event handler is detached in proceed button handler. Very important!
             ((MainActivity)(this.context)).OptionItemSelected += OnOptionItemSelected;
 
             SearchCityText = new TextView(context);
             SearchCityText.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
             SearchCityText.Text = string.Format("Search {0} for: ", location.SiteName);
+            SearchCityText.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.50f);
+            SearchCityText.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
 
             LinearLayout searchCityHolder = RowHolder();
             searchCityHolder.AddView(SearchCityText);
@@ -134,6 +143,9 @@ namespace EthansList.Droid
             proceedButton = new Button(context);
             proceedButton.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.5f);
             proceedButton.Text = "Search";
+            proceedButton.SetBackgroundResource(Resource.Drawable.roundedButton);
+            proceedButton.SetTextColor(context.Resources.GetColor(Resource.Color.lightTextColor));
+
             LinearLayout buttonLayout = RowHolder();
             buttonLayout.AddView(proceedButton);
             AddView(buttonLayout);
