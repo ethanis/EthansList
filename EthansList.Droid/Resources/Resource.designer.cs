@@ -2023,35 +2023,38 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f02005f
 			public const int ic_search_icon = 2130837599;
 			
-			// aapt resource value: 0x7f020069
-			public const int notification_template_icon_bg = 2130837609;
-			
 			// aapt resource value: 0x7f020060
-			public const int placeholder = 2130837600;
+			public const int ic_star_empty = 2130837600;
+			
+			// aapt resource value: 0x7f02006a
+			public const int notification_template_icon_bg = 2130837610;
 			
 			// aapt resource value: 0x7f020061
-			public const int progress_medium_holo = 2130837601;
+			public const int placeholder = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int ptrsharp_serious_business_gradient = 2130837602;
+			public const int progress_medium_holo = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int roundedButton = 2130837603;
+			public const int ptrsharp_serious_business_gradient = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int serious_business_arrow = 2130837604;
+			public const int roundedButton = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int serious_business_arrow2 = 2130837605;
+			public const int serious_business_arrow = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int spinner_20_inner_holo = 2130837606;
+			public const int serious_business_arrow2 = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int spinner_20_outer_holo = 2130837607;
+			public const int spinner_20_inner_holo = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int splash = 2130837608;
+			public const int spinner_20_outer_holo = 2130837608;
+			
+			// aapt resource value: 0x7f020069
+			public const int splash = 2130837609;
 			
 			static Drawable()
 			{

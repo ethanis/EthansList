@@ -23,20 +23,33 @@ namespace EthansList.Droid
     {
         private List<Search> savedSearches;
         private SavedSearchesAdapter adapter;
+        private ObservableCollection<SearchObject> deserialized;
+        private event EventHandler<EventArgs> DeserializingComplete;
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
+
+            savedSearches = await MainActivity.databaseConnection.GetAllSearchesAsync().ConfigureAwait(false);
+            deserialized = await DeserializeSearches(savedSearches);
+            if (deserialized != null)
+            {
+                if (DeserializingComplete != null)
+                    DeserializingComplete(this, new EventArgs());
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = new ListView(this.Activity);
 
-            savedSearches = MainActivity.databaseConnection.GetAllSearchesAsync().Result;
-            view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, DeserializeSearches(savedSearches).Result);
+            this.DeserializingComplete += delegate
+            {
+                view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, deserialized);
+                deserialized = null;
+            };
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
             {
@@ -178,6 +191,7 @@ namespace EthansList.Droid
             CityTitle = new TextView(_context);
             CityTitle.Gravity = GravityFlags.CenterVertical;
             CityTitle.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+            CityTitle.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
             CityTitle.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
 
             AddView(CityTitle);
@@ -185,7 +199,7 @@ namespace EthansList.Droid
             SearchTerms = new TextView(_context);
             SearchTerms.Gravity = GravityFlags.CenterVertical;
             SearchTerms.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
-            SearchTerms.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
+            SearchTerms.SetPadding((int)(rowHeight * 0.2), 0, (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
             AddView(SearchTerms);
         }
     }

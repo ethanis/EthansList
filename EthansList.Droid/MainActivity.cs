@@ -72,7 +72,7 @@ namespace EthansList.Droid
             save_button.SetVisible(false);
 
             var fav_button = Menu.FindItem(Resource.Id.favorite_action_button);
-            fav_button.SetIcon(Android.Resource.Drawable.ButtonStar);
+            fav_button.SetIcon(Resource.Drawable.ic_star_empty);
             fav_button.SetVisible(false);
 
             return base.OnCreateOptionsMenu(menu);

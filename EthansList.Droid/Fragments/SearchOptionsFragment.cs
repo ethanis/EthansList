@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Graphics.Drawables.Shapes;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
