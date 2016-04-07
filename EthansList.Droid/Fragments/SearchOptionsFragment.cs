@@ -143,6 +143,7 @@ namespace EthansList.Droid
             proceedButton = new Button(context);
             proceedButton.LayoutParameters = new LayoutParams(0, LayoutParams.WrapContent, 0.5f);
             proceedButton.Text = "Search";
+            proceedButton.SetTextSize(ComplexUnitType.Px, rowHeight * 0.5f);
             proceedButton.SetBackgroundResource(Resource.Drawable.roundedButton);
             proceedButton.SetTextColor(context.Resources.GetColor(Resource.Color.lightTextColor));
 
@@ -392,8 +393,10 @@ namespace EthansList.Droid
         void AddRowToLayout(SearchRow item)
         {
             var row = new LinearLayout(context) { Orientation = Orientation.Horizontal };
-            row.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, 100);
+            row.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             row.WeightSum = 1;
+
+            row.SetMinimumHeight(PixelConverter.DpToPixels(30));
 
             LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MatchParent, 0.5f);
             LinearLayout.LayoutParams f = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
@@ -403,6 +406,7 @@ namespace EthansList.Droid
             entryHolder.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             entryHolder.ShowDividers = ShowDividers.Middle;
             entryHolder.DividerPadding = 20;
+            entryHolder.SetPadding(PixelConverter.DpToPixels(10), 0, 0, 0);
 
             switch (item.RowType)
             {
@@ -414,7 +418,8 @@ namespace EthansList.Droid
                     EditText searchfield = new EditText(context);
                     searchfield.LayoutParameters = f;
                     searchfield.Hint = string.Format("Search {0}:", this.category.Value);
-                    searchfield.TextSize = 14f;
+                    searchfield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    searchfield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     searchfield.SetSingleLine(true);
                     searchfield.InputType = InputTypes.ClassText;
                     row.AddView(searchfield);
@@ -431,7 +436,8 @@ namespace EthansList.Droid
                     EditText minPricefield = new EditText(context);
                     minPricefield.LayoutParameters = p;
                     minPricefield.Hint = "min";
-                    minPricefield.TextSize = 14f;
+                    minPricefield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    minPricefield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     minPricefield.SetSingleLine(true);
                     minPricefield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(minPricefield);
@@ -439,7 +445,8 @@ namespace EthansList.Droid
                     EditText maxPricefield = new EditText(context);
                     maxPricefield.LayoutParameters = p;
                     maxPricefield.Hint = "min";
-                    maxPricefield.TextSize = 14f;
+                    maxPricefield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    maxPricefield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     maxPricefield.SetSingleLine(true);
                     maxPricefield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxPricefield);
@@ -464,7 +471,8 @@ namespace EthansList.Droid
                     minfield.LayoutParameters = p;
 
                     minfield.Hint = "min";
-                    minfield.TextSize = 14f;
+                    minfield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    minfield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     minfield.SetSingleLine(true);
                     minfield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(minfield);
@@ -472,7 +480,8 @@ namespace EthansList.Droid
                     EditText maxfield = new EditText(context);
                     maxfield.LayoutParameters = p;
                     maxfield.Hint = "min";
-                    maxfield.TextSize = 14f;
+                    maxfield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    maxfield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     maxfield.SetSingleLine(true);
                     maxfield.InputType = InputTypes.ClassNumber;
                     entryHolder.AddView(maxfield);
@@ -497,7 +506,8 @@ namespace EthansList.Droid
                     inputField.LayoutParameters = f;
 
                     inputField.Hint = "make / model";
-                    inputField.TextSize = 14f;
+                    inputField.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    inputField.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     inputField.SetSingleLine(true);
                     entryHolder.AddView(inputField);
 
@@ -515,7 +525,8 @@ namespace EthansList.Droid
                     display.LayoutParameters = f;
                     display.Gravity = GravityFlags.Right;
                     display.Text = "Any";
-                    display.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
+                    display.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    display.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), PixelConverter.DpToPixels(50), (int)(rowHeight * 0.15));
 
                     var dialog = new NumberPickerDialogFragment(context, item.Title, item.NumberPickerOptions, item.QueryPrefix);
                     display.Click += (object sender, EventArgs e) =>
@@ -539,7 +550,8 @@ namespace EthansList.Droid
                     comboLabel.LayoutParameters = f;
                     comboLabel.Gravity = GravityFlags.Right;
                     comboLabel.Text = "Any";
-                    comboLabel.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
+                    comboLabel.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    comboLabel.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), PixelConverter.DpToPixels(50), (int)(rowHeight * 0.15));
 
                     var comboDialog = new ComboPickerDialogFragment(context, item.Title, item.ComboPickerOptions);
 
@@ -578,7 +590,9 @@ namespace EthansList.Droid
                     catLabel.LayoutParameters = f;
                     catLabel.Gravity = GravityFlags.Right;
                     catLabel.Text = (string)item.ComboPickerOptions.First().Key;
-                    catLabel.SetPadding(0, 0, PixelConverter.DpToPixels(50), 0);
+
+                    catLabel.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
+                    catLabel.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), PixelConverter.DpToPixels(50), (int)(rowHeight * 0.15));
 
                     if (item.Title == "Sub Category")
                         SubCategory = item.ComboPickerOptions.First();
@@ -644,7 +658,9 @@ namespace EthansList.Droid
             TextView title = new TextView(context);
             title.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
             title.Text = item.Title;
-            title.SetPadding(10, 0, 10, 0);
+            title.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.45f);
+            title.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.125), (int)(rowHeight * 0.1), (int)(rowHeight * 0.125));
+            title.Gravity = GravityFlags.CenterVertical;
 
             return title;
         }
