@@ -20,8 +20,8 @@ namespace EthansList.Droid
     {
         DrawerLayout drawerLayout;
         public static DatabaseConnection databaseConnection { get; set; }
-        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment(), new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment(), new AboutFragment(), new AcknowledgementsFragment() };
-        readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches", "About", "Acknowledgements" };
+        readonly Android.Support.V4.App.Fragment[] fragments = { new SelectCityFragment(), new RecentCityFragment(), new SavedPostingsFragment(), new SavedSearchesFragment(), new AcknowledgementsFragment() };
+        readonly string[] titles = { "Select City", "Recent Cities", "Saved Postings", "Saved Searches", "Acknowledgements" };
 
         public IMenu Menu { get; private set; }
         public event EventHandler<OptionItemEventArgs> OptionItemSelected;
@@ -102,11 +102,8 @@ namespace EthansList.Droid
                 case (Resource.Id.saved_searches):
                     position = 3;
                     break;
-                case (Resource.Id.about):
-                    position = 4;
-                    break;
                 case (Resource.Id.acknowledgements):
-                    position = 5;
+                    position = 4;
                     break;
             }
 

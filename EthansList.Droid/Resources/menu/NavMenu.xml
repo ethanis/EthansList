@@ -8,7 +8,6 @@
 	</group>
 	<item android:title="More information">
 		<menu>
-			<item android:id="@+id/about" android:title="About" />
 			<item android:id="@+id/acknowledgements" android:title="Acknowledgements" />
 		</menu>
 	</item>

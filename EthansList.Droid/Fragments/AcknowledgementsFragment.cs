@@ -113,7 +113,6 @@ namespace EthansList.Droid
             card.SetForegroundGravity(GravityFlags.CenterHorizontal);
             card.Radius = PixelConverter.DpToPixels(6);
             card.CardElevation = PixelConverter.DpToPixels(4);
-            //TODO: settle on a color for this
             card.SetCardBackgroundColor(Resource.Color.accent);
 
             LinearLayout layoutHolder = new LinearLayout(_context);
@@ -121,11 +120,12 @@ namespace EthansList.Droid
             layoutHolder.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             var padding = PixelConverter.DpToPixels(8);
             layoutHolder.SetPadding(padding, padding, padding, padding);
+            layoutHolder.SetBackgroundResource(Resource.Color.accent);
 
             TextView titleDisplay = new TextView(_context) { Text = _ack.Title };
             titleDisplay.Gravity = GravityFlags.CenterVertical;
             titleDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            titleDisplay.SetTextSize(ComplexUnitType.Dip, 24);
+            titleDisplay.SetTextSize(ComplexUnitType.Dip, 20);
             titleDisplay.SetTypeface(Android.Graphics.Typeface.DefaultBold, Android.Graphics.TypefaceStyle.Bold);
             titleDisplay.SetTextColor(Android.Graphics.Color.AntiqueWhite);
             layoutHolder.AddView(titleDisplay);
@@ -133,7 +133,7 @@ namespace EthansList.Droid
             TextView descriptionDisplay = new TextView(_context) { Text = _ack.Description };
             descriptionDisplay.Gravity = GravityFlags.CenterVertical;
             descriptionDisplay.LayoutParameters = new ViewGroup.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            descriptionDisplay.SetTextSize(ComplexUnitType.Dip, 16);
+            descriptionDisplay.SetTextSize(ComplexUnitType.Dip, 14);
             descriptionDisplay.SetTypeface(Android.Graphics.Typeface.Default, Android.Graphics.TypefaceStyle.Normal);
             descriptionDisplay.SetTextColor(Android.Graphics.Color.AntiqueWhite);
             layoutHolder.AddView(descriptionDisplay);

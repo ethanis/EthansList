@@ -2064,10 +2064,7 @@ namespace EthansList.Droid
 		{
 			
 			// aapt resource value: 0x7f0a0088
-			public const int about = 2131361928;
-			
-			// aapt resource value: 0x7f0a0089
-			public const int acknowledgements = 2131361929;
+			public const int acknowledgements = 2131361928;
 			
 			// aapt resource value: 0x7f0a0070
 			public const int action0 = 2131361904;
@@ -2219,8 +2216,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0051
 			public const int expanded_menu = 2131361873;
 			
-			// aapt resource value: 0x7f0a008b
-			public const int favorite_action_button = 2131361931;
+			// aapt resource value: 0x7f0a008a
+			public const int favorite_action_button = 2131361930;
 			
 			// aapt resource value: 0x7f0a0083
 			public const int favorite_context_button = 2131361923;
@@ -2339,8 +2336,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a000d
 			public const int satellite = 2131361805;
 			
-			// aapt resource value: 0x7f0a008a
-			public const int save_action_button = 2131361930;
+			// aapt resource value: 0x7f0a0089
+			public const int save_action_button = 2131361929;
 			
 			// aapt resource value: 0x7f0a0086
 			public const int saved_postings = 2131361926;
@@ -2468,8 +2465,8 @@ namespace EthansList.Droid
 			// aapt resource value: 0x7f0a0048
 			public const int topPanel = 2131361864;
 			
-			// aapt resource value: 0x7f0a008c
-			public const int unfavorite_context_button = 2131361932;
+			// aapt resource value: 0x7f0a008b
+			public const int unfavorite_context_button = 2131361931;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int up = 2131361801;

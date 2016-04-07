@@ -22,6 +22,12 @@ namespace EthansList.Models
         {
             new Acknowledgement
             {
+                Title = "Xamarin",
+                Description = "Built with C# using Xamarin Android",
+                Link = "http://www.xamarin.com"
+            },
+            new Acknowledgement
+            {
                 Title = "Json.NET",
                 Description = "Popular high-performance JSON framework for .NET",
                 Link = "http://www.newtonsoft.com/json"
