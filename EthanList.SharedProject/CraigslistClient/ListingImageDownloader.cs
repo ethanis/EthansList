@@ -24,17 +24,17 @@ namespace EthansList.Shared
         readonly string rssImageUrl;
         public string postingDescription;
         public List<string> images = new List<string>();
-        public bool LoadingComplete { get; set;}
-        public bool PostingImagesFound {get;set;}
-        public bool PostingBodyAdded { get; set;}
-        public bool PostingMapFound {get;set;}
+        public bool LoadingComplete { get; set; }
+        public bool PostingImagesFound { get; set; }
+        public bool PostingBodyAdded { get; set; }
+        public bool PostingMapFound { get; set; }
         public event EventHandler<EventArgs> loadingComplete;
         public event EventHandler<EventArgs> postingRemoved;
-        #if __IOS__
+#if __IOS__
         public CLLocationCoordinate2D postingCoordinates;
-        #elif __ANDROID__
+#elif __ANDROID__
         public LatLng postingCoordinates;
-        #endif
+#endif
         public string postAddress;
 
         public ListingImageDownloader(string url, string rssImageUrl)
@@ -63,17 +63,18 @@ namespace EthansList.Shared
         {
             Stopwatch timer = Stopwatch.StartNew();
             Task.Factory.StartNew<string>(() => DownloadString(url))
-                .ContinueWith(t => {
+                .ContinueWith(t =>
+                {
                     ParseHtmlForImages(t.Result);
                     timer.Stop();
                     TimeSpan timespan = timer.Elapsed;
-                    Console.WriteLine (timespan.ToString());
+                    Console.WriteLine(timespan.ToString());
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private string DownloadString(string add)
         {
-            string html = "";            
+            string html = "";
             using (WebClient client = new WebClient())
             {
                 client.Proxy = null;
@@ -109,14 +110,14 @@ namespace EthansList.Shared
 
             List<HtmlNode> imageNodes = null;
             imageNodes = (from HtmlNode node in doc.DocumentNode.Descendants()
-                where node.Name == "a"
-                && node.Attributes["id"] != null
-                && node.Attributes["data-imgid"] != null
-                select node).ToList();
+                          where node.Name == "a"
+                          && node.Attributes["id"] != null
+                          && node.Attributes["data-imgid"] != null
+                          select node).ToList();
             foreach (HtmlNode node in imageNodes)
             {
                 images.Add(node.Attributes["href"].Value);
-            }           
+            }
 
             if (images.Count > 0)
                 PostingImagesFound = true;
@@ -135,19 +136,22 @@ namespace EthansList.Shared
             if (doc.GetElementbyId("map") != null)
             {
                 var element = doc.GetElementbyId("map");
-                #if __IOS__
+#if __IOS__
                 postingCoordinates = new CLLocationCoordinate2D(Convert.ToDouble(element.Attributes["data-latitude"].Value), 
                     Convert.ToDouble(element.Attributes["data-longitude"].Value));
-                #elif __ANDROID__
+#elif __ANDROID__
                 postingCoordinates = new LatLng(Convert.ToDouble(element.Attributes["data-latitude"].Value),
                 Convert.ToDouble(element.Attributes["data-longitude"].Value));
-                #endif
+#endif
                 PostingMapFound = true;
             }
 
             LoadingComplete = true;
             if (this.loadingComplete != null)
                 this.loadingComplete(this, new EventArgs());
+
+            imageNodes = null;
+            doc = null;
         }
     }
 }

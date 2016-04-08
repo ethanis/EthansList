@@ -56,8 +56,6 @@ namespace ethanslist.ios
 
     public class CityTableSource : UITableViewSource
     {
-        //AvailableLocations locations;
-        String state;
         public event EventHandler<EventArgs> ValueChange;
         protected int SelectedIndex = 0;
         const string cityCell = "cityCell";
@@ -65,9 +63,6 @@ namespace ethanslist.ios
 
         public CityTableSource(AvailableLocations locations, string state)
         {
-            //this.locations = locations;
-            this.state = state;
-
             citiesInState = locations.PotentialLocations.Where(l => l.State.Equals(state)).OrderBy(l => l.SiteName).ToList();
         }
 
