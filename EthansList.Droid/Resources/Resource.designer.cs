@@ -2054,7 +2054,7 @@ namespace EthansList.Droid
 			public const int spinner_20_outer_holo = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int splash = 2130837609;
+			public const int splash_image = 2130837609;
 			
 			static Drawable()
 			{
