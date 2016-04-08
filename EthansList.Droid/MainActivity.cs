@@ -107,6 +107,7 @@ namespace EthansList.Droid
                     break;
             }
 
+            // Handle if an invalid menu item was clicked
             if (position == -1)
                 return;
 

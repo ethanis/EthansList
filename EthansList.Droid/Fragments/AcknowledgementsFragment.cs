@@ -107,6 +107,9 @@ namespace EthansList.Droid
 
         void Initialize()
         {
+            var padding = PixelConverter.DpToPixels(8);
+            SetPadding(padding, padding, padding, 0);
+
             CardView card = new CardView(_context);
             card.LayoutParameters = new CardView.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
             card.SetForegroundGravity(GravityFlags.CenterHorizontal);
@@ -117,7 +120,6 @@ namespace EthansList.Droid
             LinearLayout layoutHolder = new LinearLayout(_context);
             layoutHolder.Orientation = Orientation.Vertical;
             layoutHolder.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent);
-            var padding = PixelConverter.DpToPixels(8);
             layoutHolder.SetPadding(padding, padding, padding, padding);
             layoutHolder.SetBackgroundResource(Resource.Color.accent);
 
