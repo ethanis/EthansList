@@ -26,18 +26,23 @@ namespace EthansList.Droid
         private ObservableCollection<SearchObject> deserialized;
         private event EventHandler<EventArgs> DeserializingComplete;
 
-        public override async void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+        }
 
-            // Create your fragment here
-
+        public override async void OnResume()
+        {
+            base.OnResume();
             savedSearches = await MainActivity.databaseConnection.GetAllSearchesAsync().ConfigureAwait(false);
             deserialized = await DeserializeSearches(savedSearches);
             if (deserialized != null)
             {
-                if (DeserializingComplete != null)
-                    DeserializingComplete(this, new EventArgs());
+                Activity.RunOnUiThread(() =>
+                {
+                    if (DeserializingComplete != null)
+                        DeserializingComplete(this, new EventArgs());
+                });
             }
         }
 
@@ -49,6 +54,7 @@ namespace EthansList.Droid
             {
                 view.Adapter = adapter = new SavedSearchesAdapter(this.Activity, deserialized);
                 deserialized = null;
+                DeserializingComplete = null;
             };
 
             view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
