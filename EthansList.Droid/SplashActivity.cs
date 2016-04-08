@@ -32,7 +32,6 @@ namespace EthansList.Droid
 
             Task startupWork = new Task(() =>
             {
-                //TODO: include any setup work here
                 Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
                 Log.Debug(TAG, "Working in the background - important stuff.");
             });

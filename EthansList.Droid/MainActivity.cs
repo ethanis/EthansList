@@ -87,7 +87,6 @@ namespace EthansList.Droid
 
         void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
-            //todo: add correct icons for these items
             int position = -1;
             switch (e.MenuItem.ItemId)
             {
@@ -107,6 +106,9 @@ namespace EthansList.Droid
                     position = 4;
                     break;
             }
+
+            if (position == -1)
+                return;
 
             base.SupportFragmentManager.PopBackStack(null, (int)PopBackStackFlags.Inclusive);
             // Show the selected Fragment to the user
