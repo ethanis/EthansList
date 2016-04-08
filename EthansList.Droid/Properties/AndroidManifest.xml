@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.xamarin.ethanslist">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="22" />
-	<application android:label="EthansList.MaterialDroid" android:theme="@style/MyTheme">
+	<application android:label="EthansList" android:theme="@style/MyTheme">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDXK_FulkhsUcYbcSgtJ50k2qkRXQthrcI" />
 	</application>
 	<!-- Google Maps for Android v2 requires OpenGL ES v2 -->

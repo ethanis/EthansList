@@ -89,13 +89,14 @@ namespace EthansList.Droid
             Orientation = Orientation.Horizontal;
             WeightSum = 1;
 
-            var imageParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+            var imageParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
 
             var imageHolder = new LinearLayout(_context);
             imageHolder.LayoutParameters = new LayoutParams(0, LayoutParams.MatchParent, 0.30f);
 
             _postingImage = new ImageView(_context);
             _postingImage.LayoutParameters = imageParams;
+            imageHolder.SetVerticalGravity(GravityFlags.CenterVertical);
             imageHolder.AddView(_postingImage);
             AddView(imageHolder);
 
