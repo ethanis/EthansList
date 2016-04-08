@@ -8,7 +8,7 @@ namespace EthansList.Shared
     public class AvailableLocations
     {
         List<Location> locations = new List<Location>();
-        SortedSet<String> states = new SortedSet<String>();
+        SortedSet<string> states = new SortedSet<string>();
 
         public AvailableLocations()
         {
@@ -17,25 +17,27 @@ namespace EthansList.Shared
 
         public List<Location> PotentialLocations
         {
-            get { 
+            get
+            {
                 return this.locations;
             }
         }
 
-        public SortedSet<String> States
+        public SortedSet<string> States
         {
-            get { 
+            get
+            {
                 return this.states;
             }
         }
 
         void ReadInputFile()
         {
-            #if __IOS__
+#if __IOS__
             var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ethanslist.ios.Constants.USCraigslistLocations.csv"));
-            #elif __ANDROID__
+#elif __ANDROID__
             var accountsStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("EthansList.Droid.Constants.USCraigslistLocations.csv"));
-            #endif
+#endif
 
             using (accountsStream)
             {
@@ -43,7 +45,7 @@ namespace EthansList.Shared
                 while ((line = accountsStream.ReadLine()) != null)
                 {
                     var container = line.Split(',');
-                    locations.Add(new Location(container[0],container[1],container[2],container[3],container[4], container[5]));
+                    locations.Add(new Location(container[0], container[1], container[2], container[3], container[4], container[5]));
                     states.Add(container[4]);
                 }
             }

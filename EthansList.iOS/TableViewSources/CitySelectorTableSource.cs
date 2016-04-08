@@ -3,6 +3,7 @@ using UIKit;
 using EthansList.Shared;
 using System.Linq;
 using Foundation;
+using System.Collections.Generic;
 
 namespace ethanslist.ios
 {
@@ -18,7 +19,8 @@ namespace ethanslist.ios
             this.locations = locations;
         }
 
-        public String SelectedItem {
+        public String SelectedItem
+        {
             get { return locations.States.ElementAt(SelectedIndex); }
         }
 
@@ -30,9 +32,9 @@ namespace ethanslist.ios
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(stateCell);
-            if (cell == null) 
+            if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, stateCell);
-            
+
             cell.TextLabel.AttributedText = new NSAttributedString(locations.States.ElementAt(indexPath.Row), Constants.CityPickerCellAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
@@ -54,25 +56,29 @@ namespace ethanslist.ios
 
     public class CityTableSource : UITableViewSource
     {
-        AvailableLocations locations;
+        //AvailableLocations locations;
         String state;
         public event EventHandler<EventArgs> ValueChange;
         protected int SelectedIndex = 0;
         const string cityCell = "cityCell";
+        List<Location> citiesInState;
 
         public CityTableSource(AvailableLocations locations, string state)
         {
-            this.locations = locations;
+            //this.locations = locations;
             this.state = state;
+
+            citiesInState = locations.PotentialLocations.Where(l => l.State.Equals(state)).OrderBy(l => l.SiteName).ToList();
         }
 
-        public Location SelectedCity {
-            get { return locations.PotentialLocations.Where(l => l.State == state).ElementAt(SelectedIndex); }
+        public Location SelectedCity
+        {
+            get { return citiesInState.ElementAt(SelectedIndex); }
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return locations.PotentialLocations.Where(l => l.State == state).Count();
+            return citiesInState.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -80,8 +86,8 @@ namespace ethanslist.ios
             var cell = tableView.DequeueReusableCell(cityCell);
             if (cell == null)
                 cell = new UITableViewCell(UITableViewCellStyle.Default, cityCell);
-            
-            cell.TextLabel.AttributedText = new NSAttributedString(locations.PotentialLocations.Where(l => l.State == state).ElementAt(indexPath.Row).SiteName, Constants.CityPickerCellAttributes);
+
+            cell.TextLabel.AttributedText = new NSAttributedString(citiesInState.ElementAt(indexPath.Row).SiteName, Constants.CityPickerCellAttributes);
             cell.BackgroundColor = ColorScheme.Clouds;
 
             return cell;

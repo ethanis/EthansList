@@ -71,7 +71,7 @@ namespace EthansList.Droid
 
             city_picker = new ListView(context);
             city_picker.LayoutParameters = p;
-            cityAdapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state));
+            cityAdapter = new CityListAdapter(context, locations.PotentialLocations.Where(loc => loc.State == state).OrderBy(x => x.SiteName));
             city_picker.Adapter = cityAdapter;
             pickerHolder.AddView(city_picker);
 
