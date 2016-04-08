@@ -478,7 +478,7 @@ namespace EthansList.Droid
 
                     EditText maxfield = new EditText(context);
                     maxfield.LayoutParameters = p;
-                    maxfield.Hint = "min";
+                    maxfield.Hint = "max";
                     maxfield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
                     maxfield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     maxfield.SetSingleLine(true);
