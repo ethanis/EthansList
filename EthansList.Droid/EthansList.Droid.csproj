@@ -139,11 +139,6 @@
     <AndroidResource Include="Resources\values\sizes.xml" />
     <AndroidResource Include="Resources\menu\Save.xml" />
     <AndroidResource Include="Resources\menu\DeleteMenu.xml" />
-    <AndroidResource Include="Resources\drawable-hdpi\ethanslist_icon.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ethanslist_icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ethanslist_icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ethanslist_icon.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ethanslist_icon.png" />
     <AndroidResource Include="Resources\layout\splashlayer.xml" />
     <AndroidResource Include="Resources\menu\FavoriteMenu.xml" />
     <AndroidResource Include="Resources\menu\UnfavoriteMenu.xml" />
@@ -189,6 +184,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\splash_image.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\splash_image.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\splash_image.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ethanslist_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ethanslist_icon.png" />
   </ItemGroup>
   <Import Project="..\EthanList.SharedProject\EthanList.SharedProject.projitems" Label="Shared" Condition="Exists('..\EthanList.SharedProject\EthanList.SharedProject.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
@@ -218,7 +218,6 @@
   <ItemGroup>
     <Folder Include="Resources\menu\" />
     <Folder Include="Resources\values-v21\" />
-    <Folder Include="Resources\android\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Fragments\" />
     <Folder Include="Views\" />

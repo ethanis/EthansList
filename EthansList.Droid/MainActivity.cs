@@ -30,6 +30,7 @@ namespace EthansList.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+            //TODO: Create appropriately sized placeholder image
             base.OnCreate(bundle);
             Instance = this;
 

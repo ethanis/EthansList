@@ -26,7 +26,7 @@
             android:textColor="#ffffff"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
-            android:text="A better craigslist client"
+            android:text="A better craigslist app"
             android:textSize="14sp"
             android:textStyle="normal" />
     </LinearLayout>
