@@ -82,6 +82,13 @@ namespace ethanslist.ios
             this.View.AddSubview(scrollView);
 
             AddLayoutConstraints();
+
+            saveButton = new UIBarButtonItem(
+                UIImage.FromFile("save.png"),
+                UIBarButtonItemStyle.Plain,
+                SaveButtonClicked);
+
+            NavigationItem.RightBarButtonItem = saveButton;
         }
 
         NSObject keyboardUpToken, keyboardDownToken;
@@ -97,13 +104,21 @@ namespace ethanslist.ios
             // Keyboard Down
             keyboardDownToken = NSNotificationCenter.DefaultCenter.AddObserver
                                 (UIKeyboard.WillHideNotification, KeyBoardDownNotification);
+
+            ads.AdLoaded += AddAdBanner_Event;
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
+
             keyboardUpToken?.Dispose();
             keyboardDownToken?.Dispose();
+            saveButton?.Dispose();
+
+            ads.AdLoaded -= AddAdBanner_Event;
+
+            saveButton.Dispose();
         }
 
         public override void ViewDidLoad()
@@ -122,51 +137,6 @@ namespace ethanslist.ios
             View.AddGestureRecognizer(g);
 
 
-            ads.AdLoaded += (object sender, EventArgs e) =>
-            {
-                AddAdBanner(true);
-            };
-
-            saveButton = new UIBarButtonItem(
-                UIImage.FromFile("save.png"),
-                UIBarButtonItemStyle.Plain,
-                async (sender, e) =>
-                {
-                    SearchObject searchObject = new SearchObject();
-                    searchObject.SearchLocation = Location;
-                    searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(Category.Key, Category.Value);
-                    searchObject.SearchItems = this.SearchItems;
-                    searchObject.Conditions = this.Conditions;
-                    searchObject.MaxListings = this.MaxListings;
-                    searchObject.PostedDate = this.WeeksOld;
-
-                    string serialized = JsonConvert.SerializeObject(searchObject);
-                    await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, serialized);
-
-                    Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
-
-                    if (AppDelegate.databaseConnection.StatusCode == codes.ok)
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = "Search Saved!";
-                        alert.AddButton("OK");
-                        alert.Show();
-
-                        this.NavigationItem.RightBarButtonItem.Enabled = false;
-                    }
-                    else
-                    {
-                        UIAlertView alert = new UIAlertView();
-                        alert.Message = String.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
-                        alert.AddButton("OK");
-                        alert.Show();
-
-                        this.NavigationItem.RightBarButtonItem.Enabled = true;
-                    }
-                }
-            );
-
-            NavigationItem.RightBarButtonItem = saveButton;
 
             SearchButton.TouchUpInside += (sender, e) =>
             {
@@ -188,6 +158,51 @@ namespace ethanslist.ios
                 this.ShowViewController(feedViewController, this);
             };
         }
+
+        async void SaveButtonClicked(object sender, EventArgs e)
+        {
+            SearchObject searchObject = new SearchObject();
+            searchObject.SearchLocation = Location;
+            searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(Category.Key, Category.Value);
+            searchObject.SearchItems = this.SearchItems;
+            searchObject.Conditions = this.Conditions;
+            searchObject.MaxListings = this.MaxListings;
+            searchObject.PostedDate = this.WeeksOld;
+
+            string serialized = JsonConvert.SerializeObject(searchObject);
+            await AppDelegate.databaseConnection.AddNewSearchAsync(Location.Url, serialized);
+            serialized = null;
+
+            Console.WriteLine(AppDelegate.databaseConnection.StatusMessage);
+
+            if (AppDelegate.databaseConnection.StatusCode == codes.ok)
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = "Search Saved!";
+                alert.AddButton("OK");
+                alert.Show();
+
+                this.NavigationItem.RightBarButtonItem.Enabled = false;
+            }
+            else
+            {
+                UIAlertView alert = new UIAlertView();
+                alert.Message = string.Format("Oops, something went wrong{0}Please try again...", Environment.NewLine);
+                alert.AddButton("OK");
+                alert.Show();
+
+                this.NavigationItem.RightBarButtonItem.Enabled = true;
+            }
+
+            searchObject = null;
+        }
+
+
+        void AddAdBanner_Event(object sender, EventArgs e)
+        {
+            AddAdBanner(true);
+        }
+
 
         void AddAdBanner(bool show)
         {
@@ -257,6 +272,7 @@ namespace ethanslist.ios
             });
 
             AddAdBanner(false);
+
 
             this.View.LayoutIfNeeded();
         }
