@@ -9,18 +9,18 @@ using CoreGraphics;
 
 namespace ethanslist.ios
 {
-	partial class CityPickerViewController : UIViewController
-	{
+    partial class CityPickerViewController : UIViewController
+    {
         AvailableLocations locations;
-        public String state {get;set;}
+        public String state { get; set; }
         Location currentSelected;
         UITableView StateTableView, CityTableView;
         StateTableSource stateTableSource;
         CityTableSource cityTableSource;
 
-		public CityPickerViewController (IntPtr handle) : base (handle)
-		{
-		}
+        public CityPickerViewController(IntPtr handle) : base(handle)
+        {
+        }
 
         public override void LoadView()
         {
@@ -37,7 +37,7 @@ namespace ethanslist.ios
             StateTableView.AccessibilityIdentifier = "StatePickTableView";
             CityTableView.AccessibilityIdentifier = "CityPickTableView";
 
-            this.View.AddSubviews(new UIView[] {StateTableView, CityTableView });
+            this.View.AddSubviews(new UIView[] { StateTableView, CityTableView });
 
             AddLayoutConstraints();
 
@@ -57,9 +57,9 @@ namespace ethanslist.ios
             base.ViewDidLoad();
 
             NavigationItem.SetLeftBarButtonItem(
-                new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)), 
+                new UIBarButtonItem(UIImage.FromBundle("menu.png"), UIBarButtonItemStyle.Plain, (s, e) => NavigationController.PopViewController(true)),
                 true);
-            
+
             locations = new AvailableLocations();
 
             state = locations.States.ElementAt(0);
@@ -70,21 +70,21 @@ namespace ethanslist.ios
             StateTableView.Source = stateTableSource;
             CityTableView.Source = cityTableSource;
 
-            StateTableView.SelectRow(NSIndexPath.FromRowSection(0,0),false,UITableViewScrollPosition.None);
+            StateTableView.SelectRow(NSIndexPath.FromRowSection(0, 0), false, UITableViewScrollPosition.None);
 
             stateTableSource.ValueChanged += StateTable_Changed;
             cityTableSource.ValueChange += CityTable_Changed;
 
             RecentCitiesButton.TouchUpInside += (object sender, EventArgs e) =>
-                {
-                    var storyboard = UIStoryboard.FromName("Main", null);
-                    var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
-                    recentCitiesViewController.FromMenu = false;
-                    this.ShowViewController(recentCitiesViewController, this);
-                };
+            {
+                var storyboard = UIStoryboard.FromName("Main", null);
+                var recentCitiesViewController = (RecentCitiesTableViewController)storyboard.InstantiateViewController("RecentCitiesTableViewController");
+                recentCitiesViewController.FromMenu = false;
+                this.ShowViewController(recentCitiesViewController, this);
+            };
         }
 
-        void ProceedToSearch (object sender, EventArgs e)
+        void ProceedToSearch(object sender, EventArgs e)
         {
             var categoryVC = new CategoryPickerViewController();
             categoryVC.SelectedCity = currentSelected;
@@ -102,17 +102,22 @@ namespace ethanslist.ios
             this.ShowViewController(categoryVC, this);
         }
 
-        void StateTable_Changed (object sender, EventArgs e)
+        void StateTable_Changed(object sender, EventArgs e)
         {
             state = stateTableSource.SelectedItem;
+
+            cityTableSource.ValueChange -= CityTable_Changed;
+            cityTableSource.Dispose();
+            cityTableSource = null;
+
             cityTableSource = new CityTableSource(locations, state);
             CityTableView.Source = cityTableSource;
             CityTableView.ReloadData();
-            Console.WriteLine (state);
+            Console.WriteLine(state);
             cityTableSource.ValueChange += CityTable_Changed;
         }
 
-        void CityTable_Changed (object sender, EventArgs e)
+        void CityTable_Changed(object sender, EventArgs e)
         {
             currentSelected = cityTableSource.SelectedCity;
             Console.WriteLine(currentSelected.SiteName);
@@ -157,11 +162,11 @@ namespace ethanslist.ios
 
             List<NSLayoutConstraint> stateConstraints = new List<NSLayoutConstraint>();
             //State table view constraints
-            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Left, 
+            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Left,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Top, 
+            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, stateHeader, NSLayoutAttribute.Bottom, 1, 0));
-            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Width, 
+            stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Width,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Width, 0.5f, 0));
             stateConstraints.Add(NSLayoutConstraint.Create(StateTableView, NSLayoutAttribute.Bottom,
                 NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -20));
@@ -169,11 +174,11 @@ namespace ethanslist.ios
 
             List<NSLayoutConstraint> cityConstraints = new List<NSLayoutConstraint>();
             //City table view constraints
-            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Left, 
+            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Left,
                 NSLayoutRelation.Equal, StateTableView, NSLayoutAttribute.Right, 1, 0));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Right, 
+            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Right,
                 NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Right, 1, 0));
-            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Top, 
+            cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Top,
                 NSLayoutRelation.Equal, cityHeader, NSLayoutAttribute.Bottom, 1, 0));
             cityConstraints.Add(NSLayoutConstraint.Create(CityTableView, NSLayoutAttribute.Bottom,
                 NSLayoutRelation.Equal, RecentCitiesButton, NSLayoutAttribute.Top, 1, -20));
@@ -191,5 +196,5 @@ namespace ethanslist.ios
 
             this.View.LayoutIfNeeded();
         }
-	}
+    }
 }
