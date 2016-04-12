@@ -25,11 +25,10 @@ namespace ethanslist.ios
         ADBannerView ads;
         NSLayoutConstraint searchTableBottom;
 
-
         private float scroll_amount = 0.0f;    // amount to scroll 
         private float bottom = 0.0f;           // bottom point
         private float offset = 40.0f;          // extra offset
-        private bool moveViewUp = false;           // which direction are we moving
+        private bool moveViewUp = false;       // which direction are we moving
         private bool keyboardSet = false;
 
         #region GeneratedFromSearchOptions
@@ -53,7 +52,6 @@ namespace ethanslist.ios
         public SearchViewController()
         {
         }
-
 
         public override void LoadView()
         {
@@ -106,6 +104,11 @@ namespace ethanslist.ios
                                 (UIKeyboard.WillHideNotification, KeyBoardDownNotification);
 
             ads.AdLoaded += AddAdBanner_Event;
+
+            SearchButton.TouchUpInside += SearchButton_Clicked;
+
+            SearchItems = new Dictionary<string, string>();
+            Conditions = new Dictionary<object, KeyValuePair<object, object>>();
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -119,6 +122,8 @@ namespace ethanslist.ios
             ads.AdLoaded -= AddAdBanner_Event;
 
             saveButton.Dispose();
+
+            SearchButton.TouchUpInside -= SearchButton_Clicked;
         }
 
         public override void ViewDidLoad()
@@ -130,33 +135,28 @@ namespace ethanslist.ios
 
             this.Title = "Options";
 
-            SearchItems = new Dictionary<string, string>();
-            Conditions = new Dictionary<object, KeyValuePair<object, object>>();
-
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(g);
+        }
 
+        void SearchButton_Clicked(object sender, EventArgs e)
+        {
+            QueryGeneration queryHelper = new QueryGeneration();
+            var feedViewController = new SearchResultsViewController();
 
+            SearchObject searchObject = new SearchObject();
+            searchObject.SearchLocation = Location;
+            searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(Category.Key, Category.Value);
+            searchObject.SearchItems = this.SearchItems;
+            searchObject.Conditions = this.Conditions;
 
-            SearchButton.TouchUpInside += (sender, e) =>
-            {
-                QueryGeneration queryHelper = new QueryGeneration();
-                var feedViewController = new SearchResultsViewController();
+            var query = queryHelper.Generate(searchObject);
 
-                SearchObject searchObject = new SearchObject();
-                searchObject.SearchLocation = Location;
-                searchObject.Category = SubCategory.Value != null ? new KeyValuePair<object, object>(SubCategory.Value, SubCategory.Key) : new KeyValuePair<object, object>(Category.Key, Category.Value);
-                searchObject.SearchItems = this.SearchItems;
-                searchObject.Conditions = this.Conditions;
+            feedViewController.Query = query;
+            feedViewController.MaxListings = MaxListings;
+            feedViewController.WeeksOld = WeeksOld;
 
-                var query = queryHelper.Generate(searchObject);
-
-                feedViewController.Query = query;
-                feedViewController.MaxListings = MaxListings;
-                feedViewController.WeeksOld = WeeksOld;
-
-                this.ShowViewController(feedViewController, this);
-            };
+            this.ShowViewController(feedViewController, this);
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)
@@ -250,20 +250,20 @@ namespace ethanslist.ios
                 NSLayoutConstraint.Create(holderView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Top, 1, 64),
                 NSLayoutConstraint.Create(holderView, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this.View, NSLayoutAttribute.Left, 1, 0),
             });
-            //Seach Table Constraints
+            //Search Table Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 1, 0),
                 NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create (SearchTableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, SearchButton, NSLayoutAttribute.Bottom, 1, 15),
             });
-            //            Seach CL Label Constraints
+            //Search CL Label Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, 0.9f, 0),
                 NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
                 NSLayoutConstraint.Create(SearchCityLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Top, 1, 15),
             });
 
-            //Seach Button Constraints
+            //Search Button Constraints
             this.View.AddConstraints(new NSLayoutConstraint[] {
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.Width, .90f, 0),
                 NSLayoutConstraint.Create(SearchButton, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, holderView, NSLayoutAttribute.CenterX, 1, 0),
@@ -272,7 +272,6 @@ namespace ethanslist.ios
             });
 
             AddAdBanner(false);
-
 
             this.View.LayoutIfNeeded();
         }
