@@ -258,5 +258,7 @@
     <BundleResource Include="Resources\LaunchScreenImage.png" />
     <BundleResource Include="Resources\LaunchScreenImage%402x.png" />
     <BundleResource Include="Resources\LaunchScreenImage%403x.png" />
+    <BundleResource Include="Resources\menu%402x.png" />
+    <BundleResource Include="Resources\menu%403x.png" />
   </ItemGroup>
 </Project>
