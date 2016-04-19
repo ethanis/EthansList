@@ -16,20 +16,20 @@ namespace ethanslist.ios
         private SearchPickerModel picker_model;
         private UIPickerView picker;
 
-        protected SearchOptionsTableSource() {}
+        protected SearchOptionsTableSource() { }
 
-        public SearchOptionsTableSource (List<TableItemGroup> items, UIViewController owner)
+        public SearchOptionsTableSource(List<TableItemGroup> items, UIViewController owner)
         {
             this.tableItems = items;
             this.owner = (SearchViewController)owner;
         }
 
-        public override nint NumberOfSections (UITableView tableView)
+        public override nint NumberOfSections(UITableView tableView)
         {
             return tableItems.Count;
         }
 
-        public override nint RowsInSection (UITableView tableview, nint section)
+        public override nint RowsInSection(UITableView tableview, nint section)
         {
             return tableItems[(int)section].Items.Count;
         }
@@ -47,7 +47,7 @@ namespace ethanslist.ios
             return Constants.ButtonHeight;
         }
 
-        private void AddSearchItem (string itemKey, string itemValue)
+        private void AddSearchItem(string itemKey, string itemValue)
         {
             if (this.owner.SearchItems.ContainsKey(itemKey))
                 this.owner.SearchItems[itemKey] = itemValue;
@@ -55,7 +55,7 @@ namespace ethanslist.ios
                 this.owner.SearchItems.Add(itemKey, itemValue);
         }
 
-        public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
+        public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             TableItem item = tableItems[indexPath.Section].Items[indexPath.Row];
 
@@ -68,7 +68,7 @@ namespace ethanslist.ios
                 {
                     this.owner.View.EndEditing(true);
                 });
-            toolbar.SetItems(new UIBarButtonItem[]{ doneButton }, true);
+            toolbar.SetItems(new UIBarButtonItem[] { doneButton }, true);
 
 
             switch (item.CellType)
@@ -84,15 +84,12 @@ namespace ethanslist.ios
                     searchTermsCell.AccessibilityIdentifier = "SearchTermsField";
                     searchTermsCell.TermsField.EditingChanged += delegate
                     {
-                            AddSearchItem("query", searchTermsCell.TermsField.Text);
+                        AddSearchItem("query", searchTermsCell.TermsField.Text);
                     };
-//                    searchTermsCell.TermsField.EditingDidBegin += (object sender, EventArgs e) =>
-//                    {
-//                            this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
-//                    };
+
                     searchTermsCell.TermsField.TouchUpInside += delegate
                     {
-                            this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
+                        this.owner.FieldSelected = searchTermsCell.TermsField.InputView;
                     };
 
                     return searchTermsCell;
@@ -105,18 +102,18 @@ namespace ethanslist.ios
 
                     priceInputCell.NumChanged += (object sender, EventArgs e) =>
                     {
-                            AddSearchItem("min_price", priceInputCell.MinPriceField.Text);
-                            AddSearchItem("max_price", priceInputCell.MaxPriceField.Text);
+                        AddSearchItem("min_price", priceInputCell.MinPriceField.Text);
+                        AddSearchItem("max_price", priceInputCell.MaxPriceField.Text);
                     };
 
                     priceInputCell.MaxPriceField.EditingDidBegin += (object sender, EventArgs e) =>
                     {
-                            this.owner.FieldSelected = priceInputCell.MaxPriceField.InputView;
+                        this.owner.FieldSelected = priceInputCell.MaxPriceField.InputView;
                     };
-                        
+
                     priceInputCell.MinPriceField.EditingDidBegin += (object sender, EventArgs e) =>
                     {
-                            this.owner.FieldSelected = priceInputCell.MinPriceField.InputView;
+                        this.owner.FieldSelected = priceInputCell.MinPriceField.InputView;
                     };
 
                     return priceInputCell;
@@ -129,26 +126,26 @@ namespace ethanslist.ios
 
                     minMaxCell.NumChanged += delegate
                     {
-                            switch (item.Heading) 
-                            {
-                                case "Sq Feet":
-                                    AddSearchItem("minSqft", minMaxCell.MinField.Text);
-                                    AddSearchItem("maxSqft", minMaxCell.MaxField.Text);
+                        switch (item.Heading)
+                        {
+                            case "Sq Feet":
+                                AddSearchItem("minSqft", minMaxCell.MinField.Text);
+                                AddSearchItem("maxSqft", minMaxCell.MaxField.Text);
 
-                                    break;
-                                case "Year":
-                                    AddSearchItem("min_auto_year", minMaxCell.MinField.Text);
-                                    AddSearchItem("max_auto_year", minMaxCell.MaxField.Text);
+                                break;
+                            case "Year":
+                                AddSearchItem("min_auto_year", minMaxCell.MinField.Text);
+                                AddSearchItem("max_auto_year", minMaxCell.MaxField.Text);
 
-                                    break;
-                                case "Odometer":
-                                    AddSearchItem("min_auto_miles", minMaxCell.MinField.Text);
-                                    AddSearchItem("max_auto_miles", minMaxCell.MaxField.Text);
+                                break;
+                            case "Odometer":
+                                AddSearchItem("min_auto_miles", minMaxCell.MinField.Text);
+                                AddSearchItem("max_auto_miles", minMaxCell.MaxField.Text);
 
-                                    break;
-                                default:
-                                    break;
-                            }
+                                break;
+                            default:
+                                break;
+                        }
                     };
 
                     minMaxCell.MaxField.EditingDidBegin += (object sender, EventArgs e) =>
@@ -172,13 +169,13 @@ namespace ethanslist.ios
 
                     makeModelCell.TermsField.EditingChanged += delegate
                     {
-                            AddSearchItem("auto_make_model", makeModelCell.TermsField.Text);
+                        AddSearchItem("auto_make_model", makeModelCell.TermsField.Text);
                     };
                     makeModelCell.TermsField.EditingDidBegin += delegate
                     {
-                            this.owner.FieldSelected = makeModelCell.TermsField.InputView;
+                        this.owner.FieldSelected = makeModelCell.TermsField.InputView;
                     };
-                    
+
                     return makeModelCell;
                 case "PickerSelectorCell":
                     var pickerSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
@@ -220,11 +217,12 @@ namespace ethanslist.ios
                             else if (item.Heading == "Sub Category")
                                 this.owner.SubCategory = new KeyValuePair<object, object>(resultKey, resultValue);
                         };
-                    
+
                     pickerSelectorCell.InputTextField.InputView = picker;
                     pickerSelectorCell.InputTextField.InputAccessoryView = toolbar;
 
-                    pickerSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                    pickerSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) =>
+                    {
                         this.owner.KeyboardBounds = picker.Bounds;
                         this.owner.FieldSelected = pickerSelectorCell;
                         pickerSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
@@ -232,22 +230,23 @@ namespace ethanslist.ios
 
                     pickerSelectorCell.InputTextField.EditingDidEnd += delegate
                     {
-                            pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
+                        pickerSelectorCell.Accessory = UITableViewCellAccessory.None;
                     };
                     return pickerSelectorCell;
                 case "ComboTableCell":
                     var tableSelectorCell = (PickerSelectorCell)tableView.DequeueReusableCell(PickerSelectorCell.Key);
                     if (tableSelectorCell == null)
                         tableSelectorCell = PickerSelectorCell.Create();
-                    
+
                     tableSelectorCell.Title.AttributedText = new NSAttributedString(item.Heading, Constants.LabelAttributes);
 
                     ComboPickerTableSource comboSource = new ComboPickerTableSource(item.PickerOptions);
                     UITableView comboPicker = new UITableView();
                     comboPicker.Source = comboSource;
-                    comboPicker.Bounds = new CoreGraphics.CGRect(0,0,this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
+                    comboPicker.Bounds = new CoreGraphics.CGRect(0, 0, this.owner.View.Bounds.Width, 0.4f * this.owner.View.Bounds.Height);
 
-                    comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) => {
+                    comboSource.ValueChanged += (object sender, PickerChangedEventArgs e) =>
+                    {
                         string resultKey = e.SelectedKey.ToString();
                         string resultValue = null;
                         if (e.SelectedValue != null)
@@ -256,12 +255,12 @@ namespace ethanslist.ios
                         if (this.owner.Conditions.ContainsKey(resultKey))
                         {
                             this.owner.Conditions.Remove(resultKey);
-                            Console.WriteLine ("Removed Key: " + resultKey + ", Value: " + resultValue);
+                            Console.WriteLine("Removed Key: " + resultKey + ", Value: " + resultValue);
                         }
                         else
                         {
                             this.owner.Conditions.Add(resultKey, new KeyValuePair<object, object>(item.SubHeading, resultValue));
-                            Console.WriteLine ("Added Key: " + resultKey + ", Value: " + resultValue);
+                            Console.WriteLine("Added Key: " + resultKey + ", Value: " + resultValue);
                         }
 
                         var keys = (from kvp in this.owner.Conditions where (string)kvp.Value.Key == item.SubHeading select (string)kvp.Key).ToList();
@@ -272,7 +271,8 @@ namespace ethanslist.ios
                     tableSelectorCell.InputTextField.InputView = comboPicker;
                     tableSelectorCell.InputTextField.InputAccessoryView = toolbar;
 
-                    tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) => {
+                    tableSelectorCell.InputTextField.EditingDidBegin += (object sender, EventArgs e) =>
+                    {
                         this.owner.KeyboardBounds = comboPicker.Bounds;
                         this.owner.FieldSelected = tableSelectorCell;
                         tableSelectorCell.Accessory = UITableViewCellAccessory.Checkmark;
@@ -282,7 +282,7 @@ namespace ethanslist.ios
                         {
                             tableSelectorCell.Accessory = UITableViewCellAccessory.None;
                         };
-                    
+
                     return tableSelectorCell;
             }
         }

@@ -25,15 +25,15 @@ namespace ethanslist.UITests
             if (platform == Platform.Android)
             {
                 app = ConfigureApp
-					.Android
+                    .Android
                     .ApkFile("../../../EthansList.Droid/bin/Release/com.xamarin.ethanslist-Signed.apk")
-					.StartApp();
+                    .StartApp();
             }
             else
             {
                 app = ConfigureApp
-    				.iOS
-    				.StartApp();
+                    .iOS
+                    .StartApp();
             }
 
             return app;
