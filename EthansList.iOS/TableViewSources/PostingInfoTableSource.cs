@@ -22,7 +22,7 @@ namespace ethanslist.ios
         ListingImageDownloader imageHelper;
         protected SmallLoadingOverlay _loadingOverlay = null;
 
-        private ImageCollectionViewSource collectionSource {get;set;}
+        private ImageCollectionViewSource collectionSource { get; set; }
         private PostingTitleCell titleCell { get; set; }
         private PostingImageCell imageCell { get; set; }
         private PostingImageCollectionCell collectionCell { get; set; }
@@ -41,14 +41,14 @@ namespace ethanslist.ios
         public string Image
         {
             get { return image; }
-            set 
+            set
             {
                 PostingImageView.SetImage(
                     new NSUrl(value),
                     UIImage.FromBundle("placeholder.png"),
                     SDWebImageOptions.HighPriority,
                     null,
-                    (image,error,cachetype,NSNull) => 
+                    (image, error, cachetype, NSNull) =>
                     {
                         PostingImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
                     }
@@ -58,10 +58,10 @@ namespace ethanslist.ios
         }
         private UIImageView PostingImageView { get; set; }
 
-        private string DescriptionText 
-        { 
-            get { return descriptionText; } 
-            set { descriptionText = value; } 
+        private string DescriptionText
+        {
+            get { return descriptionText; }
+            set { descriptionText = value; }
         }
         private string descriptionText;
 
@@ -106,7 +106,7 @@ namespace ethanslist.ios
                     if (imageCell == null)
                     {
                         imageCell = PostingImageCell.Create();
-                    
+
                         this.PostingImageView = imageCell.MainImage;
                         if (post.ImageLink != "-1")
                         {
@@ -128,11 +128,11 @@ namespace ethanslist.ios
                         };
 
                         UISwipeGestureRecognizer swipeRight = new UISwipeGestureRecognizer(OnSwipeRight)
-                        { 
+                        {
                             Direction = UISwipeGestureRecognizerDirection.Right
                         };
                         UISwipeGestureRecognizer swipeLeft = new UISwipeGestureRecognizer(OnSwipeLeft)
-                        { 
+                        {
                             Direction = UISwipeGestureRecognizerDirection.Left
                         };
 
@@ -148,7 +148,7 @@ namespace ethanslist.ios
                     if (collectionCell == null)
                     {
                         collectionCell = PostingImageCollectionCell.Create();
-                    
+
                         if (post.ImageLink != "-1")
                         {
                             if (!imageHelper.LoadingComplete)
@@ -239,10 +239,10 @@ namespace ethanslist.ios
 
                         var coords = imageHelper.postingCoordinates;
                         mapCell.PostingMap.AddAnnotation(new MKPointAnnotation()
-                            {
-                                Title = "Location", 
-                                Coordinate = coords,
-                            });
+                        {
+                            Title = "Location",
+                            Coordinate = coords,
+                        });
                         mapCell.PostingMap.AccessibilityIdentifier = "PostingMap";
                         MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(10.5), MilesToLongitudeDegrees(10.5, coords.Latitude));
                         mapCell.PostingMap.Region = new MKCoordinateRegion(coords, span);
@@ -263,7 +263,7 @@ namespace ethanslist.ios
                     if (dateCell == null)
                     {
                         dateCell = new UITableViewCell(UITableViewCellStyle.Default, null);
-                    
+
                         var date = "Listed: " + post.Date.ToShortDateString() + " at " + post.Date.ToShortTimeString();
                         dateCell.TextLabel.AttributedText = new NSAttributedString(date, Constants.LabelAttributes);
 
@@ -289,7 +289,8 @@ namespace ethanslist.ios
                                 postingWebView.PostingLink = post.Link;
 
                                 this.owner.ShowViewController(postingWebView, this);
-                            }) { NumberOfTapsRequired = 1 };
+                            })
+                        { NumberOfTapsRequired = 1 };
 
                         linkcell.TextLabel.AddGestureRecognizer(openLink);
 
@@ -310,7 +311,7 @@ namespace ethanslist.ios
                 case "PostingTitleCell":
                     return TitleHeight + 10f;
                 case "PostingImage":
-                    return  this.owner.View.Bounds.Height * 0.4f;
+                    return this.owner.View.Bounds.Height * 0.4f;
                 case "ImageCollection":
                     return 54f;
                 case "PostingDescription":
@@ -326,12 +327,12 @@ namespace ethanslist.ios
             }
         }
 
-        public override nint RowsInSection (UITableView tableview, nint section)
+        public override nint RowsInSection(UITableView tableview, nint section)
         {
             return tableItems.Count;
         }
 
-        private void OnSingleTap (UIGestureRecognizer gesture) 
+        private void OnSingleTap(UIGestureRecognizer gesture)
         {
             if (imageHelper.images.Count > 0)
             {
@@ -343,7 +344,7 @@ namespace ethanslist.ios
             }
         }
 
-        private void OnSwipeRight (UIGestureRecognizer gesture)
+        private void OnSwipeRight(UIGestureRecognizer gesture)
         {
             if (CurrentImageIndex > 0)
             {
@@ -352,7 +353,7 @@ namespace ethanslist.ios
             }
         }
 
-        private void OnSwipeLeft (UIGestureRecognizer gesture)
+        private void OnSwipeLeft(UIGestureRecognizer gesture)
         {
             if (CurrentImageIndex < imageHelper.images.Count - 1)
             {
@@ -364,15 +365,15 @@ namespace ethanslist.ios
         public double MilesToLatitudeDegrees(double miles)
         {
             double earthRadius = 3960.0; // in miles
-            double radiansToDegrees = 180.0/Math.PI;
-            return (miles/earthRadius) * radiansToDegrees;
+            double radiansToDegrees = 180.0 / Math.PI;
+            return (miles / earthRadius) * radiansToDegrees;
         }
 
         public double MilesToLongitudeDegrees(double miles, double atLatitude)
         {
             double earthRadius = 3960.0; // in miles
-            double degreesToRadians = Math.PI/180.0;
-            double radiansToDegrees = 180.0/Math.PI;
+            double degreesToRadians = Math.PI / 180.0;
+            double radiansToDegrees = 180.0 / Math.PI;
             // derive the earth's radius at that point in latitude
             double radiusAtLatitude = earthRadius * Math.Cos(atLatitude * degreesToRadians);
             return (miles / radiusAtLatitude) * radiansToDegrees;
@@ -381,7 +382,7 @@ namespace ethanslist.ios
 
     public class DescriptionLoadedEventArgs : EventArgs
     {
-        public NSIndexPath DescriptionRow { get; set;}
+        public NSIndexPath DescriptionRow { get; set; }
     }
 }
 

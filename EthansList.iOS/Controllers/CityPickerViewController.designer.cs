@@ -11,19 +11,19 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("CityPickerViewController")]
-	partial class CityPickerViewController
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton RecentCitiesButton { get; set; }
+    [Register ("CityPickerViewController")]
+    partial class CityPickerViewController
+    {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton RecentCitiesButton { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-			if (RecentCitiesButton != null) {
-				RecentCitiesButton.Dispose ();
-				RecentCitiesButton = null;
-			}
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (RecentCitiesButton != null) {
+                RecentCitiesButton.Dispose ();
+                RecentCitiesButton = null;
+            }
+        }
+    }
 }

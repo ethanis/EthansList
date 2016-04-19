@@ -11,51 +11,55 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("PostingWebViewController")]
-	partial class PostingWebViewController
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIBarButtonItem DoneButton { get; set; }
+    [Register ("PostingWebViewController")]
+    partial class PostingWebViewController
+    {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIBarButtonItem DoneButton { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UINavigationBar navBar { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UINavigationBar navBar { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UINavigationItem navBarItem { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UINavigationItem navBarItem { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView statusBarPlaceholder { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIView statusBarPlaceholder { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIWebView webView { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIWebView webView { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-			if (DoneButton != null) {
-				DoneButton.Dispose ();
-				DoneButton = null;
-			}
-			if (navBar != null) {
-				navBar.Dispose ();
-				navBar = null;
-			}
-			if (navBarItem != null) {
-				navBarItem.Dispose ();
-				navBarItem = null;
-			}
-			if (statusBarPlaceholder != null) {
-				statusBarPlaceholder.Dispose ();
-				statusBarPlaceholder = null;
-			}
-			if (webView != null) {
-				webView.Dispose ();
-				webView = null;
-			}
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (DoneButton != null) {
+                DoneButton.Dispose ();
+                DoneButton = null;
+            }
+
+            if (navBar != null) {
+                navBar.Dispose ();
+                navBar = null;
+            }
+
+            if (navBarItem != null) {
+                navBarItem.Dispose ();
+                navBarItem = null;
+            }
+
+            if (statusBarPlaceholder != null) {
+                statusBarPlaceholder.Dispose ();
+                statusBarPlaceholder = null;
+            }
+
+            if (webView != null) {
+                webView.Dispose ();
+                webView = null;
+            }
+        }
+    }
 }

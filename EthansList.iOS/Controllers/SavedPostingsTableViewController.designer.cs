@@ -11,11 +11,11 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("SavedListingsTableViewController")]
-	partial class SavedListingsTableViewController
-	{
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register ("SavedListingsTableViewController")]
+    partial class SavedListingsTableViewController
+    {
+        void ReleaseDesignerOutlets ()
+        {
+        }
+    }
 }

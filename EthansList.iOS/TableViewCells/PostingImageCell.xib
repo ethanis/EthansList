@@ -36,12 +36,15 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholder.png" width="500" height="350"/>
+        <image name="placeholder.png" width="240" height="168"/>
         <image name="Icon.png" width="57" height="57"/>
         <image name="Icon-60.png" width="60" height="60"/>
-        <image name="LaunchScreenIcon.png" width="1024" height="1024"/>
         <image name="save.png" width="50" height="50"/>
         <image name="menu.png" width="50" height="50"/>
         <image name="Delete-50.png" width="50" height="50"/>
+        <image name="favorites.png" width="50" height="50"/>
+        <image name="Trash-50.png" width="50" height="50"/>
+        <image name="DeletePattern.png" width="80" height="80"/>
+        <image name="LaunchScreenImage.png" width="219" height="219"/>
     </resources>
 </document>

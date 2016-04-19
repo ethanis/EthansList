@@ -10,8 +10,8 @@ using System.Drawing;
 
 namespace ethanslist.ios
 {
-	partial class PostingInfoViewController : UIViewController
-	{
+    partial class PostingInfoViewController : UIViewController
+    {
         PostingInfoTableSource tableSource;
         UIBarButtonItem saveButton;
         UIBarButtonItem deleteButton;
@@ -20,9 +20,9 @@ namespace ethanslist.ios
         public Posting Post { get; set; }
         public event EventHandler<EventArgs> ItemDeleted;
 
-		public PostingInfoViewController (IntPtr handle) : base (handle)
-		{
-		}
+        public PostingInfoViewController(IntPtr handle) : base(handle)
+        {
+        }
 
         public override void LoadView()
         {
@@ -43,12 +43,12 @@ namespace ethanslist.ios
             PostingInfoTableView.Source = tableSource;
             PostingInfoTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
-            myNavItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done, DismissClicked),true);
+            myNavItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done, DismissClicked), true);
 
             if (!AppDelegate.databaseConnection.PostingAlreadySaved(Post))
             {
-                saveButton = new UIBarButtonItem (
-                    UIImage.FromFile ("save.png"),
+                saveButton = new UIBarButtonItem(
+                    UIImage.FromBundle("save"),
                     UIBarButtonItemStyle.Plain,
                     SaveListing
                 );
@@ -61,23 +61,24 @@ namespace ethanslist.ios
                 myNavItem.SetLeftBarButtonItem(deleteButton, true);
             }
 
-            tableSource.DescriptionLoaded += (object sender, DescriptionLoadedEventArgs e) => {
-//                PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
+            tableSource.DescriptionLoaded += (object sender, DescriptionLoadedEventArgs e) =>
+            {
+                //                PostingInfoTableView.ReloadRows(new NSIndexPath[] {e.DescriptionRow}, UITableViewRowAnimation.Automatic);
                 PostingInfoTableView.ReloadData();
             };
 
             imageHelper.loadingComplete += ImageHelper_loadingComplete;
         }
 
-        void ImageHelper_loadingComplete (object sender, EventArgs e)
+        void ImageHelper_loadingComplete(object sender, EventArgs e)
         {
             if (imageHelper.PostingMapFound)
             {
                 tableItems.Insert(4, new TableItem()
-                    {
-                        Heading = "Posting Map",
-                        CellType = "PostingMap",
-                    });
+                {
+                    Heading = "Posting Map",
+                    CellType = "PostingMap",
+                });
             }
 
             PostingInfoTableView.ReloadData();
@@ -127,40 +128,40 @@ namespace ethanslist.ios
             List<TableItem> tableItems = new List<TableItem>();
 
             tableItems.Add(new TableItem()
-                { 
-                    Heading = "Posting Title",
-                    CellType = "PostingTitleCell",
-                });
+            {
+                Heading = "Posting Title",
+                CellType = "PostingTitleCell",
+            });
             if (Post.ImageLink != "-1")
             {
                 tableItems.Add(new TableItem()
-                    {
-                        Heading = "Posting Image",
-                        CellType = "PostingImage",
-                    });
+                {
+                    Heading = "Posting Image",
+                    CellType = "PostingImage",
+                });
                 tableItems.Add(new TableItem()
-                    {
-                        Heading = "Image Collection",
-                        CellType = "ImageCollection",
-                    });
+                {
+                    Heading = "Image Collection",
+                    CellType = "ImageCollection",
+                });
             }
             tableItems.Add(new TableItem()
-                {
-                    Heading = "Posting Description",
-                    CellType = "PostingDescription",
-                });
+            {
+                Heading = "Posting Description",
+                CellType = "PostingDescription",
+            });
             tableItems.Add(new TableItem()
-                {
-                    Heading = "Posting Date",
-                    CellType = "PostingDate",
-                });
+            {
+                Heading = "Posting Date",
+                CellType = "PostingDate",
+            });
             tableItems.Add(new TableItem()
-                {
-                    
-                    Heading = "Posting Link",
-                    CellType = "PostingLink",
-                });
+            {
+
+                Heading = "Posting Link",
+                CellType = "PostingLink",
+            });
             return tableItems;
         }
-	}
+    }
 }

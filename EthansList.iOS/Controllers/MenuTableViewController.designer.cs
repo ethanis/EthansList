@@ -11,11 +11,11 @@ using UIKit;
 
 namespace ethanslist.ios
 {
-	[Register ("MenuTableViewController")]
-	partial class MenuTableViewController
-	{
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register ("MenuTableViewController")]
+    partial class MenuTableViewController
+    {
+        void ReleaseDesignerOutlets ()
+        {
+        }
+    }
 }
