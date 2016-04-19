@@ -262,5 +262,8 @@
     <BundleResource Include="Resources\menu%403x.png" />
     <BundleResource Include="Resources\placeholder%403x.png" />
     <BundleResource Include="Resources\placeholder%402x.png" />
+    <BundleResource Include="Resources\splashScreen.png" />
+    <BundleResource Include="Resources\splashScreen%402x.png" />
+    <BundleResource Include="Resources\splashScreen%403x.png" />
   </ItemGroup>
 </Project>
