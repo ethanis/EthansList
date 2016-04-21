@@ -453,11 +453,24 @@ namespace EthansList.Droid
 
                     minPricefield.TextChanged += (object sender, TextChangedEventArgs e) =>
                     {
+                        //TODO: Get this text masking to work correctly
+                        //string text = minPricefield.Text;
+                        //if (text.Length > 0 && text.Substring(0, 1) == "$")
+                        //    minPricefield.Text = text;
+                        //else
+                        //    minPricefield.Text = "$" + text;
+
                         AddSearchItem(item.QueryPrefix, e.Text.ToString());
                     };
 
                     maxPricefield.TextChanged += (object sender, TextChangedEventArgs e) =>
                     {
+                        //string text = maxPricefield.Text;
+                        //if (text.Length > 0 && text.Substring(0, 1) == "$")
+                        //    maxPricefield.SetText(text, null);
+                        //else
+                        //    maxPricefield.Text = "$" + text;
+
                         AddSearchItem(item.SecondQueryPrefix, e.Text.ToString());
                     };
 
