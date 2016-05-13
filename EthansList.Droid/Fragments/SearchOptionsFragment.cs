@@ -444,7 +444,7 @@ namespace EthansList.Droid
 
                     EditText maxPricefield = new EditText(context);
                     maxPricefield.LayoutParameters = p;
-                    maxPricefield.Hint = "min";
+                    maxPricefield.Hint = "max";
                     maxPricefield.SetTextSize(Android.Util.ComplexUnitType.Px, rowHeight * 0.40f);
                     maxPricefield.SetPadding((int)(rowHeight * 0.1), (int)(rowHeight * 0.15), (int)(rowHeight * 0.1), (int)(rowHeight * 0.15));
                     maxPricefield.SetSingleLine(true);
